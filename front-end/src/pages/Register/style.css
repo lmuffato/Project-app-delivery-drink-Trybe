@@ -31,8 +31,8 @@
 .register-container > button {
   background: blue;
   border: none;
-  color: white;
   border-radius: 6px;
+  color: white;
   font-size: 1.3rem;
   height: 40px;
   text-decoration: none;

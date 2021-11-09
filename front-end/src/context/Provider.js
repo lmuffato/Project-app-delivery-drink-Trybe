@@ -15,9 +15,37 @@ function Provider({ children }) {
 
   // UseEffect para salvar no localStorage
 
+  /// ////////////////////////Link with BackEnd//////////////////////// ///
+
+  const postURL = 'http://localhost:3001/register';
+  const postSubmit = () => {
+    axios.post(postURL, { user })
+      .then((res) => {
+        console.log(res);
+        console.log(res.data);
+      });
+  };
+
+  /// ////////////////////////Components Functions//////////////////////// ///
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    const setuser = { ...user,
+      [name]: value,
+    };
+    setUser(setuser);
+    console.log(setuser);
+  };
+
+  const submitChange = (e) => {
+    e.preventDefault();
+    postSubmit();
+    console.log(user);
+  };
+
   return (
     <Context.Provider
-      value={ { setUser, user } }
+      value={ { setUser, user, handleChange, submitChange } }
     >
       { children }
     </Context.Provider>

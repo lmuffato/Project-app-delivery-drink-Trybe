@@ -1,16 +1,18 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import React from 'react';
-import { BrowserRouter, Routes, Route, Redirect } from 'react-router-dom';
 import './App.css';
 import Provider from './context/Provider';
-import Login from './pages/Login';
+// import Login from './pages/Login';
+import Register from './pages/Register';
 
 function App() {
   return (
     <BrowserRouter>
       <Provider>
         <Routes>
-          <Route path="/login" element={ <Login /> } />
-          <Route path="/" element={ <Redirect to="/login" /> } />
+          {/* <Route path="/login" element={ <Login /> } /> */}
+          <Route path="/register" element={ <Register /> } />
+
         </Routes>
       </Provider>
     </BrowserRouter>

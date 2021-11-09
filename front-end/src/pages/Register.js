@@ -28,6 +28,12 @@ const Register = () => {
             name="inputPassword"
           />
         </label>
+        <button
+          type="button"
+          data-testid="common_register__button-register"
+        >
+          Cadastrar
+        </button>
     </form>
     </div>
   )

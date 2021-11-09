@@ -23,6 +23,7 @@ function Provider({ children }) {
       .then((res) => {
         console.log(res);
         console.log(res.data);
+        // Aguardar: Retorno do Back para prosseguir
       });
   };
 
@@ -37,9 +38,9 @@ function Provider({ children }) {
     console.log(setuser);
   };
 
-  const submitChange = (e) => {
+  const submitChange = async (e) => {
     e.preventDefault();
-    postSubmit();
+    await postSubmit();
     console.log(user);
   };
 

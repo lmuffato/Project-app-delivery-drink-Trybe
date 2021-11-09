@@ -5,3 +5,4 @@
 - [] main-group-11-customer_products
 - [] main-group-11-customer_checkout
 - [] main-group-11-customer_orders
+- [] main-group-11-customer_orders_details

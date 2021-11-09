@@ -1,15 +1,14 @@
 import React from 'react';
 import './App.css';
-import rockGlass from './images/rockGlass.svg';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import UsersProvider from './context/Users/UsersProvider';
+import Router from './components/Router';
 
 function App() {
   return (
-    <div className="App">
-      <span className="logo">TRYBE</span>
-      <object className="rocksGlass" type="image/svg+xml" data={ rockGlass }>
-        Glass
-      </object>
-    </div>
+    <UsersProvider>
+      <Router />
+    </UsersProvider>
   );
 }
 

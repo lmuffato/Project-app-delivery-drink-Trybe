@@ -7,3 +7,4 @@
 - [] main-group-11-customer_orders
 - [] main-group-11-customer_orders_details
 - [] main-group-11-sellers_orders
+- [] main-group-11-sellers_orders_details

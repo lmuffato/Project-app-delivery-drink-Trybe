@@ -29,14 +29,14 @@
 }
 
 .register-container > button {
-  width: 40%;
-  border-radius: 6px;
-  border: none;
   background: blue;
-  height: 40px;
+  border: none;
   color: white;
+  border-radius: 6px;
   font-size: 1.3rem;
+  height: 40px;
   text-decoration: none;
+  width: 40%;
 }
 
 .register-container > button:disabled {

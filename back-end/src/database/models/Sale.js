@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: true,
     createdAt: 'saleDate',
     updatedAt: 'updated',
-    tableName: 'Sales',
+    tableName: 'sales',
   });
 
   Sale.associate = (models) => {

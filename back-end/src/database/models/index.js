@@ -6,6 +6,12 @@ const Sequelize = require('sequelize');
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.js')[env];
+/**
+ * @typedef {import('sequelize').ModelCtor<Model<any, any>>} model
+ */
+/**
+ * @type {{User: model, Sale: model, Product: model}}
+ */
 const db = {};
 
 let sequelize;

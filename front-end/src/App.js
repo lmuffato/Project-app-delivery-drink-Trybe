@@ -1,16 +1,20 @@
 import React from 'react';
 import './App.css';
-import rockGlass from './images/rockGlass.svg';
+import Provider from './context/Provider';
+import Form from './components/form';
 
 function App() {
   return (
-    <div className="App">
-      <span className="logo">TRYBE</span>
-      <object className="rocksGlass" type="image/svg+xml" data={ rockGlass }>
-        Glass
-      </object>
-    </div>
+    <Provider>
+      <div className="App">
+        <Form />
+      </div>
+    </Provider>
   );
 }
+
+// <Route exact path="/">
+//   {loggedIn ? <Redirect to="/login" /> : <Login />}
+// </Route>
 
 export default App;

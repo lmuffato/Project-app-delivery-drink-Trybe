@@ -11,3 +11,4 @@
 - [] main-group-11-customer_seller_status
 - [] main-group-11-customer_seller_socket_status
 - [] main-group-11-admin_manager_users
+- [] main-group-11-coverage_tests

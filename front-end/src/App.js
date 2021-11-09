@@ -13,8 +13,4 @@ function App() {
   );
 }
 
-// <Route exact path="/">
-//   {loggedIn ? <Redirect to="/login" /> : <Login />}
-// </Route>
-
 export default App;

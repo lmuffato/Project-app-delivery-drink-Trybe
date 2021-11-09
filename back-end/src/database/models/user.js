@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     });
 
   User.associate = (models) => {
-    User.hasMany(models.Sale,
+    User.hasOne(models.Sale,
       { foreignKey: 'userId', as: 'cart' });
   };
 

@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import {Router} from 'react-router-dom'
-// import userEvent from '@testing-library/user-event'
+import userEvent from '@testing-library/user-event'
 import {createMemoryHistory} from 'history'
 
 import LoginPage from '../pages/Login'
@@ -40,5 +40,15 @@ describe('Login page', () => {
     </Router>)
     const register = screen.getByText(/ainda não tenho conta/i)
     expect(register).toBeInTheDocument()
+  });
+
+  it('should redirect to "/register" when click on "Ainda não tenho conta"', () => {
+    const history = createMemoryHistory();
+    render(<Router history={history}>
+      <LoginPage />
+    </Router>)
+    const registerButton = screen.getByText(/ainda não tenho conta/i)
+    userEvent.click(registerButton, {button: 0});
+    expect(history.location.pathname).toEqual('/register')
   });
 })

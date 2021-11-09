@@ -1,0 +1,10 @@
+.border {
+  display: flex;
+  border: black solid 2px;
+  padding: 20px;
+  padding: 20px;
+}
+
+.input {
+  display: flex;
+}

@@ -1,0 +1,44 @@
+.register-page {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.register-container {
+  align-items: center;
+  background: #a6a6a6;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 400px;
+  justify-content: flex-end;
+  padding: 30px 0;
+  width: 320px;
+}
+
+.register-container > input {
+  border: none;
+  border-radius: 8px;
+  font-size: 1.4rem;
+  height: 30px;
+  outline: none;
+  width: 80%;
+}
+
+.register-container > button {
+  width: 40%;
+  border-radius: 6px;
+  border: none;
+  background: blue;
+  height: 40px;
+  color: white;
+  font-size: 1.3rem;
+  text-decoration: none;
+}
+
+.register-container > button:disabled {
+  background: red;
+}

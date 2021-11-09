@@ -1,20 +1,20 @@
 import React from 'react';
+import { BrowserRouter, Routes, Route, Redirect } from 'react-router-dom';
 import './App.css';
 import Provider from './context/Provider';
-import Form from './components/form';
+import Login from './pages/Login';
 
 function App() {
   return (
-    <Provider>
-      <div className="App">
-        <Form />
-      </div>
-    </Provider>
+    <BrowserRouter>
+      <Provider>
+        <Routes>
+          <Route path="/login" element={ <Login /> } />
+          <Route path="/" element={ <Redirect to="/login" /> } />
+        </Routes>
+      </Provider>
+    </BrowserRouter>
   );
 }
-
-// <Route exact path="/">
-//   {loggedIn ? <Redirect to="/login" /> : <Login />}
-// </Route>
 
 export default App;

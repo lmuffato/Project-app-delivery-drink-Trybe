@@ -1,10 +1,11 @@
 module.exports = (sequelize, DataTypes) => {
   const Sale = sequelize.define('BlogPost', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    title: DataTypes.STRING,
-    content: DataTypes.STRING,
-    published: DataTypes.DATE,
-    updated: DataTypes.DATE,
+    total_price: DataTypes.DECIMAL(9,2),
+    delivery_address: DataTypes.STRING,
+    delivery_number: DataTypes.STRING,
+    sale_date: DataTypes.DATE,
+    status: DataTypes.STRING,
     user_id: { type: DataTypes.INTEGER, foreignKey: true },
     seller_id: { type: DataTypes.INTEGER, foreignKey: true },
     // A declaração da Foreign Key é opcional no model

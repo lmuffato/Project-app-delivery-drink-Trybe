@@ -40,5 +40,6 @@
 }
 
 .register-container > button:disabled {
+  cursor: not-allowed;
   background: red;
 }

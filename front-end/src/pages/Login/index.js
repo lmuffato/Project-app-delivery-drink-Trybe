@@ -26,7 +26,7 @@ function LoginPage() {
           value={ password }
           setValue={ setPassword }
           dataid="common_login__input-password"
-          placeholder="Senha (6 digitos)"
+          placeholder="Senha"
         />
         <button
           type="button"

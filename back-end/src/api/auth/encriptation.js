@@ -12,19 +12,20 @@ const encrypt = (text) => {
 
     return {
         iv: iv.toString('hex'),
-        content: encrypted.toString('hex')
+        content: encrypted.toString('hex'),
     };
 };
 
 const decrypt = (hash) => {
     const decipher = crypto.createDecipheriv(algorithm, secretKey, Buffer.from(hash.iv, 'hex'));
 
-    const decrpyted = Buffer.concat([decipher.update(Buffer.from(hash.content, 'hex')), decipher.final()]);
+    const decrpyted = Buffer.concat([decipher.update(Buffer
+      .from(hash.content, 'hex')), decipher.final()]);
 
     return decrpyted.toString();
 };
 
 module.exports = {
     encrypt,
-    decrypt
+    decrypt,
 };

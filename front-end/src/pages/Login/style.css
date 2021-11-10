@@ -7,31 +7,31 @@
 }
 
 .right-side {
-  display: flex;
-  position: relative;
   align-items: center;
-  justify-content: center;
-  flex: 1;
   background-color: #ebebeb;
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  position: relative;
   min-height: 100vh;
   width: 100%;
 }
 
 .right-side > h1 {
-  position: absolute;
-  margin-bottom: 20rem;
   font-size: 5rem;
+  margin-bottom: 20rem;
+  position: absolute;
 }
 
 .right-side > h1 > svg {
-  transform: rotate(20deg);
   animation: beerSvg 2s;
+  transform: rotate(20deg);
 }
 
 .beer {
+  color: #ed7c2b;
   font-style: italic;
   font-weight: 600;
-  color: #ed7c2b;
 }
 
 .login-container {
@@ -56,29 +56,29 @@
 }
 
 .login-container > button {
-  position: relative;
   background: #363636;
   border: none;
   border-radius: 8px;
   cursor: pointer;
   font-size: 1.4rem;
   height: 40px;
+  position: relative;
   transition: 0.3s;
   width: 60%;
 }
 
 .login-container > button::after {
-  content: '';
-  position: absolute;
-  height: 15px;
-  width: 15px;
-  border-radius: 50%;
-  left: 15px;
-  top: 13px;
   background-color: rgb(59, 252, 0);
+  border-radius: 50%;
   box-shadow: 0 0 10px rgb(59, 252, 0);
-  z-index: 2;
+  content: '';
+  height: 15px;
+  left: 15px;
+  position: absolute;
+  top: 13px;
   transition: 0.3s;
+  width: 15px;
+  z-index: 2;
 }
 
 .login-container > button:disabled {
@@ -86,15 +86,15 @@
 }
 
 .login-container > button:disabled::after {
-  content: '';
-  position: absolute;
-  height: 15px;
-  width: 15px;
-  border-radius: 50%;
-  left: 15px;
-  top: 13px;
   background-color: rgb(252, 0, 0);
+  border-radius: 50%;
   box-shadow: 0 0 10px rgb(252, 0, 0);
+  content: '';
+  height: 15px;
+  left: 15px;
+  position: absolute;
+  top: 13px;
+  width: 15px;
   z-index: 2;
 }
 
@@ -112,30 +112,30 @@ button:disabled > a {
 }
 
 .separator {
-  font-size: 20px;
+  align-items: center;
   color: #a8a8b3;
+  display: flex;
+  font-size: 20px;
   position: relative;
   margin: 10px 0;
-  display: flex;
-  align-items: center;
 }
 
 .separator::after {
-  content: '';
-  position: absolute;
-  height: 1px;
-  width: 6rem;
   background: #a8a8b3;
+  content: '';
+  height: 1px;
+  position: absolute;
   margin-left: 50px;
+  width: 6rem;
 }
 
 .separator::before {
-  content: '';
-  position: absolute;
-  height: 1px;
-  width: 6rem;
   background: #a8a8b3;
+  content: '';
+  height: 1px;
   left: -120px;
+  position: absolute;
+  width: 6rem;
 }
 
 .register-account {

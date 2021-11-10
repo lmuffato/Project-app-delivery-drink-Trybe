@@ -1,7 +1,13 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+
+const userControllers = require('../controllers/userControllers');
+const { checkEmail } = require('../middlewares/checkEmail');
+const { checkPassword } = require('../middlewares/checkPassword');
 
 const app = express();
+app.use(bodyParser.json());
 
-app.get('/coffee', (_req, res) => res.status(418).end());
+app.post('/login', checkEmail, checkPassword, userControllers.login);
 
 module.exports = app;

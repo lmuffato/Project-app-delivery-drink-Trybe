@@ -1,11 +1,14 @@
-const dotenv = require('dotenv');
+const fs = require('fs');
+const path = require('path');
 const md5 = require('md5');
 const jwt = require('jsonwebtoken');
 const { User } = require('../../database/models');
 const AppError = require('../utils/AppError');
 
-dotenv.config();
-const { JWT_SECRET } = process.env;
+const JWT_SECRET = fs.readFileSync(
+  path.join(__dirname, '..', '..', '..', 'jwt.evaluation.key'),
+  'utf-8',
+);
 
 const login = async ({ email, password }) => {
   if (!email || !password) {
@@ -23,6 +26,7 @@ const login = async ({ email, password }) => {
   const token = jwt.sign({
     id: user.dataValues.id,
     email: user.dataValues.email,
+    role: user.dataValues.role,
   }, JWT_SECRET);
 
   const userWithoutPassword = { ...user.dataValues, password: undefined };

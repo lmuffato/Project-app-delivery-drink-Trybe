@@ -1,5 +1,5 @@
 const md5 = require('md5');
-const { User } = require('../models/User');
+const User = require('../models/User');
 const { schemaCreatedUser } = require('../validations/validations');
 
 const login = async (email, password) => {

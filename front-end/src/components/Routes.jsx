@@ -3,13 +3,14 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
+import RegisterForm from './registerForm';
 
 export default function
 Routes() {
   return (
     <Switch>
       <Route exact path="/register">
-        <p>TELA DE REGISTRO</p>
+        <RegisterForm />
       </Route>
     </Switch>
   );

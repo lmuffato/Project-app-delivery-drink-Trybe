@@ -9,7 +9,7 @@ const suffix = {
   development: "-dev",
   test: "-test",
 };
-
+console.log('teste', process.env.MYSQL_DB_NAME);
 const options = {
   host: process.env.MYSQL_HOST || 'mysql',
   port: process.env.MYSQL_PORT || '3306',

@@ -1,10 +1,15 @@
 const router = require('express').Router();
-const controlUsers = require('../../controller/users');
-const validation = require('../../middlewares/users');
-const validateTWD = require('../auth/validateJWT');
+const controlUsers = require('../controller/users');
+const userValidation = require('../middleware/user');
+const loginValidation = require('../middleware/login');
+const validateTWD = require('../middleware/validateJWT');
 
-router.post('/', validation.userValidation, controlUsers.controlCreate);
-router.post('/admin', validateTWD, validation.adminValidation, 
-validation.userValidation, controlUsers.controlAdminCreate);
+const userValid = [userValidation.checkIfUserExists, userValidation.validUser]
+
+router.post('/', userValid,  );
+// router.get('/', validateTWD, controlUsers.controlAdminCreate);
+router.get('/login', validateTWD, loginValidation, controlUsers.loginUser);
+// router.put('/', validateTWD, controlUsers.controlAdminCreate);
+// router.delete('/', validateTWD, controlUsers.controlAdminCreate);
 
 module.exports = router;

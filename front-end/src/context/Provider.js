@@ -8,10 +8,6 @@ const Endpoints = {
   register_form: 'register',
 };
 
-const status = {
-  OK: 200,
-};
-
 function Provider({ children }) {
   const [user, setUser] = useState({});
 
@@ -26,15 +22,7 @@ function Provider({ children }) {
 
   /// ////////////////////////Link with BackEnd//////////////////////// ///
 
-  const postSubmit = async (url) => {
-    console.log(user);
-
-    const res = await axios.post(`http://localhost:3001/${url}`, user);
-
-    console.log(res);
-
-    if (res.status === status.OK) return res;
-  };
+  const postSubmit = (url) => axios.post(`http://localhost:3001/${url}`, user);
 
   /// ////////////////////////Components Functions//////////////////////// ///
 
@@ -46,18 +34,14 @@ function Provider({ children }) {
     setUser(setuser);
   };
 
-  const resetUser = () => {
-    setUser({});
-  };
-
-  const submitChange = async (e, formType) => {
+  const submitChange = (e, formType) => {
     e.preventDefault();
-    await postSubmit(Endpoints[formType]);
+    return postSubmit(Endpoints[formType]);
   };
 
   return (
     <Context.Provider
-      value={ { setUser, user, handleChange, submitChange, resetUser } }
+      value={ { setUser, user, handleChange, submitChange } }
     >
       { children }
     </Context.Provider>

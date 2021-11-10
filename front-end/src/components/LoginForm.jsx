@@ -1,17 +1,45 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import '../styles/form.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import TextInput from './TextInput';
 import Context from '../context/Context';
+import regex from '../utils/regex';
 
 function LoginForm() {
-  const { handleChange, submitChange, resetUser } = useContext(Context);
+  const { handleChange, submitChange, setUser, user } = useContext(Context);
+  const navigate = useNavigate();
+  const [invalidLogin, setInvalidLogin] = useState(true);
+  const [disableButton, setDisableButton] = useState(true);
 
   useEffect(() => {
-    resetUser();
+    setUser({ email: '', password: '' });
 
-    return () => resetUser();
-  }, []);
+    return () => setUser({});
+  }, []); // eslint-disable-line
+
+  useEffect(() => {
+    const { email, password } = user;
+
+    if (regex.email.test(email) && regex.password.test(password)) {
+      setDisableButton(false);
+    } else {
+      setDisableButton(true);
+    }
+  }, [user]);
+
+  const handleSubmit = async (e) => {
+    try {
+      setInvalidLogin(true);
+      const { data } = await submitChange(e, 'login_form');
+
+      if (data.token) {
+        localStorage.setItem('token', data.token);
+        navigate('/customer/orders');
+      }
+    } catch (error) {
+      setInvalidLogin(false);
+    }
+  };
 
   return (
     <div className="border">
@@ -31,10 +59,18 @@ function LoginForm() {
           placeholder="password"
         />
 
+        <span
+          hidden={ invalidLogin }
+          data-testid="common_login__element-invalid-email"
+        >
+          * Dados inválidos
+        </span>
+
         <button
           type="submit"
           data-testid="common_login__button-login"
-          onClick={ (e) => submitChange(e, 'login_form') }
+          onClick={ handleSubmit }
+          disabled={ disableButton }
         >
           Login
         </button>

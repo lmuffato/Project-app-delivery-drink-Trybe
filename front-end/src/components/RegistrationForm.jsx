@@ -4,13 +4,17 @@ import Context from '../context/Context';
 import TextInput from './TextInput';
 
 function Registration() {
-  const { handleChange, submitChange, resetUser } = useContext(Context);
+  const { handleChange, submitChange, setUser } = useContext(Context);
 
   useEffect(() => {
-    resetUser();
+    setUser({
+      name: '',
+      email: '',
+      password: '',
+    });
 
-    return () => resetUser();
-  }, []);
+    return () => setUser({});
+  }, []); // eslint-disable-line
 
   return (
     <div className="border">

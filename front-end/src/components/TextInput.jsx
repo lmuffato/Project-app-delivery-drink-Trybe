@@ -14,6 +14,7 @@ function TextInput(props) {
         data-testid={ dataTestId }
         onChange={ onChange }
         placeholder={ placeholder }
+        autoComplete="off"
       />
     </label>
   );

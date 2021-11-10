@@ -7,6 +7,7 @@ function SignUp() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
 
   const askCreateUser = async () => {
@@ -19,7 +20,7 @@ function SignUp() {
       <h1
         className="login-title"
       >
-        Registrar novo usuário
+        Cadastro
       </h1>
       <form
         className="form"
@@ -30,6 +31,7 @@ function SignUp() {
       >
         <input
           className="input-login"
+          data-testid="common_register__input-name"
           type="text"
           value={ name }
           onChange={ (e) => setName(e.target.value) }
@@ -38,6 +40,7 @@ function SignUp() {
         />
         <input
           className="input-login"
+          data-testid="common_register__input-email"
           type="email"
           value={ email }
           onChange={ (e) => setEmail(e.target.value) }
@@ -46,6 +49,7 @@ function SignUp() {
         />
         <input
           className="input-login"
+          data-testid="common_register__input-password"
           type="password"
           value={ password }
           onChange={ (e) => setPassword(e.target.value) }
@@ -55,11 +59,18 @@ function SignUp() {
         />
         <button
           className="loginBtn"
+          data-testid="common_register__button-register"
           type="submit"
         >
           Registrar
         </button>
       </form>
+      <span
+        className="error_message-span"
+        data-testid="common_register__element-invalid_register"
+      >
+        { errorMessage }
+      </span>
     </div>
   );
 }

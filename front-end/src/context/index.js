@@ -1,3 +1,3 @@
-import LoginContext from "./LoginContext";
+import LoginContext from './LoginContext';
 
 export default LoginContext;

@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { element } from 'prop-types';
 import LoginContext from '../context/LoginContext';
 
-
 function LoginProvider({ children }) {
+  const [login, setLogin] = useState();
   const consumer = {
-    
+    login,
+    setLogin,
   };
 
   return (

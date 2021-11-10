@@ -12,7 +12,7 @@ function Login() {
     setValues({
       ...values,
       [name]: value,
-    }, () => buttonStatus());
+    });
   };
 
   return (
@@ -44,7 +44,6 @@ function Login() {
       <button
         data-testid="common_login__button-login"
         type="submit"
-        disabled={ !values.buttonStatus }
       >
         LOGIN
       </button>

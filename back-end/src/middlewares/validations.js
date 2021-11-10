@@ -1,11 +1,11 @@
 const errorMessages = require('../utils/errorMessages');
 const httpStatus = require('../utils/httpStatus');
-const { User } = require('../models');
+const { User } = require('../database/models');
 const Joi = require('joi');
 
 const emailExists = async (email) => {
-  const email = await User.findOne({ where: { email } });
-  if (email === null) {
+  const user = await User.findOne({ where: { email } });
+  if (user === null) {
     return false;
   }
   true

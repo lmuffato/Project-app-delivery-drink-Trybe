@@ -15,7 +15,7 @@
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
     references: { model: 'Users', key: 'id' },
-    type: DataTypes.INTEGER,
+    type: DataTypes.INTEGER
   },
   sellerId: {
     allowNull: false,
@@ -23,7 +23,7 @@
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
     references: { model: 'Users', key: 'id' },
-    type: DataTypes.INTEGER,
+    type: DataTypes.INTEGER
   },
   totalPrice: {
     allowNull: false,

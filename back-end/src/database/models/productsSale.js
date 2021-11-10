@@ -11,13 +11,13 @@ const productsSaleSchema = require('../schemas/productsSale');
       as: 'products',
       through: ProductsSale,
       foreignKey: 'productId',
-      otherKey: 'saleId',
+      otherKey: 'saleId'
     });
     models.Sale.belongsToMany(models.Product, {
       as: 'sales',
       through: ProductsSale,
       foreignKey: 'saleId',
-      otherKey: 'productId',
+      otherKey: 'productId'
     });
   };
   return ProductsSale;

@@ -22,6 +22,7 @@
     allowNull: false,
     default: '',
     field: 'url_image',
-    type: DataTypes.STRING(200)
+    type: DataTypes.STRING(200),
+    validate: { isUrl: true }
   }
 })

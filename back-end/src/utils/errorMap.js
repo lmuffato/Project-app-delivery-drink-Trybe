@@ -35,4 +35,10 @@ module.exports = {
       message: '"email" is not allowed to be empty',
     },
   },
+  internalError: {
+    error: {
+      code: 500,
+      message: 'internal server error',
+    },
+  },
 };

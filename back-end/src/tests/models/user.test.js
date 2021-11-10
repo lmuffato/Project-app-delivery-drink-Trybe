@@ -1,3 +1,5 @@
+const { expect } = require('chai');
+
 const {
   sequelize,
   dataTypes,
@@ -26,6 +28,8 @@ describe('O model de User', () => {
       User.associate(Sale);
     });
 
-    it('possui associação da com o model Sale')
-  })
+    it('possui "hasMany" com o model Sale', () => {
+      expect(User.hasMany).to.have.been.calledWith(Sale);
+    });
+  });
 });

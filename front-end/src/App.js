@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import ProviderLogin from './context/ProviderLogin';
 import SignUp from './screens/SingUp';
 import Login from './screens/Login';
@@ -9,10 +9,10 @@ function App() {
   return (
     <BrowserRouter>
       <ProviderLogin>
-        <Redirect from="/" to="/login" />
         <Switch>
+          <Route exact path="/" component={ Login } />
           <Route exact path="/login" component={ Login } />
-          <Route path="/register" component={ SignUp } />
+          <Route exact path="/register" component={ SignUp } />
           <Route component={ NotFound } />
         </Switch>
       </ProviderLogin>

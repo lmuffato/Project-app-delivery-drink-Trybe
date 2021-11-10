@@ -1,8 +1,8 @@
+const dotenv = require('dotenv');
 const md5 = require('md5');
 const jwt = require('jsonwebtoken');
 const { User } = require('../../database/models');
 const AppError = require('../utils/AppError');
-const dotenv = require('dotenv');
 
 dotenv.config();
 const { JWT_SECRET } = process.env;

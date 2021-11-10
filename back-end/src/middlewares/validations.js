@@ -32,7 +32,7 @@ const validateLogin = async (req, res, next) => {
   if (error) {
     const { message } = error;
     return res.status(httpStatus.badRequest).json({ message });
-  }
+  }  
 };
 
 module.exports = {

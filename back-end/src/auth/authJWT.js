@@ -1,6 +1,11 @@
 const jwt = require('jsonwebtoken')
+const fs = require('fs');
+const path = require('path');
 
-const secret = require('../../jwt.evaluation.key')
+const file = fs.readFileSync(path.join(__dirname, '../../jwt.evaluation.key'), 'utf8')
+
+
+const secret = file;
 
 const jwtConfig = {
   algorithm: 'HS256',
@@ -12,4 +17,6 @@ const createJWT = (data) => {
   return token;
 };
 
-module.exports = createJWT;
+module.exports = {
+  createJWT,
+};

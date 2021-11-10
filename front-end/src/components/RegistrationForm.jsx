@@ -31,6 +31,7 @@ function Registration() {
         <TextInput
           name="password"
           dataTestId="common_register__input-password"
+          type="password"
           onChange={ handleChange }
           placeholder="******"
         />

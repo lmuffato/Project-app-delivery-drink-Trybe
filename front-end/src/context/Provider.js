@@ -1,7 +1,16 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import PropTypes from 'prop-types';
 import Context from './Context';
-// import axios from "axios";
+
+const Endpoints = {
+  login_form: 'login',
+  register_form: 'register',
+};
+
+const status = {
+  OK: 200,
+};
 
 function Provider({ children }) {
   const [user, setUser] = useState({});
@@ -17,18 +26,14 @@ function Provider({ children }) {
 
   /// ////////////////////////Link with BackEnd//////////////////////// ///
 
-  const Endpoints = {
-    login_form: 'login',
-    register_form: 'register',
-  };
+  const postSubmit = async (url) => {
+    console.log(user);
 
-  const postSubmit = (url) => {
-    axios.post(`http://localhost:3001/${url}`, { user })
-      .then((res) => {
-        console.log(res);
-        console.log(res.data);
-        // Aguardar: Retorno do Back para prosseguir
-      });
+    const res = await axios.post(`http://localhost:3001/${url}`, user);
+
+    console.log(res);
+
+    if (res.status === status.OK) return res;
   };
 
   /// ////////////////////////Components Functions//////////////////////// ///
@@ -39,7 +44,6 @@ function Provider({ children }) {
       [name]: value,
     };
     setUser(setuser);
-    console.log(setuser);
   };
 
   const resetUser = () => {
@@ -49,7 +53,6 @@ function Provider({ children }) {
   const submitChange = async (e, formType) => {
     e.preventDefault();
     await postSubmit(Endpoints[formType]);
-    console.log(user);
   };
 
   return (

@@ -24,7 +24,8 @@ function LoginForm() {
         />
 
         <TextInput
-          name="pasword"
+          name="password"
+          type="password"
           dataTestId="common_login__input-pasword"
           onChange={ handleChange }
           placeholder="password"

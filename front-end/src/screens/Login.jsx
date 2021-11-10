@@ -1,7 +1,3 @@
-/* eslint-disable max-len */
-/* eslint-disable sonarjs/no-inverted-boolean-check */
-/* eslint-disable no-unused-expressions */
-/* eslint-disable no-unused-vars */
 import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Box, TextField, Button, Link } from '@mui/material';
@@ -30,13 +26,15 @@ function Login() {
 
   const handleFormChange = (e) => {
     const { target: { name, value } } = e;
-    name === 'email' ? setEmail(value) : setPassword(value);
-    const isError = !((emailRegex.test(email)) && (password.length >= MINPASSWORDLENGTH - 1));
-    console.log('error', isError);
+    if (name === 'email') {
+      setEmail(value);
+    }
+    setPassword(value);
+    const isError = !((emailRegex.test(email))
+    && (password.length >= MINPASSWORDLENGTH - 1));
     setError(isError);
   };
 
-  console.log(password);
   return (
     <Box
       component="form"

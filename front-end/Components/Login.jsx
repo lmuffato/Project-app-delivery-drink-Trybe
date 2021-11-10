@@ -7,9 +7,9 @@ export default function Login() {
         <input type="email" placeholder="email@trybeer.com.br" required>
           Login
         </input>
-          <input type="password" placeholder="*********">
+        <input type="password" placeholder="*********">
           Senha
-          </input>
+        </input>
         <button type="button">LOGIN</button>
         <button type="button">Ainda não tenho conta</button>
       </form>

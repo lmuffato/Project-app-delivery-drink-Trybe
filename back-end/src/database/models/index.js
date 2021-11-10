@@ -7,10 +7,16 @@ const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.js')[env];
 /**
- * @typedef {import('sequelize').ModelCtor<Model<any, any>>} model
+ * @typedef {import('sequelize').ModelCtor<import('sequelize').Model<{name: string, email: string, password: string, role: string}>>} user
  */
 /**
- * @type {{User: model, Sale: model, Product: model}}
+ * @typedef {import('sequelize').ModelCtor<import('sequelize').Model<{userId: number, sellerId: number, totalPrice: number, deliveryAddress: string, deliveryNumber: string, status: string, saleDate: Date>>} sale
+ */
+/**
+ * @typedef {import('sequelize').ModelCtor<import('sequelize').Model<{name: string, price: number, urlImage: string}>>} product
+ */
+/**
+ * @type {{User: user, Sale: sale, Product: product}}
  */
 const db = {};
 

@@ -1,8 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const { loginRouter, productRouter } = require('../routers');
 
 const app = express();
+
+app.use(cors());
 
 app.use(bodyParser.json({ extended: true }));
 

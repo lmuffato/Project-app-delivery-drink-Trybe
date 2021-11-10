@@ -16,23 +16,25 @@ const validateLogin = async (req, res, next) => {
   const  loginSchema = Joi.object({ 
     email: Joi
       .string()
-      .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } })
-      .pattern(new RegExp('\S+@\S+\.\S+'))
+      .email()
       .required(), 
     password: Joi.string()
-      .pattern(new RegExp('^[a-zA-Z0-9]{3,30}$'))
+      .min(6)
       .required(), 
   });
+  console.log('antes de verificar se email existes')
   if (await !emailExists(email)) {
     return res.status(httpStatus.unauthorized).json({
       message: '',
     });
   }
+  console.log('co')
   const { error } = loginSchema.validate({ email, password });
   if (error) {
     const { message } = error;
     return res.status(httpStatus.badRequest).json({ message });
-  }  
+  }
+  return next()
 };
 
 module.exports = {

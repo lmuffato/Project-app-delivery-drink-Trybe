@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const md5 = require('md5');
 const { User } = require('../database/models');
 const errorMap = require('../utils/errorMap');
 const SECRET = require('../utils/secret');
@@ -6,13 +7,12 @@ const SECRET = require('../utils/secret');
 const login = async (user) => {
   try {
     const { email, password } = user;
-    const result = await User.findOne({ where: { email, password } });
+    const passwordMD5 = md5(password);
+    const result = await User.findOne({ where: { email, password: passwordMD5 } });
 
     if (!result) return errorMap.NotFound;
 
     const { dataValues } = result;
-
-    // if (dataValues.password !== password) return errorMap.invalidFields;
 
     const { id, displayName } = dataValues;
 

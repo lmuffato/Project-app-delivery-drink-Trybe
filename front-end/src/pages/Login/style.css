@@ -1,0 +1,168 @@
+.login-page {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.right-side {
+  align-items: center;
+  background-color: #ebebeb;
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  min-height: 100vh;
+  position: relative;
+  width: 100%;
+}
+
+.right-side > h1 {
+  font-size: 5rem;
+  margin-bottom: 20rem;
+  position: absolute;
+}
+
+.right-side > h1 > svg {
+  animation: beerSvg 2s;
+  transform: rotate(20deg);
+}
+
+.beer {
+  color: #ed7c2b;
+  font-style: italic;
+  font-weight: 600;
+}
+
+.login-container {
+  align-items: center;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 400px;
+  justify-content: flex-end;
+  padding: 30px 0;
+  width: 320px;
+}
+
+.login-container > input {
+  border: none;
+  border-radius: 8px;
+  font-size: 1.4rem;
+  height: 30px;
+  outline: none;
+  width: 80%;
+}
+
+.login-container > button {
+  background: #363636;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.4rem;
+  height: 40px;
+  position: relative;
+  transition: 0.3s;
+  width: 60%;
+}
+
+.login-container > button:after {
+  background-color: rgb(59, 252, 0);
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgb(59, 252, 0);
+  content: '';
+  height: 15px;
+  left: 15px;
+  position: absolute;
+  top: 13px;
+  transition: 0.3s;
+  width: 15px;
+  z-index: 2;
+}
+
+.login-container > button:disabled {
+  cursor: not-allowed;
+}
+
+.login-container > button:disabled:after {
+  background-color: rgb(252, 0, 0);
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgb(252, 0, 0);
+  content: '';
+  height: 15px;
+  left: 15px;
+  position: absolute;
+  top: 13px;
+  width: 15px;
+  z-index: 2;
+}
+
+.login-container > button > a {
+  color: white;
+  text-decoration: none;
+}
+
+button:disabled > a {
+  cursor: not-allowed;
+}
+
+.login-container > button:hover {
+  filter: brightness(1.3);
+}
+
+.separator {
+  align-items: center;
+  color: #a8a8b3;
+  display: flex;
+  font-size: 20px;
+  margin: 10px 0;
+  position: relative;
+}
+
+.separator:after {
+  background: #a8a8b3;
+  content: '';
+  height: 1px;
+  margin-left: 50px;
+  position: absolute;
+  width: 6rem;
+}
+
+.separator:before {
+  background: #a8a8b3;
+  content: '';
+  height: 1px;
+  left: -120px;
+  position: absolute;
+  width: 6rem;
+}
+
+.register-account {
+  color: #0e69f0;
+  font-size: 1.1rem;
+}
+
+
+@keyframes beerSvg {
+
+  0% {
+    transform: rotate(40deg) translateY(-500px);
+  }
+
+  25% {
+    transform: rotate(-35deg) translateY(0);
+  }
+
+  50% {
+    transform: rotate(28deg);
+  }
+
+  75% {
+    transform: rotate(-24deg);
+  }
+
+  100% {
+    transform: rotate(20deg);
+  }
+}

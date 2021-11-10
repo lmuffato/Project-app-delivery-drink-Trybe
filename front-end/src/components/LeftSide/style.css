@@ -1,0 +1,36 @@
+.left-side {
+  background: linear-gradient(to top, black 15%, rgba(0, 0, 0, 0)) , url('/src/assets/beer.png');
+  background-position: bottom;
+  background-size: cover;
+  display: flex;
+  flex: 1;
+  height: 100vh;
+  justify-content: center;
+}
+
+.left-side > p {
+  animation: initBeerText 0.5s;
+  color: white;
+  font-size: 4.7rem;
+  font-weight: 600;
+  margin-top: 40rem;
+}
+
+.typewriter-span {
+  color: #ed7c2b;
+  font-style: italic;
+  font-weight: 600;
+}
+
+@keyframes initBeerText {
+
+  0% {
+    opacity: 0;
+    transform: translateX(-500px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

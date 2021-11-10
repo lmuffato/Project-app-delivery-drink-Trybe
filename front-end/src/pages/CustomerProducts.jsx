@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Row } from 'react-bootstrap';
 import axios from 'axios';
 import NavBar from '../components/CustomerNavBar';
 import ProductCard from '../components/ProductCard';
@@ -19,9 +20,11 @@ function ClientProducts() {
   return (
     <div>
       <NavBar fixed="top" />
-      {
-        productList.map((prod) => <ProductCard key={ prod.name } product={ prod } />)
-      }
+      <Row>
+        {
+          productList.map((prod) => <ProductCard key={ prod.name } product={ prod } />)
+        }
+      </Row>
     </div>
   );
 }

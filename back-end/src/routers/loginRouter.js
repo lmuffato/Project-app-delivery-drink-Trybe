@@ -1,12 +1,10 @@
 const express = require('express');
 const { userController } = require('../controllers');
+const { validateEmail, validatePassword } = require('../middlewares');
 
 const Router = express.Router();
 
-Router.post('/', userController.login);
-
-// somente para ver todos usuários no banco
-Router.get('/getAll', userController.loginGetAll);
+Router.post('/', validateEmail, validatePassword, userController.login);
 
 Router.use((err, _req, res, _next) => {
   const { code, message } = err;

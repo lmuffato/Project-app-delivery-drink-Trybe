@@ -13,6 +13,7 @@ app.get('/', (req, res) => {
 
 app.get('/coffee', (_req, res) => res.status(418).end());
 app.use('/login', userController.login);
+app.use('/register', userController.register);
 
 app.use(errorHandler);
 

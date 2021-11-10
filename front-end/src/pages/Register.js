@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Register = () => {
   const [userData, setUserData] = useState({
@@ -7,11 +7,26 @@ const Register = () => {
     inputPassword: '',
   });
 
+  const validateButton = document.querySelector('button');
+
   function handleInputChange(e) {
     e.preventDefault();
     const { name, value } = e.target;
     setUserData({ ...userData, [name]: value });
   }
+
+  useEffect(() => {
+    const { inputEmail, inputName, inputPassword } = userData;
+    const validateEmail = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(inputEmail);
+    const validateName = new RegExp(/[\w\D]{12}/g).test(inputName);
+    const validatePassword = new RegExp(/[\w\D]{6}/g).test(inputPassword);
+
+    if (validateEmail && validateName && validatePassword) {
+      validateButton.disabled = false;
+    } else {
+      validateButton.disabled = true;
+    }
+  });
 
   return (
     <div>

@@ -2,7 +2,9 @@ const jwt = require('jsonwebtoken');
 const md5 = require('md5');
 const { User } = require('../database/models');
 const errorMap = require('../utils/errorMap');
-const SECRET = require('../utils/secret');
+require('dotenv').config();
+
+const { SECRET } = process.env;
 
 const login = async (user) => {
   try {

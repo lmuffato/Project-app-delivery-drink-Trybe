@@ -20,16 +20,4 @@ describe('O model de User', () => {
   describe('possui as propriedades "name", "email", "password", "role"', () => {
     ['name', 'email', 'password', 'role'].forEach(checkPropertyExists(user));
   });
-
-  describe('se possui associações', () => {
-    const Sale = 'Sale';
-
-    before(() => {
-      User.associate(Sale);
-    });
-
-    it('possui "hasMany" com o model Sale', () => {
-      expect(User.hasMany).to.have.been.calledWith(Sale);
-    });
-  });
 });

@@ -15,9 +15,46 @@ function Provider({ children }) {
 
   // UseEffect para salvar no localStorage
 
+  /// ////////////////////////Link with BackEnd//////////////////////// ///
+
+  const Endpoints = {
+    login_form: 'login',
+    register_form: 'register',
+  };
+
+  const postSubmit = (url) => {
+    axios.post(`http://localhost:3001/${url}`, { user })
+      .then((res) => {
+        console.log(res);
+        console.log(res.data);
+        // Aguardar: Retorno do Back para prosseguir
+      });
+  };
+
+  /// ////////////////////////Components Functions//////////////////////// ///
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    const setuser = { ...user,
+      [name]: value,
+    };
+    setUser(setuser);
+    console.log(setuser);
+  };
+
+  const resetUser = () => {
+    setUser({});
+  };
+
+  const submitChange = async (e, formType) => {
+    e.preventDefault();
+    await postSubmit(Endpoints[formType]);
+    console.log(user);
+  };
+
   return (
     <Context.Provider
-      value={ { setUser, user } }
+      value={ { setUser, user, handleChange, submitChange, resetUser } }
     >
       { children }
     </Context.Provider>

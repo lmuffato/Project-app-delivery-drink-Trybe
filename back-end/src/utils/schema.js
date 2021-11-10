@@ -8,5 +8,5 @@ const validateUser = Joi.object({
 }).required();
 
 module.exports = {
-  validateUser
-}
+  validateUser,
+};

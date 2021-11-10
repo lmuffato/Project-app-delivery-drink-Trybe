@@ -19,6 +19,7 @@ router.post('/users/admin',
   middlewares.findUserByNameOrEmail,
   userController.addUserByAdmin,
 );
+
 router.delete('/users/:id', userController.removeUser);
 
 router.get('/products', productController.getAllProducts);

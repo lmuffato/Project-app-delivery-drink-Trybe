@@ -1,13 +1,12 @@
-import React from "react";
+// import React from "react";
 
-export default function User() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+// export default function User() {
+//   const [email, setEmail] = useState('');
+//   const [password, setPassword] = useState('');
 
-  return (
-    <main>
-      <div> xablau </div>
-    </main>
-  )
-}
-
+//   return (
+//     <main>
+//       <div> xablau </div>
+//     </main>
+//   )
+// }

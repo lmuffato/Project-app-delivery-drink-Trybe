@@ -14,4 +14,8 @@ describe('O model de User', () => {
   describe('possui o nome "User"', () => {
     checkModelName(User)('User');
   });
+
+  describe('possui as propriedades "name", "email", "password", "role"', () => {
+    ['name', 'email', 'password', 'role'].forEach(checkPropertyExists(user));
+  });
 });

@@ -8,6 +8,6 @@ const { checkPassword } = require('../middlewares/checkPassword');
 const app = express();
 app.use(bodyParser.json());
 
-app.post('/login', checkEmail, checkPassword, userControllers.login)
+app.post('/login', checkEmail, checkPassword, userControllers.login);
 
 module.exports = app;

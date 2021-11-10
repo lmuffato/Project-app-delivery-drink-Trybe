@@ -59,6 +59,9 @@ function Login() {
         onChange={ handleFormChange }
         error={ !(emailRegex.test(email)) }
         helperText={ !(emailRegex.test(email)) ? 'Digite um email válido' : '' }
+        inputprops={ {
+          'data-testid': 'common_login__input-email',
+        } }
       />
       <TextField
         margin="dense"
@@ -71,9 +74,26 @@ function Login() {
         error={ password.length < MINPASSWORDLENGTH }
         helperText={ password.length >= MINPASSWORDLENGTH
           ? '' : 'A senha tem que ter mais que 6 caracteres' }
+        inputprops={ {
+          'data-testid': 'common_login__input-password',
+        } }
       />
-      <Button disabled={ error } onClick={ handleLogin }>Login</Button>
-      <Link href="/register" underline="hover">
+      <Button
+        disabled={ error }
+        onClick={ handleLogin }
+        inputprops={ {
+          'data-testid': 'common_login__button-login',
+        } }
+      >
+        Login
+      </Button>
+      <Link
+        href="/register"
+        underline="hover"
+        inputprops={ {
+          'data-testid': 'common_login__button-register',
+        } }
+      >
         Criar conta
       </Link>
     </Box>

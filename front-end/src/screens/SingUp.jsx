@@ -1,14 +1,15 @@
 import React, { useState, useContext } from 'react';
-import ContextLogin from '../context/ContextLogin';
 import { useHistory } from 'react-router-dom';
+import ContextLogin from '../context/ContextLogin';
+import inputsValidator from '../utils/validateRegisterInputs';
+
 function SignUp() {
   const { createUser } = useContext(ContextLogin);
   const history = useHistory();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
-
+  const errorMessage = '';
 
   const askCreateUser = async () => {
     await createUser(name, email, password);
@@ -61,16 +62,21 @@ function SignUp() {
           className="loginBtn"
           data-testid="common_register__button-register"
           type="submit"
+          disabled={ !inputsValidator({ name, email, password }) }
         >
           Registrar
         </button>
       </form>
-      <span
-        className="error_message-span"
-        data-testid="common_register__element-invalid_register"
-      >
-        { errorMessage }
-      </span>
+
+      { errorMessage !== ''
+        && (
+          <span
+            className="error_message-span"
+            data-testid="common_register__element-invalid_register"
+          >
+            { errorMessage }
+          </span>
+        )}
     </div>
   );
 }

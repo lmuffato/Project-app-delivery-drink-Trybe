@@ -5,8 +5,7 @@ const router = Router();
 
 router.post(
   '/',
-  loginValidate.validateEmail,
-  loginValidate.validatePassword,
+  loginValidate.validate,
 );
 
 module.exports = router;

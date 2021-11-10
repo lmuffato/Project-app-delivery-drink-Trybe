@@ -5,7 +5,7 @@ const router = Router();
 
 router.post(
   '/',
-  registrationValidate.validateName,
+  registrationValidate.validate,
 );
 
 module.exports = router;

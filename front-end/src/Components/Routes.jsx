@@ -1,11 +1,12 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Redirect, Switch, Route } from 'react-router-dom';
 import Login from './Login';
 
 export default function Rout() {
   return (
-    <Routes>
-      <Route path="/" element={ <Login /> } />
-    </Routes>
+    <Switch>
+      <Route path="/login" component={ Login } />
+      <Route path="/" render={ () => <Redirect to="/login" /> } />
+    </Switch>
   );
 }

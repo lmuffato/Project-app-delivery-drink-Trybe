@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import ProviderLogin from './context/ProviderLogin';
 import SignUp from './screens/SingUp';
 import Login from './screens/Login';
-import ToDo from './screens/ToDo';
 import NotFound from './screens/NotFound';
 
 function App() {

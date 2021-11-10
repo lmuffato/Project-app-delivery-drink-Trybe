@@ -1,24 +1,23 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import ContextLogin from './ContextLogin';
 import axios from 'axios';
+import ContextLogin from './ContextLogin';
 
-//---------------------------------------------/---------------------------------------------------------------//
+// ---------------------------------------------/---------------------------------------------------------------//
 
 function ProviderLogin({ children }) {
-
   const [user, setUser] = useState([]);
   const [token, setToken] = useState('');
-  const [allowed, setAllowed] = useState(true)
+  const [allowed, setAllowed] = useState(true);
   const urlBase = 'http://localhost:3000';
 
-  //---------------------------------------------/---------------------------------------------------------------//
+  // ---------------------------------------------/---------------------------------------------------------------//
 
   const makeLogin = async (email, password) => {
     setAllowed(true);
-    const { data: { token: newToken, user: newUser, error } }= await axios
+    const { data: { token: newToken, user: newUser, error } } = await axios
       .post(`${urlBase}/users/login`, { email, password })
-        .catch((er) => console.log(er));
+      .catch((er) => console.log(er));
     if (error !== undefined) {
       console.log(error);
       return setAllowed(false);
@@ -27,16 +26,15 @@ function ProviderLogin({ children }) {
     setUser(newUser);
   };
 
-  //---------------------------------------------/---------------------------------------------------------------//
+  // ---------------------------------------------/---------------------------------------------------------------//
 
   const createUser = async (name, email, password) => {
     await axios.post(`${urlBase}/users/register`, {
       name, email, password,
-    })
+    });
   };
 
-  //---------------------------------------------/---------------------------------------------------------------//
-
+  // ---------------------------------------------/---------------------------------------------------------------//
 
   return (
     <ContextLogin.Provider
@@ -53,7 +51,7 @@ function ProviderLogin({ children }) {
   );
 }
 
-//---------------------------------------------/---------------------------------------------------------------//
+// ---------------------------------------------/---------------------------------------------------------------//
 
 ProviderLogin.propTypes = {
   children: PropTypes.objectOf(PropTypes.shape(
@@ -61,6 +59,6 @@ ProviderLogin.propTypes = {
   )),
 }.isRequired;
 
-//---------------------------------------------/---------------------------------------------------------------//
+// ---------------------------------------------/---------------------------------------------------------------//
 
 export default ProviderLogin;

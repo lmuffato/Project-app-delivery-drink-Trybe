@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
-import ContextLogin from '../context/ContextLogin';
 import { useHistory } from 'react-router-dom';
+import ContextLogin from '../context/ContextLogin';
 
 function Login() {
   const { makeLogin, allowed, getAllTasks, user } = useContext(ContextLogin);
@@ -8,9 +8,8 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-
   const askLogin = async () => {
-    await makeLogin(email, password)
+    await makeLogin(email, password);
     if (allowed) {
       await getAllTasks(user.id);
       history.push('/todo');

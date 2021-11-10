@@ -8,17 +8,19 @@ module.exports = (sequelize, DataTypes) => {
     },
     user_id: { type: DataTypes.INTEGER },
     seller_id: { type: DataTypes.INTEGER },
-    total_price: { type: DataTypes.INTEGERDECIMAL(9,2) },
+    total_price: { type: DataTypes.DECIMAL(9,2) },
     delivery_address: { type: DataTypes.STRING },
     delivery_number: { type: DataTypes.STRING },
     sala_date: { type: DataTypes.DATE },
     status: { type: DataTypes.STRING },
-  }, { timestamp: true, tableName: 'sales' });
+  }, { timestamps: true, tableName: 'sales' });
+
   Sale.associate = (models) => {
     models.Sale.belongsTo(models.User, { 
       as: 'user',
       foreignKey: ['user_id, seller_id'],
     });
   }
+
   return Sale;
 };

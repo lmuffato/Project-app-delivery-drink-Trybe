@@ -9,13 +9,15 @@ module.exports = (sequelize, DataTypes) => {
      },
     password: { type: DataTypes.STRING },
     role: { type: DataTypes.STRING },
-  }, { timestamp: false, tableName: 'users'},
+  }, { timestamps: false, tableName: 'users'},
   );
+
   User.associate = (models) => {
-    User.hasMany(models.Sales, {
+    User.hasMany(models.Sale, {
       as: 'Sales',
       foreignKey: ['user_id', 'seller_id'],
     });
   }
+
   return User;
 };

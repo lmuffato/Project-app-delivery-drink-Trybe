@@ -1,8 +1,7 @@
 import React from 'react';
 
 function App() {
-  return (<p> em construç</p>
-  );
+  return (<p> em construção </p> );
 }
 
 export default App;

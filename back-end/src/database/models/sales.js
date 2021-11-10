@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
     onDelete: DataTypes.STRING
   }, {
     tableName: 'Sales',
-    timestamps: true,
+    timestamps: false,
   });
 
   return Sales;

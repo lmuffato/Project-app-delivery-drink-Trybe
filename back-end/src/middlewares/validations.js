@@ -22,13 +22,11 @@ const validateLogin = async (req, res, next) => {
       .min(6)
       .required(), 
   });
-  console.log('antes de verificar se email existes')
   if (await !emailExists(email)) {
     return res.status(httpStatus.unauthorized).json({
       message: '',
     });
   }
-  console.log('co')
   const { error } = loginSchema.validate({ email, password });
   if (error) {
     const { message } = error;

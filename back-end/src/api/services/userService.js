@@ -23,7 +23,7 @@ const checkLogin = async (email, password) => {
 };
 
 const createUser = async ({ name, email, password, role }) => {
-  const hashPassword = encrypt(password);
+  const { iv } = encrypt(password);
 
   const [user, created] = await User.findOrCreate({
     where: {
@@ -32,16 +32,16 @@ const createUser = async ({ name, email, password, role }) => {
     defaults: {
       name,
       email,
-      password: hashPassword,
+      password: iv,
       role,
     },
   });
 
   if (!created) {
-    return created;
+    return { status: 409, message: 'User already exists!' };
   }
 
-  return user;
+  return { status: 201, user };
 };
 
 const login = async ({ email, password }) => {

@@ -1,7 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-
-const UserController = require('./controllers');
+const { userController } = require('./controllers');
 
 const newUserAuthentication = require('./middleware/newUserAuthentication');
 
@@ -11,6 +10,8 @@ app.use(bodyParser.json());
 
 app.get('/coffee', (_req, res) => res.status(418).end());
 
-app.post('/register', newUserAuthentication, UserController.createUser);
+app.post('/login', userController.login);
+
+app.post('/register', newUserAuthentication, userController.createUser);
 
 module.exports = app;

@@ -30,6 +30,7 @@ function RegisterForm() {
       <p
         data-testid={ `common_register__element-invalid_register 
         [Elemento oculto (Mensagens de erro)]` }
+        style={ { visibility: 'hidden' } }
       >
         elemento oculto
       </p>

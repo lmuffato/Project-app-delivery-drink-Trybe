@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const loginRouter = require('./router/loginRouter');
+const loginRouter = require('./src/router/loginRouter');
 
 const PORT = 3001;
 

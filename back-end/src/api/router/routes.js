@@ -17,9 +17,7 @@ router.post('/users/admin',
   auth.verifyToken,
   middlewares.verifyRoleAdmin,
   middlewares.findUserByNameOrEmail,
-  userController.addUserByAdmin,
-);
-
+  userController.addUserByAdmin);
 router.delete('/users/:id', userController.removeUser);
 
 router.get('/products', productController.getAllProducts);

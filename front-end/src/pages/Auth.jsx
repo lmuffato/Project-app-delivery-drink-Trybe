@@ -36,6 +36,7 @@ export default function Auth() {
             type="email"
             placeholder="Digite o seu e-mail"
             onChange={ setInputs }
+            data-testid="common_login__input-email"
           />
         </label>
         <label htmlFor="password">
@@ -45,10 +46,13 @@ export default function Auth() {
             type="password"
             placeholder="Digite a sua senha"
             onChange={ setInputs }
+            data-testid="common_login__input-password"
           />
         </label>
-        <button type="submit">Entrar</button>
-        <Link to="/register">Ainda não tenho conta</Link>
+        <button type="submit" data-testid="common_login__button-login">Entrar</button>
+        <Link to="/register" data-testid="common_login__button-register">
+          Ainda não tenho conta
+        </Link>
       </form>
     </>
   );

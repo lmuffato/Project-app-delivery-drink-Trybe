@@ -1,11 +1,12 @@
 const jwt = require('jsonwebtoken');
+const path = require('path');
 const md5 = require('md5');
+const fs = require('fs');
 const { User } = require('../database/models');
 const errorMap = require('../utils/errorMap');
-const { CREATED } = require('../utils/statusCodeMap');
-require('dotenv').config();
 
-const { SECRET } = process.env;
+const SECRET = fs.readFileSync(path.join(__dirname, '../../jwt.evaluation.key'), 'utf8');
+
 const CUSTOMER_ROLE = 'customer';
 
 const create = async (user) => {
@@ -20,11 +21,10 @@ const create = async (user) => {
     const result = await User.create({ name, email, password: passwordMD5, role: CUSTOMER_ROLE });
 
     return result;
-
   } catch (_error) {
     return errorMap.internalError;
   }
-}
+};
 
 const login = async (user) => {
   try {

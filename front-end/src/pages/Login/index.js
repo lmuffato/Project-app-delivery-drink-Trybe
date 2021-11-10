@@ -2,9 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import MD5 from 'crypto-js/md5';
+import { IoMdBeer } from 'react-icons/io';
 import Input from '../../components/Input';
 import api from '../../services/api';
 import './style.css';
+import LeftSide from '../../components/LeftSide';
 
 function LoginPage() {
   const [email, setEmail] = React.useState('');
@@ -28,33 +30,46 @@ function LoginPage() {
 
   return (
     <section className="login-page">
-      <div className="login-container">
-        <Input
-          type="text"
-          value={ email }
-          dataid="common_login__input-email"
-          placeholder="fulano@yahoo.com"
-          setValue={ setEmail }
-        />
-        <Input
-          type="password"
-          value={ password }
-          setValue={ setPassword }
-          dataid="common_login__input-password"
-          placeholder="Senha"
-        />
-        <button
-          type="button"
-          data-testid="common_login__button-login"
-          disabled={ !(checkEmail() && checkPass()) }
-          onClick={ handleLogin }
-        >
-          <Link to="/#">Login</Link>
-        </button>
-        <Link to="/register" data-testid="common_login__button-register">
-          Ainda não tenho conta
-        </Link>
-        {error && <p>{error}</p>}
+      <LeftSide />
+      <div className="right-side">
+        <h1>
+          dev
+          <span className="beer">Beer</span>
+          <IoMdBeer />
+        </h1>
+        <div className="login-container">
+          <Input
+            type="text"
+            value={ email }
+            dataid="common_login__input-email"
+            placeholder="fulano@yahoo.com"
+            setValue={ setEmail }
+          />
+          <Input
+            type="password"
+            value={ password }
+            setValue={ setPassword }
+            dataid="common_login__input-password"
+            placeholder="Senha"
+          />
+          <button
+            type="button"
+            data-testid="common_login__button-login"
+            disabled={ !(checkEmail() && checkPass()) }
+            onClick={ handleLogin }
+          >
+            <Link to="/#">Login</Link>
+          </button>
+          <div className="separator">ou</div>
+          <Link
+            to="/register"
+            data-testid="common_login__button-register"
+            className="register-account"
+          >
+            Ainda não tenho conta
+          </Link>
+          {error && <p>{error}</p>}
+        </div>
       </div>
     </section>
   );

@@ -1,7 +1,9 @@
 import React from 'react';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
+import { IoMdBeer } from 'react-icons/io';
 import Input from '../../components/Input';
+import LeftSide from '../../components/LeftSide';
 import './style.css';
 
 function RegisterPage() {
@@ -29,40 +31,51 @@ function RegisterPage() {
 
   return (
     <section className="register-page">
-      <div className="register-container">
-        <Input
-          type="text"
-          value={ name }
-          dataid="common_register__input-name"
-          placeholder="Seu nome"
-          setValue={ setName }
-        />
-        <Input
-          type="email"
-          value={ email }
-          setValue={ setEmail }
-          dataid="common_register__input-email"
-          placeholder="fulano@yahoo.com"
-        />
-        <Input
-          type="password"
-          value={ password }
-          setValue={ setPassword }
-          dataid="common_register__input-password"
-          placeholder="********"
-        />
-        <button
-          type="button"
-          data-testid="common_register__button-register"
-          disabled={ !(checkEmail() && checkPass() && checkName()) }
-          onClick={ handleRegister }
-        >
-          Cadastrar
-        </button>
-        <Link to="/">Voltar</Link>
-        {error && <p data-testid="common_register__element-invalid_register">{error}</p>}
+      <LeftSide />
+      <div className="right-side">
+        <h1>
+          dev
+          <span className="beer">Beer</span>
+          <IoMdBeer />
+        </h1>
+        <div className="register-container">
+          <Input
+            type="text"
+            value={ name }
+            dataid="common_register__input-name"
+            placeholder="Seu nome"
+            setValue={ setName }
+          />
+          <Input
+            type="email"
+            value={ email }
+            setValue={ setEmail }
+            dataid="common_register__input-email"
+            placeholder="fulano@yahoo.com"
+          />
+          <Input
+            type="password"
+            value={ password }
+            setValue={ setPassword }
+            dataid="common_register__input-password"
+            placeholder="********"
+          />
+          <button
+            type="button"
+            data-testid="common_register__button-register"
+            disabled={ !(checkEmail() && checkPass() && checkName()) }
+            onClick={ handleRegister }
+          >
+            Cadastrar
+          </button>
+          <Link to="/" className="return">Voltar</Link>
+          {error && (
+            <p data-testid="common_register__element-invalid_register">
+              {error}
+            </p>
+          )}
+        </div>
       </div>
-
     </section>
   );
 }

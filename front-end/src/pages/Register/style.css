@@ -8,7 +8,6 @@
 
 .register-container {
   align-items: center;
-  background: #a6a6a6;
   border-radius: 12px;
   display: flex;
   flex-direction: column;
@@ -29,17 +28,55 @@
 }
 
 .register-container > button {
-  background: blue;
+  position: relative;
+  background: #363636;
   border: none;
-  border-radius: 6px;
-  color: white;
-  font-size: 1.3rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.4rem;
   height: 40px;
-  text-decoration: none;
-  width: 40%;
+  transition: 0.3s;
+  width: 60%;
+  color: white;
+}
+
+
+.register-container > button:hover {
+  filter: brightness(1.2);
+}
+
+.register-container > button::after {
+  content: '';
+  position: absolute;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  left: 15px;
+  top: 13px;
+  background-color: rgb(59, 252, 0);
+  box-shadow: 0 0 10px rgb(59, 252, 0);
+  z-index: 2;
+  transition: 0.3s;
 }
 
 .register-container > button:disabled {
-  background: red;
   cursor: not-allowed;
+}
+
+.register-container > button:disabled::after {
+  content: '';
+  position: absolute;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  left: 15px;
+  top: 13px;
+  background-color: rgb(252, 0, 0);
+  box-shadow: 0 0 10px rgb(252, 0, 0);
+  z-index: 2;
+}
+
+.return  {
+  color: #0e69f0;
+  font-size: 1.1rem;
 }

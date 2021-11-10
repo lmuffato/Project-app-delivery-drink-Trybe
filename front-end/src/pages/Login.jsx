@@ -6,6 +6,15 @@ const initialState = () => (
 function Login() {
   const [values, setValues] = useState(initialState);
 
+  const onChange = (event) => {
+    const { value, name } = event.target;
+
+    setValues({
+      ...values,
+      [name]: value,
+    }, () => buttonStatus());
+  };
+
   return (
     <form>
       <img src="#" alt="Logotipo" />
@@ -16,6 +25,8 @@ function Login() {
           data-testid="common_login__input-email"
           name="email"
           type="email"
+          value={ values.email }
+          onChange={ onChange }
           placeholder="email@tryber.com.br"
         />
       </label>
@@ -25,12 +36,15 @@ function Login() {
           data-testid="common_login__input-password"
           name="password"
           type="password"
+          value={ values.password }
+          onChange={ onChange }
           placeholder="*******"
         />
       </label>
       <button
         data-testid="common_login__button-login"
         type="submit"
+        disabled={ !values.buttonStatus }
       >
         LOGIN
       </button>

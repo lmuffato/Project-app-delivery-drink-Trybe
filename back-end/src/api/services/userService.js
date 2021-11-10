@@ -25,7 +25,9 @@ const login = async ({ email, password }) => {
     email: user.dataValues.email,
   }, JWT_SECRET);
 
-  return token;
+  const userWithoutPassword = { ...user.dataValues, password: undefined };
+
+  return { user: userWithoutPassword, token };
 };
 
 const register = async ({ name, email, password, role = 'customer' }) => {

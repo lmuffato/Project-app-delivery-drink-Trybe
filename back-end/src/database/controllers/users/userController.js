@@ -15,4 +15,17 @@ const create = rescue(async (req, res) => {
   res.status(200).json(createdUser);
 });
 
-module.exports = { getUser, create };
+const exclude = rescue(async (req, res) => {
+  const { id } = req.params;
+  await User.destroy( { where: { id } });
+  res.status(204).end();
+})
+
+const getById = rescue(async (req, res) => {
+  const { id } = req.params;
+  const user = await User.findByPk(id);
+  if (!user) return res.status(404).json({ message: 'User does not exist' });
+  res.status(200).json(user);
+});
+
+module.exports = { getUser, create, exclude, getById };

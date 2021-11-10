@@ -45,7 +45,7 @@
   filter: brightness(1.2);
 }
 
-.register-container > button::after {
+.register-container > button:after {
   background-color: rgb(59, 252, 0);
   border-radius: 50%;
   box-shadow: 0 0 10px rgb(59, 252, 0);
@@ -63,7 +63,7 @@
   cursor: not-allowed;
 }
 
-.register-container > button:disabled::after {
+.register-container > button:disabled:after {
   background-color: rgb(252, 0, 0);
   border-radius: 50%;
   box-shadow: 0 0 10px rgb(252, 0, 0);
@@ -76,7 +76,7 @@
   z-index: 2;
 }
 
-.return  {
+.return {
   color: #0e69f0;
   font-size: 1.1rem;
 }

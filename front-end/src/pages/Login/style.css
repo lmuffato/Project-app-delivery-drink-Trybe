@@ -12,8 +12,8 @@
   display: flex;
   flex: 1;
   justify-content: center;
-  position: relative;
   min-height: 100vh;
+  position: relative;
   width: 100%;
 }
 
@@ -67,7 +67,7 @@
   width: 60%;
 }
 
-.login-container > button::after {
+.login-container > button:after {
   background-color: rgb(59, 252, 0);
   border-radius: 50%;
   box-shadow: 0 0 10px rgb(59, 252, 0);
@@ -85,7 +85,7 @@
   cursor: not-allowed;
 }
 
-.login-container > button:disabled::after {
+.login-container > button:disabled:after {
   background-color: rgb(252, 0, 0);
   border-radius: 50%;
   box-shadow: 0 0 10px rgb(252, 0, 0);
@@ -116,20 +116,20 @@ button:disabled > a {
   color: #a8a8b3;
   display: flex;
   font-size: 20px;
-  position: relative;
   margin: 10px 0;
+  position: relative;
 }
 
-.separator::after {
+.separator:after {
   background: #a8a8b3;
   content: '';
   height: 1px;
-  position: absolute;
   margin-left: 50px;
+  position: absolute;
   width: 6rem;
 }
 
-.separator::before {
+.separator:before {
   background: #a8a8b3;
   content: '';
   height: 1px;
@@ -145,12 +145,13 @@ button:disabled > a {
 
 
 @keyframes beerSvg {
+
   0% {
     transform: rotate(40deg) translateY(-500px);
   }
 
   25% {
-    transform: rotate(-35deg) translateY(0px);
+    transform: rotate(-35deg) translateY(0);
   }
 
   50% {

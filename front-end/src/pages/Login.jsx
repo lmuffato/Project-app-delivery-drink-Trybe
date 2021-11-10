@@ -28,7 +28,6 @@ function Login() {
           placeholder="Insira seu e-mail"
           data-testid="1"
           name="email"
-          // value={ userData.email }
           onChange={ handleInput }
         />
         <br />

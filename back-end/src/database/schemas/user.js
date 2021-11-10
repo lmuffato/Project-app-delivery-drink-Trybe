@@ -7,24 +7,23 @@ module.exports = (DataTypes) => ({
     allowNull: false,
     autoIncrement: true,
     primaryKey: true,
-    type: DataTypes.INTEGER,
+    type: DataTypes.INTEGER
   },
   name: {
     allowNull: false,
-    type: DataTypes.STRING(100),
+    type: DataTypes.STRING(100)
   },
   email: {
     allowNull: false,
     type: DataTypes.STRING(100),
-    unique: true,
+    unique: true
   },
   password: {
     allowNull: false,
-    type: DataTypes.STRING(32),
+    type: DataTypes.STRING(32)
   },
   role: {
     allowNull: false,
-    type: DataTypes.ENUM,
-    values: ['administrator', 'seller', 'customer']
+    type: DataTypes.ENUM('administrator', 'seller', 'customer')
   },
 })

@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const { User } = require('../../database/models');
 const { encrypt } = require('../auth/encriptation');
-const { INCORRECT_USERNAME_OR_PASSWORD, ALL_FILDES_FILLED } = require('../messages/errorMessages');
+const { INCORRECT_USERNAME_OR_PASSWORD, ALL_FIELDES_FILLED } = require('../messages/errorMessages');
 
 const jwtConfig = {
   expiresIn: '2h',
@@ -22,7 +22,7 @@ const checkLogin = async (email, password) => {
 
 const login = async ({ email, password }) => {
   if (!email || !password) {
-    return ({ status: 401, data: ALL_FILDES_FILLED });
+    return ({ status: 401, data: ALL_FIELDES_FILLED });
   }
 
   const { iv } = encrypt(password);

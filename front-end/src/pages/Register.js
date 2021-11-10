@@ -7,8 +7,6 @@ const Register = () => {
     inputPassword: '',
   });
 
-  const validateButton = document.querySelector('button');
-
   function handleInputChange(e) {
     e.preventDefault();
     const { name, value } = e.target;
@@ -16,6 +14,7 @@ const Register = () => {
   }
 
   useEffect(() => {
+    const validateButton = document.querySelector('button');
     const { inputEmail, inputName, inputPassword } = userData;
     const validateEmail = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(inputEmail);
     const validateName = new RegExp(/[\w\D]{12}/g).test(inputName);

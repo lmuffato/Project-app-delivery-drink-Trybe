@@ -1,8 +1,20 @@
 import React, { useState } from 'react';
 
 function Login() {
-  const [password, setPassword] = useState([]);
-  const [email, setemail] = useState();
+  const [userData, setUserData] = useState({
+    email: '',
+    password: '',
+  });
+
+  function handleInput({ target }) {
+    e.preventDefault();
+    const { name, value } = target;
+    setUserData({ ...userData, [name]: value });
+  }
+
+  // function handle() {
+
+  // }
 
   return (
     <main>
@@ -10,27 +22,27 @@ function Login() {
         {/* <img></img> */}
         <h1>Drink Delivery</h1>
       </section>
-      <section>
+      <form>
         <input
           type="text"
           placeholder="Insira seu e-mail"
           data-testid="1"
-          value={ email }
-          onChange={ (e) => setemail(e.target.value) }
+          name="email"
+          // value={ userData.email }
+          onChange={ handleInput }
         />
         <br />
         <input
           type="password"
           placeholder="Insira sua senha"
           data-testid="2"
-          value={ password }
-          onChange={ (e) => setPassword(e.target.value) }
+          name="password"
+          onChange={ handleInput }
         />
         <br />
         <button
           type="submit"
           data-testid="3"
-          // onClick={ () => test() }
         >
           Login
         </button>
@@ -38,7 +50,7 @@ function Login() {
         <button
           type="submit"
           data-testid="4"
-          // onClick={ () => test() }
+          // onClick={ handle }
         >
           Cadastre-se
         </button>
@@ -48,7 +60,7 @@ function Login() {
         >
           possivel erro
         </span>
-      </section>
+      </form>
     </main>
   );
 }

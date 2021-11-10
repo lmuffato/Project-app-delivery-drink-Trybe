@@ -1,0 +1,28 @@
+.productContainer {
+  max-width: 250px;
+  margin: 20px;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  background-color: lightcyan;
+  justify-content: space-evenly;
+  align-content: stretch;
+  height: 300px;
+  position: relative;
+}
+
+.element {
+  display: flex;
+}
+
+img {
+  border: 1px solid black;
+  margin: auto;
+}
+
+.absolute {
+  position: absolute;
+  inset: 0;
+  padding-left: 10px;
+  color: grey
+}

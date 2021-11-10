@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/form.css';
+import '../styles/product.css';
 // import Context from '../context/Context';
 
 function ProductCard(props) {
@@ -14,22 +14,20 @@ function ProductCard(props) {
   // Div filho 2: BG Aquamarine
 
   return (
-    <div>
-      <div>
-        <h1>Preço</h1>
+    <section className="productContainer">
+      <div className="element">
+        <h1 className="absolute">Preço</h1>
         <img src="algo" alt="algo" />
-
       </div>
       <div>
-        <span>Nome do Produto</span>
-        <div>
+        <span className="element">Nome do Produto</span>
+        <div className="element">
           <button type="button"> - </button>
           <input type="number" placeholder="0" />
           <button type="button"> + </button>
-
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 

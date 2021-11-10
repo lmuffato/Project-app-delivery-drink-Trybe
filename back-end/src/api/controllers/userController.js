@@ -18,8 +18,9 @@ const register = async (req, res, next) => {
 
     const user = await userService.register({ name, email, password });
 
-    res.status(200).json({ user });
+    res.status(201).json({ user });
   } catch (err) {
+    err.code = 409;
     next(err);
   }
 };

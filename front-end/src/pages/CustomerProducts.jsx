@@ -1,10 +1,10 @@
 import React from 'react';
-import NavBar from '../components/NavBar';
+import NavBar from '../components/CustomerNavBar';
 
 function ClientProducts() {
   return (
     <div>
-      <NavBar />
+      <NavBar fixed="top" />
     </div>
   );
 }

@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const { userController } = require('./controllers');
 
-const newUserAuthentication = require('./middleware/newUserAuthentication');
+const newUserAuthentication = require('./middleware/validateNewUser');
 
 const app = express();
 

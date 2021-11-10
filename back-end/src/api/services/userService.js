@@ -1,9 +1,12 @@
 const { Op } = require('sequelize');
-
+const md5 = require('md5');
 const jwt = require('jsonwebtoken');
+
 const { User } = require('../../database/models');
-const { INCORRECT_USERNAME_OR_PASSWORD, ALL_FILDES_FILLED } = require('../messages/errorMessages');
-const { encrypt } = require('../auth/encriptation');
+const { 
+  INCORRECT_USERNAME_OR_PASSWORD,
+  ALL_FILDS_FILLED, 
+  USER_ALREADY_EXIST } = require('../messages/errorMessages');
 
 const jwtConfig = {
   expiresIn: '2h',
@@ -23,7 +26,7 @@ const checkLogin = async (email, password) => {
 };
 
 const createUser = async ({ name, email, password, role }) => {
-  const { iv } = encrypt(password);
+  const hashPassword = md5(password);
 
   const [user, created] = await User.findOrCreate({
     where: {
@@ -32,26 +35,26 @@ const createUser = async ({ name, email, password, role }) => {
     defaults: {
       name,
       email,
-      password: iv,
+      password: hashPassword,
       role,
     },
   });
 
   if (!created) {
-    return { status: 409, message: 'User already exists!' };
+    return ({ status: 409, data: USER_ALREADY_EXIST });
   }
 
-  return { status: 201, user };
+  return ({ status: 201, user });
 };
 
 const login = async ({ email, password }) => {
   if (!email || !password) {
-    return ({ status: 401, data: ALL_FILDES_FILLED });
+    return ({ status: 401, data: ALL_FILDS_FILLED });
   }
 
-  const { iv } = encrypt(password);
+  const hashPassword = md5(password);
 
-  const loginCheck = await checkLogin(email, iv);
+  const loginCheck = await checkLogin(email, hashPassword);
 
   if (!loginCheck) {
     return ({ status: 401, data: INCORRECT_USERNAME_OR_PASSWORD });

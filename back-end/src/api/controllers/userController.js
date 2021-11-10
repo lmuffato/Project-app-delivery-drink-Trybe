@@ -4,10 +4,10 @@ const createUser = async (req, res) => {
   const { name, email, password } = req.body;
   const newUser = { name, email, password, role: 'customer' };
 
-  const { status, message, user } = await userService.createUser(newUser);
+  const { status, data, user } = await userService.createUser(newUser);
 
   if (!user) {
-    return res.status(status).json({ message });
+    return res.status(status).json({ data });
   }
   
   res.status(status).json(user);

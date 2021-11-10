@@ -1,5 +1,5 @@
 module.exports = {
-  ALL_FILDES_FILLED: 'All fields must be filled.',
+  ALL_FILDS_FILLED: 'All fields must be filled.',
   EMAIL_ALREADY_REGISTRED: 'Email already registered.',
   INCORRECT_USERNAME_OR_PASSWORD: 'Incorrect username or password.',
   INVALID_ENTRIES: 'Invalid entries. Try again.',
@@ -9,4 +9,8 @@ module.exports = {
   ONLY_ADMINS_REGISTER: 'Only admins can register new roles',
   SERVER_ERROR: 'Server error.',
   TASK_NOT_FOUND: 'Task not found.',
+  USER_ALREADY_EXIST: 'User already exists!',
+  INVALID_EMAIL: '"Email" must be a valid email',
+  NAME_SHORTER_THAN_ALLOWED: '"name" must have a minimum of 12 characters',
+  PASSWORD_SHORTER_THAN_ALLOWED: '"password" must have a minimum of 6 characters',
 };

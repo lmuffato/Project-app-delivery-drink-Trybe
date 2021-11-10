@@ -26,7 +26,7 @@ function Login() {
         <input
           type="text"
           placeholder="Insira seu e-mail"
-          data-testid="1"
+          data-testid="common_login__input-email"
           name="email"
           onChange={ handleInput }
         />
@@ -34,28 +34,28 @@ function Login() {
         <input
           type="password"
           placeholder="Insira sua senha"
-          data-testid="2"
+          data-testid="common_login__input-password"
           name="password"
           onChange={ handleInput }
         />
         <br />
         <button
           type="submit"
-          data-testid="3"
+          data-testid="common_login__button-login"
         >
           Login
         </button>
         <br />
         <button
           type="submit"
-          data-testid="4"
+          data-testid="common_login__button-register"
           // onClick={ handle }
         >
           Cadastre-se
         </button>
         <br />
         <span
-          data-testid="5"
+          data-testid="common_login__element-invalid-email"
         >
           possivel erro
         </span>

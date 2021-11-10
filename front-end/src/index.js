@@ -1,12 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import LoginProvider from './provider/LoginProvider';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
 import App from './App';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <LoginProvider>
+      <App />
+    </LoginProvider>
   </React.StrictMode>,
   document.getElementById('root'),
 );

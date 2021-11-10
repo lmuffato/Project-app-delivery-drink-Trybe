@@ -25,20 +25,10 @@ const login = async (user) => {
 
     const token = jwt.sign(payload, SECRET, options);
 
-    return { token, dataValues };
+    return { token };
   } catch (error) {
     return errorMap.internalError;
   }
 };
 
-const loginGetAll = async () => {
-  try {
-    const users = await User.findAll();
- 
-    return users;
-  } catch (error) {
-    return errorMap.internalError;
-  }
-};
-
-module.exports = { login, loginGetAll }; 
+module.exports = { login }; 

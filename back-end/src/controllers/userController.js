@@ -13,10 +13,4 @@ const login = async (req, res) => {
   return res.status(OK).json(result);
 };
 
-const loginGetAll = async (req, res) => {
-  const result = await userService.loginGetAll();
-
-  return res.status(OK).json(result);
-};
-
-module.exports = { login, loginGetAll }; 
+module.exports = { login }; 

@@ -1,13 +1,13 @@
 import React, { useState, useContext } from 'react';
-import ContextLogin from '../context/ContextLogin';
 import { useHistory } from 'react-router-dom';
+import ContextLogin from '../context/ContextLogin';
+
 function SignUp() {
   const { createUser } = useContext(ContextLogin);
   const history = useHistory();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
 
   const askCreateUser = async () => {
     await createUser(name, email, password);

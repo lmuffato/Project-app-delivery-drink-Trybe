@@ -1,6 +1,11 @@
 import React from 'react';
 
+const initialState = () => (
+  { email: '', password: '', buttonStatus: true, errorMessage: '' }
+);
 function Login() {
+  const [values, setValues] = useState(initialState);
+
   return (
     <form>
       <img src="#" alt="Logotipo" />

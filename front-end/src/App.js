@@ -1,9 +1,9 @@
 import React from 'react';
-import Animation from './components/Animation';
+import Login from './pages/Login';
 
 function App() {
   return (
-    <p>Em construção</p>
+    <Login />
   );
 }
 

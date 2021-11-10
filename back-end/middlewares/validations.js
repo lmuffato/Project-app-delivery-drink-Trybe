@@ -36,7 +36,7 @@ const emailValidate = async (req, res, next) => {
   next();
 };
 
-const emailValidate2 = async (req, res, next) => {
+const emailValidateLogin = async (req, res, next) => {
   const { email } = req.body;
   const regexEmail = /\S+@\S+\.\S+/;
   
@@ -138,7 +138,7 @@ const validateExistCategory = async (req, res, next) => {
 module.exports = {
   nameValidate,
   emailValidate,
-  emailValidate2,
+  emailValidateLogin,
   passwordValidate,
   userIdExist,
   validateCategory,

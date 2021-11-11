@@ -1,6 +1,6 @@
 // models/user.js
 module.exports = (sequelize, DataTypes) => {
-  const user = sequelize.define('user', {
+  const users = sequelize.define('users', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     name: DataTypes.STRING,  
     email: DataTypes.STRING,
@@ -12,9 +12,9 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: false, // remove a obrigatoriedade de utilizar os campos `createdAt` e `updatedAt`.
   });
 
-  user.associate = (models) => { // Define a relação de associação de um ou mais campos desta tabela com outra.
-    user.hasMany(models.sales, // Um usuário pode ter vários posts na tabela BlogPost.
-      { foreignKey: 'user_id', as: 'sales_id' }); // O campo userId será exibido como 'userPosts' na tabela BlogPost.
+  users.associate = (models) => { // Define a relação de associação de um ou mais campos desta tabela com outra.
+    users.hasMany(models.sales, // Um usuário pode ter vários posts na tabela BlogPost.
+      { foreignKey: 'user_Id', as: 'Sale' }); // O campo userId será exibido como 'userPosts' na tabela BlogPost.
   };
-  return user;
+  return users;
 };

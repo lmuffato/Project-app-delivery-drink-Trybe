@@ -1,33 +1,31 @@
-const modelConfig = {
-  tableName: 'salesProducts',
-  timestamps: false, 
-};
-
-// models/PostCategory.js
 module.exports = (sequelize, DataTypes) => {
-  const PostCategory = sequelize.define('salesProducts',
+  const salesProducts = sequelize.define('salesProducts',
     {
       quantity: DataTypes.INTEGER,
-    }, modelConfig);
+    }, 
+    {
+      tableName: 'salesProducts',
+      timestamps: false, 
+    });
 
-  PostCategory.associate = (models) => { // Essa associação define o relacionamento N:N entre as tabelas Category e BlogPost.
+  salesProducts.associate = (models) => { // Essa associação define o relacionamento N:N entre as tabelas Category e BlogPost.
     // Define o relacionamento entre as tabelas Category e BlogPost;
-    models.Category.belongsToMany(models.sales, { // Uma categoria pode pertencer a vários posts.
-      as: 'products', // A coluna postId da tabela PostCategory é que receberá a associação com as chaves extrangeiras.
-      through: PostCategory, // A associação entre os campos será feita através da tabela PostCategory
+    models.products.belongsToMany(models.sales, { // Uma categoria pode pertencer a vários posts.
+      as: 'sales', // A coluna postId da tabela salesProducts é que receberá a associação com as chaves extrangeiras.
+      through: salesProducts, // A associação entre os campos será feita através da tabela salesProducts
       foreignKey: 'sale_id', // A chave extrangeira "categoryId" é a chave que será associada a chave otherKey "postId", desta mesma tabela.
       otherKey: 'product_id', // A chave  é a outra chave associada a foreignKey "categoryId".
     });
 
     // Define o relacionamento entre as teabelas Category e BlogPost;
-    models.BlogPost.belongsToMany(models.products, { // Um post pode ter maisd e uma categoria
-      as: 'sales', // A coluna categoryId da tabela PostCategory é que receberá a associação com as chaves extrangeiras.
-      through: PostCategory, // A associação entre os campos será feita através da tabela PostCategory
+    models.sales.belongsToMany(models.products, { // Um post pode ter maisd e uma categoria
+      as: 'products', // A coluna categoryId da tabela salesProducts é que receberá a associação com as chaves extrangeiras.
+      through: salesProducts, // A associação entre os campos será feita através da tabela salesProducts
       foreignKey: 'product_id', // A chave extrangeira "postId" é a chave que será associada a chave otherKey "categoryId", desta mesma tabela.
       otherKey: 'sale_id', // A chave "categoryId" é a outra chave associada a foreignKey "postId".
     });
   };
-  return PostCategory;
+  return salesProducts;
 };
 
 

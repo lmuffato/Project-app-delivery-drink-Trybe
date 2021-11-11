@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Login from '../pages/Login';
 import NotFound from '../pages/NotFound';
+import NavBar from '../components/NavBar';
 
 export default function Routes() {
   return (
@@ -10,9 +11,9 @@ export default function Routes() {
         <Redirect to="/login" />
       </Route>
       <Route exact path="/login" component={ Login } />
-      <div id="NavBar">
+      <NavBar id="NavBar">
         <Route exact path="/products" component={ Login } />
-      </div>
+      </NavBar>
       <Route component={ NotFound } />
     </Switch>
   );

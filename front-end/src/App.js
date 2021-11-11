@@ -1,16 +1,14 @@
-import React, { useContext } from 'react';
-import ApiContext from './context/ApiContext';
+import React from 'react';
+import { Route, Switch } from 'react-router-dom';
+import Home from './pages/Home';
+import Login from './pages/Login';
 
 function App() {
-  const { users, setAtt, att } = useContext(ApiContext);
-  const click = () => {
-    setAtt(!att);
-    console.log(users);
-  };
   return (
-    <div>
-      <button type="button" onClick={ click }>Clique</button>
-    </div>
+    <Switch>
+      <Route exact path="/" component={ Home } />
+      <Route path="/login" component={ Login } />
+    </Switch>
   );
 }
 

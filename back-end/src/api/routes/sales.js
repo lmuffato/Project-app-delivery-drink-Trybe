@@ -1,12 +1,11 @@
-// const router = require('express').Router();
-// const controlUsers = require('../../controller/users');
-// const validation = require('../../middlewares/users');
-// const validateTWD = require('../auth/validateJWT');
+const router = require('express').Router();
+const controlSales = require('../controller/sales');
+const validateTWD = require('../middleware/validateJWT');
 
-// router.post('/', validateTWD, validation.recipeCreateValidation, controlRecipes.controlCreate);
-// router.get('/', controlRecipes.controlGetAll);
-// router.get('/:id', controlRecipes.controlGetById);
-// router.put('/:id', validateTWD, controlRecipes.controlUpdate);
-// router.delete('/:id', validateTWD, controlRecipes.controlDelete);
+router.post('/', validateTWD, validation.recipeCreateValidation, controlRecipes.controlCreate);
+router.get('/', controlRecipes.controlGetAll);
+router.get('/:id', controlRecipes.controlGetById);
+router.put('/:id', validateTWD, controlRecipes.controlUpdate);
+router.delete('/:id', validateTWD, controlRecipes.controlDelete);
 
-// module.exports = router;
+module.exports = router;

@@ -30,10 +30,11 @@ function Login() {
   const onSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.post('http://localhost:3001/login', {
+      const token = await axios.post('http://localhost:3001/login', {
         email: values.email,
         password: values.password,
       });
+
     } catch ({ response }) {
       // Source: https://stackoverflow.com/questions/45017822/catching-error-body-using-axios-post
       setValues({

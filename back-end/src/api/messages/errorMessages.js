@@ -1,9 +1,9 @@
 module.exports = {
-  ALL_FILDS_FILLED: 'All fields must be filled.',
+  ALL_FIELDS_FILLED: 'All fields must be filled.',
   EMAIL_ALREADY_REGISTRED: 'Email already registered.',
   INCORRECT_USERNAME_OR_PASSWORD: 'Incorrect username or password.',
   INVALID_ENTRIES: 'Invalid entries. Try again.',
-  NO_REGISTRED_TASKS: 'There are no registered tasks.',
+  NO_REGISTRED_PRODUCTS: 'There are no registered products.',
   NO_REGISTRED_USERS: 'There are no registered users',
   NON_EXISTENTE_USER: 'Non-existent user.',
   ONLY_ADMINS_REGISTER: 'Only admins can register new roles',

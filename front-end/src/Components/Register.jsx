@@ -24,6 +24,7 @@ export default function Register() {
             placeholder="Seu nome"
             value={ name }
             onChange={ (e) => handleChange(e.target) }
+            data-testid="common_register__input-name"
           />
         </label>
         <label htmlFor="user-email">
@@ -34,6 +35,8 @@ export default function Register() {
             placeholder="seu-email@site.com.br"
             value={ email }
             onChange={ (e) => handleChange(e.target) }
+            data-testid="common_register__input-email"
+
           />
         </label>
         <label htmlFor="user-password">
@@ -44,11 +47,13 @@ export default function Register() {
             placeholder="**********"
             value={ password }
             onChange={ (e) => handleChange(e.target) }
+            data-testid="common_register__input-password"
           />
         </label>
         <button
           type="button"
           id="register-button"
+          data-testid="common_register__button-register"
         >
           CADASTRAR
         </button>

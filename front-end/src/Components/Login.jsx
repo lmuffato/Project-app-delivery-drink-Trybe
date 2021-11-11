@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -49,13 +50,15 @@ export default function Login() {
           LOGIN
 
         </button>
-        <button
-          data-testid="common_login__button-register"
-          type="button"
-        >
-          Ainda não tenho conta
+        <Link to="/register">
+          <button
+            data-testid="common_login__button-register"
+            type="button"
+          >
+            Ainda não tenho conta
 
-        </button>
+          </button>
+        </Link>
       </form>
     </div>
   );

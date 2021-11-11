@@ -35,4 +35,6 @@ app.delete('/sales/:id', saleController.exclude);
 
 app.post('/login', loginController.login);
 
+app.get('/salesproducts', saleController.getSalesProducts);
+
 module.exports = app;

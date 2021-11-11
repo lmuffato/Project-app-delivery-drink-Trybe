@@ -1,4 +1,4 @@
-const { Sale } = require('../../models');
+const { Sale, SaleProduct } = require('../../models');
 const SaleService = require('../../services/sale/saleSevice');
 const rescue = require('express-rescue');
 
@@ -8,14 +8,29 @@ const getSale = rescue(async (_req, res) => {
 });
 
 const create = rescue(async (req, res) => {
-  const { totalPrice, deliveryAddress, deliveryNumber, status } = req.body;
-  const { id } = req.user
-  console.log(id);
+  const { totalPrice, deliveryAddress, deliveryNumber, status, products } = req.body;
+  const { id } = req.user;                                  // productId vem daqui
+
   const newSale = SaleService.validateEntries({ totalPrice, deliveryAddress, deliveryNumber, status });
   if (newSale.message) return res.status(newSale.status).json({ message: newSale.message });
+
   const createdSale = await Sale.create({ totalPrice, deliveryAddress, deliveryNumber, status, userId: id });
-  res.status(200).json(createdSale);
+
+  await products.forEach((product) => {
+    SaleProduct.create({
+      saleId: createdSale.id,
+      productId: product.id,
+      quantity: product.quantity,
+    });
+  });
+
+  res.status(200).json(createdSale); // saleId vem daqui
 });
+
+const getSalesProducts = rescue(async (_req, res) => {
+  const allSale = await SaleProduct.findAll();
+  res.status(200).json(allSale);
+})
 
 const exclude = rescue(async (req, res) => {
   const { id } = req.params;
@@ -35,4 +50,4 @@ const getById = rescue(async (req, res) => {
 //   const {  } = req.body;
 // });
 
-module.exports = { getSale, create, exclude, getById };
+module.exports = { getSale, create, exclude, getById, getSalesProducts };

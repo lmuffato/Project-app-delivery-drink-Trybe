@@ -1,10 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const errorHandler = require('./middlewares/errorHandler');
 const userController = require('./controllers/userController');
 
 const app = express();
 
+app.use(cors());
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {

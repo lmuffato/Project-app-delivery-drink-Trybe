@@ -1,10 +1,10 @@
 const express = require('express');
-const { userController } = require('../controllers');
-const { validateEmail, validatePassword } = require('../middlewares');
+const { productController } = require('../controllers');
+// const { validateEmail, validatePassword } = require('../middlewares');
 
 const Router = express.Router();
 
-Router.post('/', validateEmail, validatePassword, userController.login);
+Router.get('/', productController.getAll);
 
 Router.use((err, _req, res, _next) => {
   const { code, message } = err;

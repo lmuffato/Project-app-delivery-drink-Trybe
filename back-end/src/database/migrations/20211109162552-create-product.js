@@ -1,30 +1,17 @@
 'use strict';
+const productSchema = require('../schemas/product');
 module.exports = {
   /**
-   * 
    * @param {import('sequelize').QueryInterface} queryInterface 
-   * @param {import('sequelize').DataTypes} Sequelize 
+   * @param {import('sequelize').DataTypes} DataTypes 
    */
-  up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Products', {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
-      },
-      name: {
-        type: Sequelize.STRING(100)
-      },
-      price: {
-        type: Sequelize.DECIMAL(4, 2)
-      },
-      url_image: {
-        type: Sequelize.STRING(200)
-      }
-    });
+  up: async (queryInterface, DataTypes) => {
+    await queryInterface.createTable('Products', productSchema(DataTypes));
   },
-  down: async (queryInterface, Sequelize) => {
+  /**
+   * @param {import('sequelize').QueryInterface} queryInterface 
+   */
+  down: async (queryInterface) => {
     await queryInterface.dropTable('Products');
   }
 };

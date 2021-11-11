@@ -1,32 +1,18 @@
 'use strict';
+const productsSaleSchema = require('../schemas/productsSale');
 module.exports = {
   /**
    * 
    * @param {import('sequelize').QueryInterface} queryInterface 
-   * @param {import('sequelize').DataTypes} Sequelize 
+   * @param {import('sequelize').DataTypes} DataTypes 
    */
-  up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('ProductsSale', {
-      productId: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        primaryKey: true,
-        references: { model: 'Products', key: 'id' },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
-      },
-      saleId: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        primaryKey: true,
-        references: { model: 'Sales', key: 'id' },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
-      },
-      quantity: { type: Sequelize.INTEGER }
-    });
+  up: async (queryInterface, DataTypes) => {
+    await queryInterface.createTable('ProductsSale', productsSaleSchema(DataTypes));
   },
-  down: async (queryInterface, Sequelize) => {
+  /**
+   * @param {import('sequelize').QueryInterface} queryInterface 
+   */
+  down: async (queryInterface) => {
     await queryInterface.dropTable('ProductsSale');
   }
 };

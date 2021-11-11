@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 
 const { User } = require('../../database/models');
 const {
-  INCORRECT_USERNAME_OR_PASSWORD, ALL_FIELDS_FILLED, USER_ALREADY_EXIST,
+  INCORRECT_USERNAME_OR_PASSWORD, ALL_FIELDS_FILLED, USER_ALREADY_EXIST, NO_REGISTRED_USERS,
 } = require('../messages/errorMessages');
 
 const jwtConfig = {
@@ -64,7 +64,22 @@ const login = async ({ email, password }) => {
   return ({ status: 200, token });
 };
 
+const findAllUsers = async () => {
+  const allUsers = await User.findAll();
+  // console.log('🚀 ~ file: userService.js ~ line 69 ~ findAllUsers ~ allUsers', allUsers);
+
+  if (!allUsers) return ({ status: 404, data: NO_REGISTRED_USERS });
+
+  const usersArray = allUsers.map((user) => {
+    const { id, name, email, role } = user.dataValues;
+    return ({ id, name, email, role });
+  });
+
+  return ({ status: 200, data: usersArray });
+};
+
 module.exports = {
   login,
   createUser,
+  findAllUsers,
 };

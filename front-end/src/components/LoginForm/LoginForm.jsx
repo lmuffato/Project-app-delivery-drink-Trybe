@@ -5,10 +5,21 @@ import styles from './styles.module.css';
 
 export default function LoginForm() {
   const [email, setEmail] = useState('');
-  const [password, setpassword] = useState('');
+  const [password, setPassword] = useState('');
+
+  const resetValues = () => {
+    setEmail('');
+    setPassword('');
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(`email: ${email} senha: ${password}`);
+    resetValues();
+  };
 
   return (
-    <form className={ styles.loginFormContainer }>
+    <form className={ styles.loginFormContainer } onSubmit={ handleSubmit }>
       <InputField
         labelName="Login"
         type="email"
@@ -23,9 +34,9 @@ export default function LoginForm() {
         name="passwordInput"
         id="passwordInput"
         value={ password }
-        onChange={ (event) => setpassword(event.target.value) }
+        onChange={ (event) => setPassword(event.target.value) }
       />
-      <Button title="Login" typeButton="primary" />
+      <Button title="Login" typeButton="primary" type="submit" />
       <Button title="Ainda não tem conta" typeButton="tertiary" />
     </form>
   );

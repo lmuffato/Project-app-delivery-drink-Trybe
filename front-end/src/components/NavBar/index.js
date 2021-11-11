@@ -4,12 +4,33 @@ import './style.css';
 
 function NavBar() {
   return (
-    <div className="topnav">
-      <a className="active" href="#home">Produtos</a>
-      <a href="#news">Meus Pedidos</a>
-      <a href="#contact">User Name</a>
-      <a href="#sair">Sair</a>
-    </div>
+    <nav className="topnav">
+      <a
+        className="active"
+        data-testid="customer_products__element-navbar-link-products"
+        href="#home"
+      >
+        Produtos
+      </a>
+      <a
+        href="#news"
+        data-testid="customer_products__element-navbar-link-orders"
+      >
+        Meus Pedidos
+      </a>
+      <a
+        href="#contact"
+        data-testid="customer_products__element-navbar-user-full-name"
+      >
+        User Name
+      </a>
+      <a
+        href="#sair"
+        data-testid="customer_products__element-navbar-link-logout"
+      >
+        Sair
+      </a>
+    </nav>
   );
 }
 

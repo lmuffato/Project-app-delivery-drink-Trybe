@@ -8,24 +8,25 @@ const emailNotExists = async (email) => {
   if (searchResult !== null) {
     return { isExist: false };
   }
-  return { isExist: true};
+  return { isExist: true };
 };
 
 const validateNewUserData = async (req, res, next) => {
-  const { email, password } = req.body;
+  const { email, password, name } = req.body;
   const registerSchema = Joi.object({
     email: Joi.string().email().required(),
     password: Joi.string().min(6).required(),
+    name: Joi.string().min(12).required(),
   });
-  const { error } = registerSchema.validate({ email, password });
+  const { error } = registerSchema.validate({ email, password, name });
   if (error) {
     const { message } = error;
-    return res.status(httpStatus.badRequest).json({ message });
+    return res.status(httpStatus.badRequest).json({ error: { message } });
   }
   const { isExist } = await emailNotExists(email);
   if (isExist) {
     return res.status(httpStatus.conflict).json({
-      message: errorMessages.userExists,
+      error: { message: errorMessages.userExists },
     });
   }
   return next();

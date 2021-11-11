@@ -5,19 +5,21 @@ export const slice = createSlice({
   initialState: {
     email: '',
     password: '',
+    token: '',
     isLogged: false,
+    invalidEmail: false,
   },
   reducers: {
-    changeUser(state, { payload }) {
+    userLogin(state, { payload }) {
       return { ...state, isLogged: true, ...payload,
       };
     },
     logout(state) {
-      return { ...state, isLogged: false, user: '', password: '' };
+      return { ...state, isLogged: false, ...payload };
     },
   },
 });
 
-export const { changeUser, logout } = slice.actions;
+export const { userLogin, logout } = slice.actions;
 export const selectUser = (state) => state.user;
 export default slice.reducer;

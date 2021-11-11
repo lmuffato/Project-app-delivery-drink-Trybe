@@ -14,11 +14,18 @@ const register = async (name, email, password) => {
   const user = await database.User.findOne({ where: { email, name } });
   if (user) return { status: 409, message: { message: 'There is a user with your email' } }; // verificar se usuario já é registrado
   const userRegistred = await database.User.create({ 
-    name, email, password, role: 'administrator' });
+    name, email, password, role: 'customer' });
   return { status: 201, message: { userRegistred } };
+};
+
+const getAllUsers = async () => {
+  const users = await database.User.findAll();
+  const response = { status: 200, message: { users } };
+  return response;
 };
 
 module.exports = {
   login,
   register,
+  getAllUsers,
 };

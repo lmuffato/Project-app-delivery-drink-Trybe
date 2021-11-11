@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
+import testID from '../../../datatestids.json';
 import validateEmail from '../../utils/validations/validateEmail';
 import validatePassword from '../../utils/validations/validatePassword';
 import Button from '../atoms/Button';
@@ -18,9 +19,14 @@ const LoginForm = () => {
     });
   };
 
-  const handleClick = () => {
+  const handleLogin = () => {
     history.push('/products');
   };
+
+  const handleRegister = () => {
+    history.push('/register');
+  };
+
   return (
     <form>
       <div className="children_container">
@@ -29,7 +35,7 @@ const LoginForm = () => {
         <Input
           className="input-email"
           type="email"
-          data-testid="email-input"
+          data-testid={ testID[1] }
           name="email"
           value={ email }
           onChange={ handleChange }
@@ -37,7 +43,7 @@ const LoginForm = () => {
         />
         <Input
           className="inputEye"
-          data-testid="password-input"
+          data-testid={ testID[2] }
           name="password"
           value={ password }
           onChange={ handleChange }
@@ -46,10 +52,17 @@ const LoginForm = () => {
         <Button
           className="btn-login"
           type="button"
-          data-testid="login-submit-btn"
-          disabled={ validateEmail(email) && validatePassword(password) }
-          onClick={ handleClick }
-          text="ENTRAR"
+          data-testid={ testID[3] }
+          disabled={ !(validateEmail(email) && validatePassword(password)) }
+          onClick={ handleLogin }
+          text="LOGIN"
+        />
+        <Button
+          className="btn-register"
+          type="button"
+          data-testid={ testID[4] }
+          onClick={ handleRegister }
+          text="Don't have an account yet?"
         />
       </div>
     </form>

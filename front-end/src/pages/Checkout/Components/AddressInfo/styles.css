@@ -1,0 +1,52 @@
+.form-container {
+  width: 80%;
+  margin: 0 auto;
+  max-width: 700px;
+
+  padding: 1rem;
+
+  border: 1px solid #333;
+}
+
+form  {
+  display: flex;
+}
+
+form label {
+  margin: 1rem;
+}
+
+form input {
+  padding: 0.3rem;
+}
+
+form select {
+  padding: 0.3rem;
+}
+
+form label select {
+  width: 170px;
+}
+
+.button-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button-container button {
+  padding: 10px 15px;
+  background-color: green;
+  
+  font-weight: bold;
+  color: white;
+
+  border: 1px solid #c5c5c5;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.button-container button:hover {
+  background-color: rgba(0, 128, 0, 0.6);
+}

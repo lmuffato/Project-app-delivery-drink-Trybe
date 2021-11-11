@@ -6,15 +6,14 @@ function Login() {
     password: '',
   });
 
-  function handleInput({ target }) {
-    e.preventDefault();
+  function handleInput({ target }, setData) {
     const { name, value } = target;
-    setUserData({ ...userData, [name]: value });
+    setData({ ...userData, [name]: value });
   }
 
-  // function handle() {
-
-  // }
+  const { email, password } = userData;
+  const validateEmail = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(email);
+  const minPasswordLength = 5;
 
   return (
     <main>
@@ -28,7 +27,8 @@ function Login() {
           placeholder="Insira seu e-mail"
           data-testid="common_login__input-email"
           name="email"
-          onChange={ handleInput }
+          value={ email }
+          onChange={ (e) => handleInput(e, setUserData) }
         />
         <br />
         <input
@@ -36,12 +36,14 @@ function Login() {
           placeholder="Insira sua senha"
           data-testid="common_login__input-password"
           name="password"
-          onChange={ handleInput }
+          onChange={ (e) => handleInput(e, setUserData) }
         />
         <br />
         <button
           type="submit"
           data-testid="common_login__button-login"
+          id="buttonSubmit"
+          disabled={ !(validateEmail && password.length > minPasswordLength) }
         >
           Login
         </button>
@@ -49,7 +51,6 @@ function Login() {
         <button
           type="submit"
           data-testid="common_login__button-register"
-          // onClick={ handle }
         >
           Cadastre-se
         </button>

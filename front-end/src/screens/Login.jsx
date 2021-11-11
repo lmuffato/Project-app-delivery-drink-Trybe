@@ -1,27 +1,24 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Box, TextField, Button, Link } from '@mui/material';
 import ContextLogin from '../context/ContextLogin';
 
 function Login() {
-  const { makeLogin, allowed, user } = useContext(ContextLogin);
+  const { makeLogin, invalidEmailError } = useContext(ContextLogin);
   const history = useHistory();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(true);
+  const [formError, setFormError] = useState(true);
 
   const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
   const MINPASSWORDLENGTH = 6;
 
-  const askLogin = async () => {
+  const handleLogin = async () => {
     await makeLogin(email, password);
-    if (allowed) {
+    if (!invalidEmailError) {
       history.push('/');
     }
-  };
-
-  const handleLogin = () => {
-    console.log('login');
   };
 
   const handleFormChange = (e) => {
@@ -32,7 +29,7 @@ function Login() {
     setPassword(value);
     const isError = !((emailRegex.test(email))
     && (password.length >= MINPASSWORDLENGTH - 1));
-    setError(isError);
+    setFormError(isError);
   };
 
   return (
@@ -77,7 +74,7 @@ function Login() {
         } }
       />
       <Button
-        disabled={ error }
+        disabled={ formError }
         onClick={ handleLogin }
         inputprops={ {
           'data-testid': 'common_login__button-login',
@@ -94,6 +91,13 @@ function Login() {
       >
         Criar conta
       </Link>
+      {invalidEmailError && (
+        <span
+          data-testid="common_login__element-invalid-email"
+        >
+          Email ou senha inválida
+        </span>
+      )}
     </Box>
 
   // <div className="loginScreen">

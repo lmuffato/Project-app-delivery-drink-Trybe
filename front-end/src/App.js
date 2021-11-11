@@ -1,14 +1,15 @@
-import React from 'react';
-import './App.css';
-import rockGlass from './images/rockGlass.svg';
+import React, { useContext } from 'react';
+import ApiContext from './context/ApiContext';
 
 function App() {
+  const { users, setAtt, att } = useContext(ApiContext);
+  const click = () => {
+    setAtt(!att);
+    console.log(users);
+  };
   return (
-    <div className="App">
-      <span className="logo">TRYBE</span>
-      <object className="rocksGlass" type="image/svg+xml" data={ rockGlass }>
-        Glass
-      </object>
+    <div>
+      <button type="button" onClick={ click }>Clique</button>
     </div>
   );
 }

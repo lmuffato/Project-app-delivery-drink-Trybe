@@ -8,10 +8,10 @@ const registerUser = async (req, res) => {
   await User.create({
     name,
     email,
-    md5Password,
+    password: md5Password,
     role,
   }).catch((e) => res.status(httpStatus.serverError).json({ error: { message: e.message } }));
-  res.status(httpStatus.created).json({ message: `User ${name} created` });
+  return res.status(httpStatus.created).json({ message: `User ${name} created` });
 };
 
 module.exports = {

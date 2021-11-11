@@ -6,9 +6,9 @@ const { User } = require('../database/models');
 const emailNotExists = async (email) => {
   const searchResult = await User.findOne({ where: { email } });
   if (searchResult !== null) {
-    return { isExist: false };
+    return { isExist: true };
   }
-  return { isExist: true };
+  return { isExist: false };
 };
 
 const validateNewUserData = async (req, res, next) => {

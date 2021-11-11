@@ -6,6 +6,15 @@ function Login() {
   const [user, setUser] = useState({});
   const [error, setError] = useState(true);
 
+  const validForm = () => {
+    const passwordMinLength = 6;
+    const emailRegex = /\S+@\S+\.\S+/;
+    if (!emailRegex.test(email) || password.length < passwordMinLength) {
+      return true;
+    }
+    return false;
+  };
+
   const handleClick = async (userEmail, userPassword) => {
     const res = await fetch('http://localhost:3001/login', {
       method: 'POST',
@@ -35,7 +44,7 @@ function Login() {
       />
 
       <input
-        type="email"
+        type="password"
         data-testid="common_login__input-password"
         onChange={ (e) => setPassword(e.target.value) }
         value={ password }
@@ -44,6 +53,7 @@ function Login() {
 
       <button
         type="button"
+        disabled={ validForm() }
         data-testid="common_login__button-login"
         onClick={ () => handleClick(email, password) }
       >
@@ -58,12 +68,12 @@ function Login() {
         Registrar-se
       </button>
 
-      <p
+      <span
         data-testid="common_login__element-invalid-email"
         hidden={ error }
       >
         { user.error ? user.error : '' }
-      </p>
+      </span>
     </div>
   );
 }

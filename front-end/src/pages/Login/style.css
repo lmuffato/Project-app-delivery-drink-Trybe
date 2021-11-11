@@ -166,3 +166,11 @@ button:disabled > a {
     transform: rotate(20deg);
   }
 }
+
+.error {
+  bottom: 150px;
+  color: red;
+  font-size: 1.3rem;
+  font-weight: 700;
+  position: absolute;
+}

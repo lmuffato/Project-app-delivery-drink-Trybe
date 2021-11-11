@@ -2,12 +2,14 @@ const jwt = require('jsonwebtoken');
 
 const SECRET = require('../../../jwt.evaluation.key');
 
+const secretkey = "mysecretkey"
+
 const jwtConfig = {
   expiresIn: '15d',
   algorithm: 'HS256',
 };
 
-const createToken = (userData) => jwt.sign({ data: userData }, SECRET, jwtConfig);
+const createToken = (userData) => jwt.sign({ data: userData }, secretkey, jwtConfig);
 
 const verifyToken = async (req, res, next) => {
   const token = req.headers.authorization;

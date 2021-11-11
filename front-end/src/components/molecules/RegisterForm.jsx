@@ -9,8 +9,8 @@ import Button from '../atoms/Button';
 import Input from '../atoms/Input';
 
 const RegisterForm = () => {
-  const [register, setRegister] = useState({ name: '', email: '', password: '' });
-  const { name, email, password } = register;
+  const [register, setRegister] = useState({ fullName: '', email: '', password: '' });
+  const { fullName, email, password } = register;
   const history = useHistory();
 
   const handleChange = ({ target: { name, value } }) => {
@@ -32,7 +32,7 @@ const RegisterForm = () => {
           className="register-name"
           type="text"
           data-testid={ testID[6] }
-          name="name"
+          name="fullName"
           value={ name }
           onChange={ handleChange }
           placeholder="Your name"
@@ -58,7 +58,9 @@ const RegisterForm = () => {
           className="btn-register"
           type="button"
           data-testid={ testID[9] }
-          disabled={ !(validateName(name) && validateEmail(email) && validatePassword(password)) }
+          disabled={ !(validateName(fullName)
+            && validateEmail(email)
+            && validatePassword(password)) }
           onClick={ handleClick }
           text="SIGN UP"
         />

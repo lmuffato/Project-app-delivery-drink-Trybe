@@ -1,5 +1,5 @@
 const express = require('express');
-const cors = require('cors')
+const cors = require('cors');
 const bodyParser = require('body-parser');
 
 const userControllers = require('../controllers/userControllers');
@@ -9,8 +9,8 @@ const { checkName } = require('../middlewares/checkName');
 
 const corsOptions = {
   origin: '*',
-  optionsSuccessStatus: 200
-}
+  optionsSuccessStatus: 200,
+};
 
 const app = express();
 app.use(bodyParser.json());

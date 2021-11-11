@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import ProviderLogin from './context/ProviderLogin';
 import SignUp from './screens/SingUp';
 import Login from './screens/Login';
+<<<<<<< HEAD
 import CustomerProducts from './screens/CustomerProducts';
 import CustomerCheckout from './screens/CustomerCheckout';
 import CustomerOrders from './screens/CustomerOrders';
@@ -10,6 +11,8 @@ import CustomerOrdersDetails from './screens/CustomerOrdersDetails';
 import SellerOrders from './screens/SellerOrders';
 import SellerOrdersDetails from './screens/SellerOrdersDetails';
 import AdminManage from './screens/AdminManage';
+=======
+>>>>>>> 3fca26b77547a93b8d23909752f5ddbffa00345a
 import NotFound from './screens/NotFound';
 
 function App() {

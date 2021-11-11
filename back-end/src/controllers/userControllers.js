@@ -6,6 +6,13 @@ const login = async (req, res) => {
   res.status(response.status).json(response.message);
 };
 
+const register = async (req, res) => {
+  const { name, email, password } = req.body;
+  const response = await userServices.register(name, email, password);
+  res.status(response.status).json(response.message);
+};
+
 module.exports = {
   login,
+  register,
 };

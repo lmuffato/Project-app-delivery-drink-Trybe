@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import paths from '../routesPaths/paths';
 
 function Login() {
   const [userData, setUserData] = useState({
@@ -6,14 +8,17 @@ function Login() {
     password: '',
   });
 
+  const { email, password } = userData;
+  const validateEmail = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(email);
+  const minPasswordLength = 5;
+
   function handleInput({ target }, setData) {
     const { name, value } = target;
     setData({ ...userData, [name]: value });
   }
 
-  const { email, password } = userData;
-  const validateEmail = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(email);
-  const minPasswordLength = 5;
+  const history = useHistory();
+  const goRoute = (route) => history.push(route);
 
   return (
     <main>
@@ -40,7 +45,7 @@ function Login() {
         />
         <br />
         <button
-          type="submit"
+          type="button"
           data-testid="common_login__button-login"
           id="buttonSubmit"
           disabled={ !(validateEmail && password.length > minPasswordLength) }
@@ -49,8 +54,9 @@ function Login() {
         </button>
         <br />
         <button
-          type="submit"
+          type="button"
           data-testid="common_login__button-register"
+          onClick={ () => goRoute(paths.routeRegister) }
         >
           Cadastre-se
         </button>

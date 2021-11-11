@@ -1,4 +1,4 @@
-const { StatusCodes: { CONFLICT, BAD_REQUEST } } = require('http-status-codes');
+const { StatusCodes: { CONFLICT, BAD_REQUEST, NOT_FOUND } } = require('http-status-codes');
 const { User } = require('../../database/models');
 const { userSchema } = require('../validations/schema');
 

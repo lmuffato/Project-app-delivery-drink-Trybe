@@ -1,14 +1,14 @@
 const {
-  StatusCodes: { CREATED, OK, INTERNAL_SERVER_ERROR, NO_CONTENT },
+  StatusCodes: { CREATED, OK, INTERNAL_SERVER_ERROR},
 } = require('http-status-codes');
 
 const { User } = require('../../database/models');
 const tokenGen = require('../tokenGenerator')
-const loginUser = (req, res, next) => {
+const loginUser = async (req, res, next) => {
   try {
-    const user = User.findOne({ where: { email: req.body.email, password: req.body.password } })
+    const user = await User.findOne({ where: { email: req.body.email, password: req.body.password } })
     const token = tokenGen(req.body);
-    res.status(OK).json({token, user});
+    res.status(OK).json({token, user: user.role});
   } catch (e) {
     next({ statusCode: INTERNAL_SERVER_ERROR, message: e.message });
   }
@@ -17,7 +17,7 @@ const loginUser = (req, res, next) => {
 const createNewUser = async (req, res, next) => {
   try {
     User.create(req.body);
-    if (newUser) return res.status(CREATED).json({ message: 'User Created'});
+    return res.status(CREATED).json({ message: 'User Created'});
   } catch (e) {
     next(e);
   }

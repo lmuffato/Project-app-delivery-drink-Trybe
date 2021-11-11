@@ -4,9 +4,7 @@ const userValidation = require('../middleware/user');
 const loginValidation = require('../middleware/login');
 const validateTWD = require('../middleware/validateJWT');
 
-const userValid = [userValidation.checkIfUserExists, userValidation.validUser]
-
-router.post('/', userValid,  );
+router.post('/', userValidation.validUser, controlUsers.createNewUser);
 // router.get('/', validateTWD, controlUsers.controlAdminCreate);
 router.get('/login', validateTWD, loginValidation, controlUsers.loginUser);
 // router.put('/', validateTWD, controlUsers.controlAdminCreate);

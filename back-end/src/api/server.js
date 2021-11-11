@@ -15,6 +15,7 @@ const io = require('socket.io')(server, {
   },
 });
 
+const product = require('../controllers/Products');
 const user = require('../controllers/user');
 
 const corsOptions = {
@@ -26,6 +27,8 @@ require('../sockets/login')(io);
 
 app.use(cors(corsOptions));
 
+app.get('/products', product.getProducts);
 app.post('/login', user.login);
+
 server.listen(port, () => console.log(`Ouvindo na porta ${port}!`));
 module.exports = app;

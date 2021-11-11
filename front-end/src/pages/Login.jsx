@@ -1,20 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import axios from 'axios';
-
-const initialState = () => ({
-  email: '',
-  password: '',
-  buttonStatus: true,
-  errorMessage: null,
-});
+import { LoginContext } from '../contexts/Login';
 
 const minPassLength = 6;
 
 const isValidEmail = (email) => /\w+@\w+\.\w+/gi.test(email);
 const isValidPassword = (password) => password.length >= minPassLength;
 function Login() {
-  const [values, setValues] = useState(initialState);
-  // const [error, setErrors] = useState(null);
+  const { values, setValues } = useContext(LoginContext);
 
   useEffect(() => {
     setValues({
@@ -49,7 +42,6 @@ function Login() {
       });
     }
   };
-
   return (
     <form onSubmit={ onSubmit }>
       <img src="#" alt="Logotipo" />

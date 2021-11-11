@@ -10,18 +10,19 @@ const getAll = async (req, res) => {
 };
 
 // Busca por id utilizando a chave primária
-// const getById = async (req, res) => {
-//   try {
-//     const { id } = req.params;
-//     const data = await User.findByPk(id,
-//       { attributes: { exclude: ['password'] },
-//     });
-//     if (data === null) { return res.status(404).json({ message: 'User does not exist' }); }
-//     return res.status(200).json(data);
-//   } catch (err) {
-//     return res.status(500).json({ message: err.message });
-//   }
-// };
+const getById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    console.log(id);
+    const data = await users.findByPk(id,
+      { attributes: { exclude: ['password'] },
+    });
+    if (data === null) { return res.status(404).json({ message: 'User does not exist' }); }
+    return res.status(200).json(data);
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+};
 
 // Buscar por id utilizando where
 // const getById = async (req, res) => {
@@ -83,7 +84,7 @@ const getAll = async (req, res) => {
 
 module.exports = {
   getAll,
-  // getById,
+  getById,
   // updateById,
   // deleteById,
   // createNew,

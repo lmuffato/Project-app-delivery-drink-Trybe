@@ -19,6 +19,7 @@ http POST :3001/users displayName='Lucas' email='lucas' password='lucas' image='
 */
 
 router.get('/:id',
+userMiddlewares.getById,
 async () => {});
 /* REQUISIÇÃO:
 http GET :3001/users/1

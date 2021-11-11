@@ -4,24 +4,28 @@ import imgManHoldingBeer from '../images/man-holding-beer.png';
 import useInputs from '../hooks/useInputs';
 import useAlert from '../hooks/useAlert';
 import loginSchema from '../schemas/login';
+import api from '../services/api';
 import styles from '../styles/pages/Auth.module.scss';
 
 export default function Auth() {
   const [values, setInputs] = useInputs({ email: '', password: '' });
   const [schemaStatus, setSchemaStatus] = useState({ valid: false, error: '' });
+  const [buttonDisabled, setButtonDisabled] = useState(true);
   const { Alert, alertMessage, alertType, isVisible, showAlert } = useAlert();
   const history = useHistory();
 
   useEffect(() => {
     showAlert(false);
     const { error } = loginSchema.validate(values);
+    setButtonDisabled(error !== undefined);
     setSchemaStatus({ valid: error === undefined, error: error ? error.message : '' });
   }, [values, showAlert]);
 
-  function logIn(event) {
+  async function logIn(event) {
     event.preventDefault();
     try {
       if (!schemaStatus.valid) throw new Error(schemaStatus.error);
+      await api.post('/login', values);
       history.push('/home');
     } catch (error) {
       alertType('danger');
@@ -65,6 +69,7 @@ export default function Auth() {
           type="submit"
           data-testid="common_login__button-login"
           className="primary"
+          disabled={ buttonDisabled }
         >
           Entrar
         </button>

@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
   },
   {
     timestamps: false,
-    tableName: 'Products',
+    tableName: 'products',
     underscored: true,
   });
 

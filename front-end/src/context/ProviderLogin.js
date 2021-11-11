@@ -8,7 +8,7 @@ import ContextLogin from './ContextLogin';
 function ProviderLogin({ children }) {
   const [user, setUser] = useState([]);
   const [token, setToken] = useState('');
-  const [allowed, setAllowed] = useState(true);
+  const [signUpErrorMessage, setSignUpErrorMessage] = useState(false);
   const urlBase = 'http://localhost:3000';
 
   // ---------------------------------------------/---------------------------------------------------------------//
@@ -29,9 +29,14 @@ function ProviderLogin({ children }) {
   // ---------------------------------------------/---------------------------------------------------------------//
 
   const createUser = async (name, email, password) => {
-    await axios.post(`${urlBase}/users/register`, {
+    setSignUpErrorMessage(false);
+    const { data: { message } } = await axios.post(`${urlBase}/users/register`, {
       name, email, password,
     });
+
+    if (message) {
+      setSignUpErrorMessage(true);
+    }
   };
 
   // ---------------------------------------------/---------------------------------------------------------------//
@@ -43,7 +48,7 @@ function ProviderLogin({ children }) {
         createUser,
         makeLogin,
         token,
-        allowed,
+        signUpErrorMessage,
       } }
     >
       { children }

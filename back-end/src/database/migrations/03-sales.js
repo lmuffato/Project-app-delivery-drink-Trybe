@@ -39,9 +39,9 @@ module.exports = {
       delivery_number: {
         type: Sequelize.STRING,
       },
-      createdAt: {
+      sale_date: {
         type: Sequelize.DATE,
-        field: 'sale_date',
+        defaultValue: new Date(),
       },
       status: {
         type: Sequelize.STRING,

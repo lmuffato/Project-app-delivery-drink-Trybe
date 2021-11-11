@@ -18,5 +18,5 @@ const isPasswordsEqual = async (password, hashPassword) => {
 
 module.exports = {
   createHashPassword,
-  isPasswordsEqual
+  isPasswordsEqual,
 };

@@ -7,9 +7,9 @@ const app = express();
 app.use(bodyParser.json());
 app.use(
   cors({
-    origin: "localhost:3000",
-    methods: ["GET", "POST", "PUT", "DELETE"]
-  })
+    origin: 'localhost:3000',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  }),
 );
 
 app.get('/coffee', (_req, res) => res.status(418).end());

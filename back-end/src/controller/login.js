@@ -6,18 +6,18 @@ const loginUser = async (req, res) => {
     const { email, password } = req.body;
     const login = await services.login(email, password);
 
-    if(login.message) {
-      return res.status(login.code).json({ message: login.message })
+    if (login.message) {
+      return res.status(login.code).json({ message: login.message });
     }
-  
-    const checkPassword = await isPasswordsEqual(password, login.password );
+    
+   /*  const checkPassword = */ await isPasswordsEqual(password, login.password);
     // console.log(checkPassword); //false
     // if(!checkPassword) {
     //   return res.status(400).json({ message: 'Invalid username or passwords' });
     // }
 
     return res.status(200).json({ message: 'successful login' });
-  } catch(e) {
+  } catch (e) {
     return res.status(500).json({ message: e.message });
   }
 };

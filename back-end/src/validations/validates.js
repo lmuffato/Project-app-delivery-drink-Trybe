@@ -32,5 +32,5 @@ const validateLogin = (req, res, next) => {
 
 module.exports = {
   validateRegistration,
-  validateLogin
+  validateLogin,
 };

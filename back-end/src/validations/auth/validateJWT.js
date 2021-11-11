@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 
 const SECRET = require('../../../jwt.evaluation.key');
 
-const secretkey = "mysecretkey"
+const secretkey = 'mysecretkey';
 
 const jwtConfig = {
   expiresIn: '15d',

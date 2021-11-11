@@ -4,7 +4,7 @@ const productController = require('../database/controllers/productController');
 
 const router = Router();
 
-router.post(
+router.get(
   '/',
   productController.getAll,
 );

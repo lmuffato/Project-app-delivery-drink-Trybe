@@ -2,13 +2,14 @@ import React from 'react';
 import { func, string } from 'prop-types';
 
 function TextInput(props) {
-  const { name, dataTestId, onChange, placeholder, type } = props;
+  const { name, dataTestId, onChange, placeholder, type, value } = props;
 
   return (
     <label htmlFor={ name }>
       <input
         className="input"
         id={ name }
+        value={ value }
         type={ type || 'text' }
         name={ name }
         data-testid={ dataTestId }
@@ -26,6 +27,7 @@ TextInput.propTypes = {
   onChange: func,
   placeholder: string,
   type: string,
+  value: string,
 }.isRequired;
 
 export default TextInput;

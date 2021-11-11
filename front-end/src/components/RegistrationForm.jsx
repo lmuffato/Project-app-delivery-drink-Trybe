@@ -1,10 +1,16 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import '../styles/form.css';
+import { useNavigate } from 'react-router-dom';
 import Context from '../context/Context';
 import TextInput from './TextInput';
+import regex from '../utils/regex';
 
 function Registration() {
-  const { handleChange, submitChange, setUser } = useContext(Context);
+  const { handleChange, submitChange, setUser, user } = useContext(Context);
+  const [disableButton, setDisableButton] = useState(true);
+  const [errorMessage, setErrorMessage] = useState();
+  const [successMessage, setSuccessMessage] = useState();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setUser({
@@ -15,6 +21,36 @@ function Registration() {
 
     return () => setUser({});
   }, []); // eslint-disable-line
+
+  useEffect(() => {
+    const { email, password, name } = user;
+
+    if (
+      regex.email.test(email)
+      && regex.password.test(password)
+      && regex.name.test(name)
+    ) {
+      setDisableButton(false);
+    } else {
+      setDisableButton(true);
+    }
+  }, [user]);
+
+  const handleSubmit = async (e) => {
+    const fiveSeconds = 5000;
+    try {
+      setErrorMessage(null);
+      setSuccessMessage(null);
+      await submitChange(e, 'registration_form');
+
+      setSuccessMessage('Cadastrado com sucesso');
+
+      setTimeout(() => navigate('/login'), fiveSeconds);
+    } catch (error) {
+      console.log(error.message);
+      setErrorMessage('Email já cadastrado');
+    }
+  };
 
   return (
     <div className="border">
@@ -42,17 +78,23 @@ function Registration() {
         <button
           type="submit"
           data-testid="common_register__input-register"
-          onClick={ (e) => submitChange(e, 'register_form') }
+          onClick={ handleSubmit }
+          disabled={ disableButton }
         >
           Cadastrar
         </button>
       </form>
       <span
-        hidden="true"
+        hidden={ !errorMessage }
         data-testid="common_register__element-invalid_register"
       >
-        error se tiver
+        { errorMessage }
       </span>
+      <div
+        hidden={ !successMessage }
+      >
+        { successMessage }
+      </div>
     </div>
   );
 }

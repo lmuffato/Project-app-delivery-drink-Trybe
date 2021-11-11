@@ -5,7 +5,7 @@ import Context from './Context';
 
 const Endpoints = {
   login_form: 'login',
-  register_form: 'register',
+  registration_form: 'register',
 };
 
 function Provider({ children }) {

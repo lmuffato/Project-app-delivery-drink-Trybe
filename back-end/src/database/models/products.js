@@ -5,9 +5,13 @@ module.exports = (sequelize, DataTypes) => {
     price: DataTypes.DECIMAL,
     url_image: DataTypes.STRING
   }, {
-    sequelize,
+    timestamps: false,
     tableName: 'products',
   });
+
+  Product.associate = (models) => {  
+    Product.belongsTo(models.SalesProduct, { foreignKey: 'product_id', as: 'salesProduct' });  
+  };
 
   return Product;
 };

@@ -4,14 +4,14 @@ module.exports = {
     await queryInterface.createTable('salesProducts', {
       sale_id: {
         type: Sequelize.INTEGER,
-        references: { model: 'users', key: 'id' },
+        references: { model: 'sales', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
         foreignKey: true,
       },
       product_id: {
         type: Sequelize.INTEGER,
-        references: { model: 'users', key: 'id' },
+        references: { model: 'products', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
         foreignKey: true,

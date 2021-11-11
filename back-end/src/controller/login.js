@@ -10,12 +10,6 @@ const loginUser = async (req, res) => {
       return res.status(login.code).json({ message: login.message });
     }
     
-   /*  const checkPassword = */ await isPasswordsEqual(password, login.password);
-    // console.log(checkPassword); //false
-    // if(!checkPassword) {
-    //   return res.status(400).json({ message: 'Invalid username or passwords' });
-    // }
-
     return res.status(200).json({ message: 'successful login' });
   } catch (e) {
     return res.status(500).json({ message: e.message });

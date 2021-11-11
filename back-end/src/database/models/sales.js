@@ -1,22 +1,24 @@
 module.exports = (sequelize, DataTypes) => {
-  const User = sequelize.define('user', {
+  const Sale = sequelize.define('Sale', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    name: DataTypes.STRING,
-    email: DataTypes.STRING,
-    password: DataTypes.STRING,
-    role: DataTypes.STRING
+    user_id: DataTypes.STRING,
+    seller_id: DataTypes.STRING,
+    total_price: DataTypes.DECIMAL,
+    delivery_address: DataTypes.STRING,
+    delivery_number: DataTypes.STRING,
+    sale_date: DataTypes.DATE,
+    status: DataTypes.STRING
   }, {
     sequelize,
-    modelName: 'users',
+    tableName: 'sales',
   });
 
-// User.associate = (models) => {
-//   User.hasMany(
-//       models.Sales,
-//       { foreignKey: 'id', as: 'seller_id' },
-//       { foreignKey: 'id', as: 'user_id' }
-//   );
-// };
+Sale.associate = (models) => {
+  Sale.belongsTo(
+      models.User,
+        { foreignKey: 'user_id', as: 'users' }
+  );
+};
 
-  return User;
+  return Sale;
 };

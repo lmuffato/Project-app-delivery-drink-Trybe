@@ -8,27 +8,18 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
-      },  
+      },
       name: {
-        type: Sequelize.STRING,
-        allowNull: false,
+        type: Sequelize.STRING(100)
       },
       price: {
-        type: Sequelize.DECIMAL(4,2),
         allowNull: false,
+        type: Sequelize.DECIMAL(10, 2)
       },
       urlImage: {
-        type: Sequelize.STRING,
         allowNull: false,
-        field: 'url_image',
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.STRING(255),
+        field: 'url_image'
       }
     });
   },

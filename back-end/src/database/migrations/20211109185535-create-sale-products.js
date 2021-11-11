@@ -1,31 +1,27 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('salesProducts', {
-      quantity: {
-        type: Sequelize.INTEGER,
+      sale_id: {
         allowNull: false,
-      },
-      saleId: {
+        primaryKey: true,
         type: Sequelize.INTEGER,
         references: {
-          model: 'sales',
-          key: 'id',
+          model: "sales",
+          key: "id",
         },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
-        field: 'sale_id',
-        primaryKey: true,
       },
-      productId: {
+      product_id: {
+        allowNull: false,
+        primaryKey: true,
         type: Sequelize.INTEGER,
         references: {
-          model: 'products',
-          key: 'id',
+          model: "products",
+          key: "id",
         },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
-        field: 'product_id',
-        primaryKey: true,
+      },
+      quantity: {
+        allowNull: false,
+        type: Sequelize.INTEGER
       },
     });
   },

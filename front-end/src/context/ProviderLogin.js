@@ -4,18 +4,17 @@ import axios from 'axios';
 import ContextLogin from './ContextLogin';
 
 function ProviderLogin({ children }) {
-  const [user, setUser] = useState([]);
   const [token, setToken] = useState('');
   const [invalidEmailError, setInvalidEmailError] = useState(false);
   const urlBase = 'http://localhost:3001';
 
   const makeLogin = async (email, password) => {
-    const { data: { token: newToken, user: newUser, message } } = await axios
+    setInvalidEmailError(false);
+    const { data: { token: newToken, error } } = await axios
       .post(`${urlBase}/login`, { email, password })
       .catch((er) => console.log(er));
-    if (message !== undefined) setInvalidEmailError(true);
+    if (error) setInvalidEmailError(true);
     setToken(newToken);
-    setUser(newUser);
   };
 
   const createUser = async (name, email, password) => {
@@ -27,7 +26,6 @@ function ProviderLogin({ children }) {
   return (
     <ContextLogin.Provider
       value={ {
-        user,
         createUser,
         makeLogin,
         token,

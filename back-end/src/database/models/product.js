@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
   },
     {
       timestamps: false,
-      tableName: 'Product',
+      tableName: 'Products',
     });
 
   return Product;

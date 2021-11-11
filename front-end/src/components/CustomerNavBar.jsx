@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 
-function NavBar() {
+function CustomerNavBar() {
   return (
     <Navbar bg="dark" variant="dark">
       <Nav className="me-auto">
@@ -12,7 +12,7 @@ function NavBar() {
           PRODUTOS
         </Nav.Link>
         <Nav.Link
-          href="my-orders"
+          href="orders"
           data-testid="customer_products__element-navbar-link-orders"
         >
           MEUS PEDIDOS
@@ -34,4 +34,4 @@ function NavBar() {
   );
 }
 
-export default NavBar;
+export default CustomerNavBar;

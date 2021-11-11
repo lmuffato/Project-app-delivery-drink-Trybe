@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Row } from 'react-bootstrap';
+import './CustomerProducts.css';
 import axios from 'axios';
-import NavBar from '../components/CustomerNavBar';
+import CustomerNavBar from '../components/CustomerNavBar';
 import ProductCard from '../components/ProductCard';
 
 function ClientProducts() {
@@ -19,10 +20,12 @@ function ClientProducts() {
 
   return (
     <div>
-      <NavBar fixed="top" />
-      <Row>
+      <CustomerNavBar fixed="top" />
+      <Row xs={ 1 } md={ 2 } className="g-4">
         {
-          productList.map((prod) => <ProductCard key={ prod.name } product={ prod } />)
+          productList.map((prod) => (
+            <ProductCard className="productCard" key={ prod.name } product={ prod } />
+          ))
         }
       </Row>
     </div>

@@ -18,5 +18,5 @@ module.exports = (sequelize, DataTypes) => {
       { foreignKey: 'seller_id', as: 'seller' });
   };
 
-  return BlogPosts;
+  return sales;
 };

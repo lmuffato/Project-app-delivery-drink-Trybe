@@ -1,12 +1,12 @@
 import React from 'react';
 
-function ProductsPage() {
-  const teste = 'test';
+import NavBar from '../../components/NavBar';
 
+function ProductsPage() {
   return (
     <>
+      <NavBar />
       <h1>Página de Produtos</h1>
-      <p>{ teste }</p>
     </>
   );
 }

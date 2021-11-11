@@ -2,9 +2,9 @@ import React from 'react';
 import FormRegisterUser from '../../components/FormRegisterUser';
 
 const AdminManagerUsers = () => (
-  <div>
+  <main>
     <FormRegisterUser />
-  </div>
+  </main>
 );
 
 export default AdminManagerUsers;

@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const registrationValidate = require('../validations/validates');
-const userController = require('../database/controllers/useController')
+const userController = require('../database/controllers/useController');
 
 const router = Router();
 

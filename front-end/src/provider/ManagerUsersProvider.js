@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { element } from 'prop-types';
+import genHashMd5 from 'md5';
 import { ManagerUsersContext } from '../context';
 import isNotEmptyObject from '../utils/isNotEmptyObject';
 
@@ -14,9 +15,14 @@ function ManagerUsersProvider({ children }) {
   };
 
   useEffect(() => {
-    if (isNotEmptyObject(user)) { setUsers((prev) => [...prev, user]); }
-  }, [user]);
+    if (isNotEmptyObject(user)) {
+      const { name, email, password, role } = user;
+      const passwordHash = genHashMd5(password);
 
+      setUsers((prev) => [...prev, { name, email, password: passwordHash, role }]);
+    }
+  }, [user]);
+  console.log(users);
   return (
     <ManagerUsersContext.Provider value={ { ...consumer } }>
       { children }

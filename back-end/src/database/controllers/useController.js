@@ -1,27 +1,16 @@
-const { User } = require("../models");
-const { createToken } = require("../../validations/auth/validateJWT")
-
-async function findUserByEmail(email) {
-  const user = await User.findOne({ where: { email } });
-  return user;
-}
+const { HTTP_NOT_FOUND } = require('../../status');
+const useService = require('../services/useService');
 
 async function createUser(req, res) {
   try {
     const { name, email, password } = req.body;
-    const userLogin = { password, email };
+    const { isRegistered, code, error, data } = await useService.createUserService({ name, email, password, role });
 
-    const isUserResgistered = await findUserByEmail(email);
+    if (isRegistered) return res.status(code).json({ error });
 
-    if (isUserResgistered) {
-      return res.status(409).json({ error: "User already registered" });
-    }
-    const token = await createToken(userLogin);
-
-    await User.create({ name, email, password, token, role: "customer" });
-    return res.status(201).json({ name, email, token, role: "customer" });
+    if (!isRegistered) return res.status(code).json(data);
   } catch (e) {
-    return res.status(404).json({ error: error.message });
+    return res.status(HTTP_NOT_FOUND).json({ error: error.message });
   }
 }
 

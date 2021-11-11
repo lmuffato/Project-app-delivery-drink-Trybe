@@ -7,7 +7,7 @@ const login = async (req, res) => {
 };
 
 const register = async (req, res) => {
-  const {name, email, password} = req.body;
+  const { name, email, password } = req.body;
   const response = await userServices.register(name, email, password);
   res.status(response.status).json(response.message);
 };

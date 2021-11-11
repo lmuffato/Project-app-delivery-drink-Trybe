@@ -10,4 +10,3 @@ const checkName = (req, res, next) => {
 module.exports = {
   checkName,
 };
-  

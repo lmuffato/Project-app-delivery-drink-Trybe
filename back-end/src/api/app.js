@@ -10,6 +10,6 @@ const app = express();
 app.use(bodyParser.json());
 
 app.post('/login', checkEmail, checkPassword, userControllers.login);
-app.post('/register', checkName ,checkEmail, checkPassword, userControllers.register);
+app.post('/register', checkName, checkEmail, checkPassword, userControllers.register);
 
 module.exports = app;

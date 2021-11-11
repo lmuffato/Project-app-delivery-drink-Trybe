@@ -1,8 +1,8 @@
 const Joi = require('joi');
+const md5 = require('md5');
 const errorMessages = require('../utils/errorMessages');
 const httpStatus = require('../utils/httpStatus');
 const { User } = require('../database/models');
-const md5 = require('md5');
 
 const userExists = async (email) => {
   const searchResult = await User.findOne({ where: { email } });
@@ -19,7 +19,8 @@ const loginSchema = Joi.object({
 });
 
 const validateLogin = async (req, res, next) => { 
-  const { email, password } = req.body; 
+  const { email, password } = req.body;
+  const { invalidEmail, invalidFields } = errorMessages;
   const { error } = loginSchema.validate({ email, password });
   if (error) {
     const { message } = error;
@@ -27,14 +28,10 @@ const validateLogin = async (req, res, next) => {
   }
   const { user, isExist } = await userExists(email);
   if (!isExist) {
-    return res.status(httpStatus.notFound).json({
-      message: errorMessages.invalidEmail,
-    });
+    return res.status(httpStatus.notFound).json({ message: invalidEmail });
   }
   if (user.password !== md5(password)) {
-    return res.status(httpStatus.unauthorized).json({
-      message: errorMessages.invalidFields,
-    });
+    return res.status(httpStatus.unauthorized).json({ message: invalidFields });
   }
   req.user = user;
   return next();

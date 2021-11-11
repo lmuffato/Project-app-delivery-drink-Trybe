@@ -1,16 +1,18 @@
 import React from 'react';
-import { number } from 'prop-types';
+import { number, string } from 'prop-types';
 
-function PrecoProduto({ preco, id }) {
+function PrecoProduto({ data }) {
+  const { id, price } = data;
   return (
     <p data-testid={ `customer_products__element-card-price-${id}` }>
-      { preco }
+      { price }
     </p>
   );
 }
 
 PrecoProduto.propTypes = {
-  preco: number,
+  id: string,
+  price: number,
 }.isRequired;
 
 export default PrecoProduto;

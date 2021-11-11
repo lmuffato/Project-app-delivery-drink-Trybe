@@ -1,12 +1,13 @@
 import React from 'react';
 import { string } from 'prop-types';
 
-function ImagemProduto({ name, id, src }) {
+function ImagemProduto({ data }) {
+  const { id, name, urlImage } = data;
   return (
     <img
       alt={ name }
       data-testid={ `customer_products__button-card-add-item-${id}` }
-      src={ src }
+      src={ urlImage }
       className="produto-card-image"
     />
   );
@@ -14,7 +15,7 @@ function ImagemProduto({ name, id, src }) {
 ImagemProduto.propTypes = {
   id: string,
   name: string,
-  src: string,
+  urlImage: string,
 }.isRequired;
 
 export default ImagemProduto;

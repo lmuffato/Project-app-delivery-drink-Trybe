@@ -4,7 +4,8 @@ const jwt = require('jsonwebtoken');
 
 const { User } = require('../../database/models');
 const {
-  INCORRECT_USERNAME_OR_PASSWORD, ALL_FIELDS_FILLED, USER_ALREADY_EXIST, NO_REGISTRED_USERS,
+  INCORRECT_USERNAME_OR_PASSWORD, ALL_FIELDS_FILLED, USER_ALREADY_EXIST,
+  NO_REGISTRED_USERS, NON_EXISTENTE_USER,
 } = require('../messages/errorMessages');
 
 const jwtConfig = {
@@ -79,8 +80,17 @@ const findAllUsers = async () => {
   return ({ status: 200, data: usersArray });
 };
 
+const deleteUser = async (id) => {
+  const deletedUser = await User.destroy({ where: { id } });
+  
+  if (deletedUser === 0) return ({ status: 404, data: NON_EXISTENTE_USER });
+
+  return ({ status: 204, data: deletedUser });
+};
+
 module.exports = {
   login,
   createUser,
   findAllUsers,
+  deleteUser,
 };

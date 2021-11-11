@@ -1,17 +1,16 @@
 'use strict';
 module.exports = {
   /**
-   * 
    * @param {import('sequelize').QueryInterface} queryInterface 
    * @param {import('sequelize').DataTypes} Sequelize 
    */
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('ProductsSale', {
+    await queryInterface.createTable('productsSale', {
       productId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         primaryKey: true,
-        references: { model: 'Products', key: 'id' },
+        references: { model: 'products', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
       },
@@ -19,14 +18,14 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         primaryKey: true,
-        references: { model: 'Sales', key: 'id' },
+        references: { model: 'sales', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
       },
       quantity: { type: Sequelize.INTEGER }
     });
   },
-  down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('ProductsSale');
+  down: async (queryInterface) => {
+    await queryInterface.dropTable('productsSale');
   }
 };

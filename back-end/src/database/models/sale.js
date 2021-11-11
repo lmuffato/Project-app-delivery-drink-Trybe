@@ -4,7 +4,7 @@
  * @return 
  */
  module.exports = (sequelize, DataTypes) => {  
-  const Sale = sequelize.define('Sale', {
+  const Sale = sequelize.define('sale', {
     id: { type: DataTypes.INTEGER, allowNull: false, autoIncrement: true, primaryKey: true },
     userId: DataTypes.INTEGER,
     sellerId: DataTypes.INTEGER,
@@ -15,8 +15,8 @@
     status: DataTypes.STRING
   }, { timestamps: false });
   Sale.associate = (models) => {
-    Sale.belongsTo(models.User, { as: 'user' });
-    Sale.belongsTo(models.User, { as: 'seller' });
+    Sale.belongsTo(models.user, { as: 'user' });
+    Sale.belongsTo(models.user, { as: 'seller' });
   };  
   return Sale;
 };

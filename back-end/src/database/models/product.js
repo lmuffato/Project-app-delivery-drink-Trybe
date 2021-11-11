@@ -4,7 +4,7 @@
  * @return 
  */
  module.exports = (sequelize, DataTypes) => {
-  const Product = sequelize.define('Product', {
+  const Product = sequelize.define('product', {
       id: { type: DataTypes.INTEGER, allowNull: false, autoIncrement: true, primaryKey: true },
       name: DataTypes.STRING,
     }, { timestamps: false });

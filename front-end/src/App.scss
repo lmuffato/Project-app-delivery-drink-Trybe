@@ -21,6 +21,12 @@ button {
       cursor: not-allowed;
     }
   }
+
+  &.link {
+    background: none;
+    border: none;
+    text-decoration: underline;
+  }
 }
 
 .App:after {

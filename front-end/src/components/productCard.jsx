@@ -16,15 +16,39 @@ function ProductCard(props) {
   return (
     <section className="productContainer">
       <div className="element">
-        <h1 className="absolute">Preço</h1>
-        <img src="algo" alt="algo" />
+        <h1
+          className="absolute"
+          data-testid="customer_products__element-card-price-"
+        >
+          Preço
+        </h1>
+        <img src="algo" alt="algo" data-testid="customer_products__img-card-bg-image-" />
       </div>
       <div>
-        <span className="element">Nome do Produto</span>
+        <span
+          className="element"
+          data-testid="customer_products__element-card-title-"
+        >
+          Nome do Produto
+        </span>
         <div className="element">
-          <button type="button"> - </button>
-          <input type="number" placeholder="0" />
-          <button type="button"> + </button>
+          <button
+            type="button"
+            data-testid="customer_products__button-card-rm-item-"
+          >
+            -
+          </button>
+          <input
+            type="number"
+            placeholder="0"
+            data-testid="customer_products__input-card-quantity-"
+          />
+          <button
+            type="button"
+            data-testid="customer_products__button-card-add-item-"
+          >
+            +
+          </button>
         </div>
       </div>
     </section>

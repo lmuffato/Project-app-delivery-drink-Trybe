@@ -1,10 +1,10 @@
 import React from 'react';
 import LoginForm from '../../components/LoginForm/LoginForm';
+import styles from './styles.module.css';
 
 export default function LoginPage() {
   return (
-    <div>
-      <h1>Pagina de Login</h1>
+    <div className={ styles.container }>
       <LoginForm />
     </div>
   );

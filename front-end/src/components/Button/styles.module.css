@@ -1,9 +1,11 @@
 .primary, .secondary, .tertiary {
   border: none;
-  border-radius: 10px;
+  border-radius: 5px;
   color: #f2fffc;
-  font-size: 28px;
-  height: 50px;
+  cursor: pointer;
+  font-size: 18px;
+  height: 35px;
+  margin: 10px 0;
   width: 80%;
 }
 

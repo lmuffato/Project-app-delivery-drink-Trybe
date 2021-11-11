@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styles from './styles.module.css';
 
 export default function InputField({ labelName, type, name, id }) {
   return (
-    <div>
+    <div className={ styles.inputContainer }>
       <label htmlFor={ id }>
         {labelName}
       </label>
-      <input type={ type } name={ name } id={ id } />
+      <input className={ styles.input } type={ type } name={ name } id={ id } />
     </div>
   );
 }

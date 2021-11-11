@@ -14,6 +14,12 @@ button {
     color: white;
     font-weight: 600;
     height: 47px;
+
+    &:disabled {
+      background: #ccc;
+      color: #444;
+      cursor: not-allowed;
+    }
   }
 }
 

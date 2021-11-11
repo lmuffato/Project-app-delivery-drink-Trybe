@@ -21,11 +21,11 @@ function ClientProducts() {
   return (
     <div>
       <CustomerNavBar fixed="top" />
-      <Row xs={ 1 } md={ 2 } className="g-4">
+      <Row xs={ 1 } md={ 4 } className="g-4">
         {
           productList.map((prod) => (
             <div key={ prod.name } className="productCard">
-              <ProductCard className="productCard" product={ prod } />
+              <ProductCard product={ prod } />
             </div>
           ))
         }

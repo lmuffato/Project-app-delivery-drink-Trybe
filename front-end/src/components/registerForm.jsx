@@ -1,20 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import useInputs from '../hooks/useInputs';
-import validateInputsRegister from '../ValidatingFunctions/validatingFunctions';
+import registerValidations from '../schemas/register';
+// import validateInputsRegister from '../ValidatingFunctions/validatingFunctions';
 
 
 function RegisterForm() {
-  const [values, setValues] = useInputs();
-  // const [name, setName] = useState('');
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
+  const [values, setValues] = useInputs({ email: '', name: '', password: '' });
+  const [schemaStatus, setSchemaStatus] = useState({ valid: false, error: '' });
   const [buttonState, setButtonState] = useState(true);
 
-  useEffect( ()=> {
-    const disabledValue = validateInputsRegister(values);
-    setButtonState(disabledValue);
-    console.log(disabledValue);
+  useEffect( async () => {
+    const { error } = registerValidations.validate(values);
+    await setSchemaStatus({ valid: error === undefined, error: error ? error.message: '' })
+    setButtonState(schemaStatus.valid === true ? false : true);
   }, [values]);
+
+  // sendRegister = (e) => {
+  //   e.preventDefault()
+  // };
 
   return (
     <div>
@@ -53,7 +56,7 @@ function RegisterForm() {
           />
         </label>
         <button
-          type="button"
+          type="submit"
           data-testid="common_register__button-register"
           disabled={ buttonState }
         >

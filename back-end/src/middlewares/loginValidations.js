@@ -3,12 +3,13 @@ const errorMessages = require('../utils/errorMessages');
 const httpStatus = require('../utils/httpStatus');
 const { User } = require('../database/models');
 
-const emailExists = async (email) => {
-  const user = await User.findOne({ where: { email } });
-  if (user === null) {
-    return false;
+const userExists = async (email) => {
+  const searchResult = await User.findOne({ where: { email } });
+  if (searchResult === null) {
+    return { isExist: false };
   }
-  return true;
+  const { dataValues: user } = searchResult
+  return { user, isExist: true};
 };
 
 const validateLogin = async (req, res, next) => { 
@@ -17,16 +18,22 @@ const validateLogin = async (req, res, next) => {
     email: Joi.string().email().required(), 
     password: Joi.string().min(6).required(), 
   });
-  if (await !emailExists(email)) {
-    return res.status(httpStatus.unauthorized).json({
-      message: errorMessages.invalidEmail,
-    });
-  }
   const { error } = loginSchema.validate({ email, password });
   if (error) {
     const { message } = error;
     return res.status(httpStatus.badRequest).json({ message });
   }
+  const { user, isExist } = await userExists(email);
+  if (!isExist) {
+    return res.status(httpStatus.notFound).json({
+      message: errorMessages.invalidEmail,
+    });
+  }
+  if (user.password !== password) {
+    return res.status(httpStatus.unauthorized).json({
+      message: errorMessages.invalidFields,
+    });
+  };
   return next();
 };
 

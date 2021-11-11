@@ -7,8 +7,8 @@ const productController = require('./controllers/productController');
 
 const app = express();
 
+app.use('/', express.static(path.join(__dirname, '..', '..', 'public')));
 app.use(bodyParser.json());
-app.use('/images', express.static(path.join(__dirname, '..', '..','..', 'productImages')));
 
 app.get('/', (req, res) => {
   res.status(200).send('OK FUNCIONANDO');

@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [user, setUser] = useState({});
+  const [error, setError] = useState(true);
 
   const handleClick = async (userEmail, userPassword) => {
     const res = await fetch('http://localhost:3001/login', {
@@ -13,7 +15,13 @@ function Login() {
       body: JSON.stringify({ email: userEmail, password: userPassword }),
     });
     const data = await res.json();
-    console.log(data);
+    setUser(data);
+    if (data.error) {
+      setError(false);
+    } else {
+      setError(true);
+    }
+    // console.log(data);
   };
 
   return (
@@ -49,6 +57,13 @@ function Login() {
       >
         Registrar-se
       </button>
+
+      <p
+        data-testid="common_login__element-invalid-email"
+        hidden={ error }
+      >
+        { user.error ? user.error : '' }
+      </p>
     </div>
   );
 }

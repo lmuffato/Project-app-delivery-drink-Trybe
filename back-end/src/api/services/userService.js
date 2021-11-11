@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 
 const { User } = require('../../database/models');
 const {
-  INCORRECT_USERNAME_OR_PASSWORD, ALL_FIELDES_FILLED, USER_ALREADY_EXIST,
+  INCORRECT_USERNAME_OR_PASSWORD, ALL_FIELDS_FILLED, USER_ALREADY_EXIST,
 } = require('../messages/errorMessages');
 
 const jwtConfig = {
@@ -48,7 +48,7 @@ const createUser = async ({ name, email, password, role }) => {
 
 const login = async ({ email, password }) => {
   if (!email || !password) {
-    return ({ status: 401, data: ALL_FIELDES_FILLED });
+    return ({ status: 401, data: ALL_FIELDS_FILLED });
   }
 
   const hashPassword = md5(password);

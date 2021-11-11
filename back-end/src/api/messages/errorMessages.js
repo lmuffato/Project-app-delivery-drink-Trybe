@@ -1,5 +1,5 @@
 module.exports = {
-  ALL_FIELDES_FILLED: 'All fields must be filled.',
+  ALL_FIELDS_FILLED: 'All fields must be filled.',
   EMAIL_ALREADY_REGISTRED: 'Email already registered.',
   INCORRECT_USERNAME_OR_PASSWORD: 'Incorrect username or password.',
   INVALID_ENTRIES: 'Invalid entries. Try again.',

@@ -5,14 +5,15 @@ module.exports = (sequelize, DataTypes) => {
     deliveryAddress: DataTypes.STRING,
     deliveryNumber: DataTypes.STRING,
     saleDate: DataTypes.DATE,
+    updatedAt: DataTypes.DATE,
     status: DataTypes.STRING,
     userId: { type: DataTypes.INTEGER, foreignKey: true },
-    sellerId: { type: DataTypes.INTEGER, foreignKey: true },
+    // sellerId: { type: DataTypes.INTEGER, foreignKey: true },
   },
   {
     timestamps: true,
     createdAt: 'saleDate',
-    updatedAt: 'updated',
+    // updatedAt: 'updated',
     tableName: 'sales',
   });
 

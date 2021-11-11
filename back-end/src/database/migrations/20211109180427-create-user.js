@@ -16,22 +16,20 @@ module.exports = {
       },
       name: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.STRING(100)
       },
       password: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.STRING(32)
       },
       email: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.STRING(100)
       },
       role: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.ENUM('administrator', 'seller', 'customer')
       },
-      onUpdate: Sequelize.DATE,
-      onDelete: Sequelize.DATE
     });
   },
   down: async (queryInterface, Sequelize) => {

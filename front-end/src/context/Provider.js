@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import PropTypes from 'prop-types';
 import Context from './Context';
-// import axios from "axios";
+
+const Endpoints = {
+  login_form: 'login',
+  registration_form: 'register',
+};
 
 function Provider({ children }) {
   const [user, setUser] = useState({});
@@ -20,15 +25,7 @@ function Provider({ children }) {
 
   /// ////////////////////////Link with BackEnd//////////////////////// ///
 
-  const postURL = 'http://localhost:3001/register';
-  const postSubmit = () => {
-    axios.post(postURL, { user })
-      .then((res) => {
-        console.log(res);
-        console.log(res.data);
-        // Aguardar: Retorno do Back para prosseguir
-      });
-  };
+  const postSubmit = (url) => axios.post(`http://localhost:3001/${url}`, user);
 
   const getProductsURL = 'http://localhost:3001/products';
   const getProducts = () => {
@@ -66,13 +63,11 @@ function Provider({ children }) {
       [name]: value,
     };
     setUser(setuser);
-    console.log(setuser);
   };
 
-  const submitChange = async (e) => {
+  const submitChange = (e, formType) => {
     e.preventDefault();
-    await postSubmit();
-    console.log(user);
+    return postSubmit(Endpoints[formType]);
   };
 
   // Função para enviar o ShoppingCart para o BackEnd

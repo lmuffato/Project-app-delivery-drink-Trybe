@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Context from './Context';
 // import axios from "axios";
 
 function Provider({ children }) {
   const [user, setUser] = useState({});
+  const [products, setProducts] = useState([]);
+  const [shoppingCart, setShoppingCart] = useState([]);
 
   // user {
   // name: 'John',
@@ -14,6 +16,7 @@ function Provider({ children }) {
   // }
 
   // UseEffect para salvar no localStorage
+  // Há um ComponentDidMount após Link with BackEnd
 
   /// ////////////////////////Link with BackEnd//////////////////////// ///
 
@@ -26,6 +29,34 @@ function Provider({ children }) {
         // Aguardar: Retorno do Back para prosseguir
       });
   };
+
+  const getProductsURL = 'http://localhost:3001/products';
+  const getProducts = () => {
+    axios.get(getProductsURL)
+      .then((res) => {
+        console.log(res);
+        console.log(res.data);
+        setProducts(res.data);
+      });
+  };
+
+  const postShoppingCartURL = 'http://localhost:3001/xxx';
+  const postShoppingCart = () => {
+    axios.post(postShoppingCartURL, { shoppingCart })
+      .then((res) => {
+        console.log(res);
+        console.log(res.data);
+        // Aguardar: Retorno do Back para prosseguir
+      });
+  };
+  /// ////////////////////////ComponentDidMount//////////////////////// ///
+  useEffect(() => {
+    // Recebe produtos do BackEnd para renderização
+    const fetchProducts = (async () => {
+      await getProducts();
+    });
+    console.log(fetchProducts);
+  }, []);
 
   /// ////////////////////////Components Functions//////////////////////// ///
 
@@ -44,9 +75,29 @@ function Provider({ children }) {
     console.log(user);
   };
 
+  // Função para enviar o ShoppingCart para o BackEnd
+  const submitShoppingCart = async () => {
+    await postShoppingCart();
+  };
+
+  // Função disparada no onChange no ProductCard
+  const addProduct = (e) => {
+    const { name, value } = e.target;
+    console.log(name, value);
+    // Preciso enviar: Nome e Quantidade
+    setShoppingCart(name);
+  };
+
   return (
     <Context.Provider
-      value={ { setUser, user, handleChange, submitChange } }
+      value={ {
+        setUser,
+        user,
+        handleChange,
+        submitChange,
+        products,
+        submitShoppingCart,
+        addProduct } }
     >
       { children }
     </Context.Provider>

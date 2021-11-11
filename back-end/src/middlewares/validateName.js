@@ -6,7 +6,7 @@ const validateName = (req, _res, next) => {
     next(nameIsRequired.error);
   }
 
-  if(name.length < 12) {
+  if (name.length < 12) {
     next(nameLessThanTwelve.error);
   }
 

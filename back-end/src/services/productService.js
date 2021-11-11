@@ -12,4 +12,21 @@ const getAll = async () => {
   }
 };
 
-module.exports = { getAll };
+const postProducts = async () => {
+  // const {
+  //   userId, sellerId, deliveryAddress, deliveryNumber, products } = data;
+  //   products [{ productId: as61a65s, quantidade: 3 }, { productId: as61a65s, quantidade: 3 }]
+  //   status = 'pendente'
+  // try {
+  //   const result = await Sales.create({
+  //     userId, sellerId, totalPrice, deliveryAddress, deliveryNumber, status: 'pendente',
+  //   if (!result) return errorMap.NotFound;
+    
+  // });
+  //   return { result };
+  // } catch (error) {
+  //   return errorMap.internalError;
+  // }
+};
+
+module.exports = { getAll, postProducts };

@@ -23,6 +23,6 @@ const create = async (req, res) => {
   if (error) return res.status(error.code).json({ message: error.message });
 
   return res.status(CREATED).end();
-}
+};
 
 module.exports = { login, create }; 

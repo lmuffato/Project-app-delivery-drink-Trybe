@@ -1,11 +1,13 @@
 const { Router } = require('express');
 const registrationValidate = require('../validations/validates');
+const userController = require('../database/controllers/useController')
 
 const router = Router();
 
 router.post(
   '/',
-  registrationValidate.validate,
+  registrationValidate.validateRegistration,
+  userController.createUser,
 );
 
 module.exports = router;

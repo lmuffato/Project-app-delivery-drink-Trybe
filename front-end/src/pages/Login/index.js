@@ -19,13 +19,17 @@ function LoginPage() {
   const checkPass = () => password.length >= minLength;
 
   const handleLogin = async () => {
-    const passHash = MD5(password).toString();
-    const response = await api.getLogin(email, passHash);
-    if (response.error) {
+    try {
+      const passHash = MD5(password).toString();
+      const ress = await api.getLogin(email, passHash);
+      if (!ress || ress.error) {
+        throw new Error();
+      } else {
+        history.push('/customer/products');
+      }
+    } catch (e) {
       setError('Login inválido');
-      return;
     }
-    history.push('/customer/products');
   };
 
   return (
@@ -68,7 +72,7 @@ function LoginPage() {
           >
             Ainda não tenho conta
           </Link>
-          {error && <p>{error}</p>}
+          {error && <p className="error">{error}</p>}
         </div>
       </div>
     </section>

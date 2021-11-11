@@ -1,19 +1,19 @@
 .border {
   display: flex;
-  text-align: center;
   flex-grow: 1;
   padding: 0;
   padding-left: 30px;
+  text-align: center;
   width: 100px;
 }
 
 
 .container {
+  align-content: stretch;
+  background-color: aquamarine;
   display: flex;
   flex-direction: row;
-  background-color: aquamarine;
   justify-content: space-evenly;
-  align-content: stretch;
 }
 
 .border:nth-child(2) {
@@ -21,8 +21,8 @@
 }
 
 .border:nth-child(3) {
-  width: 200px;
   background-color: lime;
+  width: 200px;
 }
 
 .border:nth-child(4) {

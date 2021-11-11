@@ -1,3 +1,3 @@
-import FormRegisterUser from './FormRegisterUSer';
+import FormRegisterUser from './FormRegisterUser';
 
 export default FormRegisterUser;

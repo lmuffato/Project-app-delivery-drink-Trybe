@@ -16,6 +16,7 @@ const corsOptions = {
 
 const app = express();
 app.use(bodyParser.json());
+
 app.use(cors(corsOptions));
 
 app.post('/login', checkEmail, checkPassword, userControllers.login);

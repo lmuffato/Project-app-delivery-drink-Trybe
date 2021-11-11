@@ -2,6 +2,7 @@ const Joi = require('joi');
 const errorMessages = require('../utils/errorMessages');
 const httpStatus = require('../utils/httpStatus');
 const { User } = require('../database/models');
+const md5 = require('md5');
 
 const userExists = async (email) => {
   const searchResult = await User.findOne({ where: { email } });
@@ -30,11 +31,12 @@ const validateLogin = async (req, res, next) => {
       message: errorMessages.invalidEmail,
     });
   }
-  if (user.password !== password) {
+  if (user.password !== md5(password)) {
     return res.status(httpStatus.unauthorized).json({
       message: errorMessages.invalidFields,
     });
   }
+  req.user = user;
   return next();
 };
 

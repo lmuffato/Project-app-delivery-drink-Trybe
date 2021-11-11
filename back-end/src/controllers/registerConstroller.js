@@ -1,7 +1,7 @@
 const { createToken } = require('../middlewares/createJwt');
 const httpStatus = require('../utils/httpStatus');
 
-const loginUser = async (req, res) => {
+const registerUser = async (req, res) => {
   const { email, password } = req.body;
   const user = { email, password };
 

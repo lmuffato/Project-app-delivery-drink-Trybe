@@ -24,14 +24,14 @@ const validateLogin = async (req, res, next) => {
   const { error } = loginSchema.validate({ email, password });
   if (error) {
     const { message } = error;
-    return res.status(httpStatus.badRequest).json({ message });
+    return res.status(httpStatus.badRequest).json({ error: { message } });
   }
   const { user, isExist } = await userExists(email);
   if (!isExist) {
-    return res.status(httpStatus.notFound).json({ message: invalidEmail });
+    return res.status(httpStatus.notFound).json({ error: { message: invalidEmail } });
   }
   if (user.password !== md5(password)) {
-    return res.status(httpStatus.unauthorized).json({ message: invalidFields });
+    return res.status(httpStatus.unauthorized).json({ error: { message: invalidFields } });
   }
   req.user = user;
   return next();

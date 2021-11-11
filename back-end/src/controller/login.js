@@ -1,5 +1,4 @@
 const services = require('../service');
-const { isPasswordsEqual } = require('../encrypt/bcrypt');
 
 const loginUser = async (req, res) => {
   try {

@@ -24,7 +24,7 @@ module.exports = async (req, res, next) => {
   }
 
   if (password.length < 6) {
-     return res.status(400).json({ message: PASSWORD_SHORTER_THAN_ALLOWED });
+    return res.status(400).json({ message: PASSWORD_SHORTER_THAN_ALLOWED });
   }
 
   next();

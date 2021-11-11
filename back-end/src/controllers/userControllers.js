@@ -12,7 +12,13 @@ const register = async (req, res) => {
   res.status(response.status).json(response.message);
 };
 
+const getAllUsers = async (_req, res) => {
+  const response = await userServices.getAllUsers();
+  return res.status(response.status).json(response.message);
+};
+
 module.exports = {
   login,
   register,
+  getAllUsers,
 };

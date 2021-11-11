@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import imgManHoldingBeer from '../images/man-holding-beer.png';
 import useInputs from '../hooks/useInputs';
 import useAlert from '../hooks/useAlert';
@@ -73,9 +73,14 @@ export default function Auth() {
         >
           Entrar
         </button>
-        <Link to="/register" data-testid="common_login__button-register">
+        <button
+          onClick={ () => history.push('/register') }
+          type="button"
+          data-testid="common_login__button-register"
+          className="link"
+        >
           Ainda não tenho conta
-        </Link>
+        </button>
       </form>
     </section>
   );

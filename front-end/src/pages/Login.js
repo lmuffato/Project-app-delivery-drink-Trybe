@@ -3,6 +3,17 @@ import React, { useState } from 'react';
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [user, setUser] = useState({});
+  const [error, setError] = useState(true);
+
+  const validForm = () => {
+    const passwordMinLength = 6;
+    const emailRegex = /\S+@\S+\.\S+/;
+    if (!emailRegex.test(email) || password.length < passwordMinLength) {
+      return true;
+    }
+    return false;
+  };
 
   const handleClick = async (userEmail, userPassword) => {
     const res = await fetch('http://localhost:3001/login', {
@@ -13,7 +24,13 @@ function Login() {
       body: JSON.stringify({ email: userEmail, password: userPassword }),
     });
     const data = await res.json();
-    console.log(data);
+    setUser(data);
+    if (data.error) {
+      setError(false);
+    } else {
+      setError(true);
+    }
+    // console.log(data);
   };
 
   return (
@@ -27,7 +44,7 @@ function Login() {
       />
 
       <input
-        type="email"
+        type="password"
         data-testid="common_login__input-password"
         onChange={ (e) => setPassword(e.target.value) }
         value={ password }
@@ -36,6 +53,7 @@ function Login() {
 
       <button
         type="button"
+        disabled={ validForm() }
         data-testid="common_login__button-login"
         onClick={ () => handleClick(email, password) }
       >
@@ -49,6 +67,13 @@ function Login() {
       >
         Registrar-se
       </button>
+
+      <span
+        data-testid="common_login__element-invalid-email"
+        hidden={ error }
+      >
+        { user.error ? user.error : '' }
+      </span>
     </div>
   );
 }

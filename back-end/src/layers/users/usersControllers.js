@@ -12,6 +12,7 @@ http GET :3001/users
 */
 
 router.post('/',
+userMiddlewares.createNew,
 async () => {});
 /* REQUISIÇÃO:
 http POST :3001/users displayName='LucasMuffato' email='lucas@gmail.com' password='lucas123456' image='lucas'

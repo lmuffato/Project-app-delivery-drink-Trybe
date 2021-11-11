@@ -66,26 +66,27 @@ const getById = async (req, res) => {
 //   return newObj;
 // };
 
-// const createNew = async (req, res, next) => {
-//   try {
-//     const { displayName, email, password, image } = req.body;
-//     const obj = { displayName, email, password, image };
-//     await User.create(obj);
-//     req.userInfo = { displayName, email, image };
-//     // req.userInfo = removeKeyInObject(obj, 'password');
-//     // const newData = await User.create(obj);
-//     // return res.status(201).json(newData);
-//     req.http = { code: 201 };
-//   } catch (err) {
-//     return res.status(500).json({ message: err.message });
-//   }
-//   next();
-// };
+const createNew = async (req, res, next) => {
+  try {
+    const { name, email, password, role } = req.body;
+    console.log(name);
+    const obj = { name, email, password, role };
+    await users.create(obj);
+    req.userInfo = { name, email, role };
+    // req.userInfo = removeKeyInObject(obj, 'password');
+    // const newData = await User.create(obj);
+    // return res.status(201).json(newData);
+    req.http = { code: 201 };
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+  next();
+};
 
 module.exports = {
   getAll,
   getById,
   // updateById,
   // deleteById,
-  // createNew,
+  createNew,
 };

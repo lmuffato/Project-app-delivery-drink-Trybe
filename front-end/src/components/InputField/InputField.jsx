@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './styles.module.css';
 
-export default function InputField({ labelName, type, name, id, value, onChange }) {
+export default function InputField({
+  labelName, type, name, id, value, onChange, dataTestId }) {
   return (
     <div className={ styles.inputContainer }>
       <label htmlFor={ id }>
@@ -15,6 +16,7 @@ export default function InputField({ labelName, type, name, id, value, onChange 
         id={ id }
         value={ value }
         onChange={ onChange }
+        data-testid={ dataTestId }
       />
     </div>
   );
@@ -25,4 +27,7 @@ InputField.propTypes = {
   type: PropTypes.string,
   name: PropTypes.string,
   id: PropTypes.string,
+  value: PropTypes.string,
+  onChange: PropTypes.func,
+  dataTestId: PropTypes.string,
 }.isRequired;

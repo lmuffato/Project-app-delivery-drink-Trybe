@@ -27,6 +27,7 @@ export default function LoginForm() {
         id="loginInput"
         value={ email }
         onChange={ (event) => setEmail(event.target.value) }
+        dataTestId="common_login__input-email"
       />
       <InputField
         labelName="Senha"
@@ -35,9 +36,19 @@ export default function LoginForm() {
         id="passwordInput"
         value={ password }
         onChange={ (event) => setPassword(event.target.value) }
+        dataTestId="common_login__input-password"
       />
-      <Button title="Login" typeButton="primary" type="submit" />
-      <Button title="Ainda não tem conta" typeButton="tertiary" />
+      <Button
+        title="Login"
+        typeButton="primary"
+        type="submit"
+        dataTestId="common_login__button-login"
+      />
+      <Button
+        title="Ainda não tem conta"
+        typeButton="tertiary"
+        dataTestId="common_login__button-register"
+      />
     </form>
   );
 }

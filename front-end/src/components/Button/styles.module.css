@@ -13,6 +13,12 @@
   background-color: #036b52;
 }
 
+.primary:disabled {
+  background-color: #b1c2be;
+  color: #036b52;
+  cursor: not-allowed;
+}
+
 .secondary {
   background-color: #2fc18c;
 }

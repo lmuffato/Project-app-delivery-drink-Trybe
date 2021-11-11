@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 import ContextLogin from './ContextLogin';
+
+const axios = require('axios').default;
 
 function ProviderLogin({ children }) {
   const [token, setToken] = useState('');
@@ -10,11 +11,16 @@ function ProviderLogin({ children }) {
 
   const makeLogin = async (email, password) => {
     setInvalidEmailError(false);
-    const { data: { token: newToken, error } } = await axios
-      .post(`${urlBase}/login`, { email, password })
-      .catch((er) => console.log(er));
-    if (error) setInvalidEmailError(true);
-    setToken(newToken);
+    try {
+      const { data } = await axios.post(`${urlBase}/login`, { email, password });
+      console.log(data);
+      setToken(data);
+    } catch (error) {
+      const { response } = error;
+      const { request, ...errorObject } = response; // take everything but 'request'
+      console.log(errorObject);
+      setInvalidEmailError(true);
+    }
   };
 
   const createUser = async (name, email, password) => {

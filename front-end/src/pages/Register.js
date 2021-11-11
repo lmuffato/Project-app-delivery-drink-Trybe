@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import registry from '../api/registry';
 
 const Register = () => {
   const [userData, setUserData] = useState({
@@ -27,6 +28,13 @@ const Register = () => {
     }
   });
 
+  const saveDataToStorage = async () => {
+    const { inputName, inputEmail, inputPassword } = userData;
+    const role = 'customer';
+    const { token } = await registry(inputName, inputEmail, inputPassword, role);
+    localStorage.setItem('user', JSON.stringify({ name: inputName, token }));
+  };
+
   return (
     <div>
       <h1>Cadastro</h1>
@@ -51,6 +59,7 @@ const Register = () => {
         <label htmlFor="inputPassword">
           Senha
           <input
+            type="password"
             id="input"
             data-testid="common_register__input-password"
             name="inputPassword"
@@ -60,6 +69,7 @@ const Register = () => {
         <button
           type="button"
           data-testid="common_register__button-register"
+          onClick={ saveDataToStorage }
         >
           Cadastrar
         </button>

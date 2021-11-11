@@ -8,16 +8,17 @@ const userExists = async (email) => {
   if (searchResult === null) {
     return { isExist: false };
   }
-  const { dataValues: user } = searchResult
-  return { user, isExist: true};
+  const { dataValues: user } = searchResult;
+  return { user, isExist: true };
 };
+
+const loginSchema = Joi.object({ 
+  email: Joi.string().email().required(), 
+  password: Joi.string().min(6).required(), 
+});
 
 const validateLogin = async (req, res, next) => { 
   const { email, password } = req.body; 
-  const loginSchema = Joi.object({ 
-    email: Joi.string().email().required(), 
-    password: Joi.string().min(6).required(), 
-  });
   const { error } = loginSchema.validate({ email, password });
   if (error) {
     const { message } = error;
@@ -33,7 +34,7 @@ const validateLogin = async (req, res, next) => {
     return res.status(httpStatus.unauthorized).json({
       message: errorMessages.invalidFields,
     });
-  };
+  }
   return next();
 };
 

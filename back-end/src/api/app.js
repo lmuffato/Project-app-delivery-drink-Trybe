@@ -22,6 +22,7 @@ app.post('/register', newUserAuthentication, userController.createUser);
 
 app.route('/admin')
   .get(validateToken, validateAdmin, userController.findAllUsers)
-  .post(validateToken, validateAdmin, userController.createAdmin);
+  .post(validateToken, validateAdmin, userController.createAdmin)
+  .delete(validateToken, validateAdmin, userController.deleteUser);
 
 module.exports = app;

@@ -77,19 +77,17 @@ function Login({ history }) {
           <input
             id="login-btn"
             type="button"
-            placeholder="Login"
+            value="Login"
             disabled={ enableButton }
             data-testid="common_login__button-login"
             onClick={ handleLoginButtonClick }
           />
         </label>
-
         <label htmlFor="register-btn">
-          Login
           <input
             id="register-btn"
             type="button"
-            placeholder="Ainda não tenho conta"
+            value="Ainda não tenho conta"
             data-testid="common_login__button-register"
             onClick={ handleRegisterButtonClick }
           />

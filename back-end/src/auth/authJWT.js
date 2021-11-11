@@ -16,6 +16,18 @@ const createJWT = (data) => {
   return token;
 };
 
+const validateJWT = (token) => {
+  try {
+    const payload = jwt.verify(token, secret);
+    const { data } = payload;
+    return data;
+  } catch (e) {
+    const data = e.message;
+    return data;
+  }
+};
+
 module.exports = {
   createJWT,
+  validateJWT,
 };

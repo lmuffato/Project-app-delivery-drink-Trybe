@@ -27,4 +27,21 @@ const updatePostSchema = Joi.object({
   content: Joi.string().required(),
 });
 
-module.exports = { userSchema, loginSchema, categorySchema, postSchema, updatePostSchema }; 
+const salesSchema = Joi.object({
+  totalPrice: Joi.string().required(),
+  deliveryAddress: Joi.string().required(),
+  deliveryNumber: Joi.string().required(),
+  status: Joi.string().required(),
+  saleDate: Joi.date().required(),
+  userId: Joi.number().required(),
+  sellerId: Joi.number().required(),
+});
+
+module.exports = {
+  userSchema,
+  loginSchema,
+  categorySchema,
+  postSchema,
+  updatePostSchema,
+  salesSchema,
+};

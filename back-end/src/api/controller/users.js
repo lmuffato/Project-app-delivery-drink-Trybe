@@ -14,6 +14,15 @@ const loginUser = async (req, res, next) => {
   }
 };
 
+const findAllSellers = async (req, res, next) => {
+  try {
+    const sellers = await User.findAll({ where: { role: 'seller' } })
+    res.status(OK).json(sellers);
+  } catch (e) {
+    next({ statusCode: INTERNAL_SERVER_ERROR, message: e.message });
+  }
+};
+
 const createNewUser = async (req, res, next) => {
   try {
     User.create(req.body);
@@ -27,4 +36,5 @@ const createNewUser = async (req, res, next) => {
 module.exports = {
   loginUser,
   createNewUser,
+  findAllSellers,
 };

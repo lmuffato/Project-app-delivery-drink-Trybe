@@ -1,43 +1,38 @@
 import React, { useState } from 'react';
 import Button from '../Button';
-import InputField from '../InputField/InputField';
+import InputField from '../InputField';
+import ErrorMessage from '../ErrorMessage';
 import styles from './styles.module.css';
+import loginRequest from '../../services/login/loginRequest';
+import {
+  emailVerification,
+  passwordVerification,
+} from '../../services/login/loginValidations';
 
 export default function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [disableButton, setDisableButton] = useState(true);
-
-  const emailVerification = () => {
-    const regex = /\S+@\S+\.\S+/;
-    const result = regex.test(email);
-    return result;
-  };
-
-  const passwordVerification = () => {
-    const minimumPasswordLength = 5;
-    return password.length >= minimumPasswordLength;
-  };
+  const [showErrorMessage, setShowErrorMessage] = useState(false);
 
   const resetValues = () => {
     setEmail('');
     setPassword('');
   };
 
-  const handleChange = (event, setStates) => {
-    const verifications = emailVerification() && passwordVerification();
-    console.log(verifications);
+  const handleChange = (event, setStateCallback) => {
+    const verifications = emailVerification(email) && passwordVerification(password);
     if (verifications) {
       setDisableButton(false);
     } else {
       setDisableButton(true);
     }
-    setStates(event.target.value);
+    setStateCallback(event.target.value);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(`email: ${email} senha: ${password}`);
+    loginRequest(email, password, setShowErrorMessage);
     resetValues();
   };
 
@@ -73,6 +68,7 @@ export default function LoginForm() {
         typeButton="tertiary"
         dataTestId="common_login__button-register"
       />
+      {showErrorMessage ? <ErrorMessage message="Email não cadastrado" /> : ''}
     </form>
   );
 }

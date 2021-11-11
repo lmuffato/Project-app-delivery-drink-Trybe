@@ -3,8 +3,6 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.INTEGER,
     price: DataTypes.STRING,
     url_image: DataTypes.STRING,
-    onUpdate: DataTypes.STRING,
-    onDelete: DataTypes.STRING
   }, {
     tableName: 'Products',
     timestamps: false,

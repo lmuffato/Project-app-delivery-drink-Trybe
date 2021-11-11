@@ -38,7 +38,7 @@ const FormRegisterUser = () => {
     <>
       <form onSubmit={ handleSubmit }>
         <label htmlFor="name">
-          Nome
+          <span>Nome</span>
           <input
             type="text"
             name="name"
@@ -52,7 +52,7 @@ const FormRegisterUser = () => {
         </label>
 
         <label htmlFor="email">
-          Email
+          <span>Email</span>
           <input
             type="text"
             name="email"
@@ -66,7 +66,7 @@ const FormRegisterUser = () => {
         </label>
 
         <label htmlFor="password">
-          Senha
+          <span>Senha</span>
           <input
             type="password"
             name="password"
@@ -80,7 +80,7 @@ const FormRegisterUser = () => {
         </label>
 
         <label htmlFor="role">
-          Tipo
+          <span>Tipo</span>
           <select
             id="role"
             data-testid="admin_manage__select-role"

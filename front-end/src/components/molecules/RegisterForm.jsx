@@ -33,7 +33,7 @@ const RegisterForm = () => {
           type="text"
           data-testid={ testID[6] }
           name="fullName"
-          value={ name }
+          value={ fullName }
           onChange={ handleChange }
           placeholder="Your name"
         />

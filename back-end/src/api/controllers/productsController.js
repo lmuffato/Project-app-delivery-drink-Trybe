@@ -8,4 +8,4 @@ const findAllProducts = async (_req, res) => {
 
 module.exports = {
   findAllProducts,
-}
+};

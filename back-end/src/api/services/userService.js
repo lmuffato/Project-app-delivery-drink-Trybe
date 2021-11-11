@@ -3,7 +3,9 @@ const md5 = require('md5');
 const jwt = require('jsonwebtoken');
 
 const { User } = require('../../database/models');
-const { INCORRECT_USERNAME_OR_PASSWORD, ALL_FIELDES_FILLED, USER_ALREADY_EXIST } = require('../messages/errorMessages');
+const {
+  INCORRECT_USERNAME_OR_PASSWORD, ALL_FIELDES_FILLED, USER_ALREADY_EXIST,
+} = require('../messages/errorMessages');
 
 const jwtConfig = {
   expiresIn: '2h',

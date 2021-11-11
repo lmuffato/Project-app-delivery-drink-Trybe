@@ -9,4 +9,8 @@ module.exports = {
   ONLY_ADMINS_REGISTER: 'Only admins can register new roles',
   SERVER_ERROR: 'Server error.',
   TASK_NOT_FOUND: 'Task not found.',
+  USER_ALREADY_EXIST: 'User already exists!',
+  INVALID_EMAIL: '"Email" must be a valid email',
+  NAME_SHORTER_THAN_ALLOWED: '"name" must have a minimum of 12 characters',
+  PASSWORD_SHORTER_THAN_ALLOWED: '"password" must have a minimum of 6 characters',
 };

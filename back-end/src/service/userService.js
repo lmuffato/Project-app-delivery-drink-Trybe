@@ -1,4 +1,4 @@
-const { createHashPassword } = require('../encrypt/bcrypt');
+const md5 = require('md5');
 const { User } = require('../database/models');
 
 const createUser = async (name, email, password, role) => {
@@ -7,10 +7,9 @@ const createUser = async (name, email, password, role) => {
   if (findUser) {
     return { code: 409, message: 'conflict' };
   }
-
-  const passwordHash = await createHashPassword(password);
  
-  const addUser = await User.create({ name, email, password: passwordHash, role });
+  const addUser = await User.create({ name, email, password: md5(password), role });
+
   return addUser;
 };
 

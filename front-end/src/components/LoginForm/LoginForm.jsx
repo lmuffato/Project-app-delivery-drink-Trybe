@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from '../Button';
 import InputField from '../InputField/InputField';
 
 export default function LoginForm() {
@@ -16,6 +17,8 @@ export default function LoginForm() {
         name="passwordInput"
         id="passwordInput"
       />
+      <Button title="Login" typeButton="primary" />
+      <Button title="Ainda não tem conta" typeButton="tertiary" />
     </form>
   );
 }

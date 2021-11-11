@@ -1,0 +1,21 @@
+.primary, .secondary, .tertiary {
+  border: none;
+  border-radius: 10px;
+  color: #f2fffc;
+  font-size: 28px;
+  height: 59px;
+  width: 332px;
+}
+
+.primary {
+  background-color: #036b52;
+}
+
+.secondary {
+  background-color: #2fc18c;
+}
+
+.tertiary {
+  border: 2px solid #036b52;
+  color: #036b52;
+}

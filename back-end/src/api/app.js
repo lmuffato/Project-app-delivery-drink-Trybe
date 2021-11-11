@@ -22,7 +22,7 @@ app.use(cors(corsOptions));
 app.post('/login', checkEmail, checkPassword, userControllers.login);
 app.post('/register', checkName, checkEmail, checkPassword, userControllers.register);
 
-app.get('/users', userControllers.getAllUsers); // P. ADM/ Gerenciamento
+app.get('/users', userControllers.getAllUsers);
 app.get('/products', validateToken, productControllers.getAllProducts);
 
 module.exports = app;

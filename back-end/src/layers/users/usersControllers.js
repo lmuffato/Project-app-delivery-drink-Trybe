@@ -27,13 +27,14 @@ http GET :3001/users/1
 */
 
 router.put('/:id',
+userMiddlewares.updateById,
 async () => {});
 /* REQUISIÇÃO:
 http PUT :3001/users/3 displayName='Lucas' email='lucas@gmail.com' password='Senha123' image='www.google.com'
 */
 
 router.delete('/:id',
-// userMiddleware.deleteById,
+userMiddlewares.deleteById,
 async () => {});
 /* REQUISIÇÃO:
 http DELETE :3001/users/4

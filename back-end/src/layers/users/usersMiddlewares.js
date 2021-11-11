@@ -38,28 +38,28 @@ const getById = async (req, res) => {
 //   }
 // };
 
-// const updateById = async (req, res) => {
-//   try {
-//     const { id } = req.params;
-//     const { displayName, email, password, image } = req.body;
-//     const obj = { displayName, email, password, image };
-//     await User.update(obj, { where: { id } });
-//   return res.status(200).json(obj);
-//   } catch (err) {
-//     return res.status(500).json({ message: err.message });
-//   }
-// };
+const updateById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { name, email, password, role } = req.body;
+    const obj = { name, email, password, role };
+    await users.update(obj, { where: { id } });
+  return res.status(200).json(obj);
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+};
 
-// const deleteById = async (req, res) => {
-//   try {
-//     const { id } = req.params;
-//     const dataToDelete = await User.findByPk(id);
-//     await dataToDelete.destroy();
-//     return res.status(200).json(dataToDelete);
-//   } catch (err) {
-//     return res.status(500).json({ message: err.message });
-//   }
-// };
+const deleteById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const dataToDelete = await users.findByPk(id);
+    await dataToDelete.destroy();
+    return res.status(200).json(dataToDelete);
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+};
 
 // const removeKeyInObject = (obj, key) => {
 //   const { [key]: _, ...newObj } = obj;
@@ -86,7 +86,7 @@ const createNew = async (req, res, next) => {
 module.exports = {
   getAll,
   getById,
-  // updateById,
-  // deleteById,
+  updateById,
+  deleteById,
   createNew,
 };

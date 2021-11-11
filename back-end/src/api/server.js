@@ -4,9 +4,8 @@ const usersControllers = require('../layers/users/usersControllers');
 const salesControllers = require('../layers/sales/salesControllers');
 const productsControllers = require('../layers/products/productsControllers');
 
-app.get('/test', (_req, res) => {
-  return res.status(418).json({ message: "mensagem de test" });
-});
+app.get('/test', (_req, res) => res.status(418).json({ message: 'mensagem de test' }));
+
 /*
 http://localhost:3001/test
 */

@@ -4,7 +4,7 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const loginButton = async (userEmail, userPassword) => {
+  const handleClick = async (userEmail, userPassword) => {
     const res = await fetch('http://localhost:3001/login', {
       method: 'POST',
       headers: {
@@ -31,7 +31,7 @@ function Login() {
         placeholder="password"
       />
 
-      <button type="button" onClick={ () => loginButton(email, password) }>Entrar</button>
+      <button type="button" onClick={ () => handleClick(email, password) }>Entrar</button>
     </div>
   );
 }

@@ -6,7 +6,10 @@ const findAllProducts = async () => {
 
   if (!allProducts) return ({ status: 404, data: NO_REGISTRED_PRODUCTS });
 
-  const productsArray = allProducts.map((product) => product.dataValues)
+  const productsArray = allProducts.map((product) => {
+    const { id, name, price, url_image } = product.dataValues;
+    return ({ id, name, price, url_image });
+  });
 
   return ({ status: 200, data: productsArray });
 };

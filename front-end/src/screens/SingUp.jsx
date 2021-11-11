@@ -48,6 +48,7 @@ function SignUp() {
         helperText={
           name.length < nameMinLength && 'Nome deve ter mais de 12 caracteres'
         }
+        data-testid="common_register__input-name"
       />
       <TextField
         label="Email"
@@ -60,6 +61,7 @@ function SignUp() {
         helperText={
           !(emailRegex.test(email)) && 'Email deve ser email@email.com'
         }
+        data-testid="common_register__input-email"
       />
       <TextField
         label="Senha"
@@ -72,10 +74,12 @@ function SignUp() {
         helperText={
           password.length < passwordMinLength && 'Senha deve ter mais de 6 digitos'
         }
+        data-testid="common_register__input-password"
       />
       <Button
         disabled={ !inputsValidator({ name, email, password }) }
         onClick={ askCreateUser }
+        data-testid="common_register__button-register"
       >
         Cadastrar
       </Button>

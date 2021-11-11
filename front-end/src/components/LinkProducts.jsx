@@ -1,11 +1,11 @@
 import React from 'react';
 
-function LinkOrders() {
+function LinkProducts() {
   return (
     <>
-      LinkOrders
+      LinkProducts
     </>
   );
 }
 
-export default LinkOrders;
+export default LinkProducts;

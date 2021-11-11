@@ -7,4 +7,14 @@ const getAll = async (req, res) => {
   return res.status(OK).json(result);
 };
 
-module.exports = { getAll }; 
+const postProducts = async (req, res) => {
+  const { data } = req.body;
+  const result = await productService.postProducts(data);
+
+  return res.status(OK).json(result);
+};
+
+module.exports = {
+  getAll,
+  postProducts,
+}; 

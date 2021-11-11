@@ -3,8 +3,7 @@ const {
 } = require('http-status-codes');
 const { verify } = require('jsonwebtoken');
 
-const { Sale } = require('../../database/models');
-const { User } = require('../../database/models');
+const { Sale, ProductsSale, User } = require('../../database/models');
 
 const getAllSales = async (req, res, next) => {
   try {
@@ -39,9 +38,14 @@ const getSalesById = async (req, res, next) => {
 
 const createSale = async (req, res, next) => {
   try {
-    const params = { totalPrice, deliveryAddress, deliveryNumber, status, saleDate, userId, sellerId } = req.body;
+    const params = { totalPrice, deliveryAddress, deliveryNumber, status, saleDate, userId, sellerId, data } = req.body;
 
     const sale = await Sale.create(params);
+    data.forEach(async product => {
+    const { id: saleId } = sale.dataValues
+    const { productId, quantity } = product
+    await ProductsSale.create({productId, quantity, saleId})
+  });
     res.status(OK).json(sale);
   } catch (e) {
     next({ statusCode: INTERNAL_SERVER_ERROR, message: e.message });

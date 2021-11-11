@@ -3,11 +3,11 @@
  * @param {import('sequelize').DataTypes} DataTypes
  * @return
  */
-module.exports = (sequelize, _DataTypes) => {
+module.exports = (sequelize, DataTypes) => {
   const ProductsSale = sequelize.define(
     "ProductsSale",
-    {},
-    { timestamps: false }
+    {quantity: DataTypes.INTEGER},
+    { timestamps: false, tableName: "ProductsSale" }
   );
   ProductsSale.associate = ({ Sale, Product }) => {
     Product.belongsToMany(Sale, {

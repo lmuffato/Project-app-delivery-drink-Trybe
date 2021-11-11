@@ -28,6 +28,7 @@ const updatePostSchema = Joi.object({
 });
 
 const salesSchema = Joi.object({
+  data: Joi.array().required(),
   totalPrice: Joi.string().required(),
   deliveryAddress: Joi.string().required(),
   deliveryNumber: Joi.string().required(),

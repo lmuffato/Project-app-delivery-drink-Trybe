@@ -2,7 +2,9 @@ import React from 'react';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import { IoMdBeer } from 'react-icons/io';
+import MD5 from 'crypto-js/md5';
 import Input from '../../components/Input';
+import api from '../../services/api';
 import LeftSide from '../../components/LeftSide';
 import './style.css';
 
@@ -20,13 +22,13 @@ function RegisterPage() {
   const checkPass = () => password.length >= minLengthPassword;
 
   const handleRegister = async () => {
-    const passHash = MD5(password).toString();
-    const response = await api.getRegister(name, email, passHash);
-    if (response.error) {
+    try {
+      const passHash = MD5(password).toString();
+      await api.getRegister(name, email, passHash);
+      history.push('/customer/products');
+    } catch (e) {
       setError('Login inválido');
-      return;
     }
-    history.push('/customer/products');
   };
 
   return (
@@ -70,7 +72,7 @@ function RegisterPage() {
           </button>
           <Link to="/" className="return">Voltar</Link>
           {error && (
-            <p data-testid="common_register__element-invalid_register">
+            <p data-testid="common_register__element-invalid_register" className="error">
               {error}
             </p>
           )}

@@ -1,10 +1,11 @@
 import React from 'react';
 import Button from '../Button';
 import InputField from '../InputField/InputField';
+import styles from './styles.module.css';
 
 export default function LoginForm() {
   return (
-    <form>
+    <form className={ styles.loginFormContainer }>
       <InputField
         labelName="Login"
         type="email"

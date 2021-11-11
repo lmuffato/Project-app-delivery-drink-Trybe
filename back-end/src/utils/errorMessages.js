@@ -1,8 +1,4 @@
 const errorMessages = {
-  categoryCantEdit: 'Categories cannot be edited',
-  categoryIdRequired: '"categoryIds" is required',
-  categoryNotFound: '"categoryIds" not found',
-  contentRequired: '"content" is required',
   emptyEmail: '"email" is not allowed to be empty',
   emptyPassword: '"password" is not allowed to be empty', 
   invalidEmail: '"email" must be a valid email',

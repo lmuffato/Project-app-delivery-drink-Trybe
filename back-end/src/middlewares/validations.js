@@ -8,12 +8,12 @@ const emailExists = async (email) => {
   if (user === null) {
     return false;
   }
-  true
+  return true;
 };
 
 const validateLogin = async (req, res, next) => { 
   const { email, password } = req.body; 
-  const  loginSchema = Joi.object({ 
+  const loginSchema = Joi.object({ 
     email: Joi.string().email().required(), 
     password: Joi.string().min(6).required(), 
   });

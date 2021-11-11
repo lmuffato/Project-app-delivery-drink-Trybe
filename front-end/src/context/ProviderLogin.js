@@ -3,15 +3,11 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import ContextLogin from './ContextLogin';
 
-/*---------------------------------------------/---------------------------------------------------------------*/
-
 function ProviderLogin({ children }) {
   const [user, setUser] = useState([]);
   const [token, setToken] = useState('');
   const [allowed, setAllowed] = useState(true);
   const urlBase = 'http://localhost:3000';
-
-  /*---------------------------------------------/---------------------------------------------------------------*/
 
   const makeLogin = async (email, password) => {
     setAllowed(true);
@@ -26,15 +22,11 @@ function ProviderLogin({ children }) {
     setUser(newUser);
   };
 
-  /*---------------------------------------------/---------------------------------------------------------------*/
-
   const createUser = async (name, email, password) => {
     await axios.post(`${urlBase}/users/register`, {
       name, email, password,
-    })
+    });
   };
-
-  /*---------------------------------------------/---------------------------------------------------------------*/
 
   return (
     <ContextLogin.Provider
@@ -51,14 +43,10 @@ function ProviderLogin({ children }) {
   );
 }
 
-/*---------------------------------------------/---------------------------------------------------------------*/
-
 ProviderLogin.propTypes = {
   children: PropTypes.objectOf(PropTypes.shape(
     PropTypes.object,
   )),
 }.isRequired;
-
-/*---------------------------------------------/---------------------------------------------------------------*/
 
 export default ProviderLogin;

@@ -21,6 +21,7 @@ app.get('/products', validateToken, productsController.findAllProducts);
 app.post('/register', newUserAuthentication, userController.createUser);
 
 app.route('/admin')
-  .get(validateToken, validateAdmin, userController.findAllUsers);
+  .get(validateToken, validateAdmin, userController.findAllUsers)
+  .post(validateToken, validateAdmin, userController.createAdmin);
 
 module.exports = app;

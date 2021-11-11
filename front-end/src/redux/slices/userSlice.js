@@ -15,7 +15,7 @@ export const slice = createSlice({
         isLogged: true,
         name: payload.name,
         email: payload.email,
-        user: payload.user,
+        role: payload.role,
       };
     },
   },

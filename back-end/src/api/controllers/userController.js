@@ -10,7 +10,7 @@ const createUser = async (req, res) => {
     return res.status(status).json({ data });
   }
   
-  res.status(status).json(user);
+  return res.status(status).json(user);
 };
 
 const login = async (req, res) => {
@@ -31,8 +31,19 @@ const findAllUsers = async (_req, res) => {
   return res.status(status).json(data);
 };
 
+const createAdmin = async (req, res) => {
+  const { status, user, data } = await userService.createUser(req.body);
+
+  if (!user) {
+    return res.status(status).json({ data });
+  }
+  
+  return res.status(status).json(user);
+};
+
 module.exports = {
   login,
   createUser,
   findAllUsers,
+  createAdmin,
 };

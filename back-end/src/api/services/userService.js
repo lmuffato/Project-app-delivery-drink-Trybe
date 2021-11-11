@@ -38,12 +38,14 @@ const createUser = async ({ name, email, password, role }) => {
       role,
     },
   });
-
+  
   if (!created) {
     return ({ status: 409, data: USER_ALREADY_EXIST });
   }
-
-  return ({ status: 201, user });
+  
+  const { password: _, ...userWithoutPassword } = user.dataValues;
+  
+  return ({ status: 201, user: userWithoutPassword });
 };
 
 const login = async ({ email, password }) => {
@@ -66,7 +68,6 @@ const login = async ({ email, password }) => {
 
 const findAllUsers = async () => {
   const allUsers = await User.findAll();
-  // console.log('🚀 ~ file: userService.js ~ line 69 ~ findAllUsers ~ allUsers', allUsers);
 
   if (!allUsers) return ({ status: 404, data: NO_REGISTRED_USERS });
 

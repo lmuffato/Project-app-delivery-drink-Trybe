@@ -26,7 +26,7 @@ export default function Auth() {
     try {
       if (!schemaStatus.valid) throw new Error(schemaStatus.error);
       await api.post('/login', values);
-      history.push('/home');
+      history.push('/customer/products');
     } catch (error) {
       alertType('danger');
       alertMessage(error.message);

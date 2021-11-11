@@ -24,6 +24,13 @@ module.exports = {
         password: '1c37466c159755ce1fa181bd247cb925',
         role: 'customer',
       },
+      {
+        id: 4,
+        name: 'test',
+        email: 'test@email.com',
+        password: 'bf54b1c4f8df323ee9206d456323b2ab', //senha é "test-login" bf54b1c4f8df323ee9206d456323b2ab
+        role: 'administrador',
+      },
       ], { timestamps: false });
   },
 

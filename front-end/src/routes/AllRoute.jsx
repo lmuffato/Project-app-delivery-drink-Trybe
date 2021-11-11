@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import Login from '../components/Login';
+import Login from '../pages/login';
 import Cadastro from '../components/Cadastro';
 import Pedidos from '../components/Pedidos';
 import Produtos from '../components/Produtos';

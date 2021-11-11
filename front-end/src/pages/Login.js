@@ -20,18 +20,35 @@ function Login() {
     <div>
       <input
         type="text"
+        data-testid="common_login__input-email"
         onChange={ (e) => setEmail(e.target.value) }
         value={ email }
         placeholder="email"
       />
 
       <input
+        type="email"
+        data-testid="common_login__input-password"
         onChange={ (e) => setPassword(e.target.value) }
         value={ password }
         placeholder="password"
       />
 
-      <button type="button" onClick={ () => handleClick(email, password) }>Entrar</button>
+      <button
+        type="button"
+        data-testid="common_login__button-login"
+        onClick={ () => handleClick(email, password) }
+      >
+        Entrar
+      </button>
+
+      <button
+        type="button"
+        data-testid="common_login__button-register"
+        // onClick={ () => () }
+      >
+        Registrar-se
+      </button>
     </div>
   );
 }

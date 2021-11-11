@@ -47,7 +47,7 @@ const LoginForm = () => {
           className="btn-login"
           type="button"
           data-testid="login-submit-btn"
-          disabled={ validateEmail(email) && validatePassword(password) }
+          disabled={ !(validateEmail(email) && validatePassword(password)) }
           onClick={ handleClick }
           text="ENTRAR"
         />

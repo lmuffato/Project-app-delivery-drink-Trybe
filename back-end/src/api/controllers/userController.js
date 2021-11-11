@@ -41,9 +41,18 @@ const createAdmin = async (req, res) => {
   return res.status(status).json(user);
 };
 
+const deleteUser = async (req, res) => {
+  const { id } = req.body;
+
+  const { status, data } = await userService.deleteUser(id);
+
+  return res.status(status).json(data);
+};
+
 module.exports = {
   login,
   createUser,
   findAllUsers,
   createAdmin,
+  deleteUser,
 };

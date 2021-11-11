@@ -3,9 +3,11 @@ import { useValidator } from 'react-joi';
 import {
   initialData, schema, explicitCheck,
 } from '../../utils/validateFormRegisterConfigOptions';
+import useManagerUsersContext from '../../hooks/useManagerUsersContext';
 
 const FormRegisterUser = () => {
   const [enableButton, setEnableButton] = useState(true);
+  const { setUser } = useManagerUsersContext();
 
   const {
     state, setData,
@@ -23,6 +25,8 @@ const FormRegisterUser = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     validate();
+    const { name, email, password, role } = state.$data;
+    setUser({ name, email, password, role });
   };
 
   useEffect(() => {

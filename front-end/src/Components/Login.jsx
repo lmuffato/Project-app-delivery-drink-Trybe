@@ -1,6 +1,20 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 export default function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loginButton, setLoginButton] = useState(false);
+
+  useEffect(() => {
+    const validateFields = () => {
+      const sixDigits = 6;
+      const regex = /^[\w.]+@[a-z]+\.\w{2,3}$/g;
+      const resultButton = password.length > sixDigits && regex.test(email);
+      setLoginButton(resultButton);
+    };
+    validateFields();
+  }, [email, password]);
+
   return (
     <div>
       <form>
@@ -11,6 +25,7 @@ export default function Login() {
             type="email"
             id="email"
             placeholder="email@trybeer.com.br"
+            onChange={ (e) => setEmail(e.target.value) }
             required
           />
         </label>
@@ -21,9 +36,13 @@ export default function Login() {
             type="password"
             id="senha"
             placeholder="*********"
+            onChange={ (e) => setPassword(e.target.value) }
+            required
           />
         </label>
         <button
+          variant="primary"
+          disabled={ !loginButton }
           data-testid="common_login__button-login"
           type="button"
         >

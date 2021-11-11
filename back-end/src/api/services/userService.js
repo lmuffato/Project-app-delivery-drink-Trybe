@@ -3,10 +3,9 @@ const md5 = require('md5');
 const jwt = require('jsonwebtoken');
 
 const { User } = require('../../database/models');
-const { 
-  INCORRECT_USERNAME_OR_PASSWORD,
-  ALL_FILDS_FILLED, 
-  USER_ALREADY_EXIST } = require('../messages/errorMessages');
+const {
+  INCORRECT_USERNAME_OR_PASSWORD, ALL_FIELDS_FILLED, USER_ALREADY_EXIST,
+} = require('../messages/errorMessages');
 
 const jwtConfig = {
   expiresIn: '2h',
@@ -49,7 +48,7 @@ const createUser = async ({ name, email, password, role }) => {
 
 const login = async ({ email, password }) => {
   if (!email || !password) {
-    return ({ status: 401, data: ALL_FILDS_FILLED });
+    return ({ status: 401, data: ALL_FIELDS_FILLED });
   }
 
   const hashPassword = md5(password);

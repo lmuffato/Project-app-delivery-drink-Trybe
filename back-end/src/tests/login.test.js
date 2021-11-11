@@ -6,7 +6,7 @@ const { stub } = require('sinon');
 chai.use(chaiHttp);
 
 const server = require('../api/server');
-const { ALL_FILDES_FILLED, INCORRECT_USERNAME_OR_PASSWORD } = require('../messages/errorMessages');
+const { ALL_FIELDS_FILLED, INCORRECT_USERNAME_OR_PASSWORD } = require('../messages/errorMessages');
 
 describe('POST /login', () => {
   let db;
@@ -51,8 +51,8 @@ describe('POST /login', () => {
         expect(response.body).to.have.property('data');
       });
 
-      it(`a propriedade "data" possui o texto "${ALL_FILDES_FILLED}"`, () => {
-        expect(response.body.data).to.be.equal(ALL_FILDES_FILLED);
+      it(`a propriedade "data" possui o texto "${ALL_FIELDS_FILLED}"`, () => {
+        expect(response.body.data).to.be.equal(ALL_FIELDS_FILLED);
       });
     });
 
@@ -77,8 +77,8 @@ describe('POST /login', () => {
         expect(response.body).to.have.property('data');
       });
 
-      it(`a propriedade "data" possui o texto "${ALL_FILDES_FILLED}"`, () => {
-        expect(response.body.data).to.be.equal(ALL_FILDES_FILLED);
+      it(`a propriedade "data" possui o texto "${ALL_FIELDS_FILLED}"`, () => {
+        expect(response.body.data).to.be.equal(ALL_FIELDS_FILLED);
       });
     });
 

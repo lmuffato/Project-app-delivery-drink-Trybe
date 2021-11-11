@@ -21,6 +21,9 @@ module.exports = {
       saleDate: {
         type: Sequelize.DATE
       },
+      updatedAt: {
+        type: Sequelize.DATE
+      },
       status: {
         type: Sequelize.STRING
       },
@@ -34,16 +37,16 @@ module.exports = {
           Key: 'id'
         } 
       },
-      sellerId: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
-        references: {
-          model: 'users',
-          Key: 'id'
-        } 
-      },
+      // sellerId: {
+      //   type: Sequelize.INTEGER,
+      //   allowNull: false,
+      //   onUpdate: 'CASCADE',
+      //   onDelete: 'CASCADE',
+      //   references: {
+      //     model: 'users',
+      //     Key: 'id'
+      //   } 
+      // },
     });
   },
 

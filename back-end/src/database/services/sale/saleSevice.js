@@ -1,6 +1,6 @@
 const validateEntries = (entries) => {
-const { name, totalPrice, deliveryAdress, deliveryNumber, status } = entries;
-  if (!name || !totalPrice || !deliveryAdress || !deliveryNumber || status) {
+const { totalPrice, deliveryAddress, deliveryNumber, status } = entries;
+  if (!totalPrice || !deliveryAddress || !deliveryNumber || !status) {
     return {
     status: 404,
     message: "Entries not found",

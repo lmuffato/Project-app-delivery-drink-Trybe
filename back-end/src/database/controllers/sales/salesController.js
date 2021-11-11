@@ -1,5 +1,5 @@
 const { Sale } = require('../../models');
-const SaleService = require('../../services/users/SaleService');
+const SaleService = require('../../services/sale/saleSevice');
 const rescue = require('express-rescue');
 
 const getSale = rescue(async (_req, res) => {
@@ -8,10 +8,12 @@ const getSale = rescue(async (_req, res) => {
 });
 
 const create = rescue(async (req, res) => {
-  const { totalPrice, deliveryAdress, deliveryNumber, status } = req.body;
-  const newSale = SaleService.validateEntries({ totalPrice, deliveryAdress, deliveryNumber, status });
+  const { totalPrice, deliveryAddress, deliveryNumber, status } = req.body;
+  const { id } = req.user
+  console.log(id);
+  const newSale = SaleService.validateEntries({ totalPrice, deliveryAddress, deliveryNumber, status });
   if (newSale.message) return res.status(newSale.status).json({ message: newSale.message });
-  const createdSale = await Sale.create({ totalPrice, deliveryAdress, deliveryNumber, status });
+  const createdSale = await Sale.create({ totalPrice, deliveryAddress, deliveryNumber, status, userId: id });
   res.status(200).json(createdSale);
 });
 

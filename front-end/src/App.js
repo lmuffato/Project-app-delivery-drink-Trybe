@@ -1,15 +1,9 @@
 import React from 'react';
 import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import UsersProvider from './context/Users/UsersProvider';
-import Router from './components/Router';
+import Routes from './routes/routes';
 
 function App() {
-  return (
-    <UsersProvider>
-      <Router />
-    </UsersProvider>
-  );
+  return <Routes />;
 }
 
 export default App;

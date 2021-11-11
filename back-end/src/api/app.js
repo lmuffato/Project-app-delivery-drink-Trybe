@@ -10,7 +10,7 @@ const saleController = require('../database/controllers/sales/salesController');
 const loginController = require('../database/controllers/login/loginController');
 const validateToken = require('../database/services/login/validateToken');
 const saleProductController = require(
-  '../database/controllers/salesProducts/salesProductsController'
+  '../database/controllers/salesProducts/salesProductsController',
 );
 
 app.get('/coffee', (_req, res) => res.status(418).end());

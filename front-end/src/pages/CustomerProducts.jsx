@@ -24,7 +24,9 @@ function ClientProducts() {
       <Row xs={ 1 } md={ 2 } className="g-4">
         {
           productList.map((prod) => (
-            <ProductCard className="productCard" key={ prod.name } product={ prod } />
+            <div key={ prod.name } className="productCard">
+              <ProductCard className="productCard" product={ prod } />
+            </div>
           ))
         }
       </Row>

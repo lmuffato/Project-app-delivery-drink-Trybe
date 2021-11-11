@@ -3,6 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import imgManHoldingBeer from '../images/man-holding-beer.png';
 import useInputs from '../hooks/useInputs';
 import loginSchema from '../schemas/login';
+import styles from '../styles/pages/Auth.module.scss';
 
 export default function Auth() {
   const [values, setInputs] = useInputs({ email: '', password: '' });
@@ -25,8 +26,13 @@ export default function Auth() {
   }
 
   return (
-    <>
-      <img src={ imgManHoldingBeer } alt="Homem sorrindo e segurando caneca de cerveja" />
+    <section className={ styles.auth }>
+      <span className={ styles.manHoldingBeer }>
+        <img
+          src={ imgManHoldingBeer }
+          alt="Homem sorrindo e segurando caneca de cerveja"
+        />
+      </span>
       <img src="./logo-compact.svg" alt="tchau problema" />
       <form onSubmit={ logIn }>
         <label htmlFor="email">
@@ -49,11 +55,18 @@ export default function Auth() {
             data-testid="common_login__input-password"
           />
         </label>
-        <button type="submit" data-testid="common_login__button-login">Entrar</button>
+        <button
+          type="submit"
+          data-testid="common_login__button-login"
+          className="primary"
+        >
+          Entrar
+
+        </button>
         <Link to="/register" data-testid="common_login__button-register">
           Ainda não tenho conta
         </Link>
       </form>
-    </>
+    </section>
   );
 }

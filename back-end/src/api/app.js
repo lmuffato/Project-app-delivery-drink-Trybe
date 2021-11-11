@@ -4,6 +4,7 @@ const cors = require('cors');
 const { userController, productsController } = require('./controllers');
 
 const newUserAuthentication = require('./middleware/validateNewUser');
+const { validateAdmin } = require('./middleware/validateAdmin');
 const { validateToken } = require('./auth/validateToken');
 
 const app = express();
@@ -18,5 +19,8 @@ app.post('/login', userController.login);
 app.get('/products', validateToken, productsController.findAllProducts);
 
 app.post('/register', newUserAuthentication, userController.createUser);
+
+app.route('/admin')
+  .get(validateToken, validateAdmin, userController.findAllUsers);
 
 module.exports = app;

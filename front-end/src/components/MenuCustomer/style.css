@@ -36,7 +36,7 @@ a.active:after {
   background: #ed7c2b;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
-  bottom: 0px;
+  bottom: 0;
   content: '';
   height: 8px;
   left: 0;
@@ -47,8 +47,8 @@ a.active:after {
 .beerProducts {
   color: white;
   font-size: 4rem;
-  margin-top: 0.5rem;
   margin-left: 3rem;
+  margin-top: 0.5rem;
 }
 
 .userInfo {

@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const crypto = require('crypto');
 const { User } = require('../../models');
 
 const SECRET = require('fs')
@@ -39,7 +40,8 @@ const validateLogin = (email, password) => {
 };
 
 const validateCredentials = async (email, password) => {
-  const user = await User.findOne({ where: { email, password } });
+  const md5Password = crypto.createHash('md5').update(password).digest('hex'); 
+  const user = await User.findOne({ where: { email, password: md5Password } });
   if (!user) return USER_INVALID;
 };
 

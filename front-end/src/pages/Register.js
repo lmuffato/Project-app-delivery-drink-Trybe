@@ -1,17 +1,24 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { saveUser } from '../redux/slices/userSlice';
+import { validateAll, renderError } from '../components/ultility';
 
 export default function Register() {
   const [emailInput, setEmail] = useState('');
   const [passwordInput, setPassword] = useState('');
   const [nameInput, setName] = useState('');
   const [error, setError] = useState(false);
+  const [isValid, setIsValid] = useState(false);
 
   const history = useHistory();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const sucessValidate = validateAll(nameInput, emailInput, passwordInput);
+    setIsValid(sucessValidate);
+  }, [nameInput, emailInput, passwordInput]);
 
   const handleButtonClick = async (e) => {
     e.preventDefault();
@@ -62,13 +69,14 @@ export default function Register() {
           />
         </label>
         <button
+          disabled={ !isValid }
           type="submit"
           onClick={ (e) => handleButtonClick(e) }
           data-testid="common_register__button-register"
         >
           Enviar
         </button>
-        { error ? <p>Erro ao cadastrar</p> : null }
+        { renderError(error) }
       </form>
     </main>
   );

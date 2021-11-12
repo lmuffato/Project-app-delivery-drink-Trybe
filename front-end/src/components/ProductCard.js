@@ -1,12 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-/**
-- 18: <id>
-- 19: <id>
-- 20:
-*/
-
 function ProductCard({ product }) {
   return (
     <div>

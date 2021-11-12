@@ -1,3 +1,4 @@
+const productsSaleSchema = require('../schemas/productsSale');
 /**
  * @param {import('sequelize').Sequelize} sequelize 
  * @param {import('sequelize').DataTypes} DataTypes 
@@ -10,13 +11,13 @@
       as: 'products',
       through: ProductsSale,
       foreignKey: 'productId',
-      otherKey: 'saleId',
+      otherKey: 'saleId'
     });
     models.sale.belongsToMany(models.product, {
       as: 'sales',
       through: ProductsSale,
       foreignKey: 'saleId',
-      otherKey: 'productId',
+      otherKey: 'productId'
     });
   };
   return ProductsSale;

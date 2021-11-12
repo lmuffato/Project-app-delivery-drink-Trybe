@@ -1,8 +1,9 @@
 'use strict';
+const productSchema = require('../schemas/product');
 module.exports = {
   /**
    * @param {import('sequelize').QueryInterface} queryInterface 
-   * @param {import('sequelize').DataTypes} Sequelize 
+   * @param {import('sequelize').DataTypes} DataTypes 
    */
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('products', {

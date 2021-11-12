@@ -1,7 +1,7 @@
+const productSchema = require('../schemas/product')
 /**
  * @param {import('sequelize').Sequelize} sequelize 
  * @param {import('sequelize').DataTypes} DataTypes 
- * @return 
  */
  module.exports = (sequelize, DataTypes) => {
   const Product = sequelize.define('product', {

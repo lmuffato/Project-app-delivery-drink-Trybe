@@ -1,3 +1,4 @@
+const salesSchema = require('../schemas/sale');
 /**
  * @param {import('sequelize').Sequelize} sequelize 
  * @param {import('sequelize').DataTypes} DataTypes 

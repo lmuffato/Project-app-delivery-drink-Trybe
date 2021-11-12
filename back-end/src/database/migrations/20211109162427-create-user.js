@@ -1,8 +1,9 @@
 'use strict';
+const userSchema = require('../schemas/user');
 module.exports = {
   /**
    * @param {import('sequelize').QueryInterface} queryInterface 
-   * @param {import('sequelize').DataTypes} Sequelize 
+   * @param {import('sequelize').DataTypes} DataTypes 
    */
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('users', {

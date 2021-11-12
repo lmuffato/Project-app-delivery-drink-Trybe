@@ -39,8 +39,8 @@ const getById = async (req, res) => {
 const updateById = async (req, res) => {
   try {
     const { id } = req.params;
-    const { user_id, total_price, delivery_address, delivery_number, status, sale_date } = req.body;
-    const obj = { user_id, total_price, delivery_address, delivery_number, status, sale_date };
+    const { userId, totalPrice, deliveryAddress, deliveryNumber, status, saleDate } = req.body;
+    const obj = { userId, totalPrice, deliveryAddress, deliveryNumber, status, saleDate };
     await sales.update(obj, { where: { id } });
   return res.status(200).json(obj);
   } catch (err) {
@@ -64,22 +64,16 @@ const deleteById = async (req, res) => {
 //   return newObj;
 // };
 
-
-
-const createNew = async (req, res, next) => {
+const createNew = async (req, res) => {
   try {
     const {
-      user_id,
-      total_price,
-      delivery_address,
-      delivery_number,
-      status,
+      userId, totalPrice, deliveryAddress, deliveryNumber, status,
     } = req.body;
     const obj = {
-      user_id,
-      total_price,
-      delivery_address,
-      delivery_number,
+      userId,
+      totalPrice,
+      deliveryAddress,
+      deliveryNumber,
       status,
     };
     await sales.create(obj);
@@ -88,7 +82,6 @@ const createNew = async (req, res, next) => {
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }
-  next();
 };
 
 module.exports = {

@@ -38,8 +38,8 @@ const getById = async (req, res) => {
 const updateById = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, price, url_image } = req.body;
-    const obj = { name, price, url_image };
+    const { name, price, urlImage } = req.body;
+    const obj = { name, price, urlImage };
     await products.update(obj, { where: { id } });
   return res.status(200).json(obj);
   } catch (err) {
@@ -58,17 +58,16 @@ const deleteById = async (req, res) => {
   }
 };
 
-const createNew = async (req, res, next) => {
+const createNew = async (req, res) => {
   try {
-    const { name, price, url_image } = req.body;
-    const obj = { name, price, url_image };
+    const { name, price, urlImage } = req.body;
+    const obj = { name, price, urlImage };
     await products.create(obj);
     const newData = await products.create(obj);
     return res.status(201).json(newData);
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }
-  next();
 };
 
 module.exports = {

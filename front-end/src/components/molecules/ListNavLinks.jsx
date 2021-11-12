@@ -4,30 +4,40 @@ import { Link, useHistory } from 'react-router-dom';
 const ListNavLinks = () => {
   const history = useHistory();
 
-  const TogleActive = () => {
+  const ToggleActive = () => {
     const { location: { pathname } } = history;
 
     const productsLink = document.querySelector('.products-nav-link');
     const salesLink = document.querySelector('.sales-nav-link');
-    const pathWithoutBar = pathname.substr(1);
 
     if (pathname === '/products') {
-      productsLink.className = `nav-link ${pathWithoutBar}-nav-link active`;
-      salesLink.className = `nav-link ${pathWithoutBar}-nav-link`;
+      productsLink.classList.add('active');
+      salesLink.classList.remove('active');
     }
 
     if (pathname === '/sales') {
-      salesLink.className = `nav-link ${pathWithoutBar}-nav-link active`;
-      productsLink.className = `nav-link ${pathWithoutBar}-nav-link`;
+      salesLink.classList.add('active');
+      productsLink.classList.remove('active');
     }
   };
 
   useEffect(() => {
-    TogleActive();
+    ToggleActive();
   });
 
   return (
     <div className="collapse navbar-collapse" id="navbarNav">
+      <button
+        className="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span className="navbar-toggler-icon" />
+      </button>
       <ul className="navbar-nav">
         <li className="nav-item">
           <Link

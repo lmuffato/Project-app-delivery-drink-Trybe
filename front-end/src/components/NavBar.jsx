@@ -12,17 +12,6 @@ export default function NavBar() {
           <MdDeliveryDining className="deliveryIcon" />
           <p>Delivery App</p>
         </Link>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon" />
-        </button>
         <ListNavLinks />
         <Link className="navbar-brand" to="users/:id">Fulano de Tal</Link>
         <Link className="navbar-brand" to="/login">sair</Link>

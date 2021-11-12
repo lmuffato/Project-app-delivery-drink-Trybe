@@ -11,9 +11,15 @@ function App() {
         <Route path="/" element={ <Navigate replace to="/login" /> } />
       </Route>
       <Route
+        exact
         path="/login"
-        element={ <LoginProvider><Login /></LoginProvider> }
+        element={
+          <LoginProvider>
+            <Login />
+          </LoginProvider>
+        }
       />
+      <Route exact path="/teste" element={ <h1>Teste</h1> } />
     </Routes>
   );
 }

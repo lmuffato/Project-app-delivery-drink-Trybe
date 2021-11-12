@@ -49,7 +49,7 @@ function SignUp() {
           name.length < nameMinLength && 'Nome deve ter mais de 12 caracteres'
         }
         inputProps={ {
-          'data-testid': "common_register__input-name"
+          'data-testid': 'common_register__input-name',
         } }
       />
       <TextField
@@ -64,7 +64,7 @@ function SignUp() {
           !(emailRegex.test(email)) && 'Email deve ser email@email.com'
         }
         inputProps={ {
-          'data-testid': "common_register__input-email"
+          'data-testid': 'common_register__input-email',
         } }
       />
       <TextField
@@ -79,7 +79,7 @@ function SignUp() {
           password.length < passwordMinLength && 'Senha deve ter mais de 6 digitos'
         }
         inputProps={ {
-          'data-testid': "common_register__input-password"
+          'data-testid': 'common_register__input-password',
         } }
       />
       <Button

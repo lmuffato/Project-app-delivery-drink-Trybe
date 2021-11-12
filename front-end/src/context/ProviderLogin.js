@@ -29,7 +29,7 @@ function ProviderLogin({ children }) {
     try {
       await axios.post(`${urlBase}/register`, { name, email, password });
       return true;
-    } catch(error) {
+    } catch (error) {
       setSignUpErrorMessage(true);
       return false;
     }

@@ -9,7 +9,7 @@ function ProviderLogin({ children }) {
   const [user, setUser] = useState([]);
   const [token, setToken] = useState('');
   const [signUpErrorMessage, setSignUpErrorMessage] = useState(false);
-  const urlBase = 'http://localhost:3000';
+  const urlBase = 'http://localhost:3001';
 
   // ---------------------------------------------/---------------------------------------------------------------//
 
@@ -35,7 +35,7 @@ function ProviderLogin({ children }) {
     });
 
     if (message) {
-      console.log(message)
+      console.log(message);
     }
 
     if (error) {

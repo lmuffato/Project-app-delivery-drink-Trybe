@@ -8,20 +8,20 @@ function ProductCard({ product }) {
   const { order, setOrder } = useContext(OrderContext);
   const [quantity, setQuantity] = useState(0);
 
+  function handleClic(e) {
+    if (e.target.innerText === '-' && quantity > 0) {
+      setQuantity(quantity - 1);
+    } else if (e.target.innerText === '+') {
+      setQuantity(quantity + 1);
+    }
+  }
+
   function handleOrder() {
     if (!order.find((item) => item.name === product.name)) {
       setOrder([...order, { name: product.name, price: product.price, quantity }]);
     } else {
       const index = order.findIndex((item) => item.name === product.name);
       setOrder([...order, order[index].quantity = quantity]);
-    }
-  }
-
-  function handleClic(e) {
-    if (e.target.innerText === '-' && quantity > 0) {
-      setQuantity(quantity - 1);
-    } else if (e.target.innerText === '+') {
-      setQuantity(quantity + 1);
     }
   }
 

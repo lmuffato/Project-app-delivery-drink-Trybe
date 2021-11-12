@@ -13,7 +13,7 @@ function CheckoutBtn() {
         .reduce((sum, cur) => (cur.price ? sum + (cur.price * cur.quantity) : sum), 0));
     }
     sumPrice();
-  }, [order]);
+  }, [order, setTotalPrice]);
 
   function handleClick() {
     history.push('/customer/checkout');

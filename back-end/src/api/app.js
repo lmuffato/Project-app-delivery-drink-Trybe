@@ -2,9 +2,9 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
-const loginRouter = require('../router/loginRouter');
-const userRouter = require('../router/userRouter');
-const registerRouter = require('../router/registerRouter');
+const loginRouter = require('./router/loginRouter');
+const userRouter = require('./router/userRouter');
+const registerRouter = require('./router/registerRouter');
 
 const app = express();
 

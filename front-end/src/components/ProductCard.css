@@ -4,7 +4,6 @@
   width: 30px;
 }
 
-input::-webkit-outer-spin-button, 
-input::-webkit-inner-spin-button {
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
   appearance: none;
 }

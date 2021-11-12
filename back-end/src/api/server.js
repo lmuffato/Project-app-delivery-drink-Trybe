@@ -7,6 +7,7 @@ app.use(bodyParser.json());
 const server = require('http').createServer(app);
 
 const port = 3001;
+
 const io = require('socket.io')(server, {
   cors: {
     origin: 'http://localhost:3000',

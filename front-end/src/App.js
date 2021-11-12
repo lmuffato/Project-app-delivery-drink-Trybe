@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import Login from './pages/Login';
 import CustomerProducts from './pages/CustomerProducts';
+import Register from './pages/Register';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           </Route>
           <Route exact path="/login" component={ Login } />
           <Route exact path="/customer/products" component={ CustomerProducts } />
+          <Route path="/register" component={ Register } />
         </Switch>
       </BrowserRouter>
     </div>

@@ -1,10 +1,21 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './ProductCard.css';
 import PropTypes from 'prop-types';
 import { Card, Button } from 'react-bootstrap';
+import OrderContext from '../contexts/OrderContext';
 
 function ProductCard({ product }) {
+  const { order, setOrder } = useContext(OrderContext);
   const [quantity, setQuantity] = useState(0);
+
+  function handleOrder() {
+    if (!order.find((item) => item.name === product.name)) {
+      setOrder([...order, { name: product.name, price: product.price, quantity }]);
+    } else {
+      const index = order.findIndex((item) => item.name === product.name);
+      setOrder([...order, order[index].quantity = quantity]);
+    }
+  }
 
   function handleClic(e) {
     if (e.target.innerText === '-' && quantity > 0) {
@@ -13,6 +24,10 @@ function ProductCard({ product }) {
       setQuantity(quantity + 1);
     }
   }
+
+  useEffect(() => {
+    handleOrder();
+  }, [quantity]);
 
   return (
     <Card border="info" style={ { width: '12rem', alignItems: 'center' } }>
@@ -60,7 +75,7 @@ function ProductCard({ product }) {
 }
 
 ProductCard.propTypes = {
-  product: PropTypes.objectOf(PropTypes.string).isRequired,
+  product: PropTypes.shape().isRequired,
 };
 
 export default ProductCard;

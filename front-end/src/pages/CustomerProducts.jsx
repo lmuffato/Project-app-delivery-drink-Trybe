@@ -4,6 +4,7 @@ import './CustomerProducts.css';
 import axios from 'axios';
 import CustomerNavBar from '../components/CustomerNavBar';
 import ProductCard from '../components/ProductCard';
+import CheckoutBtn from '../components/CheckoutBtn';
 
 function ClientProducts() {
   const [productList, setProductList] = useState([]);
@@ -30,6 +31,7 @@ function ClientProducts() {
           ))
         }
       </Row>
+      <CheckoutBtn />
     </div>
   );
 }

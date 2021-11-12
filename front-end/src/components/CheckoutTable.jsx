@@ -5,77 +5,60 @@ export default function CheckoutTable() {
     <table>
       <thead>
         <tr>
-          <th
-            // data-testid={
-            //   `customer_checkout__element-order-table-item-number-${index} `
-            // }
-            className="th-item"
-          >
-            Item
-          </th>
+          <th className="th-item">Item</th>
           <th>Descrição</th>
-          <th
-            // data-testid={
-            //   `customer_checkout__element-order-table-quantity-${index} `
-            // }
-            className="th-quantity"
-          >
-            Quantidade
-          </th>
-          <th
-            // data-testid={
-            //   `customer_checkout__element-order-table-unit-price-${index} `
-            // }
-            className="th-unit-price"
-          >
-            Valor Unitário
-          </th>
-          <th
-            // data-testid={
-            //   `customer_checkout__element-order-table-sub-total-${index} `
-            // }
-            className="th-sub-total"
-          >
-            Sub-total
-          </th>
-          <th
-            // data-testid={
-            //   `customer_checkout__element-order-table-remove-${index} `
-            // }
-            className="th-remove"
-          >
-            Remover Item
-          </th>
+          <th className="th-quantity">Quantidade</th>
+          <th className="th-unit-price">Valor Unitário</th>
+          <th className="th-sub-total">Sub-total</th>
+          <th className="th-remove">Remover Item</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td
+            data-testid={
+              `customer_checkout__element-order-table-item-number-${0}`
+            }
             className="td-item"
           >
             1
           </td>
           <td
+            data-testid={
+              `customer_checkout__element-order-table-name-${0}`
+            }
             className="td-description"
           >
             Cerveja Stella 250ml
           </td>
           <td
+            data-testid={
+              `customer_checkout__element-order-table-quantity-${0}`
+            }
             className="td-quantity"
           >
             3
           </td>
           <td
+            data-testid={
+              `customer_checkout__element-order-table-unit-price-${0}`
+            }
             className="td-unit-price"
           >
             R$ 3,50
           </td>
           <td
+            data-testid={
+              `customer_checkout__element-order-table-sub-total-${0}`
+            }
             className="td-subtotal"
           >
             R$ 10,50
           </td>
           <td
+            data-testid={
+              `customer_checkout__element-order-table-remove-${0}`
+            }
             className="td-remove"
           >
             Remover

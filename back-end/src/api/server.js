@@ -23,7 +23,7 @@ const corsOptions = {
   methods: ['GET', 'POST'],
 };
 
-// require('../sockets/login')(io);
+require('../sockets/login')(io);
 
 app.use(cors(corsOptions));
 

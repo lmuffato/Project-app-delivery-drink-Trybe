@@ -1,26 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../styles/NavBar.css';
 import { MdDeliveryDining } from 'react-icons/md';
-
-const list = () => (
-  <div className="collapse navbar-collapse" id="navbarNav">
-    <ul className="navbar-nav">
-      <li className="nav-item">
-        <Link
-          className="nav-link active"
-          aria-current="page"
-          to="/products"
-        >
-          PRODUTOS
-        </Link>
-      </li>
-      <li className="nav-item">
-        <Link className="nav-link" to="/sales">MEUS PEDIDOS</Link>
-      </li>
-    </ul>
-  </div>
-);
+import ListNavLinks from './molecules/ListNavLinks';
+import '../styles/NavBar.css';
 
 export default function NavBar() {
   return (
@@ -41,7 +23,7 @@ export default function NavBar() {
         >
           <span className="navbar-toggler-icon" />
         </button>
-        {list()}
+        <ListNavLinks />
         <Link className="navbar-brand" to="users/:id">Fulano de Tal</Link>
         <Link className="navbar-brand" to="/login">sair</Link>
       </div>

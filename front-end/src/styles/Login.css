@@ -11,6 +11,7 @@
   align-items: center;
   background-color: rgb(238, 238, 238);
   border-radius: 30px;
+  box-shadow: 2px 3px 20px -4px black;
   display: flex;
   flex-direction: column;
   height: 600px;
@@ -62,6 +63,7 @@
   background-color: whitesmoke;
   border: none;
   border-radius: 8px;
+  caret-color: #2fc18c;
   height: 52px;
   margin-top: 50px;
   outline-color: #2fc18c;
@@ -87,4 +89,5 @@
 
 .btn-login:disabled {
   background-color: silver;
+  cursor: not-allowed;
 }

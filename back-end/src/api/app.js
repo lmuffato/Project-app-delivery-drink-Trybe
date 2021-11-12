@@ -2,10 +2,14 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const errorHandler = require('./middlewares/errorHandler');
 const userController = require('./controllers/userController');
+const cors = require('cors')
 
 const app = express();
 
 app.use(bodyParser.json());
+
+app-use(cors())
+
 
 app.get('/', (req, res) => {
   res.status(200).send('OK FUNCIONANDO');

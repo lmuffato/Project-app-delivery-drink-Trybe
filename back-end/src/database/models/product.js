@@ -3,6 +3,8 @@ module.exports = (sequelize, DataTypes) => {
     "Product",
     {
       name: DataTypes.STRING,
+      url_image: DataTypes.STRING,
+      price: DataTypes.INTEGER,
     },
     {
       timestamps: false,
@@ -13,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   Product.associate = (models) => {
     Product.hasMany(models.SaleProduct, {
       foreignKey: "productId",
-      as: "SaleProduct",
+      as: "SaleProducts",
     });
   };
 

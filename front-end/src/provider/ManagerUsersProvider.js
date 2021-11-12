@@ -22,7 +22,7 @@ function ManagerUsersProvider({ children }) {
       setUsers((prev) => [...prev, { name, email, password: passwordHash, role }]);
     }
   }, [user]);
-  console.log(users);
+
   return (
     <ManagerUsersContext.Provider value={ { ...consumer } }>
       { children }

@@ -8,15 +8,13 @@ const { expect } = chai;
 
 const app = require('../../api/app');
 
-const consoleLogStub = stub(console, 'log');
-
-before(() => consoleLogStub.returns(true));
-after(() => consoleLogStub.restore());
-
 describe('Rota POST /login', () => {
-  describe('Quando os dados do `email` não são válidos', () => {
-    let postLogin;
+  before(() => stub(console, 'log').returns(true));
+  after(() => console.log.restore());
 
+  let postLogin;
+
+  describe('Quando os dados do `email` não são válidos', () => {
     before(async () => {
       try {
         postLogin = await chai.request(app)
@@ -44,8 +42,6 @@ describe('Rota POST /login', () => {
   });
 
   describe('Quando os dados do `password` não são válidos', () => {
-    let postLogin;
-
     before(async () => {
       try {
         postLogin = await chai.request(app)
@@ -73,15 +69,13 @@ describe('Rota POST /login', () => {
   });
 
   describe('Quando o `email` não existe no banco', () => {
-    let postLogin;
-
     before(async () => {
       try {
         postLogin = await chai.request(app)
           .post('/login')
           .send({
-            email: "gabriel@gmail.com",
-            password: "123456"
+            email: "renato@gmail.com",
+            password: "xablau@97"
           });
       } catch (e) {
         console.error(e.message);
@@ -102,8 +96,6 @@ describe('Rota POST /login', () => {
   });
 
   describe('Quando a `senha` for inválida', () => {
-    let postLogin;
-
     before(async () => {
       try {
         postLogin = await chai.request(app)
@@ -131,8 +123,6 @@ describe('Rota POST /login', () => {
   });
 
   describe('Quando o `email` e a `senha` são válidos', () => {
-    let postLogin;
-
     before(async () => {
       try {
         postLogin = await chai.request(app)

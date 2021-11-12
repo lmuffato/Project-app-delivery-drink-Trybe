@@ -28,11 +28,11 @@
 }
 
 
-.linksContainer  > a.active {
+a.active {
   color: #ed7c2b;
 }
 
-.linksContainer  > a.active:after {
+a.active:after {
   background: #ed7c2b;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;

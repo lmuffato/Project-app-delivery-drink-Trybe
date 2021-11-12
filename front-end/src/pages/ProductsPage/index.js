@@ -9,12 +9,10 @@ const ProductsPage = () => {
   const { products, setProducts } = useContext(ContextProduct);
   const [isLoading, setIsLoading] = React.useState(false);
 
-  
   useEffect(() => {
     const fetchProducts = async () => {
       setIsLoading(true);
       const productsArray = await api.getProducts();
-  
       setProducts(productsArray);
       setIsLoading(false);
     };

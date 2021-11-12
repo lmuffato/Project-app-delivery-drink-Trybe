@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import ContextDeliveryApp from './ContextDeliveryApp';
 
 export default function Provider({ children }) {
-  const [token, setToken] = useState('');
+  const [user, setUser] = useState({});
 
-  const contextValue = { token, setToken };
+  const contextValue = { user, setUser };
 
   return (
     <ContextDeliveryApp.Provider value={ contextValue }>

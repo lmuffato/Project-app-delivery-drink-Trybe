@@ -4,11 +4,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import TextInput from './TextInput';
 import Context from '../context/Context';
 import regex from '../utils/regex';
+import errorMap from '../utils/errorMap';
 
 function LoginForm() {
   const { handleChange, submitChange, setUser, user } = useContext(Context);
   const navigate = useNavigate();
-  const [invalidLogin, setInvalidLogin] = useState(true);
+  const [invalidLogin, setInvalidLogin] = useState();
   const [disableButton, setDisableButton] = useState(true);
 
   useEffect(() => {
@@ -29,15 +30,16 @@ function LoginForm() {
 
   const handleSubmit = async (e) => {
     try {
-      setInvalidLogin(true);
+      setInvalidLogin(null);
       const { data } = await submitChange(e, 'login_form');
 
       if (data.token) {
         localStorage.setItem('token', data.token);
-        navigate('/customer/orders');
+        navigate('/customer/products');
       }
-    } catch (error) {
-      setInvalidLogin(false);
+    } catch ({ response }) {
+      const { status } = response;
+      setInvalidLogin(errorMap[status || '500']);
     }
   };
 
@@ -54,16 +56,16 @@ function LoginForm() {
         <TextInput
           name="password"
           type="password"
-          dataTestId="common_login__input-pasword"
+          dataTestId="common_login__input-password"
           onChange={ handleChange }
           placeholder="password"
         />
 
         <span
-          hidden={ invalidLogin }
+          hidden={ !invalidLogin }
           data-testid="common_login__element-invalid-email"
         >
-          * Dados inválidos
+          { invalidLogin }
         </span>
 
         <button
@@ -82,14 +84,14 @@ function LoginForm() {
           Esqueceu a senha?
         </Link>
 
-        <Link
-          to="/register"
+        <button
+          type="button"
+          onClick={ () => navigate('/register') }
           className="input"
           data-testid="common_login__button-register"
         >
           Cadastre-se
-
-        </Link>
+        </button>
 
       </form>
     </div>

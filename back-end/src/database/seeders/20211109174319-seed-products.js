@@ -4,7 +4,7 @@ module.exports = {
   /**
    * @param {import('sequelize').QueryInterface} queryInterface
    */
-  up: (queryInterface) => queryInterface.bulkInsert('Products', 
+  up: (queryInterface) => queryInterface.bulkInsert('products', 
     [
       {
         id: 1,
@@ -74,9 +74,5 @@ module.exports = {
       },
     ], {}),
 
-<<<<<<< HEAD
   down: (queryInterface) => queryInterface.bulkDelete('products', null, {}),
-=======
-  down: (queryInterface) => queryInterface.bulkDelete('Products', null, {}),
->>>>>>> main-group-11-fix-sequelize
 };

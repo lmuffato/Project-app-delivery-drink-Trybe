@@ -5,9 +5,9 @@ const userSchema = require('../schemas/user');
  * @return 
  */
  module.exports = (sequelize, DataTypes) => {
-  const User = sequelize.define('User', userSchema(DataTypes), { timestamps: false });
-  User.associate = (models) => {
-    User.hasMany(models.sale);
+  const user = sequelize.define('user', userSchema(DataTypes), { timestamps: false });
+  user.associate = (models) => {
+    user.hasMany(models.sale);
   };
-  return User;
+  return user;
 };

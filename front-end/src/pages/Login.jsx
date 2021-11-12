@@ -13,6 +13,7 @@ function Login() {
   const { email, password } = userData;
   const validateEmail = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(email);
   const minPasswordLength = 5;
+  const id = 'common_login__element-invalid-email [Elemento oculto (Mensagens de erro)]';
 
   return (
     <main>
@@ -55,7 +56,7 @@ function Login() {
         </button>
         <br />
         <span
-          data-testid="common_login__element-invalid-email"
+          data-testid={ id }
         >
           possivel erro
         </span>

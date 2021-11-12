@@ -27,7 +27,7 @@ function Register({ history }) {
     setRegisterError('');
     const response = await fetchRegister(name, email, password);
     setRegisterError(response.message);
-    if (response) return history.push('/customer/products');
+    if (!response.message) return history.push('/customer/products');
   };
 
   return (

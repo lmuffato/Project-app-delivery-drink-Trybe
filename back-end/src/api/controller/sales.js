@@ -1,5 +1,5 @@
 const {
-  StatusCodes: { _CREATED, OK, INTERNAL_SERVER_ERROR, NOT_FOUND },
+  StatusCodes: { CREATED, OK, INTERNAL_SERVER_ERROR, NOT_FOUND },
 } = require('http-status-codes');
 // const { verify } = require('jsonwebtoken');
 
@@ -38,23 +38,15 @@ const getSalesById = async (req, res, next) => {
 
 const createSale = async (req, res, next) => {
   try {
-    const params = { 
-      totalPrice, 
-      deliveryAddress, 
-      deliveryNumber, 
-      status, 
-      saleDate, 
-      userId, 
-      sellerId, 
-      data } = req.body;
-
+    const params = req.body;
     const sale = await Sale.create(params);
-    data.forEach(async product => {
+    const { data } = params;
+    data.forEach(async (product) => {
     const { id: saleId } = sale.dataValues;
     const { productId, quantity } = product;
-    await ProductsSale.create({ productId, quantity, saleId })
+    await ProductsSale.create({ productId, quantity, saleId });
   });
-    res.status(OK).json(sale);
+    res.status(CREATED).json(sale);
   } catch (e) {
     next({ statusCode: INTERNAL_SERVER_ERROR, message: e.message });
   }
@@ -64,4 +56,13 @@ module.exports = {
   getAllSales,
   getSalesById,
   createSale,
-}
+};
+
+// totalPrice, 
+//       deliveryAddress, 
+//       deliveryNumber, 
+//       status, 
+//       saleDate, 
+//       userId, 
+//       sellerId, 
+//       data

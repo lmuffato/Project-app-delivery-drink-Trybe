@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const path = require('path');
-const segredo = require('fs').readFileSync(
-  path.join(__dirname, '../../../jwt.evaluation.key'), { encoding: 'utf-8' }).trim();
+const segredo = require('fs')
+.readFileSync(path.join(__dirname, '../../../jwt.evaluation.key'), { encoding: 'utf-8' }).trim();
 
 module.exports = async (req, res, next) => {
   const { authorization } = req.headers;

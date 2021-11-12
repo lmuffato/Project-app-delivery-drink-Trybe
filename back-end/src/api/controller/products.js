@@ -1,5 +1,5 @@
 const {
-  StatusCodes: { _CREATED, OK, INTERNAL_SERVER_ERROR },
+  StatusCodes: { OK, INTERNAL_SERVER_ERROR },
 } = require('http-status-codes');
 
 const { Product } = require('../../database/models');

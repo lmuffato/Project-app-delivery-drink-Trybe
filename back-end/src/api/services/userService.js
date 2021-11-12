@@ -48,7 +48,7 @@ const createUser = async ({ name, email, password, role }) => {
 
 const login = async ({ email, password }) => {
   if (!email || !password) {
-    return ({ status: 401, data: ALL_FIELDS_FILLED });
+    return ({ status: 404, data: ALL_FIELDS_FILLED });
   }
 
   const hashPassword = md5(password);

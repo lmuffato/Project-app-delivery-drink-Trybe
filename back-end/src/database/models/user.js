@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     onUpdate: DataTypes.STRING,
     onDelete: DataTypes.STRING
   }, {
-    tableName: 'Users',
+    tableName: 'users',
     timestamps: false,
   });
 

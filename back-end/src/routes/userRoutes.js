@@ -3,6 +3,6 @@ const userController = require('../controllers/User');
 
 const routes = express.Router();
 
-routes.post('/admin', userController.createUser);
+routes.post('/', userController.createUser);
 
 module.exports = routes;

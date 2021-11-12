@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
-// import UserContext from '../context/ApiContext';
+import React, { useEffect, useState, useContext } from 'react';
+import UserContext from '../context/UserContext';
 import { setLogin } from '../services/apis';
 
 function Login() {
   const PASSWORD_LENGTH = 6;
 
-  // const { users, setAtt, att } = useContext(UserContext);
+  const { setLoggedUser } = useContext(UserContext);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -21,7 +21,7 @@ function Login() {
   const loginButton = async () => {
     try {
       const loginUser = await setLogin(email, password);
-      console.log(loginUser);
+      setLoggedUser(loginUser);
       setErrorMessage(false);
     } catch (error) {
       setErrorMessage(true);

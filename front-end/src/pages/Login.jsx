@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import { LoginContext } from '../contexts/Login';
 
 const minPassLength = 6;
@@ -8,6 +9,7 @@ const isValidEmail = (email) => /\w+@\w+\.\w+/gi.test(email);
 const isValidPassword = (password) => password.length >= minPassLength;
 function Login() {
   const { values, setValues } = useContext(LoginContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setValues({
@@ -20,7 +22,6 @@ function Login() {
 
   const onChange = (event) => {
     const { value, name } = event.target;
-
     setValues({
       ...values,
       [name]: value,
@@ -29,12 +30,15 @@ function Login() {
 
   const onSubmit = async (event) => {
     event.preventDefault();
+    const { email, password } = values;
     try {
-      const token = await axios.post('http://localhost:3001/login', {
-        email: values.email,
-        password: values.password,
+      const { data: { token } } = await axios.post('http://localhost:3001/login', {
+        email,
+        password,
       });
-
+      localStorage.setItem('token', JSON.stringify(token));
+      axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+      navigate('/teste', { replace: true });
     } catch ({ response }) {
       // Source: https://stackoverflow.com/questions/45017822/catching-error-body-using-axios-post
       setValues({
@@ -43,6 +47,7 @@ function Login() {
       });
     }
   };
+
   return (
     <form onSubmit={ onSubmit }>
       <img src="#" alt="Logotipo" />

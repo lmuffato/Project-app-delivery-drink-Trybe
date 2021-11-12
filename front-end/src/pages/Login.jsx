@@ -11,7 +11,7 @@ function Login({ history }) {
   const [password, setPassword] = useState('');
   const [enableButton, setEnableButton] = useState(true);
   const [loginError, setLoginError] = useState('');
-  const { setToken } = useContext(ContextDeliveryApp);
+  const { setUser } = useContext(ContextDeliveryApp);
 
   useEffect(() => {
     if (checkEmail(email) && checkPassword(password)) {
@@ -25,7 +25,8 @@ function Login({ history }) {
     e.preventDefault();
     const response = await fetchLogin(email, password);
     if (response.token !== undefined) {
-      setToken(response.token);
+      setUser(response);
+      localStorage.setItem('user', JSON.stringify(response));
       setLoginError('');
       if (response.role === 'customer') {
         history.push('/customer/products');

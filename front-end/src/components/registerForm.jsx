@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 import useInputs from '../hooks/useInputs';
 import registerValidations from '../schemas/register';
+import useAlert from '../hooks/userAlert';
 // import validateInputsRegister from '../ValidatingFunctions/validatingFunctions';
 
 
@@ -9,19 +12,39 @@ function RegisterForm() {
   const [schemaStatus, setSchemaStatus] = useState({ valid: false, error: '' });
   const [buttonState, setButtonState] = useState(true);
 
+  const { Alert, alertMessage, alertType, isVisible, showAlert } = useAlert();
+
+  let history = useHistory();
+
   useEffect( async () => {
+    showAlert(false);
     const { error } = registerValidations.validate(values);
     await setSchemaStatus({ valid: error === undefined, error: error ? error.message: '' })
     setButtonState(schemaStatus.valid === true ? false : true);
   }, [values]);
 
-  // sendRegister = (e) => {
-  //   e.preventDefault()
-  // };
+  const sendRegister = async (e) => {
+    e.preventDefault();
+    try {
+      history.push('/customer/products');
+      // const response = await axios.post('http://localhost:3001/register', {
+      // name,
+      // email,
+      // password,
+      // role: 'customer'
+      // });
+      if (response.message) throw new Error(response.message);
+      
+    } catch (error) {
+      alertType('danger');
+      alertMessage(error.message);
+      showAlert(true);
+    }
+  };
 
   return (
     <div>
-      <form>
+      <form onSubmit={ sendRegister }>
         <label htmlFor="name">
           Nome
           <input
@@ -56,20 +79,13 @@ function RegisterForm() {
           />
         </label>
         <button
-          type="submit"
+          type='submit'
           data-testid="common_register__button-register"
           disabled={ buttonState }
         >
           Cadastrar
         </button>
       </form>
-      <p
-        data-testid={ `common_register__element-invalid_register 
-        [Elemento oculto (Mensagens de erro)]` }
-        style={ { visibility: 'hidden' } }
-      >
-        elemento oculto
-      </p>
     </div>
   );
 }

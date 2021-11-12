@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
   {
     tableName: 'sales', // Tabela a ser acessada pelo banco de dados;
     timestamps: false,
-    // underscored: true,
+    underscored: true,
      // Quando este campo está habilitado, os campos createdAt e updatedAt são automaticamente preenchidos com suas respectivias datas.
     // createdAt: 'sale_date',
     // updatedAt: 'updated',

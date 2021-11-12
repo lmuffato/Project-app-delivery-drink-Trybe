@@ -1,4 +1,5 @@
 const { users } = require('../../database/models');
+const crypto = require('crypto');
 
 const getAll = async (req, res) => {
   try {

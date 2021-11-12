@@ -10,11 +10,12 @@ app.get('/users', async (_req, res) => {
   res.status(200).json({ result: users });
 });
 app.get('/products', async (_req, res) => {
-  const users = await Product.findAll({});
-  res.status(200).json({ result: users });
+  const products = await Product.findAll({});
+  res.status(200).json({ result: products });
 });
 app.get('/sales', async (_req, res) => {
-  const users = await Sale.findAll({});
-  res.status(200).json({ result: users });
+  const sales = await Sale.findAll({});
+  res.status(200).json({ result: sales });
 });
+
 module.exports = app;

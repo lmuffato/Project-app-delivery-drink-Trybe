@@ -3,6 +3,7 @@ import { element } from 'prop-types';
 import genHashMd5 from 'md5';
 import { ManagerUsersContext } from '../context';
 import isNotEmptyObject from '../utils/isNotEmptyObject';
+import api from '../services/api';
 
 function ManagerUsersProvider({ children }) {
   const [users, setUsers] = useState([]);
@@ -13,6 +14,14 @@ function ManagerUsersProvider({ children }) {
     user,
     setUser,
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const usersData = await api.get('/user');
+      setUsers(usersData);
+    };
+    fetchData();
+  }, []);
 
   useEffect(() => {
     if (isNotEmptyObject(user)) {

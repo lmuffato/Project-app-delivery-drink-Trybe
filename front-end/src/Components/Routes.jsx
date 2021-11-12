@@ -7,8 +7,8 @@ export default function Rout() {
   return (
     <Switch>
       <Route path="/login" component={ Login } />
-      <Route path="/" render={ () => <Redirect to="/login" /> } />
       <Route path="/register" component={ Register } />
+      <Route exact path="/" render={ () => <Redirect to="/login" /> } />
     </Switch>
   );
 }

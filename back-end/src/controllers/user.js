@@ -6,7 +6,7 @@ const login = async (req, res) => {
   const { err1, err2, user } = await User.login(email, password);
   const err = err1 ? err1.message : err2.message;
 
-  if (err) return res.status(400).json({ error: err });
+  if (err) return res.status(404).json({ error: err });
 
   return res.status(200).json(user);    
 };

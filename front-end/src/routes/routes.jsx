@@ -10,9 +10,7 @@ export default function Routes() {
         <Redirect to="/login" />
       </Route>
       <Route exact path="/login" component={ Login } />
-      <div id="NavBar">
-        <Route exact path="/products" component={ Login } />
-      </div>
+      <Route exact path="/customer/products" component={ NotFound } />
       <Route component={ NotFound } />
     </Switch>
   );

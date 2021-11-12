@@ -2,11 +2,10 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import testID from '../../../datatestids.json';
-import validateName from '../../utils/validations/validateName';
-import validateEmail from '../../utils/validations/validateEmail';
-import validatePassword from '../../utils/validations/validatePassword';
 import Button from '../atoms/Button';
 import Input from '../atoms/Input';
+import ErrorMessage from '../atoms/ErrorMessage';
+import validateLogin from '../../utils/validations/joi/login';
 
 const RegisterForm = () => {
   const [register, setRegister] = useState({ fullName: '', email: '', password: '' });
@@ -23,11 +22,14 @@ const RegisterForm = () => {
   const handleClick = () => {
     history.push('/products');
   };
+
+  const errorMessageContent = () => 'Email/senha inválido! Por favor, verifique se os dados inseridos estão corretos.';
+
   return (
     <form>
       <div className="children_container">
-        <h3>Register</h3>
-        <h5>Create your account to Delivery App!</h5>
+        <h3>Cadastro</h3>
+        <h5>Crie sua conta!</h5>
         <Input
           className="register-name"
           type="text"
@@ -35,7 +37,7 @@ const RegisterForm = () => {
           name="fullName"
           value={ fullName }
           onChange={ handleChange }
-          placeholder="Your name"
+          placeholder="Nome completo"
         />
         <Input
           className="register-email"
@@ -52,17 +54,21 @@ const RegisterForm = () => {
           name="password"
           value={ password }
           onChange={ handleChange }
-          placeholder="Password"
+          placeholder="Senha"
         />
         <Button
           className="btn-register"
           type="button"
           data-testid={ testID[9] }
-          disabled={ !(validateName(fullName)
-            && validateEmail(email)
-            && validatePassword(password)) }
+          enabled={ !validateLogin.validate({ email, password }).error }
           onClick={ handleClick }
           text="SIGN UP"
+        />
+        <ErrorMessage
+          className="error-message-login"
+          data-testid={ testID[10] }
+          text={ errorMessageContent() }
+          hidden={ isHidden }
         />
       </div>
     </form>

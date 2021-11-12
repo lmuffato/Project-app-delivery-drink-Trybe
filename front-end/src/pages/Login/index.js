@@ -72,7 +72,7 @@ function LoginPage() {
           {error && (
             <p
               className="error"
-              data-testid=" common_login__element-invalid-email"
+              data-testid="common_login__element-invalid-email"
             >
               {error}
             </p>

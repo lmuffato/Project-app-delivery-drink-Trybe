@@ -49,6 +49,10 @@ function Login() {
     }
   }
 
+  function handleRegisterClick() {
+    history.push('/register');
+  }
+
   useEffect(() => {
     setHideWarning(true);
     checkBtn();
@@ -94,6 +98,7 @@ function Login() {
         <br />
         <br />
         <Button
+          onClick={ handleRegisterClick }
           variant="secondary"
           type="button"
           data-testid="common_login__button-register"

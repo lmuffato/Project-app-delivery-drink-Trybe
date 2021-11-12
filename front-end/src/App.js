@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import Login from './pages/Login';
-import CustomerProducts from './pages/CustomerProducts'
+import CustomerProducts from './pages/CustomerProducts';
 
 function App() {
   return (

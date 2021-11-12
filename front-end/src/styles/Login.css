@@ -1,20 +1,22 @@
 .login_container {
   align-items: center;
+  background-color: #2fc18c;
   display: flex;
   flex-direction: column;
+  height: 100vh;
   justify-content: center;
 }
 
 .children_container {
   align-items: center;
-  background-color: white;
-  border-radius: 30px 30px 0 0;
+  background-color: rgb(238, 238, 238);
+  border-radius: 30px;
   display: flex;
   flex-direction: column;
-  height: 500px;
+  height: 600px;
   justify-content: center;
-  margin-top: 180px;
-  width: 100vw;
+  margin-top: auto;
+  width: 500px;
 }
 
 .children_container h3 {
@@ -36,14 +38,15 @@
   position: relative;
 }
 
-.inputEye {
+.input-password {
   background-color: whitesmoke;
   border: none;
   border-radius: 8px;
   box-sizing: border-box;
   height: 52px;
-  margin-bottom: 10px;
-  outline-color: rgb(0, 132, 255);
+  margin-bottom: 20px;
+  margin-top: 10px;
+  outline-color: #2fc18c;
   padding: 8px 16px;
   width: 340px;
 }
@@ -61,7 +64,7 @@
   border-radius: 8px;
   height: 52px;
   margin-top: 50px;
-  outline-color: rgb(0, 132, 255);
+  outline-color: #2fc18c;
   padding: 8px 16px;
   width: 340px;
 }

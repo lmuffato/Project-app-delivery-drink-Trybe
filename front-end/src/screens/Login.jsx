@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Box, TextField, Button, Link } from '@mui/material';
@@ -20,8 +19,8 @@ function Login() {
   const validateLoginInputs = () => validateEmail() && validatePassword();
 
   const handleLogin = async () => {
-    await makeLogin(email, password);
-    if (!invalidEmailError) {
+    const response = await makeLogin(email, password);
+    if (response) {
       history.push('/customer/products');
     }
   };

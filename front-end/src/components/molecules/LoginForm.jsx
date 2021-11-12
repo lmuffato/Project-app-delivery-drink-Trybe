@@ -3,8 +3,8 @@ import { useHistory } from 'react-router-dom';
 
 import testID from '../../../datatestids.json';
 import Button from '../atoms/Button';
-import ErrorMessage from '../atoms/ErrorMessage';
 import Input from '../atoms/Input';
+import ErrorMessage from '../atoms/ErrorMessage';
 import loginAction from '../../utils/validations/API/fetch';
 import validateLogin from '../../utils/validations/joi/login';
 
@@ -35,13 +35,13 @@ const LoginForm = () => {
     history.push('/register');
   };
   
-  const errorMessageContent = () => 'Element oculto (Mensagens de erro)';
+  const errorMessageContent = () => 'Email/senha inválido! Por favor, verifique se os dados inseridos estão corretos.';
 
   return (
     <form>
       <div className="children_container">
         <h3>Login</h3>
-        <h5>Welcome to Delivery App</h5>
+        <h5>Bem-vindo ao Delivery App</h5>
         <Input
           className="input-email"
           type="email"
@@ -57,7 +57,7 @@ const LoginForm = () => {
           name="password"
           value={ password }
           onChange={ handleChange }
-          placeholder="Password"
+          placeholder="Senha"
         />
         <Button
           className="btn-login"
@@ -72,7 +72,7 @@ const LoginForm = () => {
           type="button"
           data-testid={ testID[4] }
           onClick={ handleClickRegister }
-          text="Don't have an account yet?"
+          text="Não tenho conta"
         />
         <ErrorMessage
           className="error-message-login"

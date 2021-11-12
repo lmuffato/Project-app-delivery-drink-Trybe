@@ -1,12 +1,11 @@
 'use strict';
 module.exports = {
   /**
-   * 
    * @param {import('sequelize').QueryInterface} queryInterface 
    * @param {import('sequelize').DataTypes} Sequelize 
    */
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Products', {
+    await queryInterface.createTable('products', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -24,7 +23,7 @@ module.exports = {
       }
     });
   },
-  down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Products');
+  down: async (queryInterface) => {
+    await queryInterface.dropTable('products');
   }
 };

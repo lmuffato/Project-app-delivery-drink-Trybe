@@ -10,7 +10,7 @@ const config = require(__dirname + '/../config/config.js')[env];
  * @typedef {import('sequelize').ModelCtor<Model<any, any>>} model
  */
 /**
- * @type {{User: model, Sale: model, Product: model}}
+ * @type {{user: model, sale: model, product: model}}
  */
 const db = {};
 

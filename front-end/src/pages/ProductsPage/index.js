@@ -1,14 +1,46 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
+import Card from '../../components/Card';
 import MenuCostumer from '../../components/MenuCustomer';
+import ContextProduct from '../../provider/product/ContextProduct';
+import api from '../../services/api';
+import './style.css';
 
-const index = () => {
-  const teste = 'oi';
-  return (
-    <section className="productsPage">
-      <MenuCostumer />
-      {teste}
-    </section>
-  );
+const ProductsPage = () => {
+  const { products, setProducts } = useContext(ContextProduct);
+  const [isLoading, setIsLoading] = React.useState(false);
+
+  const fetchProducts = async () => {
+    setIsLoading(true);
+    const productsArray = await api.getProducts();
+
+    setProducts(productsArray);
+    setIsLoading(false);
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  if (isLoading || !products) return <h1>Loading..</h1>;
+  if (products) {
+    return (
+      <section className="productsPage">
+        <MenuCostumer />
+        { console.log(products) }
+        <div className="productsContainer">
+          {products.map(({ id, name, price, url }) => (
+            <Card
+              id={ id }
+              key={ id }
+              name={ name }
+              price={ price }
+              url={ url }
+            />
+          ))}
+        </div>
+      </section>
+    );
+  }
 };
 
-export default index;
+export default ProductsPage;

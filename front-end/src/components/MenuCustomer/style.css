@@ -1,9 +1,11 @@
 .menuCostumer {
-  height: 7rem;
-  width: 100%;
   background: rgb(24, 24, 24);
   display: flex;
+  height: 7rem;
   justify-content: space-between;
+  position: fixed;
+  top: 0;
+  width: 100%;
 }
 
 .linksContainer {
@@ -16,8 +18,8 @@
 .linksContainer  > a {
   color: white;
   font-size: 1.5rem;
-  text-decoration: none;
   position: relative;
+  text-decoration: none;
   transition: 0.3s;
 }
 

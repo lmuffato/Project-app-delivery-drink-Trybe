@@ -4,10 +4,11 @@ export const slice = createSlice({
   name: 'product',
   initialState: {
     products: [],
+    isLoadingProducts: true,
   },
   reducers: {
     setProducts(state, action) {
-      return { ...state, products: action.payload };
+      return { ...state, products: action.payload, isLoadingProducts: false };
     },
   },
 });

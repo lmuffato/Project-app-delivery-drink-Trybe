@@ -1,24 +1,30 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-// import axios from 'axios';
+import axios from 'axios';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import NavBar from '../components/NavBar';
 import ProductCard from '../components/ProductCard';
 import { setProducts } from '../redux/slices/productSlice';
 
 function CustomerProducts() {
-  const [products] = useState([]);
+  const { isLoadingProducts, products } = useSelector(((state) => state.product));
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(setProducts(['abacate', 'pera', 'uva']));
+    axios.get('http://localhost:3001/products')
+      .then((res) => {
+        dispatch(setProducts(res.data));
+      });
   }, [dispatch]);
 
   return (
     <div>
       <NavBar />
-      { products.map((product, index) => (
-        <ProductCard product={ product } key={ index } />
-      )) }
+      {
+        isLoadingProducts ? 'Loading...'
+          : products.map((product) => (
+            <ProductCard product={ product } key={ product.id } />
+          ))
+      }
     </div>
   );
 }

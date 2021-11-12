@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 export default function ProductsButton({ history }) {
   const handleProductsClick = () => {
-    history.push('/customer/orders');
+    history.push('/customer/products');
   };
 
   return (

@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function CheckoutTable() {
   return (
-    <table id="checkout-table">
+    <table className="table-checkout">
       <thead>
         <tr>
           <th className="th-item">Item</th>

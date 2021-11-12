@@ -1,7 +1,5 @@
 import React from 'react';
 
-const emailRegex = /^[\w.]+@[a-z]+\.\w{2,3}$/g;
-
 const minimumPasswordLength = 6;
 const minimunNameLength = 12;
 
@@ -13,10 +11,8 @@ export const valName = (name) => {
 };
 
 export const valEmail = (email) => {
-  if (!emailRegex.test(email)) {
-    return false;
-  }
-  return true;
+  const emailRegex = /^[\w.]+@[a-z]+\.\w{2,3}$/g;
+  return emailRegex.test(email);
 };
 
 export const valPassword = (password) => {

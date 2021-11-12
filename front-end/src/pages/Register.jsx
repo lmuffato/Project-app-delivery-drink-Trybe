@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Button from '../Components/ButtonTypeButton';
 import validateEmail from '../validations/validateEmail';
 
 export default function Register() {
@@ -64,14 +65,13 @@ export default function Register() {
             data-testid="common_register__input-password"
           />
         </label>
-        <button
-          type="button"
-          id="register-button"
-          disabled={ !disableRegisterButton }
-          data-testid="common_register__button-register"
-        >
-          CADASTRAR
-        </button>
+        <Button
+          props={ {
+            id: 'register-button',
+            disabled: !disableRegisterButton,
+            dataTestId: 'common_register__button-register',
+            value: 'CADASTRAR' } }
+        />
       </form>
     </main>
   );

@@ -1,0 +1,10 @@
+.registerFormContainer {
+  align-items: center;
+  background: #eaf1ef;
+  border: 1px solid #b1c2be;
+  display: flex;
+  flex-direction: column;
+  height: 444px;
+  justify-content: center;
+  width: 425px;
+}

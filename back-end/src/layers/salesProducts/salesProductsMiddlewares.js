@@ -13,7 +13,7 @@ const getAll = async (req, res) => {
 const getById = async (req, res) => {
   try {
     const { id } = req.params;
-    const obj = { sale_id: id};
+    const obj = { saleId: id };
     const data = await salesProducts.findOne({ where: obj });
     return res.status(200).json(data);
   } catch (err) {
@@ -24,9 +24,9 @@ const getById = async (req, res) => {
 const updateById = async (req, res) => {
   try {
     const { id } = req.params;
-    const objToFind = { sale_id: id };
-    const { quantity, sale_id, product_id } = req.body;
-    const obj = { quantity, sale_id, product_id };
+    const objToFind = { saleId: id };
+    const { quantity, saleId, productId } = req.body;
+    const obj = { quantity, saleId, productId };
     await salesProducts.update(obj, { where: objToFind });
   return res.status(200).json(obj);
   } catch (err) {
@@ -37,7 +37,7 @@ const updateById = async (req, res) => {
 const deleteById = async (req, res) => {
   try {
     const { id } = req.params;
-    const obj = { sale_id: id};
+    const obj = { saleId: id };
     const dataToDelete = await salesProducts.findOne({ where: obj });
     await dataToDelete.destroy();
     return res.status(200).json(dataToDelete);
@@ -48,8 +48,8 @@ const deleteById = async (req, res) => {
 
 const createNew = async (req, res) => {
   try {
-    const { quantity, sale_id, product_id } = req.body;
-    const obj = { quantity, sale_id, product_id };
+    const { quantity, saleId, productId } = req.body;
+    const obj = { quantity, saleId, productId };
     const newData = await salesProducts.create(obj);
     return res.status(201).json(newData);
   } catch (err) {

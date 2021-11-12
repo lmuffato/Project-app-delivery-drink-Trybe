@@ -42,7 +42,7 @@ const updateById = async (req, res) => {
   try {
     const { id } = req.params;
     const { name, email, password, role } = req.body;
-    console.log(id)
+    console.log(id);
     const obj = { name, email, password, role };
     await users.update(obj, { where: { id } });
   return res.status(200).json(obj);
@@ -62,7 +62,6 @@ const deleteById = async (req, res) => {
   }
 };
 
-
 /* // Como remover chave de objeto
 const removeKeyInObject = (obj, key) => {
   const { [key]: _, ...newObj } = obj;
@@ -70,7 +69,7 @@ const removeKeyInObject = (obj, key) => {
 };
 */
 
-const createNew = async (req, res, next) => {
+const createNew = async (req, res) => {
   try {
     const { name, email, password, role } = req.body;
     console.log(name);
@@ -80,11 +79,9 @@ const createNew = async (req, res, next) => {
     // req.userInfo = removeKeyInObject(obj, 'password');
     // const newData = await User.create(obj);
     return res.status(201).json(newData);
-    req.http = { code: 201 };
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }
-  next();
 };
 
 module.exports = {

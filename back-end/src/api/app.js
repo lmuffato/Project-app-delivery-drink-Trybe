@@ -8,7 +8,8 @@ const Product = require('../controllers/productsController');
 const app = express();
 app.use(cors());
 app.use(BodyParser.json());
-app.use('/images', express.static(path.join(__dirname, '..', '..', '/public', '/images', '/public')));
+app.use('/images', express.static(path
+  .join(__dirname, '..', '..', '/public', '/images', '/public')));
 
 app.get('/products', Product.getProducts);
 

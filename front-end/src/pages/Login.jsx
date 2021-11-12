@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import UserContext from '../context/UserContext';
 import { setLogin } from '../services/apis';
 
@@ -61,12 +62,14 @@ function Login() {
       >
         LOGIN
       </button>
-      <button
-        type="button"
-        data-testid="common_login__button-register"
-      >
-        Ainda não tenho conta
-      </button>
+      <Link to="/register">
+        <button
+          type="button"
+          data-testid="common_login__button-register"
+        >
+          Ainda não tenho conta
+        </button>
+      </Link>
       <p data-testid="common_login__element-invalid-email">
         { errorMessage ? 'Usuário não encontrado' : null }
       </p>

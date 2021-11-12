@@ -8,7 +8,7 @@ import PedidoDetalhes from '../components/PedidoDetalhes';
 import CheckoutComprador from '../components/CheckoutComprador';
 import Vendas from '../components/Vendas';
 import VendaDetalhes from '../components/VendaDetalhes';
-import Admin from '../components/Admin';
+import AdminManagerUsers from '../pages/AdminManagerUsers';
 import NotFound from '../components/NotFound';
 
 export default function AllRoute() {
@@ -23,7 +23,7 @@ export default function AllRoute() {
       <Route path="/customer/checkout" element={ <CheckoutComprador /> } />
       <Route path="/seller/orders" element={ <Vendas /> } />
       <Route path="/seller/orders/:id" element={ <VendaDetalhes /> } />
-      <Route path="/admin/manage" element={ <Admin /> } />
+      <Route path="/admin/manage" element={ <AdminManagerUsers /> } />
       <Route element={ <NotFound /> } />
     </Routes>
   );

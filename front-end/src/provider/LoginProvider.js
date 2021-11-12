@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { element } from 'prop-types';
-import LoginContext from '../context/LoginContext';
+import { LoginContext } from '../context';
 
 function LoginProvider({ children }) {
   const [login, setLogin] = useState();

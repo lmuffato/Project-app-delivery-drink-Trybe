@@ -4,6 +4,14 @@ const usersRouter = require('./routes/users');
 const salesRouter = require('./routes/sales');
 const productsRouter = require('./routes/products');
 
+//  mockado para esperar os controllers e passar no eslint
+// TODO apagar após alterar;
+
+const StatusCodes = '';
+const User = '';
+const Product = '';
+const Sale = '';
+
 const app = express();
 app.use('/login', loginRouter);
 app.use('/users', usersRouter);

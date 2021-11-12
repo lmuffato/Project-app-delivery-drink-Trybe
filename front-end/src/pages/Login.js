@@ -1,24 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
-// import axios from 'axios';
+import { validateLogin } from '../components/ultility';
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [loginButton, setLoginButton] = useState(false);
-  const history = useHistory();
   useEffect(() => {
-    const validateFields = () => {
-      const minDigits = 6;
-      const regex = /^[\w.]+@[a-z]+\.\w{2,3}$/g;
-      const resultButton = password.length > minDigits && email.match(regex);
-      setLoginButton(resultButton);
-    };
-    validateFields();
+    const sucessValidate = validateLogin(emailInput, passwordInput);
+    setIsValid(sucessValidate);
   }, [email, password]);
 
   function loginBtn() {
-    history.push('/register');
     const isEmail = { email };
     const formatedEmail = JSON.stringify(isEmail);
     localStorage.setItem('user', formatedEmail);
@@ -62,7 +53,7 @@ export default function Login() {
         Registre-se
       </button>
       <div>
-        <p common_login__element-invalid-email> Algo deu ruim </p>
+        <p data-testid="common_login__element-invalid-email">Usuário ou Senha inválido</p>
       </div>
     </main>
   );

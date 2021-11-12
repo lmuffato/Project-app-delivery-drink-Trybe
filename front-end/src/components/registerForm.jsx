@@ -26,16 +26,16 @@ function RegisterForm() {
   const sendRegister = async (e) => {
     e.preventDefault();
     try {
+      const response = await axios.post('http://localhost:3001/register', {
+      name,
+      email,
+      password,
+      role: 'customer'
+      });
+     // if (response.message) throw new Error(response.message);
       history.push('/customer/products');
-      // const response = await axios.post('http://localhost:3001/register', {
-      // name,
-      // email,
-      // password,
-      // role: 'customer'
-      // });
-      if (response.message) throw new Error(response.message);
-      
     } catch (error) {
+      console.error(error.message);
       alertType('danger');
       alertMessage(error.message);
       showAlert(true);

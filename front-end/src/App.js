@@ -1,9 +1,13 @@
 import React from 'react';
-import Routes from './components/Routes';
+import './App.scss';
+import Routes from './Routes';
+import background from './images/background.png';
 
 function App() {
   return (
-    <Routes />
+    <div className="App" style={ { background: `url('${background}') center / cover` } }>
+      <Routes />
+    </div>
   );
 }
 

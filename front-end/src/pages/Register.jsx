@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import Button from '../Components/ButtonTypeButton';
+import validateEmail from '../validations/validateEmail';
 
 export default function Register() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [disableRegisterButton, setDisableRegisterButton] = useState(false);
 
   const handleChange = (target) => {
     const { id, value } = target;
@@ -11,6 +14,18 @@ export default function Register() {
     if (id === 'user-email') setEmail(value);
     if (id === 'user-password') setPassword(value);
   };
+
+  useEffect(() => {
+    const validateFields = () => {
+      const twelveNumber = 12;
+      const sixNumber = 6;
+      const validEmail = validateEmail(email);
+      const validName = name.length >= twelveNumber;
+      const validPassword = password.length >= sixNumber;
+      return (validEmail && validName && validPassword);
+    };
+    setDisableRegisterButton(validateFields());
+  }, [name, email, password]);
 
   return (
     <main>
@@ -50,13 +65,13 @@ export default function Register() {
             data-testid="common_register__input-password"
           />
         </label>
-        <button
-          type="button"
-          id="register-button"
-          data-testid="common_register__button-register"
-        >
-          CADASTRAR
-        </button>
+        <Button
+          props={ {
+            id: 'register-button',
+            disabled: !disableRegisterButton,
+            dataTestId: 'common_register__button-register',
+            value: 'CADASTRAR' } }
+        />
       </form>
     </main>
   );

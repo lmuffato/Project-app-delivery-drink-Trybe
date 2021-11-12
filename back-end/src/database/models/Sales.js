@@ -1,49 +1,29 @@
-const Sales = (sequelize, DataTypes) => {
-  const sales = sequelize.define('sales', {
-    total_price: {
-      type: DataTypes.DECIMAL(10, 2),
-      notNull: true,
+module.exports = (sequelize, DataTypes) => {
+  const Sale = sequelize.define(
+    'sale',
+    {
+      user_id: DataTypes.INTEGER,
+      seller_id: DataTypes.INTEGER,
+      total_price: DataTypes.DECIMAL(9, 2),
+      delivery_address: DataTypes.STRING(100),
+      delivery_number: DataTypes.STRING(50),
+      sale_date: DataTypes.DATE,
+      status: DataTypes.STRING(50),
     },
-    delivery_address: {
-      type: DataTypes.STRING,
-      notNull: true,
+    {
+      timestamps: false,
     },
-    delivery_number: {
-      type: DataTypes.STRING,
-      notNull: true,
-    },
-    sale_date: {
-      type: DataTypes.DATE,
-      notNull: true,
-      defaultValue: DataTypes.NOW,
-    },
-    status: {
-      type: DataTypes.STRING,
-      notNull: true,
-    },
-    userId: {
-      type: DataTypes.INTEGER,
-      foreignKey: true,
-      field: 'user_id',
-    },
-    sellerId: {
-      type: DataTypes.INTEGER,
-      foreignKey: true,
-      field: 'seller_id',
-    },
-  },
-  {
-    timestamps: false,
-  });
-
-  sales.associate = (models) => {
-    sales.belongsTo(models.user,
-      { foreignKey: 'user_id', as: 'user' });
-    sales.belongsTo(models.user,
-      { foreignKey: 'seller_id', as: 'seller' });
+  );
+  Sale.associate = (models) => {
+    Sale.belongsTo(models.user, { // aqui
+      foreignKey: 'user_id',
+      as: 'userId',
+    });
+    Sale.belongsTo(models.user, { // aqui
+      foreignKey: 'seller_id',
+      as: 'sellerId',
+    });
   };
 
-  return sales;
+  return Sale;
 };
-
-module.exports = Sales;

@@ -17,19 +17,18 @@ export default function Login() {
   };
 
   const handleLogin = async () => {
+    console.log('xablay');
     try {
-      console.log('xablay');
-      axios.get('/users/login', { email: user, password })
-        .then((response) => { console.log(response); })
-        .catch((error) => { console.log(error); });
-      // const response = await axios.get('http://localhost:3001/sales');
-      //   method: 'get',
-      //   url: 'http://localhost:3001/sales',
-      //   // email: user,
-      //   // password,
-      // });
-      // const response = await fetch('http://localhost:3001/carlos');
-      console.log('a');
+      const response = await axios({
+        method: 'post',
+        url: 'http://localhost:3001/users/login/',
+        data: {
+          password,
+          email: user,
+        },
+        responseType: 'json',
+      });
+      console.log(response.data);
     } catch (error) {
       console.error(error);
     }

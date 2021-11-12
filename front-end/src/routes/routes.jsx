@@ -12,7 +12,7 @@ export default function Routes() {
         <Redirect to="/login" />
       </Route>
       <Route exact path="/login" component={ Login } />
-      <Route exact path="/customer/products" component={ NotFound } />
+      <Route exact path="/customer/products" component={ Products } />
       <Route exact path="/products" component={ Products } />
       <Route exact path="/sales" component={ Sales } />
       <Route component={ NotFound } />

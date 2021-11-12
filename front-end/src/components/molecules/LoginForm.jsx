@@ -5,7 +5,7 @@ import Button from '../atoms/Button';
 import ErrorMessage from '../atoms/ErrorMessage';
 import Input from '../atoms/Input';
 import loginAction from '../../utils/validations/API/fetch';
-import schema from '../../utils/validations/joi/login';
+import validateLogin from '../../utils/validations/joi/login';
 
 const LoginForm = () => {
   const [login, setLogin] = useState({ email: '', password: '' });
@@ -58,7 +58,7 @@ const LoginForm = () => {
           className="btn-login"
           type="button"
           data-testid="common_login__button-login"
-          enabled={ !schema.validate({ email, password }).error }
+          enabled={ !validateLogin.validate({ email, password }).error }
           onClick={ handleClickEnter }
           text="ENTRAR"
         />

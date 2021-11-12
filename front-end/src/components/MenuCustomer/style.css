@@ -1,0 +1,93 @@
+.menuCostumer {
+  height: 7rem;
+  width: 100%;
+  background: rgb(24, 24, 24);
+  display: flex;
+  justify-content: space-between;
+}
+
+.linksContainer {
+  display: flex;
+  gap: 10rem;
+  margin-right: 5rem;
+  margin-top: 2.3rem;
+}
+
+.linksContainer  > a {
+  color: white;
+  font-size: 1.5rem;
+  text-decoration: none;
+  position: relative;
+  transition: 0.3s;
+}
+
+.linksContainer  > a:hover {
+  color: #ed7c2b;
+}
+
+
+.linksContainer  > a.active {
+  color: #ed7c2b;
+}
+
+.linksContainer  > a.active:after {
+  position: absolute;
+  content: '';
+  height: 8px;
+  width: 100%;
+  bottom: 0px;
+  left: 0;
+  background: #ed7c2b;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.beerProducts {
+  color: white;
+  font-size: 4rem;
+  margin-top: 0.5rem;
+  margin-left: 3rem;
+}
+
+.userInfo {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  margin-right: 30px;
+}
+
+.userInfo > div {
+  background: #ed7c2b;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  display: flex;
+  font-size: 1.8rem;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.userInfo > p {
+  font-size: 1.5rem;
+  color: white;
+}
+
+.userInfo > button {
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 6rem;
+  border-radius: 8px;
+  background-color: red;
+  color: white;
+  font-size: 1.2rem;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.userInfo > button:hover {
+  filter: brightness(0.8);
+}

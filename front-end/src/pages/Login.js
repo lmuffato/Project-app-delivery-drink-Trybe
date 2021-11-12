@@ -4,8 +4,9 @@ import { validateLogin } from '../components/ultility';
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isValid, setIsValid] = useState(false);
   useEffect(() => {
-    const sucessValidate = validateLogin(emailInput, passwordInput);
+    const sucessValidate = validateLogin(email, password);
     setIsValid(sucessValidate);
   }, [email, password]);
 
@@ -39,7 +40,7 @@ export default function Login() {
           type="submit"
           className="button-input"
           onClick={ loginBtn }
-          disabled={ !loginButton }
+          disabled={ !isValid }
           data-testid="common_login__button-login"
         >
           Login

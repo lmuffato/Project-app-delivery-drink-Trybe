@@ -8,14 +8,12 @@ module.exports = (sequelize, DataTypes) => {
   },
   {
     timestamps: false, // remove a obrigatoriedade de utilizar os campos `createdAt` e `updatedAt`
-    tableName: 'Users',
+    tableName: 'users',
   });
 
   User.associate = (models) => {
     User.hasMany(models.Sale,
-      { foreignKey: 'user_id', as: 'userPurchase' });
-    User.hasMany(models.Sale,
-      { foreignKey: 'seller_id', as: 'sellerSales' });
+      { foreignKey: 'id', as: 'user' });
   };
 
   return User;

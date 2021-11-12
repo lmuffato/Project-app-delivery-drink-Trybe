@@ -1,62 +1,94 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
+import { Box, TextField, Button, Link } from '@mui/material';
 import ContextLogin from '../context/ContextLogin';
 
 function Login() {
-  const { makeLogin, allowed, getAllTasks, user } = useContext(ContextLogin);
+  const { makeLogin, invalidEmailError } = useContext(ContextLogin);
   const history = useHistory();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const askLogin = async () => {
+  const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+  const MINPASSWORDLENGTH = 6;
+
+  const validateEmail = () => emailRegex.test(email);
+
+  const validatePassword = () => password.length >= MINPASSWORDLENGTH;
+
+  const validateLoginInputs = () => validateEmail() && validatePassword();
+
+  const handleLogin = async () => {
     await makeLogin(email, password);
-    if (allowed) {
-      await getAllTasks(user.id);
-      history.push('/todo');
+    if (!invalidEmailError) {
+      history.push('/customer/products');
     }
   };
 
   return (
-    <div className="loginScreen">
-      <h1
-        className="login-title"
+    <Box
+      component="form"
+      sx={ {
+        display: 'flex',
+        flexDirection: 'column',
+        width: '100vw',
+        height: '100vh',
+        alignItems: 'center',
+        justifyContent: 'center',
+      } }
+    >
+      <TextField
+        margin="dense"
+        label="Email"
+        type="email"
+        name="email"
+        required
+        value={ email }
+        onChange={ (e) => setEmail(e.target.value) }
+        error={ !validateEmail() }
+        helperText={ !(validateEmail()) && 'Digite um email válido' }
+        inputProps={ { 'data-testid': 'common_login__input-email' } }
+      />
+      <TextField
+        margin="dense"
+        label="Senha"
+        type="password"
+        name="password"
+        required
+        value={ password }
+        onChange={ (e) => setPassword(e.target.value) }
+        error={ !validatePassword() }
+        helperText={ !validatePassword()
+          && 'A senha tem que ter mais que 6 caracteres' }
+        inputProps={ { 'data-testid': 'common_login__input-password' } }
+      />
+      <Button
+        disabled={ !validateLoginInputs() }
+        onClick={ handleLogin }
+        data-testid="common_login__button-login"
       >
         Login
-      </h1>
-      <form
-        className="form"
-        onSubmit={ (e) => {
-          e.preventDefault();
-          askLogin();
-        } }
+      </Button>
+      <Button
+        data-testid="common_login__button-register"
       >
-        <input
-          className="input-login"
-          type="email"
-          value={ email }
-          onChange={ (e) => setEmail(e.target.value) }
-          placeholder="Digite seu e-mail"
-          required
-        />
-        <input
-          className="input-login"
-          type="password"
-          value={ password }
-          onChange={ (e) => setPassword(e.target.value) }
-          placeholder="Digite sua senha"
-          minLength="7"
-          required
-        />
-        <button
-          className="loginBtn"
-          type="submit"
+        <Link
+          href="/register"
+          underline="hover"
         >
-          Entrar
-        </button>
-      </form>
-      { !allowed && <span>Informações do email ou senha estão erradas</span> }
-      <a href="/register">Cadastre um novo usuário</a>
-    </div>
+          Criar conta
+        </Link>
+      </Button>
+
+      {invalidEmailError && (
+        <span
+          data-testid="common_login__element-invalid-email"
+        >
+          Email ou senha inválida
+        </span>
+      )}
+    </Box>
   );
 }
 

@@ -1,13 +1,19 @@
 .card-container {
   align-items: center;
-  background-color: rgb(234, 250, 242);
   border-radius: 15px;
-  box-shadow: 2px 2px 10px -2px black;
+  box-shadow: 0 1px 7px -1px black;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  height: 400;
-  padding: 20px;
-  width: 300px;
+  height: 460px;
+  margin-top: 30px;
+  padding: 10px;
+  width: 320px;
+}
+
+.card-container:hover {
+  box-shadow: 0 1px 24px -1px black;
+  cursor: pointer;
 }
 
 .product-card-container {
@@ -19,6 +25,8 @@
 
 .card-title {
   align-self: baseline;
+  background-color: aquamarine;
+  padding: 3px;
 }
 
 .counter-container {
@@ -32,7 +40,7 @@
 }
 
 .btn-decrement {
-  background-color: #157347;
+  background-color: #b40c0c;
   border: none;
   border-radius: 10px 0 0 10px;
   color: white;
@@ -47,7 +55,11 @@
   width: 40px;
 }
 
-.btn-increment:hover, .btn-decrement:hover {
+.btn-increment:hover {
   background-color: #2fc18c;
+}
+
+.btn-decrement:hover {
+  background-color: #fb0202;
 }
 

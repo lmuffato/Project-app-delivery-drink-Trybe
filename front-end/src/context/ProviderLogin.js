@@ -17,7 +17,7 @@ function ProviderLogin({ children }) {
       setToken(data);
     } catch (error) {
       const { response } = error;
-      const { request, ...errorObject } = response; // take everything but 'request'
+      const { request, ...errorObject } = response;
       console.log(errorObject);
       setInvalidEmailError(true);
     }

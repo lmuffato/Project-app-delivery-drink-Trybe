@@ -15,7 +15,7 @@ const create = rescue(async (req, res) => {
   if (newUser.message) return res.status(newUser.status).json({ message: newUser.message });
   const md5Password = crypto.createHash('md5').update(password).digest('hex');
   const createdUser = await User.create({ name, email, password: md5Password, role });
-  res.status(200).json(createdUser);
+  res.status(201).json(createdUser);
 });
 
 const exclude = rescue(async (req, res) => {

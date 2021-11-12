@@ -13,8 +13,20 @@ export default function NavBar() {
           <p>Delivery App</p>
         </Link>
         <ListNavLinks />
-        <Link className="navbar-brand" to="users/:id">Fulano de Tal</Link>
-        <Link className="navbar-brand" to="/login">sair</Link>
+        <Link
+          className="navbar-brand"
+          data-testid="customer_products__element-navbar-user-full-name"
+          to="users/:id"
+        >
+          Fulano de Tal
+        </Link>
+        <Link
+          className="navbar-brand"
+          data-testid="customer_products__element-navbar-link-logout"
+          to="/login"
+        >
+          sair
+        </Link>
       </div>
     </nav>
   );

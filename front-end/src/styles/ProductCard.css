@@ -1,0 +1,65 @@
+.card-container {
+  align-items: center;
+  border-radius: 15px;
+  box-shadow: 0 1px 7px -1px black;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: 460px;
+  margin-top: 30px;
+  padding: 10px;
+  width: 320px;
+}
+
+.card-container:hover {
+  box-shadow: 0 1px 24px -1px black;
+  cursor: pointer;
+}
+
+.product-card-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.card-title {
+  align-self: baseline;
+  background-color: aquamarine;
+  padding: 3px;
+}
+
+.counter-container {
+  display: flex;
+}
+
+.counter {
+  border: none;
+  text-align: center;
+  width: 90px;
+}
+
+.btn-decrement {
+  background-color: #b40c0c;
+  border: none;
+  border-radius: 10px 0 0 10px;
+  color: white;
+  width: 40px;
+}
+
+.btn-increment {
+  background-color: #157347;
+  border: none;
+  border-radius: 0 10px 10px 0;
+  color: white;
+  width: 40px;
+}
+
+.btn-increment:hover {
+  background-color: #2fc18c;
+}
+
+.btn-decrement:hover {
+  background-color: #fb0202;
+}
+

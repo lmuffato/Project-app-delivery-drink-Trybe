@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+const DARK_LIGHT = 'dark-ligh';
+
 const buttonTheme = (btnType) => (theme) => {
   switch (btnType) {
   case 'primary': return { border: 'none', bg: theme.primary, color: theme.light };
@@ -48,7 +50,7 @@ export const BaseInput = styled.input`
   border-radius: 5px;
   height: 46px;
   border-width: 2px;
-  border-color: ${({ theme }) => theme['dark-light']};
+  border-color: ${({ theme }) => theme[DARK_LIGHT]};
   border-style: solid;
   font-size: 15px;
   padding: 10px;
@@ -68,11 +70,12 @@ export const ProductQtyContainer = styled.div`
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
-  width: min-content;
+  width: 100%;
+  box-sizing: border-box;
   
   .label {
-    font-size: 15px;
-    margin: 5px;
+    font-size: 15.8px;
+    margin: 0 5px 5px 5px;
     ${({ theme }) => theme.dark}
   }
 
@@ -111,9 +114,58 @@ export const ProductQtyContainer = styled.div`
   }
 
   .center {
-    border: 1px solid ${({ theme }) => theme['dark-light']};
+    border: 1px solid ${({ theme }) => theme[DARK_LIGHT]};
+    background-color: ${({ theme }) => theme.light};
     font-size: 15px;
     box-sizing: border-box;
   }
 
+`;
+
+export const ProductCardContainer = styled.div`
+  position: relative;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  max-width: 240px;
+  height: 320px;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0px 0px 4px 0px ${({ theme }) => theme.shadow};
+  background-color: ${({ theme }) => theme.light};
+  transition: box-shadow 0.225s; 
+  
+  &:hover {
+    box-shadow: 0px 10px 20px 0px ${({ theme }) => theme.shadow};
+  }
+
+  .product-price {
+    position: absolute;
+    background-color: ${({ theme }) => theme.light};
+    box-sizing: border-box;
+    border: 1px outset ${({ theme }) => theme[DARK_LIGHT]};
+    border-radius: 8px;
+    font-size: 18px;
+    padding: 6px 10px;
+    font-weight: bold;
+    left: 10px;
+    top: 10px;
+  }
+
+  .product-image {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    img { 
+      height: 100%;
+    }
+  }
+
+  .product-quantity {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: ${({ theme }) => theme['light-dark']};
+  }
 `;

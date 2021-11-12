@@ -11,6 +11,7 @@ const theme = {
     danger: 'red',
     warn: 'yello',
     info: 'blue',
+    shadow: 'hsla(0, 0%, 0%, 0.4)',
   },
 };
 

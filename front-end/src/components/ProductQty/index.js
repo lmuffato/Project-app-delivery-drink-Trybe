@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { ProductQtyContainer } from '../../styles/baseComponents';
 import QtyButton from './QtyButton';
 
-function ProductQty({ label, onMinus, onPlus, value, id }) {
+function ProductQty({ label, onRemove, onAdd, value, id }) {
   return (
     <ProductQtyContainer>
       <p
@@ -16,7 +16,7 @@ function ProductQty({ label, onMinus, onPlus, value, id }) {
         <QtyButton
           id={ id }
           position="remove"
-          onClick={ onMinus }
+          onClick={ onRemove }
         />
         <div
           className="center"
@@ -27,7 +27,7 @@ function ProductQty({ label, onMinus, onPlus, value, id }) {
         <QtyButton
           id={ id }
           position="add"
-          onClick={ onPlus }
+          onClick={ onAdd }
         />
       </div>
     </ProductQtyContainer>
@@ -38,8 +38,8 @@ ProductQty.propTypes = {
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   label: PropTypes.string.isRequired,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  onMinus: PropTypes.func.isRequired,
-  onPlus: PropTypes.func.isRequired,
+  onRemove: PropTypes.func.isRequired,
+  onAdd: PropTypes.func.isRequired,
 };
 
 export default ProductQty;

@@ -16,6 +16,6 @@ app.use('/sales', salesRoute);
 
 app.get('/coffee', (_req, res) => res.status(418).end());
 
-app.use(error)
+app.use(error);
 
 module.exports = app;

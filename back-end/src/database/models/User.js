@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
   },
   {
     timestamps: false, // remove a obrigatoriedade de utilizar os campos `createdAt` e `updatedAt`
-    tableName: 'Users',
+    tableName: 'users',
   });
 
   User.associate = (models) => {

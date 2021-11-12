@@ -60,3 +60,60 @@ export const BaseInput = styled.input`
     border-color: ${({ theme }) => theme.primary};
   }
 `;
+
+export const ProductQtyContainer = styled.div`
+  --width: 35px;
+  --height: 35px;
+  --border-radius: 6px;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  width: min-content;
+  
+  .label {
+    font-size: 15px;
+    margin: 5px;
+    ${({ theme }) => theme.dark}
+  }
+
+  .bts {
+    display: flex;
+  }
+
+  .add, .center, .remove {
+    width: var(--width);
+    height: var(--height);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+  }
+
+  .add, .remove {
+    background: ${({ theme }) => theme.primary};
+    border: none;
+    cursor: pointer;
+    svg {
+      color: ${({ theme }) => theme.light};
+    }
+    &:hover { filter: brightness(80%); }
+    &:active { filter: brightness(120%); }
+  }
+
+  .remove {
+    border-top-left-radius: var(--border-radius);
+    border-bottom-left-radius: var(--border-radius);
+  }
+
+  .add {
+    border-top-right-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
+  }
+
+  .center {
+    border: 1px solid ${({ theme }) => theme['dark-light']};
+    font-size: 15px;
+    box-sizing: border-box;
+  }
+
+`;

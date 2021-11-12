@@ -1,0 +1,19 @@
+const Joi = require('joi');
+
+const schema = Joi.object({
+  email: Joi.string().email().required(),
+  password: Joi.string().min(6).required(),
+});
+
+const errMessage = {
+  status: 400,
+  message: 'Dados inválidos',
+};
+
+module.exports = (req, _res, next) => {
+  const result = schema.validate(req.body);
+
+  if (result.error) next(errMessage);
+
+  next();
+};

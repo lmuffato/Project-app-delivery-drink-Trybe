@@ -1,15 +1,21 @@
 const md5 = require('md5');
-
 const { User } = require('../database/models');
+const createToken = require('../auth/jwtFunctions');
+
+const checkUserIfExist = (user) => {
+  const errMessage = { status: 404, message: 'Not found' };
+  if (!user) throw errMessage;
+};
 
 const loginUser = async (passWord, email) => {
   const password = md5(passWord);
 
-  const findUser = await User.findOne({ where: { email, password } });
-  const errMessage = { status: 401, message: 'login invalido' };
-  if (!findUser) throw errMessage;
+  const user = await User.findOne({ where: { email, password } });
+  checkUserIfExist(user);
 
-  return { status: 200, data: password };
+  const token = createToken.create(password);
+
+  return { status: 200, data: token };
 };
 
 module.exports = {

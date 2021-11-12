@@ -1,0 +1,53 @@
+.card-container {
+  align-items: center;
+  background-color: rgb(234, 250, 242);
+  border-radius: 15px;
+  box-shadow: 2px 2px 10px -2px black;
+  display: flex;
+  flex-direction: column;
+  height: 400;
+  padding: 20px;
+  width: 300px;
+}
+
+.product-card-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.card-title {
+  align-self: baseline;
+}
+
+.counter-container {
+  display: flex;
+}
+
+.counter {
+  border: none;
+  text-align: center;
+  width: 90px;
+}
+
+.btn-decrement {
+  background-color: #157347;
+  border: none;
+  border-radius: 10px 0 0 10px;
+  color: white;
+  width: 40px;
+}
+
+.btn-increment {
+  background-color: #157347;
+  border: none;
+  border-radius: 0 10px 10px 0;
+  color: white;
+  width: 40px;
+}
+
+.btn-increment:hover, .btn-decrement:hover {
+  background-color: #2fc18c;
+}
+

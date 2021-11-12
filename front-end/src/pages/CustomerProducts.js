@@ -3,10 +3,10 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import NavBar from '../components/NavBar';
 import ProductCard from '../components/ProductCard';
-import { setProducts } from '../redux/slices/productSlice';
+import { selectProduct, setProducts } from '../redux/slices/productSlice';
 
 function CustomerProducts() {
-  const { isLoadingProducts, products } = useSelector(((state) => state.product));
+  const { isLoadingProducts, products } = useSelector(selectProduct);
   const dispatch = useDispatch();
 
   useEffect(() => {

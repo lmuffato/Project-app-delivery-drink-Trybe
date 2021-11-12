@@ -9,3 +9,11 @@
   width: 425px;
 }
 
+.linkButton {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  text-decoration: none;
+  width: 100%;
+}
+

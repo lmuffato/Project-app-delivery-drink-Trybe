@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import Button from '../Button';
 import InputField from '../InputField';
 import ErrorMessage from '../ErrorMessage';
@@ -67,11 +67,13 @@ export default function LoginForm() {
         disabled={ disableButton }
         dataTestId="common_login__button-login"
       />
-      <Button
-        title="Ainda não tem conta"
-        typeButton="tertiary"
-        dataTestId="common_login__button-register"
-      />
+      <Link className={ styles.linkButton } to="/register">
+        <Button
+          title="Ainda não tem conta"
+          typeButton="tertiary"
+          dataTestId="common_login__button-register"
+        />
+      </Link>
       {showErrorMessage ? <ErrorMessage message="Email não cadastrado" /> : ''}
     </form>
   );

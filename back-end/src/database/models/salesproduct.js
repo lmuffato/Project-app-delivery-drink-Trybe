@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     quantity: DataTypes.STRING
   }, {
     sequelize,
-    modelName: 'salesProduct',
+    modelName: 'SalesProduct',
   });
   return salesProduct;
 };

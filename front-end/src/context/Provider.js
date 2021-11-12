@@ -45,7 +45,7 @@ function Provider({ children }) {
     setProducts(data);
   };
 
-  const postShoppingCartURL = 'http://localhost:3001/xxx';
+  const postShoppingCartURL = 'http://localhost:3001/products';
   const postShoppingCart = () => {
     axios.post(postShoppingCartURL, { shoppingCart })
       .then((res) => {
@@ -67,6 +67,7 @@ function Provider({ children }) {
     // console.log(fetchProducts);
   }, []);
 
+  // Atualiza o valor Total no botão de Checkout
   useEffect(() => {
     function sum() {
       const itens = Object.entries(shoppingCart);
@@ -147,6 +148,7 @@ function Provider({ children }) {
         submitShoppingCart,
         addProduct,
         subProduct,
+        postShoppingCart,
         total } }
     >
       { children }

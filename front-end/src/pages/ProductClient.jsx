@@ -4,7 +4,7 @@ import Header from '../components/header';
 import ProductCard from '../components/productCard';
 
 function ProductClient() {
-  const { products, total, shoppingCart } = useContext(Context);
+  const { products, total, shoppingCart, postShoppingCart } = useContext(Context);
   // setar CSS MASTER
 
   return (
@@ -15,6 +15,12 @@ function ProductClient() {
         type="button"
       >
         { `Ver Carrinho: R$ ${total}` }
+      </button>
+      <button
+        onClick={ () => postShoppingCart }
+        type="button"
+      >
+        Esse botão envia o carrinho de compras para o BackEnd!
       </button>
       <div className="master">
         {

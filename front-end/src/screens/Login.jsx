@@ -22,7 +22,7 @@ function Login() {
   const handleLogin = async () => {
     await makeLogin(email, password);
     if (!invalidEmailError) {
-      history.push('/');
+      history.push('/customer/products');
     }
   };
 
@@ -48,7 +48,7 @@ function Login() {
         onChange={ (e) => setEmail(e.target.value) }
         error={ !validateEmail() }
         helperText={ !(validateEmail()) && 'Digite um email válido' }
-        data-testid="common_login__input-email"
+        inputProps={ { 'data-testid': 'common_login__input-email' } }
       />
       <TextField
         margin="dense"
@@ -61,7 +61,7 @@ function Login() {
         error={ !validatePassword() }
         helperText={ !validatePassword()
           && 'A senha tem que ter mais que 6 caracteres' }
-        data-testid="common_login__input-password"
+        inputProps={ { 'data-testid': 'common_login__input-password' } }
       />
       <Button
         disabled={ !validateLoginInputs() }
@@ -70,13 +70,17 @@ function Login() {
       >
         Login
       </Button>
-      <Link
-        href="/register"
-        underline="hover"
+      <Button
         data-testid="common_login__button-register"
       >
-        Criar conta
-      </Link>
+        <Link
+          href="/register"
+          underline="hover"
+        >
+          Criar conta
+        </Link>
+      </Button>
+
       {invalidEmailError && (
         <span
           data-testid="common_login__element-invalid-email"

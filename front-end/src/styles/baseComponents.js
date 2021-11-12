@@ -10,14 +10,7 @@ const buttonTheme = (btnType) => (theme) => {
   }
 };
 
-/**
- * @typedef {{full?: boolean, btnType: 'primary' | 'secondary' | 'tertiary'}}
- * CustomButton
- * */
-
-export const BaseButton = (
-  /** @type {import('styled-components').ThemedStyledFunction<'button', any, CustomButton>} */
-  (styled.button)`
+export const BaseButton = styled.button`
   box-sizing: border-box;
   background-color: ${({ btnType, theme }) => buttonTheme(btnType)(theme).bg};
   color: ${({ btnType, theme }) => buttonTheme(btnType)(theme).color};
@@ -30,13 +23,40 @@ export const BaseButton = (
   padding: 10px;
   font-size: 15px;
   border-radius: 6px;
-  font-weight: 600;
+  font-weight: 6100;
   cursor: pointer;
   transition: filter 0.15s ease;
 
   &:active {
     filter: brightness(2);
   }
-`);
+`;
 
-export const x = 10;
+export const InputContainer = styled.div`
+  label {
+    display: flex;
+    flex-flow: column nowrap;
+    span {
+      font-size: 16px;
+      margin: 5px 10px;
+    }
+  }
+`;
+
+export const BaseInput = styled.input`
+  box-sizing: border-box;
+  border-radius: 5px;
+  height: 46px;
+  border-width: 2px;
+  border-color: ${({ theme }) => theme['dark-light']};
+  border-style: solid;
+  font-size: 15px;
+  padding: 10px;
+  min-width: 150px;
+  outline: none;
+  transition: border-color 0.15s;
+
+  &:focus {
+    border-color: ${({ theme }) => theme.primary};
+  }
+`;

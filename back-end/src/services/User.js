@@ -6,14 +6,14 @@ const login = async (email, password) => {
   const { error } = schemaLogin.validate({ email, password });
 
   if (error) {
-    return { err1: { message: error.message } };
+    return { err: { message: error.message } };
   }
 
   const passwordEncrypted = md5(password);
   const user = await User.login({ email, password: passwordEncrypted });
 
   if (user === null) {
-    return { err2: { message: 'User not found' } };
+    return { err: { message: 'User not found' } };
   }
 
   return { user };

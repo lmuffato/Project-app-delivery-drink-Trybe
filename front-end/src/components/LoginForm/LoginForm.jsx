@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Navigate } from 'react-router-dom';
 import Button from '../Button';
 import InputField from '../InputField';
 import ErrorMessage from '../ErrorMessage';
@@ -14,6 +15,7 @@ export default function LoginForm() {
   const [password, setPassword] = useState('');
   const [disableButton, setDisableButton] = useState(true);
   const [showErrorMessage, setShowErrorMessage] = useState(false);
+  const [redirect, setRedirect] = useState(false);
 
   const resetValues = () => {
     setEmail('');
@@ -32,9 +34,11 @@ export default function LoginForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    loginRequest(email, password, setShowErrorMessage);
+    loginRequest(email, password, setShowErrorMessage, setRedirect);
     resetValues();
   };
+
+  if (redirect) return <Navigate to="/customer/products" />;
 
   return (
     <form className={ styles.loginFormContainer } onSubmit={ handleSubmit }>
@@ -60,8 +64,8 @@ export default function LoginForm() {
         title="Login"
         typeButton="primary"
         type="submit"
-        dataTestId="common_login__button-login"
         disabled={ disableButton }
+        dataTestId="common_login__button-login"
       />
       <Button
         title="Ainda não tem conta"

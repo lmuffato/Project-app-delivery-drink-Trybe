@@ -6,8 +6,7 @@ export default function Button({
   title, typeButton, onClick, type, dataTestId, disabled }) {
   return (
     <button
-    // eslint-disable-next-line react/button-has-type
-      type={ type }
+      type={ type ? 'submit' : 'button' }
       className={ styles[typeButton] }
       onClick={ onClick }
       data-testid={ dataTestId }

@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import paths from '../routesPaths/paths';
+import { handleInput, goRoute } from '../utils/utils';
 
 function Login() {
   const [userData, setUserData] = useState({
@@ -6,11 +9,7 @@ function Login() {
     password: '',
   });
 
-  function handleInput({ target }, setData) {
-    const { name, value } = target;
-    setData({ ...userData, [name]: value });
-  }
-
+  const history = useHistory();
   const { email, password } = userData;
   const validateEmail = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(email);
   const minPasswordLength = 5;
@@ -28,7 +27,7 @@ function Login() {
           data-testid="common_login__input-email"
           name="email"
           value={ email }
-          onChange={ (e) => handleInput(e, setUserData) }
+          onChange={ (e) => handleInput(e, userData, setUserData) }
         />
         <br />
         <input
@@ -36,21 +35,21 @@ function Login() {
           placeholder="Insira sua senha"
           data-testid="common_login__input-password"
           name="password"
-          onChange={ (e) => handleInput(e, setUserData) }
+          onChange={ (e) => handleInput(e, userData, setUserData) }
         />
         <br />
         <button
-          type="submit"
+          type="button"
           data-testid="common_login__button-login"
-          id="buttonSubmit"
           disabled={ !(validateEmail && password.length > minPasswordLength) }
         >
           Login
         </button>
         <br />
         <button
-          type="submit"
+          type="button"
           data-testid="common_login__button-register"
+          onClick={ () => goRoute(paths.routeRegister, history) }
         >
           Cadastre-se
         </button>

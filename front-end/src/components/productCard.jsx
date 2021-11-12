@@ -1,11 +1,11 @@
-import React from 'react';
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
+import React, { useContext } from 'react';
 import '../styles/product.css';
-// import Context from '../context/Context';
+import Context from '../context/Context';
 
-function ProductCard(props) {
-  console.log(props);
-  // const { } = useContext(Context);
-
+function ProductCard({ product: { id, name, price, urlImage } }) {
+  const { addProduct } = useContext(Context);
   // Styles:
   // preço: Absolute inset -1 background-opacity 70%
   // image: fill
@@ -13,23 +13,28 @@ function ProductCard(props) {
   // Div filho 1: BG White?
   // Div filho 2: BG Aquamarine
 
+  // data testid por key
   return (
     <section className="productContainer">
       <div className="element">
-        <h1
+        {/* <h1
           className="absolute"
           data-testid="customer_products__element-card-price-"
         >
-          Preço
-        </h1>
-        <img src="algo" alt="algo" data-testid="customer_products__img-card-bg-image-" />
+          {price}
+        </h1> */}
+        <img
+          src={ urlImage }
+          alt="algo"
+          data-testid="customer_products__img-card-bg-image-"
+        />
       </div>
       <div>
         <span
           className="element"
           data-testid="customer_products__element-card-title-"
         >
-          Nome do Produto
+          {name}
         </span>
         <div className="element">
           <button
@@ -46,6 +51,8 @@ function ProductCard(props) {
           <button
             type="button"
             data-testid="customer_products__button-card-add-item-"
+            name={ name }
+            onClick={ (e) => addProduct(e) }
           >
             +
           </button>

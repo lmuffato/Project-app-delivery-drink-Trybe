@@ -1,7 +1,11 @@
+/* eslint-disable no-trailing-spaces */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-magic-numbers */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import Context from './Context';
+import mockProducts from './mockAPI';
 
 const Endpoints = {
   login_form: 'login',
@@ -11,7 +15,8 @@ const Endpoints = {
 function Provider({ children }) {
   const [user, setUser] = useState({});
   const [products, setProducts] = useState([]);
-  const [shoppingCart, setShoppingCart] = useState([]);
+  const [shoppingCart, setShoppingCart] = useState({});
+  const [cartSum, setCartSum] = useState(0);
 
   // user {
   // name: 'John',
@@ -27,14 +32,17 @@ function Provider({ children }) {
 
   const postSubmit = (url) => axios.post(`http://localhost:3001/${url}`, user);
 
-  const getProductsURL = 'http://localhost:3001/products';
+  // const getProductsURL = 'http://localhost:3001/products';
   const getProducts = () => {
-    axios.get(getProductsURL)
-      .then((res) => {
-        console.log(res);
-        console.log(res.data);
-        setProducts(res.data);
-      });
+    // axios.get(getProductsURL)
+    //   .then((res) => {
+    //     console.log(res);
+    //     console.log(res.data);
+    //     setProducts(res.data);
+    //   });
+    const data = mockProducts();
+    console.log(data);
+    setProducts(data);
   };
 
   const postShoppingCartURL = 'http://localhost:3001/xxx';
@@ -49,10 +57,14 @@ function Provider({ children }) {
   /// ////////////////////////ComponentDidMount//////////////////////// ///
   useEffect(() => {
     // Recebe produtos do BackEnd para renderização
-    const fetchProducts = (async () => {
-      await getProducts();
-    });
-    console.log(fetchProducts);
+    // const fetchProducts = (async () => {
+    //   await getProducts();
+    // });
+    // const emptyArray = [];
+    // setShoppingCart(emptyArray);
+    getProducts();
+    setCartSum(0);
+    // console.log(fetchProducts);
   }, []);
 
   /// ////////////////////////Components Functions//////////////////////// ///
@@ -75,12 +87,21 @@ function Provider({ children }) {
     await postShoppingCart();
   };
 
-  // Função disparada no onChange no ProductCard
+  // Função disparada no onClick no ProductCard
   const addProduct = (e) => {
-    const { name, value } = e.target;
-    console.log(name, value);
-    // Preciso enviar: Nome e Quantidade
-    setShoppingCart(name);
+    const { name } = e.target;
+    const currentItemsinCart = Object.keys(shoppingCart);
+    if (currentItemsinCart.includes(name)) {
+      const update = shoppingCart[name].quant;
+      return setShoppingCart({ ...shoppingCart,
+        [name]: { ...[name], quant: update + 1 } });
+    }
+    const cart = {
+      id: name,
+      quant: 1,
+    };
+    const spread = { ...shoppingCart, [name]: cart };
+    setShoppingCart(spread);
   };
 
   return (
@@ -92,7 +113,8 @@ function Provider({ children }) {
         submitChange,
         products,
         submitShoppingCart,
-        addProduct } }
+        addProduct,
+        cartSum } }
     >
       { children }
     </Context.Provider>

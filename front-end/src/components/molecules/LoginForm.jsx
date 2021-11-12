@@ -34,8 +34,10 @@ const LoginForm = () => {
   const handleClickRegister = () => {
     history.push('/register');
   };
-  
-  const errorMessageContent = () => 'Email/senha inválido! Por favor, verifique se os dados inseridos estão corretos.';
+
+  const errorMessageContent = () => {
+    return 'Email/senha inválido! Por favor, verifique se os dados inseridos estão corretos.';
+  };
 
   return (
     <form>

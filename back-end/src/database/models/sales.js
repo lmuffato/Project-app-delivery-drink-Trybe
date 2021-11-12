@@ -7,8 +7,6 @@ module.exports = (sequelize, DataTypes) => {
     delivery_number: DataTypes.STRING,
     sale_date: DataTypes.DATE,
     status: DataTypes.STRING,
-    onUpdate: DataTypes.STRING,
-    onDelete: DataTypes.STRING
   }, {
     tableName: 'Sales',
     timestamps: false,

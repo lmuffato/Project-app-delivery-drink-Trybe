@@ -15,6 +15,8 @@ module.exports = {
       },
       user_id: {
         allowNull: false,
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
         type: Sequelize.INTEGER,
         references: {
           model: 'users',
@@ -23,6 +25,8 @@ module.exports = {
       },
       seller_id: {
         allowNull: false,
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
         type: Sequelize.INTEGER,
         references: {
           model: 'users',
@@ -47,10 +51,14 @@ module.exports = {
       },
       status: {
         allowNull: false,
-        type: Sequelize.STRING,
+        defaultValue: 'Pendente',
+        type: Sequelize.ENUM('Pendente', 'Preparando', 'Em Trânsito', 'Entregue'),
       },
-      onUpdate: Sequelize.DATE,
-      onDelete: Sequelize.DATE    });
+      role: {
+        allowNull: false,
+        type: Sequelize.ENUM('administrator', 'seller', 'customer')
+      },
+    });
   },
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('Sales');

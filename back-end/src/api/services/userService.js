@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 const { User } = require('../../database/models');
 const {
   INCORRECT_USERNAME_OR_PASSWORD, ALL_FIELDS_FILLED, USER_ALREADY_EXIST,
+  NO_REGISTRED_USERS, NON_EXISTENTE_USER,
 } = require('../messages/errorMessages');
 
 const jwtConfig = {
@@ -38,12 +39,14 @@ const createUser = async ({ name, email, password, role }) => {
       role,
     },
   });
-
+  
   if (!created) {
     return ({ status: 409, data: USER_ALREADY_EXIST });
   }
-
-  return ({ status: 201, user });
+  
+  const { password: _, ...userWithoutPassword } = user.dataValues;
+  
+  return ({ status: 201, user: userWithoutPassword });
 };
 
 const login = async ({ email, password }) => {
@@ -64,7 +67,30 @@ const login = async ({ email, password }) => {
   return ({ status: 200, token });
 };
 
+const findAllUsers = async () => {
+  const allUsers = await User.findAll();
+
+  if (!allUsers) return ({ status: 404, data: NO_REGISTRED_USERS });
+
+  const usersArray = allUsers.map((user) => {
+    const { id, name, email, role } = user.dataValues;
+    return ({ id, name, email, role });
+  });
+
+  return ({ status: 200, data: usersArray });
+};
+
+const deleteUser = async (id) => {
+  const deletedUser = await User.destroy({ where: { id } });
+  
+  if (deletedUser === 0) return ({ status: 404, data: NON_EXISTENTE_USER });
+
+  return ({ status: 204, data: deletedUser });
+};
+
 module.exports = {
   login,
   createUser,
+  findAllUsers,
+  deleteUser,
 };

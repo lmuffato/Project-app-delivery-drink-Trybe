@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { createUser } from '../services/apis';
 
 function Register() {
   const PASSWORD_LENGTH = 6;
@@ -14,6 +16,10 @@ function Register() {
     if (name === 'email') setEmail(value);
     if (name === 'password') setPassword(value);
     if (name === 'name') setUserName(value);
+  };
+
+  const registerBtn = async () => {
+    await createUser(userName, email, password);
   };
 
   useEffect(() => {
@@ -53,13 +59,16 @@ function Register() {
         data-testid="common_register__input-password"
         placeholder="Digite sua senha"
       />
-      <button
-        type="button"
-        data-testid="common_register__button-register"
-        disabled={ disabled }
-      >
-        CADASTRAR
-      </button>
+      <Link to="/customer/products">
+        <button
+          type="button"
+          data-testid="common_register__button-register"
+          disabled={ disabled }
+          onClick={ registerBtn }
+        >
+          CADASTRAR
+        </button>
+      </Link>
       <p data-testid="common_register__element-invalid_register">
         Erro
       </p>

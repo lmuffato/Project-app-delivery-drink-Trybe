@@ -16,7 +16,7 @@ function Provider({ children }) {
   const [user, setUser] = useState({});
   const [products, setProducts] = useState([]);
   const [shoppingCart, setShoppingCart] = useState({});
-  const [cartSum, setCartSum] = useState(0);
+  const [total, setTotal] = useState(0);
 
   // user {
   // name: 'John',
@@ -63,9 +63,23 @@ function Provider({ children }) {
     // const emptyArray = [];
     // setShoppingCart(emptyArray);
     getProducts();
-    setCartSum(0);
+    setTotal(0);
     // console.log(fetchProducts);
   }, []);
+
+  useEffect(() => {
+    function sum() {
+      const itens = Object.entries(shoppingCart);
+      const teste = itens.map((item) => {
+        const A = parseFloat(Object.values(item[1])[1]);
+        const B = parseFloat(Object.values(item[1])[2]);
+        return (A * B).toFixed(2);
+      });
+      const soma = teste.reduce((acc, item) => acc + parseFloat(item), 0);
+      setTotal(soma);
+    }
+    sum();
+  }, [shoppingCart]);
 
   /// ////////////////////////Components Functions//////////////////////// ///
 
@@ -88,22 +102,39 @@ function Provider({ children }) {
   };
 
   // Função disparada no onClick no ProductCard
-  const addProduct = (e) => {
-    const { name } = e.target;
+  const addProduct = (name, value) => {
     const currentItemsinCart = Object.keys(shoppingCart);
     if (currentItemsinCart.includes(name)) {
       const update = shoppingCart[name].quant;
       return setShoppingCart({ ...shoppingCart,
-        [name]: { ...[name], quant: update + 1 } });
+        [name]: { id: name, price: value, quant: update + 1 } });
     }
     const cart = {
       id: name,
       quant: 1,
+      price: value,
     };
     const spread = { ...shoppingCart, [name]: cart };
     setShoppingCart(spread);
+    console.log(shoppingCart);
   };
 
+  const subProduct = (name, value) => {
+    const currentItemsinCart = Object.keys(shoppingCart);
+    if (currentItemsinCart.includes(name)) {
+      const update = shoppingCart[name].quant;
+      return setShoppingCart({ ...shoppingCart,
+        [name]: { id: name, price: value, quant: update - 1 } });
+    }
+    const cart = {
+      id: name,
+      quant: 1,
+      price: value,
+    };
+    const spread = { ...shoppingCart, [name]: cart };
+    setShoppingCart(spread);
+    console.log(shoppingCart);
+  };
   return (
     <Context.Provider
       value={ {
@@ -111,10 +142,12 @@ function Provider({ children }) {
         user,
         handleChange,
         submitChange,
+        shoppingCart,
         products,
         submitShoppingCart,
         addProduct,
-        cartSum } }
+        subProduct,
+        total } }
     >
       { children }
     </Context.Provider>

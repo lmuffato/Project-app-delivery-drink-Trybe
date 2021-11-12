@@ -5,7 +5,7 @@ import '../styles/product.css';
 import Context from '../context/Context';
 
 function ProductCard({ product: { id, name, price, urlImage } }) {
-  const { addProduct } = useContext(Context);
+  const { addProduct, subProduct } = useContext(Context);
   // Styles:
   // preço: Absolute inset -1 background-opacity 70%
   // image: fill
@@ -40,6 +40,7 @@ function ProductCard({ product: { id, name, price, urlImage } }) {
           <button
             type="button"
             data-testid="customer_products__button-card-rm-item-"
+            onClick={ () => subProduct(name, price) }
           >
             -
           </button>
@@ -51,8 +52,7 @@ function ProductCard({ product: { id, name, price, urlImage } }) {
           <button
             type="button"
             data-testid="customer_products__button-card-add-item-"
-            name={ name }
-            onClick={ (e) => addProduct(e) }
+            onClick={ () => addProduct(name, price) }
           >
             +
           </button>

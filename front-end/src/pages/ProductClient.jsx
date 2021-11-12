@@ -4,13 +4,18 @@ import Header from '../components/header';
 import ProductCard from '../components/productCard';
 
 function ProductClient() {
-  const { products, cartSum } = useContext(Context);
-  // console.log(products);
+  const { products, total, shoppingCart } = useContext(Context);
   // setar CSS MASTER
+
   return (
     <>
       <Header client={ `${'nome'}` } />
-      <button type="button">{`Ver Carrinho: R$ ${cartSum}`}</button>
+      <button
+        onClick={ () => console.log(shoppingCart) }
+        type="button"
+      >
+        { `Ver Carrinho: R$ ${total}` }
+      </button>
       <div className="master">
         {
           products ? products.map((product, index) => (

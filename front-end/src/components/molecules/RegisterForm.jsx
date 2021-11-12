@@ -23,9 +23,7 @@ const RegisterForm = () => {
     history.push('/products');
   };
 
-  const errorMessageContent = () => {
-    return 'Email/senha inválido! Por favor, verifique se os dados inseridos estão corretos.';
-  };
+  const errorMessageContent = () => 'Email/senha inválido! Verifique os dados inseridos';
 
   return (
     <form>

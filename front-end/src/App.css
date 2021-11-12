@@ -1,54 +1,60 @@
-.App {
-  align-items: center;
-  background: #0fa36b;
-  color: #464646;
+.navBar {
   display: flex;
-  flex-direction: column;
-  font-family: sans-serif;
-  height: 100vh;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgb(202,97,14);
+}
+
+.navBar button{
+  border:none;
+  color: white;
+  background-color: rgb(202,97,14);
+  font-size: 20px;
+}
+
+.navBar p{
+  color: white;
+  font-size: 20px;
+}
+
+.cards {
+  display: flex;
+  align-items: center;
   justify-content: center;
-  width: 100%;
+  max-width: 100%;
 }
 
-.App > .logo {
-  animation: shake 1.5s infinite ease;
-  color: aliceblue;
-  font-family: Montserrat , sans-serif;
-  font-size: 3em;
-  font-weight: 900;
+.cardProduct {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 15%;
+  height: 250px;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 5%;
+  flex-direction: column;
+  padding: 5px;
+  margin: 5px 5px 5px 5px;
 }
 
-.rocksGlass {
-  animation: shake 1s infinite ease;
-  max-height: 80vh;
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-@keyframes shake {
-
-  0% {
-    transform: rotate(5deg);
-  }
-
-  50% {
-    transform: rotate(-5deg);
-  }
-
-  100% {
-    transform: rotate(5deg);
-  }
+.buttons button{
+  margin: 2px 2px 2px 2px;
 }
 
-@keyframes clink {
-
-  0% {
-    transform: rotate(-10deg);
-  }
-
-  50% {
-    transform: rotate(20deg);
-  }
-
-  100% {
-    transform: rotate(-10deg);
-  }
+.buttonCheckout {
+  border: none;
+  color: white;
+  background-color: rgb(138,24,12);
+  border-radius: 5px;
+  height: 50px;
+  width: 300px;
 }

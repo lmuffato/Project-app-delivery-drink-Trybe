@@ -33,15 +33,15 @@
 }
 
 .linksContainer  > a.active:after {
-  position: absolute;
-  content: '';
-  height: 8px;
-  width: 100%;
-  bottom: 0px;
-  left: 0;
   background: #ed7c2b;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
+  bottom: 0px;
+  content: '';
+  height: 8px;
+  left: 0;
+  position: absolute;
+  width: 100%;
 }
 
 .beerProducts {
@@ -52,42 +52,42 @@
 }
 
 .userInfo {
+  align-items: center;
   display: flex;
   gap: 40px;
-  align-items: center;
   margin-right: 30px;
 }
 
 .userInfo > div {
+  align-items: center;
   background: #ed7c2b;
-  height: 40px;
-  width: 40px;
   border-radius: 50%;
+  color: white;
   display: flex;
   font-size: 1.8rem;
-  align-items: center;
+  height: 40px;
   justify-content: center;
-  color: white;
+  width: 40px;
 }
 
 .userInfo > p {
-  font-size: 1.5rem;
   color: white;
+  font-size: 1.5rem;
 }
 
 .userInfo > button {
-  height: 2rem;
-  display: flex;
   align-items: center;
-  justify-content: center;
-  width: 6rem;
-  border-radius: 8px;
   background-color: red;
-  color: white;
-  font-size: 1.2rem;
   border: none;
+  border-radius: 8px;
+  color: white;
   cursor: pointer;
+  display: flex;
+  font-size: 1.2rem;
+  height: 2rem;
+  justify-content: center;
   transition: 0.3s;
+  width: 6rem;
 }
 
 .userInfo > button:hover {

@@ -2,30 +2,40 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import testID from '../../../datatestids.json';
-import validateEmail from '../../utils/validations/validateEmail';
-import validatePassword from '../../utils/validations/validatePassword';
 import Button from '../atoms/Button';
+import ErrorMessage from '../atoms/ErrorMessage';
 import Input from '../atoms/Input';
+import loginAction from '../../utils/validations/API/fetch';
+import validateLogin from '../../utils/validations/joi/login';
 
 const LoginForm = () => {
   const [login, setLogin] = useState({ email: '', password: '' });
+  const [isHidden, setIsHidden] = useState(true);
   const { email, password } = login;
   const history = useHistory();
-
   const handleChange = ({ target: { name, value } }) => {
+    setIsHidden(true);
     setLogin({
       ...login,
       [name]: value,
     });
   };
 
-  const handleLogin = () => {
-    history.push('/products');
+  const handleClickEnter = async () => {
+    const token = await loginAction({ email, password });
+    console.log(token);
+    if (!token) {
+      setIsHidden(false);
+    } else {
+      history.push('/customer/products');
+    }
   };
 
-  const handleRegister = () => {
+  const handleClickRegister = () => {
     history.push('/register');
   };
+  
+  const errorMessageContent = () => 'Element oculto (Mensagens de erro)';
 
   return (
     <form>
@@ -53,16 +63,22 @@ const LoginForm = () => {
           className="btn-login"
           type="button"
           data-testid={ testID[3] }
-          disabled={ !(validateEmail(email) && validatePassword(password)) }
-          onClick={ handleLogin }
+          enabled={ !validateLogin.validate({ email, password }).error }
+          onClick={ handleClickEnter }
           text="LOGIN"
         />
         <Button
           className="btn-register"
           type="button"
           data-testid={ testID[4] }
-          onClick={ handleRegister }
+          onClick={ handleClickRegister }
           text="Don't have an account yet?"
+        />
+        <ErrorMessage
+          className="error-message-login"
+          data-testid={ testID[5] }
+          text={ errorMessageContent() }
+          hidden={ isHidden }
         />
       </div>
     </form>

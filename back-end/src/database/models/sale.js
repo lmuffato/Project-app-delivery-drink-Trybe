@@ -5,10 +5,10 @@ const salesSchema = require('../schemas/sale');
  * @return 
  */
  module.exports = (sequelize, DataTypes) => {  
-  const Sale = sequelize.define('Sale', salesSchema(DataTypes), { timestamps: false });
-  Sale.associate = (models) => {
-    Sale.belongsTo(models.User, { as: 'user' });
-    Sale.belongsTo(models.User, { as: 'seller' });
+  const sale = sequelize.define('sale', salesSchema(DataTypes), { timestamps: false });
+  sale.associate = (models) => {
+    sale.belongsTo(models.user, { as: 'user' });
+    sale.belongsTo(models.user, { as: 'seller' });
   };  
-  return Sale;
+  return sale;
 };

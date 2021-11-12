@@ -24,6 +24,6 @@ module.exports = (DataTypes) => ({
   },
   role: {
     allowNull: false,
-    type: DataTypes.ENUM('administrator', 'seller', 'customer')
+    type: DataTypes.STRING(20)
   },
 })

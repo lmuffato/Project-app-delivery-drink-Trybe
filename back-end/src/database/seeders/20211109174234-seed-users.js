@@ -4,7 +4,7 @@ module.exports = {
   /**
    * @param {import('sequelize').QueryInterface} queryInterface
    */
-  up: (queryInterface) => queryInterface.bulkInsert('Users',
+  up: (queryInterface) => queryInterface.bulkInsert('users',
      [
       {
         id: 1,
@@ -29,5 +29,5 @@ module.exports = {
       }
     ], {}),
 
-  down: (queryInterface) => queryInterface.bulkDelete('Users', null, {}),
+  down: (queryInterface) => queryInterface.bulkDelete('users', null, {}),
 };

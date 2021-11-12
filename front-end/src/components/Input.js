@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { BaseInput, InputContainer } from '../../styles/baseComponents';
+import { BaseInput, InputContainer } from '../styles/baseComponents';
 
 const Input = ({ name, label, onChange, value, datatestid, type, placeholder }) => (
   <InputContainer>

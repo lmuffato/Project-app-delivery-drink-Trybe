@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ProductQtyContainer } from '../../../styles/baseComponents';
+import { ProductQtyContainer } from '../../styles/baseComponents';
 import QtyButton from './QtyButton';
 
 function ProductQty({ label, onMinus, onPlus, value, id }) {

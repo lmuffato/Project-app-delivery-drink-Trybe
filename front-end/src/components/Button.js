@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { BaseButton } from '../../styles/baseComponents';
+import { BaseButton } from '../styles/baseComponents';
 
 const Button = ({ children, onClick, datatestid, btnType, full }) => (
   <BaseButton

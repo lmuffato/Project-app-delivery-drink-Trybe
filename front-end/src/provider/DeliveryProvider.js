@@ -1,48 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { node } from 'prop-types';
 import DeliveryContext from '../context/DeliveryContext';
+import fetchAllProducts from '../utils/Data';
 
 function DeliveryProvider({ children }) {
-  const [products, setProducts] = useState([{}]);
-  // const [name, settingSearchedName] = useState('');
-  // const [filterByNumber, setfilterByNumber] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [quantityProducts, setQuantityProducts] = useState(0);
 
-  // useEffect(() => {
-  //   filterByNumber.map((item) => {
-  //     const { column, comparison, value } = item;
-  //     switch (comparison) {
-  //     case 'maior que':
-  //       return setProducts(
-  //         [...products.filter((planet) => Number(planet[column]) > Number(value))],
-  //       );
-  //     case 'menor que':
-  //       return setProducts(
-  //         [...products.filter((planet) => Number(planet[column]) < Number(value))],
-  //       );
-  //     case 'igual a':
-  //       return setProducts(
-  //         [...products.filter((planet) => Number(planet[column]) === Number(value))],
-  //       );
-  //     default:
-  //       return products;
-  //     }
-  //   });
-  // }, [filterByNumber]);
+  useEffect(() => {
+    fetchAllProducts()
+      .then((allProducts) => setProducts(allProducts));
+  }, []);
 
   const contextValue = {
     products,
-    // filters: { filterByName: { name } },
-    // filterByNumber,
+    quantityProducts,
+    setQuantityProducts,
   };
-
-  useEffect(() => {
-    const getProducts = async () => {
-      const response = await fetch('localhost/products');
-      const newResponse = await response.json();
-      setProducts(newResponse.results);
-    };
-    getProducts();
-  }, []);
 
   return (
     <DeliveryContext.Provider value={ contextValue }>

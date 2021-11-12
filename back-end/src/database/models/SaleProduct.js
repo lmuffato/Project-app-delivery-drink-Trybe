@@ -1,6 +1,6 @@
 const modelConfig = {
   timestamps: false, 
-  tableName: 'SalesProducts',
+  tableName: 'salesProducts',
 };
 
 module.exports = (sequelize, DataTypes) => {

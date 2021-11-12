@@ -18,7 +18,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       role: {
-        type: Sequelize.VARCHAR
+        type: Sequelize.STRING
       },
     });
   },

@@ -1,6 +1,6 @@
 const loginAction = async ({ email, password }) => {
   try {
-    const rawResponse = await fetch(`${process.env.REACT_APP_SERVER_URL}/login`,
+    const rawResponse = await fetch('http://localhost:3001/login',
       {
         method: 'POST',
         headers: {

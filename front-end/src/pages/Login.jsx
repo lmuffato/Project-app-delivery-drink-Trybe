@@ -1,17 +1,31 @@
 import React, { useEffect, useState } from 'react';
+// import UserContext from '../context/ApiContext';
+import { setLogin } from '../services/apis';
 
 function Login() {
   const PASSWORD_LENGTH = 6;
 
+  // const { users, setAtt, att } = useContext(UserContext);
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [disabled, setDisabled] = useState(true);
+  const [errorMessage, setErrorMessage] = useState(false);
 
   const handleChange = ({ target }) => {
     const { value, name } = target;
-    console.log(value, name);
     if (name === 'email') setEmail(value);
     if (name === 'password') setPassword(value);
+  };
+
+  const loginButton = async () => {
+    try {
+      const loginUser = await setLogin(email, password);
+      console.log(loginUser);
+      setErrorMessage(false);
+    } catch (error) {
+      setErrorMessage(true);
+    }
   };
 
   useEffect(() => {
@@ -43,6 +57,7 @@ function Login() {
         data-testid="common_login__button-login"
         type="button"
         disabled={ disabled }
+        onClick={ loginButton }
       >
         LOGIN
       </button>
@@ -53,7 +68,7 @@ function Login() {
         Ainda não tenho conta
       </button>
       <p data-testid="common_login__element-invalid-email">
-        Erro
+        { errorMessage ? 'Usuário não encontrado' : null }
       </p>
     </div>
   );

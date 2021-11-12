@@ -25,3 +25,8 @@ export const fetchSaleProduct = async () => {
   const result = await api.get('/salesproducts');
   return result.data;
 };
+
+export const setLogin = async (email, password) => {
+  const result = await api.post('/login', { email, password });
+  return result.data;
+};

@@ -26,8 +26,8 @@ const PASSWORD_EMPTY = {
 };
 
 const USER_INVALID = {
-  code: 400,
-  message: 'Invalid fields',
+  code: 404,
+  message: 'Usuário inexistente',
 };
 
 const validateLogin = (email, password) => {
@@ -38,21 +38,25 @@ const validateLogin = (email, password) => {
   return null;
 };
 
-const validateCredentials = async (email) => {
-  const user = await User.findOne({ where: { email } });
+const validateCredentials = async (email, password) => {
+  const user = await User.findOne({ where: { email, password } });
   if (!user) return USER_INVALID;
 };
 
 const userLogin = async (email, password) => {
   const isValid = validateLogin(email, password);
   if (isValid) return isValid;
-  const isRegistered = await validateCredentials(email);
+  const isRegistered = await validateCredentials(email, password);
   if (isRegistered) return isRegistered;
   const user = await User.findOne({ where: { email } });
   const { dataValues } = user;
   const { password: _, ...userPayload } = dataValues;
   const token = jwt.sign(userPayload, SECRET);
-  return { code: 200, token };
+  const userLogin = {
+    ...userPayload,
+    token,
+  };
+  return userLogin;
 };
 
 module.exports = { userLogin };

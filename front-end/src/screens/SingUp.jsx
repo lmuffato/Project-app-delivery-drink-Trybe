@@ -19,8 +19,8 @@ function SignUp() {
   const [password, setPassword] = useState('');
 
   const askCreateUser = async () => {
-    await createUser(name, email, password);
-    if (!signUpErrorMessage) {
+    const response = await createUser(name, email, password);
+    if (response) {
       history.push('/customer/products');
     }
   };

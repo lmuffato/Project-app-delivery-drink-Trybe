@@ -1,4 +1,4 @@
-const { Product, Sales } = require('../database/models');
+const { Product, Sales, SalesProduct } = require('../database/models');
 const errorMap = require('../utils/errorMap');
 
 const getAll = async () => {
@@ -13,19 +13,24 @@ const getAll = async () => {
 };
 
 // ainda não implementado
-const postProducts = async (data) => {
-  const { delivery, product } = data;
+const postProducts = async (data, user) => {
+  const { delivery, shoppingCart, total } = data;
   const { deliveryAddress, deliveryNumber } = delivery;
-  const { id, total, quantity } = product;
- 
-  try {
+
+  const { id, email, role } = user;
+  const { quant } = shoppingCart;
+  
     const result = await Sales.create({
-      deliveryAddress, deliveryNumber, id, total, quantity, status: 'pendente' });
-    if (!result) return errorMap.NotFound;
-    return result;
-  } catch (error) {
-    return errorMap.internalError;
-  }
+      userId: id, totalPrice: total, deliveryAddress, deliveryNumber, status: 'pendente' });
+      console.log(result);
+
+    // const result2 = awair SalesProduct.insertOne({where: { saleId:  }})
+  // try {
+  //   if (!result) return errorMap.NotFound;
+  //   return result;
+  // } catch (error) {
+  //   return errorMap.internalError;
+  // }
 };
 
 module.exports = { getAll, postProducts };

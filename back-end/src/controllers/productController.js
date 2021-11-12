@@ -8,10 +8,12 @@ const getAll = async (req, res) => {
 };
 
 const postProducts = async (req, res) => {
-  const { data } = req.body;
-  const result = await productService.postProducts(data);
+  const data = req.body;
+  const user = req.token;
 
-  return res.status(OK).json(result);
+  const result = await productService.postProducts(data, user);
+
+  // return res.status(OK).json(result);
 };
 
 module.exports = {

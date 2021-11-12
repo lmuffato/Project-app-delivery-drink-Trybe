@@ -19,6 +19,7 @@ function ProviderLogin({ children }) {
       const { response } = error;
       const { request, ...errorObject } = response;
       console.log(errorObject);
+      console.log(errorObject);
       setInvalidEmailError(true);
     }
   };

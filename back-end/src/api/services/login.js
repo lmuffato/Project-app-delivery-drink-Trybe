@@ -1,5 +1,5 @@
 const md5 = require('md5');
-const { User } = require('../database/models');
+const { User } = require('../../database/models');
 const createToken = require('../auth/jwtFunctions');
 
 const checkUserIfExist = (user) => {

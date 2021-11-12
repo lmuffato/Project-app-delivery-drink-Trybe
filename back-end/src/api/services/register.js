@@ -1,6 +1,6 @@
 const md5 = require('md5');
 
-const { User } = require('../database/models');
+const { User } = require('../../database/models');
 
 const checkUserIfExist = (user) => {
   const errMessage = {

@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
 
   users.associate = (models) => { // Define a relação de associação de um ou mais campos desta tabela com outra.
     users.hasMany(models.sales, // Um usuário pode ter vários posts na tabela BlogPost.
-      { foreignKey: 'user_Id', as: 'Sale' }); // O campo userId será exibido como 'userPosts' na tabela BlogPost.
+      { foreignKey: 'user_id', as: 'Sale' }); // O campo userId será exibido como 'userPosts' na tabela BlogPost.
       // { foreignKey: ['user_id', 'seller_id']);  Usar esse trecho em substituição ao acima, se for usar a seller_id
   };
   return users;

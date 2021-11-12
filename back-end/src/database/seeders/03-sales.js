@@ -20,7 +20,6 @@ module.exports = {
           total_price: 1.99,
           delivery_address: 'Rua B',
           delivery_number: '388',
-          
           status: 'entrege',
         },
       ]);

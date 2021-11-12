@@ -12,6 +12,7 @@ http GET :3001/users
 */
 
 router.post('/',
+productsMiddlewares.createNew,
 async () => {});
 /* REQUISIÇÃO:
 http POST :3001/users displayName='LucasMuffato' email='lucas@gmail.com' password='lucas123456' image='lucas'
@@ -19,19 +20,21 @@ http POST :3001/users displayName='Lucas' email='lucas' password='lucas' image='
 */
 
 router.get('/:id',
+productsMiddlewares.getById,
 async () => {});
 /* REQUISIÇÃO:
 http GET :3001/users/1
 */
 
 router.put('/:id',
+productsMiddlewares.updateById,
 async () => {});
 /* REQUISIÇÃO:
 http PUT :3001/users/3 displayName='Lucas' email='lucas@gmail.com' password='Senha123' image='www.google.com'
 */
 
 router.delete('/:id',
-// userMiddleware.deleteById,
+productsMiddlewares.deleteById,
 async () => {});
 /* REQUISIÇÃO:
 http DELETE :3001/users/4

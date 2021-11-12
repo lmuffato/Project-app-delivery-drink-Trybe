@@ -20,16 +20,6 @@ module.exports = {
         onDelete: "CASCADE",
         foreignKey: true,
       },
-      // seller_id: {
-      //   type: Sequelize.INTEGER,
-      //   references: {
-      //     model: "sales",
-      //     key: "id",
-      //   },
-      //   onUpdate: "CASCADE",
-      //   onDelete: "CASCADE",
-      //   foreignKey: true,
-      // },
       total_price: {
         type: Sequelize.DECIMAL(9,2),
       },
@@ -46,6 +36,16 @@ module.exports = {
       status: {
         type: Sequelize.STRING,
       },
+            // seller_id: {
+      //   type: Sequelize.INTEGER,
+      //   references: {
+      //     model: "sales",
+      //     key: "id",
+      //   },
+      //   onUpdate: "CASCADE",
+      //   onDelete: "CASCADE",
+      //   foreignKey: true,
+      // },
     });
   },
   down: async (queryInterface, Sequelize) => {

@@ -3,6 +3,7 @@ const app = require('./app');
 const usersControllers = require('../layers/users/usersControllers');
 const salesControllers = require('../layers/sales/salesControllers');
 const productsControllers = require('../layers/products/productsControllers');
+const salesProductsControllers = require('../layers/salesProducts/salesProductsControllers');
 
 app.get('/test', (_req, res) => res.status(418).json({ message: 'mensagem de test' }));
 
@@ -23,6 +24,11 @@ http://localhost:3001/sales
 app.use('/products', productsControllers);
 /*
 http://localhost:3001/products
+*/
+
+app.use('/salesProducts', salesProductsControllers);
+/*
+http://localhost:3001/salesProducts
 */
 
 app.listen(port);

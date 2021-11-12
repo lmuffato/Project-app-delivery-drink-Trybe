@@ -1,6 +1,6 @@
 import React from 'react';
 import LoginForm from '../components/molecules/LoginForm';
-import '../styles/login.css';
+import '../styles/Login.css';
 
 function Login() {
   return (

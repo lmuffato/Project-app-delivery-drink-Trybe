@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
   {
     tableName: 'products', // Define o nome da tabela a ser usada, ignorando o nome definido no models.
     timestamps: false, // remove a obrigatoriedade de utilizar os campos `createdAt` e `updatedAt`.
+    underscored: true,
   });
 
   // products.associate = (models) => { // Define a relação de associação de um ou mais campos desta tabela com outra.

@@ -6,6 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       tableName: 'salesProducts',
       timestamps: false, 
+      underscored: true,
     });
 
   salesProducts.associate = (models) => { // Essa associação define o relacionamento N:N entre as tabelas Category e BlogPost.

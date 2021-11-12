@@ -14,11 +14,10 @@ function ProviderLogin({ children }) {
     try {
       const { data } = await axios.post(`${urlBase}/login`, { email, password });
       setToken(data);
+      return true;
     } catch (error) {
-      const { response } = error;
-      const { request, ...errorObject } = response;
-      console.log(errorObject);
       setInvalidEmailError(true);
+      return false;
     }
   };
 

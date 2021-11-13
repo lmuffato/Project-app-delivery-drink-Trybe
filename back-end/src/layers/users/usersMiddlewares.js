@@ -1,5 +1,5 @@
-const { users } = require('../../database/models');
 const crypto = require('crypto');
+const { users } = require('../../database/models');
 
 const getAll = async (req, res) => {
   try {
@@ -73,8 +73,8 @@ const removeKeyInObject = (obj, key) => {
 const createNew = async (req, res) => {
   try {
     const { name, email, password, role } = req.body;
-    console.log(name);
-    const obj = { name, email, password, role };
+    const hash = crypto.createHash('md5').update(password).digest('hex');
+    const obj = { name, email, password: hash, role };
     const newData = await users.create(obj);
     req.userInfo = { name, email, role };
     // req.userInfo = removeKeyInObject(obj, 'password');

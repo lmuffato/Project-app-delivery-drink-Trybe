@@ -7,7 +7,7 @@ const fetchLogin = async (email, password) => {
     mode: 'cors',
     body: JSON.stringify({ email, password }),
   };
-  console.log(email, password);
+
   const response = await fetch('http://localhost:3001/login', requestOptions)
     .then((res) => res.json())
     .then((data) => data);

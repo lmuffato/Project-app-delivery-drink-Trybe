@@ -1,0 +1,12 @@
+.products {
+  align-items: center;
+  display: flex;
+  font-size: 26px;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.drink-img {
+  border-radius: 30px;
+  height: 250px;
+}

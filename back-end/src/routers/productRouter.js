@@ -1,11 +1,11 @@
 const express = require('express');
 const { productController } = require('../controllers');
-// const { validateEmail, validatePassword } = require('../middlewares');
+const { validateToken } = require('../middlewares');
 
 const Router = express.Router();
 
 Router.get('/', productController.getAll);
-Router.post('/', productController.postProducts);
+Router.post('/', validateToken, productController.postProducts);
 
 Router.use((err, _req, res, _next) => {
   const { code, message } = err;

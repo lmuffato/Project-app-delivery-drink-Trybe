@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { node } from 'prop-types';
-import DeliveryContext from '../context/DeliveryContext';
+import DeliveryContext from './DeliveryContext';
 
 function DeliveryProvider({ children }) {
   const [products, setProducts] = useState([{}]);

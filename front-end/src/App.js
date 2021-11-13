@@ -1,13 +1,16 @@
 import React from 'react';
-import Router from './Routes.js';
+import Routes from './Routes';
+import DeliveryProvider from './Contexts/Deliveries/DeliveryProvider';
+import UserProvider from './Contexts/User/userProvider';
 import './App.css';
-
 
 function App() {
   return (
-    <div>
-      <Routes />
-    </div>
+    <DeliveryProvider>
+      <UserProvider>
+        <Routes />
+      </UserProvider>
+    </DeliveryProvider>
   );
 }
 

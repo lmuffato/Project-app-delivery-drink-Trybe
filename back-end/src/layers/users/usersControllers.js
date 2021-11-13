@@ -19,6 +19,13 @@ http POST :3001/users displayName='LucasMuffato' email='lucas@gmail.com' passwor
 http POST :3001/users displayName='Lucas' email='lucas' password='lucas' image='lucas'
 */
 
+router.post('/login',
+userMiddlewares.login,
+async () => {});
+/* REQUISIÇÃO:
+http POST :3001/login
+*/
+
 router.get('/:id',
 userMiddlewares.getById,
 async () => {});

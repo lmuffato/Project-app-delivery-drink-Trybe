@@ -1,4 +1,4 @@
-const { Product, Sales, SalesProduct } = require('../database/models');
+const { Product, Sale, SaleProduct } = require('../database/models');
 const errorMap = require('../utils/errorMap');
 
 const getAll = async () => {
@@ -12,25 +12,24 @@ const getAll = async () => {
   }
 };
 
-// ainda não implementado
 const postProducts = async (data, user) => {
-  const { delivery, shoppingCart, total } = data;
+  const { delivery, shoppingCart, total, sellerId } = data;
   const { deliveryAddress, deliveryNumber } = delivery;
-
-  const { id, email, role } = user;
-  const { quant } = shoppingCart;
+  const arrSales = Object.entries(shoppingCart);
   
-    const result = await Sales.create({
-      userId: id, totalPrice: total, deliveryAddress, deliveryNumber, status: 'pendente' });
-      console.log(result);
+  const { dataValues: { id } } = await Sale.create({
+    userId: user.id,
+    sellerId,
+    totalPrice: total,
+    deliveryAddress,
+    deliveryNumber,
+    status: 'pendente' });
 
-    // const result2 = awair SalesProduct.insertOne({where: { saleId:  }})
-  // try {
-  //   if (!result) return errorMap.NotFound;
-  //   return result;
-  // } catch (error) {
-  //   return errorMap.internalError;
-  // }
+  arrSales.forEach(async (currSale) => SaleProduct.create(
+    { saleId: id, productId: currSale[0], quantity: currSale[1] },
+  ));
+
+  return { id };
 };
 
 module.exports = { getAll, postProducts };

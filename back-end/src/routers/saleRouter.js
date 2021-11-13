@@ -1,9 +1,10 @@
 const express = require('express');
-const { productController } = require('../controllers');
+const { saleController } = require('../controllers');
+const { validateToken } = require('../middlewares');
 
 const Router = express.Router();
 
-Router.get('/', productController.getAll);
+Router.post('/', validateToken, saleController.postSale);
 
 Router.use((err, _req, res, _next) => {
   const { code, message } = err;

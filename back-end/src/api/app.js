@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-const { loginRouter, registerRouter, productRouter } = require('../routers');
+const { loginRouter, registerRouter, productRouter, saleRouter } = require('../routers');
 
 const app = express();
 
@@ -17,5 +17,7 @@ app.use('/login', loginRouter);
 app.use('/register', registerRouter);
 
 app.use('/products', productRouter);
+
+app.use('/sale', saleRouter);
 
 module.exports = app;

@@ -12,10 +12,13 @@ function UserProvider({ children }) {
   };
 
   const [user, setUser] = useState(DEFAULT_USER);
+  const [cart, setCart] = useState([]);
 
   const context = {
     user,
     setUser,
+    cart,
+    setCart,
   };
 
   return (

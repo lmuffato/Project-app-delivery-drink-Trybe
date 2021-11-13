@@ -9,12 +9,18 @@ function Header({ links }) {
   return (
     <header>
       {links.map((link, i) => (
-        <Link to={ link.url } key={ `header${i}` }>
+        <Link
+          to={ link.url }
+          key={ `header${i}` }
+          data-testid={ `${link.testId}` }
+        >
           {link.name}
         </Link>
       ))}
-      {user.name}
-      <Link to="/login">
+      <div data-testid="customer_products__element-navbar-user-full-name">
+        {user.name}
+      </div>
+      <Link to="/login" data-testid="customer_products__element-navbar-link-logout">
         <button type="button" onClick={ () => onExit() }>
           Sair
         </button>

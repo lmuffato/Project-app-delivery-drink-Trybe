@@ -7,8 +7,16 @@ const HEADERS = ['Descrição', 'Quantidade', 'Valor Unitário', 'Sub-total'];
 
 // Adaptar essas urls conforma a aplicação for implementada
 const links = [
-  { name: 'PRODUTOS', url: '/products' },
-  { name: 'MEUS PEDIDOS', url: '/orders' },
+  {
+    name: 'PRODUTOS',
+    url: '/products',
+    testId: 'customer_products__element-navbar-link-products',
+  },
+  {
+    name: 'MEUS PEDIDOS',
+    url: '/orders',
+    testId: 'customer_products__element-navbar-link-orders',
+  },
 ];
 
 // Helpers
@@ -47,7 +55,7 @@ function Checkout() {
           onClick={ removeItem }
           testeId="element-order-table-name-"
         />
-        <div>
+        <div data-testid="customer_checkout__element-order-total-price">
           Total R$
           {' '}
           {
@@ -58,21 +66,31 @@ function Checkout() {
       <form>
         <label htmlFor="seller">
           Vendedor Responsável
-          <select id="seller">
+          <select id="seller" data-testeid="customer_checkout__select-seller">
             <option value="">Fulano</option>
           </select>
         </label>
         <label htmlFor="adress">
           Endereço
-          <input type="text" required id="adress" />
+          <input
+            type="text"
+            required
+            id="adress"
+            data-testeid="customer_checkout__input-address"
+          />
         </label>
         <label htmlFor="number">
           Número
-          <input type="number" required id="number" />
+          <input
+            type="number"
+            required
+            id="number"
+            data-testeid="customer_checkout__input-addressNumber"
+          />
         </label>
       </form>
       <Link to="/">
-        <button type="button">
+        <button type="button" data-testeid="customer_checkout__button-submit-order">
           FINALIZAR PEDIDO
         </button>
       </Link>

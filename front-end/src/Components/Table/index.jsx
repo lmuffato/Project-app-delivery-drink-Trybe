@@ -10,7 +10,7 @@ function Table({ headers, payload, hasButton, onClick }) {
           {headers.map((header, i) => (
             <th key={ `head${i}` }>{header}</th>
           ))}
-          {hasButton && <th>Excluir</th>}
+          {hasButton && <th>Remover</th>}
         </tr>
       </thead>
       <tbody>

@@ -3,8 +3,11 @@ const User = require('../services/User');
 const login = async (req, res) => {
   const { email, password } = req.body;
   
-  const { err, user } = await User.login(email, password);
-  if (err) return res.status(400).json(err.message);
+  const { err1, err2, user } = await User.login(email, password);
+  const err = err1 ? err1.message : err2.message;
+
+  if (err) return res.status(400).json({ error: err });
+
   return res.status(200).json(user);    
 };
 

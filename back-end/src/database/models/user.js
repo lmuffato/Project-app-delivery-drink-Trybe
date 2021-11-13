@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = (sequelize, DataTypes) => {
-  const User = sequelize.define('User', {
+  const User = sequelize.define('user', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     email: DataTypes.STRING,
     name: DataTypes.STRING,
@@ -10,11 +10,11 @@ module.exports = (sequelize, DataTypes) => {
   },
     {
       timestamps: false,
-      tableName: 'Users',
+      tableName: 'users',
     });
 
   User.associate = (models) => {
-    User.hasOne(models.Sale,
+    User.hasOne(models.sale,
       { foreignKey: 'userId', as: 'cart' });
   };
 

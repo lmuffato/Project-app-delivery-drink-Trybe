@@ -3,6 +3,9 @@ import Button from './Button';
 import Input from './Input';
 import ProductCard from './ProductCard';
 import ProductQty from './ProductQty';
+import BadgeItemFinalizado from './BadgeItemFinalizado';
+import BadgeValorTotal from './BadgeValorTotal';
+import ProductOrderStatus from './ProductOrderStatus';
 
 function BaseComponent() {
   const [qty, setQty] = useState(0);
@@ -43,6 +46,30 @@ function BaseComponent() {
             image="https://media.istockphoto.com/photos/glass-of-fresh-beer-with-green-hops-isolated-on-white-background-picture-id691122340?s=612x612"
             alt="alt-teste"
           />
+        </div>
+      </div>
+      <div>
+        <BadgeItemFinalizado
+          descricao="descição"
+          id="id"
+          quantidade={ 10 }
+          valorUnitario={ 100 }
+        />
+        <ProductOrderStatus status="pending" />
+        <ProductOrderStatus status="delivered" />
+        <ProductOrderStatus status="preparing" />
+        <div
+          style={ {
+            display: 'grid',
+            gridTemplateColumns: 'repeat(4, 1fr)',
+            gridTemplateRows: '100px',
+          } }
+        >
+          <span>Tamanho variável</span>
+          <ProductOrderStatus full status="pending" />
+          <ProductOrderStatus full status="delivered" />
+          <ProductOrderStatus full status="preparing" />
+
         </div>
       </div>
     </div>);

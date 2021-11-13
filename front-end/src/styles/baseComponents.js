@@ -143,10 +143,10 @@ export const ProductCardContainer = styled.div`
     position: absolute;
     background-color: ${({ theme }) => theme.light};
     box-sizing: border-box;
-    border: 1px outset ${({ theme }) => theme[DARK_LIGHT]};
+    /* border: 1px outset ${({ theme }) => theme[DARK_LIGHT]}; */
     border-radius: 8px;
-    font-size: 18px;
-    padding: 6px 10px;
+    font-size: 16px;
+    padding: 5px 10px;
     font-weight: bold;
     left: 10px;
     top: 10px;

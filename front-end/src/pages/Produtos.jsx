@@ -10,7 +10,9 @@ export default function Produtos() {
           method: 'get',
           url: 'http://localhost:3001/products/',
           responseType: 'json',
-          headers: { Authorization: `Bearer ${token}` }
+          headers: { Authorization:
+            `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2Vy
+            Ijp7I…Y5M30.o6o8lftZaR1Z_ZuMFEXswGHch3onnySrzEobuSg061Q` },
         });
         console.log(response.data);
       } catch (error) {

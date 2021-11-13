@@ -16,7 +16,7 @@ function CustomerProducts({ history }) {
     <div>
       <Headers history={ history } />
       <ProductsCards callback={ handleCallback } />
-      <ShopCartCard value={ value } />
+      <ShopCartCard value={ value } history= { history } />
     </div>
   );
 }

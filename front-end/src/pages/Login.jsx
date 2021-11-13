@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 
-// import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 const axios = require('axios').default;
 
 export default function Login() {
-  // const history = useHistory();
+  const history = useHistory();
 
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
@@ -17,7 +17,6 @@ export default function Login() {
   };
 
   const handleLogin = async () => {
-    console.log('xablay');
     try {
       const response = await axios({
         method: 'post',
@@ -57,14 +56,17 @@ export default function Login() {
         <button
           type="button"
           data-testid="common_login__button-login"
-          onClick={ () => handleLogin() }
+          onClick={ () => {
+            handleLogin();
+            history.push('/customer/products');
+          } }
         >
           LOGIN
         </button>
         <button
           type="button"
           data-testid="common_login__button-register"
-          // onClick={ () =>  }
+          onClick={ () => history.push('/register') }
         >
           CADASTRE-SE
         </button>

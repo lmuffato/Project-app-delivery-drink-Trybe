@@ -1,5 +1,5 @@
-const loginEndpoint = 'http://localhost:3001/register';
-const statusInvalidData = 400;
+const registerEndpoint = 'http://localhost:3001/register';
+const statusInvalidData = 409;
 const statusRegisterAccept = 201;
 
 const registerRequest = async (userData, setShowErrorMessage, setRedirect) => {
@@ -9,15 +9,19 @@ const registerRequest = async (userData, setShowErrorMessage, setRedirect) => {
     body: JSON.stringify({ ...userData }),
   };
 
-  const response = await fetch(loginEndpoint, requestOptions);
-  if (response.status === statusRegisterAccept) {
-    setRedirect(true);
+  try {
+    const response = await fetch(registerEndpoint, requestOptions);
+    if (response.status === statusRegisterAccept) {
+      setRedirect(true);
+    }
+    if (response.status === statusInvalidData) {
+      setShowErrorMessage(true);
+    }
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.log(error);
   }
-  if (response.status === statusInvalidData) {
-    setShowErrorMessage(true);
-  }
-  const data = await response.json();
-  console.log(data);
 };
 
 export default registerRequest;

@@ -74,7 +74,14 @@ export default function LoginForm() {
           dataTestId="common_login__button-register"
         />
       </Link>
-      {showErrorMessage ? <ErrorMessage message="Email não cadastrado" /> : ''}
+      {showErrorMessage ? (
+        <ErrorMessage
+          dataTestId="common_login__element-invalid-email"
+          message="Email não cadastrado"
+        />
+      ) : (
+        ''
+      )}
     </form>
   );
 }

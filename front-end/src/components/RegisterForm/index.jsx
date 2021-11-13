@@ -27,8 +27,8 @@ export default function RegisterForm() {
 
   const handleChange = (event, setStateCallback) => {
     const verifications = emailVerification(email)
-    && passwordVerification(password)
-    && nameVerification(name);
+      && passwordVerification(password)
+      && nameVerification(name);
 
     if (verifications) {
       setDisableButton(false);
@@ -40,7 +40,11 @@ export default function RegisterForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    registerRequest({ name, email, password }, setShowErrorMessage, setRedirect);
+    registerRequest(
+      { name, email, password },
+      setShowErrorMessage,
+      setRedirect,
+    );
     resetValues();
   };
 
@@ -82,7 +86,14 @@ export default function RegisterForm() {
         disabled={ disableButton }
         dataTestId="common_register__button-register"
       />
-      {showErrorMessage ? <ErrorMessage message="Dados inválidos" /> : ''}
+      {showErrorMessage ? (
+        <ErrorMessage
+          dataTestId="common_register__element-invalid_register"
+          message="Email já cadastrado"
+        />
+      ) : (
+        ''
+      )}
     </form>
   );
 }

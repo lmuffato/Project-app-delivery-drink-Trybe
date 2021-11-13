@@ -15,7 +15,9 @@ export default function Login() {
     const { value } = target;
     handle(value);
   };
-
+  const tokenStorage = ({ token }) => {
+    localStorage.setItem('token', token);
+  };
   const handleLogin = async () => {
     try {
       const response = await axios({
@@ -27,7 +29,7 @@ export default function Login() {
         },
         responseType: 'json',
       });
-      console.log(response.data);
+      tokenStorage(response.data);
     } catch (error) {
       console.error(error);
     }

@@ -4,7 +4,9 @@ import InputField from '../InputField';
 import Button from '../Button';
 import styles from './styles.module.css';
 import ErrorMessage from '../ErrorMessage';
-import registerRequest from '../../services/loginAndRegister/registerRequest';
+import { registerEndpointData } from '../../utils/endPointsData';
+import postRequest from '../../services/loginAndRegister/postRequest';
+
 import {
   emailVerification,
   nameVerification,
@@ -40,10 +42,10 @@ export default function RegisterForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    registerRequest(
+    postRequest(
       { name, email, password },
-      setShowErrorMessage,
-      setRedirect,
+      { setShowErrorMessage, setRedirect },
+      registerEndpointData,
     );
     resetValues();
   };

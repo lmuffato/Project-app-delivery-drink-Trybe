@@ -4,11 +4,12 @@ import Button from '../Button';
 import InputField from '../InputField';
 import ErrorMessage from '../ErrorMessage';
 import styles from './styles.module.css';
-import loginRequest from '../../services/loginAndRegister/loginRequest';
+import postRequest from '../../services/loginAndRegister/postRequest';
 import {
   emailVerification,
   passwordVerification,
 } from '../../services/loginAndRegister/validations';
+import { loginEndpointData } from '../../utils/endPointsData';
 
 export default function LoginForm() {
   const [email, setEmail] = useState('');
@@ -34,7 +35,11 @@ export default function LoginForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    loginRequest(email, password, setShowErrorMessage, setRedirect);
+    postRequest(
+      { email, password },
+      { setShowErrorMessage, setRedirect },
+      loginEndpointData,
+    );
     resetValues();
   };
 

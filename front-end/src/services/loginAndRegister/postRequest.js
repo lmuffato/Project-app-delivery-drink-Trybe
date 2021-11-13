@@ -1,8 +1,7 @@
-const registerEndpoint = 'http://localhost:3001/register';
-const statusInvalidData = 409;
-const statusRegisterAccept = 201;
+const postRequest = async (userData, callbacks, endpointData) => {
+  const { setShowErrorMessage, setRedirect } = callbacks;
+  const { endpoint, statusInvalid, statusRegisterAccept } = endpointData;
 
-const registerRequest = async (userData, setShowErrorMessage, setRedirect) => {
   const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -10,11 +9,11 @@ const registerRequest = async (userData, setShowErrorMessage, setRedirect) => {
   };
 
   try {
-    const response = await fetch(registerEndpoint, requestOptions);
+    const response = await fetch(endpoint, requestOptions);
     if (response.status === statusRegisterAccept) {
       setRedirect(true);
     }
-    if (response.status === statusInvalidData) {
+    if (response.status === statusInvalid) {
       setShowErrorMessage(true);
     }
     const data = await response.json();
@@ -24,4 +23,4 @@ const registerRequest = async (userData, setShowErrorMessage, setRedirect) => {
   }
 };
 
-export default registerRequest;
+export default postRequest;

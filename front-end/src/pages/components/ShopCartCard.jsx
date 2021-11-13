@@ -1,11 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default function ShopCartCard({ value }) {
+export default function ShopCartCard({ value, history }) {
+  const handleClick = () => {
+    history.push('/customer/checkout')
+  }
+
   return (
     <div>
       <label htmlFor="value">
-        <p id="value">{ `ver carrinho: ${value}`}</p>
+        <input
+          id="value"
+          value={ `Ver Carrinho: ${value}`}
+          data-testid="customer_products__checkout-bottom-value"
+          onClick={ handleClick }
+        />
       </label>
     </div>
   );
@@ -13,4 +22,7 @@ export default function ShopCartCard({ value }) {
 
 ShopCartCard.propTypes = {
   value: PropTypes.number.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
 };

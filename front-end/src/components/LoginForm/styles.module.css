@@ -9,7 +9,8 @@
   width: 425px;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and ( max-width : 767px ) {
+
   .loginFormContainer {
     width: 90%;
   }

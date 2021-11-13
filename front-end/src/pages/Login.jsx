@@ -1,11 +1,12 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import UserContext from '../context/UserContext';
 import { setLogin } from '../services/apis';
 
 function Login() {
   const PASSWORD_LENGTH = 6;
 
+  const history = useHistory();
   const { setLoggedUser } = useContext(UserContext);
 
   const [email, setEmail] = useState('');
@@ -24,6 +25,7 @@ function Login() {
       const loginUser = await setLogin(email, password);
       setLoggedUser(loginUser);
       setErrorMessage(false);
+      history.push('/customer/products');
     } catch (error) {
       setErrorMessage(true);
     }

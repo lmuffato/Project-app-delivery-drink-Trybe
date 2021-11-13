@@ -36,8 +36,6 @@ function Login({ history }) {
         history.push('/admin/manage');
       }
     } else {
-      console.log(response.message);
-      console.log(typeof response.message);
       setLoginError(response.message);
     }
   };

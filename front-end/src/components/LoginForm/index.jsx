@@ -4,11 +4,11 @@ import Button from '../Button';
 import InputField from '../InputField';
 import ErrorMessage from '../ErrorMessage';
 import styles from './styles.module.css';
-import loginRequest from '../../services/login/loginRequest';
+import loginRequest from '../../services/loginAndRegister/loginRequest';
 import {
   emailVerification,
   passwordVerification,
-} from '../../services/login/loginValidations';
+} from '../../services/loginAndRegister/validations';
 
 export default function LoginForm() {
   const [email, setEmail] = useState('');

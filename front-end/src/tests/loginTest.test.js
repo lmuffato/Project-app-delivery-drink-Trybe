@@ -1,5 +1,5 @@
 import React from 'react';
-import { act, cleanup, render, screen, fireEvent } from '@testing-library/react';
+import { act, cleanup, render, screen, fireEvent, getByTestId } from '@testing-library/react';
 import axios from 'axios';
 import App from '../App';
 
@@ -20,15 +20,14 @@ const mockPostAxios = () => {
 
 describe('Teste da página de login', () => {
   beforeEach(cleanup);
-
+  
   it('Renderiza os itens corretos', () => {
     render(<App />);
-
     const emailInput = screen.getByTestId(EMAIL_TEST_ID);
     const passwordInput = screen. getByTestId(PASSWORD_TEST_ID);
     const loginButton = screen.getByTestId(BUTTON_LOGIN_TEST_ID);
     const registerButton = screen.getByTestId(BUTTON_REGISTER_TEST_ID);
-
+    
     expect(emailInput).toBeInTheDocument();
     expect(passwordInput).toBeInTheDocument();
     expect(loginButton).toBeInTheDocument();
@@ -36,5 +35,29 @@ describe('Teste da página de login', () => {
     expect(registerButton).toBeInTheDocument();
   });
 
-  // it('Botão de login desabilitado')
+  it('Botão de login desabilitado ao entrar com email inválido', () => {
+    render(<App />);
+    
+    const emailInput = screen.getByTestId(EMAIL_TEST_ID);
+    const passwordInput = screen. getByTestId(PASSWORD_TEST_ID);
+    const loginButton = screen.getByTestId(BUTTON_LOGIN_TEST_ID);
+
+    fireEvent.change(emailInput, { target: { value: 'email-invalido' } });
+    fireEvent.change(passwordInput, { target: { value: password } });
+
+    expect(loginButton).toBeDisabled();
+  })
+
+  it('Botão de login desabilitado ao entrar com senha inválida', () => {
+    render(<App />);
+    
+    const emailInput = screen.getByTestId(EMAIL_TEST_ID);
+    const passwordInput = screen. getByTestId(PASSWORD_TEST_ID);
+    const loginButton = screen.getByTestId(BUTTON_LOGIN_TEST_ID);
+
+    fireEvent.change(emailInput, { target: { value: email } });
+    fireEvent.change(passwordInput, { target: { value: '123' } });
+
+    expect(loginButton).toBeDisabled();
+  })
 })

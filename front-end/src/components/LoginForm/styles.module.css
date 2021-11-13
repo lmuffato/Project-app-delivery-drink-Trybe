@@ -9,6 +9,12 @@
   width: 425px;
 }
 
+@media screen and (max-width: 767px) {
+  .loginFormContainer {
+    width: 90%;
+  }
+}
+
 .linkButton {
   align-items: center;
   display: flex;

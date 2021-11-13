@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import axios from 'axios';
+import { saveUser } from '../redux/slices/userSlice';
 import { validateLogin } from '../components/ultility';
 import Error from '../components/Error';
 
@@ -12,6 +14,8 @@ export default function Login() {
   const [isValid, setIsValid] = useState(false);
   const [error, setError] = useState(false);
   const history = useHistory();
+  const dispatch = useDispatch();
+
   useEffect(() => {
     const sucessValidate = validateLogin(emailInput, passwordInput);
     setIsValid(sucessValidate);

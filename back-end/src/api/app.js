@@ -10,6 +10,6 @@ app.use(express.json());
 
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
-app.use('/customer/products', productsRouter);
+app.use('/products', productsRouter);
 
 module.exports = app;

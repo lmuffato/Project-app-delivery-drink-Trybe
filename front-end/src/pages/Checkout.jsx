@@ -45,6 +45,7 @@ function Checkout() {
           payload={ CART_ITEMS }
           hasButton
           onClick={ removeItem }
+          testeId="element-order-table-name-"
         />
         <div>
           Total R$

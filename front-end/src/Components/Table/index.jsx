@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function Table({ headers, payload, hasButton, onClick }) {
+function Table({ headers, payload, hasButton, onClick, testeId }) {
   return (
     <table>
       <thead>
@@ -15,7 +15,7 @@ function Table({ headers, payload, hasButton, onClick }) {
       </thead>
       <tbody>
         { payload.map((item, i) => (
-          <tr key={ `row${i + 1}` }>
+          <tr key={ `${testeId}${i}` }>
             <td>{ i + 1 }</td>
             { Object.values(item).map((value) => (
               <td key={ `${value}` }>{ value }</td>
@@ -37,6 +37,7 @@ function Table({ headers, payload, hasButton, onClick }) {
 Table.defaultProps = {
   hasButton: false,
   onClick: () => null,
+  testeId: 'row',
 };
 
 Table.propTypes = {
@@ -44,6 +45,7 @@ Table.propTypes = {
   payload: PropTypes.arrayOf(PropTypes.object).isRequired,
   hasButton: PropTypes.bool,
   onClick: PropTypes.func,
+  testeId: PropTypes.string,
 };
 
 export default Table;

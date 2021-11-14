@@ -48,7 +48,7 @@ export default function ProductCard({ product, index, callback }) {
         id="product-price"
         data-testid="customer_products__element-card-price-"
       >
-        { price }
+        { parseFloat(price).toFixed(2) }
       </p>
       <label htmlFor="remove-button">
         <input

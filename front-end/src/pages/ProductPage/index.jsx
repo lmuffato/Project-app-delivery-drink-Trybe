@@ -6,17 +6,22 @@ export default function ProductPage() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:3001/user')
+    fetch('http://localhost:3001/products')
       .then((response) => response.json())
       .then((item) => setData(item));
   }, []);
 
-  console.log(data);
-
   return (
     <div>
       <Header />
-      <ItemCard />
+      { data && data.map(({ id, name, price, urlImage }) => (
+        <ItemCard
+          key={ id }
+          name={ name }
+          price={ price }
+          image={ urlImage }
+        />
+      )) }
     </div>
   );
 }

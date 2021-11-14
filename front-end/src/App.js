@@ -14,7 +14,7 @@ function App() {
           </Route>
           <Route exact path="/login" component={ Login } />
           <Route path="/register" component={ Register } />
-          <Route exact path="/customer/products" component={ CustomerProducts }/>
+          <Route exact path="/customer/products" component={ CustomerProducts } />
         </Switch>
       </BrowserRouter>
     </div>

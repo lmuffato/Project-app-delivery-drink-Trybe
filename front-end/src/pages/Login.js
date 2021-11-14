@@ -1,8 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function login() {
   return (
-    <h1>oi</h1>
+    <Link to="/register">registro</Link>
   );
 }
 

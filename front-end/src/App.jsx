@@ -7,8 +7,9 @@ import Register from './pages/Register';
 function App() {
   return (
     <Routes>
-      <Route path="/login" element={ <Login /> } />
-      <Route path="/register" element={ <Register /> } />
+      <Route exact path="/login" element={ <Login /> } />
+      <Route exact path="/register" element={ <Register /> } />
+      <Route exact path="/seller/order" element={ <div>Tela cliente</div> } />
       <Route path="/" element={ <Navigate replace to="/login" /> } />
     </Routes>
   );

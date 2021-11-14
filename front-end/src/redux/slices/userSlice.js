@@ -6,6 +6,7 @@ export const slice = createSlice({
     name: '',
     email: '',
     role: '',
+    token: '',
     isLogged: false,
   },
   reducers: {
@@ -16,6 +17,7 @@ export const slice = createSlice({
         name: payload.name,
         email: payload.email,
         role: payload.role,
+        token: payload.token,
       };
     },
   },

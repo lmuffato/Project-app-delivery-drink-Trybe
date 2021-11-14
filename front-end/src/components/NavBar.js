@@ -1,7 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { saveUser } from '../redux/slices/userSlice';
+import { removeUserDataFromLocalStorage } from './ultility';
+
+const handleLogoutClick = (ev, dispatch) => {
+  ev.preventDefault();
+
+  dispatch(saveUser({ name: '', email: '', role: '', token: '' }));
+  removeUserDataFromLocalStorage();
+};
 
 function NavBar() {
+  const { name } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
   return (
     <nav style={ { backgroundColor: 'yellow' } }>
       <Link
@@ -19,9 +32,15 @@ function NavBar() {
       <span
         data-testid="customer_products__element-navbar-user-full-name"
       >
-        NOME USER
+        { name.toUpperCase() }
       </span>
-      <span data-testid="customer_products__element-navbar-link-logout">Sair</span>
+      <button
+        type="button"
+        onClick={ (ev) => handleLogoutClick(ev, dispatch) }
+        data-testid="customer_products__element-navbar-link-logout"
+      >
+        Sair
+      </button>
     </nav>
   );
 }

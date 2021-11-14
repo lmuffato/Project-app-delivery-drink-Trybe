@@ -34,7 +34,7 @@ function NavBar() {
       <span
         data-testid="customer_products__element-navbar-user-full-name"
       >
-        { name.toUpperCase() }
+        { name }
       </span>
       <button
         type="button"

@@ -48,7 +48,7 @@ export const validateLogin = (email, password) => {
 };
 
 export const saveUserDataToLocalStorage = ({ name, email, role, token }) => {
-  localStorage.setItem('user', { name, email, role, token });
+  localStorage.setItem('user', JSON.stringify({ name, email, role, token }));
 };
 
 export const removeUserDataFromLocalStorage = () => {

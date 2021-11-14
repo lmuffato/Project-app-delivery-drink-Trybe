@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../../components/Header';
 import ItemCard from '../../components/ItemCard';
+import styles from './styles.module.css';
 
 export default function ProductPage() {
   const [data, setData] = useState([]);
@@ -11,17 +12,22 @@ export default function ProductPage() {
       .then((item) => setData(item));
   }, []);
 
+  console.log(data);
+
   return (
     <div>
       <Header />
-      { data && data.map(({ id, name, price, urlImage }) => (
-        <ItemCard
-          key={ id }
-          name={ name }
-          price={ price }
-          image={ urlImage }
-        />
-      )) }
+      <div className={ styles.products }>
+        { data && data.map(({ id, name, price, urlImage }) => (
+          <ItemCard
+            id={ id }
+            key={ id }
+            name={ name }
+            price={ price }
+            image={ urlImage }
+          />
+        )) }
+      </div>
     </div>
   );
 }

@@ -10,7 +10,7 @@ export default function ItemCard({ id, name, price, image }) {
         className={ styles.price }
         data-testid={ `customer_products__element-card-price-${id}` }
       >
-        { price }
+        { `R$ ${price}` }
       </p>
       <img
         data-testid={ `customer_products__img-card-bg-image-${id}` }

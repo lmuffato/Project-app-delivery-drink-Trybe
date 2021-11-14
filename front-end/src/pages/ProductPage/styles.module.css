@@ -5,3 +5,12 @@
   justify-content: center;
   width: 100%;
 }
+
+.products {
+  align-self: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin: auto;
+  width: 95%;
+}

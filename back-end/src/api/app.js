@@ -15,16 +15,8 @@ const corsOptions = {
   optionsSuccessStatus: 200,
 };
 
-// const corsOptions = {
-//   origin: '*',
-//   optionsSuccessStatus: 200,
-// };
-
 const app = express();
-app.use(cors({
-  origin: '*',
-  optionsSuccessStatus: 200,
-}));
+app.use(cors(corsOptions));
 
 app.use(bodyParser.json());
 app.use(cors(corsOptions));

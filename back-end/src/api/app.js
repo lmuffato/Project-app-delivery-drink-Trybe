@@ -27,4 +27,6 @@ app.post('/register', checkName, checkEmail, checkPassword, userControllers.regi
 app.get('/users', userControllers.getAllUsers);
 app.get('/products', validateToken, productControllers.getAllProducts);
 
+app.post('/checkToken', validateToken, userControllers.tokenValidation);
+
 module.exports = app;

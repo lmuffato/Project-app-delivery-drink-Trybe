@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styles from './styles.module.css';
 
 export default function Header() {
@@ -12,7 +11,3 @@ export default function Header() {
     </nav>
   );
 }
-
-Header.propTypes = {
-  message: PropTypes.string,
-}.isRequired;

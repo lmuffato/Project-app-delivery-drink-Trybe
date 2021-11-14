@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from 'react';
+import axios from 'axios';
 import { RegisterContext } from '../contexto/register';
 
 function Register() {

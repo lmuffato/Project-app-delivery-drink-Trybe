@@ -2,14 +2,12 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
-const cors = require('cors');
 const errorHandler = require('./middlewares/errorHandler');
 const userController = require('./controllers/userController');
 const productController = require('./controllers/productController');
 
 const app = express();
 
-app.use(cors());
 app.use('/', express.static(path.join(__dirname, '..', '..', 'public')));
 app.use(cors());
 app.use(bodyParser.json());

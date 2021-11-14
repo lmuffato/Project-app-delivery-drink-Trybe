@@ -60,4 +60,17 @@ describe('Teste da página de login', () => {
 
     expect(loginButton).toBeDisabled();
   })
+
+  it('Botão de login habilitado ao entrar com dados válidos', () => {
+    render(<App />);
+    
+    const emailInput = screen.getByTestId(EMAIL_TEST_ID);
+    const passwordInput = screen. getByTestId(PASSWORD_TEST_ID);
+    const loginButton = screen.getByTestId(BUTTON_LOGIN_TEST_ID);
+
+    fireEvent.change(emailInput, { target: { value: email } });
+    fireEvent.change(passwordInput, { target: { value: password } });
+
+    expect(loginButton).not.toBeDisabled();
+  })
 })

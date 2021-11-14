@@ -17,8 +17,11 @@ const getAllUsers = async (_req, res) => {
   return res.status(response.status).json(response.message);
 };
 
+const tokenValidation = async (_req, res) => res.status(200).json({ validated: true });
+
 module.exports = {
   login,
   register,
   getAllUsers,
+  tokenValidation,
 };

@@ -11,7 +11,7 @@ export default function ShopCartCard({ value, history }) {
       <label htmlFor="value">
         <input
           id="value"
-          value={ `Ver Carrinho: ${value}` }
+          value={ `Ver Carrinho: ${parseFloat(value).toFixed(2)}` }
           data-testid="customer_products__checkout-bottom-value"
           onClick={ handleClick }
         />

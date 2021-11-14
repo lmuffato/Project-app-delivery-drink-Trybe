@@ -5,7 +5,7 @@ import ProductsCards from './components/ProductsCards';
 import ShopCartCard from './components/ShopCartCard';
 
 function CustomerProducts({ history }) {
-  const [value, setValue] = useState([]);
+  const [value, setValue] = useState(0);
 
   const handleCallback = (p) => {
     setValue(p

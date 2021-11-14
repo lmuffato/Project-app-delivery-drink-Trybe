@@ -8,7 +8,7 @@ export default function ProductCard({ product, index, callback }) {
   const { products, setProducts } = useContext(ContextDeliveryApp);
   const [qty, setQty] = useState(quantity);
 
-  const handleDeductClick = () => {
+  const handleRemoveClick = () => {
     if (qty > 0) {
       const updatingProducts = products;
       updatingProducts[index].quantity -= 1;
@@ -32,15 +32,47 @@ export default function ProductCard({ product, index, callback }) {
 
   return (
     <div>
-      <img src={ urlImage } alt="product" />
-      <p>{ name }</p>
-      <p>{ price }</p>
-      <label htmlFor="deduct-button">
-        <input id="deduct-button" type="button" value="-" onClick={ handleDeductClick } />
+      <img
+        src={ urlImage }
+        id="product-image"
+        data-testid="customer_products__img-card-bg-image-"
+        alt={ name }
+      />
+      <p
+        id="product-name"
+        data-testid="customer_products__element-card-title-"
+      >
+        { name }
+      </p>
+      <p
+        id="product-price"
+        data-testid="customer_products__element-card-price-"
+      >
+        { price }
+      </p>
+      <label htmlFor="remove-button">
+        <input
+          id="remove-button"
+          type="button"
+          value="-"
+          onClick={ handleRemoveClick }
+          data-testid="customer_products__button-card-rm-item-"
+        />
       </label>
-      <p>{ quantity }</p>
+      <p
+        id="product-quantity"
+        data-testid="customer_products__input-card-quantity-"
+      >
+        { quantity }
+      </p>
       <label htmlFor="add-button">
-        <input id="add-button" type="button" value="+" onClick={ handleAddClick } />
+        <input
+          id="add-button"
+          data-testid="customer_products__button-card-add-item-"
+          type="button"
+          value="+"
+          onClick={ handleAddClick }
+        />
       </label>
     </div>
   );

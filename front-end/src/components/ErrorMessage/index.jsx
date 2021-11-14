@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './styles.module.css';
 
-export default function ErrorMessage({ message }) {
+export default function ErrorMessage({ message, dataTestId }) {
   return (
     <span
       className={ styles.errorMessage }
-      data-testid="common_login__element-invalid-email"
+      data-testid={ dataTestId }
     >
       {message}
     </span>

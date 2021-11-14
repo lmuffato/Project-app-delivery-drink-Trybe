@@ -6,7 +6,7 @@ export default function InputField({
   labelName, type, name, id, value, onChange, dataTestId }) {
   return (
     <div className={ styles.inputContainer }>
-      <label htmlFor={ id }>
+      <label className={ styles.label } htmlFor={ id }>
         {labelName}
       </label>
       <input

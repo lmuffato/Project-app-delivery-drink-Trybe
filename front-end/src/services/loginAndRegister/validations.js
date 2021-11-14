@@ -8,3 +8,8 @@ export const passwordVerification = (password) => {
   const minimumPasswordLength = 5;
   return password.length >= minimumPasswordLength;
 };
+
+export const nameVerification = (password) => {
+  const minimumPasswordLength = 11;
+  return password.length >= minimumPasswordLength;
+};

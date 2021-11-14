@@ -1,30 +1,37 @@
 import React, { useState } from 'react';
-import { Link, Navigate } from 'react-router-dom';
-import Button from '../Button';
+import { Navigate } from 'react-router-dom';
 import InputField from '../InputField';
-import ErrorMessage from '../ErrorMessage';
+import Button from '../Button';
 import styles from './styles.module.css';
+import ErrorMessage from '../ErrorMessage';
+import { registerEndpointData } from '../../utils/endPointsData';
 import postRequest from '../../services/loginAndRegister/postRequest';
+
 import {
   emailVerification,
+  nameVerification,
   passwordVerification,
 } from '../../services/loginAndRegister/validations';
-import { loginEndpointData } from '../../utils/endPointsData';
 
-export default function LoginForm() {
+export default function RegisterForm() {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [disableButton, setDisableButton] = useState(true);
   const [showErrorMessage, setShowErrorMessage] = useState(false);
+  const [disableButton, setDisableButton] = useState(true);
   const [redirect, setRedirect] = useState(false);
 
   const resetValues = () => {
+    setName('');
     setEmail('');
     setPassword('');
   };
 
   const handleChange = (event, setStateCallback) => {
-    const verifications = emailVerification(email) && passwordVerification(password);
+    const verifications = emailVerification(email)
+      && passwordVerification(password)
+      && nameVerification(name);
+
     if (verifications) {
       setDisableButton(false);
     } else {
@@ -36,9 +43,9 @@ export default function LoginForm() {
   const handleSubmit = (event) => {
     event.preventDefault();
     postRequest(
-      { email, password },
+      { name, email, password },
       { setShowErrorMessage, setRedirect },
-      loginEndpointData,
+      registerEndpointData,
     );
     resetValues();
   };
@@ -46,43 +53,45 @@ export default function LoginForm() {
   if (redirect) return <Navigate to="/customer/products" />;
 
   return (
-    <form className={ styles.loginFormContainer } onSubmit={ handleSubmit }>
+    <form className={ styles.registerFormContainer } onSubmit={ handleSubmit }>
       <InputField
-        labelName="Login"
+        labelName="Nome"
+        type="text"
+        name="inputName"
+        id="inputName"
+        value={ name }
+        onChange={ (event) => handleChange(event, setName) }
+        dataTestId="common_register__input-name"
+      />
+      <InputField
+        labelName="Email"
         type="email"
-        name="loginInput"
-        id="loginInput"
+        name="inputEmail"
+        id="inputEmail"
         value={ email }
         onChange={ (event) => handleChange(event, setEmail) }
-        dataTestId="common_login__input-email"
+        dataTestId="common_register__input-email"
       />
       <InputField
         labelName="Senha"
         type="password"
-        name="passwordInput"
-        id="passwordInput"
+        name="inputPassword"
+        id="inputPassword"
         value={ password }
         onChange={ (event) => handleChange(event, setPassword) }
-        dataTestId="common_login__input-password"
+        dataTestId="common_register__input-password"
       />
       <Button
-        title="Login"
+        title="CADASTRAR"
         typeButton="primary"
         type="submit"
         disabled={ disableButton }
-        dataTestId="common_login__button-login"
+        dataTestId="common_register__button-register"
       />
-      <Link className={ styles.linkButton } to="/register">
-        <Button
-          title="Ainda não tem conta"
-          typeButton="tertiary"
-          dataTestId="common_login__button-register"
-        />
-      </Link>
       {showErrorMessage ? (
         <ErrorMessage
-          dataTestId="common_login__element-invalid-email"
-          message="Email não cadastrado"
+          dataTestId="common_register__element-invalid_register"
+          message="Email já cadastrado"
         />
       ) : (
         ''

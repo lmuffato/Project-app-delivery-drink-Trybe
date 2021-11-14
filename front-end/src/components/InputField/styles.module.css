@@ -6,6 +6,12 @@
   width: 100%;
 }
 
+.label {
+  margin-bottom: 5px;
+  position: relative;
+  right: 33%;
+}
+
 .input {
   border: 1px solid #001813;
   border-radius: 5px;

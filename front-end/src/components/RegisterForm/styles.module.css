@@ -1,4 +1,4 @@
-.loginFormContainer {
+.registerFormContainer {
   align-items: center;
   background: #eaf1ef;
   border: 1px solid #b1c2be;
@@ -11,16 +11,7 @@
 
 @media screen and ( max-width : 767px ) {
 
-  .loginFormContainer {
+  .registerFormContainer {
     width: 90%;
   }
 }
-
-.linkButton {
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  text-decoration: none;
-  width: 100%;
-}
-

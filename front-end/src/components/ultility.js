@@ -46,3 +46,17 @@ export const validateLogin = (email, password) => {
   }
   return false;
 };
+
+export const saveUserDataToLocalStorage = ({ name, email, role, token }) => {
+  localStorage.setItem('name', name);
+  localStorage.setItem('email', email);
+  localStorage.setItem('role', role);
+  localStorage.setItem('token', token);
+};
+
+export const removeUserDataFromLocalStorage = () => {
+  localStorage.removeItem('name');
+  localStorage.removeItem('email');
+  localStorage.removeItem('role');
+  localStorage.removeItem('token');
+};

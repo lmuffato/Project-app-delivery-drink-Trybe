@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import { saveUser } from '../redux/slices/userSlice';
-import { validateLogin } from '../components/ultility';
+import { saveUserDataToLocalStorage, validateLogin } from '../components/ultility';
 import Error from '../components/Error';
 
 const datatestid = 'common_login__element-invalid-email';
@@ -28,8 +28,9 @@ export default function Login() {
       password: passwordInput,
     })
       .then(((res) => {
-        const { email, password } = res.data.user;
-        dispatch(saveUser({ email, password }));
+        const { user: { name, email, role }, token } = res.data;
+        dispatch(saveUser({ name, email, role, token }));
+        saveUserDataToLocalStorage({ name, email, role, token });
         history.push('/customer/products');
       }))
       .catch((err) => {

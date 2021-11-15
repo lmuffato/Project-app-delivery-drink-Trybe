@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     delivery_number: DataTypes.STRING,
     sale_date: DataTypes.DATE,
     status: DataTypes.STRING,
-  }, {timestamps: false});
+  }, {timestamps: false}, {tableName: 'sales'});
   Sale.associate = (models) => {
     Sale.hasMany(models.SalesProduct, {
       foreignKey: 'sale_id',

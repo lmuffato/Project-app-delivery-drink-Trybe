@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import UserContext from '../Contexts/User/userContext';
 import Header from '../Components/Header';
 import Table from '../Components/Table';
@@ -35,6 +35,24 @@ const calculeTotal = (cart) => cart.reduce((acc, cur) => {
 
 const formatList = (cart) => cart.map((item) => calculeSubTotalPrice(item));
 
+const createSalePayload = (userId, Sellers) => {
+  const street = document.querySelector('#adress').value;
+  const number = document.querySelector('#number').value;
+  const seller = document.querySelector('#seller').value;
+  const total = document.querySelector('#total').innerText;
+
+  const sellerId = Sellers.find(({ name }) => name === seller);
+
+  return {
+    street,
+    number,
+    sellerId,
+    userId,
+    total,
+    status: 'pendente',
+  };
+};
+
 function Checkout() {
   const { cart, setCart } = useContext(UserContext);
   const CART_ITEMS = formatList(cart);
@@ -56,12 +74,8 @@ function Checkout() {
           onClick={ removeItem }
           testeId="element-order-table-name-"
         />
-        <div data-testid="customer_checkout__element-order-total-price">
-          Total R$
-          {' '}
-          {
-            calculeTotal(CART_ITEMS)
-          }
+        <div data-testid="customer_checkout__element-order-total-price" id="total">
+          {calculeTotal(CART_ITEMS)}
         </div>
       </div>
       <form>
@@ -94,6 +108,14 @@ function Checkout() {
         <button
           type="button"
           data-testeid="customer_checkout__button-submit-order"
+          onClick={ async () => {
+            const payload = createSalePayload();
+
+            await axios.post('/sales', payload);
+            setCart([]);
+
+            return <Redirect to="/products" />;
+          } }
         >
           FINALIZAR PEDIDO
         </button>

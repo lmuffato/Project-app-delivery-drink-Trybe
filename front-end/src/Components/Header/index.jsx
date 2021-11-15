@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import UserContext from '../../Contexts/User/userContext';
 
 function Header({ links }) {
   const { user } = useContext(UserContext);

@@ -1,36 +1,40 @@
 import React, { useState } from 'react';
 
-// import { useHistory } from 'react-router-dom';
+import { useHistory, Redirect } from 'react-router-dom';
 
 const axios = require('axios').default;
 
 export default function Login() {
-  // const history = useHistory();
+  const history = useHistory();
 
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
+  const [errorLogin, setErrorLogin] = useState(false);
+  const [redirect, setRedirect] = useState(false);
   // const [disableButton, setDisableButton] = useState(true);
 
   const handleChange = ({ target }, handle) => {
     const { value } = target;
     handle(value);
   };
-
+  const tokenStorage = ({ token }) => {
+    localStorage.setItem('token', token);
+  };
   const handleLogin = async () => {
     try {
-      console.log('xablay');
-      axios.get('/users/login', { email: user, password })
-        .then((response) => { console.log(response); })
-        .catch((error) => { console.log(error); });
-      // const response = await axios.get('http://localhost:3001/sales');
-      //   method: 'get',
-      //   url: 'http://localhost:3001/sales',
-      //   // email: user,
-      //   // password,
-      // });
-      // const response = await fetch('http://localhost:3001/carlos');
-      console.log('a');
+      const response = await axios({
+        method: 'post',
+        url: 'http://localhost:3001/users/login/',
+        data: {
+          password,
+          email: user,
+        },
+        responseType: 'json',
+      });
+      tokenStorage(response.data);
+      setRedirect(true);
     } catch (error) {
+      setErrorLogin(true);
       console.error(error);
     }
   };
@@ -58,17 +62,21 @@ export default function Login() {
         <button
           type="button"
           data-testid="common_login__button-login"
-          onClick={ () => handleLogin() }
+          onClick={ () => {
+            handleLogin();
+          } }
         >
           LOGIN
         </button>
+        {errorLogin ? <p>Login Falhou</p> : null }
         <button
           type="button"
           data-testid="common_login__button-register"
-          // onClick={ () =>  }
+          onClick={ () => history.push('/register') }
         >
           CADASTRE-SE
         </button>
+        {redirect ? <Redirect to="/customer/products" /> : null}
       </form>
     </div>
   );

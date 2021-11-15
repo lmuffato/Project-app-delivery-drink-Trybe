@@ -3,10 +3,21 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import UserContext from '../../Contexts/User/userContext';
 
-function Header({ links }) {
-  const { user } = useContext(UserContext);
+const DEFAULT_USER = {
+  id: 0,
+  name: '',
+  email: '',
+  password: '',
+  role: '',
+};
 
-  const onExit = () => { };
+function Header({ links }) {
+  const { user, setUser } = useContext(UserContext);
+
+  const onExit = () => {
+    setUser(DEFAULT_USER);
+    setCart([]);
+  };
 
   return (
     <header>

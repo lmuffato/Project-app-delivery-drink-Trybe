@@ -6,7 +6,7 @@ import Table from '../Components/Table';
 
 const HEADERS = ['Descrição', 'Quantidade', 'Valor Unitário', 'Sub-total'];
 
-// Adaptar essas urls conforma a aplicação for implementada
+// Adaptar essas urls conforme a aplicação for implementada
 const links = [
   {
     name: 'PRODUTOS',
@@ -91,7 +91,10 @@ function Checkout() {
         </label>
       </form>
       <Link to="/">
-        <button type="button" data-testeid="customer_checkout__button-submit-order">
+        <button
+          type="button"
+          data-testeid="customer_checkout__button-submit-order"
+        >
           FINALIZAR PEDIDO
         </button>
       </Link>

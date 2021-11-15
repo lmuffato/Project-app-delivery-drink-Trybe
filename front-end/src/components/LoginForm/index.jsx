@@ -43,7 +43,9 @@ export default function LoginForm() {
     resetValues();
   };
 
-  if (redirect) return <Navigate to="/customer/products" />;
+  if (redirect) {
+    return <Navigate to="/customer/products" />;
+  }
 
   return (
     <form className={ styles.loginFormContainer } onSubmit={ handleSubmit }>

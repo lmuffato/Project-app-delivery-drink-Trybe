@@ -4,6 +4,18 @@ import styles from './styles.module.css';
 
 export default function Header() {
   const navigate = useNavigate();
+
+  const handleExitBtn = () => {
+    localStorage.removeItem('user');
+    navigate('/login');
+  };
+
+  const userStorage = localStorage.getItem('user');
+  let user = null;
+  if (userStorage) {
+    user = JSON.parse(userStorage).name;
+  }
+
   return (
     <nav className={ styles.topnav }>
       <div>
@@ -23,12 +35,12 @@ export default function Header() {
       </div>
       <div className={ styles.rightHeader }>
         <p data-testid="customer_products__element-navbar-user-full-name">
-          Flavio
+          { user }
         </p>
         <button
           type="button"
           data-testid="customer_products__element-navbar-link-logout"
-          onClick={ () => navigate('/login') }
+          onClick={ handleExitBtn }
         >
           Sair
         </button>

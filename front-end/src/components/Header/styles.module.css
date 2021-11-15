@@ -1,6 +1,16 @@
 .topnav {
   background-color: #333;
+  display: flex;
+  justify-content: space-between;
   overflow: hidden;
+}
+
+.rightHeader {
+  align-items: right;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  width: 10%;
 }
 
 .topnav a {

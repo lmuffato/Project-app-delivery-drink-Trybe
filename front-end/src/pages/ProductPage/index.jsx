@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Header from '../../components/Header';
 import ItemCard from '../../components/ItemCard';
 import { usePrice } from '../../context/productsProvider';
+import replaceDotToComma from '../../services/productPages/replaceDotToComa';
 import styles from './styles.module.css';
 
 export default function ProductPage() {
@@ -9,7 +10,7 @@ export default function ProductPage() {
   const { totalPrice, setTotalPrice, putItem } = usePrice();
 
   useEffect(() => {
-    fetch('http://localhost:3001/products')
+    fetch('http://localhost:3001/customer/products')
       .then((response) => response.json())
       .then((item) => setData(item));
   }, []);
@@ -17,7 +18,7 @@ export default function ProductPage() {
   useEffect(() => {
     const prices = putItem
       .reduce((acc, item) => Number(item.price) * item.quantity + acc, 0);
-    setTotalPrice(prices);
+    setTotalPrice(prices.toFixed(2));
   }, [putItem]);
 
   return (
@@ -38,7 +39,7 @@ export default function ProductPage() {
       <span
         data-testid="customer_products__checkout-bottom-value"
       >
-        { totalPrice }
+        { replaceDotToComma(totalPrice) }
       </span>
     </div>
   );

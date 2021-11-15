@@ -1,13 +1,36 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styles from './styles.module.css';
 
 export default function Header() {
   return (
     <nav className={ styles.topnav }>
-      <a className={ styles.active } href="#home">Home</a>
-      <a href="#news">News</a>
-      <a href="#contact">Contact</a>
-      <a href="#about">About</a>
+      <div>
+        <Link
+          className={ styles.active }
+          to="/customer/products"
+          data-testid="customer_products__element-navbar-link-products"
+        >
+          Produtos
+        </Link>
+        <Link
+          to="/customer/orders"
+          data-testid="customer_products__element-navbar-link-orders"
+        >
+          Meus Pedidos
+        </Link>
+      </div>
+      <div className={ styles.rightHeader }>
+        <p data-testid="customer_products__element-navbar-user-full-name">
+          Flavio
+        </p>
+        <button
+          type="button"
+          data-testid="customer_products__element-navbar-link-logout"
+        >
+          Sair
+        </button>
+      </div>
     </nav>
   );
 }

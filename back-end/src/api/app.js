@@ -23,7 +23,7 @@ app.get('/coffee', (_req, res) => res.status(418).end());
 app.use('/user', userRouter);
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
-app.use('/products', productRouter);
+app.use('/customer', productRouter);
 app.use('/images', imagesRouter);
 
 app.use((error, _req, res, _next) => {

@@ -1,8 +1,29 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
+const handleQtyClick = (ev, sign, currQty, setterFn) => {
+  ev.preventDefault();
+
+  if (sign === '+') {
+    setterFn(currQty + 1);
+  }
+
+  if (sign === '-' && currQty > 0) {
+    setterFn(currQty - 1);
+  }
+};
+
+const handleQtyChange = (ev, setterFn) => {
+  ev.preventDefault();
+  const { value } = ev.target;
+
+  if (value >= 0) {
+    setterFn(+value);
+  }
+};
+
 function ProductCard({ product }) {
-  const [productQty] = useState(0);
+  const [productQty, setProductQty] = useState(0);
 
   return (
     <div>
@@ -25,6 +46,7 @@ function ProductCard({ product }) {
       <button
         type="button"
         data-testid={ `customer_products__button-card-rm-item-${product.id}` }
+        onClick={ (ev) => handleQtyClick(ev, '-', productQty, setProductQty) }
       >
         -
       </button>
@@ -32,10 +54,12 @@ function ProductCard({ product }) {
         type="number"
         data-testid={ `customer_products__input-card-quantity-${product.id}` }
         value={ productQty }
+        onChange={ (ev) => handleQtyChange(ev, setProductQty) }
       />
       <button
         type="button"
         data-testid={ `customer_products__button-card-add-item-${product.id}` }
+        onClick={ (ev) => handleQtyClick(ev, '+', productQty, setProductQty) }
       >
         +
       </button>

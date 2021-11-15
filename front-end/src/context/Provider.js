@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
+import { io } from 'socket.io-client';// https://github.com/tryber/sd-10a-live-lectures/pull/89/files
 import Context from './Context';
+
+const socket = io('http://localhost:3001');
 
 const Endpoints = {
   login_form: 'login',
@@ -41,7 +44,7 @@ function Provider({ children }) {
 
   return (
     <Context.Provider
-      value={ { setUser, user, handleChange, submitChange } }
+      value={ { socket, setUser, user, handleChange, submitChange } }
     >
       { children }
     </Context.Provider>

@@ -5,17 +5,20 @@ import md5 from 'md5';
 
 function Login() {
   const [email, setEmail] = useState('');
-  const [myUser, setUser] = useState();
   const [password, setPassword] = useState('');
   const [disAbleBtn, setDisAbleBtn] = useState(true);
   const [hideWarning, setHideWarning] = useState(true);
-
-  console.log(myUser);
 
   const history = useHistory();
 
   function checkPassword(user) {
     if (user.password === md5(password)) {
+      const localStrg = {
+        name: user.name,
+        email: user.email,
+        role: user.role,
+      };
+      localStorage.setItem('user', JSON.stringify(localStrg));
       history.push('/customer/products');
     }
   }
@@ -44,7 +47,6 @@ function Login() {
     if (message) {
       setHideWarning(false);
     } else {
-      setUser(user);
       checkPassword(user);
     }
   }

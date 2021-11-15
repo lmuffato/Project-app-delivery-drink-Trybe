@@ -11,12 +11,13 @@ function Login() {
 
   const history = useHistory();
 
-  function checkPassword(user) {
+  function checkPassword(user, token) {
     if (user.password === md5(password)) {
       const localStrg = {
         name: user.name,
         email: user.email,
         role: user.role,
+        token,
       };
       localStorage.setItem('user', JSON.stringify(localStrg));
       history.push('/customer/products');
@@ -43,11 +44,11 @@ function Login() {
         'Content-Type': 'application/json',
       },
     });
-    const { message, user } = await request.json();
+    const { message, user, token } = await request.json();
     if (message) {
       setHideWarning(false);
     } else {
-      checkPassword(user);
+      checkPassword(user, token);
     }
   }
 

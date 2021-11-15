@@ -7,16 +7,22 @@ import regex from '../utils/regex';
 import errorMap from '../utils/errorMap';
 
 function LoginForm() {
-  const { handleChange, submitChange, setUser, user } = useContext(Context);
+  const { socket, handleChange, submitChange, setUser, user } = useContext(Context);
   const navigate = useNavigate();
   const [invalidLogin, setInvalidLogin] = useState();
   const [disableButton, setDisableButton] = useState(true);
+
+  // test socket emit
+  const testSocket = () => {
+    const test = socket.emit('message');
+    console.log(test);
+  };
 
   useEffect(() => {
     setUser({ email: '', password: '' });
 
     return () => setUser({});
-  }, []); // eslint-disable-line
+  }, [setUser]);
 
   useEffect(() => {
     const { email, password } = user;
@@ -91,6 +97,14 @@ function LoginForm() {
           data-testid="common_login__button-register"
         >
           Cadastre-se
+        </button>
+
+        <button
+          type="button"
+          onClick={ testSocket }
+          className="input"
+        >
+          testarSocket
         </button>
 
       </form>

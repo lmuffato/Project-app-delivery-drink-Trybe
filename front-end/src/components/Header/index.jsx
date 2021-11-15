@@ -1,8 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from './styles.module.css';
 
 export default function Header() {
+  const navigate = useNavigate();
   return (
     <nav className={ styles.topnav }>
       <div>
@@ -27,6 +28,7 @@ export default function Header() {
         <button
           type="button"
           data-testid="customer_products__element-navbar-link-logout"
+          onClick={ () => navigate('/login') }
         >
           Sair
         </button>

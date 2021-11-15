@@ -14,3 +14,16 @@
   margin: auto;
   width: 95%;
 }
+
+.cartBtn {
+  background-color: rgb(7, 97, 48);
+  border: none;
+  border-radius: 5px;
+  bottom: 5%;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 10px;
+  position: fixed;
+  right: 8%;
+}

@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
+import { addProductToCart } from '../redux/slices/productSlice';
 
 const handleQtyClick = (ev, sign, currQty, setterFn) => {
   ev.preventDefault();
@@ -24,6 +26,11 @@ const handleQtyChange = (ev, setterFn) => {
 
 function ProductCard({ product }) {
   const [productQty, setProductQty] = useState(0);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(addProductToCart({ ...product, quantity: productQty }));
+  }, [productQty, dispatch, product]);
 
   return (
     <div>

@@ -1,14 +1,14 @@
 module.exports = (sequelize, DataTypes) => {
-  const Product = sequelize.define('Product', {
+  const product = sequelize.define('product', {
     name: DataTypes.STRING,
     price: DataTypes.DECIMAL(5,3),
     url_image: DataTypes.STRING,
   }, {timestamps: false}, {tableName: 'products'});
-  Product.associate = (models) => {
-    Product.hasMany(models.SalesProduct, {
+  product.associate = (models) => {
+    product.hasMany(models.salesProduct, {
       foreignKey: 'product_id',
-      as: 'SalesProducts',
+      as: 'salesProducts',
     });
   };
-  return Product;
+  return product;
 };

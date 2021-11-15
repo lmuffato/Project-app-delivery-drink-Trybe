@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import UserContext from '../Contexts/User/userContext';
 import Header from '../Components/Header';
@@ -55,12 +55,26 @@ const createSalePayload = (userId, Sellers) => {
 
 function Checkout() {
   const { cart, setCart } = useContext(UserContext);
+  const [sellers, setSellerts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
   const CART_ITEMS = formatList(cart);
 
   const removeItem = (name) => {
     const newItems = cart.filter((item) => item.name !== name);
     setCart(newItems);
   };
+
+  useEffect(() => {
+    const getSellers = async () => {
+      setIsLoading(true);
+      const { data } = await axios.get('/users?role=seller');
+      setSellerts(data);
+      setIsLoading(false);
+    };
+
+    getSellers();
+  }, []);
 
   return (
     <>
@@ -78,38 +92,40 @@ function Checkout() {
           {calculeTotal(CART_ITEMS)}
         </div>
       </div>
-      <form>
-        <label htmlFor="seller">
-          Vendedor Responsável
-          <select id="seller" data-testeid="customer_checkout__select-seller">
-            <option value="">Fulano</option>
-          </select>
-        </label>
-        <label htmlFor="adress">
-          Endereço
-          <input
-            type="text"
-            required
-            id="adress"
-            data-testeid="customer_checkout__input-address"
-          />
-        </label>
-        <label htmlFor="number">
-          Número
-          <input
-            type="number"
-            required
-            id="number"
-            data-testeid="customer_checkout__input-addressNumber"
-          />
-        </label>
-      </form>
+      {!isLoading && (
+        <form>
+          <label htmlFor="seller">
+            Vendedor Responsável
+            <select id="seller" data-testeid="customer_checkout__select-seller">
+              <option value="">Fulano</option>
+            </select>
+          </label>
+          <label htmlFor="adress">
+            Endereço
+            <input
+              type="text"
+              required
+              id="adress"
+              data-testeid="customer_checkout__input-address"
+            />
+          </label>
+          <label htmlFor="number">
+            Número
+            <input
+              type="number"
+              required
+              id="number"
+              data-testeid="customer_checkout__input-addressNumber"
+            />
+          </label>
+        </form>
+      )}
       <Link to="/">
         <button
           type="button"
           data-testeid="customer_checkout__button-submit-order"
           onClick={ async () => {
-            const payload = createSalePayload();
+            const payload = createSalePayload(user.id, sellers);
 
             await axios.post('/sales', payload);
             setCart([]);

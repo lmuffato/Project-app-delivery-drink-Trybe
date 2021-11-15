@@ -4,6 +4,7 @@ import './App.css';
 import Login from './pages/Login';
 import PedidosVendedor from './pages/PedidosVendedor';
 import Register from './pages/Register';
+import ProductClient from './pages/ProductClient';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Route exact path="/register" element={ <Register /> } />
       <Route exact path="/seller/order" element={ <PedidosVendedor /> } />
       <Route path="/" element={ <Navigate replace to="/login" /> } />
+      <Route path="/products" element={ <ProductClient /> } />
     </Routes>
   );
 }

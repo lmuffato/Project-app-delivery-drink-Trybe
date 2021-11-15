@@ -71,26 +71,23 @@ function Login({ history }) {
             onChange={ (e) => setPassword(e.target.value) }
           />
         </label>
-
-        <label htmlFor="login-btn">
-          <input
-            id="login-btn"
-            type="button"
-            value="Login"
-            disabled={ enableButton }
-            data-testid="common_login__button-login"
-            onClick={ handleLoginButtonClick }
-          />
-        </label>
-        <label htmlFor="register-btn">
-          <input
-            id="register-btn"
-            type="button"
-            value="Ainda não tenho conta"
-            data-testid="common_login__button-register"
-            onClick={ handleRegisterButtonClick }
-          />
-        </label>
+        <button
+          id="login-btn"
+          type="submit"
+          disabled={ enableButton }
+          data-testid="common_login__button-login"
+          onClick={ handleLoginButtonClick }
+        >
+          Login
+        </button>
+        <button
+          id="register-btn"
+          type="button"
+          data-testid="common_login__button-register"
+          onClick={ handleRegisterButtonClick }
+        >
+          Ainda não tenho conta
+        </button>
         { loginError
           ? <LoginErrorMessage errorMessage={ loginError } />
           : ''}

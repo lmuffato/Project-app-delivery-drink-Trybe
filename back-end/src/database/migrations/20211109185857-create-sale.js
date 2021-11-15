@@ -2,7 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Sales', {
+    await queryInterface.createTable('sales', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -33,7 +33,7 @@ module.exports = {
       user_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'Users',
+          model: 'users',
           ket: 'id',
         },
         onUpdate: 'CASCADE',
@@ -43,7 +43,7 @@ module.exports = {
       seller_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'Users',
+          model: 'users',
           ket: 'id',
         },
         onUpdate: 'CASCADE',
@@ -65,6 +65,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Sales');
+    await queryInterface.dropTable('sales');
   }
 };

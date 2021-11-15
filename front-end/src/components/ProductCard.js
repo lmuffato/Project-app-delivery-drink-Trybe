@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 function ProductCard({ product }) {
+  const [productQty] = useState(0);
+
   return (
     <div>
       <p
         data-testid={ `customer_products__element-card-price-${product.id}` }
       >
-        {product.price}
+        {product.price.replace('.', ',')}
       </p>
       <img
         style={ { maxWidth: '200px' } }
@@ -29,6 +31,7 @@ function ProductCard({ product }) {
       <input
         type="number"
         data-testid={ `customer_products__input-card-quantity-${product.id}` }
+        value={ productQty }
       />
       <button
         type="button"

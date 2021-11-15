@@ -1,8 +1,8 @@
 const express = require('express');
-const Sales = require('../../controllers/saleController');
-
 const router = express.Router();
 
-router.post('/', /* inserir validação aqui */ Sales.createSale);
+const saleController = require('../../controllers/saleController');
+
+router.post('/', /* inserir validação aqui */ saleController.createSale);
 
 module.exports = router;

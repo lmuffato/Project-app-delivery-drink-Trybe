@@ -2,27 +2,29 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { GrFormAdd } from 'react-icons/gr';
 import { IoMdRemove } from 'react-icons/io';
+import './style.css';
 
 function ButtonCard({ id }) {
   return (
     <div className="buttonCardContainer">
-      <div
+      <button
+        type="button"
         className="addButton"
         data-testid={ `customer_products__button-card-add-item-${id}` }
       >
         <GrFormAdd />
-      </div>
-      <div
+      </button>
+      <input
         data-testid={ `customer_products__input-card-quantity-${id}` }
-      >
-        0
-      </div>
-      <div
+        value={ 0 }
+      />
+      <button
+        type="button"
         className="removeButton"
         data-testid={ `customer_products__button-card-rm-item-${id}` }
       >
         <IoMdRemove />
-      </div>
+      </button>
     </div>
   );
 }

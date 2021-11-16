@@ -14,8 +14,12 @@ function Card({ id, name, price, url }) {
         alt={ name }
         data-testid={ `customer_products__img-card-bg-image-${id}` }
       />
-      <p data-testid={ `customer_products__element-card-title-${id}` }>{ name }</p>
+      <p data-testid={ `customer_products__element-card-title-${id}` }>
+        { name }
+      </p>
       <p data-testid={ `customer_products__element-card-price-${id}` }>
+        R$
+        {' '}
         { price.replace('.', ',') }
       </p>
       <ButtonCard id={ id } />

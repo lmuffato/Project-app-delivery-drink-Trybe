@@ -14,7 +14,7 @@ app.use('/images', express.static(path
 
 app.get('/products', Product.getProducts);
 
-app.post('/user', User.getUserbyEmail);
+app.post('/user', User.register);
 
 app.get('/coffee', (_req, res) => res.status(418).end());
 

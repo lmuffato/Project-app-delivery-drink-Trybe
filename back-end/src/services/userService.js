@@ -29,24 +29,27 @@ const getUserbyEmail = async (email) => {
 const register = async ({ name, email, password, role }) => {
   const { error } = RegisterSchema.validate({ name, email, password });
   
-  if (error) throw generateError(422, error.message);
-  
+  if (error) {
+  return { status: 422, message: 'Email already registered.' };
+  }
+
   const { status } = await getUserbyEmail(email);
   
-  if (status === 200) throw generateError(409, 'Email already registered.');
+  if (status === 200) {
+   return { status: 409, message: 'Email already registered.' };
+  }
   
   const cryptPassword = md5(password);
-  const user = await User.create({ 
+  const newUser = await user.create({ 
     name, email, password: cryptPassword, role: role || 'customer' });
-  const userWithoutPassword = removePassword(user.dataValues);
-  
+
   return {
-    user: userWithoutPassword,
+    user: newUser,
   };
 };
 
 module.exports = {
   getUserbyEmail,
   RegisterSchema,
-  register
+  register,
 };

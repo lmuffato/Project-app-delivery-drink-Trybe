@@ -1,0 +1,43 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+
+function CustomerHeader() {
+  return (
+    <header>
+      <Link to="/customer/products">
+        <button
+          data-testid="customer_products__element-navbar-link-products"
+          type="button"
+        >
+          PRODUTOS
+        </button>
+      </Link>
+      <Link to="/customer/order">
+        <button
+          data-testid="customer_products__element-navbar-link-orders"
+          type="button"
+        >
+          MEUS PEDIDOS
+        </button>
+      </Link>
+      <Link to="/perfil">
+        <button
+          data-testid="customer_products__element-navbar-user-full-name"
+          type="button"
+        >
+          NOME
+        </button>
+      </Link>
+      <Link to="/login">
+        <button
+          data-testid="customer_products__element-navbar-link-logout"
+          type="button"
+        >
+          SAIR
+        </button>
+      </Link>
+    </header>
+  );
+}
+
+export default CustomerHeader;

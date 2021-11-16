@@ -3,27 +3,27 @@ import { shape, string } from 'prop-types';
 
 function SellerOrderCard(props) {
   const { order } = props;
-  const { number, status, date, value, address } = order;
+  const { id, status, date, price, address } = order;
 
   return (
     <div>
-      <div>
+      <div data-testid={ `seller_orders__element-order-id-${id}` }>
         Pedido
         {' '}
-        { number }
+        { id }
       </div>
-      <div>
+      <div data-testid={ `seller_orders__element-delivery-status-${id}` }>
         { status }
       </div>
-      <div>
+      <div data-testid={ `seller_orders__element-order-date-${id}` }>
         { date }
       </div>
-      <div>
+      <div data-testid={ `seller_orders__element-card-price-${id}` }>
         R$
         {' '}
-        { value }
+        { price }
       </div>
-      <div>
+      <div data-testid={ `seller_orders__element-card-address-${id}` }>
         { address }
       </div>
     </div>
@@ -32,7 +32,7 @@ function SellerOrderCard(props) {
 
 SellerOrderCard.propTypes = {
   order: shape({
-    number: string,
+    id: string,
     status: string,
     date: string,
     value: string,

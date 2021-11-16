@@ -14,7 +14,7 @@ function SellerOrders() {
     <div>
       Tela do cliente
       {
-        orders.map((order) => <SellerOrderCard key={ order.number } order={ order } />)
+        orders.map((order) => <SellerOrderCard key={ order.id } order={ order } />)
       }
     </div>
   );

@@ -25,7 +25,7 @@ function CustomerHeader() {
           data-testid="customer_products__element-navbar-user-full-name"
           type="button"
         >
-          NOME
+          {JSON.parse(localStorage.getItem('user')).name}
         </button>
       </Link>
       <Link to="/login">

@@ -24,6 +24,7 @@ function Login() {
     try {
       const loginUser = await setLogin(email, password);
       setLoggedUser(loginUser);
+      localStorage.setItem('user', JSON.stringify(loginUser));
       setErrorMessage(false);
       history.push('/customer/products');
     } catch (error) {

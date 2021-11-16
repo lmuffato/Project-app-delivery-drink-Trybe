@@ -1,18 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import paths from '../routesPaths/paths';
-import { handleInput, goRoute } from '../utils/utils';
+import { goRoute } from '../utils/utils';
 
-function Login() {
+const Login = () => {
   const [userData, setUserData] = useState({
     email: '',
     password: '',
   });
 
+  function handleInputChange(e) {
+    e.preventDefault();
+    const { name, value } = e.target;
+    setUserData({ ...userData, [name]: value });
+  }
+
+  useEffect(() => {
+    const validateButton = document.querySelector('button');
+    const { email, password } = userData;
+    const validateEmail = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(email);
+    const validatePassword = new RegExp(/[\w\D]{6}/g).test(password);
+
+    if (validateEmail && validatePassword) {
+      validateButton.disabled = false;
+    } else {
+      validateButton.disabled = true;
+    }
+  });
+
   const history = useHistory();
-  const { email, password } = userData;
-  const validateEmail = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(email);
-  const minPasswordLength = 5;
   const id = 'common_login__element-invalid-email [Elemento oculto (Mensagens de erro)]';
 
   return (
@@ -27,8 +43,8 @@ function Login() {
           placeholder="Insira seu e-mail"
           data-testid="common_login__input-email"
           name="email"
-          value={ email }
-          onChange={ (e) => handleInput(e, userData, setUserData) }
+          // value={ email }
+          onChange={ handleInputChange }
         />
         <br />
         <input
@@ -36,13 +52,12 @@ function Login() {
           placeholder="Insira sua senha"
           data-testid="common_login__input-password"
           name="password"
-          onChange={ (e) => handleInput(e, userData, setUserData) }
+          onChange={ handleInputChange }
         />
         <br />
         <button
           type="button"
           data-testid="common_login__button-login"
-          disabled={ !(validateEmail && password.length > minPasswordLength) }
         >
           Login
         </button>
@@ -63,6 +78,6 @@ function Login() {
       </form>
     </main>
   );
-}
+};
 
 export default Login;

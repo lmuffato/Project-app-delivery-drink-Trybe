@@ -1,5 +1,7 @@
 'use strict';
 
+const { Sale } = require('../models')
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('sales', {
@@ -9,43 +11,49 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      total_price: {
+      totalPrice: {
         allowNull: false,
-        type: Sequelize.DECIMAL(9,2)
+        type: Sequelize.DECIMAL(9,2),
+        field: 'total_price',
       },
-      delivery_address: {
-        allowNull: false,
-        type: Sequelize.STRING,
-      },
-      delivery_number: {
+      deliveryAddress: {
         allowNull: false,
         type: Sequelize.STRING,
+        field: 'delivery_address',
       },
-      sale_date: {
+      deliveryNumber: {
+        allowNull: false,
+        type: Sequelize.STRING,
+        field: 'delivery_number'
+      },
+      saleDate: {
         allowNull: false,
         type: Sequelize.DATE,
         defaultValue: new Date(),
+        field: 'sale_date',
       },
       status: {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      user_id: {
+      userId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
         defaultValue: 1,
+        field: 'user_id',
         references: {
           model: 'users',
           key: 'id',
         }
       },
-      seller_id: {
+      sellerId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
+        field: 'seller_id',
         defaultValue: 1,
         references: {
           model: 'users',

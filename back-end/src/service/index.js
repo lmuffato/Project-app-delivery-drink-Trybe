@@ -5,5 +5,5 @@ const product = require('./productService');
 module.exports = {
   login,
   user,
-  product
+  product,
 };

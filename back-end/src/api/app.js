@@ -16,6 +16,8 @@ app.get('/products', Product.getProducts);
 
 app.post('/user', User.register);
 
+app.post('/user/login', User.getUserbyEmail);
+
 app.get('/coffee', (_req, res) => res.status(418).end());
 
 module.exports = app;

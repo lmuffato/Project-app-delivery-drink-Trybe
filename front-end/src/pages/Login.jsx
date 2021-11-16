@@ -37,7 +37,7 @@ function Login() {
   async function loginClic() {
     const data = { email };
     const myBody = JSON.stringify(data);
-    const request = await fetch('http://localhost:3001/user', {
+    const request = await fetch('http://localhost:3001/user/login', {
       method: 'POST',
       body: myBody,
       headers: {

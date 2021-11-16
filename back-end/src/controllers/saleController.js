@@ -7,6 +7,10 @@ const postSale = async (req, res) => {
 
   const result = await saleService.postSale(data, user);
 
+  const { error } = result;
+
+  if (error) return res.status(error.code).json({ message: error.message });
+
   return res.status(CREATED).json(result);
 };
 

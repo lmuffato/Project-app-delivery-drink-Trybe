@@ -5,7 +5,7 @@ export default function Login() {
     <form>
       <label htmlFor="input-email">
         <input
-          data-testid="email-input"
+          data-testid="common_login__input-email"
           type="email"
           id="input-email"
           name="email"
@@ -15,7 +15,7 @@ export default function Login() {
       <br />
       <label htmlFor="input-password">
         <input
-          data-testid="password-input"
+          data-testid="common_login__input-password"
           type="password"
           id="input-password"
           name="senha"
@@ -23,8 +23,13 @@ export default function Login() {
         />
       </label>
       <br />
-      <button type="button">Ainda não tenho conta</button>
-      <button type="button">LOGIN</button>
+      <button
+        data-testid="common_login__button-login"
+        type="button"
+      >
+        Ainda não tenho conta
+      </button>
+      <button data-testid="common_login__button-register" type="button">LOGIN</button>
     </form>
   );
 }

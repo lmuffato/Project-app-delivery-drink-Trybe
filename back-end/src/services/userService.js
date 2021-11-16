@@ -13,10 +13,18 @@ const login = async (email, password) => {
 // Criando o endpoint do cadastro do usuário
 const register = async (name, email, password) => {
   const user = await database.user.findOne({ where: { email, name } });
-  if (user) return { status: 409, message: { message: 'There is a user with your email' } }; // verificar se usuario já é registrado
-  const userRegistred = await database.User.create({ 
+  if (user) return { status: 409, message: { message: 'Conflict' } }; // verificar se usuario já é registrado
+  const userRegistred = await database.user.create({ 
     name, email, password, role: 'customer' });
-  return { status: 201, message: { userRegistred } };
+   
+    console.log(userRegistred.dataValues);
+    
+  return { status: 201,
+            message: { 
+              name: userRegistred.dataValues.name,
+              email: userRegistred.dataValues.email,
+              password: userRegistred.dataValues.password,
+          } };
 };
 
 const getAllUsers = async () => {

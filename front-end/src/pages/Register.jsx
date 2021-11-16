@@ -27,7 +27,10 @@ function Register({ history }) {
     setRegisterError('');
     const response = await fetchRegister(name, email, password);
     setRegisterError(response.message);
-    if (!response.message) return history.push('/customer/products');
+    if (!response.message) {
+    //  localStorage.setItem('user', JSON.stringify(response));
+      return history.push('/customer/products');
+    }
   };
 
   return (
@@ -66,16 +69,15 @@ function Register({ history }) {
             onChange={ (e) => setPassword(e.target.value) }
           />
         </label>
-        <label htmlFor="register-btn">
-          <input
-            id="register-btn"
-            type="button"
-            disabled={ enableBtn }
-            data-testid="common_register__button-register"
-            value="CADASTRAR"
-            onClick={ handleRegisterButtonClick }
-          />
-        </label>
+        <button
+          id="register-btn"
+          type="submit"
+          disabled={ enableBtn }
+          data-testid="common_register__button-register"
+          onClick={ handleRegisterButtonClick }
+        >
+          Cadastrar
+        </button>
 
         { registerError
           ? <RegisterErrorMessage errorMessage={ registerError } />

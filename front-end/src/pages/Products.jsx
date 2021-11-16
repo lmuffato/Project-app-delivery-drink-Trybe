@@ -6,7 +6,6 @@ import SwiperCore, { Pagination, Navigation } from 'swiper';
 import NavBar from '../components/NavBar';
 import ProductCard from '../components/molecules/ProductCard';
 import Carousel from '../components/Carousel';
-import CartBox from '../components/atoms/CartBox';
 
 export default function Products() {
   const location = useLocation();
@@ -18,20 +17,10 @@ export default function Products() {
   };
 
   return (
-    <div>
-      <div>
-        { renderNavBar() }
-        <Carousel />
-      </div>
+    <>
+      { renderNavBar() }
+      <Carousel />
       <div className="products">
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
         <ProductCard />
         <ProductCard />
         <ProductCard />
@@ -52,8 +41,7 @@ export default function Products() {
           <SwiperSlide><ProductCard /></SwiperSlide>
           <SwiperSlide><ProductCard /></SwiperSlide>
         </Swiper> */}
-        <CartBox />
       </div>
-    </div>
+    </>
   );
 }

@@ -19,11 +19,21 @@ export default function ProductCard() {
   return (
     <div className="card-container text-black mb-3">
       <div className="card-body product-card-container">
-        <p className="card-text">Heineken longneck</p>
+        <p
+          data-testid="customer_products__element-card-title"
+          className="card-text"
+        >
+          Heineken longneck
+        </p>
         <div className="card-title">
-          <h3>R$12,90</h3>
+          <h3
+            data-testid="customer_products__element-card-price"
+          >
+            R$12,90
+          </h3>
         </div>
         <img
+          data-testid="customer_products__img-card-bg-image"
           src="https://cdn-veloxcode.s3.sa-east-1.amazonaws.com/banco-de-imagens/179J7yvZXHtX28zybgBladGh1hto3xrwRJZAIS9G.png"
           alt="heineken"
           style={ { width: 80 } }
@@ -31,14 +41,20 @@ export default function ProductCard() {
       </div>
       <div className="counter-container">
         <button
+          data-testid="customer_products__button-card-add-item"
           className="btn-decrement"
           type="button"
           onClick={ () => decrement() }
         >
           -
         </button>
-        <input className="card-header counter" value={ count } />
+        <input
+          className="card-header counter"
+          value={ count }
+          data-testid="customer_products__input-card-quantity"
+        />
         <button
+          data-testid="customer_products__button-card-rm-item"
           className="btn-increment"
           type="button"
           onClick={ () => increment() }

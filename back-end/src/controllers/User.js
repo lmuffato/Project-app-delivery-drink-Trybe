@@ -1,4 +1,4 @@
-const { User } = require('../database/models');
+// const { User } = require('../database/models');
 const userService = require('../services/userService');
 
 const createUser = async (req, res) => {

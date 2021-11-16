@@ -3,7 +3,8 @@ const express = require('express');
 const router = express.Router();
 
 const saleController = require('../../controllers/saleController');
+const { validateToken } = require('../../middlewares/validateToken');
 
-router.post('/', /* inserir validação aqui */ saleController.createSale);
+router.post('/', validateToken, saleController.createSale);
 
 module.exports = router;

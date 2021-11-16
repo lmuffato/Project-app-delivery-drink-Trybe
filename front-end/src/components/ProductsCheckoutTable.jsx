@@ -18,30 +18,73 @@ function ProductsCheckoutTable() {
     return unitPrice * totalQuantity;
   }
 
-  const formatValue = (params) => `R$ ${params.value}`;
+  const formatValue = (value) => `R$ ${value}`;
 
   const tableColumns = [
     {
-      field: 'id', headerName: 'Item', flex: 0.25,
+      field: 'id',
+      headerName: 'Item',
+      flex: 0.25,
+      renderCell: (params) => (
+        <span
+          data-testid={
+            `customer_checkout__element-order-table-item-number-${params.id}`
+          }
+        >
+          {params.value}
+        </span>),
     },
     {
-      field: 'description', headerName: 'Descrição', flex: 1, headerAlign: 'center',
+      field: 'description',
+      headerName: 'Descrição',
+      flex: 1,
+      headerAlign: 'center',
+      renderCell: (params) => (
+        <span
+          data-testid={ ` customer_checkout__element-order-table-name-${params.id}` }
+        >
+          {params.value}
+        </span>),
     },
     {
-      field: 'quantity', headerName: 'Quantidade', type: 'number', flex: 0.25,
+      field: 'quantity',
+      headerName: 'Quantidade',
+      type: 'number',
+      flex: 0.25,
+      renderCell: (params) => (
+        <span
+          data-testid={ ` cutomer_checkout__element-order-table-quantity-${params.id}` }
+        >
+          {params.value}
+        </span>),
     },
     {
       field: 'value',
       headerName: 'Valor Unitário',
       flex: 0.25,
       type: 'number',
-      valueFormatter: formatValue,
+      renderCell: (params) => (
+        <span
+          data-testid={
+            ` customer_checkout__element-order-table-unit-price-${params.id}`
+          }
+        >
+          {formatValue(params.value)}
+        </span>),
     },
     {
       field: 'subtotal',
       headerName: 'SubTotal',
       flex: 0.25,
       valueGetter: getSubTotal,
+      renderCell: (params) => (
+        <span
+          data-testid={
+            ` customer_checkout__element-order-table-sub-total-${params.id}`
+          }
+        >
+          {formatValue(params.value)}
+        </span>),
       valueFormatter: formatValue,
     },
     {

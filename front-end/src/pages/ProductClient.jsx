@@ -6,7 +6,7 @@ import ProductCard from '../components/productCard';
 function ProductClient() {
   const { products, total, shoppingCart } = useContext(Context);
   // setar CSS MASTER
-
+  // console.log(products);
   return (
     <>
       <Header client={ `${'nome'}` } />

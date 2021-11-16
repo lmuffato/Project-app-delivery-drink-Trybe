@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
       password: DataTypes.STRING,
       role: DataTypes.STRING,
     },
-    { tableName: 'Users', timestamps: false }
+    { tableName: 'users', timestamps: false }
   );
   User.associate = ( { Sale } ) => {
     User.hasMany(Sale);

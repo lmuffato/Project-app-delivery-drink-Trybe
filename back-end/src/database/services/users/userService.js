@@ -1,4 +1,6 @@
-const validateEntries = (entries) => {
+const { User } = require('../../models');
+
+const validateEntries = async (entries) => {
   const { name, email, password, role } = entries;
   if (!name || !email || !password || !role) {
     return {
@@ -6,10 +8,14 @@ const validateEntries = (entries) => {
       message: "Entries not found",
     };
   }
-  // return {
-  //   status: 200,
-  //   message: entries,
-  // };
+  const exists = await User.findAll({ where: { email }});
+  console.log(exists);
+  if (exists.length > 0) {
+    return {
+      status: 409,
+      message: "User already exists",
+    };
+  }
   return true;
 };
 

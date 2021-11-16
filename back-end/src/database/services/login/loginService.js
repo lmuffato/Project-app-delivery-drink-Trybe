@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const crypto = require('crypto');
 const { User } = require('../../models');
 
 const SECRET = require('fs')
@@ -26,8 +27,8 @@ const PASSWORD_EMPTY = {
 };
 
 const USER_INVALID = {
-  code: 400,
-  message: 'Invalid fields',
+  code: 404,
+  message: 'Usuário inexistente',
 };
 
 const validateLogin = (email, password) => {
@@ -38,21 +39,26 @@ const validateLogin = (email, password) => {
   return null;
 };
 
-const validateCredentials = async (email) => {
-  const user = await User.findOne({ where: { email } });
+const validateCredentials = async (email, password) => {
+  const md5Password = crypto.createHash('md5').update(password).digest('hex');
+  const user = await User.findOne({ where: { email, password: md5Password } });
   if (!user) return USER_INVALID;
 };
 
 const userLogin = async (email, password) => {
   const isValid = validateLogin(email, password);
   if (isValid) return isValid;
-  const isRegistered = await validateCredentials(email);
+  const isRegistered = await validateCredentials(email, password);
   if (isRegistered) return isRegistered;
   const user = await User.findOne({ where: { email } });
   const { dataValues } = user;
   const { password: _, ...userPayload } = dataValues;
   const token = jwt.sign(userPayload, SECRET);
-  return { code: 200, token };
+  const userLogin = {
+    ...userPayload,
+    token,
+  };
+  return userLogin;
 };
 
 module.exports = { userLogin };

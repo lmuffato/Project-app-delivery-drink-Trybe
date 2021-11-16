@@ -40,7 +40,7 @@ const validateLogin = (email, password) => {
 };
 
 const validateCredentials = async (email, password) => {
-  const md5Password = crypto.createHash('md5').update(password).digest('hex'); 
+  const md5Password = crypto.createHash('md5').update(password).digest('hex');
   const user = await User.findOne({ where: { email, password: md5Password } });
   if (!user) return USER_INVALID;
 };

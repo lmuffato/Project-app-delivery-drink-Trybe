@@ -14,7 +14,7 @@ async function create(body) {
     await SaleProduct.create({ sale_id: newSale.id , product_id: id, quantity: quantity });
   });
 
-  return { data, code: HTTP_CREATED };
+  return { code: HTTP_CREATED };
 };
 
 module.exports = {

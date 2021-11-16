@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const { user } = require('../database/models/index');
 
-const secret = 'secret';
+const secret = 'secret_key';
 
 const getUserbyEmail = async (email) => {
   const myUser = await user.findOne({ where: { email } });
@@ -12,6 +12,7 @@ const getUserbyEmail = async (email) => {
     expiresIn: '7d',
     algorithm: 'HS256',
   };
+
   const payLoad = { name: myUser.name, email: myUser.email, role: myUser.role };
   const token = jwt.sign(payLoad, secret, jwtConfig);
   return { status: 200, data: myUser, token };

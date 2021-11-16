@@ -25,7 +25,7 @@ function CheckoutBtn() {
       variant="success"
       onClick={ handleClick }
     >
-      { `Ver carrinho $${totalPrice.toFixed(2)}` }
+      { totalPrice.toFixed(2) }
     </Button>
   );
 }

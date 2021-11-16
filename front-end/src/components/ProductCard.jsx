@@ -44,7 +44,7 @@ function ProductCard({ product }) {
           { product.name }
         </p>
         <Card.Text data-testid={ `customer_products__element-card-price-${product.id}` }>
-          { `$${product.price}` }
+          { `${product.price}` }
         </Card.Text>
         <div className="quantityContainer">
           <Button

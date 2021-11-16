@@ -3,6 +3,11 @@ import { Navbar, Nav } from 'react-bootstrap';
 
 function CustomerNavBar() {
   const userName = JSON.parse(localStorage.getItem('user')).name;
+
+  function handleClic() {
+    localStorage.removeItem('user');
+  }
+
   return (
     <Navbar bg="dark" variant="dark">
       <Nav className="me-auto">
@@ -25,7 +30,8 @@ function CustomerNavBar() {
           { userName }
         </Nav.Link>
         <Nav.Link
-          href="exit"
+          onClick={ handleClic }
+          href="http://localhost:3000/login"
           data-testid="customer_products__element-navbar-link-logout"
         >
           SAIR

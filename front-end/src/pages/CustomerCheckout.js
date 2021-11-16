@@ -32,6 +32,22 @@ function CustomerCheckout() {
           }
         </tbody>
       </table>
+      <p data-testid="customer_checkout__element-order-total-price">Total: R$ 28,46</p>
+      <form>
+        <select data-testid="customer_checkout__select-seller">
+          <option>Fulana Pereira</option>
+          <option>Cicrano da Silva</option>
+        </select>
+        <input data-testid="customer_checkout__input-address" type="text" />
+        <input data-testid="customer_checkout__input-addressNumber" type="number" />
+        <button
+          data-testid="customer_checkout__button-submit-order"
+          type="submit"
+        >
+          FINALIZAR PEDIDO
+        </button>
+      </form>
+
     </>
   );
 }

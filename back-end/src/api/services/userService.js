@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const md5 = require('md5');
 const { users } = require('../../database/models');
 require('dotenv').config();
 
@@ -13,9 +14,12 @@ const login = async (user) => {
   return { token, role: user.role };
 };
 
-const create = async ({ email, password, name }) => {
-  const response = await users.create({ email, password, name });
+const create = async ({ email, requestPassword, name, requestRole }) => {
+  let role = 'customer';
+  if (requestRole) role = requestRole;
+  const password = md5(requestPassword);
 
+  const response = await users.create({ email, password, name, role });
   return response;
 };
 

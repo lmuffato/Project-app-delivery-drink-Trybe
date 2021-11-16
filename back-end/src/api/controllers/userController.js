@@ -18,8 +18,13 @@ const login = async (req, res) => {
 
 const create = async (req, res) => {
   try {
-    const { email, password, name } = req.body;
-    const response = await userService.create({ email, password, name });
+    const { email, password, name, role } = req.body;
+    const response = await userService.create({ 
+      email, 
+      requestPassword: password, 
+      name, 
+      requestRole: role,
+    });
     return res.status(HTTP_CREATED_STATUS).json(response);
   } catch (error) {
     return res.status(HTTP_ERROR_STATUS).json({

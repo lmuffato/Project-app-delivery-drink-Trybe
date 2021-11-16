@@ -14,6 +14,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.get('/coffee', (_req, res) => res.status(418).end());
 
 app.post('/login', loginvalidationMid, userController.login);
-app.post('/register', registerValidationMid, userController.login);
+app.post('/register', registerValidationMid, userController.create);
 
 module.exports = app;

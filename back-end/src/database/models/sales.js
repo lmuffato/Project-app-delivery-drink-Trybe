@@ -5,13 +5,11 @@ module.exports = (sequelize, DataTypes) => {
     total_price: DataTypes.DECIMAL,
     delivery_address: DataTypes.STRING,
     delivery_number: DataTypes.STRING,
-    sale_date: DataTypes.DATETIME,
+    sale_date: DataTypes.DATE,
     status: DataTypes.STRING,
-    onUpdate: DataTypes.STRING,
-    onDelete: DataTypes.STRING
   }, {
     tableName: 'Sales',
-    timestamps: true,
+    timestamps: false,
   });
 
   return Sales;

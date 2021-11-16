@@ -4,11 +4,9 @@ module.exports = (sequelize, DataTypes) => {
     password: DataTypes.STRING,
     email: DataTypes.STRING,
     role: DataTypes.STRING,
-    onUpdate: DataTypes.STRING,
-    onDelete: DataTypes.STRING
   }, {
-    tableName: 'Users',
-    timestamps: true,
+    tableName: 'users',
+    timestamps: false,
   });
 
   return User;

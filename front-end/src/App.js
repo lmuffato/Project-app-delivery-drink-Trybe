@@ -1,7 +1,9 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Register from './pages/Register';
-import { RegisterProvider } from './contexto/register'
+import { RegisterProvider } from './contexts/Register'
+import Login from './pages/Login';
+import { LoginProvider } from './contexts/Login';
 
 function App() {
   return (
@@ -19,6 +21,16 @@ function App() {
           </RegisterProvider>
         }
       />
+      <Route
+        path="/login"
+        element={
+          <LoginProvider>
+            <Login />
+          </LoginProvider>
+        }
+      />
+      <Route exact path="/teste" element={ <h1>Teste</h1> } />
+
     </Routes>
   );
 }

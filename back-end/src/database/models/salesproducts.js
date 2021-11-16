@@ -3,11 +3,9 @@ module.exports = (sequelize, DataTypes) => {
     productId: DataTypes.INTEGER,
     saleId: DataTypes.INTEGER,
     quantity: DataTypes.INTEGER,
-    onUpdate: DataTypes.STRING,
-    onDelete: DataTypes.STRING
   }, {
     tableName: 'SalesProducts',
-    timestamps: true,
+    timestamps: false,
   });
 
   return SalesProducts;

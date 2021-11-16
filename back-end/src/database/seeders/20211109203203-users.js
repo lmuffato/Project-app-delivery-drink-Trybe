@@ -2,7 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkInsert('Users',
+    await queryInterface.bulkInsert('users',
       [{
         id: 1,
         name: 'Delivery App Admin',
@@ -24,10 +24,10 @@ module.exports = {
         password: '1c37466c159755ce1fa181bd247cb925',
         role: 'customer'
       }
-      ]);
+      ], { timestamps: false });
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkDelete('Users', null, {});
+    await queryInterface.bulkDelete('users', null, {});
   }
 };

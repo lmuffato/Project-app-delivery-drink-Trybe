@@ -1,6 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import axios from 'axios';
-import { RegisterContext } from '../contexto/register';
+import { RegisterContext } from '../contexts/Register';
 
 function Register() {
   const { data, setData } = useContext(RegisterContext);

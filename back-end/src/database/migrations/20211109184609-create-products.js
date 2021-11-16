@@ -16,7 +16,7 @@ module.exports = {
       },
       name: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.STRING(100)
       },
       price: {
         allowNull: false,
@@ -24,10 +24,9 @@ module.exports = {
       },
       url_image: {
         allowNull: false,
-        type: Sequelize.STRING
+        default: '',
+        type: Sequelize.STRING,
       },
-      onUpdate: Sequelize.DATE,
-      onDelete: Sequelize.DATE
     });
   },
   down: async (queryInterface, Sequelize) => {

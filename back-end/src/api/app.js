@@ -8,7 +8,7 @@ const { validateAdmin } = require('./middleware/validateAdmin');
 const { validateToken } = require('./auth/validateToken');
 
 const app = express();
-
+app.use(cors());
 app.use(bodyParser.json());
 app.use(cors());
 

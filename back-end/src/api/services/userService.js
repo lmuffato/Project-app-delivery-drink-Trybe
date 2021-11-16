@@ -51,7 +51,7 @@ const createUser = async ({ name, email, password, role }) => {
 
 const login = async ({ email, password }) => {
   if (!email || !password) {
-    return ({ status: 401, data: ALL_FIELDS_FILLED });
+    return ({ status: 404, data: ALL_FIELDS_FILLED });
   }
 
   const hashPassword = md5(password);
@@ -59,7 +59,7 @@ const login = async ({ email, password }) => {
   const loginCheck = await checkLogin(email, hashPassword);
 
   if (!loginCheck) {
-    return ({ status: 401, data: INCORRECT_USERNAME_OR_PASSWORD });
+    return ({ status: 404, data: INCORRECT_USERNAME_OR_PASSWORD });
   }
 
   const token = jwt.sign(loginCheck, secret, jwtConfig);

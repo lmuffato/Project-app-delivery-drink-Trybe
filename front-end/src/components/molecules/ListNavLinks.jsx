@@ -26,20 +26,12 @@ const ListNavLinks = () => {
   });
 
   return (
-    <div className="collapse navbar-collapse" id="navbarNav">
-      <button
-        className="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span className="navbar-toggler-icon" />
-      </button>
+    <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
       <ul className="navbar-nav">
-        <li className="nav-item">
+        <li
+          className="nav-item"
+          data-testid="customer_products__element-navbar-link-products"
+        >
           <Link
             className="nav-link products-nav-link active"
             aria-current="page"
@@ -48,7 +40,10 @@ const ListNavLinks = () => {
             PRODUTOS
           </Link>
         </li>
-        <li className="nav-item">
+        <li
+          className="nav-item"
+          data-testid="customer_products__element-navbar-link-orders"
+        >
           <Link
             className="nav-link sales-nav-link"
             aria-current="page"

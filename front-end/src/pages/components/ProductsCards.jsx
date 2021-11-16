@@ -9,6 +9,7 @@ export default function ProductsCards({ callback }) {
   const { user, products, setProducts } = useContext(ContextDeliveryApp);
   const [isLoading, setIsLoading] = useState(true);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const getProducts = async () => {
     setIsLoading(true);
     const productsList = await fetchProducts(user.token);
@@ -23,9 +24,8 @@ export default function ProductsCards({ callback }) {
     if (products.length === 0) {
       getProducts();
     }
-    console.log(products);
     setIsLoading(false);
-  }, []);
+  }, [products]);
 
   useEffect(() => {
 

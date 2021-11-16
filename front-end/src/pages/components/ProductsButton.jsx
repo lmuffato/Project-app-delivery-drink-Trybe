@@ -12,7 +12,7 @@ export default function ProductsButton({ history }) {
         <input
           id="products-btn"
           value="PRODUTOS"
-          data-testid="customer_products__element-navbar-link-orders"
+          data-testid="customer_products__element-navbar-link-products"
           onClick={ handleProductsClick }
         />
       </label>

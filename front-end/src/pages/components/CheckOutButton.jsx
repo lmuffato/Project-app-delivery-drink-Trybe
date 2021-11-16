@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default function ShopCartCard({ value, history }) {
+export default function CheckOutButton({ value, history }) {
   const handleClick = () => {
     history.push('/customer/checkout');
   };
@@ -9,19 +9,18 @@ export default function ShopCartCard({ value, history }) {
   return (
     <div>
       <button
-        id="value"
+        data-testid="customer_products__button-cart"
         type="submit"
         disabled={ value <= 0 }
-        data-testid="customer_products__checkout-bottom-value"
         onClick={ handleClick }
       >
-        { value.toFixed(2).toString().replace(/\./, ',') }
+        CheckOut
       </button>
     </div>
   );
 }
 
-ShopCartCard.propTypes = {
+CheckOutButton.propTypes = {
   value: PropTypes.number.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,

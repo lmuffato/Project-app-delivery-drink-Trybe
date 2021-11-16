@@ -3,24 +3,26 @@ import PropTypes from 'prop-types';
 import ContextDeliveryApp from '../../store/ContextDeliveryApp';
 
 export default function LogoutButton({ history }) {
-  const { setUser } = useContext(ContextDeliveryApp);
+  const { setUser, setProducts } = useContext(ContextDeliveryApp);
 
-  const handleLogoutClick = () => {
+  const handleLogoutClick = (e) => {
+    e.preventDefault();
     setUser({});
+    setProducts([]);
     localStorage.removeItem('user');
     history.push('/login');
   };
 
   return (
     <div>
-      <label htmlFor="logout-btn">
-        <input
-          id="logout-btn"
-          value="SAIR"
-          data-testid="customer_products__element-navbar-link-logout"
-          onClick={ handleLogoutClick }
-        />
-      </label>
+      <button
+        id="logout-btn"
+        type="submit"
+        data-testid="customer_products__element-navbar-link-logout"
+        onClick={ handleLogoutClick }
+      >
+        SAIR
+      </button>
     </div>
   );
 }

@@ -36,19 +36,19 @@ const create = async (user) => {
 
 const login = async (user) => {
   try {
-    const { email, password } = user;
+    const { password } = user;
 
     const passwordMD5 = md5(password);
 
-    const result = await User.findOne({ where: { email, password: passwordMD5 } });
+    const result = await User.findOne({ where: { email: user.email, password: passwordMD5 } });
 
     if (!result) return errorMap.NotFound;
 
     const { dataValues } = result;
   
-    const { id, displayName } = dataValues;
+    const { id, name, email, role } = dataValues;
 
-    const payload = { id, displayName };
+    const payload = { id, name, email, role };
     const options = { expiresIn: '1d' };
 
     const token = jwt.sign(payload, SECRET, options);

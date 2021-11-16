@@ -10,6 +10,7 @@ import mockProducts from './mockAPI';
 const Endpoints = {
   login_form: 'login',
   registration_form: 'register',
+  seller_orders: 'seller/orders',
 };
 
 function Provider({ children }) {
@@ -31,7 +32,7 @@ function Provider({ children }) {
   /// ////////////////////////Link with BackEnd//////////////////////// ///
 
   const post = (formType, data) => axios.post(`http://localhost:3001/${Endpoints[formType]}`, data);
-  const get = (formType) => axios.get(`http://localhost:3001/${Endpoints[formType]}`);
+  const get = (formType, id) => axios.get(`http://localhost:3001/${Endpoints[formType]}/${id}`);
 
   // const getProductsURL = 'http://localhost:3001/products';
   const getProducts = () => {

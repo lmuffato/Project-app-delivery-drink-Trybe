@@ -7,7 +7,7 @@ function SellerOrders() {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    get('orders').then((ordersData) => setOrders(ordersData));
+    get('seller_orders').then((ordersData) => setOrders(ordersData));
   }, [get]);
 
   return (

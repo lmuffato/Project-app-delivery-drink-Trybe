@@ -47,7 +47,7 @@ const LoginForm = () => {
           placeholder="Email"
         />
         <Input
-          className="inputEye"
+          className="input-password"
           data-testid="common_login__input-password"
           name="password"
           value={ password }
@@ -63,7 +63,7 @@ const LoginForm = () => {
           text="ENTRAR"
         />
         <Button
-          className="btn-login"
+          className="btn-register"
           type="button"
           data-testid="common_login__button-register"
           onClick={ handleClickRegister }
@@ -72,7 +72,7 @@ const LoginForm = () => {
         <ErrorMessage
           className="error-message-login"
           data-testid="common_login__element-invalid-email"
-          text={ errorMessageContent() }
+          text={ errorMessageContent }
           hidden={ isHidden }
         />
       </div>

@@ -17,6 +17,7 @@ function Provider({ children }) {
   const [products, setProducts] = useState([]);
   const [shoppingCart, setShoppingCart] = useState({});
   const [total, setTotal] = useState(0);
+  const [delivery, setDelivery] = useState({});
 
   // user {
   // name: 'John',
@@ -47,7 +48,7 @@ function Provider({ children }) {
 
   const postShoppingCartURL = 'http://localhost:3001/products';
   const postShoppingCart = () => {
-    axios.post(postShoppingCartURL, { shoppingCart })
+    axios.post(postShoppingCartURL, { shoppingCart, delivery, total })
       .then((res) => {
         console.log(res);
         console.log(res.data);
@@ -60,8 +61,7 @@ function Provider({ children }) {
     // const fetchProducts = (async () => {
     //   await getProducts();
     // });
-    // const emptyArray = [];
-    // setShoppingCart(emptyArray);
+    setDelivery({ deliveryAndress: 'string', deliveryNumber: 99 });
     getProducts();
     setTotal(0);
     // console.log(fetchProducts);
@@ -136,6 +136,24 @@ function Provider({ children }) {
     setShoppingCart(spread);
     console.log(shoppingCart);
   };
+
+  const inputProduct = (name, _id, value) => {
+    const currentItemsinCart = Object.keys(shoppingCart);
+    if (currentItemsinCart.includes(name)) {
+      const update = shoppingCart[name].quant;
+      return setShoppingCart({ ...shoppingCart,
+        [name]: { id: name, price: value, quant: update + value } });
+    }
+    const cart = {
+      id: name,
+      quant: value,
+      price: value,
+    };
+    const spread = { ...shoppingCart, [name]: cart };
+    setShoppingCart(spread);
+    console.log(shoppingCart);
+  };
+
   return (
     <Context.Provider
       value={ {
@@ -149,6 +167,7 @@ function Provider({ children }) {
         addProduct,
         subProduct,
         postShoppingCart,
+        inputProduct,
         total } }
     >
       { children }

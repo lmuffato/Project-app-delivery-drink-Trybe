@@ -5,7 +5,7 @@ import '../styles/product.css';
 import Context from '../context/Context';
 
 function ProductCard({ product: { id, name, price, urlImage } }) {
-  const { addProduct, subProduct } = useContext(Context);
+  const { addProduct, subProduct, inputProduct } = useContext(Context);
   // Styles:
   // preço: Absolute inset -1 background-opacity 70%
   // image: fill
@@ -48,6 +48,9 @@ function ProductCard({ product: { id, name, price, urlImage } }) {
             type="number"
             placeholder="0"
             data-testid="customer_products__input-card-quantity-"
+            id="testID"
+            name={ name }
+            onChange={ (e) => inputProduct(e.target.name, e.target.id, e.target.value) }
           />
           <button
             type="button"

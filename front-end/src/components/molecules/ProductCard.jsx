@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import '../../styles/ProductCard.css';
+// import ProductsContext from '../../context/Products/ProductsContext';
 
 export default function ProductCard() {
+  // const { count1, setCount1 } = useContext(ProductsContext);
   const [count, setCount] = useState(1);
 
   const increment = () => {

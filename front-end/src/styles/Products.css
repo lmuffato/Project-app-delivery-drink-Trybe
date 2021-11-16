@@ -1,6 +1,7 @@
 .products {
   align-items: center;
   display: flex;
+  flex-wrap: wrap;
   font-size: 26px;
   justify-content: space-around;
   margin-top: 20px;
@@ -9,4 +10,27 @@
 .drink-img {
   border-radius: 30px;
   height: 250px;
+}
+
+.cartbox {
+  align-items: center;
+  background-color: #157347;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+  position: fixed;
+  right: 10px;
+  top: 120px;
+  width: 280px;
+}
+
+.cartbox:hover {
+  background-color: #2fc18c;
+}
+
+.carousel-container {
+  padding-top: 120px;
 }

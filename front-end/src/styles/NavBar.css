@@ -1,3 +1,10 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: 1000;
+}
+
 .deliveryIcon {
   font-size: 50px;
 }
@@ -16,4 +23,12 @@
 .nav-link {
   font-size: 24px;
   margin-left: 30px;
+  padding: 31px;
+  text-align: center;
+  width: 200px;
+}
+
+.active {
+  background-color: #2fc18c;
+  border-radius: 5px;
 }

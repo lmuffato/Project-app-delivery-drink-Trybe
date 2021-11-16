@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [user, setUser] = useState({});
-  const [error, setError] = useState(true);
+  const [showError, setShowError] = useState(true);
+
+  const history = useHistory();
 
   const validForm = () => {
     const passwordMinLength = 6;
@@ -26,11 +29,11 @@ function Login() {
     const data = await res.json();
     setUser(data);
     if (data.error) {
-      setError(false);
+      setShowError(false);
     } else {
-      setError(true);
+      setShowError(true);
+      history.push('/customer/products');
     }
-    // console.log(data);
   };
 
   return (
@@ -70,7 +73,7 @@ function Login() {
 
       <span
         data-testid="common_login__element-invalid-email"
-        hidden={ error }
+        hidden={ showError }
       >
         { user.error ? user.error : '' }
       </span>

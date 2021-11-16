@@ -1,4 +1,4 @@
-const user = require('../controllers/user');
+const user = require('../controllers/User');
 
 module.exports = (io) => io.on('connection', async (socket) => {
   socket.on('login', async (userInfo) => {

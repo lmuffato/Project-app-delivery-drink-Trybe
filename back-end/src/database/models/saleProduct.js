@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = (sequelize, _DataTypes) => {
   const SaleProduct = sequelize.define(
     'saleProduct',

@@ -36,7 +36,6 @@
   padding-top: 30px;
   position: relative;
   font-size: 0;
-  z-index: 1;
 
   &::before {
     animation: danceRight 3s infinite;
@@ -50,7 +49,6 @@
     top: 0;
     left: 0;
     transform: rotateZ(-3deg);
-    z-index: -1;
   }
 
   &::after {
@@ -70,13 +68,11 @@
 
 .auth > img {
   grid-area: logo;
-  z-index: 1;
 }
 
 .auth form {
   display: grid;
   grid-area: form;
-  z-index: 1;
 
   label {
     color: white;

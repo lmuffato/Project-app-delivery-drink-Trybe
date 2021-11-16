@@ -24,8 +24,11 @@ function CustomerCheckout() {
         </thead>
         <tbody>
           {
-            cart
-              .map((product) => <OrderItemCard product={ product } key={ product.id } />)
+            cart.map(
+              (product, i) => (
+                <OrderItemCard product={ product } index={ i } key={ product.id } />
+              ),
+            )
           }
         </tbody>
       </table>

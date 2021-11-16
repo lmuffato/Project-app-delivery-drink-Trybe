@@ -64,7 +64,7 @@ const login = async ({ email, password }) => {
 
   const token = jwt.sign(loginCheck, secret, jwtConfig);
 
-  return ({ status: 200, token });
+  return ({ status: 200, token, role: loginCheck.role });
 };
 
 const findAllUsers = async () => {

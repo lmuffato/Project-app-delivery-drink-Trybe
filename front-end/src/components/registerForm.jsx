@@ -3,8 +3,10 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import useInputs from '../hooks/useInputs';
 import registerValidations from '../schemas/register';
-import useAlert from '../hooks/userAlert';
+import useAlert from '../hooks/useAlert';
 // import validateInputsRegister from '../ValidatingFunctions/validatingFunctions';
+
+import '../styles/components/RegisterForm.scss';
 
 function RegisterForm() {
   const [values, setValues] = useInputs({ email: '', name: '', password: '' });
@@ -44,7 +46,7 @@ function RegisterForm() {
   };
 
   return (
-    <div>
+    <div className="register-form-container">
       { isVisible && <Alert dataTestId="common_register__element-invalid_register" />}
       <form onSubmit={ sendRegister } style={ { zIndex: 10 } }>
         <label htmlFor="name">

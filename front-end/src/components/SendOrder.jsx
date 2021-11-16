@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Row, Col } from 'react-bootstrap';
+import { Form, Row, Col, Button } from 'react-bootstrap';
 
 function SendOrder() {
   function selectInput() {
@@ -37,6 +37,13 @@ function SendOrder() {
             />
           </Form.Group>
         </Row>
+        <Button
+          data-testid="customer_checkout__button-submit-order"
+          variant="success"
+          type="submit"
+        >
+          FINALIZAR PEDIDO
+        </Button>
       </Form>
     </div>
   );

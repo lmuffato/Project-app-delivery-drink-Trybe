@@ -1,16 +1,42 @@
-import React from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useState } from 'react';
+
+import { useHistory, Redirect } from 'react-router-dom';
+
+const axios = require('axios').default;
 
 export default function Login() {
   const history = useHistory();
 
-  // const [user, setUser] = useState('');
-  // const [password, setPassword] = useState('');
+  const [user, setUser] = useState('');
+  const [password, setPassword] = useState('');
+  const [errorLogin, setErrorLogin] = useState(false);
+  const [redirect, setRedirect] = useState(false);
   // const [disableButton, setDisableButton] = useState(true);
 
-  const handleChangeUser = ({ target }) => {
+  const handleChange = ({ target }, handle) => {
     const { value } = target;
-    setUser(value);
+    handle(value);
+  };
+  const tokenStorage = ({ token }) => {
+    localStorage.setItem('token', token);
+  };
+  const handleLogin = async () => {
+    try {
+      const response = await axios({
+        method: 'post',
+        url: 'http://localhost:3001/users/login/',
+        data: {
+          password,
+          email: user,
+        },
+        responseType: 'json',
+      });
+      tokenStorage(response.data);
+      setRedirect(true);
+    } catch (error) {
+      setErrorLogin(true);
+      console.error(error);
+    }
   };
 
   return (
@@ -22,21 +48,27 @@ export default function Login() {
           data-testid="common_login__input-email"
           placeholder="Email"
           name="email"
-          onChange={ handleChangeUser }
+          value={ user }
+          onChange={ (e) => handleChange(e, setUser) }
         />
         <input
           type="password"
           data-testid="common_login__input-password"
           placeholder="Senha"
+          value={ password }
+          onChange={ (e) => handleChange(e, setPassword) }
           name="senha"
         />
         <button
           type="button"
           data-testid="common_login__button-login"
-          onClick={ () => history.push('/customer/products') }
+          onClick={ () => {
+            handleLogin();
+          } }
         >
           LOGIN
         </button>
+        {errorLogin ? <p>Login Falhou</p> : null }
         <button
           type="button"
           data-testid="common_login__button-register"
@@ -44,6 +76,7 @@ export default function Login() {
         >
           CADASTRE-SE
         </button>
+        {redirect ? <Redirect to="/customer/products" /> : null}
       </form>
     </div>
   );

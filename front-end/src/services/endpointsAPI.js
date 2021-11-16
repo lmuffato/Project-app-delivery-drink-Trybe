@@ -15,5 +15,3 @@ export const createNewUser = async (name, email, password) => {
   const result = await api.post('/users/create', { name, email, password });
   return result.data;
 };
-
-

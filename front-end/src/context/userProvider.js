@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import UserContext from './UserContext';
+import UserContext from './userContext';
 
 function UserProvider({ children }) {
   const [UserData, setUserData] = useState();

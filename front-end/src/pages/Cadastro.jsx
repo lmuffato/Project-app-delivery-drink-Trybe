@@ -7,8 +7,6 @@ export default function Cadastro() {
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
 
-  // const [disableButton, setDisableButton] = useState(true);
-
   const handleChange = ({ target }, handle) => {
     const { value } = target;
     handle(value);
@@ -31,6 +29,9 @@ export default function Cadastro() {
     } catch (error) {
       console.error(error);
     }
+    setName('');
+    setUser('');
+    setPassword('');
   };
 
   return (

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import testID from '../../../datatestids.json';
+import testID from '../../datatestids.json';
 import Button from '../atoms/Button';
 import Input from '../atoms/Input';
 import ErrorMessage from '../atoms/ErrorMessage';

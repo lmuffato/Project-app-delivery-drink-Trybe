@@ -26,9 +26,7 @@ const registerProductsOnSale = async (saleId, products) => {
       return { error: { message: er } };
     }
   }, {});
-  if (error !== undefined) {
-    return { error };
-  }
+  return { error };
 };
 
 const createSale = async (saleData) => {

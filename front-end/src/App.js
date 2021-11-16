@@ -20,7 +20,6 @@ function App() {
           </LoginProvider>
         }
       />
-      <Route exact path="/teste" element={ <h1>Teste</h1> } />
       <Route exact path="/admin/manage" element={ <Admin /> } />
     </Routes>
   );

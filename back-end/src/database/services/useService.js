@@ -1,5 +1,5 @@
 const { User } = require('../models');
-const { HTTP_CREATED, HTTP_CONFLICT, HTTP_OK_STATUS } = require('../../status');
+const { HTTP_CREATED, HTTP_CONFLICT, HTTP_OK_STATUS, HTTP_NOT_FOUND } = require('../../status');
 const { createToken } = require('../../validations/auth/validateJWT');
 
 async function readByEmailService(email) {

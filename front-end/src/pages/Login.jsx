@@ -17,8 +17,8 @@ export default function Login() {
     const { value } = target;
     handle(value);
   };
-  const tokenStorage = ({ token }) => {
-    localStorage.setItem('token', token);
+  const tokenStorage = (lgUser) => {
+    localStorage.setItem('user', JSON.stringify(lgUser));
   };
   const handleLogin = async () => {
     try {

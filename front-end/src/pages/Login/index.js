@@ -1,5 +1,5 @@
 import React from 'react';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import MD5 from 'crypto-js/md5';
 import { IoMdBeer } from 'react-icons/io';
@@ -17,24 +17,15 @@ function LoginPage() {
   const checkEmail = () => /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/.test(email);
   const minLength = 6;
   const checkPass = () => password.length >= minLength;
-
-  const handleLogin = () => {
-    const passHash = MD5(password).toString();
-    api.getLogin(email, passHash).then((ress) => {
-      console.log(ress);
-      if (!ress || ress.error) {
-        throw new Error();
-        // setError('Login inválido');
-      } else {
-        history.push('/customer/products');
-      }
-    })
-      .catch(() => {
-        console.log('Deu erro');
-        setError('Login inválido');
-      });
-    // console.log('Estou no handle');
-    // setError('Login inválido');
+  const handleLogin = async () => {
+    try {
+      const passHash = MD5(password).toString();
+      const response = await api.getLogin(email, passHash);
+      localStorage.setItem('user', JSON.stringify(response));
+      history.push('/customer/products');
+    } catch (e) {
+      setError('Login inválido');
+    }
   };
 
   return (
@@ -65,25 +56,27 @@ function LoginPage() {
             type="button"
             data-testid="common_login__button-login"
             disabled={ !(checkEmail() && checkPass()) }
-            onClick={ () => handleLogin() }
+            onClick={ handleLogin }
+            className="loginButton"
           >
-            {/* <Link to="/#">Login</Link> */}
+            Login
           </button>
           <div className="separator">ou</div>
           <button
             type="button"
             data-testid="common_login__button-register"
+            className="createAccount"
           >
-            Cadastro
+            <Link to="/register">Ainda não tenho conta</Link>
           </button>
-          {/* <Link
-            to="/register"
-            data-testid="common_login__button-register"
-            className="register-account"
-          >
-            Ainda não tenho conta
-          </Link> */}
-          {error && <p className="error">{error}</p>}
+          {error && (
+            <p
+              className="error"
+              data-testid="common_login__element-invalid-email"
+            >
+              {error}
+            </p>
+          )}
         </div>
       </div>
     </section>

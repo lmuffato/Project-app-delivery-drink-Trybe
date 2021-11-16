@@ -25,7 +25,7 @@ async function login(req, res) {
 
     return res.status(code).json(data);
   } catch (e) {
-    return res.status(HTTP_BAD_REQUEST).json({ error: e.message });
+    return res.status(HTTP_NOT_FOUND).json({ error: e.message });
   }
 }
 

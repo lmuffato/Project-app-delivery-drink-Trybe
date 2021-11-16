@@ -35,7 +35,7 @@ function CheckoutBtn() {
       variant="success"
       onClick={ handleClick }
     >
-      Ver carrinho - R$
+      Total: R$
       <span
         data-testid="customer_products__checkout-bottom-value"
       >

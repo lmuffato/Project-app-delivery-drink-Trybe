@@ -6,6 +6,7 @@ import Register from './pages/Register';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import CartProvider from './contexts/CartProvider';
 import Login from './pages/Login';
+import CustomerCheckout from './pages/CustomerCheckout';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <Route path="/register" component={ Register } />
       <CartProvider>
         <Route exact path="/customer/products" component={ ClientProducts } />
+        <Route path="/customer/checkout" component={ CustomerCheckout } />
       </CartProvider>
     </>
   );

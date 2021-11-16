@@ -14,7 +14,11 @@ export default function Headers({ history }) {
       <navbar>
         <ProductsButton history={ history } />
         <OrdersButton history={ history } />
-        <p>{ user.name }</p>
+        <p
+          data-testid="customer_products__element-navbar-user-full-name"
+        >
+          { user.name }
+        </p>
         <LogoutButton history={ history } />
       </navbar>
     );

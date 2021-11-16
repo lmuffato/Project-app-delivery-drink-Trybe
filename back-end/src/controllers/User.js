@@ -11,10 +11,11 @@ const login = async (req, res) => {
 };
 
 const createUser = async (req, res) => {
-  const { name, email, password } = req;
+  const { name, email, password } = req.body;
+  console.log(req.body);
   const { err, newUser } = await User.createUser(name, email, password);
-  if (err) return res.status(400);
-  return res.status(201).json(newUser);
+  if (err) return res.status(400).json({ error: err });
+  return res.status(201).json({ newUser });
 };
 
 module.exports = {

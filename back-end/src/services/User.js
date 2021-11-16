@@ -19,11 +19,19 @@ const login = async (email, password) => {
   return { user };
 };
 
+const findUser = async (email) => {
+  const user = await User.findUser(email);
+  return user;
+};
+
 const createUser = async (name, email, password) => {
   const { error } = schemaCreatedUser.validate({ name, email, password });
 
   if (error) {
     return { err: { message: error.message } };
+  }
+  if (findUser) {
+    return { err: { message: 'Usuário já cadastrado' } };
   }
 
   const passwordEncrypted = md5(password);

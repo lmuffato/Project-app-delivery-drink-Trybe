@@ -30,6 +30,7 @@ app.use(cors(corsOptions));
 
 app.get('/products', product.getProducts);
 app.post('/login', user.login);
+app.post('/register', user.createUser);
 
 app.use('/images', express.static(path.join(__dirname, '..', '..', '/public')));
 

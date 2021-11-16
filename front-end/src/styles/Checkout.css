@@ -57,7 +57,7 @@ th {
 }
 
 .td-remove {
-  background: #31c08a;
+  /* background: #31c08a; */
   border-radius: 0 10px 10px 0;
   cursor: pointer;
 }

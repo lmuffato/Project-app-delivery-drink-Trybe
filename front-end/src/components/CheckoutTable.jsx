@@ -59,7 +59,7 @@ export default function CheckoutTable() {
             data-testid={
               `customer_checkout__element-order-table-remove-${0}`
             }
-            className="td-remove"
+            className="td-remove bg-danger"
           >
             Remover
           </td>
@@ -91,7 +91,7 @@ export default function CheckoutTable() {
             R$ 16,40
           </td>
           <td
-            className="td-remove"
+            className="td-remove bg-danger"
           >
             Remover
           </td>
@@ -123,7 +123,7 @@ export default function CheckoutTable() {
             R$ 1,56
           </td>
           <td
-            className="td-remove"
+            className="td-remove bg-danger"
           >
             Remover
           </td>

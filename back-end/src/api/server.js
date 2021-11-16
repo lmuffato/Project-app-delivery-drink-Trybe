@@ -29,6 +29,7 @@ app.use(cors(corsOptions));
 
 app.get('/products', product.getProducts);
 app.post('/login', user.login);
+app.post('/register', user.createUser);
 
 server.listen(port, () => console.log(`Ouvindo na porta ${port}!`));
 module.exports = app;

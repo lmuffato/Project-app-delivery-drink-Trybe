@@ -2,7 +2,7 @@ const Joi = require('joi');
 
 const schemaCreatedUser = Joi.object({
   name: Joi.string()
-    .min(12)
+    .max(12)
     .required(),
   email: Joi.string() 
     .email()

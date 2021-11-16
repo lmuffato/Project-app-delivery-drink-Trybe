@@ -4,16 +4,39 @@ function SignUp() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
+  const [newUser, setNewUser] = useState({});
+  const [error, setError] = useState(true);
 
   const validForm = () => {
     const passwordMinLength = 6;
     const nameMaxLength = 12;
     const emailRegex = /\S+@\S+\.\S+/;
     if (!emailRegex.test(email)
-      || password.length < passwordMinLength || name.length > nameMaxLength) {
+      || password.length < passwordMinLength || name.length < nameMaxLength) {
       return true;
     }
     return false;
+  };
+
+  const handleClick = async (userEmail, userPassword, userName, e) => {
+    e.preventDefault();
+    const res = await fetch('http://localhost:3001/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ name: userName, email: userEmail, password: userPassword }),
+    });
+    const data = await res.json();
+    setNewUser({ data });
+    if (data.error) {
+      setError(false);
+    } else {
+      setError(true);
+    }
+    console.log(data);
+    console.log(data.error);
+    console.log(typeof name);
   };
 
   return (
@@ -52,15 +75,16 @@ function SignUp() {
           type="submit"
           disabled={ validForm() }
           data-testid="common_register__button-register"
+          onClick={ handleClick }
         >
           Cadastrar
         </button>
-        {/* <span
+        <span
           data-testid="common_login__element-invalid-email"
           hidden={ error }
         >
-          { user.error ? user.error : '' }
-        </span> */}
+          { newUser.error ? newUser.error : '' }
+        </span>
       </form>
     </div>
   );

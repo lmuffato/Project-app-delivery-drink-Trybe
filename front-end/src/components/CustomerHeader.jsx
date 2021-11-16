@@ -32,6 +32,7 @@ function CustomerHeader() {
         <button
           data-testid="customer_products__element-navbar-link-logout"
           type="button"
+          onClick={ () => localStorage.removeItem('user') }
         >
           SAIR
         </button>

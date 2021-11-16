@@ -15,7 +15,6 @@ function LoginForm() {
 
   useEffect(() => {
     const { email, password } = loginForm;
-    setLoginForm({ email: '', password: '' });
 
     if (regex.email.test(email) && regex.password.test(password)) {
       setDisableButton(false);

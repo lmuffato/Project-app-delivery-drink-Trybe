@@ -1,7 +1,10 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const { resolve } = require('path');
 const router = require('../routes');
+
+const uploadPath = resolve(__dirname, '..', 'images');
 
 const app = express();
 app.use(bodyParser.json());
@@ -16,6 +19,7 @@ app.get('/coffee', (_req, res) => res.status(418).end());
 
 app.use('/login', router.login);
 app.use('/register', router.user);
-app.use('/product', router.product);
+app.use('/products', router.product);
+app.use('/images', express.static(`${uploadPath}`));
 
 module.exports = app;

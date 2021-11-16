@@ -7,9 +7,9 @@ const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
     const login = await services.login(email, password);
-    
+   
     const privateKey = await fs.readFile('jwt.evaluation.key', 'utf8');
-    console.log(privateKey, 'controller');
+    
     const payload = { login };
 
     const jwtConfig = { algorithm: 'HS256', expiresIn: '12h' };

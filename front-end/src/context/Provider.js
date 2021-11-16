@@ -136,7 +136,7 @@ function Provider({ children }) {
     <Context.Provider
       value={ {
         setUser,
-        user,
+        get,
         handleChange,
         post,
         shoppingCart,

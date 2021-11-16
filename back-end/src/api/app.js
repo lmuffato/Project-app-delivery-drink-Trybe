@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const { userController, productsController } = require('./controllers');
+const { userController, productsController, saleController } = require('./controllers');
 
 const newUserAuthentication = require('./middleware/validateNewUser');
 const { validateAdmin } = require('./middleware/validateAdmin');
@@ -24,5 +24,7 @@ app.route('/admin')
   .get(validateToken, validateAdmin, userController.findAllUsers)
   .post(validateToken, validateAdmin, userController.createAdmin)
   .delete(validateToken, validateAdmin, userController.deleteUser);
+
+app.post('/sales', validateToken, saleController.registerSale);
 
 module.exports = app;

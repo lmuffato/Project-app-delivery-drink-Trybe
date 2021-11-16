@@ -4,13 +4,13 @@ const createUser = async (req, res) => {
   const { name, email, password } = req.body;
   const newUser = { name, email, password, role: 'customer' };
 
-  const { status, data, user } = await userService.createUser(newUser);
+  const { status, data, token } = await userService.createUser(newUser);
 
-  if (!user) {
-    return res.status(status).json({ data });
+  if (token) {
+    return res.status(status).json({ token });
   }
   
-  return res.status(status).json(user);
+  return res.status(status).json({ data });
 };
 
 const login = async (req, res) => {

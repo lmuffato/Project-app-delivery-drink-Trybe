@@ -22,7 +22,7 @@ const checkLogin = async (email, password) => {
 
   const { id, name, role } = existingUser.dataValues;
 
-  return ({ id, name, email, password, role });
+  return ({ id, name, email, role });
 };
 
 const createUser = async ({ name, email, password, role }) => {
@@ -45,8 +45,9 @@ const createUser = async ({ name, email, password, role }) => {
   }
   
   const { password: _, ...userWithoutPassword } = user.dataValues;
+  const token = jwt.sign(userWithoutPassword, secret, jwtConfig);
   
-  return ({ status: 201, user: userWithoutPassword });
+  return ({ status: 201, token });
 };
 
 const login = async ({ email, password }) => {

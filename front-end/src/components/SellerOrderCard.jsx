@@ -1,12 +1,13 @@
 import React from 'react';
 import { shape, string } from 'prop-types';
+import { Link } from 'react-router-dom';
 
 function SellerOrderCard(props) {
   const { order } = props;
   const { id, status, date, price, address } = order;
 
   return (
-    <div>
+    <Link to={ `/seller/orders/${id}` }>
       <div data-testid={ `seller_orders__element-order-id-${id}` }>
         Pedido
         {' '}
@@ -26,7 +27,7 @@ function SellerOrderCard(props) {
       <div data-testid={ `seller_orders__element-card-address-${id}` }>
         { address }
       </div>
-    </div>
+    </Link>
   );
 }
 

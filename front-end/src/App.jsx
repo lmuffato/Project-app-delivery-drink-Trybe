@@ -13,6 +13,10 @@ function App() {
       <Route exact path="/login" element={ <Login /> } />
       <Route exact path="/register" element={ <Register /> } />
       <Route
+        path="/seller/order/:id"
+        element={ <PrivateRoute element={ () => <div>Seller Order ID</div> } /> }
+      />
+      <Route
         path="/seller/order"
         element={ <PrivateRoute element={ SellerOrders } /> }
       />

@@ -25,6 +25,7 @@ function Login({ history }) {
     e.preventDefault();
     const response = await fetchLogin(email, password);
     if (response.token !== undefined) {
+      console.log(response.token);
       setUser(response);
       localStorage.setItem('user', JSON.stringify(response));
       setLoginError('');

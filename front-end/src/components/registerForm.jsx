@@ -4,7 +4,6 @@ import { useHistory } from 'react-router-dom';
 import useInputs from '../hooks/useInputs';
 import registerValidations from '../schemas/register';
 import useAlert from '../hooks/useAlert';
-// import validateInputsRegister from '../ValidatingFunctions/validatingFunctions';
 
 import '../styles/components/RegisterForm.scss';
 

@@ -6,7 +6,6 @@ import registerValidations from '../schemas/register';
 import useAlert from '../hooks/userAlert';
 // import validateInputsRegister from '../ValidatingFunctions/validatingFunctions';
 
-
 function RegisterForm() {
   const [values, setValues] = useInputs({ email: '', name: '', password: '' });
   const [schemaStatus, setSchemaStatus] = useState({ valid: false, error: '' });
@@ -14,28 +13,30 @@ function RegisterForm() {
 
   const { Alert, alertMessage, alertType, isVisible, showAlert } = useAlert();
 
-  let history = useHistory();
+  const history = useHistory();
 
-  useEffect( async () => {
+  useEffect(() => {
     showAlert(false);
     const { error } = registerValidations.validate(values);
-    await setSchemaStatus({ valid: error === undefined, error: error ? error.message: '' })
-    setButtonState(schemaStatus.valid === true ? false : true);
-  }, [values]);
+    setButtonState(error !== undefined);
+    setSchemaStatus({ valid: error === undefined, error: error ? error.message : '' });
+  }, [values, showAlert]);
 
   const sendRegister = async (e) => {
     e.preventDefault();
     try {
+      const { name, email, password } = values;
       const response = await axios.post('http://localhost:3001/register', {
-      name,
-      email,
-      password,
-      role: 'customer'
+        name,
+        email,
+        password,
+        role: 'customer',
       });
-     // if (response.message) throw new Error(response.message);
+      console.log(response);
+      if (!schemaStatus.valid) throw new Error(schemaStatus.message);
       history.push('/customer/products');
     } catch (error) {
-      console.error(error.message);
+      console.error(error);
       alertType('danger');
       alertMessage(error.message);
       showAlert(true);
@@ -44,7 +45,8 @@ function RegisterForm() {
 
   return (
     <div>
-      <form onSubmit={ sendRegister }>
+      { isVisible && <Alert dataTestId="common_register__element-invalid_register" />}
+      <form onSubmit={ sendRegister } style={ { zIndex: 10 } }>
         <label htmlFor="name">
           Nome
           <input
@@ -79,7 +81,7 @@ function RegisterForm() {
           />
         </label>
         <button
-          type='submit'
+          type="submit"
           data-testid="common_register__button-register"
           disabled={ buttonState }
         >

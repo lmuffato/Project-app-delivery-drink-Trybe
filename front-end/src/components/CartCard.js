@@ -9,7 +9,7 @@ function CartCard() {
   const history = useHistory();
 
   useEffect(() => {
-    setCartTotal(calcCartTotal(cart).toFixed(2));
+    setCartTotal(calcCartTotal(cart));
   }, [cart]);
 
   return (
@@ -22,7 +22,7 @@ function CartCard() {
       >
         <span data-testid="customer_products__checkout-bottom-value">
           R$
-          {`${cartTotal}`.replace('.', ',')}
+          {`${cartTotal.toFixed(2)}`.replace('.', ',')}
         </span>
       </button>
     </div>

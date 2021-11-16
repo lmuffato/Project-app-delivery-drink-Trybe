@@ -11,6 +11,6 @@ app.use(cors());
 app.use('/user', useRoutes);
 app.get('/coffee', (_req, res) => res.status(418).end());
 
-app.get('/seller', getSalesRouter);
+app.use('/seller', getSalesRouter);
 
 module.exports = app;

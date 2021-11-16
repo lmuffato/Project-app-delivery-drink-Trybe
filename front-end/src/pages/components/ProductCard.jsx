@@ -71,7 +71,7 @@ export default function ProductCard({ product, index, callback }) {
           id="product-quantity"
           type="text"
           placeholder="0"
-          value={ qty === 0 ? '' : qty.toString() }
+          value={ qty.toString() }
           onChange={ handleInputChange }
           data-testid={ `customer_products__input-card-quantity-${id}` }
         />

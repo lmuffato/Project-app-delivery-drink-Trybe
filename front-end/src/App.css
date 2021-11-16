@@ -45,6 +45,10 @@
   height: 80px;
 }
 
+.cardProduct input {
+  width: 10px;
+}
+
 .buttons {
   display: flex;
   align-items: center;

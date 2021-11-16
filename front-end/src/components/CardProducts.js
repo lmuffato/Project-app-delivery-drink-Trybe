@@ -5,44 +5,45 @@ function CardProducts() {
   const {
     products,
     quantityProducts,
+    setQuantityProducts,
     cartValue,
   } = useContext(DeliveryContext);
 
   return (
-    <div>
+    <>
       <div className="cards">
         {products.map((product) => (
           <div key={ product.id } className="cardProduct">
             <img
-              src={ product.urlImage }
+              src={ product.url_image }
               alt="produto"
-              data-testid="customer_products__img-card-bg-image-"
+              data-testid={ `customer_products__img-card-bg-image-${product.id}` }
             />
             <h3
-              data-testid="customer_products__element-card-title-"
+              data-testid={ `customer_products__element-card-title-${product.id}` }
             >
               {product.name}
             </h3>
             <h3
-              data-testid="customer_products__element-card-price-"
+              data-testid={ `customer_products__element-card-price-${product.id}` }
             >
               {`R$ ${product.price}`}
             </h3>
             <div className="buttons">
               <button
                 type="button"
-                data-testid="customer_products__button-card-rm-item-"
+                data-testid={ `customer_products__button-card-rm-item-${product.id}` }
               >
                 -
               </button>
-              <p
-                data-testid="customer_products__input-card-quantity-"
-              >
-                { quantityProducts }
-              </p>
+              <input
+                data-testid={ `customer_products__input-card-quantity-${product.id}` }
+                value={ quantityProducts }
+                onChange={ (e) => setQuantityProducts(e.target.value) }
+              />
               <button
                 type="button"
-                data-testid="customer_products__button-card-add-item-"
+                data-testid={ `customer_products__button-card-add-item-${product.id}` }
               >
                 +
               </button>
@@ -57,7 +58,7 @@ function CardProducts() {
       >
         { `Ver Carrinho: R$ ${cartValue}` }
       </button>
-    </div>
+    </>
   );
 }
 

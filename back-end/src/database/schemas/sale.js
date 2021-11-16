@@ -14,7 +14,7 @@
     field: 'user_id',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
-    references: { model: 'Users', key: 'id' },
+    references: { model: 'users', key: 'id' },
     type: DataTypes.INTEGER
   },
   sellerId: {
@@ -22,7 +22,7 @@
     field: 'seller_id',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
-    references: { model: 'Users', key: 'id' },
+    references: { model: 'users', key: 'id' },
     type: DataTypes.INTEGER
   },
   totalPrice: {
@@ -43,11 +43,7 @@
   status: {
     allowNull: false,
     defaultValue: 'Pendente',
-    type: DataTypes.ENUM('Pendente', 'Preparando', 'Em Trânsito', 'Entregue')
-  },
-  role: {
-    allowNull: false,
-    type: DataTypes.ENUM('administrator', 'seller', 'customer')
+    type: DataTypes.STRING(50)
   },
   saleDate: {
     allowNull: false,

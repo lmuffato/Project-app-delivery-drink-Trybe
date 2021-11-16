@@ -9,7 +9,7 @@
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
     primaryKey: true,
-    references: { model: 'Products', key: 'id' },
+    references: { model: 'products', key: 'id' },
     type: DataTypes.INTEGER
   },
   saleId: {
@@ -18,7 +18,7 @@
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
     primaryKey: true,
-    references: { model: 'Sales', key: 'id' },
+    references: { model: 'sales', key: 'id' },
     type: DataTypes.INTEGER
   },
   quantity: {

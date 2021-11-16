@@ -16,7 +16,7 @@ const config = require(__dirname + '/../config/config.js')[env];
  * @typedef {import('sequelize').ModelCtor<import('sequelize').Model<{name: string, price: number, urlImage: string}>>} product
  */
 /**
- * @type {{User: user, Sale: sale, Product: product}}
+ * @type {{user: user, sale: sale, product: product}}
  */
 const db = {};
 

@@ -77,7 +77,7 @@ function Login() {
       </button>
 
       <span
-        data-testid="common_login__element-invalid-email"
+        data-testid="common_register__element-invalid_register"
         hidden={ error }
       >
         { user.error ? user.error : '' }

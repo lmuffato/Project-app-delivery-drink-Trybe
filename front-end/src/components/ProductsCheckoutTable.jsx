@@ -1,17 +1,10 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { DataGrid } from '@mui/x-data-grid';
 import { Delete } from '@mui/icons-material';
 
-const PRODUCTS_PER_PAGE = 15;
-
-function ProductsCheckoutTable() {
-  const rows = [{
-    id: 1,
-    description: 'coca-cola',
-    quantity: 2,
-    value: 2.5,
-  }];
+function ProductsCheckoutTable({ checkoutCart }) {
+  const rows = checkoutCart;
   function getSubTotal(params) {
     const unitPrice = params.getValue(params.id, 'value');
     const totalQuantity = params.getValue(params.id, 'quantity');
@@ -25,10 +18,11 @@ function ProductsCheckoutTable() {
       field: 'id',
       headerName: 'Item',
       flex: 0.25,
+      type: 'number',
       renderCell: (params) => (
         <span
           data-testid={
-            `customer_checkout__element-order-table-item-number-${params.id}`
+            `customer_checkout__element-order-table-item-number-${params.id - 1}`
           }
         >
           {params.value}
@@ -41,7 +35,7 @@ function ProductsCheckoutTable() {
       headerAlign: 'center',
       renderCell: (params) => (
         <span
-          data-testid={ ` customer_checkout__element-order-table-name-${params.id}` }
+          data-testid={ ` customer_checkout__element-order-table-name-${params.id - 1}` }
         >
           {params.value}
         </span>),
@@ -53,7 +47,9 @@ function ProductsCheckoutTable() {
       flex: 0.25,
       renderCell: (params) => (
         <span
-          data-testid={ ` cutomer_checkout__element-order-table-quantity-${params.id}` }
+          data-testid={
+            ` cutomer_checkout__element-order-table-quantity-${params.id - 1}`
+          }
         >
           {params.value}
         </span>),
@@ -66,7 +62,7 @@ function ProductsCheckoutTable() {
       renderCell: (params) => (
         <span
           data-testid={
-            ` customer_checkout__element-order-table-unit-price-${params.id}`
+            ` customer_checkout__element-order-table-unit-price-${params.id - 1}`
           }
         >
           {formatValue(params.value)}
@@ -80,7 +76,7 @@ function ProductsCheckoutTable() {
       renderCell: (params) => (
         <span
           data-testid={
-            ` customer_checkout__element-order-table-sub-total-${params.id}`
+            ` customer_checkout__element-order-table-sub-total-${params.id - 1}`
           }
         >
           {formatValue(params.value)}
@@ -95,7 +91,7 @@ function ProductsCheckoutTable() {
           type="button"
           onClick={ () => console.log('click') }
           data-testid={
-            ` customer_checkout__element-order-table-remove-${params.id}`
+            ` customer_checkout__element-order-table-remove-${params.id - 1}`
           }
         >
           <Delete />
@@ -105,18 +101,22 @@ function ProductsCheckoutTable() {
   return (
     <div
       style={ {
-        width: '80%', margin: 'auto', backgroundColor: '#fff', borderRadius: 10,
+        width: '80%',
+        margin: 'auto',
+        backgroundColor: '#fff',
+        borderRadius: 10,
+        height: 400,
       } }
     >
       <DataGrid
         rows={ rows }
         columns={ tableColumns }
-        pageSize={ 5 }
-        rowsPerPageOptions={ [PRODUCTS_PER_PAGE] }
-        autoHeight
+        pageSize={ 11 }
+        // autoHeight
         disableSelectionOnClick
         disableMultipleSelection
         disableColumnMenu
+        rowHeight={ 35 }
       />
     </div>
   );
@@ -124,7 +124,11 @@ function ProductsCheckoutTable() {
 
 export default ProductsCheckoutTable;
 
-// ProductsCheckoutTable.propTypes = {
-//   title: PropTypes.string.isRequired,
-//   children: PropTypes.node.isRequired,
-// };
+ProductsCheckoutTable.propTypes = {
+  checkoutCart: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    description: PropTypes.string,
+    quantity: PropTypes.number,
+    value: PropTypes.number,
+  })).isRequired,
+};

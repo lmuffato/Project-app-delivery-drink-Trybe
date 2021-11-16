@@ -12,7 +12,7 @@ function CustomerHeader() {
           PRODUTOS
         </button>
       </Link>
-      <Link to="/customer/order">
+      <Link to="/customer/orders">
         <button
           data-testid="customer_products__element-navbar-link-orders"
           type="button"

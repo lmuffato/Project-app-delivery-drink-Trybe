@@ -1,15 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import LoginProvider from './provider/LoginProvider';
+import ManagerUsersProvider from './provider/ManagerUsersProvider';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
 import App from './App';
+import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.render(
   <React.StrictMode>
-    <LoginProvider>
-      <App />
-    </LoginProvider>
+    <BrowserRouter>
+    <ManagerUsersProvider>
+      <LoginProvider>
+        <App />
+      </LoginProvider>
+    </ManagerUsersProvider>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root'),
 );

@@ -4,7 +4,6 @@ const { User } = require('../../database/models');
 
 const login = async (req, _res, next) => {
   const { error } = loginSchema.validate(req.body);
-  console.log(req.body);
   const { email, password } = req.body; 
   if (error) return next({ statusCode: BAD_REQUEST, message: error.message });
   const checkIfUserExists = await User.findOne({ where: { email, password } });

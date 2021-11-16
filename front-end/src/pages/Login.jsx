@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
-
+import { useSnackbar } from 'react-simple-snackbar';
 import { useHistory, Redirect } from 'react-router-dom';
-
-const axios = require('axios').default;
+import { loginApi } from '../API/dataBaseCall';
 
 export default function Login() {
+  const [openSnackbar] = useSnackbar();
   const history = useHistory();
 
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
-  const [errorLogin, setErrorLogin] = useState(false);
   const [redirect, setRedirect] = useState(false);
-  // const [disableButton, setDisableButton] = useState(true);
 
   const handleChange = ({ target }, handle) => {
     const { value } = target;
@@ -20,24 +18,10 @@ export default function Login() {
   const tokenStorage = ({ token }) => {
     localStorage.setItem('token', token);
   };
-  const handleLogin = async () => {
-    try {
-      const response = await axios({
-        method: 'post',
-        url: 'http://localhost:3001/users/login/',
-        data: {
-          password,
-          email: user,
-        },
-        responseType: 'json',
-      });
-      tokenStorage(response.data);
-      setRedirect(true);
-    } catch (error) {
-      setErrorLogin(true);
-      console.error(error);
-    }
-  };
+  const handleLogin = async () => loginApi(user, password).then((data) => {
+    tokenStorage(data);
+    setRedirect(true);
+  }).catch(openSnackbar);
 
   return (
     <div>
@@ -60,15 +44,15 @@ export default function Login() {
           name="senha"
         />
         <button
-          type="button"
+          type="submit"
           data-testid="common_login__button-login"
-          onClick={ () => {
+          onClick={ (event) => {
+            event.preventDefault();
             handleLogin();
           } }
         >
           LOGIN
         </button>
-        {errorLogin ? <p>Login Falhou</p> : null }
         <button
           type="button"
           data-testid="common_login__button-register"
@@ -76,7 +60,7 @@ export default function Login() {
         >
           CADASTRE-SE
         </button>
-        {redirect ? <Redirect to="/customer/products" /> : null}
+        {redirect && <Redirect to="/customer/products" />}
       </form>
     </div>
   );

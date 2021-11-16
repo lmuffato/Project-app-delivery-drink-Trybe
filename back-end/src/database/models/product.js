@@ -4,8 +4,8 @@
  * @return
  */
 module.exports = (sequelize, DataTypes) => {
-  const Product = sequelize.define(
-    "Product",
+  const products = sequelize.define(
+    "products",
     {
       id: {
         type: DataTypes.INTEGER,
@@ -17,8 +17,8 @@ module.exports = (sequelize, DataTypes) => {
       price: DataTypes.STRING,
       url_image: DataTypes.STRING,
     },
-    { tableName: "Products", timestamps: false }
+    { tableName: "products", timestamps: false }
   );
-  Product.associate = (_models) => {};
-  return Product;
+  products.associate = (_models) => {};
+  return products;
 };

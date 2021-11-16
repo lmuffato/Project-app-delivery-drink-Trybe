@@ -8,14 +8,15 @@ export default function ShopCartCard({ value, history }) {
 
   return (
     <div>
-      <label htmlFor="value">
-        <input
-          id="value"
-          value={ `Ver Carrinho: ${parseFloat(value).toFixed(2)}` }
-          data-testid="customer_products__checkout-bottom-value"
-          onClick={ handleClick }
-        />
-      </label>
+      <button
+        id="value"
+        type="submit"
+        disabled={ value <= 0 }
+        data-testid="customer_products__checkout-bottom-value"
+        onClick={ handleClick }
+      >
+        { value.toFixed(2).toString().replace(/\./, ',') }
+      </button>
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -33,6 +34,13 @@ function Login() {
     // console.log(data);
   };
 
+  const history = useHistory();
+
+  const signUpRedirect = () => {
+    const path = 'register';
+    history.push(path);
+  };
+
   return (
     <div>
       <input
@@ -63,7 +71,7 @@ function Login() {
       <button
         type="button"
         data-testid="common_login__button-register"
-        // onClick={ () => () }
+        onClick={ signUpRedirect }
       >
         Registrar-se
       </button>

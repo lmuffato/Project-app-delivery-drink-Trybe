@@ -5,9 +5,11 @@ import testID from '../../datatestids.json';
 import Button from '../atoms/Button';
 import Input from '../atoms/Input';
 import ErrorMessage from '../atoms/ErrorMessage';
-import validateLogin from '../../utils/validations/joi/login';
+import { registerAction } from '../../utils/validations/API/fetch';
+import validateRegister from '../../utils/validations/joi/register';
 
 const RegisterForm = () => {
+  const [isHidden, setIsHidden] = useState(true);
   const [register, setRegister] = useState({ fullName: '', email: '', password: '' });
   const { fullName, email, password } = register;
   const history = useHistory();
@@ -19,11 +21,16 @@ const RegisterForm = () => {
     });
   };
 
-  const handleClick = () => {
-    history.push('/products');
+  const handleClick = async () => {
+    const token = await registerAction({ fullName, email, password });
+    if (!token) {
+      setIsHidden(false);
+    } else {
+      history.push('/customer/products');
+    }
   };
 
-  const errorMessageContent = () => 'Email/senha inválido! Verifique os dados inseridos';
+  const errorMessageContent = () => 'Usuário já registrado!';
 
   return (
     <form>
@@ -60,9 +67,9 @@ const RegisterForm = () => {
           className="btn-register"
           type="button"
           data-testid={ testID[9] }
-          enabled={ !validateLogin.validate({ email, password }).error }
+          disabled={ validateRegister.validate({ fullName, email, password }).error }
           onClick={ handleClick }
-          text="SIGN UP"
+          text="CADASTRAR"
         />
         <ErrorMessage
           className="error-message-login"

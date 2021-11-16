@@ -5,7 +5,7 @@ import testID from '../../datatestids.json';
 import Button from '../atoms/Button';
 import Input from '../atoms/Input';
 import ErrorMessage from '../atoms/ErrorMessage';
-import loginAction from '../../utils/validations/API/fetch';
+import { loginAction } from '../../utils/validations/API/fetch';
 import validateLogin from '../../utils/validations/joi/login';
 
 const LoginForm = () => {
@@ -23,7 +23,6 @@ const LoginForm = () => {
 
   const handleClickEnter = async () => {
     const token = await loginAction({ email, password });
-    console.log(token);
     if (!token) {
       setIsHidden(false);
     } else {
@@ -63,7 +62,7 @@ const LoginForm = () => {
           className="btn-login"
           type="button"
           data-testid={ testID[3] }
-          enabled={ !validateLogin.validate({ email, password }).error }
+          disabled={ validateLogin.validate({ email, password }).error }
           onClick={ handleClickEnter }
           text="LOGIN"
         />

@@ -13,13 +13,15 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      delivery_address: {
+      deliveryAddress: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        field: 'delivery_address'
       },
-      delivery_number: {
+      deliveryNumber: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        field: 'delivery_number'
       },
       sale_date: {
         allowNull: false,
@@ -30,7 +32,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      user_id: {
+      userId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'users',
@@ -39,8 +41,9 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
         primaryKey: true,
+        field: 'user_id',
       },
-      seller_id: {
+      sellerId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'users',
@@ -49,10 +52,12 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
         primaryKey: true,
+        field: 'seller_id',
       },
-      total_price: {
+      totalPrice: {
         allowNull: false,
-        type: Sequelize.DECIMAL(5,3)
+        type: Sequelize.DECIMAL(5,2),
+        total_price: 'total_price',
       },
       // createdAt: {
       //   allowNull: false,

@@ -43,8 +43,13 @@ function ProductCard({ product }) {
         >
           { product.name }
         </p>
-        <Card.Text data-testid={ `customer_products__element-card-price-${product.id}` }>
-          { `${product.price}` }
+        <Card.Text>
+          R$
+          <span
+            data-testid={ `customer_products__element-card-price-${product.id}` }
+          >
+            { (product.price.replace('.', ',')) }
+          </span>
         </Card.Text>
         <div className="quantityContainer">
           <Button

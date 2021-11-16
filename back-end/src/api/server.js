@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const path = require('path');
 
 const app = express();
 app.use(bodyParser.json());
@@ -29,6 +30,8 @@ app.use(cors(corsOptions));
 
 app.get('/products', product.getProducts);
 app.post('/login', user.login);
+
+app.use('/images', express.static(path.join(__dirname, '..', '..', '/public')));
 
 server.listen(port, () => console.log(`Ouvindo na porta ${port}!`));
 module.exports = app;

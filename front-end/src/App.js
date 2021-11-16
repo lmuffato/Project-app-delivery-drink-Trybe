@@ -2,6 +2,8 @@ import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Login from './pages/Login';
 import { LoginProvider } from './contexts/Login';
+import Products from './pages/Products';
+import { ProductsProvider } from './contexts/Products';
 
 function App() {
   return (
@@ -19,7 +21,15 @@ function App() {
           </LoginProvider>
         }
       />
-      <Route exact path="/teste" element={ <h1>Teste</h1> } />
+      <Route
+        exact
+        path="/customer/products"
+        element={
+          <ProductsProvider>
+            <Products />
+          </ProductsProvider>
+        }
+      />
     </Routes>
   );
 }

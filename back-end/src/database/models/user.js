@@ -5,15 +5,9 @@ const userSchema = require('../schemas/user');
  * @return 
  */
  module.exports = (sequelize, DataTypes) => {
-  const User = sequelize.define('user', {
-    id: { type: DataTypes.INTEGER, allowNull: false, autoIncrement: true, primaryKey: true },
-    name: DataTypes.STRING,
-    email: DataTypes.STRING,
-    password: DataTypes.STRING,
-    role: DataTypes.STRING,
-  }, { timestamps: false });
-  User.associate = (models) => {
-    User.hasMany(models.sale);
+  const user = sequelize.define('user', userSchema(DataTypes), { timestamps: false });
+  user.associate = (models) => {
+    user.hasMany(models.sale);
   };
-  return User;
+  return user;
 };

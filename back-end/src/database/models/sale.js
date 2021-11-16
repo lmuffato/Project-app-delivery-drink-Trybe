@@ -5,19 +5,10 @@ const salesSchema = require('../schemas/sale');
  * @return 
  */
  module.exports = (sequelize, DataTypes) => {  
-  const Sale = sequelize.define('sale', {
-    id: { type: DataTypes.INTEGER, allowNull: false, autoIncrement: true, primaryKey: true },
-    userId: DataTypes.INTEGER,
-    sellerId: DataTypes.INTEGER,
-    totalPrice: DataTypes.STRING,
-    deliveryAddress: DataTypes.STRING,
-    deliveryNumber: DataTypes.STRING,
-    saleDate: DataTypes.DATE,
-    status: DataTypes.STRING
-  }, { timestamps: false });
-  Sale.associate = (models) => {
-    Sale.belongsTo(models.user, { as: 'user' });
-    Sale.belongsTo(models.user, { as: 'seller' });
+  const sale = sequelize.define('sale', salesSchema(DataTypes), { timestamps: false });
+  sale.associate = (models) => {
+    sale.belongsTo(models.user, { as: 'user' });
+    sale.belongsTo(models.user, { as: 'seller' });
   };  
-  return Sale;
+  return sale;
 };

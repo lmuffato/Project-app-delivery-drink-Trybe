@@ -1,7 +1,14 @@
 import React from 'react';
 import { shape, string, func } from 'prop-types';
 
-const Input = ({ className, testid, name, value, onChange, placeholder }) => (
+const Input = ({
+  className,
+  'data-testid': testid,
+  name,
+  value,
+  onChange,
+  placeholder,
+}) => (
   <input
     className={ className }
     data-testid={ testid }

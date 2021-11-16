@@ -1,6 +1,6 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
-import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
+import { DataGrid } from '@mui/x-data-grid';
 import { Delete } from '@mui/icons-material';
 
 const PRODUCTS_PER_PAGE = 15;
@@ -85,19 +85,21 @@ function ProductsCheckoutTable() {
         >
           {formatValue(params.value)}
         </span>),
-      valueFormatter: formatValue,
     },
     {
       field: 'actions',
       type: 'actions',
       width: 90,
-      getActions: (params) => [
-        <GridActionsCellItem
-          key={ params.id }
-          icon={ <Delete /> }
-          label="Delete"
-        />,
-      ],
+      renderCell: (params) => (
+        <button
+          type="button"
+          onClick={ () => console.log('click') }
+          data-testid={
+            ` customer_checkout__element-order-table-remove-${params.id}`
+          }
+        >
+          <Delete />
+        </button>),
     },
   ];
   return (

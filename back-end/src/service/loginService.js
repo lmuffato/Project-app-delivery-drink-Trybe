@@ -3,7 +3,7 @@ const { User } = require('../database/models');
 
 const loginServices = async (email, password) => {
   const findUser = await User.findOne({ where: { email } });
-  
+
   if (!findUser) {
     return { code: 404, message: 'Não encontrado' };
   }
@@ -14,7 +14,6 @@ const loginServices = async (email, password) => {
     return { code: 401, message: 'Senha ou Usuário inválido' };
   }
   
-  // o fluxo de jwt virá aqui
   return findUser;
 };
 

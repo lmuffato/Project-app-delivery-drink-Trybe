@@ -37,11 +37,11 @@ function ProductCard({ id, price, image, name }) {
         >
           -
         </button>
-        <span
+        <input
           data-testid={ `customer_products__input-card-quantity-${id}` }
-        >
-          { quantity }
-        </span>
+          value={ quantity }
+          disabled
+        />
         <button
           type="button"
           data-testid={ `customer_products__button-card-add-item-${id}` }

@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const path = require('path');
 const cors = require('cors');
 
 const app = express();
@@ -15,6 +16,8 @@ const validateToken = require('../database/services/login/validateToken');
 const saleProductController = require(
   '../database/controllers/salesProducts/salesProductsController',
 );
+
+app.use('/images', express.static(path.join(__dirname, '..', 'uploads')));
 
 app.get('/coffee', (_req, res) => res.status(418).end());
 

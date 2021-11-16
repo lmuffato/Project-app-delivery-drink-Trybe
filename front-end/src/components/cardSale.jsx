@@ -4,9 +4,13 @@ import { Link } from 'react-router-dom';
 import Status from './status';
 
 export default function CardSale({ sale }) {
+  const testIdPart = window.location.href.includes('seller')
+    ? 'seller_orders' : 'customer_products';
+  const url = window.location.href.includes('seller')
+    ? 'seller' : 'costumer';
   return (
-    <Link to={ `localhost:3000/seller/orders/${sale.id}` }>
-      <div data-testid={ `seller_orders__element-order-date-${sale.id}` }>
+    <Link to={ `localhost:3000/${url}/orders/${sale.id}` }>
+      <div data-testid={ `${testIdPart}__element-order-date-${sale.id}` }>
         <div>
           <p>Pedido</p>
           <p>{ sale.id }</p>

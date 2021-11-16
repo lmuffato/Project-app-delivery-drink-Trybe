@@ -5,6 +5,7 @@ import RegisterPage from './pages/RegisterPage';
 import ProductPage from './pages/ProductPage';
 import { PricesProvider } from './context/productsProvider';
 import './App.css';
+import MyRequestsPage from './pages/MyRequestsPage';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         path="/customer/products"
         element={ <PricesProvider><ProductPage /></PricesProvider> }
       />
+      <Route path="/customer/orders" element={ <MyRequestsPage /> } />
     </Routes>
   );
 }

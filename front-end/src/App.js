@@ -1,20 +1,25 @@
 import React from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
-import { RegisterProvider } from './contexto/register';
-import login from './pages/Login';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Register from './pages/Register';
+import { RegisterProvider } from './contexto/register'
 
 function App() {
   return (
-    <Switch>
-      <Route exact path="/"><Redirect to="/login" /></Route>
-      <Route path="/login" component={ login } />
-      <Route path="/register">
-        <RegisterProvider>
-          <Register />
-        </RegisterProvider>
+    <Routes>
+      <Route exact path="/">
+        {/* Source:  https://gist.github.com/mjackson/b5748add2795ce7448a366ae8f8ae3bb */}
+        <Route path="/" element={ <Navigate replace to="/login" /> } />
       </Route>
-    </Switch>
+      <Route
+        exact
+        path="/register"
+        element={
+          <RegisterProvider>
+            <Register />
+          </RegisterProvider>
+        }
+      />
+    </Routes>
   );
 }
 

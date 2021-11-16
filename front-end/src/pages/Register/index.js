@@ -24,7 +24,9 @@ function RegisterPage() {
   const handleRegister = async () => {
     try {
       const passHash = MD5(password).toString();
-      await api.getRegister(name, email, passHash);
+      const response = await api.getRegister(name, email, passHash);
+      localStorage.setItem('user', JSON.stringify(response));
+      console.log(response);
       history.push('/customer/products');
     } catch (e) {
       setError('Login inválido');

@@ -28,11 +28,11 @@ async function loginService({ password, email }) {
   const isUserResgistered = await readByEmailService(email);
 
   if (!isUserResgistered) {
-    return { notFound: true, code: HTTP_CONFLICT, error: "User dont exists" };
+    return { notFound: true, code: HTTP_NOT_FOUND, error: "User dont exists" };
   };
 
   if (password !== isUserResgistered.password) {
-    return { invalidPassword: true, code: HTTP_CONFLICT, error: "Invalid data" }
+    return { invalidPassword: true, code: HTTP_NOT_FOUND, error: "Invalid data" }
   };
 
   const { name, role } = await readByEmailService(email);

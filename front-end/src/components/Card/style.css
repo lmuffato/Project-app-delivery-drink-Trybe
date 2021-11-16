@@ -1,0 +1,9 @@
+.cardContainer {
+  align-items: center;
+  background: turquoise;
+  display: flex;
+  flex-direction: column;
+  height: 20rem;
+  justify-content: center;
+  width: 20rem;
+}

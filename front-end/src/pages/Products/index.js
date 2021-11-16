@@ -23,6 +23,7 @@ function ProductsPage() {
       return (
         <li key={ product.id }>
           {product.name}
+          <img alt={ product.name } src={ product.url_image } />
         </li>
       );
     })

@@ -1,0 +1,29 @@
+.container {
+  align-items: center;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  width: 100%;
+}
+
+.products {
+  align-self: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin: auto;
+  width: 95%;
+}
+
+.cartBtn {
+  background-color: rgb(7, 97, 48);
+  border: none;
+  border-radius: 5px;
+  bottom: 5%;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 10px;
+  position: fixed;
+  right: 8%;
+}

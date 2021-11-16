@@ -1,0 +1,33 @@
+.topnav {
+  background-color: #333;
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.rightHeader {
+  align-items: right;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  width: 10%;
+}
+
+.topnav a {
+  color: #f2f2f2;
+  float: left;
+  font-size: 17px;
+  padding: 14px 16px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.active {
+  background-color: #04aa6d;
+  color: white;
+}

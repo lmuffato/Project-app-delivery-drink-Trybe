@@ -1,0 +1,41 @@
+.productCard {
+  align-items: center;
+  border: 1px solid rgb(198, 198, 198);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  font-size: 15px;
+  font-weight: 600;
+  height: 300px;
+  margin: 10px;
+  text-align: center;
+  width: 180px;
+}
+
+.price {
+  align-self: flex-start;
+  background-color: rgba(196, 196, 196, 0.783);
+  border-radius: 3px;
+  font-size: 20px;
+  margin: 0;
+  padding: 5px;
+  position: relative;
+}
+
+.productHeader {
+  align-items: center;
+  background-color: rgb(129, 196, 142);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.quantityBtn {
+  display: flex;
+}
+
+.quantityInput {
+  width: 30px;
+}

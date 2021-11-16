@@ -10,12 +10,16 @@ const checkUserIfExist = (user) => {
 const loginUser = async (passWord, email) => {
   const password = md5(passWord);
 
-  const user = await User.findOne({ where: { email, password } });
+  const user = await User.findOne({
+    where: { email, password },
+    attributes: { exclude: ['id', 'password'] },
+  });
+
   checkUserIfExist(user);
 
-  const token = createToken.create(password);
+  const token = createToken.create({ email });
 
-  return { status: 200, data: token };
+  return { status: 200, token, user };
 };
 
 module.exports = {

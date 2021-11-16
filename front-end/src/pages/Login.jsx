@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
-import { useSnackbar } from 'react-simple-snackbar';
 import { useHistory, Redirect } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
+import Alert from 'react-bootstrap/Alert';
+import Container from 'react-bootstrap/Container';
+import { FormControl, InputGroup } from 'react-bootstrap';
 import { loginApi } from '../API/dataBaseCall';
 
 export default function Login() {
-  const [openSnackbar] = useSnackbar();
   const history = useHistory();
 
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
   const [redirect, setRedirect] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleChange = ({ target }, handle) => {
     const { value } = target;
@@ -21,21 +24,23 @@ export default function Login() {
   const handleLogin = async () => loginApi(user, password).then((data) => {
     tokenStorage(data);
     setRedirect(true);
-  }).catch(openSnackbar);
+  }).catch(setErrorMessage);
 
   return (
-    <div>
+    <Container>
       <h1>Login</h1>
       <form>
-        <input
-          type="text"
-          data-testid="common_login__input-email"
-          placeholder="Email"
-          name="email"
-          value={ user }
-          onChange={ (e) => handleChange(e, setUser) }
-        />
-        <input
+        <InputGroup>
+          <FormControl
+            type="text"
+            data-testid="common_login__input-email"
+            placeholder="Email"
+            name="email"
+            value={ user }
+            onChange={ (e) => handleChange(e, setUser) }
+          />
+        </InputGroup>
+        <FormControl
           type="password"
           data-testid="common_login__input-password"
           placeholder="Senha"
@@ -43,7 +48,7 @@ export default function Login() {
           onChange={ (e) => handleChange(e, setPassword) }
           name="senha"
         />
-        <button
+        <Button
           type="submit"
           data-testid="common_login__button-login"
           onClick={ (event) => {
@@ -52,16 +57,17 @@ export default function Login() {
           } }
         >
           LOGIN
-        </button>
-        <button
+        </Button>
+        <Button
           type="button"
           data-testid="common_login__button-register"
           onClick={ () => history.push('/register') }
         >
           CADASTRE-SE
-        </button>
+        </Button>
         {redirect && <Redirect to="/customer/products" />}
       </form>
-    </div>
+      {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
+    </Container>
   );
 }

@@ -1,29 +1,35 @@
 @keyframes slideFromRight {
+
   from {
     transform: translateX(100%);
-  } to {
+  }
+
+  to {
     transform: translateX(0);
   }
 }
 
 .Alert {
-  --default-bg: #6385e2ee;
-  --default-border: #5473c7;
-  --danger-bg: #e2637eee;
-  --danger-border: #c7545e;
 
-  animation: slideFromRight .5s forwards;
+  --default-bg: #6385e2ee;
+
+  --default-border: #5473c7;
+
+  --danger-bg: #e2637eee;
+
+  --danger-border: #c7545e;
+  animation: slideFromRight 0.5s forwards;
   background-color: var(--default-bg);
   border: 2px solid var(--default-border);
   border-radius: 5px;
-  position: fixed;
-  padding: 15px 50px;
-  margin: 50px;
-  top: 0;
-  right: 0;
-  z-index: 99;
   color: white;
+  margin: 50px;
   overflow: hidden;
+  padding: 15px 50px;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 99;
 }
 
 .danger {

@@ -18,7 +18,7 @@ function SignUp() {
     return false;
   };
 
-  const handleClick = async (userEmail, userPassword, userName, e) => {
+  const handleClick = async (e, userEmail, userPassword, userName) => {
     e.preventDefault();
     const res = await fetch('http://localhost:3001/register', {
       method: 'POST',
@@ -36,7 +36,7 @@ function SignUp() {
     }
     console.log(data);
     console.log(data.error);
-    console.log(typeof name);
+    console.log(name);
   };
 
   return (

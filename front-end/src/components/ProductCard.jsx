@@ -4,9 +4,10 @@ import {
   Card,
   CardContent,
   Typography,
-  CardActions,
   Button,
   CardMedia,
+  ButtonGroup,
+  TextField,
 } from '@mui/material';
 
 function ProductCard(props) {
@@ -21,6 +22,7 @@ function ProductCard(props) {
           data-testid={ `customer_products__element-card-price-${id}` }
           gutterBottom
         >
+          R$
           { price }
         </Typography>
         <CardMedia
@@ -37,9 +39,28 @@ function ProductCard(props) {
           { name }
         </Typography>
       </CardContent>
-      <CardActions>
-        <Button size="small">Learn More</Button>
-      </CardActions>
+      <ButtonGroup>
+        <Button
+          size="medium"
+          data-testid={ `customer_products__button-card-rm-item-${id}` }
+        >
+          -
+        </Button>
+        <TextField
+          sx={ {
+            maxWidth: 50,
+          } }
+          inputProps={ {
+            'data-testid': `customer_products__input-card-quantity-${id}`,
+          } }
+        />
+        <Button
+          size="medium"
+          data-testid={ `customer_products__button-card-add-item-${id}` }
+        >
+          +
+        </Button>
+      </ButtonGroup>
     </Card>
   );
 }

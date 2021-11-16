@@ -9,11 +9,13 @@ const ProductsPage = () => {
   const { products, setProducts } = useContext(ContextProduct);
   const [isLoading, setIsLoading] = React.useState(false);
 
+  console.log(products);
+  // console.log(isLoading);
   useEffect(() => {
     const fetchProducts = async () => {
       setIsLoading(true);
-      const productsArray = await api.getProducts();
-      setProducts(productsArray);
+      const array = await api.getProducts();
+      setProducts(array);
       setIsLoading(false);
     };
     fetchProducts();
@@ -24,7 +26,6 @@ const ProductsPage = () => {
     return (
       <section className="productsPage">
         <MenuCostumer />
-        { console.log(products) }
         <div className="productsContainer">
           {products.map(({ id, name, price, url }) => (
             <Card

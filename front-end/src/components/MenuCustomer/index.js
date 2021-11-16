@@ -7,7 +7,7 @@ import './style.css';
 const MenuCostumer = () => {
   const history = useHistory();
   const [userEmail] = React.useState(JSON.parse(localStorage.getItem('user'))
-    .email);
+    .name);
   const [userFirstLetter] = React.useState(JSON.parse(localStorage.getItem('user'))
     .name[0].toUpperCase());
   const [pathname] = React.useState(history.location.pathname);
@@ -28,20 +28,28 @@ const MenuCostumer = () => {
         <Link
           to="/customer/products"
           className={ pathname === '/customer/products' ? 'active' : '' }
+          data-testid="customer_products__element-navbar-link-products"
         >
           Produtos
         </Link>
         <Link
           to="/customer/orders"
           className={ pathname === '/customer/orders' ? 'active' : '' }
+          data-testid="customer_products__element-navbar-link-orders"
         >
           Pedidos
         </Link>
       </div>
       <div className="userInfo">
         <div>{userFirstLetter}</div>
-        <p>{userEmail}</p>
-        <button type="button" onClick={ handleLogout }>sair</button>
+        <p data-testid="customer_products__element-navbar-user-full-name">{userEmail}</p>
+        <button
+          type="button"
+          onClick={ handleLogout }
+          data-testid="customer_products__element-navbar-link-logout"
+        >
+          sair
+        </button>
       </div>
     </header>
   );

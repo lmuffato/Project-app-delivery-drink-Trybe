@@ -16,7 +16,7 @@ const io = require('socket.io')(server, {
 });
 
 const product = require('../controllers/Products');
-const user = require('../controllers/user');
+const user = require('../controllers/User');
 
 const corsOptions = {
   origin: 'http://localhost:3000',

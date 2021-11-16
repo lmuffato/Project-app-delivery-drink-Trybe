@@ -7,3 +7,9 @@
   justify-content: center;
   width: 20rem;
 }
+
+.cardContainer > img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+}

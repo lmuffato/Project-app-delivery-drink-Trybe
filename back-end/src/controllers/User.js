@@ -7,18 +7,12 @@ const createUser = async (req, res) => {
   try {
     const userData = req.body;
     const { password, name, email, role } = userData;
-
     const MD5password = md5(password);
 
     const user = await User.create(
       { name, email, password: MD5password, role },
     );
-
-    console.log(user);
-
-    if (!user) {
-      throw new Error('Algo deu errado');
-    }
+    if (!user) throw new Error('Algo deu errado');
 
     return res.status(201).json(user);
   } catch (e) {

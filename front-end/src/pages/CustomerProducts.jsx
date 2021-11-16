@@ -4,6 +4,7 @@ import './CustomerProducts.css';
 import axios from 'axios';
 import CustomerNavBar from '../components/CustomerNavBar';
 import ProductCard from '../components/ProductCard';
+import CheckoutBtn from '../components/CheckoutBtn';
 
 function ClientProducts() {
   const [productList, setProductList] = useState([]);
@@ -21,15 +22,16 @@ function ClientProducts() {
   return (
     <div>
       <CustomerNavBar fixed="top" />
-      <Row xs={ 1 } md={ 2 } className="g-4">
+      <Row xs={ 1 } md={ 4 } className="g-4">
         {
           productList.map((prod) => (
             <div key={ prod.name } className="productCard">
-              <ProductCard className="productCard" product={ prod } />
+              <ProductCard product={ prod } />
             </div>
           ))
         }
       </Row>
+      <CheckoutBtn />
     </div>
   );
 }

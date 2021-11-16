@@ -22,10 +22,6 @@ export default function Products() {
       <Carousel />
       <div className="products">
         <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
 
         {/* <Swiper
           slidesPerView={ 3 }

@@ -38,7 +38,6 @@ function Login() {
       });
       localStorage.setItem('token', JSON.stringify(token));
       axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-      console.log(role);
       if (role === 'administrator') {
         navigate('/admin/manage', { replace: true });
       } else if (role === 'seller') {

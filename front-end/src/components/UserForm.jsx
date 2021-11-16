@@ -64,9 +64,9 @@ function UserForm() {
             defaultValue="Vendedor"
             onChange={ (e) => setUserRole(e.target.value) }
           >
-            <option value="Vendedor">Vendedor</option>
-            <option value="Administrador">Administrador</option>
-            <option value="Cliente">Cliente</option>
+            <option value="seller">Vendedor</option>
+            <option value="administrator">Administrador</option>
+            <option value="customer">Cliente</option>
           </select>
         </label>
         <button

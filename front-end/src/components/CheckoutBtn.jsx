@@ -1,19 +1,19 @@
 import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
-import OrderContext from '../contexts/OrderContext';
+import CartContext from '../contexts/CartContext';
 
 function CheckoutBtn() {
-  const { order, totalPrice, setTotalPrice } = useContext(OrderContext);
+  const { cart, totalPrice, setTotalPrice } = useContext(CartContext);
   const history = useHistory();
 
   useEffect(() => {
     function sumPrice() {
-      setTotalPrice(order
+      setTotalPrice(cart
         .reduce((sum, cur) => (cur.price ? sum + (cur.price * cur.quantity) : sum), 0));
     }
     sumPrice();
-  }, [order, setTotalPrice]);
+  }, [cart, setTotalPrice]);
 
   function handleClick() {
     history.push('/customer/checkout');

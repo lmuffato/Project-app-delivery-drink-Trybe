@@ -2,10 +2,10 @@ import React, { useContext, useEffect, useState } from 'react';
 import './ProductCard.css';
 import PropTypes from 'prop-types';
 import { Card, Button } from 'react-bootstrap';
-import OrderContext from '../contexts/OrderContext';
+import CartContext from '../contexts/CartContext';
 
 function ProductCard({ product }) {
-  const { order, setOrder } = useContext(OrderContext);
+  const { cart, setCart } = useContext(CartContext);
   const [quantity, setQuantity] = useState(0);
 
   function handleClic(e) {
@@ -16,21 +16,21 @@ function ProductCard({ product }) {
     }
   }
 
-  function handleOrder() {
-    if (!order.find((item) => item.name === product.name)) {
-      setOrder([...order, { name: product.name, price: product.price, quantity }]);
+  function handlecart() {
+    if (!cart.find((item) => item.name === product.name)) {
+      setCart([...cart, { name: product.name, price: product.price, quantity }]);
     } else {
-      const index = order.findIndex((item) => item.name === product.name);
-      setOrder([...order, order[index].quantity = quantity]);
+      const index = cart.findIndex((item) => item.name === product.name);
+      setCart([...cart, cart[index].quantity = quantity]);
     }
   }
 
   useEffect(() => {
-    handleOrder();
+    handlecart();
   }, [quantity]);
 
   return (
-    <Card border="info" style={ { width: '12rem', alignItems: 'center' } }>
+    <Card bcart="info" style={ { width: '12rem', alignItems: 'center' } }>
       <Card.Img
         data-testid={ `customer_products__img-card-bg-image-${product.id}` }
         variant="top"

@@ -1,28 +1,28 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import OrderContext from './OrderContext';
+import CartContext from './CartContext';
 
-function OrderProvider({ children }) {
-  const [order, setOrder] = useState([]);
+function CartProvider({ children }) {
+  const [cart, setCart] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
 
   return (
-    <OrderContext.Provider
+    <CartContext.Provider
       value={
         {
           totalPrice,
           setTotalPrice,
-          order,
-          setOrder }
+          cart,
+          setCart }
       }
     >
       { children }
-    </OrderContext.Provider>
+    </CartContext.Provider>
   );
 }
 
-OrderProvider.propTypes = {
+CartProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export default OrderProvider;
+export default CartProvider;

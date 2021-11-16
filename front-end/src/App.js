@@ -3,7 +3,7 @@ import { Route, Redirect } from 'react-router-dom';
 import './App.css';
 import ClientProducts from './pages/CustomerProducts';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import OrderProvider from './contexts/OrderProvider';
+import CartProvider from './contexts/CartProvider';
 import Login from './pages/Login';
 
 function App() {
@@ -13,9 +13,9 @@ function App() {
         <Redirect to="/login" />
       </Route>
       <Route path="/login" component={ Login } />
-      <OrderProvider>
+      <CartProvider>
         <Route exact path="/customer/products" component={ ClientProducts } />
-      </OrderProvider>
+      </CartProvider>
     </>
   );
 }

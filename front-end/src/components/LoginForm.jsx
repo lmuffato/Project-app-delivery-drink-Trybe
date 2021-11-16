@@ -7,31 +7,32 @@ import regex from '../utils/regex';
 import errorMap from '../utils/errorMap';
 
 function LoginForm() {
-  const { handleChange, submitChange, setUser, user } = useContext(Context);
+  const { post } = useContext(Context);
   const navigate = useNavigate();
+  const [loginForm, setLoginForm] = useState({ email: '', password: '' });
   const [invalidLogin, setInvalidLogin] = useState();
   const [disableButton, setDisableButton] = useState(true);
 
   useEffect(() => {
-    setUser({ email: '', password: '' });
-
-    return () => setUser({});
-  }, []); // eslint-disable-line
-
-  useEffect(() => {
-    const { email, password } = user;
+    const { email, password } = loginForm;
 
     if (regex.email.test(email) && regex.password.test(password)) {
       setDisableButton(false);
     } else {
       setDisableButton(true);
     }
-  }, [user]);
+  }, [loginForm]);
+
+  const handleChange = ({ target }) => {
+    const { name, value } = target;
+    setLoginForm({ ...loginForm, [name]: value });
+  };
 
   const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
       setInvalidLogin(null);
-      const { data } = await submitChange(e, 'login_form');
+      const { data } = await post('login_form', loginForm);
 
       if (data.token) {
         localStorage.setItem('token', data.token);
@@ -50,6 +51,7 @@ function LoginForm() {
           name="email"
           dataTestId="common_login__input-email"
           onChange={ handleChange }
+          value={ loginForm.email }
           placeholder="email"
         />
 
@@ -59,6 +61,7 @@ function LoginForm() {
           dataTestId="common_login__input-password"
           onChange={ handleChange }
           placeholder="password"
+          value={ loginForm.password }
         />
 
         <span

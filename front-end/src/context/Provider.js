@@ -30,7 +30,8 @@ function Provider({ children }) {
 
   /// ////////////////////////Link with BackEnd//////////////////////// ///
 
-  const postSubmit = (url) => axios.post(`http://localhost:3001/${url}`, user);
+  const post = (formType, data) => axios.post(`http://localhost:3001/${Endpoints[formType]}`, data);
+  const get = (formType) => axios.get(`http://localhost:3001/${Endpoints[formType]}`);
 
   // const getProductsURL = 'http://localhost:3001/products';
   const getProducts = () => {
@@ -92,11 +93,6 @@ function Provider({ children }) {
     setUser(setuser);
   };
 
-  const submitChange = (e, formType) => {
-    e.preventDefault();
-    return postSubmit(Endpoints[formType]);
-  };
-
   // Função para enviar o ShoppingCart para o BackEnd
   const submitShoppingCart = async () => {
     await postShoppingCart();
@@ -142,7 +138,7 @@ function Provider({ children }) {
         setUser,
         user,
         handleChange,
-        submitChange,
+        post,
         shoppingCart,
         products,
         submitShoppingCart,

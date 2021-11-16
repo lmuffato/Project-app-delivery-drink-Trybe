@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useStore } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { userLogin } from '../redux/userSlice';
@@ -7,16 +7,19 @@ import { userLogin } from '../redux/userSlice';
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const url = 'http://localhost:3000';
+  const [showError, setShowError] = useState(false);
+  const url = 'http://localhost:3001';
   const dispatch = useDispatch();
+  const store = useStore();
   const history = useHistory();
-  const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
-  const minPasswordLength = 6;
 
   const validations = () => {
-    if (!emailRegex.test(email)) return 'Please enter a valid email';
-    if (password.length < minPasswordLength) return 'Please enter a valid password';
-    return '';
+    const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+    const minPasswordLength = 6;
+    if (!emailRegex.test(email) || password.length < minPasswordLength) {
+      return true;
+    }
+    return false;
   };
 
   const makeLogin = async () => {
@@ -26,12 +29,17 @@ export default function Login() {
       .then((res) => {
         const { token, role } = res.data;
         dispatch(userLogin({ token, role }));
+        console.log(userLogin);
+        setShowError(false);
       })
-      .catch((er) => console.log(er));
+      .catch((err) => setShowError(err));
   };
+
   const handleLogin = async () => {
     await makeLogin();
-    history.push('/');
+    if (store.getState().user.role === 'customer') history.push('/customer/products');
+    if (store.getState().user.role === 'administrator') history.push('/admin/manage');
+    if (store.getState().user.role === 'seller') history.push('/seller/orders');
   };
 
   return (
@@ -62,6 +70,7 @@ export default function Login() {
         </label>
         <button
           type="button"
+          disabled={ validations() }
           data-testid="common_login__button-login"
           onClick={ handleLogin }
         >
@@ -74,6 +83,13 @@ export default function Login() {
         >
           Ainda não tenho conta
         </button>
+        <span
+          data-testid="common_login__element-invalid-email"
+          style={ { color: 'red' } }
+          hidden={ !showError }
+        >
+          Usuário ou senha inválidos
+        </span>
       </form>
     </main>
   );

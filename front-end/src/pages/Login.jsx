@@ -37,8 +37,7 @@ function Login() {
         password,
       });
       localStorage.setItem('token', JSON.stringify(token));
-      axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-      navigate('/teste', { replace: true });
+      navigate('/customer/products', { replace: true });
     } catch ({ response }) {
       // Source: https://stackoverflow.com/questions/45017822/catching-error-body-using-axios-post
       setValues({

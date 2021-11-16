@@ -1,16 +1,32 @@
 module.exports = (sequelize, DataTypes) => {
   const Sales = sequelize.define('Sales', {
-    user_id: DataTypes.INTEGER,
-    seller_id: DataTypes.INTEGER,
-    total_price: DataTypes.DECIMAL,
-    delivery_address: DataTypes.STRING,
-    delivery_number: DataTypes.STRING,
-    sale_date: DataTypes.DATE,
-    status: DataTypes.STRING,
+    userId: {
+      type: DataTypes.INTEGER,
+      foreignKey: true,
+      field: 'user_id'
+    },
+    sellerId: {
+      type: DataTypes.INTEGER,
+      foreignKey: true,
+      field: 'seller_id'
+    },
+    totalPrice: {type: DataTypes.DECIMAL, field: 'total_price'},
+    deliveryAddress: {type: DataTypes.STRING, field: 'delivery_address'},
+    deliveryNumber: {type: DataTypes.STRING, field: 'delivery_number'},
+    saleDate: {
+      type: DataTypes.DATE,
+      field: 'sale_date',
+      notNull: true,
+      defaultValue: DataTypes.NOW,
+    },
+    status: {
+      type: DataTypes.STRING,
+      defaultValue: 'Pendente'
+    },
   }, {
     tableName: 'Sales',
     timestamps: false,
   });
-
+  
   return Sales;
 };

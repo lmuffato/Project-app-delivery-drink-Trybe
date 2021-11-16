@@ -40,6 +40,11 @@
   margin: 5px 5px 5px 5px;
 }
 
+.cardProduct img {
+  width: 70px;
+  height: 80px;
+}
+
 .buttons {
   display: flex;
   align-items: center;

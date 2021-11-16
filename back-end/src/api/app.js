@@ -4,27 +4,24 @@ const bodyParser = require('body-parser');
 
 const userControllers = require('../controllers/userControllers');
 const productControllers = require('../controllers/productControllers');
+const saleControllers = require('../controllers/saleControllers');
 
 const { checkEmail } = require('../middlewares/checkEmail');
 const { checkPassword } = require('../middlewares/checkPassword');
 const { validateToken } = require('../middlewares/validateToken');
 const { checkName } = require('../middlewares/checkName');
+const validateProducts = require('../middlewares/validateProducts');
+const validateSeller = require('../middlewares/validateSeller');
+const validateCustomer = require('../middlewares/validateUser');
+const validateAddress = require('../middlewares/validateAddress');
 
 const corsOptions = {
   origin: '*',
   optionsSuccessStatus: 200,
 };
 
-// const corsOptions = {
-//   origin: '*',
-//   optionsSuccessStatus: 200,
-// };
-
 const app = express();
-app.use(cors({
-  origin: '*',
-  optionsSuccessStatus: 200,
-}));
+app.use(cors(corsOptions));
 
 app.use(bodyParser.json());
 app.use(cors(corsOptions));
@@ -34,5 +31,13 @@ app.post('/register', checkName, checkEmail, checkPassword, userControllers.regi
 
 app.get('/users', userControllers.getAllUsers);
 app.get('/products', validateToken, productControllers.getAllProducts);
+
+app.post('/sale',
+  validateToken,
+  validateProducts,
+  validateSeller,
+  validateCustomer,
+  validateAddress,
+  saleControllers.register);
 
 module.exports = app;

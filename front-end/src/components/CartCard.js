@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-
-const calcCartTotal = (cart) => cart
-  .reduce((acc, prod) => acc + (Number(prod.price) * prod.quantity), 0);
+import { calcCartTotal } from './ultility';
 
 function CartCard() {
   const [cartTotal, setCartTotal] = useState(0);
@@ -11,7 +9,7 @@ function CartCard() {
   const history = useHistory();
 
   useEffect(() => {
-    setCartTotal(calcCartTotal(cart));
+    setCartTotal(calcCartTotal(cart).toFixed(2));
   }, [cart]);
 
   return (

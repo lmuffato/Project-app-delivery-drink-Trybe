@@ -7,22 +7,21 @@ import Context from '../context/Context';
 
 function PrivateRoute({ element: Element }) {
   const navigate = useNavigate();
-  const { user, setUser } = useContext(Context);
+  const { setUser } = useContext(Context);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
     const data = Jwt.decode(token);
-    const { exp, email, name, role } = data;
     const oneSecond = 1000;
-    const expirationDate = exp * oneSecond;
 
-    if (!token || expirationDate < Date.now()) {
+    if (!token || data.exp * oneSecond < Date.now()) {
       localStorage.removeItem('token');
       navigate('/login');
     } else {
-      setUser({ name, email, role });
+      const { id, email, name, role } = data;
+      setUser({ id, name, email, role });
     }
-  }, [user]);
+  }, []);
 
   return (
     <>

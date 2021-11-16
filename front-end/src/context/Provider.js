@@ -84,16 +84,6 @@ function Provider({ children }) {
     sum();
   }, [shoppingCart]);
 
-  /// ////////////////////////Components Functions//////////////////////// ///
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    const setuser = { ...user,
-      [name]: value,
-    };
-    setUser(setuser);
-  };
-
   // Função para enviar o ShoppingCart para o BackEnd
   const submitShoppingCart = async () => {
     await postShoppingCart();
@@ -140,7 +130,6 @@ function Provider({ children }) {
         setUser,
         get,
         post,
-        handleChange,
         shoppingCart,
         products,
         submitShoppingCart,

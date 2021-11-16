@@ -8,7 +8,7 @@ function SellerOrders() {
 
   useEffect(() => {
     get('seller_orders').then((ordersData) => setOrders(ordersData));
-  }, [get]);
+  }, []);
 
   return (
     <div>

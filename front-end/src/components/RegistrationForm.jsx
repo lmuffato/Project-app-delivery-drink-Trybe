@@ -4,12 +4,12 @@ import { useNavigate } from 'react-router-dom';
 import Context from '../context/Context';
 import TextInput from './TextInput';
 import regex from '../utils/regex';
+import errorMap from '../utils/errorMap';
 
 function Registration() {
   const { handleChange, submitChange, setUser, user } = useContext(Context);
   const [disableButton, setDisableButton] = useState(true);
   const [errorMessage, setErrorMessage] = useState();
-  const [successMessage, setSuccessMessage] = useState();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -37,18 +37,17 @@ function Registration() {
   }, [user]);
 
   const handleSubmit = async (e) => {
-    const fiveSeconds = 5000;
     try {
       setErrorMessage(null);
-      setSuccessMessage(null);
-      await submitChange(e, 'registration_form');
+      const { data } = await submitChange(e, 'registration_form');
 
-      setSuccessMessage('Cadastrado com sucesso');
-
-      setTimeout(() => navigate('/login'), fiveSeconds);
-    } catch (error) {
-      console.log(error.message);
-      setErrorMessage('Email já cadastrado');
+      if (data.token) {
+        localStorage.setItem('token', data.token);
+        navigate('/customer/products');
+      }
+    } catch ({ response }) {
+      const { status } = response;
+      setErrorMessage(errorMap[status || '500']);
     }
   };
 
@@ -77,7 +76,7 @@ function Registration() {
         />
         <button
           type="submit"
-          data-testid="common_register__input-register"
+          data-testid="common_register__button-register"
           onClick={ handleSubmit }
           disabled={ disableButton }
         >
@@ -90,11 +89,6 @@ function Registration() {
       >
         { errorMessage }
       </span>
-      <div
-        hidden={ !successMessage }
-      >
-        { successMessage }
-      </div>
     </div>
   );
 }

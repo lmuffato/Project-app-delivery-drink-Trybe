@@ -4,18 +4,25 @@ import { Link, useNavigate } from 'react-router-dom';
 import TextInput from './TextInput';
 import Context from '../context/Context';
 import regex from '../utils/regex';
+import errorMap from '../utils/errorMap';
 
 function LoginForm() {
-  const { handleChange, submitChange, setUser, user } = useContext(Context);
+  const { socket, handleChange, submitChange, setUser, user } = useContext(Context);
   const navigate = useNavigate();
-  const [invalidLogin, setInvalidLogin] = useState(true);
+  const [invalidLogin, setInvalidLogin] = useState();
   const [disableButton, setDisableButton] = useState(true);
+
+  // test socket emit
+  const testSocket = () => {
+    const test = socket.emit('message');
+    console.log(test);
+  };
 
   useEffect(() => {
     setUser({ email: '', password: '' });
 
     return () => setUser({});
-  }, []); // eslint-disable-line
+  }, [setUser]);
 
   useEffect(() => {
     const { email, password } = user;
@@ -29,15 +36,16 @@ function LoginForm() {
 
   const handleSubmit = async (e) => {
     try {
-      setInvalidLogin(true);
+      setInvalidLogin(null);
       const { data } = await submitChange(e, 'login_form');
 
       if (data.token) {
         localStorage.setItem('token', data.token);
-        navigate('/customer/orders');
+        navigate('/customer/products');
       }
-    } catch (error) {
-      setInvalidLogin(false);
+    } catch ({ response }) {
+      const { status } = response;
+      setInvalidLogin(errorMap[status || '500']);
     }
   };
 
@@ -60,10 +68,10 @@ function LoginForm() {
         />
 
         <span
-          hidden={ invalidLogin }
+          hidden={ !invalidLogin }
           data-testid="common_login__element-invalid-email"
         >
-          * Dados inválidos
+          { invalidLogin }
         </span>
 
         <button
@@ -82,14 +90,22 @@ function LoginForm() {
           Esqueceu a senha?
         </Link>
 
-        <Link
-          to="/register"
+        <button
+          type="button"
+          onClick={ () => navigate('/register') }
           className="input"
           data-testid="common_login__button-register"
         >
           Cadastre-se
+        </button>
 
-        </Link>
+        <button
+          type="button"
+          onClick={ testSocket }
+          className="input"
+        >
+          testarSocket
+        </button>
 
       </form>
     </div>

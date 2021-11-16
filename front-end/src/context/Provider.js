@@ -6,6 +6,9 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import Context from './Context';
 import mockProducts from './mockAPI';
+import { io } from 'socket.io-client';// https://github.com/tryber/sd-10a-live-lectures/pull/89/files
+
+// const socket = io('http://localhost:3001');
 
 const Endpoints = {
   login_form: 'login',

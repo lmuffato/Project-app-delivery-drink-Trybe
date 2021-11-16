@@ -1,14 +1,13 @@
-// const { io } = require('socket.io-client');
-// const socket = io('http://localhost:3001');
-
 const User = require('../services/User');
 
 const login = async (req, res) => {
-  const { email, password } = req;
+  const { email, password } = req.body;
+  
   const { err, user } = await User.login(email, password);
-  // socket.emit('userInfo', (user));
-  if (err) return res.status(400).json(err.message);
-  return res.status(200).json(user);    
+
+  if (err) return res.status(404).json({ error: err.message });
+
+  res.status(200).json({ message: user });
 };
 
 const createUser = async (req, res) => {

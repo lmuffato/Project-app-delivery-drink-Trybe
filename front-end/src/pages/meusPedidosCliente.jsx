@@ -1,6 +1,19 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useContext, useEffect, useState } from 'react';
+import DeliveryContext from '../context/DeliveryContext';
 
 function meusPedidosCliente (){
+  const { orders, setOrders } = useContext(DeliveryContext);
+  const { isLoading, setIsLoading } = useState(true);
+
+  useEffect (() => {
+    const getOrders = async () => {
+      setOrders = await axios.get(`/customer/orders/${id}`);
+      setIsLoading = false;
+    },
+    []
+  });
+
   return (
     <>
     <nada></nada>
@@ -16,7 +29,7 @@ function meusPedidosCliente (){
             <h3
               data-testid={ `customer_products__element-order-date-${id}` }
             >
-              { id }
+              { index + 1 }
             </h3>
           </div>
           <input
@@ -27,10 +40,10 @@ function meusPedidosCliente (){
           </input>
           <div>
             <h4>
-              { saleDate }
+              { sale_date }
             </h4>
             <h4>
-              { totalPrice }
+              { total_price }
             </h4>
           </div>
         </button>

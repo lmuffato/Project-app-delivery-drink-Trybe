@@ -1,0 +1,9 @@
+.quantityInput {
+  height: 35px;
+  text-align: center;
+  width: 30px;
+}
+
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+  appearance: none;
+}

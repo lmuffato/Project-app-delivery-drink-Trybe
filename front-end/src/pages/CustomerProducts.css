@@ -1,7 +1,4 @@
-.productCard {
-  margin-left: 50px;
-}
-
-.cardList {
-  align-items: center;
+.card {
+  height: 290px;
+  margin-top: 20px;
 }

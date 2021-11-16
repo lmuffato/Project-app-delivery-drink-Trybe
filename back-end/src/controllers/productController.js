@@ -1,5 +1,5 @@
 const { productService } = require('../services');
-const { /* CREATED, */ OK } = require('../utils/statusCodeMap');
+const { OK } = require('../utils/statusCodeMap');
 
 const getAll = async (req, res) => {
   const result = await productService.getAll();
@@ -7,4 +7,6 @@ const getAll = async (req, res) => {
   return res.status(OK).json(result);
 };
 
-module.exports = { getAll }; 
+module.exports = {
+  getAll,
+}; 

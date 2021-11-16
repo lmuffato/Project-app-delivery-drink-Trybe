@@ -2,7 +2,6 @@ const express = require('express');
 const { userController } = require('../controllers');
 const { validateEmail, validatePassword, validateName } = require('../middlewares');
 
-
 const Router = express.Router();
 
 Router.post('/', validateName, validateEmail, validatePassword, userController.create);

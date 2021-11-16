@@ -9,6 +9,8 @@ const registrationRouter = require('../router/registration');
 const productRouter = require('../router/product');
 const saleRouter = require('../router/sale');
 
+const { HTTP_OK_STATUS } = require('../status');
+
 const app = express();
 
 app.use(cors());
@@ -26,7 +28,7 @@ app.use('/order', saleRouter);
 
 app.get('/images/:file', (req, res) => {
   const { file } = req.params;
-  res.sendFile(path.resolve(__dirname, `../../public/${file}`));
+  res.status(HTTP_OK_STATUS).sendFile(path.resolve(__dirname, `../../public/${file}`));
 });
 
 module.exports = app;

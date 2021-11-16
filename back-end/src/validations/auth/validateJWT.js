@@ -1,15 +1,15 @@
+const { readFileSync } = require('fs');
 const jwt = require('jsonwebtoken');
 
-const SECRET = require('../../../jwt.evaluation.key');
-
-const secretkey = 'mysecretkey';
+const SECRET = './jwt.evaluation.key';
+const TOKEN_SECRET = readFileSync(SECRET, 'utf-8').replace('\n', '');
 
 const jwtConfig = {
   expiresIn: '15d',
   algorithm: 'HS256',
 };
 
-const createToken = (userData) => jwt.sign({ data: userData }, secretkey, jwtConfig);
+const createToken = (userData) => jwt.sign({ data: userData }, TOKEN_SECRET, jwtConfig);
 
 const verifyToken = async (req, res, next) => {
   const token = req.headers.authorization;
@@ -19,7 +19,7 @@ const verifyToken = async (req, res, next) => {
   }
 
   try {
-    const decoded = jwt.verify(token, SECRET);
+    const decoded = jwt.verify(token, TOKEN_SECRET);
 
     req.user = decoded;
 

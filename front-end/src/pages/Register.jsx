@@ -1,15 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
+import UserContext from '../context/UserContext';
 import { createUser } from '../services/apis';
 
 function Register() {
+  const history = useHistory();
   const PASSWORD_LENGTH = 6;
   const NAME_LENGTH = 12;
+
+  const { setLoggedUser } = useContext(UserContext);
 
   const [userName, setUserName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [disabled, setDisabled] = useState(true);
+  const [errorMessage, setErrorMessage] = useState(false);
 
   const handleChange = ({ target }) => {
     const { value, name } = target;
@@ -19,7 +24,14 @@ function Register() {
   };
 
   const registerBtn = async () => {
-    await createUser(userName, email, password);
+    try {
+      const createdUser = await createUser(userName, email, password);
+      setLoggedUser(createdUser);
+      setErrorMessage(false);
+      history.push('/customer/products');
+    } catch (error) {
+      setErrorMessage(true);
+    }
   };
 
   useEffect(() => {
@@ -59,18 +71,16 @@ function Register() {
         data-testid="common_register__input-password"
         placeholder="Digite sua senha"
       />
-      <Link to="/customer/products">
-        <button
-          type="button"
-          data-testid="common_register__button-register"
-          disabled={ disabled }
-          onClick={ registerBtn }
-        >
-          CADASTRAR
-        </button>
-      </Link>
+      <button
+        type="button"
+        data-testid="common_register__button-register"
+        disabled={ disabled }
+        onClick={ registerBtn }
+      >
+        CADASTRAR
+      </button>
       <p data-testid="common_register__element-invalid_register">
-        Erro
+        { errorMessage ? 'Usuário já foi registrado' : null }
       </p>
     </div>
   );

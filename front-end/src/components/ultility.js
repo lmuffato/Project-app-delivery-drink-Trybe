@@ -39,3 +39,21 @@ export const validateAll = (name, email, password) => {
   }
   return false;
 };
+
+export const validateLogin = (email, password) => {
+  if (valEmail(email) && valPassword(password)) {
+    return true;
+  }
+  return false;
+};
+
+export const saveUserDataToLocalStorage = ({ name, email, role, token }) => {
+  localStorage.setItem('user', JSON.stringify({ name, email, role, token }));
+};
+
+export const removeUserDataFromLocalStorage = () => {
+  localStorage.removeItem('user');
+};
+
+export const calcCartTotal = (cart) => cart
+  .reduce((acc, prod) => acc + (Number(prod.price) * prod.quantity), 0);

@@ -8,9 +8,11 @@ const productController = require('./controllers/productController');
 
 const app = express();
 
-app.use(cors());
 app.use('/', express.static(path.join(__dirname, '..', '..', 'public')));
+app.use(cors());
 app.use(bodyParser.json());
+
+app.use(cors());
 
 app.get('/', (req, res) => {
   res.status(200).send('OK FUNCIONANDO');

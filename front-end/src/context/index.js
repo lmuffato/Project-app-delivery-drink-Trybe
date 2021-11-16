@@ -1,7 +1,9 @@
 import LoginContext from './LoginContext';
 import ManagerUsersContext from './ManagerUsersContext';
 
-export {
+const lib = {
   LoginContext,
   ManagerUsersContext,
 };
+
+export default lib;

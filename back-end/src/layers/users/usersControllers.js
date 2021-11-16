@@ -11,7 +11,7 @@ async () => {});
 http GET :3001/users
 */
 
-router.post('/',
+router.post('/create',
 userMiddlewares.createNew,
 async () => {});
 /* REQUISIÇÃO:

@@ -1,5 +1,42 @@
+const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const { users } = require('../../database/models');
+// const authentication = require('../authentication/authMiddleware');
+
+const SECRET = 'meuSegredo';
+
+const login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const hash = crypto.createHash('md5').update(password).digest('hex');
+    const user = await users.findOne({ where: { email, password: hash } });
+    if (!user) return res.status(404).json({ message: false });
+
+    const { dataValues } = user;
+
+    const { password: _, ...payload } = dataValues;
+    const token = jwt.sign(payload, SECRET);
+
+    return res.status(200).json({ token });
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+};
+
+const createNew = async (req, res) => {
+  try {
+    const { name, email, password } = req.body;
+    const hash = crypto.createHash('md5').update(password).digest('hex');
+    const oldUser = await users.findOne({ where: { email } });
+    if (oldUser) return res.status(409).json({ message: false });
+    const obj = { name, email, password: hash, role: 'customer' };
+    await users.create(obj);
+ 
+    return res.status(201).json({ message: true });
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+};
 
 const getAll = async (req, res) => {
   try {
@@ -69,40 +106,6 @@ const removeKeyInObject = (obj, key) => {
    return newObj;
 };
 */
-
-const login = async (req, res) => {
-  try {
-    const { email, password } = req.body;
-    const hash = crypto.createHash('md5').update(password).digest('hex');
-    // const obj = { email, password: hash };
-    // const newData = await users.create(obj);
-    const user = await users.findOne({ where: { email, password: hash } });
-    // req.userInfo = { name, email, role };
-    // req.userInfo = removeKeyInObject(obj, 'password');
-    // const newData = await User.create(obj);
-    if (!user) return res.status(401).json({ message: false });
-    return res.status(200).json({ message: true });
-  } catch (err) {
-    return res.status(500).json({ message: err.message });
-  }
-};
-
-const createNew = async (req, res) => {
-  try {
-    const { name, email, password, role } = req.body;
-    const hash = crypto.createHash('md5').update(password).digest('hex');
-    const oldUser = await users.findOne({ where: { email } });
-    if (oldUser) return res.status(409).json({ message: false });
-    const obj = { name, email, password: hash, role };
-    await users.create(obj);
-    // req.userInfo = { name, email, role };
-    // req.userInfo = removeKeyInObject(obj, 'password');
-    // const newData = await User.create(obj);
-    return res.status(201).json({ message: true });
-  } catch (err) {
-    return res.status(500).json({ message: err.message });
-  }
-};
 
 module.exports = {
   getAll,

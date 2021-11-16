@@ -2,7 +2,6 @@ import { useState } from 'react';
 
 export default function useInputs(initialState) {
   const [values, setValues] = useState(initialState);
-
   function storeInputValue({ target }) {
     setValues({
       ...values,

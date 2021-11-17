@@ -3,18 +3,19 @@ import Button from './Button';
 import Input from './Input';
 import ProductCard from './ProductCard';
 import ProductQty from './ProductQty';
-import BadgeItemFinalizado from './BadgeItemFinalizado';
-import BadgeValorTotal from './BadgeValorTotal';
 import ProductOrderStatus from './ProductOrderStatus';
+import ProductOrderCard from './ProductOrderCard';
 
 function BaseComponent() {
   const [qty, setQty] = useState(0);
   return (
     <div>
       <div>
+        {window.ScreenOrientation.toString()}
+        {window.visualViewport.width}
         <h2>Botões</h2>
         <Button>PRIMÁRIO</Button>
-        <Button btnType="secondary">SECUNDÁRIO</Button>
+        <Button btnType="secondary" onClick={ () => alert('alerta') }>SECUNDÁRIO</Button>
         <Button btnType="tertiary">Terciário</Button>
       </div>
       <div>
@@ -49,28 +50,21 @@ function BaseComponent() {
         </div>
       </div>
       <div>
-        <BadgeItemFinalizado
-          descricao="descição"
-          id="id"
-          quantidade={ 10 }
-          valorUnitario={ 100 }
-        />
         <ProductOrderStatus status="pending" />
         <ProductOrderStatus status="delivered" />
         <ProductOrderStatus status="preparing" />
-        <div
-          style={ {
-            display: 'grid',
-            gridTemplateColumns: 'repeat(4, 1fr)',
-            gridTemplateRows: '100px',
-          } }
-        >
-          <span>Tamanho variável</span>
-          <ProductOrderStatus full status="pending" />
-          <ProductOrderStatus full status="delivered" />
-          <ProductOrderStatus full status="preparing" />
-
-        </div>
+      </div>
+      <div>
+        <h1>card de pedido do produto</h1>
+        <ProductOrderCard
+          adress="Avenida cônego domingos maltês"
+          date="date"
+          price={ 100 }
+          address="endereço com"
+          orderId="meuid"
+          status="pending"
+          testIdOrderStatus="idtestid"
+        />
       </div>
     </div>);
 }

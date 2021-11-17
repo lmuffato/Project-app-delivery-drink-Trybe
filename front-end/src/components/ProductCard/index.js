@@ -6,7 +6,7 @@ import ProductQty from '../ProductQty';
 function ProductCard({ id, image, price, alt, description, onChange }) {
   const [qty, setQty] = useState(0);
 
-  useEffect(() => { onChange(qty); });
+  useEffect(() => { onChange(qty); }, [qty]);
 
   function remove() { setQty((st) => ((st - 1) <= 0 ? 0 : (st - 1))); }
   function add() { setQty((st) => st + 1); }

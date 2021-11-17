@@ -47,7 +47,7 @@ const createUser = async ({ name, email, password, role }) => {
   const { password: _, ...userWithoutPassword } = user.dataValues;
   const token = jwt.sign(userWithoutPassword, secret, jwtConfig);
   
-  return ({ status: 201, token });
+  return ({ status: 201, token, id, name, email, role });
 };
 
 const login = async ({ email, password }) => {

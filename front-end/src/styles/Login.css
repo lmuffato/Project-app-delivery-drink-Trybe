@@ -7,11 +7,12 @@
   justify-content: center;
 }
 
-.children_container {
+.children_container_login {
   align-items: center;
-  background-color: rgb(238, 238, 238);
+  background-color: rgb(40, 100, 63);
   border-radius: 30px;
   box-shadow: 2px 3px 20px -4px black;
+  color: white;
   display: flex;
   flex-direction: column;
   height: 600px;
@@ -20,11 +21,11 @@
   width: 500px;
 }
 
-.children_container h3 {
+.children_container_login h3 {
   font-size: 26px;
 }
 
-.children_container h5 {
+.children_container_login h5 {
   font-size: 16px;
   font-weight: 200;
 }

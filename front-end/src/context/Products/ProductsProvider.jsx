@@ -4,7 +4,7 @@ import ProductsContext from './ProductsContext';
 import { fetchProducts } from '../../utils/API/fetch';
 
 export default function UserProvider({ children }) {
-  const [count, setCount] = useState(1);
+  const [count, setCount] = useState(0);
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -17,17 +17,12 @@ export default function UserProvider({ children }) {
   const BRL = (price) => price
     .toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
 
-  const increment = (e) => {
-    console.log(e.target);
+  const increment = () => {
     setCount(count + 1);
   };
 
-  const handleChange = (e) => {
-    e.target.value = count;
-  };
-
   const decrement = () => {
-    if (count > 1) {
+    if (count > 0) {
       setCount(count - 1);
     }
   };

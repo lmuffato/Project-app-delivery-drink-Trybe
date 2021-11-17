@@ -8,8 +8,10 @@ const Input = ({
   value,
   onChange,
   placeholder,
+  type,
 }) => (
   <input
+    type={ type }
     className={ className }
     data-testid={ testid }
     name={ name }

@@ -38,27 +38,27 @@ export default function ProductCard() {
         </div>
         <div className="counter-container">
           <button
-            id={ prod.id }
+            name={ prod.id }
             data-testid="customer_products__button-card-add-item"
             className="btn-decrement"
             type="button"
-            onClick={ () => decrement() }
+            onClick={ decrement }
           >
             -
           </button>
           <input
-            id={ prod.id }
+            name={ prod.id }
             className="card-header counter"
             value={ count }
-            onChange={ (e) => handleChange(e) }
+            onChange={ ({ target: { value } }) => handleChange(value) }
             data-testid="customer_products__input-card-quantity"
           />
           <button
-            id={ prod.id }
+            name={ prod.id }
             data-testid="customer_products__button-card-rm-item"
             className="btn-increment"
             type="button"
-            onClick={ (e) => increment(e) }
+            onClick={ increment }
           >
             +
           </button>

@@ -59,6 +59,7 @@ const RegisterForm = () => {
           className="register-password"
           data-testid={ testID[8] }
           name="password"
+          type="password"
           value={ password }
           onChange={ handleChange }
           placeholder="Senha"

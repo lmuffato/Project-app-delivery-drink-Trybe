@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router';
 
+const md5 = require('md5');
 const axios = require('axios').default;
 
 export default function Cadastro() {
@@ -28,13 +29,14 @@ export default function Cadastro() {
         url: 'http://localhost:3001/users',
         data: {
           name,
-          password,
+          password: md5(password),
           email: user,
           role: 'customer',
         },
         responseType: 'json',
       });
-      console.log(response.data);
+      console.log(response);
+      console.log(md5(password));
       setRedirect(true);
     } catch (error) {
       resetInputs();

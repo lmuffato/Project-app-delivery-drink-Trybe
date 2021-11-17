@@ -17,4 +17,10 @@ router.get(
   saleController.getByUserId,
 );
 
+router.get(
+  '/:id',
+  tokenValidate.verifyToken,
+  saleController.getByOrderId,
+);
+
 module.exports = router;

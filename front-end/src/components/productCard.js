@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 function Card({ index, strName, strThumb, strPrice }) {
   return (
 
-    <button className="card" type="button">
+    <div className="card" type="button">
       <h4
         className="card-price"
         data-testid={ `customer_products__element-card-price-${index}` }
@@ -25,16 +25,26 @@ function Card({ index, strName, strThumb, strPrice }) {
         { strName }
       </h2>
       <div>
-        <input type="button" />
+        <button
+          type="button"
+          data-testid={ `customer_products__button-card-add-item-${index}` }
+        >
+          +
+        </button>
         <input
           type="text"
-          data-testid={ `customer_products__element-card-price-${index}` }
+          data-testid={ `customer_products__input-card-quantity-${index}` }
           value="0"
           disabled
         />
-        <input type="button" />
+        <button
+          type="button"
+          data-testid={ `customer_products__button-card-rm-item-${index}` }
+        >
+          -
+        </button>
       </div>
-    </button>
+    </div>
   );
 }
 

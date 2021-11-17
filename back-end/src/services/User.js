@@ -19,7 +19,7 @@ const login = async (email, password) => {
   return { user };
 };
 
-const createUser = async (name, email, password) => {
+const createUser = async (name, email, password, type) => {
   const { error } = schemaCreatedUser.validate({ name, email, password });
 
   if (error) {
@@ -27,9 +27,11 @@ const createUser = async (name, email, password) => {
   }
 
   const passwordEncrypted = md5(password);
-  const newUser = await User.createUser({ name, email, password: passwordEncrypted });
+  const res = await User.createUser({ name, email, password: passwordEncrypted, type });
 
-  return { newUser };
+  if (res.err) return { err: { message: 'User already registered' } };
+
+  return { res };
 };
 
 module.exports = {

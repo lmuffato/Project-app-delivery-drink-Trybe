@@ -17,6 +17,7 @@ const io = require('socket.io')(server, {
 
 const product = require('../controllers/Products');
 const user = require('../controllers/User');
+const validateJwtAdmin = require('../auth/validateJwtAdmin');
 
 const corsOptions = {
   origin: 'http://localhost:3000',
@@ -29,6 +30,8 @@ app.use(cors(corsOptions));
 
 app.get('/products', product.getProducts);
 app.post('/login', user.login);
+app.post('/register', user.createUser);
+app.post('/register/admin', validateJwtAdmin, user.createUser);
 
 server.listen(port, () => console.log(`Ouvindo na porta ${port}!`));
 module.exports = app;

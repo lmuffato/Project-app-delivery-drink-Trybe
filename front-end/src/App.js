@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import Login from './pages/Login';
+import Admin from './pages/Admin';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
           <Redirect to="/login" />
         </Route>
         <Route path="/login" component={ Login } />
+        <Route path="/admin" component={ Admin } />
       </Switch>
     </BrowserRouter>
   );

@@ -1,6 +1,9 @@
 const { Op } = require('sequelize');
 const md5 = require('md5');
 const jwt = require('jsonwebtoken');
+const path = require('path');
+const secret = require('fs')
+.readFileSync(path.join(__dirname, '../../../jwt.evaluation.key'), { encoding: 'utf-8' }).trim(); 
 
 const { User } = require('../../database/models');
 const {
@@ -13,8 +16,6 @@ const jwtConfig = {
   algorithm: 'HS256',
 };
 
-const secret = process.env.SECRET || 'e717vdd^DEp.';
-
 const checkLogin = async (email, password) => {
   const existingUser = await User.findOne({ where: { email, password } });
 
@@ -22,10 +23,11 @@ const checkLogin = async (email, password) => {
 
   const { id, name, role } = existingUser.dataValues;
 
-  return ({ id, name, email, password, role });
+  return ({ id, name, email, role });
 };
 
 const createUser = async ({ name, email, password, role }) => {
+console.log('🚀 ~ file: userService.js ~ line 29 ~ createUser ~ password', password);
   const hashPassword = md5(password);
 
   const [user, created] = await User.findOrCreate({

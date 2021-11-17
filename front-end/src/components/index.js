@@ -5,6 +5,7 @@ import ProductCard from './ProductCard';
 import ProductQty from './ProductQty';
 import ProductOrderStatus from './ProductOrderStatus';
 import ProductOrderCard from './ProductOrderCard';
+import Navbar from './Navbar';
 
 function BaseComponent() {
   const [qty, setQty] = useState(0);
@@ -65,6 +66,11 @@ function BaseComponent() {
           status="pending"
           testIdOrderStatus="idtestid"
         />
+      </div>
+      <div>
+        <Navbar userType="customer" username="murilo" />
+        <Navbar active userType="seller" username="murilo" />
+        <Navbar userType="admin" username="murilo" />
       </div>
     </div>);
 }

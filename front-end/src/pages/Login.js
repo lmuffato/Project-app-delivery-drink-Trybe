@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import paths from '../routesPaths/paths';
 import { goRoute } from '../utils/utils';
+import postLogin from '../services/requests';
 
 const Login = () => {
   const [userData, setUserData] = useState({
@@ -58,6 +59,7 @@ const Login = () => {
         <button
           type="button"
           data-testid="common_login__button-login"
+          onClick={ () => postLogin(userData) }
         >
           Login
         </button>

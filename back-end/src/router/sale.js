@@ -11,4 +11,10 @@ router.post(
   saleController.create,
 );
 
+router.get(
+  '/costumer/:id',
+  tokenValidate.verifyToken,
+  saleController.getByUserId,
+);
+
 module.exports = router;

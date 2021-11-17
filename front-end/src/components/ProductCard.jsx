@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import {
   Card,
@@ -9,9 +9,25 @@ import {
   ButtonGroup,
   TextField,
 } from '@mui/material';
+import ContextProducts from '../context/ContextProducts';
 
 function ProductCard(props) {
   const { id, name, price, url_image: image } = props;
+  const {
+    increaseProductQuantity,
+    decreaseProductQuantity,
+    setProductQuantity,
+    cartProducts,
+  } = useContext(ContextProducts);
+
+  const findQuantityInCart = (productId) => {
+    const foundProduct = cartProducts
+      .find((product) => product.id === productId);
+
+    if (!foundProduct) return 0;
+
+    return foundProduct.quantity;
+  };
 
   return (
     <Card sx={ { maxWidth: 275 } }>
@@ -43,6 +59,7 @@ function ProductCard(props) {
         <Button
           size="medium"
           data-testid={ `customer_products__button-card-rm-item-${id}` }
+          onClick={ () => decreaseProductQuantity(id) }
         >
           -
         </Button>
@@ -53,10 +70,13 @@ function ProductCard(props) {
           inputProps={ {
             'data-testid': `customer_products__input-card-quantity-${id}`,
           } }
+          onBlur={ (e) => setProductQuantity(id, +(e.target.value)) }
+          value={ findQuantityInCart(id) }
         />
         <Button
           size="medium"
           data-testid={ `customer_products__button-card-add-item-${id}` }
+          onClick={ () => increaseProductQuantity(id) }
         >
           +
         </Button>

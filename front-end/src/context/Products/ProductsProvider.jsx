@@ -10,19 +10,27 @@ export default function UserProvider({ children }) {
   useEffect(() => {
     (async () => {
       const getProducts = await fetchProducts({ token: 'xablau' });
-      setProducts(getProducts);
+      const newProducts = getProducts.map((product) => ({ ...product, count: 0 }));
+      setProducts(newProducts);
+      console.log(newProducts);
     })();
   }, []);
 
   const BRL = (price) => price
     .toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
 
-  const increment = () => {
+  const increment = (e) => {
+    products[e.target.id - 1].count += 1;
     setCount(count + 1);
   };
 
-  const decrement = () => {
+  const handleChange = (e) => {
+    e.target.value = count;
+  };
+
+  const decrement = (e) => {
     if (count > 0) {
+      products[e.target.id - 1].count -= 1;
       setCount(count - 1);
     }
   };

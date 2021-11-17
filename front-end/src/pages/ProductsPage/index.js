@@ -11,6 +11,7 @@ const ProductsPage = () => {
 
   useEffect(() => {
     const fetchProducts = async () => {
+      console.log('Aqui');
       setIsLoading(true);
       const array = await api.getProducts();
       setProducts(array);

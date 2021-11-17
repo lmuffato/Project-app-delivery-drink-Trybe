@@ -1,11 +1,10 @@
 const { sale } = require('../database/models/index');
-const saleProduct = require('./saleProductService');
+const salesProduct = require('./saleProductService');
 
 const createSale = async (data) => {
-  const cart = data.cart;
-  delete data.cart;
+  const { cart } = data;
   const newSale = await sale.create(data);
-  saleProduct.createSaleProduct(cart, newSale.id);
+  salesProduct.createSalesProduct(cart, newSale.id);
   return { status: 201, id: newSale.id };
 };
 

@@ -6,7 +6,7 @@ const getProducts = async () => {
 };
 
 const getProductId = async (name) => {
-  const prod = await product.findOne({ where: { name } })
+  const prod = await product.findOne({ where: { name } });
   return prod.id;
 };
 

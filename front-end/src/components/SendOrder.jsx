@@ -21,8 +21,6 @@ function SendOrder() {
     setAuth(myUser.token);
   }
 
-  console.log(cart);
-
   async function getSellers() {
     const sellersReq = await axios.get('http://localhost:3001/sellers');
     const allSellers = sellersReq.data;
@@ -54,7 +52,6 @@ function SendOrder() {
   }
 
   async function createSale() {
-    console.log(sellerId);
     const data = {
       cart,
       user_id: userId,

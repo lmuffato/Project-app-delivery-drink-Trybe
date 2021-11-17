@@ -7,5 +7,5 @@ module.exports = {
   login,
   user,
   product,
-  sale
+  sale,
 };

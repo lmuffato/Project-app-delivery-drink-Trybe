@@ -3,10 +3,7 @@ import PropTypes from 'prop-types';
 
 function Card({ index, strName, strThumb, strPrice }) {
   return (
-    <button
-      className="card"
-      type="button"
-    >
+    <button className="card" type="button">
       <img
         className="card-img"
         src={ strThumb }
@@ -25,6 +22,16 @@ function Card({ index, strName, strThumb, strPrice }) {
       >
         { strPrice }
       </h4>
+      <div>
+        <button type="button">+</button>
+        <input
+          type="text"
+          data-testid={ `customer_products__element-card-price-${index}` }
+          value="0"
+          disabled
+        />
+        <button type="button">-</button>
+      </div>
     </button>
   );
 }

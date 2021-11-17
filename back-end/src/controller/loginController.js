@@ -2,7 +2,6 @@ const jwt = require('jsonwebtoken');
 const fs = require('fs').promises;
 const services = require('../service');
 
-// const secret = 'senha_dificil';
 const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;

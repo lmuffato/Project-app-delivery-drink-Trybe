@@ -11,7 +11,7 @@ const HEADERS = ['Descrição', 'Quantidade', 'Valor Unitário', 'Sub-total'];
 const links = [
   {
     name: 'PRODUTOS',
-    url: '/products',
+    url: '/customer/products',
     testId: 'customer_products__element-navbar-link-products',
   },
   {

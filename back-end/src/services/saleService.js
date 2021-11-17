@@ -32,10 +32,24 @@ const postSale = async (data, user) => {
     await transaction.commit()
   
     return { id };
-  } catch (error) {
+  } catch (_error) {
     await transaction.rollback();
     return errorMap.internalError;
   }
 };
 
-module.exports = { postSale };
+const getSalesBySellerId = async (id) => {
+  try {
+    const sellerSales = await Sale.findAll({
+      where: {
+        sellerId: id
+      }
+    });
+  
+    return sellerSales
+  } catch (_error) {
+    return errorMap.internalError;
+  }
+}
+
+module.exports = { postSale, getSalesBySellerId };

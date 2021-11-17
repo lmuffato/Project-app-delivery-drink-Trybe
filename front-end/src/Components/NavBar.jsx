@@ -30,3 +30,4 @@ function Navbar() {
 }
 
 export default Navbar;
+// nos ultimos requisitos eu voltarei para deixar o nome dinamico

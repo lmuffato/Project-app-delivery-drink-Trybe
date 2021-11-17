@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import NavBar from '../components/NavBar';
 import OrderItemCard from '../components/OrderItemCard';
+import { calcCartTotal } from '../components/ultility';
 
 function CustomerCheckout() {
   const { cart } = useSelector((state) => state.product);
@@ -32,7 +33,12 @@ function CustomerCheckout() {
           }
         </tbody>
       </table>
-      <p data-testid="customer_checkout__element-order-total-price">Total: R$ 28,46</p>
+      <p data-testid="customer_checkout__element-order-total-price">
+        Total: R$
+        <span>
+          {calcCartTotal(cart).toFixed(2).replace('.', ',')}
+        </span>
+      </p>
       <form>
         <select data-testid="customer_checkout__select-seller">
           <option>Fulana Pereira</option>

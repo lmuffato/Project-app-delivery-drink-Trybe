@@ -5,6 +5,7 @@ const midleware = require('../middleware');
 
 const router = express.Router();
 
-router.post('/', midleware.token, controller.sale);
+router.post('/', midleware.token, controller.sale.createSale);
+router.get('/', controller.sale.getSales);
 
 module.exports = router;

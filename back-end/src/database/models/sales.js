@@ -11,9 +11,9 @@ module.exports = (sequelize, DataTypes) => {
     total_price: { type: DataTypes.DECIMAL(9,2) },
     delivery_address: { type: DataTypes.STRING },
     delivery_number: { type: DataTypes.STRING },
-    sala_date: { type: DataTypes.DATE },
+    sale_date: { type: DataTypes.DATE },
     status: { type: DataTypes.STRING },
-  }, { timestamps: true, tableName: 'sales' });
+  }, { underscored: false ,timestamps: false, tableName: 'sales' });
 
   Sale.associate = (models) => {
     models.Sale.belongsTo(models.User, { 

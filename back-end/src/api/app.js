@@ -5,6 +5,7 @@ const path = require('path');
 const errorHandler = require('./middlewares/errorHandler');
 const userController = require('./controllers/userController');
 const productController = require('./controllers/productController');
+const { findById } = require('./controllers/sales');
 
 const app = express();
 
@@ -25,6 +26,8 @@ app.get('/coffee', (_req, res) => res.status(418).end());
 
 app.use('/login', userController.login);
 app.use('/register', userController.register);
+
+app.use ('/sales/:id', findById)
 
 app.use(errorHandler);
 

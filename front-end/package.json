@@ -17,7 +17,9 @@
     "test:coverage:json": "npm run with-env react-scripts test -- --coverage --coverageReporters=\"json-summary\" --watchAll=false --testFailureExitCode=0 --detectOpenHandles --runInBand --forceExit",
     "eject": "npm run with-env react-scripts eject",
     "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json .",
-    "lint:styles": "stylelint **/*.css --config .stylelintrc.json --ignore-disables --allow-empty-input"
+    "lint:styles": "stylelint **/*.css --config .stylelintrc.json --ignore-disables --allow-empty-input",
+    "storybook": "start-storybook -p 6006 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "dependencies": {
     "@testing-library/jest-dom": "5.14.1",
@@ -25,13 +27,24 @@
     "@testing-library/user-event": "12.8.3",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-icons": "^4.3.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "serve": "12.0.0",
+    "styled-components": "^5.3.3",
     "web-vitals": "1.1.2"
   },
   "devDependencies": {
+    "@storybook/addon-actions": "^6.3.12",
+    "@storybook/addon-essentials": "^6.3.12",
+    "@storybook/addon-links": "^6.3.12",
+    "@storybook/node-logger": "^6.3.12",
+    "@storybook/preset-create-react-app": "^3.2.0",
+    "@storybook/react": "^6.3.12",
+    "@types/styled-components": "^5.1.15",
     "eslint-config-trybe-frontend": "1.2.1",
+    "react-styleguidist": "^11.1.7",
+    "storybook-addon-styled-component-theme": "^2.0.0",
     "stylelint": "13.13.1",
     "stylelint-config-standard": "22.0.0",
     "stylelint-order": "4.1.0"
@@ -58,6 +71,18 @@
       "reportWebVitals.js",
       "./services/renderWithRouter",
       "./services/history"
+    ]
+  },
+  "eslintConfig": {
+    "overrides": [
+      {
+        "files": [
+          "**/*.stories.*"
+        ],
+        "rules": {
+          "import/no-anonymous-default-export": "off"
+        }
+      }
     ]
   }
 }

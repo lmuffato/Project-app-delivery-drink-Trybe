@@ -4,6 +4,18 @@
   --dark-color: #1b1a21;
 }
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Inter, sans-serif;
+}
+
+.App {
+  background: rgb(27, 26, 33, 0.95);
+  min-height: 100vh;
+}
+
 input {
   border: none;
   border-radius: 5px;
@@ -33,8 +45,4 @@ button {
     border: none;
     text-decoration: underline;
   }
-}
-
-.App {
-  background: rgb(27, 26, 33, 0.95);
 }

@@ -54,8 +54,9 @@ function SendOrder() {
   }
 
   async function createSale() {
-    console.log('foitb');
+    console.log(sellerId);
     const data = {
+      cart,
       user_id: userId,
       seller_id: sellerId,
       total_price: totalPrice,
@@ -65,7 +66,6 @@ function SendOrder() {
       status: 'Pendente',
     };
     const myBody = JSON.stringify(data);
-    console.log(myBody);
     const request = await fetch('http://localhost:3001/sale', {
       method: 'POST',
       body: myBody,
@@ -74,15 +74,12 @@ function SendOrder() {
         Authorization: auth,
       },
     });
-    console.log(request);
     const saleId = await request.json();
     return saleId;
   }
 
   async function handleClick() {
-    console.log('foi');
     const saleId = await createSale();
-    console.log(saleId);
     history.push(`orders/${saleId}`);
   }
 

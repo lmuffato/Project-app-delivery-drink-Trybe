@@ -8,6 +8,7 @@ import {
   CardMedia,
   ButtonGroup,
   TextField,
+  Box,
 } from '@mui/material';
 import ContextProducts from '../context/ContextProducts';
 
@@ -23,15 +24,29 @@ function ProductCard(props) {
   return (
     <Card sx={ { maxWidth: 275 } }>
       <CardContent>
-        <Typography
-          sx={ { fontSize: 14 } }
-          color="text.secondary"
-          data-testid={ `customer_products__element-card-price-${id}` }
-          gutterBottom
+        <Box
+          sx={ {
+            display: 'flex',
+            flexDirection: 'row',
+            gap: 0.5,
+          } }
         >
-          R$
-          { price }
-        </Typography>
+          <Typography
+            sx={ { fontSize: 14 } }
+            color="text.secondary"
+            gutterBottom
+          >
+            R$
+          </Typography>
+          <Typography
+            sx={ { fontSize: 14 } }
+            color="text.secondary"
+            data-testid={ `customer_products__element-card-price-${id}` }
+            gutterBottom
+          >
+            { price }
+          </Typography>
+        </Box>
         <CardMedia
           component="img"
           height="125"

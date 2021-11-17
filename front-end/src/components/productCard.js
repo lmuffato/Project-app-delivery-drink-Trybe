@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function Card({ index, strName, strThumb, strPrice }) {
+  const commaValue = strPrice.replace(/\./g, ',');
+
   return (
 
     <div className="card" type="button">
@@ -9,7 +11,7 @@ function Card({ index, strName, strThumb, strPrice }) {
         className="card-price"
         data-testid={ `customer_products__element-card-price-${index}` }
       >
-        { strPrice }
+        { commaValue }
       </h4>
       <img
         className="card-img"

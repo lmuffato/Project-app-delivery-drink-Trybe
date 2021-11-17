@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
+import testID from '../../datatestids.json';
 import Button from '../atoms/Button';
-import ErrorMessage from '../atoms/ErrorMessage';
 import Input from '../atoms/Input';
-import loginAction from '../../utils/validations/API/fetch';
+import ErrorMessage from '../atoms/ErrorMessage';
+import { loginAction } from '../../utils/validations/API/fetch';
 import validateLogin from '../../utils/validations/joi/login';
 
 const LoginForm = () => {
@@ -19,28 +20,31 @@ const LoginForm = () => {
       [name]: value,
     });
   };
+
   const handleClickEnter = async () => {
     const token = await loginAction({ email, password });
-    console.log(token);
     if (!token) {
       setIsHidden(false);
     } else {
       history.push('/customer/products');
     }
   };
+
   const handleClickRegister = () => {
     history.push('/register');
   };
-  const errorMessageContent = () => 'Element oculto (Mensagens de erro)';
+
+  const errorMessageContent = () => 'Email/senha inválido! Verifique os dados inseridos';
+
   return (
     <form>
       <div className="children_container">
         <h3>Login</h3>
-        <h5>Welcome to Delivery App</h5>
+        <h5>Bem-vindo ao Delivery App</h5>
         <Input
           className="input-email"
           type="email"
-          data-testid="common_login__input-email"
+          data-testid={ testID[1] }
           name="email"
           value={ email }
           onChange={ handleChange }
@@ -48,30 +52,30 @@ const LoginForm = () => {
         />
         <Input
           className="inputEye"
-          data-testid="common_login__input-password"
+          data-testid={ testID[2] }
           name="password"
           value={ password }
           onChange={ handleChange }
-          placeholder="Password"
+          placeholder="Senha"
         />
         <Button
           className="btn-login"
           type="button"
-          data-testid="common_login__button-login"
-          enabled={ !validateLogin.validate({ email, password }).error }
+          data-testid={ testID[3] }
+          disabled={ validateLogin.validate({ email, password }).error }
           onClick={ handleClickEnter }
-          text="ENTRAR"
+          text="LOGIN"
         />
         <Button
-          className="btn-login"
+          className="btn-register"
           type="button"
-          data-testid="common_login__button-register"
+          data-testid={ testID[4] }
           onClick={ handleClickRegister }
-          text="Ainda não tenho conta"
+          text="Não tenho conta"
         />
         <ErrorMessage
           className="error-message-login"
-          data-testid="common_login__element-invalid-email"
+          data-testid={ testID[5] }
           text={ errorMessageContent() }
           hidden={ isHidden }
         />

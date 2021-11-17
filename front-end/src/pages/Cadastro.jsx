@@ -12,8 +12,6 @@ export default function Cadastro() {
   const [redirect, setRedirect] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  // const [disableButton, setDisableButton] = useState(true);
-
   const handleChange = ({ target }, handle) => {
     const { value } = target;
     handle(value);
@@ -43,6 +41,9 @@ export default function Cadastro() {
       console.error(error.response.data.message);
       resetInputs();
     }
+    setName('');
+    setUser('');
+    setPassword('');
   };
   const verifyName = (n) => {
     const minChar = 12;

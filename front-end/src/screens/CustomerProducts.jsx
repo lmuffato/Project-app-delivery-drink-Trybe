@@ -17,14 +17,14 @@ function CustomerProducts() {
   const { findProducts, allProducts: products } = useContext(ContextProducts);
   const [loading, setLoading] = useState(false);
 
-  useEffect(async () => {
+  useEffect(() => {
     setLoading(true);
     async function getProducts() {
       await findProducts();
     }
     getProducts();
     setLoading(false);
-  }, []);
+  }, [findProducts]);
 
   const renderProductCard = () => products.map((product, index) => (
     <ProductCard key={ index } { ...product } />

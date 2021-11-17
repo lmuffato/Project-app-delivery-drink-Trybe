@@ -7,8 +7,7 @@ import Table from '../Components/Table';
 
 const HEADERS = ['Descrição', 'Quantidade', 'Valor Unitário', 'Sub-total'];
 
-// Adaptar essas urls conforme a aplicação for implementada
-const links = [
+const LINK = [
   {
     name: 'PRODUTOS',
     url: '/customer/products',
@@ -79,7 +78,7 @@ function Checkout() {
 
   return (
     <>
-      <Header links={ links } />
+      <Header links={ LINK } />
       <div>
         Finalizar Pedido
         <Table
@@ -128,7 +127,12 @@ function Checkout() {
           onClick={ async () => {
             const payload = createSalePayload(user.id, sellers);
 
-            const { data: id } = await axios.post('/sales', payload);
+            const { data: id } = await axios.post(
+              '/sales',
+              payload, { headers: { Authorization: user.token },
+              },
+            );
+
             setCart([]);
 
             return <Redirect to={ `/customer/orders/${id}` } />;

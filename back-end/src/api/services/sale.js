@@ -14,6 +14,7 @@ const create = async ({ cart, ...sale }) => {
   
   cart.forEach(async ({ productId, quantity }) =>
     SalesProduct.create({ saleId: data.id, productId, quantity }));
+    
   return data;
 };
 

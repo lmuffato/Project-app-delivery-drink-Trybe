@@ -30,9 +30,9 @@ io.on('connection', (socket) => {
 app.get('/coffee', (_req, res) => res.status(418).end());
 
 app.use('/login', login);
-app.use('/user', user);
-app.use('/product', product);
-app.use('/sale', sale);
+app.use('/users', user);
+app.use('/products', product);
+app.use('/sales', sale);
 
 app.use(errorMiddleware);
 

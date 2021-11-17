@@ -14,13 +14,19 @@ const create = async ({ name, email, password, role = 'customer' }) => {
 };
 
 const findAll = async () => {
-  const data = await User.findAll();
+  const data = await User.findAll({
+    attributes: {
+        exclude: ['password']
+    }
+  });
 
   return data;
 };
 
 const findOne = async ({ id }) => {
-  const data = await User.findOne({ where: { id } });
+  const data = await User.findOne({ where: { id }, attributes: {
+    exclude: ['password']
+  }});
 
   if (!data) throw err('notFound', userNotFound);
 

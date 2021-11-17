@@ -25,9 +25,11 @@ function App() {
         exact
         path="/customer/products"
         element={
-          <ProductsProvider>
-            <Products />
-          </ProductsProvider>
+          <LoginProvider>
+            <ProductsProvider>
+              <Products />
+            </ProductsProvider>
+          </LoginProvider>
         }
       />
     </Routes>

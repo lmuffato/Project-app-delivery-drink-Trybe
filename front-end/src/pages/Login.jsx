@@ -1,9 +1,7 @@
-/* eslint-disable react/jsx-max-depth */
 import React, { useState } from 'react';
 import { useDispatch, useStore } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
-import { LockClosedIcon } from '@heroicons/react/solid';
 import { userLogin } from '../redux/userSlice';
 
 export default function Login() {
@@ -100,13 +98,6 @@ export default function Login() {
             data-testid="common_login__button-login"
             onClick={ handleLogin }
           >
-            <span className="absolute left-0 inset-y-0 flex items-center pl-3">
-              <LockClosedIcon
-                className="h-5 w-5 text-indigo-500
-                group-hover:text-indigo-400"
-                aria-hidden="true"
-              />
-            </span>
             <p>
               Login
             </p>

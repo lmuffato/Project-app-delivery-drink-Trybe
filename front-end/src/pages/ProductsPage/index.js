@@ -9,12 +9,11 @@ const ProductsPage = () => {
   const { products, setProducts } = useContext(ContextProduct);
   const [isLoading, setIsLoading] = React.useState(false);
 
-  console.log(products);
-  // console.log(isLoading);
   useEffect(() => {
     const fetchProducts = async () => {
       setIsLoading(true);
-      const array = await api.getProducts();
+      const { token } = JSON.parse(localStorage.getItem('user'));
+      const array = await api.getProducts(token);
       setProducts(array);
       setIsLoading(false);
     };

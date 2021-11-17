@@ -13,8 +13,12 @@ export default {
     const { data } = await api.post('/registration', { name, email, password });
     return data;
   },
-  getProducts: async () => {
-    const { data } = await api.get('/products');
+  getProducts: async (token) => {
+    const { data } = await api.get('/products', {
+      headers: {
+        Authorization: token,
+      },
+    });
     return data;
   },
 };

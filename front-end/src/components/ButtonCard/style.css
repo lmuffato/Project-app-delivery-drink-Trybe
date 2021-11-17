@@ -1,3 +1,36 @@
 .buttonCardContainer {
+  align-items: center;
   display: flex;
+  height: 40px;
+  justify-content: space-evenly;
+  width: 120px;
+}
+
+button {
+  align-items: center;
+  display: flex;
+  border: none;
+  cursor: pointer;
+  height: 90%;
+  justify-content: center;
+  transition: 0.3s;
+}
+
+button:hover {
+  filter: brightness(0.8);
+}
+
+.buttonCardContainer > div {
+  align-items: center;
+  background: white;
+  border-radius: 3px;
+  color: #ed7c2b;
+  display: flex;
+  font-weight: 700;
+  justify-content: center;
+  width: 30px;
+}
+
+button > svg {
+  font-size: 20px;
 }

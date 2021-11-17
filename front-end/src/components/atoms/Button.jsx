@@ -3,7 +3,7 @@ import { string, bool, func, shape } from 'prop-types';
 
 const Button = ({
   className,
-  enabled = false,
+  disabled = false,
   onClick,
   'data-testid': testid,
   text,
@@ -12,7 +12,7 @@ const Button = ({
   <button
     className={ className }
     data-testid={ testid }
-    disabled={ !enabled }
+    disabled={ disabled }
     onClick={ onClick }
     type={ typeIsSubmit ? 'submit' : 'button' }
   >

@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Status from './status';
 
 export default function CardSale({ sale }) {
-  const testIdPart = window.location.href.includes('seller')
+  const location = useLocation().pathname;
+  const testIdPart = location.includes('seller')
     ? 'seller_orders' : 'customer_products';
-  const url = window.location.href.includes('seller')
+  const url = location.includes('seller')
     ? 'seller' : 'costumer';
   return (
     <Link to={ `localhost:3000/${url}/orders/${sale.id}` }>
@@ -28,7 +29,7 @@ export default function CardSale({ sale }) {
 }
 
 CardSale.propTypes = {
-  sale: PropTypes.elementType({
+  sale: PropTypes.objectOf({
     id: PropTypes.number,
     status: PropTypes.string,
     sale_date: PropTypes.string,

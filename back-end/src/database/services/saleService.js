@@ -1,5 +1,5 @@
 const { Sale, SalesProducts } = require('../models');
-const { HTTP_CREATED, HTTP_CONFLICT, HTTP_OK_STATUS } = require('../../status');
+const { HTTP_CREATED, HTTP_CONFLICT, HTTP_OK_STATUS, HTTP_NOT_FOUND } = require('../../status');
 
 
 async function create(body) {
@@ -18,6 +18,20 @@ async function create(body) {
   return { code: HTTP_CREATED };
 };
 
+async function getById(id) {
+  const order = await Sale.findOne({
+    where: { id },
+    include: [
+      { model: SalesProducts, as:'products', through: { attributes: [] } },
+    ],
+  });
+
+  if (!order) return { code: HTTP_NOT_FOUND, error: 'Sale does not exist' };
+
+  return { data: order, code: HTTP_OK_STATUS };
+};
+
 module.exports = {
   create,
+  getById,
 };

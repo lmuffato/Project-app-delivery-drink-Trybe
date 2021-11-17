@@ -62,10 +62,11 @@ const login = async ({ email, password }) => {
   if (!loginCheck) {
     return ({ status: 404, data: INCORRECT_USERNAME_OR_PASSWORD });
   }
+  const { name, email, role } = loginCheck;
 
   const token = jwt.sign(loginCheck, secret, jwtConfig);
 
-  return ({ status: 200, token });
+  return ({ status: 200, token, name, email, role });
 };
 
 const findAllUsers = async () => {

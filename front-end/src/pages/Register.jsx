@@ -1,12 +1,28 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+
 import Button from '../Components/ButtonTypeButton';
 import validateEmail from '../validations/validateEmail';
 
+import { createNewUser } from '../services/endpointsAPI';
+
 export default function Register() {
+  const history = useHistory();
+
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [disableRegisterButton, setDisableRegisterButton] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(false);
+
+  const clickCadastrarButton = async () => {
+    try {
+      await createNewUser(name, email, password);
+      history.push('/customer/products');
+    } catch (error) {
+      setErrorMessage(true);
+    }
+  };
 
   const handleChange = (target) => {
     const { id, value } = target;
@@ -70,6 +86,7 @@ export default function Register() {
             id: 'register-button',
             disabled: !disableRegisterButton,
             dataTestId: 'common_register__button-register',
+            onClick: { clickCadastrarButton },
             value: 'CADASTRAR' } }
         />
       </form>

@@ -23,7 +23,6 @@ export default function Login() {
   const clickLoginButton = async () => {
     try {
       const login = await doLogin(email, password);
-      console.log(login);
       setUserData(login);
       history.push('/customer/products');
     } catch (error) {
@@ -35,7 +34,7 @@ export default function Login() {
     const validateFields = () => {
       const sixDigits = 6;
       const regex = /^[\w.]+@[a-z]+\.\w{2,3}$/g;
-      const resultButton = password.length > sixDigits && regex.test(email);
+      const resultButton = password.length >= sixDigits && regex.test(email);
       setLoginButton(resultButton);
     };
     validateFields();

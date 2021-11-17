@@ -5,7 +5,7 @@ export function storeUser(data) {
 
 export function verifyUserExistance() {
   const user = localStorage.getItem('user');
-  if(!user) return false;
+  if (!user) return false;
   return JSON.parse(user);
 }
 

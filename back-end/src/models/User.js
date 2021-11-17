@@ -15,7 +15,6 @@ const login = async ({ email, password }) => {
   }
 };
 
-
 const createUser = async ({ name, email, password, type }) => {
   try {
     const newUser = await user.create({ name, email, password, role: type });
@@ -23,16 +22,11 @@ const createUser = async ({ name, email, password, type }) => {
   } catch (e) {
     return { err: e.message };
   }
-}
+};
 
 const findUser = async (email) => {
   const userFound = await user.findOne({ where: { email } });
   return userFound;
-};
-
-const createUser = async ({ name, email, password }) => {
-  const newUser = await user.create({ name, email, password });
-  return newUser;
 };
 
 const listUsers = async (role) => (

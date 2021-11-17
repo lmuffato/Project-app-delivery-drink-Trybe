@@ -19,7 +19,6 @@ async function create(body) {
 };
 
 async function getByUserId(id) {
-  console.log('Cheguei aqui');
   const order = await Sale.findAll({
     where: { user_id: id },
     include: [
@@ -29,12 +28,24 @@ async function getByUserId(id) {
 
   if (!order) return { code: HTTP_NOT_FOUND, error: 'Sale does not exist' };
 
-  console.log('Entrei aqui no final')
-
   return { data: order, code: HTTP_OK_STATUS };
 };
+
+async function getByOrderId(id) {
+  const order = await Sale.findOne({
+    where: { id },
+    include: [
+      { model: Product, as:'products', through: { attributes: [] } },
+    ],
+  });
+
+  if (!order) return { code: HTTP_NOT_FOUND, error: 'Sale does not exist' };
+
+  return { data: order, code: HTTP_OK_STATUS };
+}
 
 module.exports = {
   create,
   getByUserId,
+  getByOrderId,
 };

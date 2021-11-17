@@ -22,8 +22,7 @@ async function getByUserId(id) {
   const order = await Sale.findAll({
     where: { user_id: id },
     include: [
-      { model: Product, as:'products', through: { attributes: ['quantity'], as: 'productQuantity' } },
-      // { model: Product, required: true, right: true, as:'products', through: { attributes: ['quantity'] }},
+      { model: Product, as:'products', through: { attributes: ['quantity'], as: 'quantityTotal' } },
     ],
   });
 
@@ -36,7 +35,7 @@ async function getByOrderId(id) {
   const order = await Sale.findOne({
     where: { id },
     include: [
-      { model: Product, as:'products', through: { attributes: ['quantity'], as: 'productQuantity' } },
+      { model: Product, as:'products', through: { attributes: ['quantity'], as: 'quantityTotal' } },
     ],
   });
 

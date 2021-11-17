@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   User.associate = (models) => {
-    User.hasOne(models.Sale,
+    User.hasMany(models.Sale, // foi alterado de 'hasOne' para 'hasMany'
       { foreignKey: 'seller_id', as: 'sellerId' });
   };
 

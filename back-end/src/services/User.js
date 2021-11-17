@@ -40,7 +40,17 @@ const createUser = async (name, email, password) => {
   return { newUser };
 };
 
+const listUsers = async (orders, payload, role) => {
+  try {
+    const users = await User.listUsers(orders, payload, role);
+    return users;
+  } catch (error) {
+    return { err: error.message };
+  }
+};
+
 module.exports = {
   login,
   createUser,
+  listUsers,
 };

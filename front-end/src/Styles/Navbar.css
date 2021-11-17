@@ -10,8 +10,8 @@
 .icons-container {
   align-items: center;
   display: flex;
-  list-style: none;
   justify-content: space-between;
+  list-style: none;
   width: 90vw;
 }
 

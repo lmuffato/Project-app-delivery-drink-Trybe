@@ -13,6 +13,7 @@ const secret = 'secret_key';
 
 const getUserbyEmail = async (email) => {
   const myUser = await user.findOne({ where: { email } });
+  console.log(myUser);
   if (!myUser) {
     return { status: 404, message: 'email não cadastrado' };
   }
@@ -30,22 +31,20 @@ const register = async ({ name, email, password, role }) => {
   const { error } = RegisterSchema.validate({ name, email, password });
   
   if (error) {
-  return { status: 422, message: 'Email already registered.' };
+  return { status: 422, message: 'Invalid Data' };
   }
 
-  const { status } = await getUserbyEmail(email);
-  
-  if (status === 200) {
-   return { status: 409, message: 'Email already registered.' };
+  const findUser = await user.findOne({ where: { email } });
+ 
+  if (findUser) {
+    return { code: 409, message: 'Email Already Registered' };
   }
   
   const cryptPassword = md5(password);
   const newUser = await user.create({ 
     name, email, password: cryptPassword, role: role || 'customer' });
 
-  return {
-    user: newUser,
-  };
+  return newUser;
 };
 
 const getSelers = async () => {

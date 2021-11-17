@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 function Signup() {
@@ -25,77 +26,73 @@ function Signup() {
   function handleLocalState(event) {
     const { name, value } = event.target;
     setSignupValues((prevState) => ({ ...prevState, [name]: value }));
-    console.log(signupValues);
   }
 
+  const history = useHistory();
   async function registerUser() {
-    try {
-      const { name, email, password } = signupValues;
-      const request = await axios({
-        method: 'post',
-        url: 'http://localhost:3001/user',
-        data: {
-          name,
-          email,
-          password,
-        },
-      });
-      const { data } = request;
-      console.log(request);
-      localStorage.setItem('user', JSON.stringify(data));
-    } catch (e) {
+    axios.post('http://localhost:3001/user', {
+      name: signupValues.name,
+      email: signupValues.email,
+      password: signupValues.password,
+    }).then((response) => {
+      localStorage.setItem('user', JSON.stringify(response));
+      history.push('/customer/products');
+    }).catch((e) => {
       console.log(e);
-      setErrorMessage('error');
-    }
+      setErrorMessage('Usuario já cadastrado');
+    });
   }
+
   return (
     <div>
-      <label htmlFor="name">
-        Nome
-        <input
-          type="text"
-          name="name"
-          data-testid="common_register__input-name"
-          value={ signupValues.name }
-          onChange={ (event) => handleLocalState(event) }
-        />
-      </label>
+      <div>
+        <label htmlFor="name">
+          Nome
+          <input
+            type="text"
+            name="name"
+            data-testid="common_register__input-name"
+            value={ signupValues.name }
+            onChange={ (event) => handleLocalState(event) }
+          />
+        </label>
 
-      <label htmlFor="email">
-        Email
-        <input
-          type="text"
-          name="email"
-          data-testid="common_register__input-email"
-          value={ signupValues.email }
-          onChange={ (event) => handleLocalState(event) }
-        />
-      </label>
+        <label htmlFor="email">
+          Email
+          <input
+            type="text"
+            name="email"
+            data-testid="common_register__input-email"
+            value={ signupValues.email }
+            onChange={ (event) => handleLocalState(event) }
+          />
+        </label>
 
-      <label htmlFor="password">
-        <span>Senha</span>
-        <input
-          type="text"
-          name="password"
-          data-testid="common_register__input-password"
-          value={ signupValues.password }
-          onChange={ (event) => handleLocalState(event) }
-        />
-      </label>
+        <label htmlFor="password">
+          <span>Senha</span>
+          <input
+            type="password"
+            name="password"
+            data-testid="common_register__input-password"
+            value={ signupValues.password }
+            onChange={ (event) => handleLocalState(event) }
+          />
+        </label>
 
-      <button
-        type="button"
-        data-testid="common_register__button-register"
-        disabled={ disableBtn }
-        onClick={ registerUser }
-      >
-        Cadastrar
-      </button>
-      <span
-        data-testid="common_register__element-invalid_register"
-      >
-        {errorMessage}
-      </span>
+        <button
+          type="button"
+          data-testid="common_register__button-register"
+          disabled={ disableBtn }
+          onClick={ registerUser }
+        >
+          Cadastrar
+        </button>
+        <span
+          data-testid="common_register__element-invalid_register"
+        >
+          {errorMessage}
+        </span>
+      </div>
     </div>
   );
 }

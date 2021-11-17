@@ -8,12 +8,17 @@ const getUserbyEmail = async (req, res) => {
   };
 
 const register = async (req, res) => {
+  try {
     const { name, email, password, role } = req.body;
-  
     const response = await User.register({ name, email, password, role });
-  
+    if (response.message) {
+      return res.status(response.code).json({ message: response.message });
+    }
     return res.status(201).json(response);
-  };
+  } catch (e) {
+    return res.status(409).json({ message: e.message });
+  }
+};
 
   module.exports = {
       getUserbyEmail,

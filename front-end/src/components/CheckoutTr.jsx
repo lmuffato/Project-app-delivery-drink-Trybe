@@ -34,7 +34,7 @@ function CheckoutTr({ item, index }) {
       </td>
       <td data-testid={ `customer_checkout__element-order-table-sub-total-${index}` }>
         R$
-        <span>{ subTotal.toString().replace('.', ',') }</span>
+        <span>{ subTotal.toFixed(2).toString().replace('.', ',') }</span>
       </td>
       <td>
         <button

@@ -16,17 +16,18 @@ const create = async ({ name, email, password, role = 'customer' }) => {
 const findAll = async () => {
   const data = await User.findAll({
     attributes: {
-        exclude: ['password']
-    }
+        exclude: ['password'],
+    },
   });
 
   return data;
 };
 
 const findOne = async ({ id }) => {
-  const data = await User.findOne({ where: { id }, attributes: {
-    exclude: ['password']
-  }});
+  const data = await User.findOne({ where: { id }, 
+    attributes: {
+      exclude: ['password'],
+  } });
 
   if (!data) throw err('notFound', userNotFound);
 

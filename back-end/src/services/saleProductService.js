@@ -4,7 +4,9 @@ const Product = require('./productsService');
 const createSalesProduct = async (cart, saleId) => {
   const cartData = await cart.map(async (prod) => {
     const prodId = await Product.getProductId(prod.name);
-    return { product_id: prodId, sale_id: saleId, quantity: prod.quantity };
+    const productId = 'product_id';
+    const saleIdKey = 'sale_id';
+    return { [productId]: prodId, [saleIdKey]: saleId, quantity: prod.quantity };
   });
   const test = await Promise.all(cartData);
   test.forEach(async (data) => {

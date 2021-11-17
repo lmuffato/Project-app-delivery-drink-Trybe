@@ -3,7 +3,7 @@ import React from 'react';
 function ErrorRegister() {
   return (
     <div>
-      <p data-testid="common_login__element-invalid-email">
+      <p data-testid="common_register__element-invalid_register ">
         Nome e/ou email já cadastrado
       </p>
     </div>

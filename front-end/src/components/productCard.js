@@ -6,16 +6,25 @@ function Card({ index, strName, strThumb, strPrice }) {
     <button
       className="card"
       type="button"
-      data-testid={ `card-id-${index}` }
     >
       <img
         className="card-img"
         src={ strThumb }
-        data-testid={ `${index}-card-img` }
+        data-testid={ ` customer_products__img-card-bg-image-${index}` }
         alt="foto da receita"
       />
-      <h2 className="card-title" data-testid={ `card-title-${index}` }>{ strName }</h2>
-      <h4 className="card-price" data-testid={ `card-price-${index}` }>{ strPrice }</h4>
+      <h2
+        className="card-title"
+        data-testid={ `customer_products__element-card-title-${index}` }
+      >
+        { strName }
+      </h2>
+      <h4
+        className="card-price"
+        data-testid={ `customer_products__element-card-price-${index}` }
+      >
+        { strPrice }
+      </h4>
     </button>
   );
 }

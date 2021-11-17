@@ -4,24 +4,24 @@
  * @return
  */
 module.exports = (sequelize, _DataTypes) => {
-  const productsSale = sequelize.define(
-    "productsSale",
+  const ProductsSale = sequelize.define(
+    "ProductsSale",
     {},
     { timestamps: false }
   );
-  productsSale.associate = ({ sales, products }) => {
-    products.belongsToMany(sales, {
+  ProductsSale.associate = ({ Sale, Product }) => {
+    Product.belongsToMany(Sale, {
       as: "products",
-      through: productsSale,
+      through: ProductsSale,
       foreignKey: "productId",
       otherKey: "saleId",
     });
-    sales.belongsToMany(products, {
+    Sale.belongsToMany(Product, {
       as: "sales",
-      through: productsSale,
+      through: ProductsSale,
       foreignKey: "saleId",
       otherKey: "productId",
     });
   };
-  return productsSale;
+  return ProductsSale;
 };

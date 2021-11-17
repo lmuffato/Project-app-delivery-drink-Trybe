@@ -4,8 +4,8 @@
  * @return
  */
 module.exports = (sequelize, DataTypes) => {
-  const users = sequelize.define(
-    "users",
+  const User = sequelize.define(
+    "User",
     {
       id: {
         type: DataTypes.INTEGER,
@@ -20,8 +20,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     { tableName: 'users', timestamps: false }
   );
-  users.associate = ( { sales } ) => {
-    users.hasMany(sales);
+  User.associate = ( { Sale } ) => {
+    User.hasMany(Sale);
   };
-  return users;
+  return User;
 };

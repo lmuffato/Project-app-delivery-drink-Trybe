@@ -10,6 +10,7 @@ export default function Cadastro() {
   const [password, setPassword] = useState('');
   const [disable, setDisable] = useState(true);
   const [redirect, setRedirect] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   // const [disableButton, setDisableButton] = useState(true);
 
@@ -36,11 +37,11 @@ export default function Cadastro() {
         responseType: 'json',
       });
       console.log(response);
-      console.log(md5(password));
       setRedirect(true);
     } catch (error) {
+      setErrorMessage(error.response.data.message);
+      console.error(error.response.data.message);
       resetInputs();
-      console.error(error);
     }
   };
   const verifyName = (n) => {
@@ -63,9 +64,6 @@ export default function Cadastro() {
     return true;
   };
   useEffect(() => {
-    console.log(verifyName(name));
-    console.log(verifyPassword(password));
-    console.log(verifyUser(user));
     if (verifyName(name) && verifyPassword(password) && verifyUser(user)) {
       setDisable(false);
     }
@@ -108,6 +106,7 @@ export default function Cadastro() {
           CADASTRAR
         </button>
         {redirect ? <Redirect to="/customer/products" /> : null}
+        <p data-testid="common_register__element-invalid_register">{errorMessage}</p>
       </form>
     </div>
   );

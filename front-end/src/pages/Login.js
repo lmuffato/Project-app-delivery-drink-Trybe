@@ -45,6 +45,11 @@ function Login() {
     }
   };
 
+  const signUpRedirect = () => {
+    const path = 'register';
+    history.push(path);
+  };
+
   return (
     <div>
       <input
@@ -75,7 +80,7 @@ function Login() {
       <button
         type="button"
         data-testid="common_login__button-register"
-        // onClick={ () => () }
+        onClick={ signUpRedirect }
       >
         Registrar-se
       </button>

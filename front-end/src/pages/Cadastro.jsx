@@ -32,7 +32,6 @@ export default function Cadastro() {
         },
         responseType: 'json',
       });
-      console.log(response.data);
       setRedirect(true);
     } catch (error) {
       resetInputs();
@@ -62,9 +61,6 @@ export default function Cadastro() {
     return true;
   };
   useEffect(() => {
-    console.log(verifyName(name));
-    console.log(verifyPassword(password));
-    console.log(verifyUser(user));
     if (verifyName(name) && verifyPassword(password) && verifyUser(user)) {
       setDisable(false);
     }

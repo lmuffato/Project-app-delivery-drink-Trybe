@@ -28,7 +28,6 @@ export default function Produtos() {
     <div>
       <h1>Produtos</h1>
       {lodaing ? <p>Loading....</p> : products.map((product) => {
-        console.log(product);
         return <img key={ product.id } alt="productImg" src={ product.url_image } />;
       })}
     </div>

@@ -4,7 +4,7 @@ import ProductsContext from '../../context/Products/ProductsContext';
 
 export default function ProductCard() {
   const {
-    count,
+    // count,
     increment,
     decrement,
     products,
@@ -42,14 +42,14 @@ export default function ProductCard() {
             data-testid="customer_products__button-card-add-item"
             className="btn-decrement"
             type="button"
-            onClick={ () => decrement() }
+            onClick={ (e) => decrement(e) }
           >
             -
           </button>
           <input
             id={ prod.id }
             className="card-header counter"
-            value={ count }
+            value={ prod.count }
             onChange={ (e) => handleChange(e) }
             data-testid="customer_products__input-card-quantity"
           />

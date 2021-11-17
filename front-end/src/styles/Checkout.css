@@ -1,3 +1,7 @@
+.checkout-order {
+  padding-top: 130px;
+}
+
 .checkout-order, .checkout-details {
   align-items: center;
   display: flex;
@@ -112,7 +116,7 @@ td {
   cursor: pointer;
   font-size: 1.5rem;
   font-weight: 700;
-  margin: 15px 0;
+  margin: 35px 0;
   padding: 15px 50px;
   text-transform: uppercase;
 }

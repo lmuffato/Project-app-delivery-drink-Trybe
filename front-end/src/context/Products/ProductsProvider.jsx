@@ -4,13 +4,15 @@ import ProductsContext from './ProductsContext';
 import { fetchProducts } from '../../utils/API/fetch';
 
 export default function UserProvider({ children }) {
-  const [count, setCount] = useState(1);
+  const [count, setCount] = useState(0);
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
     (async () => {
       const getProducts = await fetchProducts({ token: 'xablau' });
-      setProducts(getProducts);
+      const newProducts = getProducts.map((product) => ({ ...product, count: 0 }));
+      setProducts(newProducts);
+      console.log(newProducts);
     })();
   }, []);
 
@@ -18,7 +20,7 @@ export default function UserProvider({ children }) {
     .toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
 
   const increment = (e) => {
-    console.log(e.target);
+    products[e.target.id - 1].count += 1;
     setCount(count + 1);
   };
 
@@ -26,8 +28,9 @@ export default function UserProvider({ children }) {
     e.target.value = count;
   };
 
-  const decrement = () => {
-    if (count > 1) {
+  const decrement = (e) => {
+    if (count > 0) {
+      products[e.target.id - 1].count -= 1;
       setCount(count - 1);
     }
   };

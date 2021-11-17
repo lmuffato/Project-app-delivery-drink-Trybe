@@ -1,5 +1,5 @@
 import React from 'react';
-import CardProducts from '../components/CardProducts';
+import CardProducts from '../Components/CardProducts';
 import NavBar from '../components/NavBar';
 
 function Products() {

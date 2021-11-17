@@ -16,7 +16,7 @@ function CheckoutTr({ item, index }) {
       <td
         data-testid={ `customer_checkout__element-order-table-item-number-${index}` }
       >
-        { index }
+        { index + 1 }
       </td>
       <td
         data-testid={ `customer_checkout__element-order-table-name-${index}` }

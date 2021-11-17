@@ -1,10 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import ErrorLogin from '../Components/ErrorLogin';
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loginButton, setLoginButton] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(false);
+
+  const toggleErrorMessage = (user) => {
+    if (!user.password || !user.email) {
+      setErrorMessage(true);
+    }
+  };
 
   useEffect(() => {
     const validateFields = () => {
@@ -44,6 +52,7 @@ export default function Login() {
         <button
           variant="primary"
           disabled={ !loginButton }
+          onClick={ ({ target }) => toggleErrorMessage(target.value) }
           data-testid="common_login__button-login"
           type="button"
         >
@@ -60,7 +69,7 @@ export default function Login() {
           </button>
         </Link>
       </form>
+      { errorMessage ? <ErrorLogin /> : ''}
     </div>
   );
 }
-// teste github.

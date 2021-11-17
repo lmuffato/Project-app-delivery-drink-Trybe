@@ -3,19 +3,35 @@ import PropTypes from 'prop-types';
 
 function Card({ index, strName, strThumb, strPrice }) {
   return (
-    <button
-      className="card"
-      type="button"
-      data-testid={ `card-id-${index}` }
-    >
+    <button className="card" type="button">
       <img
         className="card-img"
         src={ strThumb }
-        data-testid={ `${index}-card-img` }
+        data-testid={ ` customer_products__img-card-bg-image-${index}` }
         alt="foto da receita"
       />
-      <h2 className="card-title" data-testid={ `card-title-${index}` }>{ strName }</h2>
-      <h4 className="card-price" data-testid={ `card-price-${index}` }>{ strPrice }</h4>
+      <h2
+        className="card-title"
+        data-testid={ `customer_products__element-card-title-${index}` }
+      >
+        { strName }
+      </h2>
+      <h4
+        className="card-price"
+        data-testid={ `customer_products__element-card-price-${index}` }
+      >
+        { strPrice }
+      </h4>
+      <div>
+        <input type="button" />
+        <input
+          type="text"
+          data-testid={ `customer_products__element-card-price-${index}` }
+          value="0"
+          disabled
+        />
+        <input type="button" />
+      </div>
     </button>
   );
 }

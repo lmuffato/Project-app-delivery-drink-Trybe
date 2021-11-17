@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Redirect } from 'react-router';
 
 const axios = require('axios').default;
 
@@ -6,19 +7,23 @@ export default function Cadastro() {
   const [name, setName] = useState('');
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
-
-  // const [disableButton, setDisableButton] = useState(true);
+  const [disable, setDisable] = useState(true);
+  const [redirect, setRedirect] = useState(false);
 
   const handleChange = ({ target }, handle) => {
     const { value } = target;
     handle(value);
   };
-
+  const resetInputs = () => {
+    setName('');
+    setPassword('');
+    setUser('');
+  };
   const handleRegister = async () => {
     try {
-      const response = await axios({
+      await axios({
         method: 'post',
-        url: 'http://localhost:3001/users/',
+        url: 'http://localhost:3001/users',
         data: {
           name,
           password,
@@ -27,11 +32,39 @@ export default function Cadastro() {
         },
         responseType: 'json',
       });
-      console.log(response.data);
+      setRedirect(true);
     } catch (error) {
+      resetInputs();
       console.error(error);
     }
+    setName('');
+    setUser('');
+    setPassword('');
   };
+  const verifyName = (n) => {
+    const minChar = 12;
+    if (n.length < minChar) {
+      return false;
+    }
+    return true;
+  };
+  const verifyUser = (email) => {
+    const emailRegex = RegExp(
+      /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+    );
+    if (emailRegex.test(email)) return true;
+    return false;
+  };
+  const verifyPassword = (pass) => {
+    const minPass = 6;
+    if (pass.length < minPass) return false;
+    return true;
+  };
+  useEffect(() => {
+    if (verifyName(name) && verifyPassword(password) && verifyUser(user)) {
+      setDisable(false);
+    }
+  }, [name, user, password]);
 
   return (
     <div>
@@ -39,7 +72,7 @@ export default function Cadastro() {
       <form>
         <input
           type="text"
-          data-testid="common_register__element-name"
+          data-testid="common_register__input-name"
           placeholder="Name"
           name="email"
           value={ name }
@@ -47,7 +80,7 @@ export default function Cadastro() {
         />
         <input
           type="text"
-          data-testid="common_register__element-email"
+          data-testid="common_register__input-email"
           placeholder="Email"
           name="email"
           value={ user }
@@ -55,7 +88,7 @@ export default function Cadastro() {
         />
         <input
           type="password"
-          data-testid="common_register__element-password"
+          data-testid="common_register__input-password"
           placeholder="Senha"
           value={ password }
           onChange={ (e) => handleChange(e, setPassword) }
@@ -63,11 +96,13 @@ export default function Cadastro() {
         />
         <button
           type="button"
-          data-testid="common_register__element-register"
+          disabled={ disable }
+          data-testid="common_register__button-register"
           onClick={ () => handleRegister() }
         >
           CADASTRAR
         </button>
+        {redirect ? <Redirect to="/customer/products" /> : null}
       </form>
     </div>
   );

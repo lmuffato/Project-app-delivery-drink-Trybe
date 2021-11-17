@@ -1,5 +1,5 @@
 const { StatusCodes: { CONFLICT, BAD_REQUEST, NOT_FOUND } } = require('http-status-codes');
-const { users } = require('../../database/models');
+const { User: users } = require('../../database/models');
 const { userSchema } = require('../validations/schema');
 
 const validUser = async (req, _res, next) => {

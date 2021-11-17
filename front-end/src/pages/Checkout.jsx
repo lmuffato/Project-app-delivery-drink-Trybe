@@ -5,6 +5,8 @@ import UserContext from '../Contexts/User/userContext';
 import Header from '../Components/Header';
 import Table from '../Components/Table';
 
+import { getSellers } from '../utils/Data';
+
 const HEADERS = ['Descrição', 'Quantidade', 'Valor Unitário', 'Sub-total'];
 
 const LINK = [
@@ -35,7 +37,7 @@ const calculeTotal = (cart) => cart.reduce((acc, cur) => {
 
 const formatList = (cart) => cart.map((item) => calculeSubTotalPrice(item));
 
-const createSalePayload = (userId, Sellers) => {
+const createSalePayload = (userId, Sellers, cart) => {
   const street = document.querySelector('#adress').value;
   const number = document.querySelector('#number').value;
   const seller = document.querySelector('#seller').value;
@@ -50,12 +52,13 @@ const createSalePayload = (userId, Sellers) => {
     userId,
     total,
     status: 'Pendente',
+    orders: cart,
   };
 };
 
 function Checkout() {
   const { cart, setCart } = useContext(UserContext);
-  const [sellers, setSellerts] = useState([]);
+  const [sellers, setSellers] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   const CART_ITEMS = formatList(cart);
@@ -66,14 +69,14 @@ function Checkout() {
   };
 
   useEffect(() => {
-    const getSellers = async () => {
+    const onMount = async () => {
       setIsLoading(true);
-      const { data } = await axios.get('/users?role=seller');
-      setSellerts(data);
+      const result = await getSellers();
+      setSellers(result);
       setIsLoading(false);
     };
 
-    getSellers();
+    onMount();
   }, []);
 
   return (
@@ -125,7 +128,7 @@ function Checkout() {
           type="button"
           data-testeid="customer_checkout__button-submit-order"
           onClick={ async () => {
-            const payload = createSalePayload(user.id, sellers);
+            const payload = createSalePayload(user.id, sellers, cart);
 
             const { data: id } = await axios.post(
               '/sales',

@@ -21,7 +21,7 @@ function ProductCard({ id, price, image, name }) {
 
   useEffect(() => {
     setProductsList(
-      [...productsList, { name, price, quantity, total: price * quantity }],
+      [...productsList, { name, price, quantity, total: (price * quantity) }],
     );
   }, [quantity]);
 

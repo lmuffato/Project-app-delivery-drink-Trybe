@@ -10,10 +10,17 @@ const Login = () => {
     password: '',
   });
 
+  const [loginErr, setLoginErr] = useState('');
+
   function handleInputChange(e) {
     e.preventDefault();
     const { name, value } = e.target;
     setUserData({ ...userData, [name]: value });
+  }
+
+  async function validateLogin(userLogin) {
+    const result = await postLogin(userLogin);
+    if (result.message) setLoginErr('Usuário ou senha inválido!');
   }
 
   useEffect(() => {
@@ -30,7 +37,6 @@ const Login = () => {
   });
 
   const history = useHistory();
-  const id = 'common_login__element-invalid-email [Elemento oculto (Mensagens de erro)]';
 
   return (
     <main>
@@ -59,7 +65,7 @@ const Login = () => {
         <button
           type="button"
           data-testid="common_login__button-login"
-          onClick={ () => postLogin(userData) }
+          onClick={ () => validateLogin(userData) }
         >
           Login
         </button>
@@ -72,11 +78,15 @@ const Login = () => {
           Cadastre-se
         </button>
         <br />
-        <span
-          data-testid={ id }
-        >
-          possivel erro
-        </span>
+        {
+          loginErr && (
+            <span
+              data-testid="common_login__element-invalid-email"
+            >
+              { loginErr }
+            </span>
+          )
+        }
       </form>
     </main>
   );

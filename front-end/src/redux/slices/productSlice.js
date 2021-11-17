@@ -29,10 +29,17 @@ export const slice = createSlice({
       newCart.push(payload);
       return { ...state, cart: newCart };
     },
+
+    removeItemFromCart(state, { payload }) {
+      return {
+        ...state,
+        cart: state.cart.filter((prod) => prod.id !== payload),
+      };
+    },
   },
 });
 
-export const { setProducts, addProductToCart } = slice.actions;
+export const { setProducts, addProductToCart, removeItemFromCart } = slice.actions;
 
 export const selectProduct = (state) => state.product;
 

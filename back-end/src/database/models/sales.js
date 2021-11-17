@@ -6,14 +6,21 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       autoIncrement: true,
     },
-    user_id: { type: DataTypes.INTEGER },
-    seller_id: { type: DataTypes.INTEGER },
-    total_price: { type: DataTypes.DECIMAL(9,2) },
-    delivery_address: { type: DataTypes.STRING },
-    delivery_number: { type: DataTypes.STRING },
-    sale_date: { type: DataTypes.DATE },
+    userId: { type: DataTypes.INTEGER },
+    sellerId: { type: DataTypes.INTEGER },
+    totalPrice: { type: DataTypes.DECIMAL(9,2) },
+    deliveryAddress: { type: DataTypes.STRING },
+    deliveryNumber: { type: DataTypes.STRING },
+    saleDate: {
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
+    },
     status: { type: DataTypes.STRING },
-  }, { underscored: false ,timestamps: false, tableName: 'sales' });
+  }, {
+    timestamps: false,
+    tableName: 'sales',
+    underscored: true,
+  });
 
   Sale.associate = (models) => {
     models.Sale.belongsTo(models.User, { 

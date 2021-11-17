@@ -8,7 +8,7 @@ const getUserbyEmail = async (req, res) => {
   };
 
 const register = async (req, res) => {
-  try{
+  try {
     const { name, email, password, role } = req.body;
     const response = await User.register({ name, email, password, role });
     if (response.message) {

@@ -9,6 +9,7 @@ function UserProvider({ children }) {
     email: '',
     password: '',
     role: '',
+    token: '',
   };
 
   const [user, setUser] = useState(DEFAULT_USER);

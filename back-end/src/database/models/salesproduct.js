@@ -1,10 +1,7 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
- const SalesProduct = sequelize.define(
-   'SalesProuct',
+ const SalesProduct = sequelize.define('SalesProduct',
    {
      sale_id: {
        type: DataTypes.INTEGER,
@@ -15,10 +12,13 @@ module.exports = (sequelize, DataTypes) => {
      quantity: {
       type: DataTypes.INTEGER,
     },
-   }, { timestamps: false })
+   },
+   { timestamps: false });
+
   SalesProduct.associate = (models) => {
     SalesProduct.belongsTo(models.Sale, { foreignKey: 'sale_id' });
     SalesProduct.belongsTo(models.Product, { foreignKey: 'product_id' });
   };
+
   return SalesProduct;
 };

@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useValidator } from 'react-joi';
+import genHashMd5 from 'md5';
 import {
   initialData, schema, explicitCheck,
 } from '../../utils/validateFormRegisterConfigOptions';
 import useManagerUsersContext from '../../hooks/useManagerUsersContext';
+import api from '../../services/api';
+import ErrorBackend from '../ErrorBackend';
 
 const FormRegisterUser = () => {
   const [enableButton, setEnableButton] = useState(true);
+  const [messageErrorBackend, setMessageErrorBackend] = useState(false);
   const { setUser } = useManagerUsersContext();
 
   const {
@@ -22,11 +26,26 @@ const FormRegisterUser = () => {
     }));
   };
 
+  const fetchPostData = async (userData) => {
+    try {
+      await api.post('/user', userData);
+      setMessageErrorBackend(false);
+    } catch (error) {
+      const { data } = error.response;
+      setMessageErrorBackend(data.message);
+      console.log(data.message);
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     validate();
     const { name, email, password, role } = state.$data;
+    const passwordHash = genHashMd5(password);
+
     setUser({ name, email, password, role });
+
+    fetchPostData({ name, email, password: passwordHash, role });
   };
 
   useEffect(() => {
@@ -36,7 +55,7 @@ const FormRegisterUser = () => {
 
   return (
     <>
-      <form onSubmit={ handleSubmit }>
+      <form action="POST" onSubmit={ handleSubmit }>
         <label htmlFor="name">
           <span>Nome</span>
           <input
@@ -110,6 +129,8 @@ const FormRegisterUser = () => {
         {state.$errors.password.map((data) => data.$message).join(',')}
         {state.$errors.role.map((data) => data.$message).join(',')}
       </span>
+
+      { messageErrorBackend && <ErrorBackend messageError={ messageErrorBackend } />}
     </>
   );
 };

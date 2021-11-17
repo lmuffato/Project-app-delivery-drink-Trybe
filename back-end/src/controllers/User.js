@@ -7,15 +7,14 @@ const login = async (req, res) => {
 
   if (err) return res.status(404).json({ error: err.message });
 
-  res.status(200).json({ message: user });
+  res.status(200).json({ token: user.token, data: user.userLogin });
 };
 
 const createUser = async (req, res) => {
-  const { name, email, password } = req.body;
-  console.log(req.body);
-  const { err, newUser } = await User.createUser(name, email, password);
-  if (err) return res.status(400).json({ error: err });
-  return res.status(201).json({ newUser });
+  const { name, email, password, type = 'customer' } = req.body;
+  const { err, newUser } = await User.createUser(name, email, password, type);
+  if (err) return res.status(409).json(err.message);
+  return res.status(201).json(newUser);
 };
 
 const listUsers = async (req, res) => {

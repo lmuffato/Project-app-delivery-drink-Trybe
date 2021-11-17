@@ -1,10 +1,23 @@
-const { Sale, SaleProduct } = require('../database/models');
+const { Sale, SaleProduct, User } = require('../database/models');
 const errorMap = require('../utils/errorMap');
 const Sequelize = require('sequelize');
 
 const config = require('../database/config/config');
 
 const sequelize = new Sequelize(process.env.NODE_ENV === 'test' ? config.test : config.development);
+
+
+const checkRoleMatch = async (entityId, role) => {
+  const entity = await User.findOne({ where: {
+    id: entityId
+  }})
+
+  if(!entity) return false;
+
+  const { dataValues } = entity;
+
+  return dataValues.role === role
+}
 
 const postSale = async (data, user) => {
   const transaction = await sequelize.transaction();
@@ -40,9 +53,13 @@ const postSale = async (data, user) => {
 
 const getSalesBySellerId = async (id) => {
   try {
+    const isMatchedRole = await checkRoleMatch(id, 'seller');
+
+    if(!isMatchedRole) return errorMap.unmatchedRole;
+
     const sellerSales = await Sale.findAll({
       where: {
-        sellerId: id
+        sellerId: id,
       }
     });
   
@@ -50,6 +67,25 @@ const getSalesBySellerId = async (id) => {
   } catch (_error) {
     return errorMap.internalError;
   }
+};
+
+const getSalesByCustomerId = async (id) => {
+  try {
+    const isMatchedRole = await checkRoleMatch(id, 'customer');
+
+    if(!isMatchedRole) return errorMap.unmatchedRole;
+
+    const customerSales = await Sale.findAll({
+      where: {
+        userId: id,
+      }
+    });
+  
+    return customerSales
+  } catch (error) {
+    console.log(error)
+    return errorMap.internalError;
+  }
 }
 
-module.exports = { postSale, getSalesBySellerId };
+module.exports = { postSale, getSalesBySellerId, getSalesByCustomerId };

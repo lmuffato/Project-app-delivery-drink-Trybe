@@ -77,4 +77,10 @@ module.exports = {
       message: 'Expired or invalid token',
     },
   },
+  unmatchedRole: {
+    error: {
+      code: 400,
+      message: 'this id does not belong to this entity'
+    }
+  }
 };

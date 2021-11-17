@@ -8,9 +8,9 @@
 
 button {
   align-items: center;
-  display: flex;
   border: none;
   cursor: pointer;
+  display: flex;
   height: 90%;
   justify-content: center;
   transition: 0.3s;

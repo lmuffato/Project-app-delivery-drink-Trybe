@@ -20,6 +20,11 @@
   padding: 0 10px;
 }
 
+.requestId {
+  display: flex;
+  flex-direction: column;
+}
+
 .dateAndPrice {
   background: transparent;
   flex-direction: column;
@@ -28,9 +33,12 @@
 }
 
 .dateAndPrice span {
+  align-items: center;
   background: white;
   border-radius: 5px;
-  padding: 5px 20px;
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
   width: 100%;
 }
 
@@ -39,6 +47,7 @@
   font-size: 1.5rem;
   font-weight: 700;
   margin: 0 5px;
+  text-transform: uppercase;
 }
 
 .pendente {

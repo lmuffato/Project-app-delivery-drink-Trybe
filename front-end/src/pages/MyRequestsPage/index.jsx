@@ -8,10 +8,24 @@ export default function MyRequestsPage() {
     <main className={ styles.container }>
       <Header />
       <section className={ styles.requestsContainer }>
-        <RequestCard />
-        <RequestCard />
-        <RequestCard />
-        <RequestCard />
+        <RequestCard
+          requestId="001"
+          status="pendente"
+          date="17/11/21"
+          price="50,90"
+        />
+        <RequestCard
+          requestId="002"
+          status="entregue"
+          date="08/12/20"
+          price="22,90"
+        />
+        <RequestCard
+          requestId="003"
+          status="preparando"
+          date="11/10/21"
+          price="145,90"
+        />
       </section>
     </main>
   );

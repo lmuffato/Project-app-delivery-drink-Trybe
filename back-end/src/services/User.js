@@ -19,7 +19,6 @@ const login = async (email, password) => {
   return { user };
 };
 
-
 const createUser = async (name, email, password, type) => {
   const { error } = schemaCreatedUser.validate({ name, email, password });
 

@@ -23,6 +23,7 @@ const createUser = async ({ name, email, password, type }) => {
   } catch (e) {
     return { err: e.message };
   }
+}
 
 const findUser = async (email) => {
   const userFound = await user.findOne({ where: { email } });
@@ -32,5 +33,5 @@ const findUser = async (email) => {
 module.exports = {
   login,
   createUser,
-  findUser,
+  findUser
 };

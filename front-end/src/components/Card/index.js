@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './style.css';
 import ButtonCard from '../ButtonCard';
+import './style.css';
 
 function Card({ id, name, price, url }) {
   return (

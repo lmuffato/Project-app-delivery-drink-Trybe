@@ -6,7 +6,7 @@ import './style.css';
 
 function ButtonCard({ id }) {
   const [quantityProductsCart, setQuantityProductsCart] = React
-    .useState(JSON.parse(localStorage.getItem('carrinho')?.length ?? 0));
+    .useState(JSON.parse(localStorage.getItem('carrinho')?.length || 0));
 
   const updateCart = (param) => {
     const cart = JSON.parse(localStorage.getItem('carrinho'));

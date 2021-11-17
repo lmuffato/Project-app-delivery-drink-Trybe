@@ -1,10 +1,35 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState, useContext } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import ErrorLogin from '../Components/ErrorLogin';
+
+import UserContext from '../context/userContext';
+import { doLogin } from '../services/endpointsAPI';
 
 export default function Login() {
+  const history = useHistory();
+  const { setUserData } = useContext(UserContext);
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loginButton, setLoginButton] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(false);
+
+  // const toggleErrorMessage = (user) => {
+  //   if (!user.password || !user.email) {
+  //     setErrorMessage(true);
+  //   }
+  // };
+
+  const clickLoginButton = async () => {
+    try {
+      const login = await doLogin(email, password);
+      console.log(login);
+      setUserData(login);
+      history.push('/customer/products');
+    } catch (error) {
+      setErrorMessage(true);
+    }
+  };
 
   useEffect(() => {
     const validateFields = () => {
@@ -44,6 +69,7 @@ export default function Login() {
         <button
           variant="primary"
           disabled={ !loginButton }
+          onClick={ clickLoginButton }
           data-testid="common_login__button-login"
           type="button"
         >
@@ -60,6 +86,7 @@ export default function Login() {
           </button>
         </Link>
       </form>
+      { errorMessage ? <ErrorLogin /> : ''}
     </div>
   );
 }

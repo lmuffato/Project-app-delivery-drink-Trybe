@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import UserContext from './userContext';
 
 function UserProvider({ children }) {
-  const [UserData, setUserData] = useState();
+  const [userData, setUserData] = useState();
 
   return (
     <UserContext.Provider
       value={ {
-        UserData,
+        userData,
         setUserData,
       } }
     >

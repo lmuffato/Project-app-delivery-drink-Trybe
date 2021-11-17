@@ -6,7 +6,7 @@ const api = axios.create({
   baseURL: `http://localhost:${PORT}`,
 });
 
-export const login = async (email, password) => {
+export const doLogin = async (email, password) => {
   const result = await api.post('/users/login', { email, password });
   return result.data;
 };

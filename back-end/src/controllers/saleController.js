@@ -24,7 +24,6 @@ const getSalesBySellerId = async (req, res) => {
   if (error) return res.status(error.code).json({ message: error.message });
 
   return res.status(OK).json(result);
-  
 };
 
 const getSalesByCustomerId = async (req, res) => {
@@ -37,9 +36,8 @@ const getSalesByCustomerId = async (req, res) => {
   if (error) return res.status(error.code).json({ message: error.message });
 
   return res.status(OK).json(result);
-  
-}
+};
 
 module.exports = {
-  postSale, getSalesBySellerId, getSalesByCustomerId
+  postSale, getSalesBySellerId, getSalesByCustomerId,
 }; 

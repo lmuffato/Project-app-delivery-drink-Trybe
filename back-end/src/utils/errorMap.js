@@ -80,7 +80,7 @@ module.exports = {
   unmatchedRole: {
     error: {
       code: 400,
-      message: 'this id does not belong to this entity'
-    }
-  }
+      message: 'this id does not belong to this entity',
+    },
+  },
 };

@@ -24,7 +24,21 @@ async function getByUserId(req, res) {
   }
 };
 
+async function getByOrderId(req, res) {
+  try {
+    const { id } = req.params;
+    const { code, error, data } = await saleService.getByOrderId(id);
+
+    if (error) return res.status(code).json({ error });
+
+    return res.status(code).json(data);
+  } catch(e) {
+    return res.status(HTTP_NOT_FOUND).json({ error: e.message });
+  }
+};
+
 module.exports = {
   create,
   getByUserId,
+  getByOrderId,
 }

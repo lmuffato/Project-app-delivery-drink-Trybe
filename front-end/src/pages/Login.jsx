@@ -22,7 +22,7 @@ export default function Login() {
     return false;
   };
 
-  const makeLogin = async () => {
+  const makeLogin = async () => { // oi
     validations();
     await axios
       .post(`${url}/login`, { email, password })

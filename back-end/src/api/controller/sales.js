@@ -3,12 +3,12 @@ const {
 } = require('http-status-codes');
 
 const { Sale } = require('../../database/models');
-const { User } = require('../../database/models');
+const { User: users } = require('../../database/models');
 
 const getAllSales = async (req, res, next) => {
   try {
     const { email, password } = req.user;
-    const { dataValues } = await User.findOne({ where: { email, password } });
+    const { dataValues } = await users.findOne({ where: { email, password } });
 
     const { role } = dataValues.role;
     if (role === 'customer') {

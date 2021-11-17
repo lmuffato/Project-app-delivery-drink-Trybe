@@ -23,14 +23,14 @@ function Card({ index, strName, strThumb, strPrice }) {
         { strPrice }
       </h4>
       <div>
-        <button type="button">+</button>
+        <input type="button" />
         <input
           type="text"
           data-testid={ `customer_products__element-card-price-${index}` }
           value="0"
           disabled
         />
-        <button type="button">-</button>
+        <input type="button" />
       </div>
     </button>
   );

@@ -20,7 +20,7 @@ function Header({ links }) {
   };
 
   return (
-    <header>
+    <nav>
       {links.map((link, i) => (
         <Link
           to={ link.url }
@@ -38,7 +38,7 @@ function Header({ links }) {
           Sair
         </button>
       </Link>
-    </header>
+    </nav>
   );
 }
 

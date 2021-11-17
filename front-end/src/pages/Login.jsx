@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory, Redirect } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
@@ -13,18 +13,31 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [redirect, setRedirect] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [disabled, setDisabled] = useState(false);
 
   const handleChange = ({ target }, handle) => {
     const { value } = target;
     handle(value);
   };
+
+  const validInputs = () => {
+    const minPasswordLength = 5;
+    const emailPattern = /\b[\w.-]+@[\w.-]+\.\w{2,4}\b/gi;
+    const validPassword = password.length > minPasswordLength;
+    const validEmail = user.match(emailPattern);
+    setDisabled(!(validEmail && validPassword));
+  };
+  useEffect(validInputs, [user, password, disabled]);
+
   const tokenStorage = ({ token }) => {
     localStorage.setItem('token', token);
   };
-  const handleLogin = async () => loginApi(user, password).then((data) => {
-    tokenStorage(data);
-    setRedirect(true);
-  }).catch(setErrorMessage);
+  const handleLogin = async () => loginApi(user, password)
+    .then((data) => {
+      tokenStorage(data);
+      setRedirect(true);
+    })
+    .catch(setErrorMessage);
 
   return (
     <Container>
@@ -51,6 +64,7 @@ export default function Login() {
         <Button
           type="submit"
           data-testid="common_login__button-login"
+          disabled={ disabled }
           onClick={ (event) => {
             event.preventDefault();
             handleLogin();
@@ -67,7 +81,14 @@ export default function Login() {
         </Button>
         {redirect && <Redirect to="/customer/products" />}
       </form>
-      {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
+      {errorMessage && (
+        <Alert
+          data-testid="common_login__element-invalid-email"
+          variant="danger"
+        >
+          {errorMessage}
+        </Alert>
+      )}
     </Container>
   );
 }

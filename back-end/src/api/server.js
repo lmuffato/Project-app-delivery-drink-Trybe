@@ -32,6 +32,8 @@ app.use(cors(corsOptions));
 app.get('/products', product.getProducts);
 app.post('/login', user.login);
 app.post('/register', user.createUser);
+// Adicionar lógica de validação de login
+app.get('/users', user.listUsers);
 
 app.use('/images', express.static(path.join(__dirname, '..', '..', '/public')));
 

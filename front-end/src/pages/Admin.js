@@ -1,5 +1,5 @@
 import React from 'react';
-import AdminForm from '../components/AdminForm';
+import AdminForm from '../Components/AdminForm';
 
 function Admin() {
   return (

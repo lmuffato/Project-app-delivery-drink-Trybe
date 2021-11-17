@@ -6,6 +6,7 @@ import Login from './pages/Login';
 import Checkout from './pages/Checkout';
 import SignUp from './pages/SignUp';
 import Products from './pages/Products';
+import Admin from './pages/Admin';
 
 export default function Router() {
   return (
@@ -18,6 +19,7 @@ export default function Router() {
         <Route path="/customer/checkout" component={ Checkout } />
         <Route path="/register" component={ SignUp } />
         <Route path="/customer/products" component={ Products } />
+        <Route path="/admin" component={ Admin } />
       </Switch>
     </BrowserRouter>
   );

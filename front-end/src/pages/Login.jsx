@@ -5,6 +5,9 @@ import ErrorLogin from '../Components/ErrorLogin';
 import UserContext from '../context/userContext';
 import { doLogin } from '../services/endpointsAPI';
 
+const messageError = 'Login e/ou senha inválidos';
+const testId = 'common_login__element-invalid-email';
+
 export default function Login() {
   const history = useHistory();
   const { setUserData } = useContext(UserContext);
@@ -85,7 +88,10 @@ export default function Login() {
           </button>
         </Link>
       </form>
-      { errorMessage ? <ErrorLogin /> : ''}
+      {
+        errorMessage
+          && <ErrorLogin props={ { dataTestIdError: testId, message: messageError } } />
+      }
     </div>
   );
 }

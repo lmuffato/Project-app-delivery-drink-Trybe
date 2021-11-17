@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import ErrorLogin from '../Components/ErrorLogin';
 
-import Button from '../Components/ButtonTypeButton';
 import validateEmail from '../validations/validateEmail';
 
 import { createNewUser } from '../services/endpointsAPI';
+
+const testId = 'common_register__element-invalid_register';
+const messageError = 'Nome e/ou email já cadastrado';
 
 export default function Register() {
   const history = useHistory();
@@ -18,6 +21,7 @@ export default function Register() {
   const clickCadastrarButton = async () => {
     try {
       await createNewUser(name, email, password);
+      setErrorMessage(false);
       history.push('/customer/products');
     } catch (error) {
       setErrorMessage(true);
@@ -81,15 +85,20 @@ export default function Register() {
             data-testid="common_register__input-password"
           />
         </label>
-        <Button
-          props={ {
-            id: 'register-button',
-            disabled: !disableRegisterButton,
-            dataTestId: 'common_register__button-register',
-            onClick: { clickCadastrarButton },
-            value: 'CADASTRAR' } }
-        />
+        <button
+          type="button"
+          id="register-button"
+          disabled={ !disableRegisterButton }
+          dataTestId="common_register__button-register"
+          onClick={ clickCadastrarButton }
+        >
+          CADASTRAR
+        </button>
       </form>
+      {
+        errorMessage
+          && <ErrorLogin props={ { dataTestIdError: testId, message: messageError } } />
+      }
     </main>
   );
 }

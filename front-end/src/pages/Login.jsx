@@ -90,7 +90,7 @@ export default function Login() {
       </form>
       {
         errorMessage
-          && <ErrorLogin props={ { dataTestIdError: testId, message: messageError } } />
+        && <ErrorLogin dataTestIdError={ testId } message={ messageError } />
       }
     </div>
   );

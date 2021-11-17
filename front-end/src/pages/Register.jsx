@@ -97,7 +97,7 @@ export default function Register() {
       </form>
       {
         errorMessage
-          && <ErrorLogin props={ { dataTestIdError: testId, message: messageError } } />
+          && <ErrorLogin dataTestIdError={ testId } message={ messageError } />
       }
     </main>
   );

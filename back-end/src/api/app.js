@@ -7,6 +7,7 @@ const path = require('path');
 const loginRouter = require('../router/login');
 const registrationRouter = require('../router/registration');
 const productRouter = require('../router/product');
+const { HTTP_OK_STATUS } = require('../status');
 // const imageRouter = require('../router/image');
 
 const app = express();
@@ -27,7 +28,7 @@ app.use('/products', productRouter);
 
 app.get('/images/:file', (req, res) => {
   const { file } = req.params;
-  res.sendFile(path.resolve(__dirname, `../../public/${file}`));
+  res.status(HTTP_OK_STATUS).sendFile(path.resolve(__dirname, `../../public/${file}`));
 });
 
 module.exports = app;

@@ -40,10 +40,10 @@ const createUser = async (name, email, password) => {
   return { newUser };
 };
 
-const listUsers = async (orders, payload, role) => {
+const listUsers = async (role) => {
   try {
-    const users = await User.listUsers(orders, payload, role);
-    return users;
+    const users = await User.listUsers(role);
+    return { users };
   } catch (error) {
     return { err: error.message };
   }

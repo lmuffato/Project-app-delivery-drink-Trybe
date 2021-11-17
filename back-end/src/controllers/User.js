@@ -19,10 +19,9 @@ const createUser = async (req, res) => {
 };
 
 const listUsers = async (req, res) => {
-  const { orders, ...payload } = req.body;
   const { role } = req.query;
 
-  const { err, users } = await User.listUsers(orders, payload, role);
+  const { err, users } = await User.listUsers(role);
   if (err) return res.status(500).json({ error: err });
   return res.status(200).json({ result: users });
 };

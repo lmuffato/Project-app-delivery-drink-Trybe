@@ -9,9 +9,9 @@ module.exports = (sequelize, DataTypes) => {
     tableName: 'products',
   });
 
-  Product.associate = (models) => {  
-    Product.belongsTo(models.SalesProduct, { foreignKey: 'product_id', as: 'salesProduct' });  
-  };
+  // Product.associate = (models) => {  
+  //  Product.belongsTo(models.SalesProduct, { foreignKey: 'product_id', as: 'salesProduct' });  
+  // };
 
   return Product;
 };

@@ -1,36 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../../styles/ProductCard.css';
+import { fetchProducts } from '../../utils/API/fetch';
 // import ProductsContext from '../../context/Products/ProductsContext';
 
 export default function ProductCard() {
   // const { count1, setCount1 } = useContext(ProductsContext);
   const [count, setCount] = useState(1);
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    (async () => {
+      const getProducts = await fetchProducts({ token: 'xablau' });
+      setProducts(getProducts);
+      console.log(getProducts);
+    })();
+  }, []);
 
   const BRL = (price) => price
     .toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
-
-  const price1 = 12.90;
-  const price2 = 14.90;
-  const price3 = 15.90;
-  const img = 'https://cdn-veloxcode.s3.sa-east-1.amazonaws.com/banco-de-imagens/179J7yvZXHtX28zybgBladGh1hto3xrwRJZAIS9G.png';
-
-  const products = [
-    {
-      title: 'Heineken longneck',
-      price: BRL(price1),
-      img,
-    },
-    {
-      title: 'Brahma',
-      price: BRL(price2),
-      img,
-    },
-    {
-      title: 'Corona',
-      price: BRL(price3),
-      img,
-    },
-  ];
 
   const increment = () => {
     setCount(count + 1);
@@ -44,24 +30,24 @@ export default function ProductCard() {
 
   return (
     products.map((prod) => (
-      <div key={ prod } className="card-container text-black mb-3">
+      <div key={ prod.id } className="card-container text-black mb-3">
         <div className="card-body product-card-container">
           <p
             data-testid="customer_products__element-card-title"
             className="card-text"
           >
-            {prod.title}
+            {prod.name}
           </p>
           <div className="card-title">
             <h3
               data-testid="customer_products__element-card-price"
             >
-              {prod.price}
+              {BRL(prod.price)}
             </h3>
           </div>
           <img
             data-testid="customer_products__img-card-bg-image"
-            src={ prod.img }
+            src={ prod.urlImage }
             alt="heineken"
             style={ { width: 80 } }
           />

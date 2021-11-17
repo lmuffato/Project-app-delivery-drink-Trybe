@@ -5,7 +5,7 @@ import testID from '../../datatestids.json';
 import Button from '../atoms/Button';
 import Input from '../atoms/Input';
 import ErrorMessage from '../atoms/ErrorMessage';
-import { loginAction } from '../../utils/validations/API/fetch';
+import { loginAction } from '../../utils/API/fetch';
 import validateLogin from '../../utils/validations/joi/login';
 
 const LoginForm = () => {

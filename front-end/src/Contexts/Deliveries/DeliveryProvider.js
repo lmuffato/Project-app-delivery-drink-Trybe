@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { node } from 'prop-types';
-import DeliveryContext from '../context/DeliveryContext';
-import fetchAllProducts from '../utils/Data';
+import DeliveryContext from './DeliveryContext';
+import fetchAllProducts from '../../utils/Data';
 
 function DeliveryProvider({ children }) {
   const [products, setProducts] = useState([]);

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import DeliveryContext from '../context/DeliveryContext';
+import DeliveryContext from '../../Contexts/Deliveries/DeliveryContext';
 
 function CardProducts() {
   const {

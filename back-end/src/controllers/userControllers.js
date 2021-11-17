@@ -17,8 +17,14 @@ const getAllUsers = async (_req, res) => {
   return res.status(response.status).json(response.message);
 };
 
+const getAllSellers = async (_req, res) => {
+  const response = await userServices.getAllSellers();
+  return res.status(response.status).json(response.message);
+};
+
 module.exports = {
   login,
   register,
   getAllUsers,
+  getAllSellers,
 };

@@ -13,22 +13,6 @@ function CustomerProducts({ history }) {
       .reduce((acc, product) => acc + Number(product.price) * product.quantity, 0));
   };
 
-  // const getProducts = async (token) => {
-  //   const productsList = await fetchProducts(token);
-  //   return productsList;
-  // };
-
-  // useEffect(() => {
-  //   const { token } = JSON.parse(localStorage.getItem('user'));
-  //   const products = getProducts(token);
-  //   if (products.message) {
-  //     localStorage.removeItem('user');
-  //     setUser({});
-  //     setProducts([]);
-  //     history.push('/login');
-  //   }
-  // }, [value]);
-
   return (
     <div>
       <Headers history={ history } />

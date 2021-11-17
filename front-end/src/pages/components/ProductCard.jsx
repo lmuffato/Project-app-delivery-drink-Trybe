@@ -5,7 +5,7 @@ import ContextDeliveryApp from '../../store/ContextDeliveryApp';
 export default function ProductCard({ product, index, callback }) {
   const { url_image: urlImage, name, price, id } = product;
   const { products, setProducts } = useContext(ContextDeliveryApp);
-  const [qty, setQty] = useState();
+  const [qty, setQty] = useState(0);
 
   const handleRemoveClick = () => {
     if (qty > 0) {
@@ -17,7 +17,7 @@ export default function ProductCard({ product, index, callback }) {
     }
   };
 
-  const handleAddClick = () => {
+  const handleAddClick = async () => {
     const updatingProducts = products;
     updatingProducts[index].quantity += 1;
     setProducts(updatingProducts);
@@ -29,13 +29,11 @@ export default function ProductCard({ product, index, callback }) {
     callback(updatingProducts);
   };
 
-  const handleInputChange = (e) => {
-    console.log(typeof e.target.value);
-    setQty(e.target.value);
-    console.log(qty);
+  const handleInputChange = async (e) => {
+    setQty(parseInt(e.target.value, 10));
     const updatingProducts = products;
-    updatingProducts[index].quantity = e.target.value;
-    setProducts(updatingProducts);
+    updatingProducts[index].quantity = parseInt(e.target.value, 10);
+    await setProducts(updatingProducts);
     callback(updatingProducts);
   };
 
@@ -70,9 +68,9 @@ export default function ProductCard({ product, index, callback }) {
       <label htmlFor="product-quantity">
         <input
           id="product-quantity"
-          type="number"
+          type="text"
           placeholder="0"
-          value={ qty }
+          value={ qty.toString() }
           onChange={ handleInputChange }
           data-testid={ `customer_products__input-card-quantity-${id}` }
         />

@@ -1,9 +1,11 @@
 import React from 'react';
+import { useHistory } from 'react-router';
 import PropTypes from 'prop-types';
 // import { Link } from 'react-router-dom';
 
 function Header({ props }) {
   const { title, subtitle, name } = props;
+  const history = useHistory();
   return (
     <header className="header">
       <div className="header-top">
@@ -31,6 +33,7 @@ function Header({ props }) {
           data-testid="customer_products__element-navbar-link-logout"
           className="page-title"
           type="button"
+          onClick={ () => { localStorage.clear(); history.push('/'); } }
         >
           SAIR
         </button>

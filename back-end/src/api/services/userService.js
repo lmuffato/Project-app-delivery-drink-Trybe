@@ -43,14 +43,14 @@ const createUser = async ({ name, email, password, role }) => {
   if (!created) {
     return ({ status: 409, data: USER_ALREADY_EXIST });
   }
-  
+  console.log(user.dataValues);
   const { password: _, ...userWithoutPassword } = user.dataValues;
   const token = jwt.sign(userWithoutPassword, secret, jwtConfig);
-  
+  const { id } = userWithoutPassword;
   return ({ status: 201, token, id, name, email, role });
 };
 
-const login = async ({ email, password }) => {
+const login = async (email, password) => {
   if (!email || !password) {
     return ({ status: 404, data: ALL_FIELDS_FILLED });
   }
@@ -62,7 +62,7 @@ const login = async ({ email, password }) => {
   if (!loginCheck) {
     return ({ status: 404, data: INCORRECT_USERNAME_OR_PASSWORD });
   }
-  const { name, email, role } = loginCheck;
+  const { name, role, id } = loginCheck;
 
   const token = jwt.sign(loginCheck, secret, jwtConfig);
 

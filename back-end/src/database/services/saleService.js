@@ -15,12 +15,12 @@ async function create(body) {
     await SalesProducts.create({ sale_id: saleId.dataValues.id , product_id: id, quantity: quantity })
   });
 
-  return { code: HTTP_CREATED };
+  return { data: saleId.dataValues.id, code: HTTP_CREATED };
 };
 
-async function getById(id) {
+async function getByUserId(id) {
   const order = await Sale.findOne({
-    where: { id },
+    where: { user_id: id },
     include: [
       { model: SalesProducts, as:'products', through: { attributes: [] } },
     ],
@@ -33,5 +33,5 @@ async function getById(id) {
 
 module.exports = {
   create,
-  getById,
+  getByUserId,
 };

@@ -10,7 +10,7 @@ const LINKS = [
   },
   {
     name: 'MEUS PEDIDOS',
-    url: '/orders',
+    url: '/customer/orders',
     testId: 'customer_products__element-navbar-link-orders',
   },
 ];

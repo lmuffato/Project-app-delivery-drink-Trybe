@@ -16,7 +16,7 @@ const links = [
   },
   {
     name: 'MEUS PEDIDOS',
-    url: '/orders',
+    url: '/customer/orders',
     testId: 'customer_products__element-navbar-link-orders',
   },
 ];
@@ -50,7 +50,7 @@ const createSalePayload = (userId, Sellers) => {
     sellerId,
     userId,
     total,
-    status: 'pendente',
+    status: 'Pendente',
   };
 };
 
@@ -128,10 +128,10 @@ function Checkout() {
           onClick={ async () => {
             const payload = createSalePayload(user.id, sellers);
 
-            await axios.post('/sales', payload);
+            const { data: id } = await axios.post('/sales', payload);
             setCart([]);
 
-            return <Redirect to="/products" />;
+            return <Redirect to={ `/customer/orders/${id}` } />;
           } }
         >
           FINALIZAR PEDIDO

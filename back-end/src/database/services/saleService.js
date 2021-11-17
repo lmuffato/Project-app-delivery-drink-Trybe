@@ -1,4 +1,4 @@
-const { Sale, SalesProducts } = require('../models');
+const { Sale, SalesProducts, Product } = require('../models');
 const { HTTP_CREATED, HTTP_CONFLICT, HTTP_OK_STATUS, HTTP_NOT_FOUND } = require('../../status');
 
 
@@ -19,14 +19,17 @@ async function create(body) {
 };
 
 async function getByUserId(id) {
-  const order = await Sale.findOne({
+  console.log('Cheguei aqui');
+  const order = await Sale.findAll({
     where: { user_id: id },
     include: [
-      { model: SalesProducts, as:'products', through: { attributes: [] } },
+      { model: Product, as:'products', through: { attributes: [] } },
     ],
   });
 
   if (!order) return { code: HTTP_NOT_FOUND, error: 'Sale does not exist' };
+
+  console.log('Entrei aqui no final')
 
   return { data: order, code: HTTP_OK_STATUS };
 };

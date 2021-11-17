@@ -18,13 +18,13 @@ function CustomerProducts() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
     async function getProducts() {
+      setLoading(true);
       await findProducts();
+      setLoading(false);
     }
     getProducts();
-    setLoading(false);
-  }, [findProducts]);
+  }, []);
 
   const renderProductCard = () => products.map((product, index) => (
     <ProductCard key={ index } { ...product } />

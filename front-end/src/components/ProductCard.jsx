@@ -1,16 +1,43 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
+import ProductListContext from '../context/ProductListContext';
 
 function ProductCard({ id, price, image, name }) {
+  const { productsList, setProductsList,
+    setTotalPrice } = useContext(ProductListContext);
+  const [att, setAtt] = useState(false);
+
   const [quantity, setQuantity] = useState(0);
 
   const rmvItem = () => {
     if (quantity > 0) setQuantity(quantity - 1);
+    setAtt(!att);
   };
 
   const addItem = () => {
     setQuantity(quantity + 1);
+    setAtt(!att);
   };
+
+  useEffect(() => {
+    setProductsList(
+      [...productsList, { name, price, quantity, total: price * quantity }],
+    );
+  }, [quantity]);
+
+  useEffect(() => {
+    const listAux = productsList;
+    productsList.forEach((product, index) => {
+      if (product.quantity === 0) listAux.splice(index, 1);
+      if (product.name === name && product.quantity !== quantity) {
+        listAux.splice(index, 1);
+      }
+    });
+    localStorage.setItem('carrinho', JSON.stringify(listAux));
+    const totalReduce = listAux
+      .reduce((totalP, product) => totalP + product.total, 0);
+    setTotalPrice(totalReduce.toFixed(2).replace('.', ','));
+  }, [productsList]);
 
   return (
     <div>
@@ -39,8 +66,8 @@ function ProductCard({ id, price, image, name }) {
         </button>
         <input
           data-testid={ `customer_products__input-card-quantity-${id}` }
-          value={ quantity }
-          disabled
+          value={ Number(quantity) }
+          onChange={ (element) => setQuantity(Number(element.target.value)) }
         />
         <button
           type="button"

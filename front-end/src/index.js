@@ -6,13 +6,16 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import ApiProvider from './context/ApiProvider';
 import UserProvider from './context/UserProvider';
+import ProductListProvider from "./context/ProductListProvider";
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <ApiProvider>
       <UserProvider>
-        <App />
+        <ProductListProvider>
+          <App />
+        </ProductListProvider>
       </UserProvider>
       </ApiProvider>
     </BrowserRouter>

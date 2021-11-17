@@ -1,7 +1,10 @@
 import React from 'react';
+import Navbar from '../Components/NavBar';
 
 const CustomerProducts = () => (
-  <div />
+  <div>
+    <Navbar />
+  </div>
 );
 
 export default CustomerProducts;

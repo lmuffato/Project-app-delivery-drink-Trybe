@@ -12,14 +12,11 @@ import UserProvider from './context/userProvider';
 
 ReactDOM.render(
   <React.StrictMode>
-    ,
-
     <BrowserRouter>
       <UserProvider>
         <App />
       </UserProvider>
     </BrowserRouter>
-    ,
   </React.StrictMode>,
   document.getElementById('root'),
 );

@@ -17,8 +17,8 @@ const register = async (req, res) => {
     return res.status(201).json(response);
   } catch (e) {
     return res.status(409).json({ message: e.message });
-  };
-}
+  }
+};
 
   module.exports = {
       getUserbyEmail,

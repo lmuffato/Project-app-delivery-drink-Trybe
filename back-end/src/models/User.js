@@ -20,8 +20,15 @@ const createUser = async ({ name, email, password }) => {
   return newUser;
 };
 
+const listUsers = async (role) => (
+  role
+    ? user.findAll({ where: { role } })
+    : user.finAll()
+);
+
 module.exports = {
   login,
   createUser,
   findUser,
+  listUsers,
 };

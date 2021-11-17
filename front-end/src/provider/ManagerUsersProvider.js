@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { element } from 'prop-types';
-import { ManagerUsersContext } from '../context';
+import genHashMd5 from 'md5';
+import lib from '../context';
 import isNotEmptyObject from '../utils/isNotEmptyObject';
 // import api from '../services/api';
+
+const { ManagerUsersContext } = lib;
 
 function ManagerUsersProvider({ children }) {
   const [users, setUsers] = useState([]);

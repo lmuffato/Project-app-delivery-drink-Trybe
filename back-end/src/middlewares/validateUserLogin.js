@@ -1,6 +1,8 @@
 const { User } = require('../database/models');
 
 const validateUserLogin = async (req, res, next) => {
+  console.log('back:', req.body);
+
   const { email, password: loginPass } = req.body;
 
   const user = await User.findOne({ where: { email }, raw: true });

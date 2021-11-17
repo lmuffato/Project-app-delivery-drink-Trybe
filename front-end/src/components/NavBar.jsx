@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { useHistory } from 'react-router';
 import {
   AppBar,
   Toolbar,
@@ -6,8 +7,12 @@ import {
   Button,
   Link,
 } from '@mui/material';
+import ContextLogin from '../context/ContextLogin';
+import { logoutUser } from '../utils/LocalStorageFunctions';
 
 function NavBar() {
+  const { userData: { name } } = useContext(ContextLogin);
+  const history = useHistory();
   return (
     <AppBar position="static">
       <Toolbar
@@ -35,11 +40,15 @@ function NavBar() {
           variant="h6"
           data-testid="customer_products__element-navbar-user-full-name"
         >
-          Fulano da Silva
+          { name }
         </Typography>
         <Button
           color="inherit"
           data-testid="customer_products__element-navbar-link-logout"
+          onClick={ () => {
+            logoutUser();
+            history.push('/login');
+          } }
         >
           Sair
         </Button>

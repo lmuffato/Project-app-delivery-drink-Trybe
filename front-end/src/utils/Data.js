@@ -7,7 +7,7 @@ const fetchAllProducts = async () => {
 };
 
 export const getSellers = async () => {
-  const { data } = await axios.get('/users?role=seller');
+  const { data } = await axios.get('http://localhost:3001/users?role=seller');
   return data;
 };
 

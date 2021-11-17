@@ -12,6 +12,8 @@
     "start": "npm run with-env react-scripts start",
     "start:build": "PORT=3000 ./node_modules/.bin/serve -s build",
     "build": "npm run with-env react-scripts build",
+    "build:css": "postcss src/style/tailwind.css -o src/style/main.css",
+    "build:watch": "postcss src/style/tailwind.css -o src/style/main.css --watch",
     "test": "npm run with-env react-scripts test -- --runInBand --detectOpenHandles --verbose",
     "test:coverage": "npm run with-env react-scripts test -- --coverage",
     "test:coverage:json": "npm run with-env react-scripts test -- --coverage --coverageReporters=\"json-summary\" --watchAll=false --testFailureExitCode=0 --detectOpenHandles --runInBand --forceExit",
@@ -26,6 +28,8 @@
     "@testing-library/react": "11.2.7",
     "@testing-library/user-event": "12.8.3",
     "axios": "^0.24.0",
+    "postcss": "^8.3.11",
+    "postcss-cli": "^9.0.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-redux": "^7.2.6",
@@ -35,10 +39,12 @@
     "web-vitals": "1.1.2"
   },
   "devDependencies": {
+    "autoprefixer": "^9.8.8",
     "eslint-config-trybe-frontend": "1.2.1",
     "stylelint": "13.13.1",
     "stylelint-config-standard": "22.0.0",
-    "stylelint-order": "4.1.0"
+    "stylelint-order": "4.1.0",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17"
   },
   "browserslist": {
     "production": [

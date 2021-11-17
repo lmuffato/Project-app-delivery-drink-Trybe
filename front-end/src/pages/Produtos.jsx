@@ -53,10 +53,6 @@ export default function Produtos() {
               />
             ))
       }
-<<<<<<< HEAD
-
-=======
->>>>>>> 60a77cb25a2e433150aa8899e24dee117da0a4b4
     </div>
   );
 }

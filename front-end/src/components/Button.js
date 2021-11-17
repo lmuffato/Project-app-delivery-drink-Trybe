@@ -1,20 +1,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { BaseButton } from '../styles/baseComponents';
 
-const Button = ({ label, onClick, datatestid }) => (
-  <button
+const Button = ({ children, onClick, datatestid, btnType, full }) => (
+  <BaseButton
     type="button"
     onClick={ onClick }
     data-testid={ datatestid }
+    btnType={ btnType }
+    full={ full }
   >
-    {label}
-  </button>
+    {children}
+  </BaseButton>
 );
 
 Button.propTypes = {
-  datatestid: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
-  label: PropTypes.string.isRequired,
+  children: PropTypes.string.isRequired,
+  btnType: PropTypes.string,
+  full: PropTypes.bool,
+  datatestid: PropTypes.string,
+  onClick: PropTypes.func,
+};
+
+Button.defaultProps = {
+  btnType: 'primary',
+  full: false,
+  datatestid: undefined,
+  onClick: undefined,
 };
 
 export default Button;

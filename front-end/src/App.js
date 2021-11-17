@@ -5,8 +5,15 @@ import background from './images/background.png';
 
 function App() {
   return (
-    <div className="App" style={ { background: `url('${background}') center / cover` } }>
-      <Routes />
+    <div
+      className="AppContainer"
+      style={
+        { background: `url('${background}') center / cover` }
+      }
+    >
+      <div className="App">
+        <Routes />
+      </div>
     </div>
   );
 }

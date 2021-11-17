@@ -86,7 +86,7 @@ const getSalesByCustomerId = async (id) => {
         userId: id,
       },
     });
-  
+
     return customerSales;
   } catch (error) {
     return errorMap.internalError;

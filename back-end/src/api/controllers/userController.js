@@ -22,7 +22,7 @@ const login = async (req, res) => {
     token, 
     id, 
     name, 
-    role 
+    role,
   } = await userService.login(email, password);
 
   if (token) {

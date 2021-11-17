@@ -27,23 +27,17 @@ const checkLogin = async (email, password) => {
 
 const createUser = async ({ name, email, password, role }) => {
   const hashPassword = md5(password);
-
   const [user, created] = await User.findOrCreate({
     where: {
       [Op.or]: [{ name }, { email }],
     },
-    defaults: {
-      name,
-      email,
-      password: hashPassword,
-      role,
-    },
+    defaults: { name, email, password: hashPassword, role },
   });
-  
+
   if (!created) {
     return ({ status: 409, data: USER_ALREADY_EXIST });
   }
-  console.log(user.dataValues);
+
   const { password: _, ...userWithoutPassword } = user.dataValues;
   const token = jwt.sign(userWithoutPassword, secret, jwtConfig);
   const { id } = userWithoutPassword;

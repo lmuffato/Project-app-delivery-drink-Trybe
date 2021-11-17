@@ -15,7 +15,7 @@ export default function Router() {
           <Redirect to="/login" />
         </Route>
         <Route path="/login" component={ Login } />
-        <Route path="/checkout" component={ Checkout } />
+        <Route path="/customer/checkout" component={ Checkout } />
         <Route path="/register" component={ SignUp } />
         <Route path="/customer/products" component={ Products } />
       </Switch>

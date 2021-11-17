@@ -20,38 +20,28 @@ function ProviderProducts({ children }) {
     return product;
   };
 
-  const increaseProductQuantity = async (id) => {
-    const productInCart = cartProducts.find((product) => product.id === id);
-
-    if (productInCart) {
-      productInCart.quantity += 1;
+  const setProductCartQuantity = async (id, quantity) => {
+    if (quantity === 0) {
+      setCartProducts(cartProducts.filter((product) => product.id !== id));
       return;
     }
 
-    const product = await findSpecificProduct(id);
-
-    setCartProducts([...cartProducts, { ...product, quantity: 1, id }]);
-  };
-
-  const setProductQuantity = async (id, quantity) => {
     const productInCart = cartProducts.find((product) => product.id === id);
 
     if (productInCart) {
-      productInCart.quantity = quantity;
+      setCartProducts(cartProducts
+        .map((p) => {
+          if (p.id === id) p.quantity = quantity;
+          return p;
+        }));
       return;
     }
+
+    if (!id) return;
 
     const product = await findSpecificProduct(id);
 
     setCartProducts([...cartProducts, { ...product, quantity, id }]);
-  };
-
-  const decreaseProductQuantity = (id) => {
-    const productInCart = cartProducts.find((product) => product.id === id);
-
-    if (!productInCart || productInCart.quantity === 0) return;
-
-    productInCart.quantity -= 1;
   };
 
   return (
@@ -59,10 +49,8 @@ function ProviderProducts({ children }) {
       value={ {
         findProducts,
         allProducts,
-        increaseProductQuantity,
         cartProducts,
-        setProductQuantity,
-        decreaseProductQuantity,
+        setProductCartQuantity,
       } }
     >
       {children}

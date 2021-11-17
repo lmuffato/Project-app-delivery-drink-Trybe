@@ -18,7 +18,17 @@ const createUser = async (req, res) => {
   return res.status(201).json({ newUser });
 };
 
+const listUsers = async (req, res) => {
+  const { orders, ...payload } = req.body;
+  const { role } = req.query;
+
+  const { err, users } = await User.listUsers(orders, payload, role);
+  if (err) return res.status(500).json({ error: err });
+  return res.status(200).json({ result: users });
+};
+
 module.exports = {
   login,
   createUser,
+  listUsers,
 };

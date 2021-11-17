@@ -29,14 +29,20 @@ const findById = async (req, res, next) => {
     console.log('xablau',req.params);
     const sale  = await saleService.findById(id);
 
-    res.status(200).json(sale);
+    return res.status(200).json(sale);
   } catch (err) {
     console.log(err);
     next(err);
   }
 }
 
+const getAll = async (req, res) => {
+  const sale = await saleService.getAll();
+  return res.status(200).json(sale);
+}
+
 module.exports = {
   create,
   findById,
+  getAll,
 };

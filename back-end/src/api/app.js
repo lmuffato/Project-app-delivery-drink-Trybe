@@ -22,6 +22,7 @@ app.get('/products', productController.getAll);
 
 app.post('/sales', saleController.create);
 app.use ('/sales/:id', saleController.findById);
+app.get('/sales', saleController.getAll);
 
 app.get('/coffee', (_req, res) => res.status(418).end());
 

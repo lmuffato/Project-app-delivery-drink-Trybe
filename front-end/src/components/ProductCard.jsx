@@ -8,15 +8,33 @@ export default function ProductCard(props) {
   return (
     <div { ...props } className={ `${styles.productCard} ${customClass}` }>
       <div className={ styles.image }>
-        <img src={ image } alt="" />
-        <span>{ `R$${price}` }</span>
+        <img
+          src={ image }
+          alt={ title }
+          data-testid="customer_products__img-card-bg-image-"
+        />
+        <span data-testid="customer_products__element-card-price-">{ `R$${price}` }</span>
       </div>
       <div className={ styles.info }>
-        <h1>{ title }</h1>
+        <h1 data-testid="customer_products__element-card-title-">{ title }</h1>
         <div>
-          <button type="button">-</button>
-          <span className={ styles.quantity }>10</span>
-          <button type="button">+</button>
+          <button
+            type="button"
+            data-testid="customer_products__button-card-rm-item-"
+          >
+            -
+          </button>
+          <input
+            type="number"
+            data-testid="customer_products__input-card-quantity-"
+            className={ styles.quantity }
+          />
+          <button
+            type="button"
+            data-testid="customer_products__button-card-add-item-"
+          >
+            +
+          </button>
         </div>
       </div>
     </div>

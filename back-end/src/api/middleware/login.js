@@ -5,10 +5,7 @@ const { User: users } = require('../../database/models');
 const login = async (req, _res, next) => {
   const { error } = loginSchema.validate(req.body);
   const { email, password } = req.body; 
-<<<<<<< HEAD
-=======
 
->>>>>>> 60a77cb25a2e433150aa8899e24dee117da0a4b4
   if (error) return next({ statusCode: BAD_REQUEST, message: error.message });
   const checkIfUserExists = await users.findOne({ where: { email, password } });
   if (!checkIfUserExists) return next({ statusCode: NOT_FOUND, message: 'Invalid fields' });

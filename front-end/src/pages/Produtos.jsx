@@ -37,7 +37,7 @@ export default function Produtos() {
   return (
     <div>
       {
-        loading ? <p>Loading....</p>
+        loading ? ''
           : <Header props={ headerInfo } />
       }
       {

@@ -45,12 +45,22 @@
 
     div {
       align-items: center;
-      display: flex;
-      justify-content: space-between;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
 
       .quantity {
         font-family: Mohave, sans-serif;
         font-size: 54px;
+        background: none;
+        width: 100%;
+        padding: 0;
+        height: fit-content;
+        text-align: center;
+        appearance: textfield;
+        
+        &::-webkit-inner-spin-button, &::-webkit-outer-spin-button {
+          -webkit-appearance: none;
+        }
       }
 
       button {

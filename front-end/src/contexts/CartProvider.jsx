@@ -5,7 +5,6 @@ import CartContext from './CartContext';
 function CartProvider({ children }) {
   const [cart, setCart] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
-  console.log(cart);
 
   return (
     <CartContext.Provider

@@ -15,7 +15,13 @@ const register = async (req, res) => {
     return res.status(201).json(response);
   };
 
-  module.exports = {
-      getUserbyEmail,
-      register,
-  };
+const getSelers = async (_req, res) => {
+  const { status, data } = await User.getSelers();
+  return res.status(status).json(data);
+};
+
+module.exports = {
+    getUserbyEmail,
+    register,
+    getSelers,
+};

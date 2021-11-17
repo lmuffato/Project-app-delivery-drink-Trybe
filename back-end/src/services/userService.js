@@ -21,7 +21,7 @@ const getUserbyEmail = async (email) => {
     algorithm: 'HS256',
   };
 
-  const payLoad = { name: myUser.name, email: myUser.email, role: myUser.role };
+  const payLoad = { name: myUser.name, email: myUser.email, role: myUser.role, id: myUser.id };
   const token = jwt.sign(payLoad, secret, jwtConfig);
   return { status: 200, data: myUser, token };
 };
@@ -48,8 +48,14 @@ const register = async ({ name, email, password, role }) => {
   };
 };
 
+const getSelers = async () => {
+  const selers = await user.findAll({ where: { role: 'seller' } });
+  return { status: 200, data: selers };
+};
+
 module.exports = {
   getUserbyEmail,
   RegisterSchema,
   register,
+  getSelers,
 };

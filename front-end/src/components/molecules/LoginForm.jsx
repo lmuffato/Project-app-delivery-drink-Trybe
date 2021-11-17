@@ -51,7 +51,7 @@ const LoginForm = () => {
           placeholder="Email"
         />
         <Input
-          className="inputEye"
+          className="input-password"
           data-testid={ testID[2] }
           name="password"
           value={ password }

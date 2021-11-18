@@ -23,18 +23,28 @@ function CheckoutTr({ item, index }) {
       >
         { item.name }
       </td>
-      <td
-        data-testid={ `cutomer_checkout__element-order-table-quantity-${index}` }
-      >
-        { item.quantity }
+      <td>
+        <span
+          data-testid={ `customer_checkout__element-order-table-quantity-${index}` }
+        >
+          { item.quantity }
+        </span>
       </td>
-      <td data-testid={ `customer_checkout__element-order-table-unit-price-${index}` }>
+      <td>
         R$
-        <span>{ item.price.replace('.', ',') }</span>
+        <span
+          data-testid={ `customer_checkout__element-order-table-unit-price-${index}` }
+        >
+          { item.price.replace('.', ',') }
+        </span>
       </td>
-      <td data-testid={ `customer_checkout__element-order-table-sub-total-${index}` }>
+      <td>
         R$
-        <span>{ subTotal.toFixed(2).toString().replace('.', ',') }</span>
+        <span
+          data-testid={ `customer_checkout__element-order-table-sub-total-${index}` }
+        >
+          { subTotal.toFixed(2).toString().replace('.', ',') }
+        </span>
       </td>
       <td>
         <button

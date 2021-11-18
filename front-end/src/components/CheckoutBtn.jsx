@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import CartContext from '../contexts/CartContext';
 
-function CheckoutBtn() {
+function CheckoutBtn({ testId }) {
   const { cart, totalPrice, setTotalPrice } = useContext(CartContext);
   const [disableBtn, setDisableBtn] = useState(true);
   const history = useHistory();
@@ -31,7 +32,7 @@ function CheckoutBtn() {
   return (
     <Button
       disabled={ disableBtn }
-      data-testid="customer_products__button-cart"
+      data-testid={ testId }
       variant="success"
       onClick={ handleClick }
     >
@@ -44,5 +45,9 @@ function CheckoutBtn() {
     </Button>
   );
 }
+
+CheckoutBtn.propTypes = {
+  testId: PropTypes.string.isRequired,
+};
 
 export default CheckoutBtn;

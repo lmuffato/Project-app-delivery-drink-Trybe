@@ -34,7 +34,7 @@ function CustomerCheckout() {
           }
         </tbody>
       </Table>
-      <CheckoutBtn data-testid="customer_checkout__element-order-total-price" />
+      <CheckoutBtn testId="customer_checkout__element-order-total-price" />
       <SendOrder />
     </div>
   );

@@ -7,6 +7,7 @@ export default function Login() {
   const [disabledBtn, setDisabledBtn] = useState(true);
 
   /* const handleButtonClick = () => {
+    redirecionar para registrar usuário se não tiver email no db
   }; */
 
   return (

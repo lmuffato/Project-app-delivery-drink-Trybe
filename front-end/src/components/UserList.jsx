@@ -3,6 +3,7 @@ import Table from 'react-bootstrap/Table';
 
 function UserList() {
   const [users, setUsers] = useState([]);
+  const { token } = JSON.parse(localStorage.getItem('user'));
 
   async function getUsers() {
     const request = await fetch('http://localhost:3001/users');
@@ -14,6 +15,19 @@ function UserList() {
   useEffect(() => {
     getUsers();
   }, []);
+
+  async function handleClick(email) {
+    const data = { email };
+    const myBody = JSON.stringify(data);
+    await fetch('http://localhost:3001/user', {
+      method: 'DELETE',
+      body: myBody,
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: token,
+      },
+    });
+  }
 
   return (
     <div>
@@ -44,8 +58,12 @@ function UserList() {
                 <td data-testid={ `admin_manage__element-user-table-role-${i}` }>
                   { u.role }
                 </td>
-                <td data-testid={ `admin_manage__element-user-table-remove-${i}` }>
-                  <button type="button">
+                <td>
+                  <button
+                    data-testid={ `admin_manage__element-user-table-remove-${i}` }
+                    onClick={ () => handleClick(u.email) }
+                    type="button"
+                  >
                     Excluir
                   </button>
                 </td>

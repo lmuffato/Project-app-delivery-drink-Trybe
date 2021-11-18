@@ -26,6 +26,8 @@ app.get('/sellers', User.getSelers);
 
 app.get('/users', User.getUsers);
 
+app.delete('/user', Validation.validateAdmToken, User.deleteUser);
+
 app.post('/sale', Sale.createSale);
 
 app.get('/coffee', (_req, res) => res.status(418).end());

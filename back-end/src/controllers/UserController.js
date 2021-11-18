@@ -30,9 +30,16 @@ const getUsers = async (_req, res) => {
   return res.status(status).json(data);
 };
 
+const deleteUser = async (req, res) => {
+  const { email } = req.body;
+  await User.deleteUser(email);
+  return res.status(201).send();
+};
+
 module.exports = {
     getUserbyEmail,
     register,
     getSelers,
     getUsers,
+    deleteUser,
 };

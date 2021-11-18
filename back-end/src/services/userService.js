@@ -57,10 +57,15 @@ const getUsers = async () => {
   return { status: 200, data: users };
 };
 
+const deleteUser = async (email) => {
+  await user.destroy({ where: { email } });
+};
+
 module.exports = {
   getUserbyEmail,
   RegisterSchema,
   register,
   getSelers,
   getUsers,
+  deleteUser,
 };

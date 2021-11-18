@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { io } from 'socket.io-client';
 import { useLocation, useParams } from 'react-router';
+import OrdersTable from './OrdersTable';
 
 export default function DetailsSocket() {
   const { id } = useParams();
@@ -62,6 +63,9 @@ export default function DetailsSocket() {
         <h1>{sale.date}</h1>
         <div><h1>{sale.status}</h1></div>
         { renderButton() }
+      </div>
+      <div>
+        <OrdersTable orderList={ sale.products } />
       </div>
     </div>
   );

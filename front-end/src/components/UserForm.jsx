@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 
+const errorId = 'admin_manage__element-invalid-register';
+
 function UserForm() {
   const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
   const [userRole, setUserRole] = useState('Vendedor');
   const [disabled, setDisabled] = useState(true);
+  const [existingUserError, setExistingUserError] = useState(false);
 
   useEffect(() => {
     const verifyInfo = () => {
@@ -35,6 +38,7 @@ function UserForm() {
         password: userPassword,
         role: userRole,
       };
+
       const newUser = await fetch('http://localhost:3001/admin', {
         method: 'POST',
         mode: 'cors',
@@ -47,7 +51,8 @@ function UserForm() {
         body: JSON.stringify(bodyRequest),
       })
         .then((result) => result.json());
-      console.log(newUser);
+      if (newUser.data) setExistingUserError(true);
+      else setExistingUserError(false);
     } catch (erro) {
       console.log(erro);
     }
@@ -106,6 +111,10 @@ function UserForm() {
           Cadastrar
         </button>
       </fieldset>
+      {
+        existingUserError
+          && <span data-testid={ errorId }>Esse usuário já existe</span>
+      }
     </form>
   );
 }

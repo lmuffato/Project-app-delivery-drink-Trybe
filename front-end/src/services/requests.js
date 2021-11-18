@@ -1,5 +1,5 @@
-async function postLogin(userData) {
-  const response = await fetch('http://localhost:3001/login', {
+async function postUser(userData, rota) {
+  const response = await fetch(`http://localhost:3001/${rota}`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(userData),
@@ -9,4 +9,4 @@ async function postLogin(userData) {
   return data;
 }
 
-export default postLogin;
+export default postUser;

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import paths from '../routesPaths/paths';
 import { goRoute } from '../utils/utils';
-import postLogin from '../services/requests';
+import postUser from '../services/requests';
 
 const Login = () => {
   const [userData, setUserData] = useState({
@@ -19,7 +19,7 @@ const Login = () => {
   }
 
   async function validateLogin(userLogin) {
-    const result = await postLogin(userLogin);
+    const result = await postUser(userLogin, 'login');
     if (result.message) setLoginErr('Usuário ou senha inválido!');
   }
 

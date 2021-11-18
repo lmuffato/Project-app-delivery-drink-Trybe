@@ -16,7 +16,9 @@ const login = async (req, res) => {
 
     const token = authentication.generateToken(payload);
 
-    return res.status(200).json({ token });
+    const { name, role} = payload;
+ 
+    return res.status(200).json({ name, email, role, token });
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }
@@ -28,8 +30,6 @@ const createNew = async (req, res) => {
     const hash = crypto.createHash('md5').update(password).digest('hex');
     const oldUserByEmail = await users.findOne({ where: { email } });
     const oldUserByName = await users.findOne({ where: { name } });
-
-    console.log(oldUserByEmail, oldUserByName, 'teste no middleware');
     
     if (oldUserByEmail || oldUserByName) return res.status(409).json({ message: false });
     const obj = { name, email, password: hash, role: 'customer' };

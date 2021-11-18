@@ -5,6 +5,8 @@ import ErrorLogin from '../Components/ErrorLogin';
 import UserContext from '../context/userContext';
 import { doLogin } from '../services/endpointsAPI';
 
+import { setToLocalStorage } from '../services/localStorage';
+
 const messageError = 'Login e/ou senha inválidos';
 const testId = 'common_login__element-invalid-email';
 
@@ -26,6 +28,8 @@ export default function Login() {
   const clickLoginButton = async () => {
     try {
       const login = await doLogin(email, password);
+      setToLocalStorage('key', login);
+
       setUserData(login);
       history.push('/customer/products');
     } catch (error) {

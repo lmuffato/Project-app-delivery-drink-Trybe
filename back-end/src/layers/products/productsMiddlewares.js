@@ -1,7 +1,5 @@
 const { products } = require('../../database/models');
 
-
-
 const createNew = async (req, res) => {
   try {
     const { name, price, urlImage } = req.body;

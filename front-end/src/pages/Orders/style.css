@@ -16,13 +16,32 @@
 }
 
 .order-container {
-  background-color: aqua;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  width: 500px;
+  padding: 5px;
+  width: 400px;
 }
 
 .order-container div {
+  align-content: space-between;
+  align-self: center;
+  display: flex;
+  flex-flow: column wrap;
+  padding: 5px;
   text-align: center;
+}
+
+.status-order-pendente {
+  background-color: rgb(255, 251, 0);
+  max-height: 5em;
+}
+
+.info-order p {
+  max-height: 5px;
+}
+
+.date-price-order p {
+  max-height: 5px;
 }

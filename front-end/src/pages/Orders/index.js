@@ -30,17 +30,17 @@ function Orders() {
           key={ id }
           data-testid={ `customer_orders__element-order-id-${id}` }
         >
-          <div>
+          <div className="info-order">
             <p>Pedido</p>
             <p>{id}</p>
           </div>
           <div
-            className="status-order"
+            className={ `status-order-${status}` }
             data-testid={ `customer_orders__element-delivery-status-${id}` }
           >
             <p>{status.toUpperCase()}</p>
           </div>
-          <div>
+          <div className="date-price-order">
             <p
               data-testid={ `customer_orders__element-order-date-${id}` }
             >

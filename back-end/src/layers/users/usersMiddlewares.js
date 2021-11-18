@@ -1,9 +1,7 @@
-const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const { users } = require('../../database/models');
-// const authentication = require('../authentication/authMiddleware');
 
-const SECRET = 'meuSegredo';
+const authentication = require('../authentication/authMiddleware');
 
 const login = async (req, res) => {
   try {
@@ -15,7 +13,8 @@ const login = async (req, res) => {
     const { dataValues } = user;
 
     const { password: _, ...payload } = dataValues;
-    const token = jwt.sign(payload, SECRET);
+
+    const token = authentication.generateToken(payload);
 
     return res.status(200).json({ token });
   } catch (err) {
@@ -27,8 +26,9 @@ const createNew = async (req, res) => {
   try {
     const { name, email, password } = req.body;
     const hash = crypto.createHash('md5').update(password).digest('hex');
-    const oldUser = await users.findOne({ where: { email } });
-    if (oldUser) return res.status(409).json({ message: false });
+    const oldUserByEmail = await users.findOne({ where: { email } });
+    const oldUserByName = await users.findOne({ where: { name } });
+    if (oldUserByEmail || oldUserByName) return res.status(409).json({ message: false });
     const obj = { name, email, password: hash, role: 'customer' };
     await users.create(obj);
  

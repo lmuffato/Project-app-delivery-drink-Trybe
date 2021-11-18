@@ -5,6 +5,9 @@ import ErrorLogin from '../Components/ErrorLogin';
 import UserContext from '../context/userContext';
 import { doLogin } from '../services/endpointsAPI';
 
+const messageError = 'Login e/ou senha inválidos';
+const testId = 'common_login__element-invalid-email';
+
 export default function Login() {
   const history = useHistory();
   const { setUserData } = useContext(UserContext);
@@ -23,7 +26,6 @@ export default function Login() {
   const clickLoginButton = async () => {
     try {
       const login = await doLogin(email, password);
-      console.log(login);
       setUserData(login);
       history.push('/customer/products');
     } catch (error) {
@@ -35,7 +37,7 @@ export default function Login() {
     const validateFields = () => {
       const sixDigits = 6;
       const regex = /^[\w.]+@[a-z]+\.\w{2,3}$/g;
-      const resultButton = password.length > sixDigits && regex.test(email);
+      const resultButton = password.length >= sixDigits && regex.test(email);
       setLoginButton(resultButton);
     };
     validateFields();
@@ -86,7 +88,10 @@ export default function Login() {
           </button>
         </Link>
       </form>
-      { errorMessage ? <ErrorLogin /> : ''}
+      {
+        errorMessage
+        && <ErrorLogin dataTestIdError={ testId } message={ messageError } />
+      }
     </div>
   );
 }

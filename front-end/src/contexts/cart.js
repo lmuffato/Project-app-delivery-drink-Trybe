@@ -32,6 +32,7 @@ export function CartProvider({ children }) {
     }
     cartItem.quantity -= 1;
     cartItem.subTotal = cartItem.quantity * price;
+    setCartItens([...cartItens, cartItem]);
   };
 
   return (

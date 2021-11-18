@@ -9,7 +9,6 @@ module.exports = async (req, res, next) => {
 
   const validations = userValidation.validateLogin({ email, password });
   
-  console.log(validations);
   if (validations.error) {
     return res.status(HTTP_ERROR_STATUS).json({
       message: validations.error.details,

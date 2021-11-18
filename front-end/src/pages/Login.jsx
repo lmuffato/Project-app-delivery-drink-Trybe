@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch, useStore } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import md5 from 'md5';
@@ -9,9 +9,10 @@ export default function Login() {
   const [userEmail, setUserEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showError, setShowError] = useState(false);
+  // const [userRole, setUserRole] = useState('');
   const url = 'http://localhost:3001';
   const dispatch = useDispatch();
-  const store = useStore();
+  // const store = useStore();
   const history = useHistory();
 
   const validations = () => {
@@ -24,24 +25,28 @@ export default function Login() {
   };
 
   const makeLogin = async () => {
+    let userRole;
     validations();
     await axios
       .post(`${url}/login`, { email: userEmail, password: md5(password) })
       .then((res) => {
         const { name, email, role, token } = res.data;
-        console.log(res.data);
+        console.log(res.message);
         localStorage.setItem('user', JSON.stringify({ name, email, role, token }));
         dispatch(userLogin({ token, role }));
         setShowError(false);
+        userRole = role;
       })
       .catch((err) => setShowError(err));
+    return userRole;
   };
 
   const handleLogin = async () => {
-    await makeLogin();
-    if (store.getState().user.role === 'customer') history.push('/customer/products');
-    if (store.getState().user.role === 'administrator') history.push('/admin/manage');
-    if (store.getState().user.role === 'seller') history.push('/seller/orders');
+    const userRole = await makeLogin();
+    console.log(userRole);
+    if (userRole === 'customer') history.push('/customer/products');
+    if (userRole === 'administrator') history.push('/admin/manage');
+    if (userRole === 'seller') history.push('/seller/orders');
   };
 
   return (

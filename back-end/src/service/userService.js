@@ -13,4 +13,6 @@ const createUser = async (name, email, password, role) => {
   return addUser;
 };
 
-module.exports = createUser;
+module.exports = {
+  createUser,
+};

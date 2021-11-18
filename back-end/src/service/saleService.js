@@ -8,7 +8,7 @@ const createSale = async (
   );
     
   const saleId = sale.id;
-  // função responsável por alimentar a tabela intermediária
+  // função responsável por alimentar a tabela intermediária 'salesProduct'
   const saleProduct = products.map(async ({ productId, quantity }) => {
     const register = await SalesProduct.create({ productId, saleId, quantity });
     return register;

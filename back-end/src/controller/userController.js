@@ -1,9 +1,9 @@
-const service = require('../service');
+const { userService } = require('../service');
 
 const createUser = async (req, res) => {
   try {
     const { name, email, password, role } = req.body;
-    const create = await service.user(name, email, password, role);
+    const create = await userService.createUser(name, email, password, role);
     if (create.message) {
       return res.status(create.code).json({ message: create.message });
     }
@@ -13,4 +13,6 @@ const createUser = async (req, res) => {
   }
 };
 
-module.exports = createUser;
+module.exports = {
+  createUser,
+};

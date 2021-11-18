@@ -7,7 +7,8 @@ function UserList() {
   async function getUsers() {
     const request = await fetch('http://localhost:3001/users');
     const list = await request.json();
-    setUsers(list);
+    const filteredList = list.filter((e) => e.role !== 'administrator');
+    setUsers(filteredList);
   }
 
   useEffect(() => {
@@ -29,21 +30,21 @@ function UserList() {
         </thead>
         <tbody>
           {
-            users.map((u, index) => (
+            users.map((u, i) => (
               <tr key={ u.name }>
-                <td>
-                  { index + 1 }
+                <td data-testid={ `admin_manage__element-user-table-item-number-${i}` }>
+                  { i + 1 }
                 </td>
-                <td>
+                <td data-testid={ `admin_manage__element-user-table-name-${i}` }>
                   { u.name }
                 </td>
-                <td>
+                <td data-testid={ `admin_manage__element-user-table-email-${i}` }>
                   { u.email }
                 </td>
-                <td>
+                <td data-testid={ `admin_manage__element-user-table-role-${i}` }>
                   { u.role }
                 </td>
-                <td>
+                <td data-testid={ `admin_manage__element-user-table-remove-${i}` }>
                   <button type="button">
                     Excluir
                   </button>

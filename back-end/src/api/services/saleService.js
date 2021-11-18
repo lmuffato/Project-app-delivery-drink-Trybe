@@ -25,6 +25,7 @@ const registerSale = async (saleData) => {
 const getOrdersByUserId = async (userId) => {
   const userOrders = await Sales.findAll({
     where: { userId },
+    include: { model: User, as: 'seller', attributes: { exclude: ['password'] } },
   });
 
   if (userOrders.length === 0) {
@@ -44,12 +45,43 @@ const getAllOrders = async () => {
       { model: User, as: 'seller', attributes: { exclude: ['password'] } },
     ],
   });
+
+  console.log(allOrders);
   
   return allOrders;
+};
+
+const getOrdersBySellerId = async (sellerId) => {
+  const sellerOrders = await Sales.findAll({
+    where: { sellerId },
+    include: { model: User, as: 'user', attributes: { exclude: ['password'] } },
+  });
+
+  if (sellerOrders.length === 0) {
+    return ({ status: 404, data: ORDERS_NOT_FOUND });
+  }
+
+  const ordersData = await findUserById(sellerId);
+  ordersData.orders = sellerOrders;
+
+  return ({ ordersData });
+};
+
+const updateOrder = async (id, status) => {
+  await Sales.update(
+    { status },
+    { where: { id } },
+  );
+
+  const updatedOrder = await Sales.findByPk(id);
+
+  return updatedOrder;
 };
 
 module.exports = {
   registerSale,
   getOrdersByUserId,
   getAllOrders,
+  getOrdersBySellerId,
+  updateOrder,
 };

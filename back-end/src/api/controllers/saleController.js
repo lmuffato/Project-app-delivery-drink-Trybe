@@ -32,12 +32,35 @@ const getOrdersByUserId = async (req, res) => {
 const getAllOrders = async (_req, res) => {
   const allOrders = await saleService.getAllOrders();
 
-  console.log(allOrders);
   res.status(200).json(allOrders);
+};
+
+const getOrdersBySellerId = async (req, res) => {
+  const { id } = req.params;
+  console.log(req.user);
+
+  const { status, data, ordersData } = await saleService.getOrdersBySellerId(id);
+
+  if (status) {
+    return res.status(status).json({ error: data });
+  }
+
+  res.status(200).json(ordersData);
+};
+
+const updateOrder = async (req, res) => {
+  const { id } = req.params;
+  const { status } = req.body;
+
+  const updatedOrder = await saleService.updateOrder(id, status);
+
+  return res.status(200).json(updatedOrder);
 };
 
 module.exports = {
   registerSale,
   getOrdersByUserId,
   getAllOrders,
+  getOrdersBySellerId,
+  updateOrder,
 };

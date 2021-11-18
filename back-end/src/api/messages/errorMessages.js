@@ -11,6 +11,7 @@ module.exports = {
   NO_REGISTRED_USERS: 'There are no registered users',
   NON_EXISTENTE_USER: 'Non-existent user.',
   ONLY_ADMINISTRATORS_ACCESS: 'Only administrators have access to this information.',
+  ONLY_SELLERS_ACCESS: 'Only sellers have access to this information.',
   ONLY_ADMINS_REGISTER: 'Only admins can register new roles',
   PASSWORD_SHORTER_THAN_ALLOWED: '"password" must have a minimum of 6 characters',
   SERVER_ERROR: 'Server error.',

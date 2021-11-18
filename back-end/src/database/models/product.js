@@ -5,9 +5,12 @@ module.exports = (sequelize, DataTypes) => {
   {
     name: DataTypes.STRING,
     price: DataTypes.DECIMAL,
-    urlImage: DataTypes.STRING,
+    url_Image: DataTypes.STRING,
   },
-  { timestamps: false });
+  { 
+    timestamps: false,
+    tableName: 'products'
+  });
 
   Product.associate = (models) => {
     Product.hasMany(models.SalesProduct, { foreignKey: 'product_id' });

@@ -1,13 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, {
+  // useEffect,
+  // useState,
+  useContext,
+} from 'react';
 import TableHeader from './TableHeader';
-
-// Array de test
-const arrayDeTest = [
-  { productId: 1, name: 'cerveja', quantity: 10, price: 8 },
-  { productId: 2, name: 'cachaça', quantity: 2, price: 10 },
-  { productId: 3, name: 'vinho', quantity: 1, price: 60 },
-  { productId: 4, name: 'whisk', quantity: 5, price: 80 },
-];
+import NewOrderContext from '../../context/NewOrderContext';
 
 const testIdNumber = 'customer_checkout__element-order-table-item-number-';
 const testIdName = 'customer_checkout__element-order-table-name-';
@@ -18,12 +15,14 @@ const testIdRemove = 'customer_checkout__element-order-table-remove-';
 const testIdTotal = 'customer_checkout__element-order-total-price';
 
 export default function Table() {
-  const [itensList, setItensList] = useState([]);
+  // const [itensList, setItensList] = useState([]);
+  const { itensList, setItensList } = useContext(NewOrderContext);
+  // const { itensList, setItensList } = useContext(UserContext);
 
-  useEffect(() => {
-    setItensList(arrayDeTest);
-    console.log(itensList);
-  }, []);
+  // useEffect(() => {
+  //   setItensList(arrayDeTest);
+  //   console.log(itensList);
+  // }, []);
 
   const deleteItem = (itemId) => {
     const newList = itensList.filter((ele) => ele.productId !== Number(itemId));

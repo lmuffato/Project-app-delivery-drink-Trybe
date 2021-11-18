@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, {
+  // useEffect,
+  // useState,
+  useContext, useEffect,
+} from 'react';
 import { Link } from 'react-router-dom';
-
-// Array de test
-const sellersArrayTest = [
-  { id: 1, name: 'Lewis Hamilton' },
-  { id: 2, name: 'Michael Schumacher' },
-];
+import NewOrderContext from '../../context/NewOrderContext';
 
 const selectSeller = 'customer_checkout__select-seller';
 const inputAddress = 'ustomer_checkout__input-address';
@@ -13,19 +12,18 @@ const inputAddressNumber = 'customer_checkout__input-addressNumber';
 const buttonSubmitOrder = 'customer_checkout__button-submit-order';
 
 export default function DeliveryDetails() {
-  const [sellersList, setSellersList] = useState([]);
-  const [deliveryAddress, setDeliveryAddress] = useState('');
-  const [addressNumber, setAddressNumber] = useState('');
-  const [seller, setSeller] = useState('');
+  const { sellersList } = useContext(NewOrderContext);
+  const { sellerId, setSellerId } = useContext(NewOrderContext);
+  const { deliveryAddress, setDeliveryAddress } = useContext(NewOrderContext);
+  const { addressNumber, setAddressNumber } = useContext(NewOrderContext);
 
   useEffect(() => {
-    setSellersList(sellersArrayTest);
-    setSeller(sellersArrayTest[0].name);
+    setSellerId(sellersList[0].id);
   }, []);
 
   useEffect(() => {
-    console.log(sellersList);
-  }, [sellersList]);
+    console.log(sellerId);
+  }, [sellerId]);
 
   return (
     <div>
@@ -38,14 +36,13 @@ export default function DeliveryDetails() {
             className={ `${selectSeller}` }
             data-testid={ `${selectSeller}` }
             name="SellersList"
-            value={ seller }
+            value={ sellerId }
             onChange={ (event) => {
-              setSeller(event.target.value);
-              console.log(seller);
+              setSellerId(event.target.value);
             } }
           >
-            {sellersList.map((ele, index) => (
-              <option key={ index }>{ele.name}</option>))}
+            { sellersList.map((ele, index) => (
+              <option key={ index } value={ `${ele.id}` }>{ele.name}</option>))}
           </select>
         </label>
       </span>

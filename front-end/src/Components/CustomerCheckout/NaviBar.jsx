@@ -1,37 +1,39 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import '../../Styles/Navbar.css';
 
 export default function NaviBar() {
   return (
     <div>
-      <nav>
-        <a
-          href="www.google.com"
+      <nav className="icons-container">
+        <Link
+          to="/customer/products"
           data-testid="customer_products__element-navbar-link-products"
           className="customer_products__element-navbar-link-products"
         >
           PRODUTOS
-        </a>
-        <a
-          href="www.google.com"
+        </Link>
+        <Link
+          to="/customer/checkout"
           data-testid="customer_products__element-navbar-link-orders"
           className="customer_products__element-navbar-link-orders"
         >
           MEUS PEDIDOS
-        </a>
-        <a
-          href="www.google.com"
+        </Link>
+        <Link
+          to="/"
           data-testid="customer_products__element-navbar-user-full-name"
           className="customer_products__element-navbar-user-full-name"
         >
           Nome do usuário
-        </a>
-        <a
-          href="www.google.com"
+        </Link>
+        <Link
+          to="/"
           data-testid="customer_products__element-navbar-link-logout"
           className="customer_products__element-navbar-link-logout"
         >
           Sair
-        </a>
+        </Link>
       </nav>
     </div>
   );

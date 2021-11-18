@@ -1,30 +1,42 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import NewOrderContext from '../context/NewOrderContext';
 import '../Styles/Navbar.css';
 
 function Navbar() {
+  const { userName } = useContext(NewOrderContext);
   return (
-    <div className="footer">
-      <ul className="icons-container">
-        <Link to="/customer/products">
-          <li
-            data-testid="customer_products__element-navbar-link-products"
-          >
-            <p>PRODUTOS</p>
-          </li>
+    <div>
+      <nav className="icons-container">
+        <Link
+          to="/customer/products"
+          data-testid="customer_products__element-navbar-link-products"
+          className="customer_products__element-navbar-link-products"
+        >
+          PRODUTOS
         </Link>
-        <Link to="/customer/checkout">
-          <li
-            data-testid="customer_products__element-navbar-link-orders"
-          >
-            <p>MEUS PEDIDOS</p>
-          </li>
+        <Link
+          to="/customer/checkout"
+          data-testid="customer_products__element-navbar-link-orders"
+          className="customer_products__element-navbar-link-orders"
+        >
+          MEUS PEDIDOS
         </Link>
-        <li><p>NAME</p></li>
-        <Link to="/">
-          <li><p>SAIR</p></li>
+        <span
+          to="/customer/orders"
+          data-testid="customer_products__element-navbar-user-full-name"
+          className="customer_products__element-navbar-user-full-name"
+        >
+          <p>{ `${userName}` }</p>
+        </span>
+        <Link
+          to="/"
+          data-testid="customer_products__element-navbar-link-logout"
+          className="customer_products__element-navbar-link-logout"
+        >
+          Sair
         </Link>
-      </ul>
+      </nav>
     </div>
   );
 }

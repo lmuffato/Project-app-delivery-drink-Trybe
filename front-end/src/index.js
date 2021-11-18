@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import UserProvider from './context/userProvider';
+import NewOrderProvider from './context/NewOrderProvider';
 // import reportWebVitals from './reportWebVitals';
 
 // If you want to start measuring performance in your app, pass a function
@@ -14,7 +15,9 @@ ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <UserProvider>
-        <App />
+        <NewOrderProvider>
+          <App />
+        </NewOrderProvider>
       </UserProvider>
     </BrowserRouter>
   </React.StrictMode>,

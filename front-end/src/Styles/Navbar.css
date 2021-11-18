@@ -1,5 +1,30 @@
+/*
 .footer {
-  background-color: rgb(123, 255, 0);
+  background-color: rgb(173, 209, 140);
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.icons-container {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  width: 90vw;
+}
+
+.destaque {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+*/
+nav {
+  background-color: rgb(173, 209, 140);
   display: flex;
   justify-content: center;
   position: fixed;

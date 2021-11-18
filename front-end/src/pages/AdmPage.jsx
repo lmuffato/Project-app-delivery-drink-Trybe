@@ -8,8 +8,31 @@ function AdmPage() {
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('seller');
   const [disAbleBtn, setDisableBtn] = useState(true);
+  const [hideErr, setHideErr] = useState(true);
 
-  console.log(role);
+  const { token } = JSON.parse(localStorage.getItem('user'));
+
+  async function handleClick() {
+    const data = {
+      email,
+      name,
+      password,
+      role,
+    };
+    const myBody = JSON.stringify(data);
+    const request = await fetch('http://localhost:3001/user/admin', {
+      method: 'POST',
+      body: myBody,
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: token,
+      },
+    });
+    const { message } = await request.json();
+    if (message) {
+      setHideErr(false);
+    }
+  }
 
   useEffect(() => {
     const passwordLength = 6;
@@ -26,13 +49,12 @@ function AdmPage() {
     }
   }, [name, email, password]);
 
-  const roles = [
-    { rol: 'seller', ptRole: 'Vendedor' },
-    { rol: 'administrator', ptRole: 'Administrador' },
-    { rol: 'customer', ptRole: 'Cliente' },
-  ];
-
   function selectInput() {
+    const roles = [
+      { rol: 'seller', ptRole: 'Vendedor' },
+      { rol: 'administrator', ptRole: 'Administrador' },
+      { rol: 'customer', ptRole: 'Cliente' },
+    ];
     return (
       <Form.Group as={ Col } controlId="formGridState">
         <Form.Label>Tipo</Form.Label>
@@ -88,6 +110,7 @@ function AdmPage() {
           { selectInput() }
         </Row>
         <Button
+          onClick={ handleClick }
           disabled={ disAbleBtn }
           data-testid="admin_manage__button-register"
           variant="success"
@@ -96,6 +119,12 @@ function AdmPage() {
           CADASTRAR
         </Button>
       </Form>
+      <span
+        data-testid="admin_manage__element-invalid-register"
+        hidden={ hideErr }
+      >
+        Usuario já cadastrado
+      </span>
     </div>
   );
 }

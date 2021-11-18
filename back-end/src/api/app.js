@@ -23,5 +23,6 @@ app.use('/register', router.user);
 app.use('/products', router.product);
 app.use('/images', express.static(`${uploadPath}`));
 app.use('/sales', router.sale);
+// app.use('/vendas', router.productSale);
 
 module.exports = app;

@@ -1,7 +1,11 @@
-const { Product } = require('../database/models');
+const { Product, Sale } = require('../database/models');
 
 const getAllProducts = async () => {
-  const getProduct = await Product.findAll();
+  const getProduct = await Product.findAll({
+    include: [
+      { model: Sale, as: 'sales', though: { attributes: [] } },
+    ],
+  });
   return getProduct;
 };
 

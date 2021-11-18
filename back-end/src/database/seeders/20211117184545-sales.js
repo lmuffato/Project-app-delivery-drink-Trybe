@@ -9,7 +9,7 @@ module.exports = {
       seller_id: 2, 
       total_price: 29.3, 
       delivery_address: "Rua T 15 - Taquaralto - TO", 
-      delivery_number: 712, 
+      delivery_number: "712", 
       sale_date: "2021/12/01", 
       status: "em andamento"
     },
@@ -19,7 +19,7 @@ module.exports = {
       seller_id: 2, 
       total_price: 51.3, 
       delivery_address: "Rua J 3", 
-      delivery_number: 828, 
+      delivery_number: "828", 
       sale_date: "2021/12/02", 
       status: "pendente"
     },
@@ -29,7 +29,7 @@ module.exports = {
       seller_id: 2, 
       total_price: 91.2, 
       delivery_address: "Avenida Marechal Rondon - MG", 
-      delivery_number: 472, 
+      delivery_number: "472", 
       sale_date: "2021/12/03", 
       status: "concluido"
     },

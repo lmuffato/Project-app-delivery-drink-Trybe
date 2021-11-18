@@ -39,14 +39,16 @@
   display: flex;
   justify-content: center;
   padding: 10px 0;
+  text-align: center;
   width: 100%;
 }
 
 .pendente, .preparando, .entregue {
   flex: 2;
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: 700;
   margin: 0 5px;
+  min-width: 8rem;
   text-transform: uppercase;
 }
 

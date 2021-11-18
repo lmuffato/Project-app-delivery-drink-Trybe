@@ -20,13 +20,46 @@ function Orders() {
     fetchSales();
   }, []);
 
+  const createOrders = () => (
+    salesOrder.map((order) => {
+      const { id, status, sale_date: saleDate, total_price: totalPrice } = order;
+
+      return (
+        <div
+          className="order-container"
+          key={ id }
+          data-testid={ `customer_orders__element-order-id-${id}` }
+        >
+          <div>
+            <p>Pedido</p>
+            <p>{id}</p>
+          </div>
+          <div
+            className="status-order"
+            data-testid={ `customer_orders__element-delivery-status-${id}` }
+          >
+            <p>{status.toUpperCase()}</p>
+          </div>
+          <div>
+            <p
+              data-testid={ `customer_orders__element-order-date-${id}` }
+            >
+              {saleDate.split('T')[0]}
+            </p>
+            <p>{totalPrice}</p>
+          </div>
+        </div>
+      );
+    })
+  );
+
   console.log(salesOrder);
 
   return (
     <section className="ordersPage">
       <MenuCostumer />
       <div className="salesContainer">
-        <p>Olá</p>
+        { salesOrder !== undefined ? createOrders() : <p>Sem pedidos!</p>}
       </div>
     </section>
   );

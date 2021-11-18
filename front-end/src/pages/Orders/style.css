@@ -5,12 +5,24 @@
 }
 
 .salesContainer {
+  align-content: center;
   background-color: rgb(228, 228, 228);
   display: flex;
-  flex-wrap: wrap;
+  flex-flow: column wrap;
   gap: 5rem;
-  justify-content: center;
   margin-top: 7rem;
   min-height: 100vh;
   padding: 5rem 0;
+}
+
+.order-container {
+  background-color: aqua;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  width: 500px;
+}
+
+.order-container div {
+  text-align: center;
 }

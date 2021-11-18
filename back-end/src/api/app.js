@@ -5,7 +5,14 @@ const http = require('http');
 const socket = require('socket.io');
 const path = require('path');
 
-const { loginRouter, registerRouter, productRouter, saleRouter } = require('../routers');
+const {
+  loginRouter,
+  registerRouter,
+  productRouter,
+  saleRouter,
+  customerRouter,
+  sellerRouter,
+} = require('../routers');
 
 const app = express();
 const httpServer = http.createServer(app);
@@ -18,7 +25,6 @@ const corsOptions = {
   origin: '*',
 };
 
-// https://github.com/tryber/sd-10a-live-lectures/pull/89/files
 app.use(cors(corsOptions));
 
 app.use(bodyParser.json({ extended: true }));
@@ -34,6 +40,10 @@ app.use('/register', registerRouter);
 app.use('/products', productRouter);
 
 app.use('/sale', saleRouter);
+
+app.use('/customer', customerRouter);
+
+app.use('/seller', sellerRouter);
 
 io.on('connection', (currSocket) => {
   currSocket.on('message', () => console.log('chamou message'));

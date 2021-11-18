@@ -83,4 +83,10 @@ module.exports = {
       message: 'this id does not belong to this entity',
     },
   },
+  saleNotFound: {
+    error: {
+      code: 404,
+      message: 'sale not found',
+    },
+  },
 };

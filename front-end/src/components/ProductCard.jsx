@@ -13,7 +13,7 @@ import {
 import ContextProducts from '../context/ContextProducts';
 
 function ProductCard(props) {
-  const { id, name, price, url_image: image } = props;
+  const { id, name, price, urlImage: image } = props;
   const [quantity, setQuantity] = useState(0);
   const { setProductCartQuantity } = useContext(ContextProducts);
 
@@ -97,7 +97,7 @@ ProductCard.propTypes = {
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
-  url_image: PropTypes.string.isRequired,
+  urlImage: PropTypes.string.isRequired,
 };
 
 export default ProductCard;

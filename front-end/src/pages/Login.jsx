@@ -88,10 +88,9 @@ export default function Login() {
           </button>
         </Link>
       </form>
-      {
-        errorMessage
-        && <ErrorLogin dataTestIdError={ testId } message={ messageError } />
-      }
+      <div hidden={ errorMessage }>
+        <ErrorLogin dataTestIdError={ testId } message={ messageError } />
+      </div>
     </div>
   );
 }

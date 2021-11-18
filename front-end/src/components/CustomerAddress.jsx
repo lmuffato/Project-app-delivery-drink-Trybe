@@ -14,10 +14,6 @@ function CustomerAddress() {
     setSellers(teste);
   }, [users, sellerSelect]);
 
-  // useEffect(() => {
-  //   setSellerSelect(sellers[0].name);
-  // }, [sellers]);
-
   const onChange = ({ target }) => {
     const { value, name } = target;
     if (name === 'seller') setSellerSelect(value);

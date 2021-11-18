@@ -12,8 +12,8 @@ export const loginAction = async ({ email, password }) => {
   try {
     const rawResponse = await fetch('http://localhost:3001/login',
       requestMetadata({ method: 'POST', body: JSON.stringify({ email, password }) }));
-    const token = await rawResponse.json();
-    return token;
+    const user = await rawResponse.json();
+    return user;
   } catch (error) {
     console.error(error.message);
     return null;

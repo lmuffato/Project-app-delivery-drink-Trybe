@@ -23,10 +23,11 @@ const LoginForm = () => {
   };
 
   const handleClickEnter = async () => {
-    const token = await loginAction({ email, password });
-    if (!token) {
+    const user = await loginAction({ email, password });
+    if (!user) {
       setIsHidden(false);
     } else {
+      localStorage.setItem('user', JSON.stringify(user));
       history.push('/customer/products');
     }
   };

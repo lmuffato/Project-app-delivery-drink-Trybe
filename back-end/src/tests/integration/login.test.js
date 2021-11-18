@@ -82,10 +82,10 @@ describe('Rota POST /login', () => {
       }
     });
 
-    it('retorna 409 - HTTP Conflict', async () => {
+    it('retorna 404 - HTTP Not Found', async () => {
       const { status } = postLogin;
 
-      expect(status).to.be.equals(409);
+      expect(status).to.be.equals(404);
     });
 
     it('retorna uma mensagem `User dont exists`', async () => {
@@ -109,10 +109,10 @@ describe('Rota POST /login', () => {
       }
     });
 
-    it('retorna 409 - HTTP Conflict', async () => {
+    it('retorna 404 - HTTP Not Found', async () => {
       const { status } = postLogin;
 
-      expect(status).to.be.equals(409);
+      expect(status).to.be.equals(404);
     });
 
     it('retorna uma mensagem `Invalid data`', async () => {

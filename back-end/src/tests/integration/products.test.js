@@ -14,11 +14,69 @@ describe('Rota GET /products', () => {
 
   let getProducts;
 
-  describe('Quandos os produtos não chegam do banco', () => {
+  describe('Quando o token não é encontrado', () => {
     before(async () => {
       try {
         getProducts = await chai.request(app)
           .get('/products')
+      } catch (e) {
+        console.error(e.message);
+      }
+    });
+
+    it('retorna 401 - HTTP Not Found', async () => {
+      const { status } = getProducts;
+
+      expect(status).to.be.equals(401);
+    });
+
+    it('retorna uma mensagem `Token not found`', async () => {
+      const { body: { message } } = getProducts;
+
+      expect(message).to.be.equals('Token not found');
+    });
+  });
+
+  describe('Quando o token não for válido', () => {
+    before(async () => {
+      try {
+        const token = 123456;
+
+        getProducts = await chai.request(app)
+          .get('/products')
+          .set('authorization', token)
+      } catch (e) {
+        console.error(e.message);
+      }
+    });
+
+    it('retorna 401 - HTTP Not Found', async () => {
+      const { status } = getProducts;
+
+      expect(status).to.be.equals(401);
+    });
+
+    it('retorna uma mensagem `Expired or invalid token`', async () => {
+      const { body: { message } } = getProducts;
+
+      expect(message).to.be.equals('Expired or invalid token');
+    });
+  });
+
+  describe('Quandos os produtos não chegam do banco', () => {
+    before(async () => {
+      try {
+        const token = await chai.request(app)
+          .post('/login')
+          .send({
+            email: 'zebirita@email.com',
+            password: '1c37466c159755ce1fa181bd247cb925'
+          })
+          .then((res) => res.body.token);
+
+        getProducts = await chai.request(app)
+          .get('/products')
+          .set('authorization', token)
       } catch (e) {
         console.error(e.message);
       }
@@ -40,8 +98,17 @@ describe('Rota GET /products', () => {
   describe('Quando os produtos chegam do banco', () => {
     before(async () => {
       try {
+        const token = await chai.request(app)
+          .post('/login')
+          .send({
+            email: 'zebirita@email.com',
+            password: '1c37466c159755ce1fa181bd247cb925'
+          })
+          .then((res) => res.body.token);
+
         getProducts = await chai.request(app)
           .get('/products')
+          .set('authorization', token)
       } catch (e) {
         console.error(e.message);
       }

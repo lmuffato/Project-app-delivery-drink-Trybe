@@ -12,6 +12,7 @@ export function AuthProvider({ children }) {
   const [values, setInputs] = useInputs({ email: '', password: '' });
   const [schemaStatus, setSchemaStatus] = useState({ valid: false, error: '' });
   const [buttonDisabled, setButtonDisabled] = useState(true);
+  const [user, setUser] = useState({});
   const { Alert, alertMessage, alertType, isVisible, showAlert } = useAlert();
   const history = useHistory();
 
@@ -26,7 +27,16 @@ export function AuthProvider({ children }) {
     event.preventDefault();
     try {
       if (!schemaStatus.valid) throw new Error(schemaStatus.error);
-      await api.post('/login', values);
+      const response = await api.post('/login', values);
+      const { data } = response;
+      const userData = {
+        name: data.name,
+        email: data.email,
+        role: data.role,
+        token: data.token,
+      };
+      setUser(userData);
+      localStorage.setItem('user', JSON.stringify(userData));
       history.push('/customer/products');
     } catch (error) {
       alertType('danger');
@@ -43,6 +53,7 @@ export function AuthProvider({ children }) {
         buttonDisabled,
         Alert,
         setInputs,
+        user,
       } }
     >
       { children }

@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
+import UserContext from '../Contexts/User/userContext';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [user, setUser] = useState({});
   const [hiddenError, setHiddenError] = useState(true);
+  const { user, setUser } = useContext(UserContext);
 
   const history = useHistory();
 
@@ -33,7 +34,10 @@ function Login() {
       setUser({ error });
     } else {
       setUser(data);
+      const { name, role } = data;
+      const infosUser = { name, email, role, token };
       localStorage.setItem('token', token);
+      localStorage.setItem('user', JSON.stringify(infosUser));
 
       if (data.role === 'administrator') {
         setHiddenError(true);

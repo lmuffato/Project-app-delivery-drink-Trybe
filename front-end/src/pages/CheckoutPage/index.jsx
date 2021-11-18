@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import Header from '../../components/Header';
 import { usePrice } from '../../context/productsProvider';
+import CheckoutForm from '../../components/CheckoutForm';
 import replaceDotToComma from '../../services/productPages/replaceDotToComa';
 import styles from './styles.module.css';
 
@@ -91,9 +92,7 @@ export default function CheckoutPage() {
 
       <div>
         <h2> Detalhes e Endereço para Entrega</h2>
-        <form action="/customer/checkout" method="POST">
-          
-        </form>
+        <CheckoutForm />
       </div>
     </div>
   );

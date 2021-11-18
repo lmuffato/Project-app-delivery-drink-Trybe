@@ -20,14 +20,18 @@
   filter: brightness(0.8);
 }
 
-.buttonCardContainer > div {
+.buttonCardContainer > input {
   align-items: center;
   background: white;
+  border: none;
   border-radius: 3px;
   color: #ed7c2b;
   display: flex;
+  font-size: 1.3rem;
   font-weight: 700;
+  height: 70%;
   justify-content: center;
+  text-align: center;
   width: 30px;
 }
 

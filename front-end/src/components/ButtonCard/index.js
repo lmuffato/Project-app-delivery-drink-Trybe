@@ -107,11 +107,10 @@ function ButtonCard({ id, name, price }) {
       >
         <IoMdRemove />
       </button>
-      <div
+      <input
         data-testid={ `customer_products__input-card-quantity-${id}` }
-      >
-        { checkQuantity() }
-      </div>
+        value={ checkQuantity() }
+      />
       <button
         type="button"
         className="addButton"

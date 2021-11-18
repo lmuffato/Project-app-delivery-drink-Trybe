@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Header from '../../components/Header';
 import RequestCard from '../../components/RequestCard';
 import fetchSales from '../../services/MyRequestsPage/fetchSales';
+import formatDate from '../../services/MyRequestsPage/formatDate';
 import styles from './styles.module.css';
 
 export default function MyRequestsPage() {
@@ -24,7 +25,7 @@ export default function MyRequestsPage() {
             key={ id }
             requestId={ id }
             status={ status }
-            date={ saleDate }
+            date={ formatDate(saleDate) }
             price={ totalPrice }
           />
         ))}

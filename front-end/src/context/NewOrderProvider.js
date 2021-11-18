@@ -22,7 +22,7 @@ function NewOrderProvider({ children }) {
   const [userId, setUserId] = useState(userIdExemple); // Preenche na tela de login
   const [userName, setUserName] = useState(userNameExample); // Preenche na tela de login
   const [itensList, setItensList] = useState(oderListExemple); // Prenchente na tela de produtos
-  const [sellersList] = useState(sellersListExample); // Carrega os dados do sequelize com os nomes e ids dos vendedores (usuários com role adm)
+  const [sellersList, setSellersList] = useState(sellersListExample); // Carrega os dados do sequelize com os nomes e ids dos vendedores (usuários com role adm)
   const [sellerId, setSellerId] = useState(''); // id do vendedor
   const [deliveryAddress, setDeliveryAddress] = useState(''); // endereço de entrega
   const [addressNumber, setAddressNumber] = useState(''); // numero do endereço
@@ -40,7 +40,8 @@ function NewOrderProvider({ children }) {
         setItensList,
 
         sellersList, // Tela checkout (recebe do banco de dados)
-
+        setSellersList,
+        
         sellerId, // Tela checkout (recebe do input do usuário)
         setSellerId,
 

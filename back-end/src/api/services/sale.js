@@ -7,6 +7,11 @@ exports.findAll = async () => {
   const sales = await saleModel.findAll({});
   return sales;
 };
+exports.getOrdersByUserEmail = async ({ email }) => {
+  const user = await userModel.findOne({ where: { email } });
+  const sales = await saleModel.findAll({ where: { userId: user.id } });
+  return sales;
+};
 const getUserIdByName = async (name) => {
   const user = await userModel.findOne({ where: { name } });
   return user.id;

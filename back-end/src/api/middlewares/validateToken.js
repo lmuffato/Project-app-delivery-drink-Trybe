@@ -1,16 +1,17 @@
-const jwt = require('jsonwebtoken');
-const fs = require('fs');
-const path = require('path');
+const { StatusCodes } = require('http-status-codes');
+const { parseToken } = require('../../utils/parseToken');
 
 /** @type {import('express').RequestHandler} */
-const validateToken = (req, _res, next) => {
+const validateToken = (req, res, next) => {
+  const { authorization: token } = req.headers;
+  if (!token) return res.status(StatusCodes.BAD_REQUEST).json({ message: 'Missing token' });
   try {
-    const { authorization } = req.headers;
-    const jwtPath = path.resolve(__dirname, '..', '..', '..', 'jwt.evaluation.key');
-    const JWT_SECRET = fs.readFileSync(jwtPath, 'utf8');
-    jwt.verify(authorization, JWT_SECRET);
+    parseToken({ token });
     next();
   } catch (error) {
+    if (error.name === 'JsonWebTokenError') {
+      return res.status(StatusCodes.BAD_REQUEST).json({ message: 'Malformed toekn' });
+    }
     console.error(error.message);
     next(error);
   }

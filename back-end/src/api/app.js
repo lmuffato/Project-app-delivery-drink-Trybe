@@ -4,6 +4,7 @@ const cors = require('cors');
 const http = require('http');
 const socket = require('socket.io');
 const path = require('path');
+const sockets = require('../sockets');
 
 const { loginRouter, registerRouter, productRouter, saleRouter } = require('../routers');
 
@@ -35,8 +36,9 @@ app.use('/products', productRouter);
 
 app.use('/sale', saleRouter);
 
-io.on('connection', (currSocket) => {
-  currSocket.on('message', () => console.log('chamou message'));
+sockets(io);
+// io.on('connection', (currSocket) => {
+//   currSocket.on('order', () => console.log('chamou message'));
 
   // socket.on('disconnect', () => {
     // the user is deleted from array of users and a left room message displayed
@@ -48,6 +50,6 @@ io.on('connection', (currSocket) => {
         // text: `${PUser.username} has left the room`,
       // });
     // }
-});
+// });
 
 module.exports = httpServer;

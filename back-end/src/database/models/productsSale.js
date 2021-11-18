@@ -8,13 +8,11 @@ const productsSaleSchema = require('../schemas/productsSale');
   const productsSale = sequelize.define('productsSale', productsSaleSchema(DataTypes), { timestamps: false });
   productsSale.associate = (models) => {
     models.product.belongsToMany(models.sale, {
-      as: 'products',
       through: productsSale,
       foreignKey: 'productId',
       otherKey: 'saleId'
     });
     models.sale.belongsToMany(models.product, {
-      as: 'sales',
       through: productsSale,
       foreignKey: 'saleId',
       otherKey: 'productId'

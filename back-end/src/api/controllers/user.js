@@ -6,9 +6,9 @@ exports.login = async (req, res) => {
     const { email, password } = req.body;
     const jwt = await UserService.login({ email, password });
     if (jwt) {
-      return res.status(StatusCodes.OK).json({ hasToken: true, token: jwt });
+      return res.status(StatusCodes.OK).json({ token: jwt });
     }
-    return res.status(StatusCodes.NOT_FOUND).end();
+    return res.status(StatusCodes.NOT_FOUND).json({ message: ReasonPhrases.NOT_FOUND });
   } catch (error) {
     console.error(error);
     res

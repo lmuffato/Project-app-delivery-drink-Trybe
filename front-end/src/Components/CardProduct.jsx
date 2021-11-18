@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const CardProduct = ({ key, drink, cost, thumb }) => (
-  <div key={ key }>
+const CardProduct = ({ id, drink, cost, thumb }) => (
+  <div key={ id }>
     <img
       alt="drink"
-      data-testid=""
+      data-testid={ `customer_products__element-card-price-${id}` }
       src={ thumb }
     />
     <div className="">

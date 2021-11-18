@@ -14,7 +14,6 @@ export default function CustomerProducts() {
       .then((data) => {
         setListProducts(data);
         setIsLoading(false);
-        console.log(listProducts);
       });
   }, []);
 
@@ -27,10 +26,11 @@ export default function CustomerProducts() {
       <main>
         { isLoading ? <h3>Carregando...</h3>
           : listProducts
-            .map((product, index) => {
-              const { name, price, urlImage } = product;
+            .map((product) => {
+              const { id, name, price, urlImage } = product;
               return (<CardProduct
-                key={ index }
+                key={ id }
+                id={ id }
                 drink={ name }
                 cost={ price }
                 thumb={ urlImage }

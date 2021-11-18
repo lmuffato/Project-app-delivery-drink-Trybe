@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import ContextLogin from './ContextLogin';
 import {
-  verifyUserExistance,
   storeUser,
 } from '../utils/LocalStorageFunctions';
 
@@ -14,13 +12,12 @@ function ProviderLogin({ children }) {
   const [signUpErrorMessage, setSignUpErrorMessage] = useState(false);
   const [userData, setUserData] = useState();
   const urlBase = 'http://localhost:3001';
-  const history = useHistory();
 
-  useEffect(() => {
-    const user = verifyUserExistance();
-    if (!user) history.push('/login');
-    setUserData(user);
-  }, []);
+  // useEffect(() => {
+  //   const user = verifyUserExistance();
+  //   if (!user) history.push('/login');
+  //   setUserData(user);
+  // }, []);
 
   const makeLogin = async (email, password) => {
     setInvalidEmailError(false);

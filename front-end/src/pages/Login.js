@@ -87,6 +87,11 @@ const Login = () => {
             </span>
           )
         }
+        <span
+          data-testid="common_login__element-invalid-email"
+        >
+          Error
+        </span>
       </form>
     </main>
   );

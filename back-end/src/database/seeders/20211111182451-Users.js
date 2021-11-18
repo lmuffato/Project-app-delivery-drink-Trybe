@@ -15,13 +15,13 @@ module.exports = {
           name: "Fulana Pereira",
           email: "fulana@deliveryapp.com",
           role: "seller",
-          password: "a4c86edecc5aee06eff8fdeda69e0d04",
+          password: "3c28d2b0881bf46457a853e0b07531c6",
         },
         {
           name: "Cliente Zé Birita",
           email: "zebirita@email.com",
           role: "customer",
-          password: "a4c86edecc5aee06eff8fdeda69e0d04",
+          password: "1c37466c159755ce1fa181bd247cb925",
         },
       ],
       {}

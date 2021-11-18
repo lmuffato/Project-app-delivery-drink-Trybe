@@ -27,8 +27,9 @@ const createNew = async (req, res) => {
   try {
     const { name, email, password } = req.body;
     const hash = crypto.createHash('md5').update(password).digest('hex');
-    const oldUser = await users.findOne({ where: { email } });
-    if (oldUser) return res.status(409).json({ message: false });
+    const oldUserByEmail = await users.findOne({ where: { email } });
+    const oldUserByName = await users.findOne({ where: { name } });
+    if (oldUserByEmail || oldUserByName) return res.status(409).json({ message: false });
     const obj = { name, email, password: hash, role: 'customer' };
     await users.create(obj);
  

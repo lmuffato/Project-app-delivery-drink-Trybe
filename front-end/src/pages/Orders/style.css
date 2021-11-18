@@ -8,8 +8,9 @@
   align-content: center;
   background-color: rgb(228, 228, 228);
   display: flex;
-  flex-flow: column wrap;
+  flex-flow: row wrap;
   gap: 5rem;
+  justify-content: center;
   margin-top: 7rem;
   min-height: 100vh;
   padding: 5rem 0;
@@ -20,6 +21,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  max-height: 100px;
   padding: 5px;
   width: 400px;
 }
@@ -35,7 +37,9 @@
 
 .status-order-pendente {
   background-color: rgb(255, 251, 0);
-  max-height: 5em;
+  border-radius: 10px;
+  margin: 5px;
+  padding: 5px;
 }
 
 .info-order p {

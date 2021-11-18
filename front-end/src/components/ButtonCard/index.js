@@ -5,8 +5,7 @@ import { IoMdRemove } from 'react-icons/io';
 import './style.css';
 
 function ButtonCard({ id }) {
-  const [quantityProductsCart, setQuantityProductsCart] = React
-    .useState(JSON.parse(localStorage.getItem('carrinho')?.length || 0));
+  const [quantityProductsCart, setQuantityProductsCart] = React.useState(0);
 
   const updateCart = (param) => {
     const cart = JSON.parse(localStorage.getItem('carrinho'));
@@ -41,8 +40,9 @@ function ButtonCard({ id }) {
   };
 
   const addToCart = () => {
-    setQuantityProductsCart((previousValue) => previousValue + 1);
     const cart = JSON.parse(localStorage.getItem('carrinho'));
+    setQuantityProductsCart(cart.length + 1);
+    console.log(cart.length)
     if (!cart) {
       const product = {
         id,
@@ -80,8 +80,17 @@ function ButtonCard({ id }) {
     updateCart('-');
   };
 
+  const setQuantity = () => {
+    const cartLength = JSON.parse(localStorage.getItem('carrinho')).length;
+    if (cartLength) {
+      setQuantityProductsCart(cart)
+      return;
+    }
+  };
+
   return (
     <div className="buttonCardContainer">
+      { setQuantity() }
       <button
         type="button"
         className="removeButton"

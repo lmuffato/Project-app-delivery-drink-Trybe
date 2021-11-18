@@ -1,5 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Grid } from '@mui/material';
+import {
+  Grid,
+  Button,
+  Link,
+} from '@mui/material';
 import NavBar from '../components/NavBar';
 import ProductCard from '../components/ProductCard';
 import ContextProducts from '../context/ContextProducts';
@@ -14,7 +18,12 @@ function CustomerProducts() {
     marginLeft: 5,
   };
 
-  const { findProducts, allProducts: products } = useContext(ContextProducts);
+  const {
+    findProducts,
+    allProducts: products,
+    cartProducts,
+    calculateSubtotal,
+  } = useContext(ContextProducts);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -37,6 +46,18 @@ function CustomerProducts() {
       { loading
         ? <p>Loading</p>
         : <Grid sx={ gridStyle }>{ renderProductCard() }</Grid> }
+
+      <Button
+        disabled={ cartProducts.length === 0 }
+        data-testid="customer_products__button-cart"
+      >
+        <Link
+          href="/customer/checkout"
+          data-testid="customer_products__checkout-bottom-value"
+        >
+          { calculateSubtotal(cartProducts).toString().replace('.', ',') }
+        </Link>
+      </Button>
     </div>
   );
 }

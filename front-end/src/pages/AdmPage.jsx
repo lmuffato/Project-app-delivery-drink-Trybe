@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Row, Col, Button } from 'react-bootstrap';
 import CustomerNavBar from '../components/CustomerNavBar';
+import UserList from '../components/UserList';
 
 function AdmPage() {
   const [email, setEmail] = useState('');
@@ -125,6 +126,10 @@ function AdmPage() {
       >
         Usuario já cadastrado
       </span>
+      <br />
+      <br />
+      <br />
+      <UserList />
     </div>
   );
 }

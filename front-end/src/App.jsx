@@ -22,6 +22,7 @@ function App() {
       />
       <Route exact path="/products" element={ <ProductClient /> } />
       <Route path="/" element={ <Navigate replace to="/login" /> } />
+      <Route path="/customer/products" element={ <ProductClient /> } />
     </Routes>
   );
 }

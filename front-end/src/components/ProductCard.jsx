@@ -44,7 +44,7 @@ function ProductCard(props) {
             data-testid={ `customer_products__element-card-price-${id}` }
             gutterBottom
           >
-            { price }
+            { price ? price.replace('.', ',') : 0 }
           </Typography>
         </Box>
         <CardMedia
@@ -65,7 +65,9 @@ function ProductCard(props) {
         <Button
           size="medium"
           data-testid={ `customer_products__button-card-rm-item-${id}` }
-          onClick={ () => setQuantity(quantity - 1) }
+          onClick={ () => {
+            if (quantity !== 0) setQuantity(quantity - 1);
+          } }
         >
           -
         </Button>

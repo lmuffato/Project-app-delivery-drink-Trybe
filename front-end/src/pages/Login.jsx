@@ -9,6 +9,7 @@ import validateEmail from '../validations/validateEmail';
 
 const messageError = 'Login e/ou senha inválidos';
 const testId = 'common_login__element-invalid-email';
+const testIdEmail = 'common_login__input-email';
 const IvalidPassword = 'common_login__input-password';
 const testIdBtnLogin = 'common_login__button-login';
 const testIdBtnRegister = 'common_login__button-register';
@@ -55,7 +56,7 @@ export default function Login() {
         <label htmlFor="login">
           Login
           <input
-            data-testid={ testId }
+            data-testid={ testIdEmail }
             type="email"
             id="email"
             placeholder="email@trybeer.com.br"

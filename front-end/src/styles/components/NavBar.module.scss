@@ -1,0 +1,39 @@
+.nav {
+  align-items: center;
+  background: var(--dark-color);
+  border-bottom: 3px solid var(--primary-color);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  left: 0;
+  padding: 10px 50px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 2;
+
+  a {
+    color: white;
+    text-decoration: none;
+
+    & + a {
+      margin-left: 40px;
+    }
+  }
+  
+  div {
+    align-items: center;
+    display: flex;
+
+    button {
+      align-items: center;
+      background: none;
+      border: none;
+      color: white;
+      display: inline-flex;
+      font-size: 16px;
+      gap: 5px;
+      margin-left: 40px;
+    }
+  }
+}

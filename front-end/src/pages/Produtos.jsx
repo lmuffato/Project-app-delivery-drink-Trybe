@@ -16,6 +16,7 @@ export default function Produtos() {
   const local = JSON.parse(user);
   const headerInfo = {
     title: 'Produtos',
+    subtitle: 'Meus Pedidos',
     name: local.name,
   };
 

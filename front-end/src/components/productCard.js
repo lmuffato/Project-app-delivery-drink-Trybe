@@ -2,13 +2,23 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function Card({ index, strName, strThumb, strPrice }) {
+  const commaValue = strPrice.replace(/\./g, ',');
+
   return (
-    <button className="card" type="button">
+
+    <div className="card" type="button">
+      <h4
+        className="card-price"
+        data-testid={ `customer_products__element-card-price-${index}` }
+      >
+        { commaValue }
+      </h4>
       <img
         className="card-img"
         src={ strThumb }
-        data-testid={ ` customer_products__img-card-bg-image-${index}` }
+        data-testid={ `customer_products__img-card-bg-image-${index}` }
         alt="foto da receita"
+        style={ { width: '200px', height: '200px', display: 'flex' } }
       />
       <h2
         className="card-title"
@@ -16,23 +26,27 @@ function Card({ index, strName, strThumb, strPrice }) {
       >
         { strName }
       </h2>
-      <h4
-        className="card-price"
-        data-testid={ `customer_products__element-card-price-${index}` }
-      >
-        { strPrice }
-      </h4>
       <div>
-        <input type="button" />
+        <button
+          type="button"
+          data-testid={ `customer_products__button-card-add-item-${index}` }
+        >
+          +
+        </button>
         <input
           type="text"
-          data-testid={ `customer_products__element-card-price-${index}` }
+          data-testid={ `customer_products__input-card-quantity-${index}` }
           value="0"
           disabled
         />
-        <input type="button" />
+        <button
+          type="button"
+          data-testid={ `customer_products__button-card-rm-item-${index}` }
+        >
+          -
+        </button>
       </div>
-    </button>
+    </div>
   );
 }
 

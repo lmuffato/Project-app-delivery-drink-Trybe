@@ -28,8 +28,8 @@ export default function Login() {
       password: passwordInput,
     })
       .then(((res) => {
-        const { user: { name, email, role }, token } = res.data;
-        dispatch(saveUser({ name, email, role, token }));
+        const { user: { id, name, email, role }, token } = res.data;
+        dispatch(saveUser({ id, name, email, role, token }));
         saveUserDataToLocalStorage({ name, email, role, token });
         history.push('/customer/products');
       }))

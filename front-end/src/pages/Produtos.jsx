@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useState } from 'react/cjs/react.development';
 
 import Card from '../components/productCard';
 import Header from '../components/header';
+import CheckoutContext from '../context/checkoutContext';
 
 const axios = require('axios').default;
 
@@ -10,6 +11,7 @@ export default function Produtos() {
   const user = localStorage.getItem('user');
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const {totalValue } = useContext(CheckoutContext);
 
   const local = JSON.parse(user);
   const headerInfo = {

@@ -1,8 +1,8 @@
 import React from 'react';
 import '../styles/Products.css';
-import { useLocation, Redirect } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 // import { Swiper, SwiperSlide } from 'swiper/react';
-import { isJwtExpired } from 'jwt-check-expiration';
+// import { isJwtExpired } from 'jwt-check-expiration';
 import SwiperCore, { Pagination, Navigation } from 'swiper';
 import NavBar from '../components/NavBar';
 import ProductCard from '../components/molecules/ProductCard';
@@ -20,11 +20,11 @@ export default function Products() {
     }
   };
 
-  const user = JSON.parse(localStorage.getItem('user'));
+  // const user = JSON.parse(localStorage.getItem('user'));
 
-  if (!user || isJwtExpired(user.token)) {
-    return <Redirect to="/login" />;
-  }
+  // if (isJwtExpired(user.token)) {
+  //   return <Redirect to="/login" />;
+  // }
   return (
     <>
       { renderNavBar() }

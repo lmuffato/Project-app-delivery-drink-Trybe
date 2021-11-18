@@ -1,9 +1,9 @@
-const requestMetadata = ({ method, body, Authentication }) => ({
+const requestMetadata = ({ method, body, Authorization }) => ({
   method,
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',
-    Authentication,
+    Authorization,
   },
   body,
 });
@@ -33,10 +33,11 @@ export const registerAction = async ({ fullName, email, password }) => {
   }
 };
 
-export const fetchProducts = async ({ token }) => {
+export const fetchProducts = async (token) => {
   try {
     const rawResponse = await fetch('http://localhost:3001/products',
-      requestMetadata({ method: 'GET', Authentication: token }));
+      requestMetadata({ method: 'GET', Authorization: token }));
+    console.log('🚀 ~ rawResponse', rawResponse);
     const { result } = await rawResponse.json();
     return result;
   } catch (error) {

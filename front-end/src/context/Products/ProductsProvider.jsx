@@ -8,11 +8,16 @@ export default function UserProvider({ children }) {
   const [products, setProducts] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
 
+  // const user = JSON.parse(localStorage.getItem('user'));
+  // console.log('🚀 ~ file: ProductsProvider.jsx ~ line 12 ~ UserProvider ~ user', user);
+
   useEffect(() => {
     (async () => {
-      const getProducts = await fetchProducts({ token: 'xablau' });
+      // if (user) {
+      const getProducts = await fetchProducts('token');
       const newProducts = getProducts.map((product) => ({ ...product, count: 0 }));
       setProducts(newProducts);
+      // }
     })();
   }, []);
 

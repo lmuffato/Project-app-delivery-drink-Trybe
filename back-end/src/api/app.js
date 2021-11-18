@@ -6,6 +6,7 @@ const registerRouter = require('./routes/register');
 const usersRouter = require('./routes/users');
 const salesRouter = require('./routes/sales');
 const productsRouter = require('./routes/products');
+// const validateToken = require('./middlewares/validateToken');
 
 const app = express();
 app.use(express.json());

@@ -25,6 +25,34 @@ function UserForm() {
     verifyInfo();
   }, [userEmail, userName.length, userPassword.length, userRole]);
 
+  const insertNewUser = async () => {
+    const token = JSON.parse(localStorage.getItem('token'));
+    console.log(token);
+    try {
+      const bodyRequest = {
+        name: userName,
+        email: userEmail,
+        password: userPassword,
+        role: userRole,
+      };
+      const newUser = await fetch('http://localhost:3001/admin', {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: token,
+        },
+        body: JSON.stringify(bodyRequest),
+      })
+        .then((result) => result.json());
+      console.log(newUser);
+    } catch (erro) {
+      console.log(erro);
+    }
+  };
+
   return (
     <form>
       <fieldset>
@@ -73,7 +101,7 @@ function UserForm() {
           type="button"
           data-testid="admin_manage__button-register"
           disabled={ disabled }
-          onClick={ () => console.log('Teste') }
+          onClick={ insertNewUser }
         >
           Cadastrar
         </button>

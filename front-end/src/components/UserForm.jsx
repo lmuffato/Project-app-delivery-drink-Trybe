@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { UsersContext } from '../contexts/Users';
 
 const errorId = 'admin_manage__element-invalid-register';
 
@@ -9,6 +10,8 @@ function UserForm() {
   const [userRole, setUserRole] = useState('Vendedor');
   const [disabled, setDisabled] = useState(true);
   const [existingUserError, setExistingUserError] = useState(false);
+
+  const { token, usersList, setUsersList } = useContext(UsersContext);
 
   useEffect(() => {
     const verifyInfo = () => {
@@ -29,7 +32,6 @@ function UserForm() {
   }, [userEmail, userName.length, userPassword.length, userRole]);
 
   const insertNewUser = async () => {
-    const token = JSON.parse(localStorage.getItem('token'));
     console.log(token);
     try {
       const bodyRequest = {
@@ -38,6 +40,8 @@ function UserForm() {
         password: userPassword,
         role: userRole,
       };
+
+      setUsersList([...usersList, bodyRequest]);
 
       const newUser = await fetch('http://localhost:3001/admin', {
         method: 'POST',

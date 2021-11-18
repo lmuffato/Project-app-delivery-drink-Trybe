@@ -3,26 +3,19 @@ import { createSlice } from '@reduxjs/toolkit';
 export const slice = createSlice({
   name: 'sale',
   initialState: {
-    id: '',
-    status: '',
-    date: '',
-    totalPrice: 0,
-    address: '',
+    sales: [],
   },
   reducers: {
     saveSale(state, { payload }) {
       return {
         ...state,
-        id: payload.id,
-        status: payload.status,
-        date: payload.date,
-        totalPrice: payload.totalPrice,
-        address: payload.address,
+        sales: payload,
       };
     },
   },
 });
 
-export const saveSale = slice.actions;
+export const { saveSale } = slice.actions;
+export const selectSale = (state) => state.product;
 
 export default slice.reducer;

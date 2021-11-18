@@ -25,7 +25,7 @@ function NavBar() {
       >
         PRODUTOS
       </Link>
-      { role === 'costumer' && (
+      { role === 'customer' && (
         <Link
           data-testid="customer_products__element-navbar-link-orders"
           to="/customer/orders"

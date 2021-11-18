@@ -7,23 +7,18 @@ import regex from '../utils/regex';
 import errorMap from '../utils/errorMap';
 
 function Registration() {
-  const { handleChange, submitChange, setUser, user } = useContext(Context);
+  const { post } = useContext(Context);
+  const [registerForm, setRegisterForm] = useState({
+    name: '',
+    email: '',
+    password: '',
+  });
   const [disableButton, setDisableButton] = useState(true);
   const [errorMessage, setErrorMessage] = useState();
   const navigate = useNavigate();
 
   useEffect(() => {
-    setUser({
-      name: '',
-      email: '',
-      password: '',
-    });
-
-    return () => setUser({});
-  }, []); // eslint-disable-line
-
-  useEffect(() => {
-    const { email, password, name } = user;
+    const { email, password, name } = registerForm;
 
     if (
       regex.email.test(email)
@@ -34,12 +29,18 @@ function Registration() {
     } else {
       setDisableButton(true);
     }
-  }, [user]);
+  }, [registerForm]);
+
+  const handleChange = ({ target }) => {
+    const { name, value } = target;
+    setRegisterForm({ ...registerForm, [name]: value });
+  };
 
   const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
       setErrorMessage(null);
-      const { data } = await submitChange(e, 'registration_form');
+      const { data } = await post('registration_form', registerForm);
 
       if (data.token) {
         localStorage.setItem('token', data.token);
@@ -57,18 +58,21 @@ function Registration() {
       <form action="submit">
         <TextInput
           name="name"
+          value={ registerForm.name }
           dataTestId="common_register__input-name"
           onChange={ handleChange }
           placeholder="Seu Nome"
         />
         <TextInput
           name="email"
+          value={ registerForm.email }
           dataTestId="common_register__input-email"
           onChange={ handleChange }
           placeholder="email@email.com"
         />
         <TextInput
           name="password"
+          value={ registerForm.password }
           dataTestId="common_register__input-password"
           type="password"
           onChange={ handleChange }

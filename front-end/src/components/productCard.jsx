@@ -27,10 +27,9 @@ function ProductCard({ product: { id, name, price, urlImage } }) {
           src={ urlImage }
           alt="algo"
           data-testid="customer_products__img-card-bg-image-"
-        <h1
           // className="absolute"
-          data-testid={ `customer_products__element-card-price-${id}` }
-        >
+        />
+        <h1 data-testid={ `customer_products__element-card-price-${id}` }>
           {price}
         </h1>
         <img

@@ -1,14 +1,11 @@
-/* eslint-disable no-trailing-spaces */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-magic-numbers */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
+import { io } from 'socket.io-client';// https://github.com/tryber/sd-10a-live-lectures/pull/89/files
 import Context from './Context';
-import mockProducts from './mockAPI';
-// import { io } from 'socket.io-client';// https://github.com/tryber/sd-10a-live-lectures/pull/89/files
+// import mockProducts from './mockAPI';
 
-// const socket = io('http://localhost:3001');
+const socket = io('http://localhost:3001');
 
 const Endpoints = {
   login_form: 'login',
@@ -35,15 +32,16 @@ function Provider({ children }) {
 
   /// ////////////////////////Link with BackEnd//////////////////////// ///
 
-  const post = (formType, data) => axios.post(`http://localhost:3001/${Endpoints[formType]}`, data);
-  const get = (formType, id) => axios.get(`http://localhost:3001/${Endpoints[formType]}/${id}`);
+  const postSubmit = (url) => axios.post(`http://localhost:3001/${url}`, user);
+  // const post = (formType, data) => axios.post(`http://localhost:3001/${Endpoints[formType]}`, data);
+  // const get = (formType, id) => axios.get(`http://localhost:3001/${Endpoints[formType]}/${id}`);
 
   const getProductsURL = 'http://localhost:3001/products';
   const getProducts = () => {
     axios.get(getProductsURL)
       .then((res) => {
         setProducts(res.data.result);
-      });    
+      });
   };
 
   const postShoppingCartURL = 'http://localhost:3001/products';
@@ -70,6 +68,9 @@ function Provider({ children }) {
     function sum() {
       const itens = Object.entries(shoppingCart);
       const teste = itens.map((item) => {
+        console.log(Object.values(item[1])[2]);
+        console.log(Object.values(item[1])[3]);
+
         const A = parseFloat(Object.values(item[1])[2]);
         const B = parseFloat(Object.values(item[1])[3]);
         return (A * B).toFixed(2);
@@ -167,6 +168,7 @@ function Provider({ children }) {
         subProduct,
         postShoppingCart,
         inputProduct,
+        socket,
         total } }
     >
       { children }

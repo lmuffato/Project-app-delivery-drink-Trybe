@@ -6,6 +6,8 @@ const { userController, productsController, saleController } = require('./contro
 const newUserAuthentication = require('./middleware/validateNewUser');
 const { validateAdmin } = require('./middleware/validateAdmin');
 const { validateToken } = require('./auth/validateToken');
+const { validateSeller } = require('./middleware/validateSeller');
+const { validateUpdateOrder } = require('./middleware/validateUpdateOrder');
 
 const app = express();
 app.use(cors());
@@ -25,6 +27,14 @@ app.route('/admin')
   .post(validateToken, validateAdmin, userController.createAdmin)
   .delete(validateToken, validateAdmin, userController.deleteUser);
 
-app.post('/sales', validateToken, saleController.registerSale);
+app.route('/orders')
+  .post(validateToken, saleController.registerSale)
+  .get(validateToken, saleController.getAllOrders);
+
+app.put('/orders/:id', validateToken, validateUpdateOrder, saleController.updateOrder);
+
+app.get('/orders/customerId/:id', validateToken, saleController.getOrdersByUserId);
+
+app.get('/orders/sellerId/:id', validateToken, validateSeller, saleController.getOrdersBySellerId);
 
 module.exports = app;

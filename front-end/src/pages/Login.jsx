@@ -26,7 +26,7 @@ export default function Login() {
   const makeLogin = async () => {
     validations();
     await axios
-      .post(`${url}/login`, { email: userEmail, password })
+      .post(`${url}/login`, { email: userEmail, password: md5(password) })
       .then((res) => {
         const { name, email, role, token } = res.data;
         console.log(res.data);
@@ -78,7 +78,7 @@ export default function Login() {
             value={ password }
             placeholder="Senha"
             data-testid="common_login__input-password"
-            onChange={ (e) => setPassword(md5(e.target.value)) }
+            onChange={ (e) => setPassword(e.target.value) }
             required
           />
         </div>

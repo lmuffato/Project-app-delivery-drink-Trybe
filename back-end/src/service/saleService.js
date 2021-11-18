@@ -6,13 +6,15 @@ const createSale = async (
   const sale = await Sale.create(
     { totalPrice, userId, sellerId, deliveryAddress, deliveryNumber, saleDate, status, products },
   );
-  // products => chamar a tabela de salesProducts conforme os 
-  // "saleId": 3, "productId": 2, "quantity": 5
-  
-  products.map(async ({ productId, saleId, quantity }) => {
+    
+  const saleId = sale.id;
+  // função responsável por alimentar a tabela intermediária
+  const saleProduct = products.map(async ({ productId, quantity }) => {
     const register = await SalesProduct.create({ productId, saleId, quantity });
     return register;
   });
+
+  await Promise.all(saleProduct);
 
   return sale;
 };

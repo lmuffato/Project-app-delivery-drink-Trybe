@@ -31,7 +31,9 @@ export default function Login() {
         const { user: { name, email, role }, token } = res.data;
         dispatch(saveUser({ name, email, role, token }));
         saveUserDataToLocalStorage({ name, email, role, token });
-        history.push('/customer/products');
+        history.push(role === 'administrator'
+          ? '/admin/manage'
+          : '/customer/products');
       }))
       .catch((err) => {
         console.log(err);

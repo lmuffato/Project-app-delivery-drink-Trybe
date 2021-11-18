@@ -8,6 +8,7 @@ function CheckoutCard({ index, name, qty, price, total }) {
         data-testid={ `customer_checkout__element-order-table-item-number-${index}` }
       >
         { Number(index) + 1 }
+        {console.log(index)}
       </td>
       <td
         data-testid={ `customer_checkout__element-order-table-name-${index}` }

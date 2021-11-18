@@ -5,6 +5,14 @@ import CustomerAddress from '../components/CustomerAddress';
 function Checkout() {
   const [products, setProducts] = useState([]);
   const [totalCheckout, setTotalCheckout] = useState(0);
+  const colunas = [
+    'Item',
+    'Descrição',
+    'Quantidade',
+    'Valor Unitário',
+    'Sub-Total',
+    'Remover Item',
+  ];
 
   useEffect(() => {
     setTotalCheckout(products
@@ -20,24 +28,33 @@ function Checkout() {
       Finalizar Pedido
       <div>
         <table>
-          <tr>
-            <th>Item</th>
-            <th>Descrição</th>
-            <th>Quantidade</th>
-            <th>Valor Unitário</th>
-            <th>Sub-total</th>
-            <th>Remover Item</th>
-          </tr>
-          {products.map((product, index) => (
-            <CheckoutCard
-              key={ index }
-              index={ index }
-              name={ product.name }
-              qty={ product.quantity }
-              price={ product.price }
-              total={ product.total }
-            />
-          ))}
+          <thead>
+            <tr>
+              { colunas.map((coluna, index) => (
+                <th key={ index }>
+                  { coluna }
+                </th>
+              )) }
+              {/* <th>Item</th>
+              <th>Descrição</th>
+              <th>Quantidade</th>
+              <th>Valor Unitário</th>
+              <th>Sub-total</th>
+              <th>Remover Item</th> */}
+            </tr>
+          </thead>
+          <tbody>
+            {products.map((product, index) => (
+              <CheckoutCard
+                key={ index }
+                index={ index }
+                name={ product.name }
+                qty={ product.quantity }
+                price={ product.price }
+                total={ product.total }
+              />
+            ))}
+          </tbody>
         </table>
         <div>
           <span

@@ -41,7 +41,7 @@ function NewOrderProvider({ children }) {
 
         sellersList, // Tela checkout (recebe do banco de dados)
         setSellersList,
-        
+
         sellerId, // Tela checkout (recebe do input do usuário)
         setSellerId,
 

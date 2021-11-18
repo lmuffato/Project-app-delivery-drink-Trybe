@@ -1,7 +1,7 @@
 import React, {
   useEffect,
   // useState,
-  useContext, useEffect,
+  useContext,
 } from 'react';
 import { Link } from 'react-router-dom';
 import NewOrderContext from '../../context/NewOrderContext';

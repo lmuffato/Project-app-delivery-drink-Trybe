@@ -17,10 +17,19 @@ function ProductCard({ product: { id, name, price, urlImage } }) {
   return (
     <section className="productContainer">
       <div className="element">
-        <h1
-          // className="absolute"
-          data-testid={ `customer_products__element-card-price-${id}` }
+        {/* <h1
+          className="absolute"
+          data-testid="customer_products__element-card-price-"
         >
+          {price}
+        </h1> */}
+        <img
+          src={ urlImage }
+          alt="algo"
+          data-testid="customer_products__img-card-bg-image-"
+          // className="absolute"
+        />
+        <h1 data-testid={ `customer_products__element-card-price-${id}` }>
           {price}
         </h1>
         <img

@@ -1,0 +1,23 @@
+import React, { useContext, useEffect, useState } from 'react';
+import Context from '../context/Context';
+import SellerOrderCard from '../components/SellerOrderCard';
+
+function SellerOrders() {
+  const { get } = useContext(Context);
+  const [orders, setOrders] = useState([]);
+
+  useEffect(() => {
+    get('seller_orders').then((ordersData) => setOrders(ordersData));
+  }, []);
+
+  return (
+    <div>
+      Tela do cliente
+      {
+        orders.map((order) => <SellerOrderCard key={ order.id } order={ order } />)
+      }
+    </div>
+  );
+}
+
+export default SellerOrders;

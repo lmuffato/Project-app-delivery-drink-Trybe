@@ -7,27 +7,41 @@ import './style.css';
 
 function OrderDetails() {
   const [sale, setSale] = useState({});
-  const { id } = useParams();
+  const { id: idOrder } = useParams();
 
   useEffect(() => {
     const { token } = JSON.parse(localStorage.getItem('user'));
 
     const fetchSale = async () => {
-      const saleFetched = await api.getSaleById(id, token);
+      const saleFetched = await api.getSaleById(idOrder, token);
 
       setSale(saleFetched);
     };
 
     fetchSale();
-  }, [id]);
+  }, [idOrder]);
 
   console.log(sale);
 
+  const { id, status, sale_date: saleDate, total_price: totalPrice } = sale;
+
   return (
-    <section className="ordersPage">
+    <section className="orderDetailsPage">
       <MenuCostumer />
       <div className="saleDetailsContainer">
-        Teste dos detalhes
+        <div>
+          Detalhe do Pedido
+          <div className="order-detail-container">
+
+            <div className="order-info">
+              <p>{`Pedido ${id}`}</p>
+              <p>{saleDate.split('T')[0]}</p>
+              <div>{status.toUpperCase()}</div>
+            </div>
+
+            <div>{totalPrice}</div>
+          </div>
+        </div>
       </div>
     </section>
   );

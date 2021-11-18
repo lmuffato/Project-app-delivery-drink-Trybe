@@ -4,16 +4,21 @@ import { Link } from 'react-router-dom';
 import DeliveryDetails from '../components/DeliveryDetails';
 import ProductsCheckoutTable from '../components/ProductsCheckoutTable';
 import ContextProducts from '../context/ContextProducts';
+import NavBar from '../components/NavBar';
 
 function CustomerCheckout() {
   const { cartProducts, calculateSubtotal } = useContext(ContextProducts);
   return (
-    <div>
+    <>
+      <NavBar />
       <ProductsCheckoutTable checkoutCart={ cartProducts } />
-      <p
-        data-testid="customer_checkout__element-order-total-price"
-      >
-        { `R$ ${calculateSubtotal(cartProducts).toString().replace('.', ',')}` }
+      <p>
+        R$
+        <span
+          data-testid="customer_checkout__element-order-total-price"
+        >
+          { ` ${calculateSubtotal(cartProducts).toString().replace('.', ',')}` }
+        </span>
       </p>
       <DeliveryDetails />
       <Button
@@ -27,7 +32,7 @@ function CustomerCheckout() {
           </Typography>
         </Link>
       </Button>
-    </div>
+    </>
   );
 }
 

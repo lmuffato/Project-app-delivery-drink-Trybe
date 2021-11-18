@@ -1,9 +1,25 @@
 .cardContainer {
   align-items: center;
-  background: turquoise;
+  background: rgb(24, 24, 24);
+  border-bottom: 8px solid #ed7c2b;
+  border-radius: 5px;
+  color: rgb(243, 243, 243);
   display: flex;
   flex-direction: column;
+  font-size: 1.3rem;
+  font-weight: 700;
   height: 20rem;
-  justify-content: center;
+  justify-content: end;
+  position: relative;
   width: 20rem;
+}
+
+.cardContainer > img {
+  border-radius: 5px;
+  height: 170px;
+  margin-bottom: 180px;
+  object-fit: cover;
+  position: absolute;
+  width: 170px;
+  z-index: 0;
 }

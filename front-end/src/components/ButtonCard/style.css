@@ -1,3 +1,40 @@
-.addButton {
-  background-color: aqua;
+.buttonCardContainer {
+  align-items: center;
+  display: flex;
+  height: 40px;
+  justify-content: space-evenly;
+  width: 120px;
+}
+
+.buttonCardContainer > button {
+  align-items: center;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  height: 90%;
+  justify-content: center;
+  transition: 0.3s;
+}
+
+.buttonCardContainer > button:hover {
+  filter: brightness(0.8);
+}
+
+.buttonCardContainer > input {
+  align-items: center;
+  background: white;
+  border: none;
+  border-radius: 3px;
+  color: #ed7c2b;
+  display: flex;
+  font-size: 1.3rem;
+  font-weight: 700;
+  height: 70%;
+  justify-content: center;
+  text-align: center;
+  width: 30px;
+}
+
+button > svg {
+  font-size: 20px;
 }

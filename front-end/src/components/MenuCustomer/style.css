@@ -1,11 +1,13 @@
 .menuCostumer {
   background: rgb(24, 24, 24);
+  border-bottom: 4px solid rgba(0, 0, 0, 0.685);
   display: flex;
   height: 7rem;
   justify-content: space-between;
   position: fixed;
   top: 0;
   width: 100%;
+  z-index: 9999;
 }
 
 .linksContainer {

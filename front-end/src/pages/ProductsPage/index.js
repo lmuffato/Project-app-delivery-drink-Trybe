@@ -13,7 +13,8 @@ const ProductsPage = () => {
     const fetchProducts = async () => {
       console.log('Aqui');
       setIsLoading(true);
-      const array = await api.getProducts();
+      const { token } = JSON.parse(localStorage.getItem('user'));
+      const array = await api.getProducts(token);
       setProducts(array);
       setIsLoading(false);
     };
@@ -26,13 +27,13 @@ const ProductsPage = () => {
       <section className="productsPage">
         <MenuCostumer />
         <div className="productsContainer">
-          {products.map(({ id, name, price, url }) => (
+          {products.map((product) => (
             <Card
-              id={ id }
-              key={ id }
-              name={ name }
-              price={ price }
-              url={ url }
+              id={ product.id }
+              key={ product.id }
+              name={ product.name }
+              price={ product.price }
+              url={ product.url_image }
             />
           ))}
         </div>

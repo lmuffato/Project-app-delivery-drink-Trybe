@@ -7,8 +7,9 @@ const path = require('path');
 const loginRouter = require('../router/login');
 const registrationRouter = require('../router/registration');
 const productRouter = require('../router/product');
+const saleRouter = require('../router/sale');
+
 const { HTTP_OK_STATUS } = require('../status');
-// const imageRouter = require('../router/image');
 
 const app = express();
 
@@ -21,8 +22,7 @@ app.get('/coffee', (_req, res) => res.status(418).end());
 app.use('/login', loginRouter);
 app.use('/registration', registrationRouter);
 app.use('/products', productRouter);
-
-app.use('/products', productRouter);
+app.use('/orders', saleRouter);
 
 // app.use('/images', imageRouter); Refatorar para deixar padronizado!
 

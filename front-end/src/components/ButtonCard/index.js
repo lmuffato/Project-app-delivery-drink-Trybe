@@ -42,7 +42,6 @@ function ButtonCard({ id }) {
   const addToCart = () => {
     const cart = JSON.parse(localStorage.getItem('carrinho'));
     setQuantityProductsCart(cart.length + 1);
-    console.log(cart.length)
     if (!cart) {
       const product = {
         id,
@@ -83,14 +82,13 @@ function ButtonCard({ id }) {
   const setQuantity = () => {
     const cartLength = JSON.parse(localStorage.getItem('carrinho')).length;
     if (cartLength) {
-      setQuantityProductsCart(cart)
-      return;
+      setQuantityProductsCart(cart);
     }
   };
 
   return (
     <div className="buttonCardContainer">
-      { setQuantity() }
+      { setQuantity }
       <button
         type="button"
         className="removeButton"

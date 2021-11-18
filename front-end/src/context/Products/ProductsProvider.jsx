@@ -34,7 +34,7 @@ export default function UserProvider({ children }) {
   };
 
   const decrement = (e) => {
-    if (count > 0) {
+    if (products[e.target.id - 1].count > 0) {
       products[e.target.id - 1].count -= 1;
       setCount(count - 1);
     }

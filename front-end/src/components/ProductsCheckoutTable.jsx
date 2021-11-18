@@ -5,13 +5,15 @@ import { Delete } from '@mui/icons-material';
 
 function ProductsCheckoutTable({ checkoutCart }) {
   const rows = checkoutCart.map((cart, index) => ({ ...cart, id: index }));
+  const formatValue = (value) => (
+    `${parseFloat(value.toString()).toFixed(2).replace('.', ',')}`
+  );
+
   function getSubTotal(params) {
     const unitPrice = params.getValue(params.id, 'price');
     const totalQuantity = params.getValue(params.id, 'quantity');
-    return unitPrice * totalQuantity;
+    return formatValue(unitPrice * totalQuantity);
   }
-
-  const formatValue = (value) => `R$ ${value}`;
 
   const tableColumns = [
     {
@@ -79,7 +81,7 @@ function ProductsCheckoutTable({ checkoutCart }) {
             `customer_checkout__element-order-table-sub-total-${params.id}`
           }
         >
-          {formatValue(params.value)}
+          {params.value}
         </span>),
     },
     {

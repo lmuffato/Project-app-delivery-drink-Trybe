@@ -11,6 +11,7 @@ const fetchSale = async (customer, seller, cartProducts, address) => {
   const response = await fetch('http://localhost:3001/sale', requestOptions)
     .then((res) => res.json())
     .then((data) => data);
+  console.log(response);
   return response;
 };
 

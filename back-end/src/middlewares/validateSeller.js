@@ -1,9 +1,11 @@
 const database = require('../database/models');
 
 const validateSeller = async (req, res, next) => {
-  const seller = req.body;
-  const sellers = await database.user.find({ where: { role: 'seller' } });
-  if (sellers.some((s) => seller.name === s.name)) return next();
+  const { seller } = req.body;
+  console.log(seller);
+  const sellerFound = await database.user.findOne({ where: { role: 'seller', id: seller.id } });
+  console.log(sellerFound);
+  if (sellerFound) return next();
   return res.status(404).json({ message: { message: 'Seller not found' } });
 };
 

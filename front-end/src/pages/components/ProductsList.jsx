@@ -77,14 +77,14 @@ export default function ProductsList() {
                     `customer_checkout__element-order-table-unit-price-${index}`
                   }
                 >
-                  { product.price.toFixed(2).toString().replace(/\./, ',') }
+                  { product.price.replace(/\./, ',') }
                 </td>
                 <td
                   data-testid={
                     `customer_checkout__element-order-table-sub-total-${index}`
                   }
                 >
-                  { subTotalCalc(product).toFixed(2).toString().replace(/\./, ',') }
+                  { subTotalCalc(product) }
                 </td>
                 <td
                   data-testid={
@@ -97,7 +97,7 @@ export default function ProductsList() {
         </tbody>
       </table>
       <h4 data-testid="customer_checkout__element-order-total-price">
-        {`Total: R$ ${totalPrice().toFixed(2).toString().replace(/\./, ',')}`}
+        { totalPrice() }
       </h4>
     </div>
   );

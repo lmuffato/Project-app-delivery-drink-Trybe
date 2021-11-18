@@ -11,7 +11,8 @@ module.exports = {
       },
       status: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        defaultValue: "Pendente"
       },
       deliveryAddress: {
         allowNull: false,
@@ -28,10 +29,6 @@ module.exports = {
         type: Sequelize.DATE,
         defaultValue: Sequelize.fn('NOW')
       },
-      status: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
       userId: {
         type: Sequelize.INTEGER,
         references: {
@@ -41,7 +38,7 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
         primaryKey: true,
-        field: 'user_id',
+        field: 'user_id'
       },
       sellerId: {
         type: Sequelize.INTEGER,
@@ -52,12 +49,12 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
         primaryKey: true,
-        field: 'seller_id',
+        field: 'seller_id'
       },
       totalPrice: {
         allowNull: false,
         type: Sequelize.DECIMAL(5,2),
-        total_price: 'total_price',
+        field: 'total_price',
       },
       // createdAt: {
       //   allowNull: false,

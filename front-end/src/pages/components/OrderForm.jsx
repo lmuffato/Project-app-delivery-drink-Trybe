@@ -1,4 +1,5 @@
 import React, { useEffect, useContext, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import ContextDeliveryApp from '../../store/ContextDeliveryApp';
 import fetchSellers from '../../services/fetchSellers';
 import fetchSale from '../../services/fetchSale';
@@ -9,6 +10,8 @@ export default function OrderForm() {
   const [selectedSeller, setSelectedSeller] = useState('');
   const [street, setStreet] = useState('');
   const [number, setNumber] = useState('');
+
+  const history = useHistory();
 
   const getSellers = async () => {
     const { token } = user;
@@ -27,9 +30,9 @@ export default function OrderForm() {
     const customer = user;
     const seller = sellers.find((s) => s.name === selectedSeller);
     const address = { street, number };
-    console.log(customer, seller, cartProducts, address);
     const response = await fetchSale(customer, seller, cartProducts, address);
     console.log(response);
+    if (response.sale) history.push(`/customer/orders/${response.sale.id}`);
   };
 
   useEffect(() => {
@@ -54,7 +57,6 @@ export default function OrderForm() {
         { sellers && sellers.map((seller) => (
           <option value={ seller.name } key={ seller.id }>{ seller.name }</option>
         ))}
-        <option value="test">teste</option>
       </select>
       <label htmlFor="endereco">
         Endereço

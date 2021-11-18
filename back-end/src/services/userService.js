@@ -6,8 +6,7 @@ const login = async (email, password) => {
   if (user === null) return { status: 404, message: { message: 'Incorrect username or password' } };
   const { name, role } = user;
   const token = createJWT({ name, email, role });
-  console.log(token);
-  return { status: 200, message: { token, name, email, role } };
+  return { status: 200, message: { token, name, email, role, id: user.id } };
 };
 
 // Criando o endpoint do cadastro do usuário

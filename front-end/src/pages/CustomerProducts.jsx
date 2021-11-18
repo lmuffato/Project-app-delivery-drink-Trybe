@@ -12,7 +12,6 @@ export default function CustomerProducts() {
     setIsLoading(true);
     getProducts().then((resp) => resp)
       .then((data) => {
-        console.log('sssssssss', data);
         setListProducts(data);
         setIsLoading(false);
         console.log(listProducts);

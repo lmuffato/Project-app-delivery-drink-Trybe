@@ -1,9 +1,12 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import CheckoutContext from '../context/checkoutContext';
 
 function BottomBox() {
-  const { totalValue } = useContext(CheckoutContext);
+  const { totalValue, setTotalValue } = useContext(CheckoutContext);
+  useEffect(() => {
+    setTotalValue(totalValue);
+  }, [totalValue]);
   return (
     <div>
       <Link to={ { pathname: '/customer/checkout' } }>
@@ -14,7 +17,7 @@ function BottomBox() {
         >
           Ver Carrinho:
           <span>
-            { ` R$: ${Math.round(totalValue * 100) / 100}` }
+            { ` R$: ${totalValue}` }
           </span>
         </button>
       </Link>

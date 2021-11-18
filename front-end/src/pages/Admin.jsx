@@ -10,9 +10,9 @@
 // }
 
 import React from 'react';
-// import { NavLink } from 'react-router-dom';
 import NavBar from '../components/NavBar';
 import UserForm from '../components/UserForm';
+import UsersTable from '../components/UsersTable';
 
 const testIds = {
   pageId: 'customer_products__element-navbar-link-orders',
@@ -29,6 +29,7 @@ function Admin() {
     <div>
       <NavBar ids={ testIds } names={ navegationNames } />
       <UserForm />
+      <UsersTable />
     </div>
   );
 }

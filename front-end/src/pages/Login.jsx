@@ -23,12 +23,6 @@ export default function Login() {
   const [loginButton, setLoginButton] = useState(false);
   const [errorMessage, setErrorMessage] = useState(true);
 
-  // const toggleErrorMessage = (user) => {
-  //   if (!user.password || !user.email) {
-  //     setErrorMessage(true);
-  //   }
-  // };
-
   const clickLoginButton = async () => {
     try {
       const login = await doLogin(email, password);

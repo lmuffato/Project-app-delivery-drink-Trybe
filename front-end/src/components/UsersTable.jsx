@@ -15,13 +15,29 @@ function UsersTable() {
         {
           usersList.map(({ id, email, name, role }, index) => (
             <tr key={ index }>
-              <td data-testid="admin_manage__element-user-table-item-number-">{index}</td>
-              <td data-testid="admin_manage__element-user-table-name-">{name}</td>
-              <td data-testid="admin_manage__element-user-table-email-">{email}</td>
-              <td data-testid="admin_manage__element-user-table-role-">{role}</td>
+              <td
+                data-testid={ `admin_manage__element-user-table-item-number-${index}` }
+              >
+                {index}
+              </td>
+              <td
+                data-testid={ `admin_manage__element-user-table-name-${index}` }
+              >
+                {name}
+              </td>
+              <td
+                data-testid={ `admin_manage__element-user-table-email-${index}` }
+              >
+                {email}
+              </td>
+              <td
+                data-testid={ `admin_manage__element-user-table-role-${index}` }
+              >
+                {role}
+              </td>
               <button
                 type="button"
-                data-testid="admin_manage__element-user-table-remove-"
+                data-testid={ `admin_manage__element-user-table-remove-${index}` }
                 onClick={ () => removeUser(id) }
               >
                 Excluir

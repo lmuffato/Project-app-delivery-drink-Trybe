@@ -1,7 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router';
 import PropTypes from 'prop-types';
-// import { Link } from 'react-router-dom';
 
 function Header({ props }) {
   const { title, subtitle, name } = props;

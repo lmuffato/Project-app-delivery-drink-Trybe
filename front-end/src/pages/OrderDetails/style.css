@@ -16,4 +16,6 @@
 
 .sale-card {
   background-color: rgb(170, 247, 119);
+  height: 300px;
+  width: 800px;
 }

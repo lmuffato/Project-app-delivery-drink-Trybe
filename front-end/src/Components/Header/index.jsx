@@ -16,6 +16,7 @@ function Header({ links }) {
 
   const onExit = () => {
     setUser(DEFAULT_USER);
+    localStorage.clear();
   };
 
   return (

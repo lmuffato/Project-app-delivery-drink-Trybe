@@ -17,11 +17,12 @@ function Checkout() {
   useEffect(() => {
     setTotalCheckout(products
       .reduce((totalP, product) => totalP + product.total, 0));
+    console.log('olá');
   });
 
   useEffect(() => {
     setProducts(JSON.parse(localStorage.getItem('carrinho')));
-  }, {});
+  }, []);
 
   return (
     <>

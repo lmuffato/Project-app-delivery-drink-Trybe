@@ -1,5 +1,4 @@
-import React, { useContext, useState } from 'react';
-import { useEffect } from 'react/cjs/react.development';
+import React, { useContext, useState, useEffect } from 'react';
 import ApiContext from '../context/ApiContext';
 
 function CustomerAddress() {
@@ -10,7 +9,9 @@ function CustomerAddress() {
   const [number, setNumber] = useState(0);
 
   useEffect(() => {
-    setSellers(users.filter((user) => user.role === 'seller'));
+    const teste = users.filter((user) => user.role === 'seller');
+    console.log(teste);
+    setSellers(teste);
   }, [users, sellerSelect]);
 
   // useEffect(() => {

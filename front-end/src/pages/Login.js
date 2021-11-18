@@ -29,6 +29,7 @@ export default function Login() {
     })
       .then(((res) => {
         const { user: { name, email, role }, token } = res.data;
+        console.log(res.data.user);
         dispatch(saveUser({ name, email, role, token }));
         saveUserDataToLocalStorage({ name, email, role, token });
         history.push('/customer/products');

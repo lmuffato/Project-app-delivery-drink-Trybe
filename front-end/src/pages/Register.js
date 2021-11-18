@@ -1,8 +1,10 @@
 import React, { useContext, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import { RegisterContext } from '../contexts/Register';
 
 function Register() {
+  const navigate = useNavigate();
   const { data, setData } = useContext(RegisterContext);
 
   const onChange = ({ target }) => {
@@ -37,12 +39,13 @@ function Register() {
     event.preventDefault();
     const { name, password, email } = data;
     try {
-      const result = await axios.post('http://localhost:3001/register', {
+      await axios.post('http://localhost:3001/register', {
         name,
         email,
         password,
       });
-      console.log(result.data.token);
+
+      navigate('/customer/products');
     } catch ({ response }) {
       // Source: https://stackoverflow.com/questions/45017822/catching-error-body-using-axios-post
       setData({

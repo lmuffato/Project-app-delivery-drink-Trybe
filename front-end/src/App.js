@@ -4,6 +4,7 @@ import Register from './pages/Register';
 import { RegisterProvider } from './contexts/Register';
 import Login from './pages/Login';
 import { LoginProvider } from './contexts/Login';
+import Products from './pages/Products';
 
 function App() {
   return (
@@ -29,7 +30,7 @@ function App() {
           </LoginProvider>
         }
       />
-      <Route exact path="/teste" element={ <h1>Teste</h1> } />
+      <Route exact path="/customer/products" element={ <Products /> } />
 
     </Routes>
   );

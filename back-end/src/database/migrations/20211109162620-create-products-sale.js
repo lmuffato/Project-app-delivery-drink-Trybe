@@ -6,12 +6,12 @@ module.exports = {
    * @param {import('sequelize').DataTypes} DataTypes 
    */
   up: async (queryInterface, DataTypes) => {
-    await queryInterface.createTable('productsSale', productsSaleSchema(DataTypes));
+    await queryInterface.createTable('productsSales', productsSaleSchema(DataTypes));
   },
   /**
    * @param {import('sequelize').QueryInterface} queryInterface 
    */
   down: async (queryInterface) => {
-    await queryInterface.dropTable('productsSale');
+    await queryInterface.dropTable('productsSales');
   }
 };

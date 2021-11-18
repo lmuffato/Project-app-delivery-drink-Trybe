@@ -40,14 +40,18 @@ function ProductDetailsCard(props) {
         ) }
       </div>
       <table>
-        <tr>
-          <th>Item</th>
-          <th>Descrição</th>
-          <th>Quantidade</th>
-          <th>Valor Unitário</th>
-          <th>Sub-Total</th>
-        </tr>
-        { items.map((item) => <ProductItem key={ `item-${item.id}` } />) }
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Descrição</th>
+            <th>Quantidade</th>
+            <th>Valor Unitário</th>
+            <th>Sub-Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          { items.map((item) => <ProductItem key={ `item-${item.id}` } />) }
+        </tbody>
       </table>
       <div>{ total }</div>
     </div>

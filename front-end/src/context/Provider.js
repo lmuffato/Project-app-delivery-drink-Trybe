@@ -32,9 +32,9 @@ function Provider({ children }) {
 
   /// ////////////////////////Link with BackEnd//////////////////////// ///
 
-  const post = (formType, data) => {
+  const post = (formType, data, id) => {
     const { token } = localStorage.getItem('token');
-    return axios.post(`http://localhost:3001/${Endpoints[formType]}`, {
+    return axios.post(`http://localhost:3001/${Endpoints[formType]}/${id || ''}`, {
       headers: {
         Authorization: token ? `Bearer ${token}` : null,
         data,

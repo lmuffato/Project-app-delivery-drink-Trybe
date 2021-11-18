@@ -5,6 +5,7 @@ const initialState = () => ({
   name: '',
   email: '',
   password: '',
+  messageErr: '',
   disabledButton: true,
 });
 

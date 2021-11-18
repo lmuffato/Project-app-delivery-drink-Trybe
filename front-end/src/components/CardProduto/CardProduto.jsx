@@ -7,6 +7,7 @@ import NomeProduto from './NomeProduto';
 import AddItem from './AddItem';
 import QuantidadeItens from './QuantidadeItens';
 import RmItem from './RmItem';
+import '../../styles/CardProduct.css';
 
 function CardProduto() {
   const { values: { isFetching, productsResult } } = useContext(ProductsContext);
@@ -16,7 +17,7 @@ function CardProduto() {
     <>
       { data
         .map((product) => (
-          <section className="produto-card" key={ product.id }>
+          <section className="product-card" key={ product.id }>
             <PrecoProduto data={ product } />
             <ImagemProduto data={ product } />
             <NomeProduto data={ product } />

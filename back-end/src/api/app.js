@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const userController = require('./controllers/userController');
+const productController = require('./controllers/productController');
 const loginvalidationMid = require('./middlewares/loginValidationMid');
 const registerValidationMid = require('./middlewares/registerValidationMid');
 const authMid = require('./middlewares/authMid');
@@ -17,6 +18,6 @@ app.get('/coffee', (_req, res) => res.status(418).end());
 app.post('/login', loginvalidationMid, userController.login);
 app.post('/register', registerValidationMid, userController.create);
 
-app.get('/products', authMid);
+app.get('/products', authMid, productController.getAll);
 
 module.exports = app;

@@ -28,7 +28,7 @@ export default function CardSale({ sale }) {
 }
 
 CardSale.propTypes = {
-  sale: PropTypes.elementType({
+  sale: PropTypes.arrayOf({
     id: PropTypes.number,
     status: PropTypes.string,
     sale_date: PropTypes.string,

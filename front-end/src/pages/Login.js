@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Redirect } from 'react-router-dom';
 import paths from '../routesPaths/paths';
 import { goRoute } from '../utils/utils';
 import postUser from '../services/requests';
@@ -11,6 +11,8 @@ const Login = () => {
   });
 
   const [loginErr, setLoginErr] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const STATUS = 200;
 
   function handleInputChange(e) {
     e.preventDefault();
@@ -19,8 +21,9 @@ const Login = () => {
   }
 
   async function validateLogin(userLogin) {
-    const result = await postUser(userLogin, 'login');
-    if (result.message) setLoginErr('Usuário ou senha inválido!');
+    const { data, status } = await postUser(userLogin, 'login');
+    if (data.message) setLoginErr(data.message);
+    if (status === STATUS) setIsLoading(true);
   }
 
   useEffect(() => {
@@ -87,11 +90,11 @@ const Login = () => {
             </span>
           )
         }
-        <span
-          data-testid="common_login__element-invalid-email"
-        >
-          Error
-        </span>
+        {
+          isLoading && (
+            <Redirect to="/customer/products" />
+          )
+        }
       </form>
     </main>
   );

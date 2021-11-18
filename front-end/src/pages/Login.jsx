@@ -28,8 +28,8 @@ export default function Login() {
   const clickLoginButton = async () => {
     try {
       const login = await doLogin(email, password);
-      setToLocalStorage('key', login);
-
+      const { name, role } = login;
+      setToLocalStorage('user', { name, email, role });
       setUserData(login);
       history.push('/customer/products');
     } catch (error) {

@@ -16,9 +16,9 @@ const login = async (req, res) => {
 
     const token = authentication.generateToken(payload);
 
-    const { name, role} = payload;
+    const { id, name, role } = payload;
  
-    return res.status(200).json({ name, email, role, token });
+    return res.status(200).json({ name, email, id, role, token });
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }

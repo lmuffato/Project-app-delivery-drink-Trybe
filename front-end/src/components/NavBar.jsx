@@ -6,7 +6,7 @@ import styles from '../styles/components/NavBar.module.scss';
 import { AuthContext } from '../contexts/auth';
 
 export default function NavBar() {
-  const { user } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
   return (
     <header className={ styles.nav }>
       <img src="/logo.svg" alt="tchau problema" />
@@ -22,7 +22,11 @@ export default function NavBar() {
         <strong data-testid="customer_products__element-navbar-user-full-name">
           {user.name}
         </strong>
-        <button type="button" data-testid="customer_products__element-navbar-link-logout">
+        <button
+          onClick={ logOut }
+          type="button"
+          data-testid="customer_products__element-navbar-link-logout"
+        >
           <SignOutIcon />
           Sair
         </button>

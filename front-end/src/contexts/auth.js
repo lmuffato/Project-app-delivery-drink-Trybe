@@ -45,10 +45,17 @@ export function AuthProvider({ children }) {
     }
   }
 
+  function logOut() {
+    localStorage.removeItem('user');
+    setUser({});
+    history.push('/login');
+  }
+
   return (
     <AuthContext.Provider
       value={ {
         logIn,
+        logOut,
         isVisible,
         buttonDisabled,
         Alert,

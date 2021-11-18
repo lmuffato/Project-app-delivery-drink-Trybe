@@ -1,20 +1,30 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import ContextLogin from './ContextLogin';
+import {
+  storeUser,
+} from '../utils/LocalStorageFunctions';
 
 const axios = require('axios').default;
 
 function ProviderLogin({ children }) {
-  const [token, setToken] = useState('');
   const [invalidEmailError, setInvalidEmailError] = useState(false);
   const [signUpErrorMessage, setSignUpErrorMessage] = useState(false);
+  const [userData, setUserData] = useState();
   const urlBase = 'http://localhost:3001';
+
+  // useEffect(() => {
+  //   const user = verifyUserExistance();
+  //   if (!user) history.push('/login');
+  //   setUserData(user);
+  // }, []);
 
   const makeLogin = async (email, password) => {
     setInvalidEmailError(false);
     try {
       const { data } = await axios.post(`${urlBase}/login`, { email, password });
-      setToken(data);
+      storeUser(data);
+      setUserData(data);
       return true;
     } catch (error) {
       setInvalidEmailError(true);
@@ -42,9 +52,9 @@ function ProviderLogin({ children }) {
       value={ {
         createUser,
         makeLogin,
-        token,
         signUpErrorMessage,
         invalidEmailError,
+        userData,
       } }
     >
       {children}

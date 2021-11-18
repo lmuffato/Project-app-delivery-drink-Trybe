@@ -1,5 +1,7 @@
 "use strict";
 
+const defaultURLImg = 'https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg';
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable("products", {
@@ -18,9 +20,9 @@ module.exports = {
         type: Sequelize.DECIMAL(4,2),
       },
       urlImage: {
-        allowNull: false,
         type: Sequelize.STRING,
-        field: 'url_image'
+        field: 'url_image',
+        default: defaultURLImg 
       },
     });
   },

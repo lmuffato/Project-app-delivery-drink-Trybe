@@ -1,6 +1,24 @@
 const { products } = require('../../database/models');
 
-const getAll = async (req, res) => {
+
+
+const createNew = async (req, res) => {
+  try {
+    const { name, price, urlImage } = req.body;
+    // const hash = crypto.createHash('md5').update(password).digest('hex');
+    // const oldUserByEmail = await users.findOne({ where: { email } });
+    // const oldUserByName = await users.findOne({ where: { name } });
+    // if (oldUserByEmail || oldUserByName) return res.status(409).json({ message: false });
+    const obj = { name, price, urlImage };
+    await products.create(obj);
+ 
+    return res.status(201).json({ message: true });
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+};
+
+const getAll = async (_req, res) => {
   try {
     const data = await products.findAll({});
     return res.status(200).json(data);
@@ -58,17 +76,17 @@ const deleteById = async (req, res) => {
   }
 };
 
-const createNew = async (req, res) => {
-  try {
-    const { name, price, urlImage } = req.body;
-    const obj = { name, price, urlImage };
-    await products.create(obj);
-    const newData = await products.create(obj);
-    return res.status(201).json(newData);
-  } catch (err) {
-    return res.status(500).json({ message: err.message });
-  }
-};
+// const createNew = async (req, res) => {
+//   try {
+//     const { name, price, urlImage } = req.body;
+//     const obj = { name, price, urlImage };
+//     await products.create(obj);
+//     const newData = await products.create(obj);
+//     return res.status(201).json(newData);
+//   } catch (err) {
+//     return res.status(500).json({ message: err.message });
+//   }
+// };
 
 module.exports = {
   getAll,

@@ -1,5 +1,5 @@
 const { Sales } = require('../../database/models');
-const { ORDERS_NOT_FOUND } = require('../messages/errorMessages');
+const { ORDERS_NOT_FOUND, ORDER_STATUS_NOT_AUTHORIZED } = require('../messages/errorMessages');
 
 const findOrderById = async (id) => {
   const order = await Sales.findByPk(id);
@@ -17,7 +17,7 @@ const validateUpdateOrder = async (req, res, next) => {
     .some((order) => order === status);
 
   if (!orderStatus) {
-    return res.status(401).json({ data: 'Order status not authorized' });
+    return res.status(401).json({ data: ORDER_STATUS_NOT_AUTHORIZED });
   }
 
   const orderExists = await findOrderById(id);

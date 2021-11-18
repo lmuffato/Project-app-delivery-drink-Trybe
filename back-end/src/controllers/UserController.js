@@ -25,8 +25,14 @@ const getSelers = async (_req, res) => {
   return res.status(status).json(data);
 };
 
+const getUsers = async (_req, res) => {
+  const { status, data } = await User.getUsers();
+  return res.status(status).json(data);
+};
+
 module.exports = {
     getUserbyEmail,
     register,
     getSelers,
+    getUsers,
 };

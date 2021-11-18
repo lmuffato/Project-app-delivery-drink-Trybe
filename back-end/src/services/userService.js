@@ -52,9 +52,15 @@ const getSelers = async () => {
   return { status: 200, data: selers };
 };
 
+const getUsers = async () => {
+  const users = await user.findAll();
+  return { status: 200, data: users };
+};
+
 module.exports = {
   getUserbyEmail,
   RegisterSchema,
   register,
   getSelers,
+  getUsers,
 };

@@ -24,6 +24,8 @@ app.post('/user/login', User.getUserbyEmail);
 
 app.get('/sellers', User.getSelers);
 
+app.get('/users', User.getUsers);
+
 app.post('/sale', Sale.createSale);
 
 app.get('/coffee', (_req, res) => res.status(418).end());

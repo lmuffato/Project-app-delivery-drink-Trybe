@@ -1,4 +1,3 @@
-const md5 = require('md5');
 const { users } = require('../../database/models');
 const userValidation = require('../schemas/userValidation');
 
@@ -23,7 +22,7 @@ module.exports = async (req, res, next) => {
     return res.status(HTTP_NOT_FOUND_STATUS).json({ message: 'User not registered' });
   } 
 
-  if (alreadyExists.password !== md5(password)) {
+  if (alreadyExists.password !== password) {
     return res.status(HTTP_NOT_FOUND_STATUS).json({ message: 'Invalid Password' });
   }
 

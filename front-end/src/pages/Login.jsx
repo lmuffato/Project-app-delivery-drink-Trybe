@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useStore } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
+import md5 from 'md5';
 import { userLogin } from '../redux/userSlice';
 
 export default function Login() {
@@ -77,7 +78,7 @@ export default function Login() {
             value={ password }
             placeholder="Senha"
             data-testid="common_login__input-password"
-            onChange={ (e) => setPassword(e.target.value) }
+            onChange={ (e) => setPassword(md5(e.target.value)) }
             required
           />
         </div>

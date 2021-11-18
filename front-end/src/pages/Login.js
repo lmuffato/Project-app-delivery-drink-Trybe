@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import paths from '../routesPaths/paths';
 import { goRoute } from '../utils/utils';
+import postUser from '../services/requests';
 
 const Login = () => {
   const [userData, setUserData] = useState({
@@ -9,10 +10,17 @@ const Login = () => {
     password: '',
   });
 
+  const [loginErr, setLoginErr] = useState('');
+
   function handleInputChange(e) {
     e.preventDefault();
     const { name, value } = e.target;
     setUserData({ ...userData, [name]: value });
+  }
+
+  async function validateLogin(userLogin) {
+    const result = await postUser(userLogin, 'login');
+    if (result.message) setLoginErr('Usuário ou senha inválido!');
   }
 
   useEffect(() => {
@@ -29,7 +37,6 @@ const Login = () => {
   });
 
   const history = useHistory();
-  const id = 'common_login__element-invalid-email [Elemento oculto (Mensagens de erro)]';
 
   return (
     <main>
@@ -58,6 +65,7 @@ const Login = () => {
         <button
           type="button"
           data-testid="common_login__button-login"
+          onClick={ () => validateLogin(userData) }
         >
           Login
         </button>
@@ -70,10 +78,19 @@ const Login = () => {
           Cadastre-se
         </button>
         <br />
+        {
+          loginErr && (
+            <span
+              data-testid="common_login__element-invalid-email"
+            >
+              { loginErr }
+            </span>
+          )
+        }
         <span
-          data-testid={ id }
+          data-testid="common_login__element-invalid-email"
         >
-          possivel erro
+          Error
         </span>
       </form>
     </main>

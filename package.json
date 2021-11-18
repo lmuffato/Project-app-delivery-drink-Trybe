@@ -31,7 +31,7 @@
   },
   "homepage": "https://github.com/betrybe/sd-0x-project-delivery-app#readme",
   "devDependencies": {
-    "axios": "0.21.1",
+    "axios": "^0.21.1",
     "dotenv": "8.2.0",
     "faker": "5.5.3",
     "jest": "26.6.3",
@@ -55,6 +55,7 @@
     }
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "express-validator": "^6.13.0",
     "react-router-dom": "^5.3.0"
   }

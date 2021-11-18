@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react';
+import { Redirect } from 'react-router';
+import postUser from '../services/requests';
 
 const Register = () => {
   const [userData, setUserData] = useState({
-    inputName: '',
-    inputEmail: '',
-    inputPassword: '',
+    name: '',
+    email: '',
+    password: '',
+    role: '',
   });
+  const [userErr, setUserErr] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   function handleInputChange(e) {
     e.preventDefault();
@@ -13,12 +18,20 @@ const Register = () => {
     setUserData({ ...userData, [name]: value });
   }
 
+  async function createUser() {
+    const STATUS = 201;
+    const { data, status } = await postUser(userData, 'register');
+    if (data.message) setUserErr(data.message);
+
+    if (status === STATUS) setIsLoading(true);
+  }
+
   useEffect(() => {
     const validateButton = document.querySelector('button');
-    const { inputEmail, inputName, inputPassword } = userData;
-    const validateEmail = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(inputEmail);
-    const validateName = new RegExp(/[\w\D]{12}/g).test(inputName);
-    const validatePassword = new RegExp(/[\w\D]{6}/g).test(inputPassword);
+    const { email, name, password } = userData;
+    const validateEmail = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(email);
+    const validateName = new RegExp(/[\w\D]{12}/g).test(name);
+    const validatePassword = new RegExp(/[\w\D]{6}/g).test(password);
 
     if (validateEmail && validateName && validatePassword) {
       validateButton.disabled = false;
@@ -31,38 +44,69 @@ const Register = () => {
     <div>
       <h1>Cadastro</h1>
       <form>
-        <label htmlFor="inputName">
+        <label htmlFor="name">
           Nome
           <input
             data-testid="common_register__input-name"
-            name="inputName"
+            name="name"
             onChange={ handleInputChange }
           />
         </label>
-        <label htmlFor="inputEmail">
+        <label htmlFor="email">
           Email
           <input
             id="input"
             data-testid="common_register__input-email"
-            name="inputEmail"
+            name="email"
             onChange={ handleInputChange }
           />
         </label>
-        <label htmlFor="inputPassword">
+        <label htmlFor="password">
           Senha
           <input
             id="input"
             data-testid="common_register__input-password"
-            name="inputPassword"
+            name="password"
+            onChange={ handleInputChange }
+          />
+        </label>
+        <label htmlFor="role">
+          Cliente
+          <input
+            type="radio"
+            id="input"
+            value="customer"
+            name="role"
+            onChange={ handleInputChange }
+          />
+        </label>
+        <label htmlFor="role">
+          Vendedor
+          <input
+            type="radio"
+            id="input"
+            value="seller"
+            name="role"
             onChange={ handleInputChange }
           />
         </label>
         <button
           type="button"
           data-testid="common_register__button-register"
+          onClick={ createUser }
         >
           Cadastrar
         </button>
+        {
+          isLoading && (
+            <Redirect to="/customer/products" />
+          )
+        }
+        {
+          userErr && (
+            <span>{ userErr }</span>
+          )
+        }
       </form>
     </div>
   );

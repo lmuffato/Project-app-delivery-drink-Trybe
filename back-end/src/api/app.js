@@ -21,6 +21,8 @@ app.get('/', (req, res) => {
 app.get('/products/:id', productController.getOne);
 app.get('/products', productController.getAll);
 
+app.get('/users', userController.getAll);
+
 app.get('/coffee', (_req, res) => res.status(418).end());
 
 app.use('/login', userController.login);

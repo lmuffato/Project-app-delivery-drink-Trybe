@@ -43,7 +43,14 @@ const register = async ({ name, email, password, role = 'customer' }) => {
   return userWithoutPassword;
 };
 
+const getAll = async () => {
+  const result = await User.findAll();
+  console.log(result);
+  return result;
+}
+
 module.exports = {
   login,
   register,
+  getAll,
 };

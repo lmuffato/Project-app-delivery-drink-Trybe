@@ -7,6 +7,7 @@ export default function buttonTypeButton({ props }) {
       id={ props.id }
       data-testid={ props.dataTestId }
       disabled={ props.disabled ? props.disabled : false }
+      onClick={ props.onclick }
     >
       { props.value }
     </button>

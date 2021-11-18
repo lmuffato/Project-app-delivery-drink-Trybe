@@ -11,7 +11,7 @@ export const valName = (name) => {
 };
 
 export const valEmail = (email) => {
-  const emailRegex = /^[\w.]+@[a-z]+\.\w{2,3}$/g;
+  const emailRegex = /^[\w.]+@[a-z]+\.\w{2,3}.?b?r?$/g;
   return emailRegex.test(email);
 };
 

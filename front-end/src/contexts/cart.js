@@ -1,30 +1,41 @@
 import React, { createContext, useState } from 'react';
 
-export const cartContext = createContext([]);
+export const cartContext = createContext({ cartItens: [],
+  increaseQuantity: () => {},
+  decreaseQuantity: () => {},
+});
 
 export function CartProvider({ children }) {
   const [cartItens, setCartItens] = useState([]);
 
-  const increaseQuantity = () => {
+  const increaseQuantity = (title, price) => {
     const cartItem = cartItens.find((item) => item.title === title);
     if (cartItem) {
-      setCartItens(...cartItens,
-        cartItem.quantity + 1, cartItem.subtotal = price * quantity);
+      cartItem.quantity += 1;
+      cartItem.subTotal = cartItem.quantity * price;
+      const updated = [...cartItens, cartItem];
+      setCartItens(updated);
     }
-    setCartItens(...cartItens, {
+    console.log(cartItens);
+    setCartItens([...cartItens, {
       title,
       quantity: 1,
       unitaryPrice: price,
       subTotal: price,
-    });
+    }]);
   };
 
-  decreaseQuantity = () => {
-
+  const decreaseQuantity = (title, price) => {
+    const cartItem = cartItens.find((item) => item.title === title);
+    if (cartItem.quantity === 0) {
+      cartItem.quantity = 0;
+    }
+    cartItem.quantity -= 1;
+    cartItem.subTotal = cartItem.quantity * price;
   };
 
   return (
-    <cartContext.Provider value={ { cartItens, setCartItens, increaseQuantity } }>
+    <cartContext.Provider value={ { cartItens, increaseQuantity, decreaseQuantity } }>
       { children }
     </cartContext.Provider>
   );

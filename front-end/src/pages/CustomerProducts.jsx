@@ -31,7 +31,7 @@ function ClientProducts() {
           ))
         }
       </Row>
-      <CheckoutBtn />
+      <CheckoutBtn testId="customer_products__button-cart" />
     </div>
   );
 }

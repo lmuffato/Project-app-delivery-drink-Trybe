@@ -17,6 +17,7 @@ function Login() {
         name: user.name,
         email: user.email,
         role: user.role,
+        id: user.id,
         token,
       };
       localStorage.setItem('user', JSON.stringify(localStrg));

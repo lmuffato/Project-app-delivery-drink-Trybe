@@ -8,7 +8,6 @@ module.exports = {
         type: Sequelize.INTEGER,
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
-        defaultValue: 1,
         references: {
           model: 'sales',
           key: 'id',
@@ -20,7 +19,6 @@ module.exports = {
         type: Sequelize.INTEGER,
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
-        defaultValue: 1,
         references: {
           model: 'products',
           key: 'id',

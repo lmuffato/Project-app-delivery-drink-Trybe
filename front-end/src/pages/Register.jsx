@@ -89,7 +89,7 @@ export default function Register() {
           type="button"
           id="register-button"
           disabled={ !disableRegisterButton }
-          dataTestId="common_register__button-register"
+          data-testid="common_register__button-register"
           onClick={ clickCadastrarButton }
         >
           CADASTRAR

@@ -33,7 +33,7 @@ export default function Login() {
 
   useEffect(() => {
     const validateFields = () => {
-      const sixDigits = 6;
+      const sixDigits = 5;
       const regex = /^[\w.]+@[a-z]+\.\w{2,3}$/g;
       const resultButton = password.length > sixDigits && regex.test(email);
       setLoginButton(resultButton);

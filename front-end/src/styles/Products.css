@@ -23,12 +23,14 @@
   padding: 15px;
   position: fixed;
   right: 10px;
+  text-decoration: none;
   top: 120px;
   width: 280px;
 }
 
 .cartbox:hover {
   background-color: #2fc18c;
+  color: white;
 }
 
 .carousel-container {

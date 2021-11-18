@@ -6,22 +6,27 @@ import { fetchProducts } from '../../utils/API/fetch';
 export default function UserProvider({ children }) {
   const [count, setCount] = useState(0);
   const [products, setProducts] = useState([]);
+  console.log('line 9 ~ UserProvider ~ products', products);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
     (async () => {
       const getProducts = await fetchProducts({ token: 'xablau' });
       const newProducts = getProducts.map((product) => ({ ...product, count: 0 }));
       setProducts(newProducts);
-      console.log(newProducts);
     })();
   }, []);
 
   const BRL = (price) => price
     .toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
 
-  const increment = (e) => {
-    products[e.target.id - 1].count += 1;
+  const increment = ({ target: { id } }) => {
+    console.log(id);
+    products[id - 1].count += 1;
     setCount(count + 1);
+    const price = products.filter((prod) => prod.id === parseFloat(id))
+      .map((prod) => prod.price);
+    setTotalPrice(price * products[id - 1].count);
   };
 
   const handleChange = (e) => {
@@ -42,6 +47,7 @@ export default function UserProvider({ children }) {
     products,
     BRL,
     handleChange,
+    totalPrice,
   };
   return (
     <ProductsContext.Provider value={ context }>

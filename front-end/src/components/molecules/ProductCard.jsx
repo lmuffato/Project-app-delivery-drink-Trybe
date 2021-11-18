@@ -25,6 +25,7 @@ export default function ProductCard() {
           <div className="card-title">
             <h3
               data-testid="customer_products__element-card-price"
+              className="price"
             >
               {BRL(parseFloat(prod.price))}
             </h3>
@@ -38,7 +39,7 @@ export default function ProductCard() {
         </div>
         <div className="counter-container">
           <button
-            name={ prod.id }
+            id={ prod.id }
             data-testid="customer_products__button-card-add-item"
             className="btn-decrement"
             type="button"
@@ -47,14 +48,14 @@ export default function ProductCard() {
             -
           </button>
           <input
-            name={ prod.id }
+            id={ prod.id }
             className="card-header counter"
             value={ prod.count }
             onChange={ (e) => handleChange(e) }
             data-testid="customer_products__input-card-quantity"
           />
           <button
-            name={ prod.id }
+            id={ prod.id }
             data-testid="customer_products__button-card-rm-item"
             className="btn-increment"
             type="button"

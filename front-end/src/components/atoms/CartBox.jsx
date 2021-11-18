@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import ProductsContext from '../../context/Products/ProductsContext';
 
 export default function CartBox() {
-  const { count } = useContext(ProductsContext);
-
+  const { totalPrice, BRL } = useContext(ProductsContext);
   return (
-    <div className="cartbox">
-      <p>{`Ver Carinho: R$ ${count}`}</p>
-    </div>
+    <Link className="cartbox" to="/customer/checkout">
+      <p>{ `Ver Carinho: ${BRL(totalPrice)}` }</p>
+    </Link>
   );
 }

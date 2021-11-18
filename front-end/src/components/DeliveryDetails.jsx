@@ -24,7 +24,6 @@ function DeliveryDetails() {
           component="div"
         >
           <DropDown
-            name="Pessoa vendedora"
             items={ ['luisa', 'orlando'] }
             dataTest="customer_checkout__select-seller"
           />

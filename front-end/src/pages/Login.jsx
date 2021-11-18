@@ -21,7 +21,11 @@ function Login() {
         token,
       };
       localStorage.setItem('user', JSON.stringify(localStrg));
-      history.push('/customer/products');
+      if (user.role === 'customer') {
+        history.push('/customer/products');
+      } else if (user.role === 'administrator') {
+        history.push('/admin/manage');
+      }
     }
   }
 

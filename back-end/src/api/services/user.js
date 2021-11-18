@@ -47,7 +47,7 @@ const destroy = async ({ id }) => {
   
   if (!data) throw err('notFound', userNotFound);
   
-  const message = "Usuário deletado com sucesso";
+  const message = 'Usuário deletado com sucesso';
 
   return { message };
 };

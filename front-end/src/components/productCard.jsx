@@ -1,3 +1,4 @@
+/* eslint-disable react/style-prop-object */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React, { useContext } from 'react';
@@ -21,10 +22,11 @@ function ProductCard({ product: { id, name, price, urlImage } }) {
           // className="absolute"
           data-testid={ `customer_products__element-card-price-${id}` }
         >
-          {price}
+          {price.replace('.', ',')}
         </h1>
         <img
           src={ urlImage }
+          style={ { width: 20 } }
           alt="algo"
           data-testid={ `customer_products__img-card-bg-image-${id}` }
         />

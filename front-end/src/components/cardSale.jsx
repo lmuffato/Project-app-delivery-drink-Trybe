@@ -27,11 +27,15 @@ export default function CardSale({ sale }) {
   );
 }
 
+// CardSale.propTypes = {
+//   sale: PropTypes.elementType({
+//     id: PropTypes.number,
+//     status: PropTypes.string,
+//     sale_date: PropTypes.string,
+//     total_price: PropTypes.string,
+//   }).isRequired,
+// };
+
 CardSale.propTypes = {
-  sale: PropTypes.elementType({
-    id: PropTypes.number,
-    status: PropTypes.string,
-    sale_date: PropTypes.string,
-    total_price: PropTypes.string,
-  }).isRequired,
+  sale: PropTypes.elementType.isRequired,
 };

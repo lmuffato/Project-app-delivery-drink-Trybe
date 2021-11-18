@@ -11,14 +11,21 @@ const findById = async (id) => {
     where: { sellerId: id },
   });
   return getAll;
-}
+};
+
+const findByIdSale = async (saleId) => {
+  const getById = await Sale.findById(saleId);
+  return getById;
+};
 
 const getAll = async () => {
-  const getAll = await Sale.findAll();
-  return getAll;
-}
+  const data = await Sale.findAll();
+  return data;
+};
+
 module.exports = {
   create,
   findById,
   getAll,
+  findByIdSale,
 };

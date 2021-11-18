@@ -25,23 +25,35 @@ const create = async (req, res, next) => {
 
 const findById = async (req, res, next) => {
   try {
-    const { id } = req.params
-    const sale  = await saleService.findById(id);
+    const { id } = req.params;
+    const sale = await saleService.findById(id);
 
     return res.status(200).json(sale);
   } catch (err) {
     console.log(err);
     next(err);
   }
-}
+};
 
 const getAll = async (req, res) => {
   const sale = await saleService.getAll();
   return res.status(200).json(sale);
-}
+};
+
+const findByIdSale = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const sale = await saleService.findById(id);
+
+    return res.status(200).json(sale);
+  } catch (err) {
+    next(err);
+  }
+};
 
 module.exports = {
   create,
   findById,
   getAll,
+  findByIdSale,
 };

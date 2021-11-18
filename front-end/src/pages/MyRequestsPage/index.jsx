@@ -1,31 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '../../components/Header';
 import RequestCard from '../../components/RequestCard';
+import fetchSales from '../../services/MyRequestsPage/fetchSales';
 import styles from './styles.module.css';
 
 export default function MyRequestsPage() {
+  const [sales, setSales] = useState([]);
+
+  useEffect(() => {
+    const getSales = async () => {
+      const data = await fetchSales();
+      setSales(data);
+    };
+    getSales();
+  }, []);
+
   return (
     <main className={ styles.container }>
       <Header />
       <section className={ styles.requestsContainer }>
-        <RequestCard
-          requestId="001"
-          status="pendente"
-          date="17/11/21"
-          price="50,90"
-        />
-        <RequestCard
-          requestId="002"
-          status="entregue"
-          date="08/12/20"
-          price="22,90"
-        />
-        <RequestCard
-          requestId="003"
-          status="preparando"
-          date="11/10/21"
-          price="145,90"
-        />
+        {sales.map(({ id, totalPrice, status, saleDate }) => (
+          <RequestCard
+            key={ id }
+            requestId={ id }
+            status={ status }
+            date={ saleDate }
+            price={ totalPrice }
+          />
+        ))}
       </section>
     </main>
   );

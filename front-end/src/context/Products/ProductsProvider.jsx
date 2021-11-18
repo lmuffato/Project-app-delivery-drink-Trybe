@@ -6,7 +6,6 @@ import { fetchProducts } from '../../utils/API/fetch';
 export default function UserProvider({ children }) {
   const [count, setCount] = useState(0);
   const [products, setProducts] = useState([]);
-  console.log('line 9 ~ UserProvider ~ products', products);
   const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {

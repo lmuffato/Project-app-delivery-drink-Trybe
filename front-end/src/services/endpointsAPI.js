@@ -15,3 +15,13 @@ export const createNewUser = async (name, email, password) => {
   const result = await api.post('/users/create', { name, email, password });
   return result.data;
 };
+
+export const getProducts = async () => {
+  const result = await api.post('/products');
+  return result.data;
+};
+
+export const postProducts = async (name, price, urlImage) => {
+  const result = await api.post('/products', { name, price, urlImage });
+  return result.data;
+};

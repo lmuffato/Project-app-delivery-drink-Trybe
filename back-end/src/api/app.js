@@ -29,6 +29,7 @@ app.route('/sales')
   .post(validateToken, saleController.registerSale)
   .get(validateToken, saleController.getAllOrders);
 
-app.get('/sales/:id', validateToken, saleController.getOrdersByUserId);
+app.get('/orders/customer/:id', validateToken, saleController.getOrdersByUserId);
+// app.get('/orders/seller/:id');
 
 module.exports = app;

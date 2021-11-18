@@ -4,9 +4,9 @@ import { DataGrid } from '@mui/x-data-grid';
 import { Delete } from '@mui/icons-material';
 
 function ProductsCheckoutTable({ checkoutCart }) {
-  const rows = checkoutCart;
+  const rows = checkoutCart.map((cart, index) => ({ ...cart, id: index }));
   function getSubTotal(params) {
-    const unitPrice = params.getValue(params.id, 'value');
+    const unitPrice = params.getValue(params.id, 'price');
     const totalQuantity = params.getValue(params.id, 'quantity');
     return unitPrice * totalQuantity;
   }
@@ -22,20 +22,20 @@ function ProductsCheckoutTable({ checkoutCart }) {
       renderCell: (params) => (
         <span
           data-testid={
-            `customer_checkout__element-order-table-item-number-${params.id - 1}`
+            `customer_checkout__element-order-table-item-number-${params.id}`
           }
         >
-          {params.value}
+          {params.value + 1}
         </span>),
     },
     {
-      field: 'description',
+      field: 'name',
       headerName: 'Descrição',
       flex: 1,
       headerAlign: 'center',
       renderCell: (params) => (
         <span
-          data-testid={ ` customer_checkout__element-order-table-name-${params.id - 1}` }
+          data-testid={ `customer_checkout__element-order-table-name-${params.id}` }
         >
           {params.value}
         </span>),
@@ -48,21 +48,21 @@ function ProductsCheckoutTable({ checkoutCart }) {
       renderCell: (params) => (
         <span
           data-testid={
-            ` cutomer_checkout__element-order-table-quantity-${params.id - 1}`
+            `customer_checkout__element-order-table-quantity-${params.id}`
           }
         >
           {params.value}
         </span>),
     },
     {
-      field: 'value',
+      field: 'price',
       headerName: 'Valor Unitário',
       flex: 0.25,
       type: 'number',
       renderCell: (params) => (
         <span
           data-testid={
-            ` customer_checkout__element-order-table-unit-price-${params.id - 1}`
+            `customer_checkout__element-order-table-unit-price-${params.id}`
           }
         >
           {formatValue(params.value)}
@@ -76,7 +76,7 @@ function ProductsCheckoutTable({ checkoutCart }) {
       renderCell: (params) => (
         <span
           data-testid={
-            ` customer_checkout__element-order-table-sub-total-${params.id - 1}`
+            `customer_checkout__element-order-table-sub-total-${params.id}`
           }
         >
           {formatValue(params.value)}
@@ -91,7 +91,7 @@ function ProductsCheckoutTable({ checkoutCart }) {
           type="button"
           onClick={ () => console.log('click') }
           data-testid={
-            ` customer_checkout__element-order-table-remove-${params.id - 1}`
+            `customer_checkout__element-order-table-remove-${params.id}`
           }
         >
           <Delete />

@@ -239,4 +239,130 @@ describe('Rota GET /costumer/:id', () => {
   })
 });
 
+describe('Rota GET /orders/:id', () => {
+  before(() => stub(console, 'log').returns(true));
+  after(() => console.log.restore());
+
+  let getOrders;
+
+  describe('Quando o token não é encontrado', () => {
+    before(async () => {
+      try {
+        getOrders = await chai.request(app)
+          .get('/orders/1')
+      } catch (e) {
+        console.error(e.message);
+      }
+    });
+
+    it('retorna 401 - HTTP Not Found', async () => {
+      const { status } = getOrders;
+
+      expect(status).to.be.equals(401);
+    });
+
+    it('retorna uma mensagem `Token not found`', async () => {
+      const { body: { message } } = getOrders;
+
+      expect(message).to.be.equals('Token not found');
+    });
+  });
+
+  describe('Quando o token não for válido', () => {
+    before(async () => {
+      try {
+        const token = 123456;
+
+        getOrders = await chai.request(app)
+          .get('/orders/1')
+          .set('authorization', token)
+      } catch (e) {
+        console.error(e.message);
+      }
+    });
+
+    it('retorna 401 - HTTP Not Found', async () => {
+      const { status } = getOrders;
+
+      expect(status).to.be.equals(401);
+    });
+
+    it('retorna uma mensagem `Expired or invalid token`', async () => {
+      const { body: { message } } = getOrders;
+
+      expect(message).to.be.equals('Expired or invalid token');
+    });
+  });
+
+  describe('Quando não retorna a ordem ', () => {
+    before(async () => {
+      try {
+        const token = await chai.request(app)
+          .post('/login')
+          .send({
+            email: 'zebirita@email.com',
+            password: '1c37466c159755ce1fa181bd247cb925'
+          })
+          .then((res) => res.body.token);
+
+        getOrders = await chai.request(app)
+          .get('/orders/2')
+          .set('authorization', token)
+      } catch (e) {
+        console.error(e.message);
+      }
+    });
+
+    it('retorna 404 - HTTP Not Found', async () => {
+      const { status } = getOrders;
+
+      expect(status).to.be.equals(404);
+    });
+
+    it('retorna uma mensagem `Sale does not exist`', async () => {
+      const { body: { error } } = getOrders;
+
+      expect(error).to.be.equals('Sale does not exist');
+    });
+  });
+
+  describe('Quando retorna a ordem ', () => {
+    before(async () => {
+      try {
+        const token = await chai.request(app)
+          .post('/login')
+          .send({
+            email: 'zebirita@email.com',
+            password: '1c37466c159755ce1fa181bd247cb925'
+          })
+          .then((res) => res.body.token);
+
+        getOrders = await chai.request(app)
+          .get('/orders/1')
+          .set('authorization', token)
+      } catch (e) {
+        console.error(e.message);
+      }
+    });
+
+    it('retorna 200 - HTTP Ok Status', async () => {
+      const { status } = getOrders;
+
+      expect(status).to.be.equals(200);
+    });
+
+    it('retorna um body que não é vazio', async () => {
+      const { body } = getOrders;
+
+      expect(body).to.not.be.null;
+    });
+
+    it('retorna um object', async () => {
+      const { body } = getOrders;
+
+      expect(body).to.be.a('object');
+    });
+  })
+});
+
 // describe('', () => {});

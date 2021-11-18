@@ -11,7 +11,6 @@ export default function Produtos() {
   const user = localStorage.getItem('user');
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [value, setValue] = useState(0);
 
   const local = JSON.parse(user);
   const headerInfo = {
@@ -54,12 +53,10 @@ export default function Produtos() {
                 strThumb={ e.url_image }
                 strName={ e.name }
                 strPrice={ e.price }
-                setValue={ setValue }
-                value={ value }
               />
             ))
       }
-      <BottomBox value={ value } />
+      <BottomBox />
     </div>
   );
 }

@@ -1,8 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import CheckoutContext from '../context/checkoutContext';
 
-function BottomBox({ value }) {
+function BottomBox() {
+  const { totalValue } = useContext(CheckoutContext);
   return (
     <div>
       <Link to={ { pathname: '/customer/checkout' } }>
@@ -13,16 +14,12 @@ function BottomBox({ value }) {
         >
           Ver Carrinho:
           <span>
-            { ` R$: ${value}` }
+            { ` R$: ${Math.round(totalValue * 100) / 100}` }
           </span>
         </button>
       </Link>
     </div>
   );
 }
-
-BottomBox.propTypes = {
-  value: PropTypes.number.isRequired,
-};
 
 export default BottomBox;

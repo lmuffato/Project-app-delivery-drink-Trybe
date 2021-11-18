@@ -1,18 +1,20 @@
-import React, { useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-function Card({ id, strName, strThumb, strPrice, setValue, value }) {
+import CheckoutContext from '../context/checkoutContext';
+
+function Card({ id, strName, strThumb, strPrice }) {
+  const { addItem } = useContext(CheckoutContext);
   const commaValue = strPrice.replace(/\./g, ',');
   const [qtd, setQtd] = useState(0);
 
-  function addItem() {
-    setQtd((e) => parseFloat(e) + 1);
-    setValue(() => qtd * strPrice);
-    console.log(value);
+  useEffect(() => { addItem(qtd, strPrice); }, []);
+
+  function addElem() {
+    setQtd(() => qtd + 1);
   }
 
   return (
-
     <div
       className="card"
       style={ { width: '400px', height: '400px', display: 'flex' } }
@@ -41,7 +43,7 @@ function Card({ id, strName, strThumb, strPrice, setValue, value }) {
       <button
         type="button"
         data-testid={ `customer_products__button-card-add-item-${id}` }
-        onClick={ () => addItem() }
+        onClick={ () => addElem() }
         style={ { width: '20px', height: '20px', display: 'flex' } }
       >
         +
@@ -74,8 +76,6 @@ Card.propTypes = {
   strName: PropTypes.string.isRequired,
   strThumb: PropTypes.string.isRequired,
   strPrice: PropTypes.string.isRequired,
-  setValue: PropTypes.func.isRequired,
-  value: PropTypes.number.isRequired,
 };
 
 export default Card;

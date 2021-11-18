@@ -32,8 +32,22 @@ function Provider({ children }) {
 
   /// ////////////////////////Link with BackEnd//////////////////////// ///
 
-  const post = (formType, data) => axios.post(`http://localhost:3001/${Endpoints[formType]}`, data);
-  const get = (formType, id) => axios.get(`http://localhost:3001/${Endpoints[formType]}/${id || ''}`);
+  const post = (formType, data) => {
+    const { token } = localStorage.getItem('token');
+    return axios.post(`http://localhost:3001/${Endpoints[formType]}`, {
+      headers: {
+        Authorization: token ? `Bearer ${token}` : null,
+        data,
+      },
+    });
+  };
+
+  const get = (formType, id) => {
+    const { token } = localStorage.getItem('token');
+    return axios.get(`http://localhost:3001/${Endpoints[formType]}/${id || ''}`, { headers: {
+      Authorization: token ? `Bearer ${token}` : null,
+    } });
+  };
 
   const getProductsURL = 'http://localhost:3001/products';
   const getProducts = () => {

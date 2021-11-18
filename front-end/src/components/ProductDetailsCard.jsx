@@ -27,7 +27,11 @@ function ProductDetailsCard(props) {
         <span>{ status }</span>
         { role === 'seller' && (
           <>
-            <button type="button">PREPARAR PEDIDO</button>
+            <button
+              type="button"
+            >
+              PREPARAR PEDIDO
+            </button>
             <button type="button">SAIU PARA ENTREGA</button>
           </>
         ) }

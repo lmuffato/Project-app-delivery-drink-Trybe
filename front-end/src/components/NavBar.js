@@ -13,7 +13,7 @@ const handleLogoutClick = (ev, dispatch, history) => {
 };
 
 function NavBar() {
-  const { name } = useSelector((state) => state.user);
+  const { name, role } = useSelector((state) => state.user);
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -25,12 +25,14 @@ function NavBar() {
       >
         PRODUTOS
       </Link>
-      <Link
-        data-testid="customer_products__element-navbar-link-orders"
-        to="/customer/orders"
-      >
-        MEUS PEDIDOS
-      </Link>
+      { role === 'costumer' && (
+        <Link
+          data-testid="customer_products__element-navbar-link-orders"
+          to="/customer/orders"
+        >
+          MEUS PEDIDOS
+        </Link>
+      )}
       <span
         data-testid="customer_products__element-navbar-user-full-name"
       >

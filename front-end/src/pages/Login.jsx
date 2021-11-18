@@ -6,9 +6,14 @@ import UserContext from '../context/userContext';
 import { doLogin } from '../services/endpointsAPI';
 
 import { setToLocalStorage } from '../services/localStorage';
+import validateEmail from '../validations/validateEmail';
 
 const messageError = 'Login e/ou senha inválidos';
 const testId = 'common_login__element-invalid-email';
+const testIdEmail = 'common_login__input-email';
+const IvalidPassword = 'common_login__input-password';
+const testIdBtnLogin = 'common_login__button-login';
+const testIdBtnRegister = 'common_login__button-register';
 
 export default function Login() {
   const history = useHistory();
@@ -17,13 +22,7 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loginButton, setLoginButton] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(false);
-
-  // const toggleErrorMessage = (user) => {
-  //   if (!user.password || !user.email) {
-  //     setErrorMessage(true);
-  //   }
-  // };
+  const [errorMessage, setErrorMessage] = useState(true);
 
   const clickLoginButton = async () => {
     try {
@@ -31,17 +30,18 @@ export default function Login() {
       const { name, role } = login;
       setToLocalStorage('user', { name, email, role });
       setUserData(login);
+      setErrorMessage(true);
       history.push('/customer/products');
     } catch (error) {
-      setErrorMessage(true);
+      setErrorMessage(false);
     }
   };
 
   useEffect(() => {
     const validateFields = () => {
       const sixDigits = 6;
-      const regex = /^[\w.]+@[a-z]+\.\w{2,3}$/g;
-      const resultButton = password.length >= sixDigits && regex.test(email);
+      const validEmail = validateEmail(email);
+      const resultButton = password.length >= sixDigits && validEmail;
       setLoginButton(resultButton);
     };
     validateFields();
@@ -53,7 +53,7 @@ export default function Login() {
         <label htmlFor="login">
           Login
           <input
-            data-testid="common_login__input-email"
+            data-testid={ testIdEmail }
             type="email"
             id="email"
             placeholder="email@trybeer.com.br"
@@ -64,7 +64,7 @@ export default function Login() {
         <label htmlFor="senha">
           Senha
           <input
-            data-testid="common_login__input-password"
+            data-testid={ IvalidPassword }
             type="password"
             id="senha"
             placeholder="*********"
@@ -76,7 +76,7 @@ export default function Login() {
           variant="primary"
           disabled={ !loginButton }
           onClick={ clickLoginButton }
-          data-testid="common_login__button-login"
+          data-testid={ testIdBtnLogin }
           type="button"
         >
           LOGIN
@@ -84,7 +84,7 @@ export default function Login() {
         </button>
         <Link to="/register">
           <button
-            data-testid="common_login__button-register"
+            data-testid={ testIdBtnRegister }
             type="button"
           >
             Ainda não tenho conta
@@ -92,10 +92,9 @@ export default function Login() {
           </button>
         </Link>
       </form>
-      {
-        errorMessage
-        && <ErrorLogin dataTestIdError={ testId } message={ messageError } />
-      }
+      <div hidden={ errorMessage }>
+        <ErrorLogin dataTestIdError={ testId } message={ messageError } />
+      </div>
     </div>
   );
 }

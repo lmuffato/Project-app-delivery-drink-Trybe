@@ -30,7 +30,7 @@ const createNew = async (req, res) => {
     const hash = crypto.createHash('md5').update(password).digest('hex');
     const oldUserByEmail = await users.findOne({ where: { email } });
     const oldUserByName = await users.findOne({ where: { name } });
-    
+
     if (oldUserByEmail || oldUserByName) return res.status(409).json({ message: false });
     const obj = { name, email, password: hash, role: 'customer' };
     await users.create(obj);
@@ -40,7 +40,7 @@ const createNew = async (req, res) => {
   }
 };
 
-const getAll = async (req, res) => {
+const getAll = async (_req, res) => {
   try {
     const data = await users.findAll({ attributes: { exclude: ['password'] } });
     return res.status(200).json(data);
@@ -53,7 +53,6 @@ const getAll = async (req, res) => {
 const getById = async (req, res) => {
   try {
     const { id } = req.params;
-    console.log(id);
     const data = await users.findByPk(id,
       { attributes: { exclude: ['password'] },
     });
@@ -82,7 +81,6 @@ const updateById = async (req, res) => {
   try {
     const { id } = req.params;
     const { name, email, password, role } = req.body;
-    console.log(id);
     const obj = { name, email, password, role };
     await users.update(obj, { where: { id } });
   return res.status(200).json(obj);

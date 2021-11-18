@@ -16,15 +16,15 @@ export default function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [disableRegisterButton, setDisableRegisterButton] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(true);
 
   const clickCadastrarButton = async () => {
     try {
       await createNewUser(name, email, password);
-      setErrorMessage(false);
+      setErrorMessage(true);
       history.push('/customer/products');
     } catch (error) {
-      setErrorMessage(true);
+      setErrorMessage(false);
     }
   };
 
@@ -95,10 +95,9 @@ export default function Register() {
           CADASTRAR
         </button>
       </form>
-      {
-        errorMessage
-          && <ErrorLogin dataTestIdError={ testId } message={ messageError } />
-      }
+      <div hidden={ errorMessage }>
+        <ErrorLogin dataTestIdError={ testId } message={ messageError } />
+      </div>
     </main>
   );
 }

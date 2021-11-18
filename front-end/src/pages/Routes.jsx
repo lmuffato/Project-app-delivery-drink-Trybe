@@ -22,7 +22,7 @@ export default function Rout() {
       <Route path="/customer/orders" component={ CustomerOrder } />
       <Route path="/sellers/orders" component={ SellerOrders } />
       <Route path="/admin/manage" component={ AdminManage } />
-      <Route exact path="/" render={ () => <Redirect to="/login" /> } />
+      <Route exact path="/"><Redirect to="/login" /></Route>
     </Switch>
   );
 }

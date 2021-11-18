@@ -1,33 +1,25 @@
-/* eslint-disable react/require-default-props */
-/* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const CardProduct = ({ props }) => (
-  props
-    ? props.map((drink, index) => (
-      <div key={ index }>
-        <img
-          alt="drink"
-          data-testid=""
-          src={ drink.thumb }
-        />
-        <div className="">
-          <h5>{drink.name}</h5>
-          <p>{drink.cost}</p>
-        </div>
-      </div>
-    ))
-    : <p>Sem produtos</p>
+const CardProduct = ({ key, drink, cost, thumb }) => (
+  <div key={ key }>
+    <img
+      alt="drink"
+      data-testid=""
+      src={ thumb }
+    />
+    <div className="">
+      <h5>{drink}</h5>
+      <p>{cost}</p>
+    </div>
+  </div>
 );
 
 CardProduct.propTypes = {
-  props: PropTypes.arrayOf(
-    PropTypes.shape({
-      map: PropTypes.object,
-    }),
-  ),
-  map: PropTypes.func,
-};
+  key: PropTypes.string,
+  drink: PropTypes.string,
+  cost: PropTypes.string,
+  thumb: PropTypes.string,
+}.isRequired;
 
 export default CardProduct;

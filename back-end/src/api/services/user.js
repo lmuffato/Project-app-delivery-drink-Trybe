@@ -17,7 +17,12 @@ exports.login = async ({ email, password }) => {
   const user = await userModel.findOne(
     { where: { email, password: hashedPassword } },
   );
-  if (user) return jwt.sign({ email }, JWT_SECRET, { expiresIn: '12h' }); 
+  if (user) return {
+    token: jwt.sign({ email }, JWT_SECRET, { expiresIn: '12h' }),
+    name: user.name,
+    email: user.email,
+    role: user.role
+  }; 
   return null;
 };
 

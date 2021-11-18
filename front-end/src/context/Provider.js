@@ -33,7 +33,7 @@ function Provider({ children }) {
   /// ////////////////////////Link with BackEnd//////////////////////// ///
 
   const post = (formType, data) => axios.post(`http://localhost:3001/${Endpoints[formType]}`, data);
-  const get = (formType, id) => axios.get(`http://localhost:3001/${Endpoints[formType]}/${id}`);
+  const get = (formType, id) => axios.get(`http://localhost:3001/${Endpoints[formType]}/${id || ''}`);
 
   const getProductsURL = 'http://localhost:3001/products';
   const getProducts = () => {

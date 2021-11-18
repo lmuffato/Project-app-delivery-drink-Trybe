@@ -5,6 +5,7 @@ import Context from '../context/Context';
 function Header() {
   const { user } = useContext(Context);
   const { name, role } = user;
+  console.log(user);
 
   return (
     <div className="container">

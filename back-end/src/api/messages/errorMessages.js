@@ -16,4 +16,6 @@ module.exports = {
   SERVER_ERROR: 'Server error.',
   TASK_NOT_FOUND: 'Task not found.',
   USER_ALREADY_EXIST: 'User already exists!',
+  ORDERS_NOT_FOUND: 'Orders not found.',
+  UNAUTHORIZED_SEARCH: 'Unauthorized search!',
 };

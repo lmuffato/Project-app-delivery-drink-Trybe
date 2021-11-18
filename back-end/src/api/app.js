@@ -25,6 +25,10 @@ app.route('/admin')
   .post(validateToken, validateAdmin, userController.createAdmin)
   .delete(validateToken, validateAdmin, userController.deleteUser);
 
-app.post('/sales', validateToken, saleController.registerSale);
+app.route('/sales')
+  .post(validateToken, saleController.registerSale)
+  .get(validateToken, saleController.getAllOrders);
+
+app.get('/sales/:id', validateToken, saleController.getOrdersByUserId);
 
 module.exports = app;

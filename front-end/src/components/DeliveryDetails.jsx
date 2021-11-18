@@ -23,9 +23,13 @@ function DeliveryDetails() {
           } }
           component="div"
         >
-          <DropDown name="Pessoa vendedora" items={ ['luisa', 'orlando'] } />
-          <Input label="Endereço" />
-          <Input label="Número" />
+          <DropDown
+            name="Pessoa vendedora"
+            items={ ['luisa', 'orlando'] }
+            dataTest="customer_checkout__select-seller"
+          />
+          <Input label="Endereço" dataTest="customer_checkout__input-address" />
+          <Input label="Número" dataTest="customer_checkout__input-addressNumber" />
         </Box>
       </Container>
     </>

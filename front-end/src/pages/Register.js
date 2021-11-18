@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Redirect } from 'react-router';
 import postUser from '../services/requests';
 
 const Register = () => {
@@ -9,6 +10,7 @@ const Register = () => {
     role: '',
   });
   const [userErr, setUserErr] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   function handleInputChange(e) {
     e.preventDefault();
@@ -17,8 +19,11 @@ const Register = () => {
   }
 
   async function createUser() {
-    const result = await postUser(userData, 'register');
-    if (result.message) setUserErr(result.message);
+    const STATUS = 201;
+    const { data, status } = await postUser(userData, 'register');
+    if (data.message) setUserErr(data.message);
+
+    if (status === STATUS) setIsLoading(true);
   }
 
   useEffect(() => {
@@ -92,6 +97,11 @@ const Register = () => {
         >
           Cadastrar
         </button>
+        {
+          isLoading && (
+            <Redirect to="/customer/products" />
+          )
+        }
         {
           userErr && (
             <span>{ userErr }</span>

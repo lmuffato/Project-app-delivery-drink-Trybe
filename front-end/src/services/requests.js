@@ -4,9 +4,9 @@ async function postUser(userData, rota) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(userData),
   });
-
   const data = await response.json();
-  return data;
+
+  return { data, status: response.status };
 }
 
 export default postUser;

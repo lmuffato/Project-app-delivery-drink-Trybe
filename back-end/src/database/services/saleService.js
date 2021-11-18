@@ -26,7 +26,7 @@ async function getByUserId(id) {
     ],
   });
 
-  if (!order) return { code: HTTP_NOT_FOUND, error: 'Sale does not exist' };
+  if (order.length <= 0) return { code: HTTP_NOT_FOUND, error: 'Sale does not exist' };
 
   return { data: order, code: HTTP_OK_STATUS };
 };

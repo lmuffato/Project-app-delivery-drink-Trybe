@@ -30,7 +30,7 @@ function ProviderProducts({ children }) {
         return tot + (+(curr.price) * curr.quantity);
       }, 0);
 
-    return total;
+    return total.toFixed(2);
   };
 
   const setProductCartQuantity = async (id, quantity) => {

@@ -6,7 +6,14 @@ const socket = require('socket.io');
 const path = require('path');
 const sockets = require('../sockets');
 
-const { loginRouter, registerRouter, productRouter, saleRouter } = require('../routers');
+const {
+  loginRouter,
+  registerRouter,
+  productRouter,
+  saleRouter,
+  customerRouter,
+  sellerRouter,
+} = require('../routers');
 
 const app = express();
 const httpServer = http.createServer(app);
@@ -19,7 +26,6 @@ const corsOptions = {
   origin: '*',
 };
 
-// https://github.com/tryber/sd-10a-live-lectures/pull/89/files
 app.use(cors(corsOptions));
 
 app.use(bodyParser.json({ extended: true }));
@@ -36,20 +42,10 @@ app.use('/products', productRouter);
 
 app.use('/sale', saleRouter);
 
-sockets(io);
-// io.on('connection', (currSocket) => {
-//   currSocket.on('order', () => console.log('chamou message'));
+app.use('/customer', customerRouter);
 
-  // socket.on('disconnect', () => {
-    // the user is deleted from array of users and a left room message displayed
-    // const PUser = user_Disconnect(socket.id);
-    // if (PUser) {
-      // io.to(PUser.room).emit('message', {
-        // userId: PUser.id,
-        // username: PUser.username,
-        // text: `${PUser.username} has left the room`,
-      // });
-    // }
-// });
+app.use('/seller', sellerRouter);
+
+sockets(io);
 
 module.exports = httpServer;

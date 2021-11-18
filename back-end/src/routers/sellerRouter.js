@@ -4,11 +4,7 @@ const { validateToken } = require('../middlewares');
 
 const Router = express.Router();
 
-Router.post('/', validateToken, saleController.postSale);
-
-Router.get('/:id', validateToken, saleController.getSaleDetailById);
-
-Router.get('/seller/:id', validateToken, saleController.getSalesBySellerId);
+Router.get('/orders', validateToken, saleController.getSalesBySellerId);
 
 Router.use((err, _req, res, _next) => {
   const { code, message } = err;

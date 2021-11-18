@@ -3,12 +3,9 @@ import PropTypes from 'prop-types';
 
 function ErrorLogin({ dataTestIdError, message }) {
   return (
-    <div>
-      <p data-testid={ dataTestIdError }>
-        { message }
-      </p>
-    </div>
-
+    <p data-testid={ dataTestIdError }>
+      { message }
+    </p>
   );
 }
 

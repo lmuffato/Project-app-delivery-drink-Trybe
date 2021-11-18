@@ -27,6 +27,7 @@ function Register() {
     try {
       const createdUser = await createUser(userName, email, password);
       setLoggedUser(createdUser);
+      localStorage.setItem('user', JSON.stringify(createdUser));
       setErrorMessage(false);
       history.push('/customer/products');
     } catch (error) {

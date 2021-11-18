@@ -3,6 +3,7 @@ import './App.css';
 
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import Login from './pages/Login';
+import meusPedidosCliente from './pages/meusPedidosCliente';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
           <Redirect to="/login" />
         </Route>
         <Route path="/login" component={ Login } />
+        <Route path="pedido" component={ meusPedidosCliente } />
       </Switch>
     </BrowserRouter>
   );

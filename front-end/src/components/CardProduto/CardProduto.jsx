@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { arrayOf, shape } from 'prop-types';
+import ProductsContext from '../../context/ProductsContext';
 import PrecoProduto from './PrecoProduto';
 import ImagemProduto from './ImagemProduto';
 import NomeProduto from './NomeProduto';
@@ -7,9 +8,11 @@ import AddItem from './AddItem';
 import QuantidadeItens from './QuantidadeItens';
 import RmItem from './RmItem';
 
-function CardProduto({ data }) {
-  console.log(data);
-  return (
+function CardProduto() {
+  const { values: { isFetching, productsResult } } = useContext(ProductsContext);
+  const data = productsResult;
+
+  return !isFetching ? (
     <>
       { data
         .map((product) => (
@@ -23,7 +26,7 @@ function CardProduto({ data }) {
           </section>
         ))}
     </>
-  );
+  ) : <span>Loading ...</span>;
 }
 
 CardProduto.propTypes = {

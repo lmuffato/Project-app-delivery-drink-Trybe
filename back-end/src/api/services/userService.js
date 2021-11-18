@@ -27,7 +27,6 @@ const checkLogin = async (email, password) => {
 };
 
 const createUser = async ({ name, email, password, role }) => {
-console.log('🚀 ~ file: userService.js ~ line 29 ~ createUser ~ password', password);
   const hashPassword = md5(password);
   const [user, created] = await User.findOrCreate({
     where: {
@@ -43,6 +42,7 @@ console.log('🚀 ~ file: userService.js ~ line 29 ~ createUser ~ password', pas
   const { password: _, ...userWithoutPassword } = user.dataValues;
   const token = jwt.sign(userWithoutPassword, secret, jwtConfig);
   const { id } = userWithoutPassword;
+    
   return ({ status: 201, token, id, name, email, role });
 };
 

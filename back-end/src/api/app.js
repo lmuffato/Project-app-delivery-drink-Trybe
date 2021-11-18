@@ -3,6 +3,8 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const loginRouter = require('../routers/loginRouter');
 const registerRouter = require('../routers/registerRouter');
+const productRouter = require('../routers/productRouter');
+const salesRouter = require('../routers/salesRouter');
 
 const app = express();
 
@@ -12,8 +14,14 @@ app.use(cors({
 }));
 app.use(bodyParser.json());
 
+app.use(express.static('public'));
+
 app.use('/login', loginRouter);
 
 app.use('/register', registerRouter);
+
+app.use('/products', productRouter);
+
+app.use('/sales', salesRouter);
 
 module.exports = app;

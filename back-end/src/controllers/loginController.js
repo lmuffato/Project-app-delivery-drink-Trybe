@@ -5,9 +5,11 @@ const loginUser = async (req, res) => {
   const { email, role, name, id } = req.user;
   const user = { email, role, name, id };
 
-  const token = createToken(user);
+  const { token } = createToken(user);
 
-  res.status(httpStatus.ok).json(token);  
+  const response = { name, email, role, token };
+
+  res.status(httpStatus.ok).json(response);
 };
 
 module.exports = {

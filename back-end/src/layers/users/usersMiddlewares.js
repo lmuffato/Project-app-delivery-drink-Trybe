@@ -1,9 +1,7 @@
-const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const { users } = require('../../database/models');
-// const authentication = require('../authentication/authMiddleware');
 
-const SECRET = 'meuSegredo';
+const authentication = require('../authentication/authMiddleware');
 
 const login = async (req, res) => {
   try {
@@ -15,7 +13,8 @@ const login = async (req, res) => {
     const { dataValues } = user;
 
     const { password: _, ...payload } = dataValues;
-    const token = jwt.sign(payload, SECRET);
+
+    const token = authentication.generateToken(payload);
 
     return res.status(200).json({ token });
   } catch (err) {

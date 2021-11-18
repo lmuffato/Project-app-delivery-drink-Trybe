@@ -7,6 +7,7 @@ const axios = require('axios').default;
 function ProviderProducts({ children }) {
   const [allProducts, setAllProducts] = useState([{}]);
   const [cartProducts, setCartProducts] = useState([{}]);
+  // const [subtotal, setSubtotal] = useState(0);
   const urlBase = 'http://localhost:3001';
 
   const findProducts = async () => {
@@ -18,6 +19,18 @@ function ProviderProducts({ children }) {
   const findSpecificProduct = async (id) => {
     const { data: product } = await axios.get(`${urlBase}/products/${id}`);
     return product;
+  };
+
+  const calculateSubtotal = (cart) => {
+    const total = cart
+      .reduce((tot, curr) => {
+        if (curr.quantity === 0) {
+          return tot + (+(curr.price) * 1);
+        }
+        return tot + (+(curr.price) * curr.quantity);
+      }, 0);
+
+    return total;
   };
 
   const setProductCartQuantity = async (id, quantity) => {
@@ -51,6 +64,7 @@ function ProviderProducts({ children }) {
         allProducts,
         cartProducts,
         setProductCartQuantity,
+        calculateSubtotal,
       } }
     >
       {children}

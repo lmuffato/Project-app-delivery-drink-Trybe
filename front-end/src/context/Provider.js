@@ -13,6 +13,7 @@ import mockProducts from './mockAPI';
 const Endpoints = {
   login_form: 'login',
   registration_form: 'register',
+  seller_orders: 'seller/orders',
 };
 
 function Provider({ children }) {
@@ -34,7 +35,8 @@ function Provider({ children }) {
 
   /// ////////////////////////Link with BackEnd//////////////////////// ///
 
-  const postSubmit = (url) => axios.post(`http://localhost:3001/${url}`, user);
+  const post = (formType, data) => axios.post(`http://localhost:3001/${Endpoints[formType]}`, data);
+  const get = (formType, id) => axios.get(`http://localhost:3001/${Endpoints[formType]}/${id}`);
 
   const getProductsURL = 'http://localhost:3001/products';
   const getProducts = () => {
@@ -68,9 +70,6 @@ function Provider({ children }) {
     function sum() {
       const itens = Object.entries(shoppingCart);
       const teste = itens.map((item) => {
-        console.log(Object.values(item[1])[2]);
-        console.log(Object.values(item[1])[3]);
-
         const A = parseFloat(Object.values(item[1])[2]);
         const B = parseFloat(Object.values(item[1])[3]);
         return (A * B).toFixed(2);

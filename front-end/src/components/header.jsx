@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import '../styles/header.css';
-// import Context from '../context/Context';
-// / { useContext }
+import Context from '../context/Context';
 
 function Header() {
-  // const { } = useContext(Context);
+  const { user } = useContext(Context);
+  console.log(user);
 
   return (
     <div className="container">
@@ -19,7 +19,12 @@ function Header() {
         </h1>
       </div>
       <div className="border">
-        <h1 data-testid="customer_products__element-navbar-user-full-name">Nome</h1>
+        <h1
+          data-testid="customer_products__element-navbar-user-full-name"
+        >
+          { user.name }
+
+        </h1>
       </div>
       <div className="border">
         <h1 data-testid="customer_products__element-navbar-link-logout">Sair</h1>

@@ -1,4 +1,21 @@
 .register-form-container {
-  position: absolute;
-  z-index: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.register-form-container > button {
+  margin-top: 3%;
+  width: 100%;
+}
+
+.register-form-container > input {
+  margin-bottom: 1%;
+  width: 100%;
+}
+
+.register-form-container > label {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 3%;
 }

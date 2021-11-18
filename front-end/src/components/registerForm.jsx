@@ -45,9 +45,9 @@ function RegisterForm() {
   };
 
   return (
-    <div className="register-form-container">
+    <div>
       { isVisible && <Alert dataTestId="common_register__element-invalid_register" />}
-      <form onSubmit={ sendRegister } style={ { zIndex: 10 } }>
+      <form onSubmit={ sendRegister } className="register-form-container">
         <label htmlFor="name">
           Nome
           <input
@@ -85,6 +85,7 @@ function RegisterForm() {
           type="submit"
           data-testid="common_register__button-register"
           disabled={ buttonState }
+          className="primary"
         >
           Cadastrar
         </button>

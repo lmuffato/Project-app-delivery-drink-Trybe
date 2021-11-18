@@ -18,5 +18,6 @@ module.exports = {
   TASK_NOT_FOUND: 'Task not found.',
   USER_ALREADY_EXIST: 'User already exists!',
   ORDERS_NOT_FOUND: 'Orders not found.',
+  ORDER_STATUS_NOT_AUTHORIZED: 'Order status not authorized.',
   UNAUTHORIZED_SEARCH: 'Unauthorized search!',
 };

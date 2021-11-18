@@ -16,14 +16,13 @@ function Navbar() {
           PRODUTOS
         </Link>
         <Link
-          to="/customer/checkout"
+          to="/customer/orders"
           data-testid="customer_products__element-navbar-link-orders"
           className="customer_products__element-navbar-link-orders"
         >
           MEUS PEDIDOS
         </Link>
         <span
-          to="/customer/orders"
           data-testid="customer_products__element-navbar-user-full-name"
           className="customer_products__element-navbar-user-full-name"
         >

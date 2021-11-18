@@ -9,10 +9,12 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       userId: {
+        allowNull: false,
         type: Sequelize.INTEGER,
         field: 'user_id',
       },
       sellerId: {
+        allowNull: false,
         type: Sequelize.INTEGER,
         field: 'seller_id',
       },

@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import MenuCostumer from '../../components/MenuCustomer';
+import OrderBox from '../../components/OrderBox';
 import api from '../../services/api';
 
 import './style.css';
 
 function OrderDetails() {
-  const [sale, setSale] = useState({});
+  const [sale, setSale] = useState('');
   const { id: idOrder } = useParams();
 
   useEffect(() => {
@@ -23,26 +24,19 @@ function OrderDetails() {
 
   console.log(sale);
 
-  const { id, status, sale_date: saleDate, total_price: totalPrice } = sale;
+  const createOrder = () => (
+    <div className="saleDetailsContainer">
+      <div className="sale-card">
+        Detalhe do Pedido
+        <OrderBox props={ sale } />
+      </div>
+    </div>
+  );
 
   return (
     <section className="orderDetailsPage">
       <MenuCostumer />
-      <div className="saleDetailsContainer">
-        <div>
-          Detalhe do Pedido
-          <div className="order-detail-container">
-
-            <div className="order-info">
-              <p>{`Pedido ${id}`}</p>
-              <p>{saleDate.split('T')[0]}</p>
-              <div>{status.toUpperCase()}</div>
-            </div>
-
-            <div>{totalPrice}</div>
-          </div>
-        </div>
-      </div>
+      {sale ? createOrder() : <p>Carregando pedido!</p>}
     </section>
   );
 }

@@ -4,7 +4,7 @@ import { GrFormAdd } from 'react-icons/gr';
 import { IoMdRemove } from 'react-icons/io';
 import './style.css';
 
-function ButtonCard({ id }) {
+function ButtonCard({ id, name, price }) {
   const [quantityProductsCart, setQuantityProductsCart] = React.useState(0);
 
   const updateCart = (param) => {
@@ -14,6 +14,8 @@ function ButtonCard({ id }) {
     if (param === '+') {
       product = {
         id,
+        name,
+        price,
         quantity: actualCart.quantity + 1,
       };
     }
@@ -21,6 +23,8 @@ function ButtonCard({ id }) {
       setQuantityProductsCart((previousValue) => previousValue - 1);
       product = {
         id,
+        name,
+        price,
         quantity: actualCart.quantity - 1,
       };
     }
@@ -41,10 +45,14 @@ function ButtonCard({ id }) {
 
   const addToCart = () => {
     const cart = JSON.parse(localStorage.getItem('carrinho'));
-    setQuantityProductsCart(cart.length + 1);
+    console.log('opa');
+    setQuantityProductsCart((previousValue) => previousValue + 1);
     if (!cart) {
+      console.log(cart);
       const product = {
         id,
+        name,
+        price,
         quantity: 1,
       };
       const arrayOfProducts = JSON.stringify([product]);
@@ -54,6 +62,8 @@ function ButtonCard({ id }) {
     if (cart.every((elem) => elem.id !== id)) {
       const product = {
         id,
+        name,
+        price,
         quantity: 1,
       };
       const arrayOfProducts = JSON.stringify([...cart, product]);
@@ -116,6 +126,8 @@ function ButtonCard({ id }) {
 
 ButtonCard.propTypes = {
   id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  price: PropTypes.string.isRequired,
 };
 
 export default ButtonCard;

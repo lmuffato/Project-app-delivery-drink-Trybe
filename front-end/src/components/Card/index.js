@@ -22,7 +22,7 @@ function Card({ id, name, price, url }) {
         {' '}
         { price.replace('.', ',') }
       </p>
-      <ButtonCard id={ id } />
+      <ButtonCard id={ id } name={ name } price={ price } />
     </div>
   );
 }

@@ -70,26 +70,6 @@ const Register = () => {
             onChange={ handleInputChange }
           />
         </label>
-        <label htmlFor="role">
-          Cliente
-          <input
-            type="radio"
-            id="input"
-            value="customer"
-            name="role"
-            onChange={ handleInputChange }
-          />
-        </label>
-        <label htmlFor="role">
-          Vendedor
-          <input
-            type="radio"
-            id="input"
-            value="seller"
-            name="role"
-            onChange={ handleInputChange }
-          />
-        </label>
         <button
           type="button"
           data-testid="common_register__button-register"
@@ -104,7 +84,11 @@ const Register = () => {
         }
         {
           userErr && (
-            <span>{ userErr }</span>
+            <span
+              data-testid="common_register__element-invalid_register"
+            >
+              { userErr }
+            </span>
           )
         }
       </form>

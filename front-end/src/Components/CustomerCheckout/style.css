@@ -1,0 +1,19 @@
+* {
+  background: #0fa36b;
+}
+
+.customer_products__element-navbar-link-products {
+  padding: 20px;
+}
+
+.customer_products__element-navbar-link-orders {
+  padding: 20px;
+}
+
+.customer_products__element-navbar-user-full-name {
+  padding: 20px;
+}
+
+.customer_products__element-navbar-link-logout {
+  padding: 20px;
+}

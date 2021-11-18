@@ -12,8 +12,9 @@ export default function ItemCard({ id, name, price, image }) {
     putItem.forEach((item, index) => {
       if (item.id === id) putItem.splice(index, 1);
     });
-
-    setPutItem([...putItem, { id, name, price, quantity: inputContent }]);
+    if (inputContent > 0) {
+      setPutItem([...putItem, { id, name, price, quantity: inputContent }]);
+    }
   }, [inputContent]);
 
   const buttonClick = ({ textContent }) => {

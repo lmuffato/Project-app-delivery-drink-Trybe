@@ -1,0 +1,38 @@
+table.customTable {
+  width: 100%;
+  background-color: #FFFFFF;
+  border-collapse: collapse;
+  border-width: 2px;
+  border-style: solid;
+  color: #000000;
+}
+
+table.customTable td, table.customTable th {
+  border-width: 2px;
+  border-color: #04aa6d;
+  border-style: solid;
+  padding: 5px;
+  text-align: center;
+}
+
+table.customTable thead {
+  background-color: #04aa6d;
+}
+
+.container {
+  align-items: center;
+  flex-direction: column;
+  display: flex;
+  height: 75%;
+  justify-content: center;
+  width: 75%;
+  margin: auto;
+}
+
+.flexstart {
+  align-self: flex-start;
+}
+
+.flexend {
+  align-self: flex-end;
+}

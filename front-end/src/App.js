@@ -3,6 +3,7 @@ import { Route, Routes, Navigate } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import ProductPage from './pages/ProductPage';
+import CheckoutPage from './pages/CheckoutPage';
 import { PricesProvider } from './context/productsProvider';
 import './App.css';
 
@@ -15,6 +16,10 @@ function App() {
       <Route
         path="/customer/products"
         element={ <PricesProvider><ProductPage /></PricesProvider> }
+      />
+      <Route
+        path="/customer/checkout"
+        element={ <PricesProvider><CheckoutPage /></PricesProvider> }
       />
     </Routes>
   );

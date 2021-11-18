@@ -16,11 +16,10 @@ function Header({ links }) {
 
   const onExit = () => {
     setUser(DEFAULT_USER);
-    setCart([]);
   };
 
   return (
-    <nav>
+    <nav className="navBar">
       {links.map((link, i) => (
         <Link
           to={ link.url }

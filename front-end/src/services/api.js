@@ -29,4 +29,12 @@ export default {
     });
     return data;
   },
+  getSaleById: async (id, token) => {
+    const { data } = await api.get(`/orders/${id}`, {
+      headers: {
+        Authorization: token,
+      },
+    });
+    return data;
+  },
 };

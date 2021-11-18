@@ -11,6 +11,13 @@
   width: 100%;
 }
 
+@media screen and ( max-width : 767px ) {
+
+  .requestsContainer {
+    justify-content: center;
+  }
+}
+
 a {
   color: black;
   text-decoration: none;

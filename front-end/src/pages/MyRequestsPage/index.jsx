@@ -4,6 +4,7 @@ import Header from '../../components/Header';
 import RequestCard from '../../components/RequestCard';
 import fetchSales from '../../services/MyRequestsPage/fetchSales';
 import formatDate from '../../services/MyRequestsPage/formatDate';
+import dataTestids from '../../utils/dataTestIdsMyRequestPage';
 import styles from './styles.module.css';
 
 export default function MyRequestsPage() {
@@ -12,6 +13,7 @@ export default function MyRequestsPage() {
   useEffect(() => {
     const getSales = async () => {
       const data = await fetchSales();
+      console.log(data);
       setSales(data);
     };
     getSales();
@@ -21,13 +23,16 @@ export default function MyRequestsPage() {
     <main className={ styles.container }>
       <Header />
       <section className={ styles.requestsContainer }>
-        {sales.map(({ id, totalPrice, status, saleDate }) => (
-          <Link key={ id } to={ `/customer/orders/${id}` }>
+        {sales.map((sale) => (
+          <Link key={ sale.id } to={ `/customer/orders/${sale.id}` }>
             <RequestCard
-              requestId={ id }
-              status={ status }
-              date={ formatDate(saleDate) }
-              price={ totalPrice }
+              dataTestId={ dataTestids }
+              requestId={ sale.id }
+              status={ sale.status }
+              date={ formatDate(sale.saleDate) }
+              price={ sale.totalPrice }
+              address={ sale.deliveryAddress }
+              number={ sale.deliveryNumber }
             />
           </Link>
         ))}

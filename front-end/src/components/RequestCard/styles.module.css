@@ -3,10 +3,24 @@
   background: #eaf1ef;
   border: 1px solid #b1c2be;
   display: flex;
-  height: 100px;
+  flex-direction: column;
+  height: 125px;
   margin-top: 40px;
   padding: 5px;
   width: 425px;
+}
+
+@media screen and ( max-width : 767px ) {
+
+  .cardContainer {
+    width: 100%;
+  }
+}
+
+.cardSubContainer {
+  display: flex;
+  height: 100%;
+  width: 100%;
 }
 
 .requestId, .dateAndPrice, .pendente, .preparando, .entregue {
@@ -40,6 +54,13 @@
   justify-content: center;
   padding: 10px 0;
   text-align: center;
+  width: 100%;
+}
+
+.address {
+  display: flex;
+  font-size: 1rem;
+  justify-content: flex-end;
   width: 100%;
 }
 

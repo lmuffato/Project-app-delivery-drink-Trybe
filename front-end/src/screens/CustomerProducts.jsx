@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Grid,
   Button,
-  Link,
 } from '@mui/material';
 import NavBar from '../components/NavBar';
 import ProductCard from '../components/ProductCard';
@@ -52,7 +52,7 @@ function CustomerProducts() {
         data-testid="customer_products__button-cart"
       >
         <Link
-          href="/customer/checkout"
+          to="/customer/checkout"
           data-testid="customer_products__checkout-bottom-value"
         >
           { calculateSubtotal(cartProducts).toString().replace('.', ',') }

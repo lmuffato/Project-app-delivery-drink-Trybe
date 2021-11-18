@@ -5,18 +5,16 @@ import styles from './styles.module.css';
 export default function RequestCard({ requestId, status, date, price }) {
   return (
     <div className={ styles.cardContainer }>
-      <div
-        className={ styles.requestId }
-        data-testid={ `customer_orders__element-order-id-${requestId}` }
-      >
+      <div className={ styles.requestId }>
         <span>Pedido</span>
-        <span>{requestId}</span>
+        <span data-testid={ `customer_orders__element-order-id-${requestId}` }>
+          {requestId}
+        </span>
       </div>
-      <div
-        className={ styles[status] }
-        data-testid={ `customer_orders__element-delivery-status-id-${requestId}` }
-      >
-        {status}
+      <div className={ styles[status] }>
+        <span data-testid={ `customer_orders__element-delivery-status-id-${requestId}` }>
+          {status}
+        </span>
       </div>
       <div className={ styles.dateAndPrice }>
         <span data-testid={ `customer_orders__element-order-date-id-${requestId}` }>

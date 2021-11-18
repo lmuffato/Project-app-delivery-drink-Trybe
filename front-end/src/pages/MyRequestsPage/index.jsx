@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../../components/Header';
 import RequestCard from '../../components/RequestCard';
 import fetchSales from '../../services/MyRequestsPage/fetchSales';
@@ -21,13 +22,14 @@ export default function MyRequestsPage() {
       <Header />
       <section className={ styles.requestsContainer }>
         {sales.map(({ id, totalPrice, status, saleDate }) => (
-          <RequestCard
-            key={ id }
-            requestId={ id }
-            status={ status }
-            date={ formatDate(saleDate) }
-            price={ totalPrice }
-          />
+          <Link key={ id } to={ `/customer/orders/${id}` }>
+            <RequestCard
+              requestId={ id }
+              status={ status }
+              date={ formatDate(saleDate) }
+              price={ totalPrice }
+            />
+          </Link>
         ))}
       </section>
     </main>

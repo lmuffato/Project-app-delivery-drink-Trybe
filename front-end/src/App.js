@@ -9,7 +9,7 @@ import MyRequestsPage from './pages/MyRequestsPage';
 
 function App() {
   const userStorage = localStorage.getItem('user');
-  const keepUserLoggedIn = userStorage ? '/customer/orders' : '/login';
+  const keepUserLoggedIn = userStorage ? '/customer/products' : '/login';
   return (
     <Routes>
       <Route exact path="/login" element={ <LoginPage /> } />

@@ -1,4 +1,4 @@
-const { Sale/* , User */ } = require('../database/models');
+const { Sale, User } = require('../database/models');
 
 const createSale = async (
     { totalPrice, userId, sellerId, deliveryAddress, deliveryNumber, saleDate, status },
@@ -11,10 +11,11 @@ const createSale = async (
 };
 
 const getSales = async () => {
-  const sales = await Sale.findAll(/* {
-    include: 
+  const sales = await Sale.findAll({
+    include: [
       { model: User, as: 'user_id' },
-  } */);
+    ]
+  });
   return sales;
 };
 

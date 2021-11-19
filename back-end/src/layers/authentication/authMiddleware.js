@@ -9,6 +9,17 @@ const jwtConfig = { expiresIn: '30m', algorithm: 'HS256' };
 
 const generateToken = (payload) => jwt.sign(payload, secret, jwtConfig);
 
+const validateAdmRole = async (req, _res, next) => {
+  try {
+    console.log(req.headers);
+    const decoded = jwt.verify(token, secret);
+    console.log('decoded backkkk', decoded);
+    next();
+  } catch (err) {
+    console.log(err.message);
+  }
+}; 
+
 /*
 
 const { User } = require('../../models');
@@ -82,4 +93,5 @@ const tokenValidation = async (req, res, next) => {
 
 module.exports = {
   generateToken,
+  validateAdmRole,
 };

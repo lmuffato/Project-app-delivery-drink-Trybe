@@ -26,6 +26,7 @@
     "axios": "^0.24.0",
     "joi": "^17.4.2",
     "md5": "^2.3.0",
+    "nodemon": "^2.0.15",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-joi": "^1.0.0",
@@ -65,5 +66,8 @@
       "./services/renderWithRouter",
       "./services/history"
     ]
+  },
+  "optionalDependencies": {
+    "fsevents": "^2.3.2"
   }
 }

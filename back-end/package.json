@@ -41,5 +41,8 @@
     "nyc": "15.1.0",
     "sequelize-cli": "6.2.0",
     "sinon": "10.0.0"
+  },
+  "optionalDependencies": {
+    "fsevents": "^2.3.2"
   }
 }

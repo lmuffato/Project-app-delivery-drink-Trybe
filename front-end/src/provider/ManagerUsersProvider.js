@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { element } from 'prop-types';
-// import genHashMd5 from 'md5';
 import lib from '../context';
 import isNotEmptyObject from '../utils/isNotEmptyObject';
 // import api from '../services/api';

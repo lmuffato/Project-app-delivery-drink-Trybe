@@ -4,7 +4,6 @@ import ButtonLogout from './ButtonLogout';
 import { LoginContext } from '../contexts/Login';
 
 function NavBar() {
-  console.log(LoginContext);
   const { values } = useContext(LoginContext);
 
   return (

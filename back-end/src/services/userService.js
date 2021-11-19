@@ -34,10 +34,11 @@ const register = async ({ name, email, password, role }) => {
   return { status: 422, message: 'Invalid Data' };
   }
 
-  const findUser = await user.findOne({ where: { email } });
+  const findUserByEmail = await user.findOne({ where: { email } });
+  const findUserByName = await user.findOne({ where: { name } });
  
-  if (findUser) {
-    return { code: 409, message: 'Email Already Registered' };
+  if (findUserByEmail || findUserByName) {
+    return { code: 409, message: 'User Already Registered' };
   }
   
   const cryptPassword = md5(password);

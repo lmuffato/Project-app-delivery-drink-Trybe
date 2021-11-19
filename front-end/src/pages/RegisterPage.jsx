@@ -1,5 +1,5 @@
 import React from 'react';
-import RegisterForm from '../components/registerForm';
+import RegisterForm from '../components/RegisterForm';
 import imgManHoldingBeer from '../images/man-holding-beer.png';
 
 import styles from '../styles/pages/Register.module.scss';

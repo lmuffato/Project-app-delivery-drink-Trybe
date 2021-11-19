@@ -35,3 +35,11 @@ export const createUser = async (name, email, password) => {
   const result = await api.post('/users', { name, email, password });
   return result.data;
 };
+
+export const createSale = async (object) => {
+  const { totalPrice, deliveryAddress, deliveryNumber, status, products, token } = object;
+  const result = await api.post('/sales',
+    { totalPrice, deliveryAddress, deliveryNumber, status, products },
+    { headers: { authorization: token } });
+  return result.data;
+};

@@ -1,7 +1,8 @@
 import React, { useContext, useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import ApiContext from '../context/ApiContext';
 
-function CustomerAddress() {
+function CustomerAddress({ checkout }) {
   const { users } = useContext(ApiContext);
   const [sellers, setSellers] = useState([]);
   const [sellerSelect, setSellerSelect] = useState('');
@@ -19,6 +20,13 @@ function CustomerAddress() {
     if (name === 'address') setAddress(value);
     if (name === 'number') setNumber(value);
   };
+
+  useEffect(() => {
+    const addressObject = {
+      address, number,
+    };
+    localStorage.setItem('address', JSON.stringify(addressObject));
+  }, [address, number]);
 
   return (
     <div>
@@ -52,7 +60,7 @@ function CustomerAddress() {
       <label htmlFor="number">
         Número
         <input
-          type="number"
+          type="text"
           data-testid="customer_checkout__input-addressNumber"
           id="number"
           name="number"
@@ -63,11 +71,16 @@ function CustomerAddress() {
       <button
         type="button"
         data-testid="customer_checkout__button-submit-order"
+        onClick={ checkout }
       >
         Finalizar Pedido
       </button>
     </div>
   );
 }
+
+CustomerAddress.propTypes = {
+  checkout: PropTypes.function,
+}.isRequired;
 
 export default CustomerAddress;

@@ -24,7 +24,7 @@ const create = rescue(async (req, res) => {
     });
   });
 
-  res.status(200).json(createdSale); // saleId vem daqui
+  res.status(201).json(createdSale); // saleId vem daqui
 });
 
 // const getSalesProducts = rescue(async (_req, res) => {

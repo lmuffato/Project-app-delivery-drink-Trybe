@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router';
 import CheckoutCard from '../components/CheckoutCard';
 import CustomerAddress from '../components/CustomerAddress';
+import { createSale } from '../services/apis';
 
 function Checkout() {
+  const history = useHistory();
   const [products, setProducts] = useState([]);
   const [totalCheckout, setTotalCheckout] = useState(0);
   const colunas = [
@@ -27,6 +30,23 @@ function Checkout() {
     const filteredProducts = products.filter((product) => product.name !== name);
     setProducts(filteredProducts);
     localStorage.setItem('carrinho', JSON.stringify(filteredProducts));
+  };
+
+  const checkout = async () => {
+    try {
+      const object = {
+        totalPrice: totalCheckout,
+        deliveryAddress: JSON.parse(localStorage.getItem('address')).address,
+        deliveryNumber: JSON.parse(localStorage.getItem('address')).number,
+        status: 'PEDIDO REALIZADO',
+        products,
+        token: JSON.parse(localStorage.getItem('user')).token,
+      };
+      const getSale = await createSale(object);
+      history.push(`/customer/orders/${getSale.id}`);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -65,7 +85,9 @@ function Checkout() {
           </span>
         </div>
       </div>
-      <CustomerAddress />
+      <CustomerAddress
+        checkout={ () => checkout() }
+      />
     </>
   );
 }

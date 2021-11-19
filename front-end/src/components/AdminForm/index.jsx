@@ -60,6 +60,7 @@ export default function AdminForm() {
             name="name"
             value={ name }
             type="text"
+            data-testid="admin_manage__input-name"
             placeholder="Nome e sobrenome"
             onChange={ (e) => setName(e.target.value) }
           />
@@ -71,6 +72,7 @@ export default function AdminForm() {
             name="email"
             value={ email }
             type="email"
+            data-testid="admin_manage__input-email"
             placeholder="seu-email@site.com.br"
             onChange={ (e) => setEmail(e.target.value) }
           />
@@ -82,6 +84,7 @@ export default function AdminForm() {
             name="password"
             value={ password }
             type="password"
+            data-testid="admin_manage__input-password"
             placeholder="********"
             onChange={ (e) => setPassword(e.target.value) }
           />
@@ -92,6 +95,7 @@ export default function AdminForm() {
           <select
             value={ role }
             name="userRole"
+            data-testid="admin_manage__select-role"
             onChange={ (e) => setRole(e.target.value) }
           >
             <option value="admin">Administrador</option>
@@ -102,13 +106,19 @@ export default function AdminForm() {
 
         <button
           disabled={ disabled }
+          data-testid="admin_manage__button-register"
           type="submit"
         >
           Cadastrar
         </button>
       </form>
       { status === CREATED_STATUS && <span>Usuario criado com sucesso</span> }
-      { status === CONFLICT_STATUS && <span>Usuario ja existente</span> }
+      { status === CONFLICT_STATUS && (
+        <span
+          data-testid="admin_manage__element-invalid-register"
+        >
+          Usuario ja existente
+        </span>) }
     </div>
   );
 }

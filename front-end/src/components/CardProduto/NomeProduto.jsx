@@ -4,9 +4,9 @@ import { string } from 'prop-types';
 function NomeProduto({ data }) {
   const { id, name } = data;
   return (
-    <p data-testid={ `customer_products__element-card-title-${id}` }>
+    <section data-testid={ `customer_products__element-card-title-${id}` }>
       { name }
-    </p>
+    </section>
   );
 }
 NomeProduto.propTypes = {

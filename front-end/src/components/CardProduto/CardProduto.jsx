@@ -21,9 +21,9 @@ function CardProduto() {
             <PrecoProduto data={ product } />
             <ImagemProduto data={ product } />
             <NomeProduto data={ product } />
-            <AddItem data={ product } />
-            <QuantidadeItens data={ product } />
             <RmItem data={ product } />
+            <QuantidadeItens data={ product } />
+            <AddItem data={ product } />
           </section>
         ))}
     </>

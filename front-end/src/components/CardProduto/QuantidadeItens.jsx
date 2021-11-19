@@ -4,7 +4,11 @@ import { string } from 'prop-types';
 function QuantidadeItens({ data }) {
   const { id } = data;
   return (
-    <div data-testid={ `customer_products__input-card-quantity-${id}` } />
+    <input
+      data-testid={ `customer_products__input-card-quantity-${id}` }
+      type="number"
+      value={ 0 }
+    />
   );
 }
 QuantidadeItens.propTypes = {

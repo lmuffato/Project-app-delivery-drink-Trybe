@@ -22,7 +22,9 @@ export default function useAuth() {
 
   function throwAuthFailedAlert(error) {
     const { request } = error;
-    const message = request.response ? request.response.message : error.message;
+    const message = request.response ? (
+      JSON.parse(request.response).message
+    ) : error.message;
     alertType('danger');
     alertMessage(message);
     showAlert(true);
@@ -34,7 +36,6 @@ export default function useAuth() {
   }
 
   function validateForm({ schema, values }) {
-    showAlert(false);
     const { error } = schema.validate(values);
 
     function throwErrorIfIsNotValid(customErrorMessage) {

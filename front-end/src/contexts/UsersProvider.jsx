@@ -4,7 +4,7 @@ import UsersContext from './UsersContext';
 
 function UsersProvider({ children }) {
   const [users, setUsers] = useState([]);
-  console.log(users);
+
   return (
     <UsersContext.Provider
       value={

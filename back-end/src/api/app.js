@@ -29,6 +29,8 @@ app.route('/admin')
   .post(validateToken, validateAdmin, userController.createAdmin)
   .delete(validateToken, validateAdmin, userController.deleteUser);
 
+app.delete('/admin/:id', validateToken, validateAdmin, userController.deleteUser);
+
 app.route('/orders')
   .post(validateToken, saleController.registerSale)
   .get(validateToken, saleController.getAllOrders);
@@ -38,7 +40,6 @@ app.put('/orders/:id', validateToken, validateUpdateOrder, saleController.update
 app.get('/orders/customerId/:id', validateToken, saleController.getOrdersByUserId);
 
 app.get('/orders/sellerId/:id', validateToken, validateSeller, saleController.getOrdersBySellerId);
-app.delete('/admin/:id', validateToken, validateAdmin, userController.deleteUser);
 
 // app.post('/sales', validateToken, saleController.registerSale);
 

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
 import useInputs from '../hooks/useInputs';
 import registerValidations from '../schemas/register';
 import useAlert from '../hooks/useAlert';
@@ -13,8 +12,6 @@ function RegisterForm() {
   const [buttonState, setButtonState] = useState(true);
 
   const { Alert, alertMessage, alertType, isVisible, showAlert } = useAlert();
-
-  const history = useHistory();
 
   useEffect(() => {
     showAlert(false);
@@ -33,9 +30,8 @@ function RegisterForm() {
         password,
         role: 'customer',
       });
-      console.log(response);
       if (!schemaStatus.valid) throw new Error(schemaStatus.message);
-      history.push('/customer/products');
+      console.log(response.data);
     } catch (error) {
       console.error(error);
       alertType('danger');

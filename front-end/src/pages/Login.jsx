@@ -32,13 +32,19 @@ function Login() {
     event.preventDefault();
     const { email, password } = values;
     try {
-      const { data: { token } } = await axios.post('http://localhost:3001/login', {
+      const { data: { token, role } } = await axios.post('http://localhost:3001/login', {
         email,
         password,
       });
       localStorage.setItem('token', JSON.stringify(token));
       axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-      navigate('/teste', { replace: true });
+      if (role === 'administrator') {
+        navigate('/admin/manage', { replace: true });
+      } else if (role === 'seller') {
+        navigate('/orders', { replace: true });
+      } else {
+        navigate('/products', { replace: true });
+      }
     } catch ({ response }) {
       // Source: https://stackoverflow.com/questions/45017822/catching-error-body-using-axios-post
       setValues({

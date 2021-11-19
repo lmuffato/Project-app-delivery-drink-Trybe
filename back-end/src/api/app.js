@@ -12,7 +12,9 @@ const { validateUpdateOrder } = require('./middleware/validateUpdateOrder');
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
-app.use(cors());
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+// app.use(cors());
 
 app.get('/coffee', (_req, res) => res.status(418).end());
 
@@ -36,5 +38,8 @@ app.put('/orders/:id', validateToken, validateUpdateOrder, saleController.update
 app.get('/orders/customerId/:id', validateToken, saleController.getOrdersByUserId);
 
 app.get('/orders/sellerId/:id', validateToken, validateSeller, saleController.getOrdersBySellerId);
+app.delete('/admin/:id', validateToken, validateAdmin, userController.deleteUser);
+
+// app.post('/sales', validateToken, saleController.registerSale);
 
 module.exports = app;

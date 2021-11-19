@@ -19,7 +19,6 @@ const validateToken = (req, res, next) => {
   } catch (error) {
     return res.status(401).json({ data: error.message });
   }
-
   return false;
 };
 

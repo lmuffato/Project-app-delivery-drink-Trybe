@@ -32,6 +32,13 @@ admRoleMiddleware.validateAdmRole,
 userMiddlewares.createByAdmin,
 async () => {});
 
+router.post('/token',
+userMiddlewares.verifyTokenNotExpired,
+async () => {});
+/* REQUISIÇÃO:
+http POST :3001/login
+*/
+
 router.get('/:id',
 userMiddlewares.getById,
 async () => {});

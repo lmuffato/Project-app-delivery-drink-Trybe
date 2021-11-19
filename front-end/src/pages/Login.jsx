@@ -1,11 +1,13 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
+
 import ErrorLogin from '../Components/ErrorLogin';
 
 import UserContext from '../context/userContext';
 import { doLogin } from '../services/endpointsAPI';
 
+import { setToLocalStorageUser } from '../services/localStorage';
 import validateEmail from '../validations/validateEmail';
 
 const messageError = 'Login e/ou senha inválidos';
@@ -32,9 +34,10 @@ export default function Login() {
   const clickLoginButton = async () => {
     try {
       const login = await doLogin(email, password);
-      setUserData(login);
       const { token } = login;
       const endpoint = checkRole(token);
+      setToLocalStorageUser('user', { login, email });
+      setUserData(login);
       setErrorMessage(true);
       history.push(endpoint);
     } catch (error) {

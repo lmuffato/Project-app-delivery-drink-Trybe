@@ -1,5 +1,9 @@
 const crypto = require('crypto');
+const jwt = require('jsonwebtoken');
+const fs = require('fs');
 const { users } = require('../../database/models');
+
+const secret = fs.readFileSync('jwt.evaluation.key', { encoding: 'utf-8' }).trim();
 
 const authentication = require('../authentication/authMiddleware');
 
@@ -16,7 +20,9 @@ const login = async (req, res) => {
 
     const token = authentication.generateToken(payload);
 
-    return res.status(200).json({ token });
+    const { id, name, role } = payload;
+ 
+    return res.status(200).json({ name, email, id, role, token });
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }
@@ -28,6 +34,7 @@ const createNew = async (req, res) => {
     const hash = crypto.createHash('md5').update(password).digest('hex');
     const oldUserByEmail = await users.findOne({ where: { email } });
     const oldUserByName = await users.findOne({ where: { name } });
+
     if (oldUserByEmail || oldUserByName) return res.status(409).json({ message: false });
     const obj = { name, email, password: hash, role: 'customer' };
     await users.create(obj);
@@ -49,6 +56,16 @@ const createByAdmin = async (req, res) => {
     return res.status(201).json({ message: true });
   } catch (err) {
     return res.status(500).json({ message: err.message });
+  }
+};
+
+const verifyTokenNotExpired = (req, res) => {
+  try {
+    const { token } = req.body;
+    jwt.verify(token, secret);
+    return res.status(200).json({ message: true });
+  } catch (err) {
+    return res.status(401).json({ message: false });
   }
 };
 
@@ -127,4 +144,5 @@ module.exports = {
   createNew,
   login,
   createByAdmin,
+  verifyTokenNotExpired,
 };

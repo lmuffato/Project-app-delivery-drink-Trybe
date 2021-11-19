@@ -20,7 +20,7 @@ const loginSchema = Joi.object({
 
 const validateLogin = async (req, res, next) => { 
   const { email, password } = req.body;
-  const { invalidEmail, invalidFields } = errorMessages;
+  const { invalidEmail, invalidPassword } = errorMessages;
   const { error } = loginSchema.validate({ email, password });
   if (error) {
     const { message } = error;
@@ -31,7 +31,7 @@ const validateLogin = async (req, res, next) => {
     return res.status(httpStatus.notFound).json({ error: { message: invalidEmail } });
   }
   if (user.password !== md5(password)) {
-    return res.status(httpStatus.unauthorized).json({ error: { message: invalidFields } });
+    return res.status(httpStatus.unauthorized).json({ error: { message: invalidPassword } });
   }
   req.user = user;
   return next();

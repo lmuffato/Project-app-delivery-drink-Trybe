@@ -1,92 +1,74 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect, useContext } from 'react';
+import { useHistory } from 'react-router';
+import { AuthContext } from '../contexts/auth';
 import useInputs from '../hooks/useInputs';
-import registerValidations from '../schemas/register';
-import useAlert from '../hooks/useAlert';
+import registerSchema from '../schemas/register';
 
 import '../styles/components/RegisterForm.scss';
 
 function RegisterForm() {
-  const [values, setValues] = useInputs({ email: '', name: '', password: '' });
-  const [schemaStatus, setSchemaStatus] = useState({ valid: false, error: '' });
-  const [buttonState, setButtonState] = useState(true);
-
-  const { Alert, alertMessage, alertType, isVisible, showAlert } = useAlert();
+  const history = useHistory();
+  const [
+    inputsValues,
+    setInputsValues,
+  ] = useInputs({ name: '', email: '', password: '' });
+  const { Alert, alertIsVisible, authFormSubmit, validateForm } = useContext(AuthContext);
+  const [buttonDisabled, setButtonDisabled] = useState(true);
 
   useEffect(() => {
-    showAlert(false);
-    const { error } = registerValidations.validate(values);
-    setButtonState(error !== undefined);
-    setSchemaStatus({ valid: error === undefined, error: error ? error.message : '' });
-  }, [values, showAlert]);
+    const formValidation = validateForm({ schema: registerSchema, values: inputsValues });
+    setButtonDisabled(!formValidation.isValid);
+  }, [inputsValues, validateForm]);
 
-  const sendRegister = async (e) => {
-    e.preventDefault();
-    try {
-      const { name, email, password } = values;
-      const response = await axios.post('http://localhost:3001/register', {
-        name,
-        email,
-        password,
-        role: 'customer',
-      });
-      if (!schemaStatus.valid) throw new Error(schemaStatus.message);
-      console.log(response.data);
-    } catch (error) {
-      console.error(error);
-      alertType('danger');
-      alertMessage(error.message);
-      showAlert(true);
-    }
-  };
+  async function register(event) {
+    await authFormSubmit(event, {
+      formSchema: registerSchema,
+      formValues: inputsValues,
+      authType: 'register',
+    }, () => history.push('/customer/products'));
+  }
 
   return (
-    <div>
-      { isVisible && <Alert dataTestId="common_register__element-invalid_register" />}
-      <form onSubmit={ sendRegister } className="register-form-container">
-        <label htmlFor="name">
-          Nome
-          <input
-            type="text"
-            id="name"
-            data-testid="common_register__input-name"
-            onChange={ async (e) => {
-              await setValues(e);
-            } }
-          />
-        </label>
-        <label htmlFor="email">
-          Email
-          <input
-            type="text"
-            id="email"
-            data-testid="common_register__input-email"
-            onChange={ async (e) => {
-              await setValues(e);
-            } }
-          />
-        </label>
-        <label htmlFor="password">
-          Senha
-          <input
-            type="password"
-            id="password"
-            data-testid="common_register__input-password"
-            onChange={ async (e) => {
-              await setValues(e);
-            } }
-          />
-        </label>
-        <button
-          type="submit"
-          data-testid="common_register__button-register"
-          disabled={ buttonState }
-          className="primary"
-        >
-          Cadastrar
-        </button>
-      </form>
-    </div>
+    <form onSubmit={ register } className="register-form-container">
+      { alertIsVisible && (
+        <Alert dataTestId="common_register__element-invalid_register" />
+      ) }
+      <label htmlFor="name">
+        Nome
+        <input
+          type="text"
+          id="name"
+          data-testid="common_register__input-name"
+          onChange={ setInputsValues }
+        />
+      </label>
+      <label htmlFor="email">
+        Email
+        <input
+          type="text"
+          id="email"
+          data-testid="common_register__input-email"
+          onChange={ setInputsValues }
+        />
+      </label>
+      <label htmlFor="password">
+        Senha
+        <input
+          type="password"
+          id="password"
+          data-testid="common_register__input-password"
+          onChange={ setInputsValues }
+        />
+      </label>
+      <button
+        type="submit"
+        data-testid="common_register__button-register"
+        disabled={ buttonDisabled }
+        className="primary"
+      >
+        Cadastrar
+      </button>
+    </form>
   );
 }
 

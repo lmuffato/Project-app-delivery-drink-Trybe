@@ -6,7 +6,7 @@ const createSale = async (
   const sale = await Sale.create(
     { totalPrice, userId, sellerId, deliveryAddress, deliveryNumber, saleDate, status, products },
   );
-    
+  
   const saleId = sale.id;
   // função responsável por alimentar a tabela intermediária 'salesProduct'
   const saleProduct = products.map(async ({ productId, quantity }) => {

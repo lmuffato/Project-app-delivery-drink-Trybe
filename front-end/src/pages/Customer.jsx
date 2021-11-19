@@ -7,8 +7,14 @@ import NavBar from '../components/NavBar';
 
 export default function Customer() {
   const buttonsList = [
-    { name: 'PRODUTOS', value: 'products' },
-    { name: 'MEUS PEDIDOS', value: 'orders' },
+    { name: 'PRODUTOS',
+      value: 'products',
+      testId: 'customer_products__element-navbar-link-products',
+    },
+    { name: 'MEUS PEDIDOS',
+      value: 'orders',
+      testId: 'customer_products__element-navbar-link-orders',
+    },
   ];
   // const history = useHistory();
   // const [userEmail, setUserEmail] = useState('');

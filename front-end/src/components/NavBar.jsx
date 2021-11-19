@@ -24,6 +24,7 @@ export default function NavBar(props) {
             type="button"
             key={ index }
             value={ button.value }
+            dataTestId={ button.testId }
             onClick={ (event) => handleRedirect(event) }
           >
             { button.name }
@@ -31,8 +32,20 @@ export default function NavBar(props) {
         ))}
       </div>
       <div className="flex">
-        <button type="button" className="w-60 hover:bg-indigo-700">{clientName}</button>
-        <button type="button" className="w-60 hover:bg-indigo-700">Sair</button>
+        <button
+          type="button"
+          className="w-60 hover:bg-indigo-700"
+          dataTestId="customer_products__element-navbar-user-full-name"
+        >
+          { clientName }
+        </button>
+        <button
+          type="button"
+          className="w-60 hover:bg-indigo-700"
+          dataTestId="customer_products__element-navbar-link-logout"
+        >
+          Sair
+        </button>
       </div>
     </nav>
   );

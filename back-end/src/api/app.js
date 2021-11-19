@@ -2,30 +2,35 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const http = require('http');
-const io = require('socket.io')();
-const { getSaleById, update } = require('../services');
 
 const app = express();
 const server = http.createServer(app);
+const io = require('socket.io')(server, {
+    cors: {
+      origin: 'http://localhost:3000', // url aceita pelo cors
+      methods: ['GET', 'POST'], // Métodos aceitos pela url
+    } });
+const { getSaleById, update } = require('../services');
+
 const { useRoutes, sellerRoutes } = require('../routes');
 
-server.use(bodyParser.json());
-server.use(bodyParser.urlencoded({ extended: true }));
-server.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
 
-server.use('/user', useRoutes);
-server.get('/coffee', (_req, res) => res.status(418).end());
+app.use('/user', useRoutes);
+app.get('/coffee', (_req, res) => res.status(418).end());
 
-server.use('/seller', sellerRoutes);
-
-io.attach(server);
+app.use('/seller', sellerRoutes);
 
 io.on('connection', (socket) => {
+    console.log('conectou');
     socket.on('getSale', async (id) => {
         const sale = await getSaleById(id);
+        console.log(sale);
         io.emit('takeSale', sale);
     });
-    socket.on('senStatus', async ({ id, status }) => {
+    socket.on('sendStatus', async ({ id, status }) => {
         await update('sales', { id }, { status });
         const updated = await getSaleById(id);
         io.emit('takeSale', updated);

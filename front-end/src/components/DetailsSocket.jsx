@@ -5,7 +5,6 @@ import OrdersTable from './OrdersTable';
 
 export default function DetailsSocket() {
   const { id } = useParams();
-  const socket = io('http://localhost:3000');
   const path = useLocation().pathname;
   const [sale, setSale] = useState({});
   const [buttonText] = useState({
@@ -14,14 +13,15 @@ export default function DetailsSocket() {
     'Em Trânsito': 'Entregue',
   });
   useEffect(() => {
-    socket.on('connection', () => {
-      socket.emit('getSale', id);
-    });
+    const socket = io('http://localhost:3001');
+    socket.emit('getSale', id);
     socket.on('takeSale', (response) => {
+      console.log(response);
       setSale(response);
     });
-  }, [socket, id]);
+  });
   const onClick = ({ target }) => {
+    const socket = io('http://localhost:3000');
     const statusValue = { preparo: 'Preparando',
       'saiu para entrega': 'Em Trânsito',
       Entregue: 'Entregue' };
@@ -61,11 +61,13 @@ export default function DetailsSocket() {
       <div>
         <h1>{`PEDIDO${sale.id}`}</h1>
         <h1>{sale.date}</h1>
+        {console.log(sale)}
         <div><h1>{sale.status}</h1></div>
         { renderButton() }
       </div>
       <div>
-        <OrdersTable orderList={ sale.products } />
+        { sale.products ? <OrdersTable orderList={ sale.products } /> : null }
+        <h1>{`Total: R$${sale.total_price}`}</h1>
       </div>
     </div>
   );

@@ -12,6 +12,7 @@ export default function Products() {
   ];
   const store = useStore();
   const username = store.getState().user.name;
+  console.log('seila mano');
 
   return (
     <main>

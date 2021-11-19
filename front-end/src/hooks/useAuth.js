@@ -59,7 +59,13 @@ export default function useAuth() {
     event.preventDefault();
     try {
       validateForm({ schema: formSchema, values: formValues }).throwErrorIfIsNotValid();
-      const response = await authenticate({ type: authType, request: formValues });
+      if (authType === 'register') {
+        await authenticate({ type: 'register', request: formValues });
+      }
+      const response = await authenticate({
+        type: 'login',
+        request: { email: formValues.email, password: formValues.password },
+      });
       const { name, email, role, token } = response.data;
       signInUser({ name, email, role, token });
       if (callback) callback();

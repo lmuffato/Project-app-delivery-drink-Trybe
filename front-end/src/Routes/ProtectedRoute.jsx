@@ -13,7 +13,9 @@ export default function ProtectedRoute({ children, ...rest }) {
     if (user) {
       try {
         if (user.token) {
-          const validJWT = jwt.verify(user.token, process.env.REACT_APP_JWT_SECRET_KEY);
+          const validJWT = jwt.verify(
+            user.token, process.env.REACT_APP_JWT_SECRET_KEY || 'senha_dificil',
+          );
           setTokenValid(validJWT !== undefined);
         }
       } catch (error) {

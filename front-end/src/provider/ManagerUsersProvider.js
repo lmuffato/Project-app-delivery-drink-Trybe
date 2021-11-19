@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { element } from 'prop-types';
-import genHashMd5 from 'md5';
 import lib from '../context';
 import isNotEmptyObject from '../utils/isNotEmptyObject';
+// import api from '../services/api';
 
 const { ManagerUsersContext } = lib;
 
@@ -16,12 +16,21 @@ function ManagerUsersProvider({ children }) {
     setUser,
   };
 
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const usersData = await api.get('/user');
+  //     setUsers(usersData);
+  //   };
+  //   fetchData();
+  // }, []);
+
   useEffect(() => {
     if (isNotEmptyObject(user)) {
       const { name, email, password, role } = user;
-      const passwordHash = genHashMd5(password);
 
-      setUsers((prev) => [...prev, { name, email, password: passwordHash, role }]);
+      const userData = { name, email, password, role };
+
+      setUsers((prev) => [...prev, userData]);
     }
   }, [user]);
 

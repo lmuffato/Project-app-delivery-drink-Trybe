@@ -22,7 +22,7 @@ export default function Customer() {
   if (!user) history.push('/login');
 
   return (
-    <div className="w-screen flex flex-col h-full">
+    <div className="w-full h-full bg-gray-500">
       <NavBar buttonsList={ buttonsList } clientName={ username } />
       {
         location === '/customer/products'

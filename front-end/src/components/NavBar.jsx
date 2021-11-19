@@ -13,7 +13,10 @@ export default function NavBar(props) {
   };
 
   return (
-    <nav className="flex justify-between h-16 top-0 text-white bg-indigo-600">
+    <nav
+      className="absolute w-full flex justify-between h-16 top-0
+        text-white bg-indigo-600"
+    >
       <div className="flex">
         {buttonsList.map((button, index) => (
           <button

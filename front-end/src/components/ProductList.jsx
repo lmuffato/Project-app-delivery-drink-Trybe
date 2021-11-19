@@ -34,10 +34,15 @@ export default function ProductList(props) {
   console.log(products);
 
   return (
-    products.map((product, index) => (<ProductCard
-      product={ product }
-      key={ index }
-    />)));
+    <div className="w-full flex flex-wrap p-20">
+      {
+        products.map((product, index) => (<ProductCard
+          product={ product }
+          key={ index }
+        />))
+      }
+    </div>
+  );
 }
 
 ProductList.propTypes = {

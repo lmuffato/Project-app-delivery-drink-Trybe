@@ -27,8 +27,7 @@ export default function Login() {
   const clickLoginButton = async () => {
     try {
       const login = await doLogin(email, password);
-      const { name, role, token } = login;
-      setToLocalStorage('user', { name, email, role, token });
+      setToLocalStorage('user', { login, email });
       setUserData(login);
       setErrorMessage(true);
       history.push('/customer/products');

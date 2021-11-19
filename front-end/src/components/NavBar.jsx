@@ -21,7 +21,7 @@ export default function NavBar(props) {
             type="button"
             key={ index }
             value={ button.value }
-            dataTestId={ button.testId }
+            data-testid={ button.testId }
             onClick={ (event) => handleRedirect(event) }
           >
             { button.name }
@@ -32,14 +32,14 @@ export default function NavBar(props) {
         <button
           type="button"
           className="w-60 hover:bg-indigo-700"
-          dataTestId="customer_products__element-navbar-user-full-name"
+          data-testid="customer_products__element-navbar-user-full-name"
         >
           { clientName }
         </button>
         <button
           type="button"
           className="w-60 hover:bg-indigo-700"
-          dataTestId="customer_products__element-navbar-link-logout"
+          data-testid="customer_products__element-navbar-link-logout"
         >
           Sair
         </button>

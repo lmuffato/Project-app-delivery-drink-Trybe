@@ -16,14 +16,17 @@ export default function Customer() {
   ];
   const history = useHistory();
   const location = history.location.pathname;
-  const username = 'Fulana';
+  const user = JSON.parse(localStorage.getItem('user'));
+  const username = user.name;
+
+  if (!user) history.push('/login');
 
   return (
     <div className="w-screen flex flex-col h-full">
       <NavBar buttonsList={ buttonsList } clientName={ username } />
       {
         location === '/customer/products'
-          ? <ProductList />
+          ? <ProductList token={ user.token } />
           : <span>aeaeae</span>
       }
     </div>

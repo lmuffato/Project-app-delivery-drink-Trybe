@@ -3,8 +3,7 @@ const saleService = require('../services/saleService');
 const create = async (req, res, next) => {
   try {
     const {
-      userId, sellerId, totalPrice,
-      deliveryAddress, deliveryNumber, status,
+      userId, sellerId, totalPrice, deliveryAddress, deliveryNumber, status, products,
     } = req.body;
 
     const newSale = await saleService.create({
@@ -14,6 +13,7 @@ const create = async (req, res, next) => {
       deliveryAddress,
       deliveryNumber,
       status,
+      products,
     });
 
     return res.status(201).json({ sale: newSale });

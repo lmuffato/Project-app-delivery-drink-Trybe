@@ -10,6 +10,11 @@ const handleSelectChange = (ev, setter) => {
   setter(+ev.target.value);
 };
 
+const formatCartProducts = (product) => ({
+  id: product.id,
+  quantity: product.quantity,
+});
+
 function CustomerCheckout() {
   const [totalPrice, setTotalPrice] = useState('0,00');
   const [selectValue, setSelectValue] = useState(2);
@@ -39,7 +44,8 @@ function CustomerCheckout() {
       totalPrice: +totalPrice.replace(',', '.'),
       deliveryAddress,
       deliveryNumber,
-      status: 'pending',
+      products: cart.map(formatCartProducts),
+      status: 'Pendente',
     }, { headers: { Authorization: JSON.parse(localStorage.getItem('user')).token } })
       .then(((res) => {
         history.push(`/customer/orders/${res.data.sale.id}`);

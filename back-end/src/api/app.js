@@ -1,8 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const routes = require('../routes');
 const path = require('path');
+const routes = require('../routes');
 const middlewares = require('../middlewares');
 
 const app = express();
@@ -19,6 +19,5 @@ app.use(express.static(path.join(__dirname, '../', '../', 'public')));
 
 app.use(middlewares.routeNotFound);
 app.use(middlewares.errorMiddleware);
-
 
 module.exports = app;

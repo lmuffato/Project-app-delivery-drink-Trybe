@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import { DataGrid } from '@mui/x-data-grid';
 import { Delete } from '@mui/icons-material';
 
-function ProductsCheckoutTable({ checkoutCart }) {
-  const rows = checkoutCart.map((cart, index) => ({ ...cart, id: index }));
+function ProductsCheckoutTable({ checkoutCart, setCheckoutCart }) {
+  const rows = checkoutCart.map((cart, index) => (
+    { ...cart, productId: cart.id, id: index }));
   const formatValue = (value) => (
     `${parseFloat(value.toString()).toFixed(2).replace('.', ',')}`
   );
@@ -13,6 +14,11 @@ function ProductsCheckoutTable({ checkoutCart }) {
     const unitPrice = params.getValue(params.id, 'price');
     const totalQuantity = params.getValue(params.id, 'quantity');
     return formatValue(unitPrice * totalQuantity);
+  }
+
+  function handleDeleteCartItem(params) {
+    setCheckoutCart(checkoutCart
+      .filter((product) => product.id !== params.row.productId));
   }
 
   const tableColumns = [
@@ -91,7 +97,7 @@ function ProductsCheckoutTable({ checkoutCart }) {
       renderCell: (params) => (
         <button
           type="button"
-          onClick={ () => console.log('click') }
+          onClick={ () => handleDeleteCartItem(params) }
           data-testid={
             `customer_checkout__element-order-table-remove-${params.id}`
           }
@@ -132,5 +138,6 @@ ProductsCheckoutTable.propTypes = {
     description: PropTypes.string,
     quantity: PropTypes.number,
     value: PropTypes.number,
-  })).isRequired,
-};
+  })),
+  setCheckoutCart: PropTypes.func,
+}.isRequired;

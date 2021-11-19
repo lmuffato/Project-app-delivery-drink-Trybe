@@ -1,16 +1,29 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const { useRoutes, sellerRoutes } = require('../routes');
+const http = require('http');
+const io = require('socket.io')();
+const { getSaleById } = require('../services');
 
 const app = express();
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors());
+const server = http.createServer(app);
+const { useRoutes, sellerRoutes } = require('../routes');
 
-app.use('/user', useRoutes);
-app.get('/coffee', (_req, res) => res.status(418).end());
+server.use(bodyParser.json());
+server.use(bodyParser.urlencoded({ extended: true }));
+server.use(cors());
 
-app.use('/seller', sellerRoutes);
+server.use('/user', useRoutes);
+server.get('/coffee', (_req, res) => res.status(418).end());
 
-module.exports = app;
+server.use('/seller', sellerRoutes);
+
+io.attach(server);
+
+io.on('connection', (socket) => {
+    socket.on('getSale', async (id) => {
+        const sale = await getSaleById(id);
+    });
+});
+
+module.exports = server;

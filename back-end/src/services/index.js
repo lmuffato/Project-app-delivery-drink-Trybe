@@ -3,6 +3,7 @@ const insert = require('./insert');
 const update = require('./update');
 const find = require('./find');
 const takeToken = require('./takeToken');
+const getSaleById = require('./getSaleById');
 
 module.exports = {
     update,
@@ -10,4 +11,5 @@ module.exports = {
     insert,
     find,
     takeToken,
+    getSaleById,
 };

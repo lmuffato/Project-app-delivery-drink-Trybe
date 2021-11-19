@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
+
 import ErrorLogin from '../Components/ErrorLogin';
 
 import UserContext from '../context/userContext';
@@ -33,12 +34,13 @@ export default function Login() {
   const clickLoginButton = async () => {
     try {
       const login = await doLogin(email, password);
-      setToLocalStorage('user', { login, email });
-      setUserData(login);
       const { token } = login;
       const endpoint = checkRole(token);
+      setToLocalStorageUser('user', { login, email });
+      setUserData(login);
       setErrorMessage(true);
-      history.push(endpoint);
+      console.log('xxxxxxxxx', endpoint);
+      history.push('/customer/products');
     } catch (error) {
       setErrorMessage(false);
     }

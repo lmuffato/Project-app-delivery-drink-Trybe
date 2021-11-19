@@ -1,4 +1,4 @@
-export const setToLocalStorage = (key, element) => {
+export const setToLocalStorageUser = (key, element) => {
   const { login, email } = element;
   const { name, role, token } = login;
   const data = { name, email, role, token };
@@ -11,7 +11,5 @@ export const getItemFromLocalStorage = (key) => {
   return JSON.parse(localStorage.getItem(key));
 };
 
-// name, email, role, token
-
-/* export const setToLocalStorage = (key, element) => localStorage
-  .setItem(key, JSON.stringify(element)); */
+export const setToLocalStorage = (key, element) => localStorage
+  .setItem(key, JSON.stringify(element));

@@ -20,10 +20,12 @@ function CardProduto() {
           <section className="product-card" key={ product.id }>
             <PrecoProduto data={ product } />
             <ImagemProduto data={ product } />
-            <NomeProduto data={ product } />
-            <RmItem data={ product } />
-            <QuantidadeItens data={ product } />
-            <AddItem data={ product } />
+            <section>
+              <NomeProduto data={ product } />
+              <RmItem data={ product } />
+              <QuantidadeItens data={ product } />
+              <AddItem data={ product } />
+            </section>
           </section>
         ))}
     </>

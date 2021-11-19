@@ -7,11 +7,18 @@ import ContextProducts from '../context/ContextProducts';
 import NavBar from '../components/NavBar';
 
 function CustomerCheckout() {
-  const { cartProducts, calculateSubtotal } = useContext(ContextProducts);
+  const {
+    cartProducts,
+    calculateSubtotal,
+    setCartProducts,
+  } = useContext(ContextProducts);
   return (
     <>
       <NavBar />
-      <ProductsCheckoutTable checkoutCart={ cartProducts } />
+      <ProductsCheckoutTable
+        checkoutCart={ cartProducts }
+        setCheckoutCart={ setCartProducts }
+      />
       <p>
         R$
         <span

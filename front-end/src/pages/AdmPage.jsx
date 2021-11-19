@@ -23,8 +23,10 @@ function AdmPage() {
       password,
       role,
     };
-    const newUsers = [...users, data];
-    setUsers(newUsers);
+    if (!users.find((us) => us.email === email || us.name === name)) {
+      const newUsers = [...users, data];
+      setUsers(newUsers);
+    }
     const myBody = JSON.stringify(data);
     const request = await fetch('http://localhost:3001/user/admin', {
       method: 'POST',

@@ -7,7 +7,7 @@ import ErrorLogin from '../Components/ErrorLogin';
 import UserContext from '../context/userContext';
 import { doLogin } from '../services/endpointsAPI';
 
-import { setToLocalStorage } from '../services/localStorage';
+import { setToLocalStorageUser } from '../services/localStorage';
 import validateEmail from '../validations/validateEmail';
 
 const messageError = 'Login e/ou senha inválidos';

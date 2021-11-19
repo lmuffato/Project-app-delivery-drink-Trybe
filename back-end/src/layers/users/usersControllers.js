@@ -27,7 +27,7 @@ http POST :3001/login
 */
 
 router.post('/token',
-userMiddlewares.login,
+userMiddlewares.verifyTokenNotExpired,
 async () => {});
 /* REQUISIÇÃO:
 http POST :3001/login

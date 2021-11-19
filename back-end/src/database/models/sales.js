@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     userId: DataTypes.STRING,
     sellerId: DataTypes.STRING,
-    totalPrice: { type: DataTypes.INTEGER, allowNull: false },
+    totalPrice: { type: DataTypes.DECIMAL, allowNull: false },
     deliveryAddress: { type: DataTypes.STRING, allowNull: false },
     deliveryNumber: { type: DataTypes.STRING, allowNull: false },  
     saleDate: { type: DataTypes.DATE, allowNull: false },

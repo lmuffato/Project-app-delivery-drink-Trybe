@@ -6,6 +6,7 @@ const midleware = require('../middleware');
 const router = express.Router();
 
 router.get('/', midleware.token, productController.getAllProducts);
-router.put(':id/images', midleware.multer.imageUpload());
+router.get(':id/images', midleware.multer.imageUpload());
+router.get('/:id', productController.getProduct);
 
 module.exports = router; 

@@ -13,6 +13,23 @@ const createUser = async (req, res) => {
   }
 };
 
+const getusers = async (_req, res) => {
+  try {
+    const create = await userService.getUsers();
+    return res.status(200).json(create);
+  } catch (e) {
+    return res.status(500).json({ message: e.message });
+  }
+};
+
+const deleteUser = async (req, res) => {
+  const { id } = req.params;
+  await userService.deleteUser(id);
+  return res.status(204).end();
+};
+
 module.exports = {
   createUser,
+  getusers,
+  deleteUser,
 };

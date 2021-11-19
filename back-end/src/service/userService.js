@@ -13,6 +13,17 @@ const createUser = async (name, email, password, role) => {
   return addUser;
 };
 
+const getUsers = async () => {
+  const users = await User.findAll();
+  return users;
+};
+
+const deleteUser = async (id) => {
+  await User.destroy({ where: { id } });
+};
+
 module.exports = {
   createUser,
+  getUsers,
+  deleteUser,
 };

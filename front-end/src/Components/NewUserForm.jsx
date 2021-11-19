@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import validateEmail from '../validations/validateEmail';
+import ErrorRegister from './ErrorRegister';
+
+import { createNewUserByAdmin } from '../services/endpointsAPI';
 
 export default function NewUserForm() {
   const [name, setName] = useState('');
@@ -7,6 +10,7 @@ export default function NewUserForm() {
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('');
   const [disableRegisterButton, setDisableRegisterButton] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(true);
 
   const handleChange = (target) => {
     const { id, value } = target;
@@ -14,6 +18,21 @@ export default function NewUserForm() {
     if (id === 'user-email') setEmail(value);
     if (id === 'user-password') setPassword(value);
     if (id === 'select-role') setRole(value);
+  };
+
+  const createUser = async () => {
+    try {
+      const result = await createNewUserByAdmin(name, email, password, role);
+      if (result) {
+        setName('');
+        setEmail('');
+        setPassword('');
+        setRole('');
+        setErrorMessage(true);
+      }
+    } catch (error) {
+      setErrorMessage(false);
+    }
   };
 
   useEffect(() => {
@@ -39,6 +58,7 @@ export default function NewUserForm() {
             type="text"
             name="name"
             id="user-name"
+            value={ name }
             placeholder="Nome e sobrenome"
             data-testid="admin_manage__input-name"
             onChange={ (e) => handleChange(e.target) }
@@ -50,6 +70,7 @@ export default function NewUserForm() {
             type="email"
             name="email"
             id="user-email"
+            value={ email }
             placeholder="seu-email@site.com"
             data-testid="admin_manage__input-email"
             onChange={ (e) => handleChange(e.target) }
@@ -61,6 +82,7 @@ export default function NewUserForm() {
             type="password"
             name="password"
             id="user-password"
+            value={ password }
             placeholder="********"
             data-testid="admin_manage__input-password"
             onChange={ (e) => handleChange(e.target) }
@@ -82,11 +104,14 @@ export default function NewUserForm() {
           id="register-button"
           disabled={ !disableRegisterButton }
           data-testid="admin_manage__button-register"
-          onClick={ () => console.log(name, email, password, role) }
+          onClick={ createUser }
         >
           CADASTRAR
         </button>
       </form>
+      <div hidden={ errorMessage }>
+        <ErrorRegister />
+      </div>
     </>
   );
 }

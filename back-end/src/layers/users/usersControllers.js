@@ -26,6 +26,10 @@ async () => {});
 http POST :3001/login
 */
 
+router.post('/createbyadmin',
+userMiddlewares.createByAdmin,
+async () => {});
+
 router.get('/:id',
 userMiddlewares.getById,
 async () => {});

@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const path = require('path');
 const { userController, productsController } = require('./controllers');
 
 const newUserAuthentication = require('./middleware/validateNewUser');
@@ -10,8 +11,7 @@ const { validateToken } = require('./auth/validateToken');
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
-app.use(cors());
-
+app.use('/images', express.static(path.join(__dirname, '..', '..', 'public', 'images')));
 app.get('/coffee', (_req, res) => res.status(418).end());
 
 app.post('/login', userController.login);

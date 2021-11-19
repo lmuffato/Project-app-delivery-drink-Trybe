@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import useAlert from './useAlert';
 import api from '../services/api';
 
 export default function useAuth() {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(undefined);
   const {
     Alert,
     alertMessage,
@@ -13,6 +13,11 @@ export default function useAuth() {
     showAlert,
   } = useAlert();
   const history = useHistory();
+
+  useEffect(() => {
+    const userStorage = JSON.parse(localStorage.getItem('user')) || {};
+    setUser(userStorage);
+  }, []);
 
   function logOut() {
     history.push('/login');

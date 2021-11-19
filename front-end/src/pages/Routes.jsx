@@ -9,6 +9,7 @@ import OrderDetails from './OrderDetails';
 import SellerOrders from './SellersOrders';
 import SellerOrdersDetails from './SellerOrdersDetails';
 import AdminManage from './AdminManage';
+import FinishedOrder from '../pages/FinishedOrder';
 
 export default function Rout() {
   return (
@@ -19,6 +20,7 @@ export default function Rout() {
       <Route path="/register" component={ Register } />
       <Route path="/customer/products" component={ CustomerProducts } />
       <Route path="/customer/checkout" component={ CustomerCheckout } />
+      <Route path="/customer/finished" component={ FinishedOrder } />
       <Route path="/customer/orders" component={ CustomerOrder } />
       <Route path="/sellers/orders" component={ SellerOrders } />
       <Route path="/admin/manage" component={ AdminManage } />

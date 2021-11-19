@@ -9,14 +9,9 @@ function CustomerAddress() {
   const [number, setNumber] = useState(0);
 
   useEffect(() => {
-    const teste = users.filter((user) => user.role === 'seller');
-    console.log(teste);
-    setSellers(teste);
+    const sellerFiltered = users.filter((user) => user.role === 'seller');
+    setSellers(sellerFiltered);
   }, [users, sellerSelect]);
-
-  // useEffect(() => {
-  //   setSellerSelect(sellers[0].name);
-  // }, [sellers]);
 
   const onChange = ({ target }) => {
     const { value, name } = target;

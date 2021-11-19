@@ -17,12 +17,17 @@ function Checkout() {
   useEffect(() => {
     setTotalCheckout(products
       .reduce((totalP, product) => totalP + product.total, 0));
-    console.log('olá');
   });
 
   useEffect(() => {
     setProducts(JSON.parse(localStorage.getItem('carrinho')));
   }, []);
+
+  const removeProduct = (name) => {
+    const filteredProducts = products.filter((product) => product.name !== name);
+    setProducts(filteredProducts);
+    localStorage.setItem('carrinho', JSON.stringify(filteredProducts));
+  };
 
   return (
     <>
@@ -36,12 +41,6 @@ function Checkout() {
                   { coluna }
                 </th>
               )) }
-              {/* <th>Item</th>
-              <th>Descrição</th>
-              <th>Quantidade</th>
-              <th>Valor Unitário</th>
-              <th>Sub-total</th>
-              <th>Remover Item</th> */}
             </tr>
           </thead>
           <tbody>
@@ -53,6 +52,7 @@ function Checkout() {
                 qty={ product.quantity }
                 price={ product.price }
                 total={ product.total }
+                onChange={ () => removeProduct(product.name) }
               />
             ))}
           </tbody>

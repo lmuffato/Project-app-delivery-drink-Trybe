@@ -19,11 +19,11 @@ export default function CustomerProducts() {
 
   return (
 
-    <main>
+    <main className="mainCustomerProducts">
       <nav>
         <Navbar />
       </nav>
-      <main>
+      <main className="bodyCustomerProducts">
         { isLoading ? <h3>Carregando...</h3>
           : listProducts
             .map((product) => {

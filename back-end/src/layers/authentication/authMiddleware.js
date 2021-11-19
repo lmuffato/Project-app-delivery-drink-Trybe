@@ -9,6 +9,17 @@ const jwtConfig = { expiresIn: '30m', algorithm: 'HS256' };
 
 const generateToken = (payload) => jwt.sign(payload, secret, jwtConfig);
 
+
+const verifyTokenNotExpired = (req, res) => {
+  try {
+    const { token } = req.body;
+    jwt.verify(token, jwt.evaluation.key);
+    return res.status(200).json({message: true});
+  } catch (err) {
+    return res.status(401).json({message: false});
+  }
+};
+
 /*
 
 const { User } = require('../../models');
@@ -82,4 +93,5 @@ const tokenValidation = async (req, res, next) => {
 
 module.exports = {
   generateToken,
+  verifyTokenNotExpired,
 };

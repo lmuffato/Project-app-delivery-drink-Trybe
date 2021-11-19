@@ -4,6 +4,7 @@ const usersControllers = require('../layers/users/usersControllers');
 const salesControllers = require('../layers/sales/salesControllers');
 const productsControllers = require('../layers/products/productsControllers');
 const salesProductsControllers = require('../layers/salesProducts/salesProductsControllers');
+const authenticationController = require('../layers/authentication/authController');
 
 app.get('/test', (_req, res) => res.status(418).json({ message: 'mensagem de test' }));
 
@@ -30,6 +31,13 @@ app.use('/salesProducts', salesProductsControllers);
 /*
 http://localhost:3001/salesProducts
 */
+
+app.use('/token', authenticationController);
+/*
+http://localhost:3001/salesProducts
+*/
+
+
 
 app.listen(port);
 console.log(`Api rodando na porta ${port}`);

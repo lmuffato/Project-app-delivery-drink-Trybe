@@ -1,0 +1,24 @@
+.cardProduct {
+  margin-bottom: 40px;
+  width: 200px;
+}
+
+.imageDrinkCard {
+  width: 200px;
+}
+
+.unitPrice {
+  color: blue;
+  position: absolute;
+}
+
+.footerCardDrink {
+  background-color: darkseagreen;
+  display: flex;
+  flex-direction: column;
+  margin-top: -6px;
+}
+
+.addQuantities {
+  display: flex;
+}

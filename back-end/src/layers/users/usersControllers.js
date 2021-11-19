@@ -26,6 +26,13 @@ async () => {});
 http POST :3001/login
 */
 
+router.post('/token',
+userMiddlewares.login,
+async () => {});
+/* REQUISIÇÃO:
+http POST :3001/login
+*/
+
 router.get('/:id',
 userMiddlewares.getById,
 async () => {});

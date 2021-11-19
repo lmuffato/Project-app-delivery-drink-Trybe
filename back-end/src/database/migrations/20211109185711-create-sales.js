@@ -17,7 +17,7 @@ module.exports = {
         allowNull: false,
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
-        defaultValue: 1,
+        // defaultValue: 1,
         field: 'user_id',
         type: Sequelize.INTEGER,
         references: {
@@ -29,7 +29,7 @@ module.exports = {
         allowNull: false,
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
-        defaultValue: 1,
+        // defaultValue: 1,
         field: 'seller_id',
         type: Sequelize.INTEGER,
         references: {
@@ -57,7 +57,7 @@ module.exports = {
       },
       saleDate: {
         // allowNull: false,
-        type: Sequelize.DATEONLY,
+        type: Sequelize.DATE,
         field: 'sale_date',
         defaultValue: Sequelize.NOW,
       },

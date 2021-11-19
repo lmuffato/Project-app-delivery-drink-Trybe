@@ -1,13 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from './styles.module.css';
 
 export default function Header() {
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (!localStorage.getItem('user')) {
+      navigate('/login');
+    }
+  });
+
   const handleExitBtn = () => {
     localStorage.removeItem('user');
-    navigate('/login');
+    navigate('/');
   };
 
   const userStorage = localStorage.getItem('user');

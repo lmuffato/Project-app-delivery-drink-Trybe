@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
 import {
   nameVerification,
   emailVerification,
@@ -14,6 +15,14 @@ export default function AdminForm() {
   const [role, setRole] = useState('admin');
   const [disabled, setDisabled] = useState(true);
   const [status, setStatus] = useState('');
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!localStorage.getItem('user')) {
+      navigate('/');
+    }
+  });
 
   useEffect(() => {
     if (

@@ -18,8 +18,6 @@ const adminRegister = async (request, setStatus) => {
     } else {
       setStatus(CREATED_STATUS);
     }
-    const data = await response.json();
-    return data;
   } catch (error) {
     console.error(error);
   }

@@ -1,9 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-// import axios from 'axios';
-// import { userLogin } from '../redux/userSlice';
 
 export default function NavBar(props) {
   const { buttonsList, clientName } = props;

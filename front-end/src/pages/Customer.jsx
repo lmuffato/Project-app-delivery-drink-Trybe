@@ -1,9 +1,7 @@
 import React from 'react';
-// import { useStore } from 'react-redux';
-// import { useHistory } from 'react-router-dom';
-// import axios from 'axios';
-// import { userLogin } from '../redux/userSlice';
+import { useHistory } from 'react-router-dom';
 import NavBar from '../components/NavBar';
+import ProductList from '../components/ProductList';
 
 export default function Customer() {
   const buttonsList = [
@@ -16,15 +14,18 @@ export default function Customer() {
       testId: 'customer_products__element-navbar-link-orders',
     },
   ];
-  // const history = useHistory();
-  // const [userEmail, setUserEmail] = useState('');
-  // const store = useStore();
-  // const username = store.getState().user.name;
+  const history = useHistory();
+  const location = history.location.pathname;
   const username = 'Fulana';
 
   return (
     <div className="w-screen flex flex-col h-full">
       <NavBar buttonsList={ buttonsList } clientName={ username } />
+      {
+        location === '/customer/products'
+          ? <ProductList />
+          : <span>aeaeae</span>
+      }
     </div>
   );
 }

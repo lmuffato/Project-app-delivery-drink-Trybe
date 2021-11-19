@@ -16,6 +16,11 @@ export const createNewUser = async (name, email, password) => {
   return result.data;
 };
 
+export const checkUserToken = async (token) => {
+  const result = await api.post('/users/token', { token });
+  return result.data;
+};
+
 export const getProducts = async () => {
   const result = await api.get('/products');
   return result.data;

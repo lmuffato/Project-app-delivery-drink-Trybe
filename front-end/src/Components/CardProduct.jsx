@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import '../Styles/Cardproducs.css';
 
-export default function CardProduct({ id, drink, cost, thumb }) {
+export default function CardProduct({ id,
+  drink, cost, thumb, changeSomeStatus, setChangeSomeStatus }) {
   const [counter, setCounter] = useState(0);
+
+  useEffect(() => {
+    setChangeSomeStatus(!changeSomeStatus);
+  }, [counter]);
 
   function increment() {
     setCounter(counter + 1);

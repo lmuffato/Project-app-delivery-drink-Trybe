@@ -5,7 +5,7 @@ require('dotenv').config(); // Configura o uso de variáveis de ambiente
 const fs = require('fs');
 
 const secret = fs.readFileSync('jwt.evaluation.key', { encoding: 'utf-8' }).trim();
-const jwtConfig = { expiresIn: '30m', algorithm: 'HS256' };
+const jwtConfig = { expiresIn: '1m', algorithm: 'HS256' };
 
 const generateToken = (payload) => jwt.sign(payload, secret, jwtConfig);
 

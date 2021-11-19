@@ -1,5 +1,9 @@
 const crypto = require('crypto');
+const jwt = require('jsonwebtoken');
+const fs = require('fs');
 const { users } = require('../../database/models');
+
+const secret = fs.readFileSync('jwt.evaluation.key', { encoding: 'utf-8' }).trim();
 
 const authentication = require('../authentication/authMiddleware');
 
@@ -43,7 +47,7 @@ const createNew = async (req, res) => {
 const verifyTokenNotExpired = (req, res) => {
   try {
     const { token } = req.body;
-    jwt.verify(token, jwt.evaluation.key);
+    jwt.verify(token, secret);
     return res.status(200).json({message: true});
   } catch (err) {
     return res.status(401).json({message: false});

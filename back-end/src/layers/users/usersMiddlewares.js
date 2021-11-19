@@ -48,9 +48,9 @@ const verifyTokenNotExpired = (req, res) => {
   try {
     const { token } = req.body;
     jwt.verify(token, secret);
-    return res.status(200).json({message: true});
+    return res.status(200).json({ message: true });
   } catch (err) {
-    return res.status(401).json({message: false});
+    return res.status(401).json({ message: false });
   }
 };
 

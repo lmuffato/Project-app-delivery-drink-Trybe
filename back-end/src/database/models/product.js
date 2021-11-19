@@ -5,11 +5,12 @@ module.exports = (sequelize, DataTypes) => {
   {
     name: DataTypes.STRING,
     price: DataTypes.DECIMAL,
-    url_Image: DataTypes.STRING,
+    urlImage: DataTypes.STRING,
   },
   { 
     timestamps: false,
-    tableName: 'products'
+    tableName: 'products',
+    underscored: true,
   });
 
   Product.associate = (models) => {

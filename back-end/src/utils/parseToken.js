@@ -2,8 +2,12 @@ const jwt = require('jsonwebtoken');
 const fs = require('fs');
 const path = require('path');
 
-exports.parseToken = ({ token }) => {
+exports.getSecretKey = () => {
   const jwtPath = path.resolve(__dirname, '..', '..', 'jwt.evaluation.key');
-  const JWT_SECRET = fs.readFileSync(jwtPath, 'utf8');
+  return fs.readFileSync(jwtPath, 'utf8').trim();
+};
+
+exports.parseToken = ({ token }) => {
+  const JWT_SECRET = this.getSecretKey();
   return jwt.verify(token, JWT_SECRET);
 };

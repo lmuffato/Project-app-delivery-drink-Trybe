@@ -18,7 +18,7 @@ function Login() {
         isValidEmail(values.email) && isValidPassword(values.password),
       errorMessage: null,
     });
-  }, [values.email, values.password]);
+  }, [setValues, values, values.email, values.password]);
 
   const onChange = (event) => {
     const { value, name } = event.target;

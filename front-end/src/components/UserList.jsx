@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Table from 'react-bootstrap/Table';
+import UsersContext from '../contexts/UsersContext';
 
 function UserList() {
-  const [users, setUsers] = useState([]);
+  const { users, setUsers } = useContext(UsersContext);
   const { token } = JSON.parse(localStorage.getItem('user'));
 
   async function getUsers() {
@@ -19,7 +20,7 @@ function UserList() {
   async function handleClick(email) {
     const data = { email };
     const myBody = JSON.stringify(data);
-    await fetch('http://localhost:3001/user', {
+    const request = await fetch('http://localhost:3001/user', {
       method: 'DELETE',
       body: myBody,
       headers: {
@@ -27,6 +28,9 @@ function UserList() {
         Authorization: token,
       },
     });
+    const myList = await request.json();
+    const filteredList = myList.data.filter((e) => e.role !== 'administrator');
+    setUsers(filteredList);
   }
 
   return (

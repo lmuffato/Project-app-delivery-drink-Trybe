@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Form, Row, Col, Button } from 'react-bootstrap';
 import CustomerNavBar from '../components/CustomerNavBar';
 import UserList from '../components/UserList';
+import UsersContext from '../contexts/UsersContext';
 
 function AdmPage() {
+  const { users, setUsers } = useContext(UsersContext);
+
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
@@ -20,6 +23,8 @@ function AdmPage() {
       password,
       role,
     };
+    const newUsers = [...users, data];
+    setUsers(newUsers);
     const myBody = JSON.stringify(data);
     const request = await fetch('http://localhost:3001/user/admin', {
       method: 'POST',

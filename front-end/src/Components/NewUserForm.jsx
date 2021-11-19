@@ -73,9 +73,9 @@ export default function NewUserForm() {
           data-testid="admin_manage__select-role"
           onChange={ (e) => handleChange(e.target) }
         >
-          <option value="vendedor">Vendedor</option>
+          <option value="seller">Vendedor</option>
           <option value="administrator">Administrador</option>
-          <option value="cliente">Cliente</option>
+          <option value="customer">Cliente</option>
         </select>
         <button
           type="button"

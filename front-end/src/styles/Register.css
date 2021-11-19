@@ -1,0 +1,85 @@
+.register_container {
+  align-items: center;
+  background-color: #2fc18c;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+}
+
+.children_container {
+  align-items: center;
+  background-color: rgb(238, 238, 238);
+  border-radius: 30px;
+  box-shadow: 2px 3px 20px -4px black;
+  display: flex;
+  flex-direction: column;
+  height: 600px;
+  justify-content: center;
+  margin-top: auto;
+  width: 500px;
+}
+
+.children_container h3 {
+  font-size: 26px;
+}
+
+.children_container h5 {
+  font-size: 16px;
+  font-weight: 200;
+}
+
+.register-name {
+  background-color: whitesmoke;
+  border: none;
+  border-radius: 8px;
+  box-sizing: border-box;
+  height: 52px;
+  margin-top: 10px;
+  outline-color: #2fc18c;
+  padding: 8px 16px;
+  width: 340px;
+}
+
+.register-email {
+  background-color: whitesmoke;
+  border: none;
+  border-radius: 8px;
+  caret-color: #2fc18c;
+  height: 52px;
+  margin-top: 10px;
+  outline-color: #2fc18c;
+  padding: 8px 16px;
+  width: 340px;
+}
+
+.register-password {
+  background-color: whitesmoke;
+  border: none;
+  border-radius: 8px;
+  box-sizing: border-box;
+  height: 52px;
+  margin-bottom: 20px;
+  margin-top: 10px;
+  outline-color: #2fc18c;
+  padding: 8px 16px;
+  width: 340px;
+}
+
+.btn-register {
+  background-color: #036b52;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 800;
+  height: 52px;
+  margin-top: 10px;
+  padding: 8px;
+  width: 340px;
+}
+
+.btn-register:hover {
+  background-color: #2fc18c;
+}

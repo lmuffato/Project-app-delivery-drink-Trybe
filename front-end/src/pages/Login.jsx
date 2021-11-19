@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import jwtDecode from 'jwt-decode';
 import ErrorLogin from '../Components/ErrorLogin';
 
 import UserContext from '../context/userContext';
@@ -23,12 +24,19 @@ export default function Login() {
   const [loginButton, setLoginButton] = useState(false);
   const [errorMessage, setErrorMessage] = useState(true);
 
+  const checkRole = (token) => {
+    const { role } = jwtDecode(token);
+    return role === 'administrator' ? '/admin/manage' : '/customer/products';
+  };
+
   const clickLoginButton = async () => {
     try {
       const login = await doLogin(email, password);
       setUserData(login);
+      const { token } = login;
+      const endpoint = checkRole(token);
       setErrorMessage(true);
-      history.push('/customer/products');
+      history.push(endpoint);
     } catch (error) {
       setErrorMessage(false);
     }

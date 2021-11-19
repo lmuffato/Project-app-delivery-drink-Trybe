@@ -39,8 +39,7 @@ export default function Login() {
       setToLocalStorageUser('user', { login, email });
       setUserData(login);
       setErrorMessage(true);
-      console.log('xxxxxxxxx', endpoint);
-      history.push('/customer/products');
+      history.push(endpoint);
     } catch (error) {
       setErrorMessage(false);
     }

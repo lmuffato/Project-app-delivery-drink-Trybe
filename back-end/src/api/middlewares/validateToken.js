@@ -10,7 +10,7 @@ const validateToken = (req, res, next) => {
     next();
   } catch (error) {
     if (error.name === 'JsonWebTokenError') {
-      return res.status(StatusCodes.BAD_REQUEST).json({ message: 'Malformed toekn' });
+      return res.status(StatusCodes.BAD_REQUEST).json({ message: 'Malformed token' });
     }
     console.error(error.message);
     next(error);

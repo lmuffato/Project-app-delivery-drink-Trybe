@@ -1,17 +1,16 @@
-const requestMetadata = ({ method, body, Authorization }) => ({
-  method,
-  headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
-    Authorization,
-  },
-  body,
-});
-
+const APPLICATION_JSON = 'application/json';
 export const loginAction = async ({ email, password }) => {
   try {
     const rawResponse = await fetch('http://localhost:3001/login',
-      requestMetadata({ method: 'POST', body: JSON.stringify({ email, password }) }));
+      {
+        method: 'POST',
+        headers: {
+          Accept: APPLICATION_JSON,
+          'Content-Type': APPLICATION_JSON,
+          Authorization,
+        },
+        body: JSON.stringify({ email, password }),
+      });
     const user = await rawResponse.json();
     return user;
   } catch (error) {
@@ -23,8 +22,15 @@ export const loginAction = async ({ email, password }) => {
 export const registerAction = async ({ fullName, email, password }) => {
   try {
     const rawResponse = await fetch('http://localhost:3001/register',
-      requestMetadata({ method: 'POST',
-        body: JSON.stringify({ fullName, email, password }) }));
+      {
+        method: 'POST',
+        headers: {
+          Accept: APPLICATION_JSON,
+          'Content-Type': APPLICATION_JSON,
+          Authorization,
+        },
+        body: JSON.stringify({ fullName, email, password }),
+      });
     const token = await rawResponse.json();
     return token;
   } catch (error) {
@@ -36,7 +42,33 @@ export const registerAction = async ({ fullName, email, password }) => {
 export const fetchProducts = async (token) => {
   try {
     const rawResponse = await fetch('http://localhost:3001/products',
-      requestMetadata({ method: 'GET', Authorization: token }));
+      {
+        method: 'GET',
+        headers: {
+          Accept: APPLICATION_JSON,
+          'Content-Type': APPLICATION_JSON,
+          Authorization: token,
+        },
+      });
+    const { result } = await rawResponse.json();
+    return result;
+  } catch (error) {
+    console.error(error.message);
+    return null;
+  }
+};
+
+export const fetchSales = async (token) => {
+  try {
+    const rawResponse = await fetch('http://localhost:3001/sales',
+      {
+        method: 'GET',
+        headers: {
+          Accept: APPLICATION_JSON,
+          'Content-Type': APPLICATION_JSON,
+          Authorization: token,
+        },
+      });
     console.log('🚀 ~ rawResponse', rawResponse);
     const { result } = await rawResponse.json();
     return result;

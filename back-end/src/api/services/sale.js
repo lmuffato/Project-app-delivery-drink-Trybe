@@ -7,10 +7,23 @@ exports.findAll = async () => {
   const sales = await saleModel.findAll({});
   return sales;
 };
+const formatSaleData = ({ id, status, saleDate, totalPrice, deliveryAddress, deliveryNumber }) => ({
+    id,
+    status,
+    date: saleDate,
+    price: totalPrice,
+    address: `${deliveryAddress}, ${deliveryNumber}`,
+  });
 exports.getOrdersByUserEmail = async ({ email }) => {
   const user = await userModel.findOne({ where: { email } });
   const sales = await saleModel.findAll({ where: { userId: user.id } });
-  return sales;
+  return sales.map(formatSaleData);
+};
+
+exports.getOrdersBySellerEmail = async ({ email }) => {
+  const user = await userModel.findOne({ where: { email } });
+  const sales = await saleModel.findAll({ where: { sellerId: user.id } });
+  return sales.map(formatSaleData);
 };
 const getUserIdByName = async (name) => {
   const user = await userModel.findOne({ where: { name } });

@@ -19,9 +19,11 @@ router.get('/all', async (_req, res) => {
 
 router.get('/', validateToken, async (req, res) => {
   const { authorization: token } = req.headers;
-  const { email } = parseToken({ token });
+  const { email, role } = parseToken({ token });
   try {
-    const sales = await SaleService.getOrdersByUserEmail({ email });
+    let sales = null;
+    if (role === 'customer') sales = await SaleService.getOrdersByUserEmail({ email });
+    if (role === 'seller') sales = await SaleService.getOrdersBySellerEmail({ email }); 
     res.status(StatusCodes.OK).json({ result: sales });
   } catch (error) {
     console.error(error);

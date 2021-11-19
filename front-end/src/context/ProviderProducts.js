@@ -65,6 +65,7 @@ function ProviderProducts({ children }) {
         cartProducts,
         setProductCartQuantity,
         calculateSubtotal,
+        setCartProducts,
       } }
     >
       {children}

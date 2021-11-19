@@ -3,10 +3,12 @@ import PropTypes from 'prop-types';
 import '../Styles/Cardproducs.css';
 
 export default function CardProduct({ id, drink, cost, thumb }) {
-  const [counter, setCounter] = useState(0);
+  const [counter, setCounter] = useState(1);
+  const [price, setPrice] = useState(cost);
 
   function increment() {
     setCounter(counter + 1);
+    setPrice(counter * cost);
   }
 
   function decrement() {
@@ -14,6 +16,7 @@ export default function CardProduct({ id, drink, cost, thumb }) {
       return 0;
     }
     setCounter(counter - 1);
+    setPrice(counter - cost);
   }
 
   return (
@@ -60,6 +63,9 @@ export default function CardProduct({ id, drink, cost, thumb }) {
             {' '}
 
           </button>
+          <div>
+            <p>{ price }</p>
+          </div>
         </div>
       </div>
     </div>

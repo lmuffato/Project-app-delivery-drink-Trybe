@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const http = require('http');
 const io = require('socket.io')();
-const { getSaleById } = require('../services');
+const { getSaleById, update } = require('../services');
 
 const app = express();
 const server = http.createServer(app);
@@ -23,6 +23,12 @@ io.attach(server);
 io.on('connection', (socket) => {
     socket.on('getSale', async (id) => {
         const sale = await getSaleById(id);
+        io.emit('takeSale', sale);
+    });
+    socket.on('senStatus', async ({ id, status }) => {
+        await update('sales', { id }, { status });
+        const updated = await getSaleById(id);
+        io.emit('takeSale', updated);
     });
 });
 

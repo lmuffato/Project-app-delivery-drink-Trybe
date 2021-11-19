@@ -18,7 +18,7 @@ function ProductCard(props) {
   const { setProductCartQuantity } = useContext(ContextProducts);
 
   useEffect(() => {
-    setProductCartQuantity(id, +(quantity));
+    setProductCartQuantity(id, +(quantity));// eslint-disable-next-line
   }, [quantity]);
 
   return (

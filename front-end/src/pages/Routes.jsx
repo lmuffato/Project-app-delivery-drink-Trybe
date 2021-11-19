@@ -9,7 +9,7 @@ import OrderDetails from './OrderDetails';
 import SellerOrders from './SellersOrders';
 import SellerOrdersDetails from './SellerOrdersDetails';
 import AdminManage from './AdminManage';
-import FinishedOrder from '../pages/FinishedOrder';
+import FinishedOrder from './FinishedOrder';
 
 export default function Rout() {
   return (

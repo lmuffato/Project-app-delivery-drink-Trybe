@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
-import md5 from 'md5';
 import { userLogin } from '../redux/userSlice';
 
 export default function Login() {
@@ -28,10 +27,9 @@ export default function Login() {
     let userRole;
     validations();
     await axios
-      .post(`${url}/login`, { email: userEmail, password: md5(password) })
+      .post(`${url}/login`, { email: userEmail, password })
       .then((res) => {
         const { name, email, role, token } = res.data;
-        console.log(res.message);
         localStorage.setItem('user', JSON.stringify({ name, email, role, token }));
         dispatch(userLogin({ token, role }));
         setShowError(false);
@@ -43,7 +41,6 @@ export default function Login() {
 
   const handleLogin = async () => {
     const userRole = await makeLogin();
-    console.log(userRole);
     if (userRole === 'customer') history.push('/customer/products');
     if (userRole === 'administrator') history.push('/admin/manage');
     if (userRole === 'seller') history.push('/seller/orders');

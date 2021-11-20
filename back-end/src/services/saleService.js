@@ -4,11 +4,11 @@ const config = require('../database/config/config');
 
 const sequelize = new Sequelize(config.development);
 
-const createSale = async ({ customer, seller, value, address }, t) => {
+const createSale = async ({ customer, sellerId, value, address }, t) => {
     const sale = await database.sale
     .create({
       userId: customer.id,
-      sellerId: seller.id,
+      sellerId,
       totalPrice: value.toFixed(2),
       deliveryAddress: address.street,
       deliveryNumber: address.number,
@@ -17,12 +17,12 @@ const createSale = async ({ customer, seller, value, address }, t) => {
   return sale;
 };
 
-const register = async (customer, seller, cartProducts, address) => {
+const register = async (customer, sellerId, cartProducts, address) => {
   const t = await sequelize.transaction();
   try {
     const value = cartProducts
       .reduce((acc, product) => acc + Number(product.price) * product.quantity, 0);
-    const sale = await createSale({ customer, seller, value, address }, t);
+    const sale = await createSale({ customer, sellerId, value, address }, t);
 
     const saleProductsObject = cartProducts.map((product) => ({ productId: product.id,
       saleId: sale.id,

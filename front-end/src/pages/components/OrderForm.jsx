@@ -7,7 +7,7 @@ import fetchSale from '../../services/fetchSale';
 export default function OrderForm() {
   const { user, products } = useContext(ContextDeliveryApp);
   const [sellers, setSellers] = useState([]);
-  const [selectedSeller, setSelectedSeller] = useState('');
+  const [selectedSeller, setSelectedSeller] = useState(0);
   const [street, setStreet] = useState('');
   const [number, setNumber] = useState('');
 
@@ -18,7 +18,7 @@ export default function OrderForm() {
     const sellersGotten = await fetchSellers(token);
     const allSellers = await sellersGotten.sellers;
     setSellers(allSellers);
-    setSelectedSeller(allSellers[0].name);
+    setSelectedSeller(allSellers[0].id);
   };
 
   const handleSelect = (e) => {
@@ -28,12 +28,18 @@ export default function OrderForm() {
   const handleClick = async () => {
     const cartProducts = products.filter((product) => product.quantity > 0);
     const customer = user;
-    const seller = sellers.find((s) => s.name === selectedSeller);
+    const sellerId = selectedSeller;
+    console.log(sellerId);
     const address = { street, number };
-    const response = await fetchSale(customer, seller, cartProducts, address);
-    if (response.sale) {
+    try {
+      const response = await fetchSale(customer, sellerId, cartProducts, address);
       console.log(response);
-      history.push(`/customer/orders/${response.sale.id}`);
+      if (response.data.sale) {
+        console.log(response);
+        history.push(`/customer/orders/${response.data.sale.id}`);
+      }
+    } catch (e) {
+      console.log(e);
     }
   };
 
@@ -57,7 +63,7 @@ export default function OrderForm() {
       >
         P. Vendedora Responsável
         { sellers && sellers.map((seller) => (
-          <option value={ seller.name } key={ seller.id }>{ seller.name }</option>
+          <option value={ seller.id } key={ seller.id }>{ seller.name }</option>
         ))}
       </select>
       <label htmlFor="endereco">

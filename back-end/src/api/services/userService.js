@@ -23,7 +23,13 @@ const create = async ({ email, requestPassword, name, requestRole }) => {
   return response;
 };
 
+const findAllUsers = async () => {
+  const response = await users.findAll();
+  return response;
+};
+
 module.exports = {
   login,
   create,
+  findAllUsers,
 };

@@ -33,7 +33,19 @@ const create = async (req, res) => {
   }
 };
 
+const findAllUsers = async (req, res) => {
+  try {
+    const response = await userService.findAll();
+    return res.status(HTTP_OK_STATUS).json(response);
+  } catch (error) {
+    return res.status(HTTP_ERROR_STATUS).json({
+      message: error,
+  });
+  }
+};
+
 module.exports = {
   login,
   create,
+  findAllUsers,
 };

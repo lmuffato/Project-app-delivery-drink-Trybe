@@ -31,6 +31,11 @@ export const postProducts = async (name, price, urlImage) => {
   return result.data;
 };
 
+export const postSales = async (name, price, urlImage) => {
+  const result = await api.post('/products', { name, price, urlImage });
+  return result.data;
+};
+
 export const createNewUserByAdmin = async (obj) => {
   const { name, email, password, role, token } = obj;
   const apiForAdm = axios.create({

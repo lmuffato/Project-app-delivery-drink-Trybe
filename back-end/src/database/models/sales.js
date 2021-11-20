@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
 
   sales.associate = (models) => { // Define a associação entre um campo da tabela  BlogPots e a tabela Users.
     sales.belongsTo(models.users, { // O campo indicado pertence a tabela User, acessada pelo models.User.
-      foreignKey: 'user_id', as: 'users' }); // Esse campo acessa a chave extrangeira userId conffigurada no migrate, e exibe esse campo com o nome "user".
+      foreignKey: 'userId', as: 'users' }); // Esse campo acessa a chave extrangeira userId conffigurada no migrate, e exibe esse campo com o nome "user".
       //  foreignKey: ['user_id', 'seller_id']);  Usar esse trecho em substituição ao acima, se for usar a seller_id
   };
   return sales;

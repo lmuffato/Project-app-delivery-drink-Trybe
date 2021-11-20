@@ -37,7 +37,7 @@ export const fetchProducts = async (token) => {
   try {
     const rawResponse = await fetch('http://localhost:3001/products',
       requestMetadata({ method: 'GET', Authorization: token }));
-    console.log('🚀 ~ rawResponse', rawResponse);
+    // console.log('🚀 ~ rawResponse', rawResponse);
     const { result } = await rawResponse.json();
     return result;
   } catch (error) {

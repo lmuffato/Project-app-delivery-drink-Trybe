@@ -4,6 +4,7 @@
   flex-wrap: wrap;
   font-size: 26px;
   justify-content: space-around;
+  margin-bottom: 130px;
   margin-top: 20px;
 }
 
@@ -18,13 +19,13 @@
   border-radius: 5px;
   color: white;
   cursor: pointer;
+  bottom: 20px;
   display: flex;
   justify-content: center;
   padding: 15px;
   position: fixed;
   right: 10px;
   text-decoration: none;
-  top: 120px;
   width: 280px;
 }
 

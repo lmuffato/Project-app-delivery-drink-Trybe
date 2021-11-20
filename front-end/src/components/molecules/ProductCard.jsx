@@ -40,7 +40,7 @@ export default function ProductCard() {
         <div className="counter-container">
           <button
             id={ prod.id }
-            data-testid={ `customer_products__button-card-add-item-${prod.id}` }
+            data-testid={ `customer_products__button-card-rm-item-${prod.id}` }
             className="btn-decrement"
             type="button"
             onClick={ (e) => decrement(e) }
@@ -56,7 +56,7 @@ export default function ProductCard() {
           />
           <button
             id={ prod.id }
-            data-testid={ `customer_products__button-card-rm-item-${prod.id}` }
+            data-testid={ `customer_products__button-card-add-item--${prod.id}` }
             className="btn-increment"
             type="button"
             onClick={ (e) => increment(e) }

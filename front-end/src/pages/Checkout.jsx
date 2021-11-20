@@ -38,19 +38,19 @@ const calculeTotal = (cart) => cart.reduce((acc, cur) => {
 const formatList = (cart) => cart.map((item) => calculeSubTotalPrice(item));
 
 const createSalePayload = (userId, Sellers, cart) => {
-  const street = document.querySelector('#adress').value;
-  const number = document.querySelector('#number').value;
+  const deliveryAddress = document.querySelector('#adress').value;
+  const deliveryNumber = document.querySelector('#number').value;
   const seller = document.querySelector('#seller').value;
-  const total = document.querySelector('#total').innerText;
+  const totalPrice = document.querySelector('#total').innerText;
 
   const sellerId = Sellers.find(({ name }) => name === seller);
 
   return {
-    street,
-    number,
+    deliveryAddress,
+    deliveryNumber,
     sellerId,
     userId,
-    total,
+    totalPrice,
     status: 'Pendente',
     orders: cart,
   };

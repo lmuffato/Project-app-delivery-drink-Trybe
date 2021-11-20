@@ -9,7 +9,7 @@ export default function CardProduct({ id,
 
   useEffect(() => {
     setChangeSomeStatus(!changeSomeStatus);
-  }, ([changeSomeStatus, counter, price, setChangeSomeStatus]));
+  }, [counter, price]);
 
   function increment() {
     setCounter(counter + 1);

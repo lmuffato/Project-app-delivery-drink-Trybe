@@ -17,18 +17,22 @@ export default function CustomerProducts() {
       const { token } = await getItemFromLocalStorage('user');
       await checkUserToken(token);
     } catch (e) {
+      console.log('catch da valid token', e.message);
       history.push('/login');
     }
   };
 
   useEffect(() => {
     setIsLoading(true);
-    validToken();
-
-    getProducts().then((resp) => setListProducts(resp));
-
+    getProducts()
+      .then((resp) => resp)
+      .then((data) => setListProducts(data));
     setIsLoading(false);
-  }, [changeSomeStatus, validToken]);
+  }, [changeSomeStatus]);
+
+  useEffect(() => {
+    validToken();
+  }, []);
 
   return (
     <div className="mainCustomerProducts">

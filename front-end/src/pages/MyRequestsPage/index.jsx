@@ -13,7 +13,6 @@ export default function MyRequestsPage() {
   useEffect(() => {
     const getSales = async () => {
       const data = await fetchSales();
-      console.log(data);
       setSales(data);
     };
     getSales();
@@ -31,8 +30,6 @@ export default function MyRequestsPage() {
               status={ sale.status }
               date={ formatDate(sale.saleDate) }
               price={ sale.totalPrice }
-              address={ sale.deliveryAddress }
-              number={ sale.deliveryNumber }
             />
           </Link>
         ))}

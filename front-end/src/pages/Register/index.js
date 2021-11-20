@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import api from '../../api';
@@ -18,12 +17,11 @@ const Form = styled.form`
   & > *:first-child { margin-top: 0px; }
 `;
 
-function Login() {
+function Register() {
   const [errorMessage, setErrorMessage] = useState(null);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { login, redirectUserByRole } = useAuth();
-  const navigator = useNavigate();
 
   const authUser = (ev) => {
     ev.preventDefault();
@@ -70,7 +68,7 @@ function Login() {
           full
           variant="tertiary"
           datatestid="common_login__button-register"
-          onClick={ () => navigator('/register') }
+          onClick={ authUser }
         >
           Ainda não tenho conta
         </Button>
@@ -86,4 +84,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Register;

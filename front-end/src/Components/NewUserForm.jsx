@@ -3,6 +3,7 @@ import validateEmail from '../validations/validateEmail';
 import ErrorRegister from './ErrorRegister';
 
 import { createNewUserByAdmin } from '../services/endpointsAPI';
+import { getItemFromLocalStorage } from '../services/localStorage';
 
 export default function NewUserForm() {
   const [name, setName] = useState('');
@@ -22,7 +23,8 @@ export default function NewUserForm() {
 
   const createUser = async () => {
     try {
-      const result = await createNewUserByAdmin(name, email, password, role);
+      const { token } = await getItemFromLocalStorage('user');
+      const result = await createNewUserByAdmin({ name, email, password, role, token });
       if (result) {
         setName('');
         setEmail('');
@@ -95,9 +97,9 @@ export default function NewUserForm() {
           data-testid="admin_manage__select-role"
           onChange={ (e) => handleChange(e.target) }
         >
+          <option value="">Selecione</option>
           <option value="seller">Vendedor</option>
           <option value="administrator">Administrador</option>
-          <option value="customer">Cliente</option>
         </select>
         <button
           type="button"

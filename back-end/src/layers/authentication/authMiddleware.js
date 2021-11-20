@@ -5,18 +5,18 @@ require('dotenv').config(); // Configura o uso de variáveis de ambiente
 const fs = require('fs');
 
 const secret = fs.readFileSync('jwt.evaluation.key', { encoding: 'utf-8' }).trim();
-const jwtConfig = { expiresIn: '1m', algorithm: 'HS256' };
+const jwtConfig = { expiresIn: '10m', algorithm: 'HS256' };
 
 const generateToken = (payload) => jwt.sign(payload, secret, jwtConfig);
 
-const validateAdmRole = async (req, _res, next) => {
+const validateAdmRole = async (req, res, next) => {
   try {
-    console.log(req.headers);
-    const decoded = jwt.verify(token, secret);
-    console.log('decoded backkkk', decoded);
+    const { authentication } = req.headers;
+    const { role } = jwt.verify(authentication, secret);
+    if (!role || role !== 'administrator') return res.status(401).json({ message: 'forbbiden' });
     next();
   } catch (err) {
-    console.log(err.message);
+    return res.status(401).json({ message: err });
   }
 }; 
 

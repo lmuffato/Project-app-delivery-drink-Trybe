@@ -17,9 +17,9 @@
   align-items: center;
   background-color: #157347;
   border-radius: 5px;
+  bottom: 20px;
   color: white;
   cursor: pointer;
-  bottom: 20px;
   display: flex;
   justify-content: center;
   padding: 15px;

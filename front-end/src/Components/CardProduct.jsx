@@ -27,16 +27,16 @@ export default function CardProduct({ id,
   return (
     <div key={ id } className="cardProduct">
       <div>
-        <p className="unitPrice">{`R$ ${cost}`}</p>
+        <p data-testid={`customer_products__element-card-price-${id}`}          className="unitPrice">{`R$ ${cost}`}</p>
         <img
           className="imageDrinkCard"
           alt="drink"
-          data-testid={ `customer_products__element-card-price-${id}` }
+          data-testid={ `customer_products__img-card-bg-image-${id}` }
           src={ thumb }
         />
       </div>
       <div className="footerCardDrink">
-        <h5>{drink}</h5>
+        <h5 data-testid={ `customer_products__element-card-title-${id}` }>{drink}</h5>
         <div className="addQuantities">
           <button
             data-testid={

@@ -14,33 +14,39 @@ export default function RequestCard(
 
   return (
     <div className={ styles.cardContainer }>
-      <div className={ styles.cardSubContainer }>
-        <div className={ styles.requestId }>
-          <span>Pedido</span>
-          <span data-testid={ `${dataTestIdRequest}${requestId}` }>
-            {requestId}
-          </span>
-        </div>
-        <div className={ styles[status] }>
-          <span data-testid={ `${dataTestIdStatus}${requestId}` }>{status}</span>
-        </div>
-        <div className={ styles.dateAndPrice }>
-          <span data-testid={ `${dataTestIdDate}${requestId}` }>{date}</span>
-          <span data-testid={ `${dataTestIdPrice}${requestId}` }>
-            {`R$ ${price}`}
-          </span>
-        </div>
-      </div>
-      {address ? (
-        <span
-          className={ styles.address }
-          data-testid={ `${dataTestIdAddress}${requestId}` }
-        >
-          {`${address} Nº ${number}`}
+      <div className={ styles.requestId }>
+        <span>Pedido</span>
+        <span data-testid={ `${dataTestIdRequest}${requestId}` }>
+          {requestId}
         </span>
-      ) : (
-        null
-      )}
+      </div>
+      <div className={ styles.cardSubContainer }>
+        <div className={ styles.statusDatePriceContainer }>
+          <div className={ styles[status] }>
+            <span data-testid={ `${dataTestIdStatus}${requestId}` }>
+              {status}
+            </span>
+          </div>
+          <div className={ styles.dateAndPrice }>
+            <span data-testid={ `${dataTestIdDate}${requestId}` }>
+              {date}
+            </span>
+            <span data-testid={ `${dataTestIdPrice}${requestId}` }>
+              {`R$ ${price}`}
+            </span>
+          </div>
+        </div>
+        {address ? (
+          <span
+            className={ styles.address }
+            data-testid={ `${dataTestIdAddress}${requestId}` }
+          >
+            {`${address} Nº ${number}`}
+          </span>
+        ) : (
+          null
+        )}
+      </div>
     </div>
   );
 }

@@ -3,24 +3,22 @@
   background: #eaf1ef;
   border: 1px solid #b1c2be;
   display: flex;
-  flex-direction: column;
-  height: 125px;
+  height: 8rem;
   margin-top: 40px;
   padding: 5px;
-  width: 425px;
-}
-
-@media screen and ( max-width : 767px ) {
-
-  .cardContainer {
-    width: 100%;
-  }
+  width: 400px;
 }
 
 .cardSubContainer {
   display: flex;
+  flex-direction: column;
   height: 100%;
   width: 100%;
+}
+
+.statusDatePriceContainer {
+  display: flex;
+  height: 100%;
 }
 
 .requestId, .dateAndPrice, .pendente, .preparando, .entregue {
@@ -28,7 +26,6 @@
   background: white;
   border-radius: 5px;
   display: flex;
-  flex: 1;
   height: 100%;
   justify-content: center;
   padding: 0 10px;
@@ -37,13 +34,16 @@
 .requestId {
   display: flex;
   flex-direction: column;
+  width: 100px;
 }
 
 .dateAndPrice {
   background: transparent;
+  display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  font-weight: 600;
   padding: 0;
+  width: 100%;
 }
 
 .dateAndPrice span {
@@ -51,23 +51,29 @@
   background: white;
   border-radius: 5px;
   display: flex;
+  flex: 1;
   justify-content: center;
   padding: 10px 0;
   text-align: center;
   width: 100%;
 }
 
+.dateAndPrice span:first-child {
+  margin-bottom: 5px;
+}
+
 .address {
+  align-items: center;
   display: flex;
   font-size: 1rem;
+  height: 100%;
   justify-content: flex-end;
   width: 100%;
 }
 
 .pendente, .preparando, .entregue {
-  flex: 2;
   font-size: 1rem;
-  font-weight: 700;
+  font-weight: 800;
   margin: 0 5px;
   min-width: 8rem;
   text-transform: uppercase;
@@ -75,7 +81,6 @@
 
 .pendente {
   background: #ccb800;
-
 }
 
 .preparando {
@@ -86,3 +91,14 @@
   background: #00cc9b;
 }
 
+@media screen and ( max-width : 767px ) {
+
+  .cardContainer {
+    width: 350px;
+  }
+
+  .address {
+    font-size: 0.9rem;
+    padding: 0 5px;
+  }
+}

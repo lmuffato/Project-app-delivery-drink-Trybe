@@ -31,8 +31,6 @@ export default function MyRequestsPage() {
               status={ sale.status }
               date={ formatDate(sale.saleDate) }
               price={ sale.totalPrice }
-              address={ sale.deliveryAddress }
-              number={ sale.deliveryNumber }
             />
           </Link>
         ))}

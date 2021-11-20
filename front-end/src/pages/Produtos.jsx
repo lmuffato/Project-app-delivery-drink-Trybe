@@ -34,7 +34,7 @@ export default function Produtos() {
     }
   }
 
-  useEffect(() => { getProducts(); }, []);
+  useEffect(() => { getProducts(); }, [getProducts]);
 
   return (
     <div>
@@ -42,6 +42,7 @@ export default function Produtos() {
         loading ? ''
           : <Header props={ headerInfo } />
       }
+
       {
         loading ? <p>Loading....</p>
           : products

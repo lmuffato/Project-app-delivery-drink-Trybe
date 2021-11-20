@@ -1,24 +1,20 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import CheckoutContext from '../context/checkoutContext';
 
 function BottomBox() {
-  const { totalValue, setTotalValue } = useContext(CheckoutContext);
-  useEffect(() => {
-    setTotalValue(totalValue);
-  }, [totalValue]);
+  const { total } = useContext(CheckoutContext);
+  const result = total.toString().replace('.', ',');
+
   return (
     <div>
       <Link to={ { pathname: '/customer/checkout' } }>
         <button
-          data-testid="customer_products__checkout-bottom-value"
+          data-testid="customer_products__button-cart"
           className="bottom_cart_button"
           type="button"
         >
-          Ver Carrinho:
-          <span>
-            { ` R$: ${totalValue}` }
-          </span>
+          {result}
         </button>
       </Link>
     </div>

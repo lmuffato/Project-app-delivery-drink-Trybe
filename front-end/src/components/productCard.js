@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import CheckoutContext from '../context/checkoutContext';
@@ -7,19 +7,22 @@ function Card({ id, strName, strThumb, strPrice }) {
   const { addItem } = useContext(CheckoutContext);
   const commaValue = strPrice.replace(/\./g, ',');
   const [qtd, setQtd] = useState(0);
+
   useEffect(() => {
-    setQtd(qtd);
-    addItem(qtd, strPrice);
+    addItem(qtd, strPrice, id);
   }, [qtd]);
+
   function addElem() {
     setQtd(qtd + 1);
-    addItem(qtd, strPrice, 'add');
   }
   function removeElem() {
     if (qtd > 0) {
       setQtd(qtd - 1);
-      addItem(qtd, strPrice, 'remove');
     }
+  }
+  function setInputValue(e) {
+    setQtd(e.target.value);
+    console.log(qtd);
   }
 
   return (
@@ -59,6 +62,7 @@ function Card({ id, strName, strThumb, strPrice }) {
       <input
         type="number"
         value={ qtd }
+        onChange={ setInputValue }
         data-testid={ `customer_products__input-card-quantity-${id}` }
         style={ { width: '200px', height: '20px', display: 'flex' } }
       />

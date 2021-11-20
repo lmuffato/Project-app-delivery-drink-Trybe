@@ -9,7 +9,7 @@ export default function CardProduct({ id,
 
   useEffect(() => {
     setChangeSomeStatus(!changeSomeStatus);
-  }, ([counter, price]));
+  }, ([changeSomeStatus, counter, price, setChangeSomeStatus]));
 
   function increment() {
     setCounter(counter + 1);
@@ -27,7 +27,12 @@ export default function CardProduct({ id,
   return (
     <div key={ id } className="cardProduct">
       <div>
-        <p data-testid={`customer_products__element-card-price-${id}`}          className="unitPrice">{`R$ ${cost}`}</p>
+        <p
+          data-testid={ `customer_products__element-card-price-${id}` }
+          className="unitPrice"
+        >
+          {`R$ ${cost}`}
+        </p>
         <img
           className="imageDrinkCard"
           alt="drink"

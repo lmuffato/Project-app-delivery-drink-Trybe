@@ -22,7 +22,7 @@ function Table({ headers, payload, hasButton, onClick }) {
             <td data-testid={ `customer_checkout__element-order-table-name-${i}` }>
               {item.name}
             </td>
-            <td data-testid={ `cutomer_checkout__element-order-table-quantity-${i}` }>
+            <td data-testid={ `customer_checkout__element-order-table-quantity-${i}` }>
               {item.quantity}
             </td>
             <td data-testid={ `customer_checkout__element-order-table-unit-price-${i}` }>

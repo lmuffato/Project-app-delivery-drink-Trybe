@@ -29,13 +29,10 @@ export default function OrderForm() {
     const cartProducts = products.filter((product) => product.quantity > 0);
     const customer = user;
     const sellerId = selectedSeller;
-    console.log(sellerId);
     const address = { street, number };
     try {
       const response = await fetchSale(customer, sellerId, cartProducts, address);
-      console.log(response);
       if (response.data.sale) {
-        console.log(response);
         history.push(`/customer/orders/${response.data.sale.id}`);
       }
     } catch (e) {

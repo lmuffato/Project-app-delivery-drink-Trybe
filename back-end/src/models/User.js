@@ -24,8 +24,8 @@ const createUser = async ({ name, email, password, type }) => {
   }
 };
 
-const findUser = async (email) => {
-  const userFound = await user.findOne({ where: { email } });
+const findUser = async (name, email) => {
+  const userFound = await user.findOne({ where: { name, email } });
   return userFound;
 };
 

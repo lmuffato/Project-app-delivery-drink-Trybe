@@ -19,8 +19,17 @@ const login = async (email, password) => {
   return { user };
 };
 
+const findUser = async (name, email) => {
+  const user = await User.findUser(name, email);
+  return user;
+};
+
 const createUser = async (name, email, password, type) => {
   const { error } = schemaCreatedUser.validate({ name, email, password });
+
+  if (findUser) {
+    return { err: { message: 'User already registered' } };
+  }
 
   if (error) {
     return { err: { message: error.message } };

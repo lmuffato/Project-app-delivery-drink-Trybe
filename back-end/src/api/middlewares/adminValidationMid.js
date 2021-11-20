@@ -1,6 +1,7 @@
 const { verify } = require('jsonwebtoken');
 
 require('dotenv').config();
+
 const { SECRET } = process.env;
 
 const HTTP_UNAUTHORIZED_STATUS = 401;

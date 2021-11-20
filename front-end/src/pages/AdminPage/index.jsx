@@ -1,5 +1,6 @@
 import React from 'react';
 import AdminForm from '../../components/AdminForm';
+/* import ListUsers from '../../components/AdminUserList'; */
 import Header from '../../components/Header';
 
 export default function LoginPage() {
@@ -7,6 +8,7 @@ export default function LoginPage() {
     <div>
       <Header />
       <AdminForm />
+      {/* <ListUsers /> */}
     </div>
   );
 }

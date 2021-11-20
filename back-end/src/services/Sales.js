@@ -2,10 +2,10 @@ const Sale = require('../models/Sales');
 
 const addNew = async (orders, payload) => {
   try {
-    const joinTablePayload = orders.map(({ id, quantity }) => ({ id, quantity }));
-
     const sale = await Sale.addNew(payload);
-    sale.setProducts(joinTablePayload);
+    const joinTablePayload = orders
+      .map(({ id, quantity }) => ({ productId: id, saleId: sale.id, quantity }));
+    await Sale.addRelation(joinTablePayload);
 
     return { sale };
   } catch (error) {

@@ -9,8 +9,10 @@ module.exports = (sequelize, DataTypes) => {
     status: DataTypes.STRING,
     userId: DataTypes.INTEGER,
     sellerId: DataTypes.INTEGER,
+    saleDate: DataTypes.DATE,
   },
     {
+      updatedAt: false,
       createdAt: 'saleDate',
       tableName: 'sales',
     });

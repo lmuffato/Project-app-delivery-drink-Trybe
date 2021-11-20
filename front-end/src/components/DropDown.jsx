@@ -1,29 +1,22 @@
 import React from 'react';
 import {
-  InputLabel,
   FormControl,
   NativeSelect,
 } from '@mui/material';
 import PropTypes from 'prop-types';
 
-function DropDown({ name, items, dataTest }) {
-  // const handleChange = (e) => {
-  //   setValue(e.target.value);
-  // };
-
+function DropDown({ items, dataTest, onChange }) {
   return (
     <FormControl
       variant="outlined"
       sx={ { m: 1, minWidth: 200 } }
     >
-      <InputLabel id={ name }>{name}</InputLabel>
       <NativeSelect
         inputProps={ { 'data-testid': dataTest } }
-        labelId={ name }
-        label={ name }
+        onChange={ (e) => onChange(e.target.value) }
       >
         <option value="">Escolha o vendedor</option>
-        {items.map((item) => <option key={ item } value={ item }>{item}</option>)}
+        {items.map(([id, name]) => <option key={ id } value={ id }>{name}</option>)}
       </NativeSelect>
     </FormControl>
   );
@@ -32,7 +25,8 @@ function DropDown({ name, items, dataTest }) {
 export default DropDown;
 
 DropDown.propTypes = {
-  name: PropTypes.string,
   items: PropTypes.array,
   dataTest: PropTypes.string,
+  onChange: PropTypes.string,
+  value: PropTypes.string,
 }.isRequired;

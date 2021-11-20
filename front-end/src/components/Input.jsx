@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import TextField from '@mui/material/TextField';
 
-function Input({ label, dataTest }) {
+function Input({ label, dataTest, onChange, value }) {
   return (
     <TextField
       autoFocus
@@ -11,8 +11,8 @@ function Input({ label, dataTest }) {
       type="text"
       required
       inputProps={ { 'data-testid': dataTest } }
-    // value={description}
-    // onChange={(e) => setDescription(e.target.value)}
+      value={ value }
+      onChange={ (e) => onChange(e.target.value) }
     />
   );
 }
@@ -22,4 +22,6 @@ export default Input;
 Input.propTypes = {
   label: PropTypes.string,
   dataTest: PropTypes.string,
+  onChange: PropTypes.func,
+  value: PropTypes.string,
 }.isRequired;

@@ -21,6 +21,7 @@ const product = require('../controllers/Products');
 const user = require('../controllers/User');
 const sale = require('../controllers/Sales');
 const validateJwtAdmin = require('../auth/validateJwtAdmin');
+const validateToken = require('../auth/validateToken');
 
 const corsOptions = {
   origin: 'http://localhost:3000',
@@ -37,6 +38,7 @@ app.post('/register', user.createUser);
 // Adicionar lógica de validação de login
 app.get('/users', user.listUsers);
 app.post('/register/admin', validateJwtAdmin, user.createUser);
+app.post('/validToken', validateToken);
 
 app.post('/sales', sale.addNew);
 

@@ -12,12 +12,12 @@ export default function CustomerProducts() {
   const [isLoading, setIsLoading] = useState(false);
   const [changeSomeStatus, setChangeSomeStatus] = useState(false);
 
-  const validToken = async (token) => {
+  const validToken = async () => {
     try {
+      const { token } = await getItemFromLocalStorage('user');
       await checkUserToken(token);
     } catch (e) {
       history.push('/login');
-      // setErrorMessage(false);
     }
   };
 
@@ -26,14 +26,10 @@ export default function CustomerProducts() {
     getProducts().then((resp) => resp)
       .then((data) => {
         setListProducts(data);
-        setIsLoading(false);
       });
-  }, []);
 
-  useEffect(() => {
-    const tokenLocalStarege = getItemFromLocalStorage('user');
-    validToken(tokenLocalStarege.token);
-    console.log(changeSomeStatus);
+    validToken();
+    setIsLoading(false);
   }, [changeSomeStatus]);
 
   return (

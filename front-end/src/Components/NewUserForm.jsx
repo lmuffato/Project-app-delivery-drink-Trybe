@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import validateEmail from '../validations/validateEmail';
-import ErrorRegister from './ErrorRegister';
 
 import { createNewUserByAdmin } from '../services/endpointsAPI';
-import { getItemFromLocalStorage } from '../services/localStorage';
+// import { getItemFromLocalStorage } from '../services/localStorage';
+import ErrorLogin from './ErrorLogin';
+
+const testId = 'admin_manage__element-invalid-register';
+const messageError = 'Usuário já cadastrado!';
 
 export default function NewUserForm() {
   const [name, setName] = useState('');
@@ -23,8 +26,9 @@ export default function NewUserForm() {
 
   const createUser = async () => {
     try {
-      const { token } = await getItemFromLocalStorage('user');
+      // const { token } = await getItemFromLocalStorage('user');
       const result = await createNewUserByAdmin({ name, email, password, role, token });
+      console.log('resulttt', result);
       if (result) {
         setName('');
         setEmail('');
@@ -112,7 +116,7 @@ export default function NewUserForm() {
         </button>
       </form>
       <div hidden={ errorMessage }>
-        <ErrorRegister />
+        <ErrorLogin dataTestIdError={ testId } message={ messageError } />
       </div>
     </>
   );

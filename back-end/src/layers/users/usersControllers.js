@@ -29,8 +29,8 @@ http POST :3001/login
 
 router.post('/createbyadmin',
 admRoleMiddleware.validateAdmRole,
-userMiddlewares.createByAdmin,
-async () => {});
+userMiddlewares.createByAdmin),
+async () => {};
 
 router.post('/token',
 userMiddlewares.verifyTokenNotExpired,

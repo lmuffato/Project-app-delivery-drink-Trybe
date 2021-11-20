@@ -32,10 +32,10 @@ export const postProducts = async (name, price, urlImage) => {
 };
 
 export const createNewUserByAdmin = async (obj) => {
-  const { name, email, password, role, userToken } = obj;
+  const { name, email, password, role, userToken: token } = obj;
   const apiForAdm = axios.create({
     baseURL: `http://localhost:${PORT}`,
-    headers: { authentication: userToken },
+    headers: { authentication: token },
   });
   const result = await apiForAdm.post('/users/createbyadmin',
     { name, email, password, role });

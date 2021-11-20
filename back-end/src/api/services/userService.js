@@ -23,9 +23,8 @@ const create = async ({ email, requestPassword, name, requestRole }) => {
   return response;
 };
 
-const findAllUsers = async () => {
+const getAllUsers = async () => {
   const response = await users.findAll();
-  console.log('find aqui', response);
   return response;
 };
 
@@ -37,6 +36,6 @@ const deleteUser = async (id) => {
 module.exports = {
   login,
   create,
-  findAllUsers,
+  getAllUsers,
   deleteUser,
 };

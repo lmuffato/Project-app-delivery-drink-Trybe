@@ -33,9 +33,9 @@ const create = async (req, res) => {
   }
 };
 
-const findAllUsers = async (_req, res) => {
+const getAllUsers = async (_req, res) => {
   try {
-    const response = await userService.findAll();
+    const response = await userService.getAllUsers();
     return res.status(HTTP_OK_STATUS).json(response);
   } catch (error) {
     return res.status(HTTP_ERROR_STATUS).json({
@@ -64,6 +64,6 @@ const deleteUser = async (req, res) => {
 module.exports = {
   login,
   create,
-  findAllUsers,
+  getAllUsers,
   deleteUser,
 };

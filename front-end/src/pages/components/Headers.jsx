@@ -41,6 +41,11 @@ export default function Headers({ history }) {
       </navbar>
     );
   }
+  return (
+    <div>
+      <h1>test</h1>
+    </div>
+  );
 }
 
 Headers.propTypes = {

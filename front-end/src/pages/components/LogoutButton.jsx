@@ -10,6 +10,7 @@ export default function LogoutButton({ history }) {
     setUser({});
     setProducts([]);
     localStorage.removeItem('user');
+    localStorage.removeItem('productsCard');
     history.push('/login');
   };
 

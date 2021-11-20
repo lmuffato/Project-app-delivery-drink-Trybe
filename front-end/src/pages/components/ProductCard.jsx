@@ -17,7 +17,7 @@ export default function ProductCard({ product, index, callback }) {
     }
   };
 
-  const handleAddClick = () => {
+  const handleAddClick = async () => {
     const updatingProducts = products;
     updatingProducts[index].quantity += 1;
     setProducts(updatingProducts);
@@ -29,12 +29,11 @@ export default function ProductCard({ product, index, callback }) {
     callback(updatingProducts);
   };
 
-  const handleInputChange = (e) => {
-    console.log(e.target.value);
+  const handleInputChange = async (e) => {
     setQty(parseInt(e.target.value, 10));
     const updatingProducts = products;
     updatingProducts[index].quantity = parseInt(e.target.value, 10);
-    setProducts(updatingProducts);
+    await setProducts(updatingProducts);
     callback(updatingProducts);
   };
 

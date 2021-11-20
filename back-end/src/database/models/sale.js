@@ -1,11 +1,13 @@
 module.exports = (sequelize, DataTypes) => {
   const sale = sequelize.define('sale', {
-    total_price: DataTypes.DECIMAL(5, 3),
-    delivery_address: DataTypes.STRING,
-    delivery_number: DataTypes.STRING,
+    totalPrice: DataTypes.DECIMAL(7, 2),
+    deliveryAddress: DataTypes.STRING,
+    deliveryNumber: DataTypes.STRING,
     sale_date: DataTypes.DATE,
     status: DataTypes.STRING,
-  }, {timestamps: false}, {tableName: 'sales'});
+    userId: DataTypes.INTEGER,
+    sellerId: DataTypes.INTEGER
+  }, {timestamps: false, tableName: 'sales', underscored: true});
   sale.associate = (models) => {
     sale.hasMany(models.salesProduct, {
       foreignKey: 'sale_id',

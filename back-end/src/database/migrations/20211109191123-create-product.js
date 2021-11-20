@@ -19,7 +19,7 @@ module.exports = {
       },
       url_image: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       // createdAt: {
       //   allowNull: false,

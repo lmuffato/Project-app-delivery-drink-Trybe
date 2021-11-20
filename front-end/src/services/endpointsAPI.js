@@ -31,8 +31,8 @@ export const postProducts = async (name, price, urlImage) => {
   return result.data;
 };
 
-export const postSales = async (name, price, urlImage) => {
-  const result = await api.post('/products', { name, price, urlImage });
+export const postSales = async (obj) => { // obj = { userId, totalPrice, deliveryAddress, deliveryNumber, status }
+  const result = await api.post('/sales', obj);
   return result.data;
 };
 

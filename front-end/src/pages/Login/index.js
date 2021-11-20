@@ -1,0 +1,78 @@
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Input from '../../components/Input';
+import Button from '../../components/Button';
+import api from '../../api';
+import { useAuth } from '../../contexts/auth';
+
+const validateEmail = (email) => /[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z0-9]+/.test(email);
+const MAX_PWD_LENGTH = 6;
+
+function Login() {
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const { login, redirectUserByRole } = useAuth();
+
+  const authUser = (ev) => {
+    ev.preventDefault();
+    api.login(email, password)
+      .then((data) => {
+        login(data);
+        redirectUserByRole(data);
+      })
+      .catch(setErrorMessage);
+  };
+
+  const canSubmit = validateEmail(email) && password.length >= MAX_PWD_LENGTH;
+
+  return (
+    <div style={ { margin: '0 auto', maxWidth: '500px' } }>
+      <form onSubmit={ authUser }>
+        <Input
+          type="email "
+          label="Login"
+          name="email"
+          onChange={ ({ target: { value } }) => setEmail(value) }
+          placeholder="email@trybeer.com.br"
+          datatestid="common_login__input-email"
+        />
+        <Input
+          type="password"
+          onChange={ ({ target: { value } }) => setPassword(value) }
+          label="Senha"
+          name="email"
+          datatestid="common_login__input-password"
+          placeholder={ `${'****'}${'****'}${'***'}` }
+        />
+
+        <Button
+          full
+          type="submit"
+          variant="primary"
+          datatestid="common_login__button-login"
+          disabled={ !canSubmit }
+        >
+          LOGIN
+        </Button>
+        <Button
+          full
+          variant="tertiary"
+          datatestid="common_login__button-register"
+          onClick={ authUser }
+        >
+          Ainda não tenho conta
+        </Button>
+      </form>
+
+      {errorMessage
+      && (
+        <p data-testid="common_login__element-invalid-email">
+          {errorMessage.message}
+        </p>
+      )}
+    </div>
+  );
+}
+
+export default Login;

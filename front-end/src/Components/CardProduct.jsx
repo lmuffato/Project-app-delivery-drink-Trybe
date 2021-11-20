@@ -88,3 +88,5 @@ CardProduct.propTypes = {
   cost: PropTypes.string,
   thumb: PropTypes.string,
 }.isRequired;
+
+// thumb

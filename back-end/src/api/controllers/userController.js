@@ -48,9 +48,11 @@ const deleteUser = async (req, res) => {
   try {
     const { id } = req.params;
     const response = await userService.delete(id);
-    if (response === 0) return res.status(HTTP_ERROR_STATUS).json({
-      message: 'User not found',
-    });
+    if (response === 0) {
+      return res.status(HTTP_ERROR_STATUS).json({
+        message: 'User not found',
+      });
+    }
     return res.status(HTTP_OK_STATUS).json({
       message: 'User deleted',
     });

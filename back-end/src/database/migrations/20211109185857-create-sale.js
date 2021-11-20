@@ -53,7 +53,7 @@ module.exports = {
       },
       totalPrice: {
         allowNull: false,
-        type: Sequelize.DECIMAL(5,2),
+        type: Sequelize.DECIMAL(7,2),
         field: 'total_price',
       },
       // createdAt: {

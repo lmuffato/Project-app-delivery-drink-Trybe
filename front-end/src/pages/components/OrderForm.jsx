@@ -31,8 +31,10 @@ export default function OrderForm() {
     const seller = sellers.find((s) => s.name === selectedSeller);
     const address = { street, number };
     const response = await fetchSale(customer, seller, cartProducts, address);
-    console.log(response);
-    if (response.sale) history.push(`/customer/orders/${response.sale.id}`);
+    if (response.sale) {
+      console.log(response);
+      history.push(`/customer/orders/${response.sale.id}`);
+    }
   };
 
   useEffect(() => {

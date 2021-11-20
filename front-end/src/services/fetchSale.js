@@ -1,9 +1,10 @@
 const fetchSale = async (customer, seller, cartProducts, address) => {
+  const { token } = customer;
   const requestOptions = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      authorization: customer.token,
+      authorization: token,
     },
     mode: 'cors',
     body: JSON.stringify({ customer, seller, cartProducts, address }),

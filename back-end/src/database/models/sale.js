@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
   const sale = sequelize.define('sale', {
-    totalPrice: DataTypes.DECIMAL(5, 2),
+    totalPrice: DataTypes.DECIMAL(7, 2),
     deliveryAddress: DataTypes.STRING,
     deliveryNumber: DataTypes.STRING,
     sale_date: DataTypes.DATE,

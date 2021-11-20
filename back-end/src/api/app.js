@@ -44,4 +44,6 @@ app.post('/sale',
   validateAddress,
   saleControllers.register);
 
+app.post('/saleDone', validateToken, saleControllers.getSaleDone);
+
 module.exports = app;

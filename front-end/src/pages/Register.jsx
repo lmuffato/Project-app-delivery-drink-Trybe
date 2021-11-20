@@ -24,7 +24,6 @@ export default function Register() {
       await createNewUser(name, email, password);
       const login = await doLogin(email, password);
       setToLocalStorageUser('user', { login, email });
-      setErrorMessage(true);
       history.push('/customer/products');
     } catch (error) {
       setErrorMessage(false);
@@ -48,6 +47,7 @@ export default function Register() {
       return (validEmail && validName && validPassword);
     };
     setDisableRegisterButton(validateFields());
+    setErrorMessage(true);
   }, [name, email, password]);
 
   return (

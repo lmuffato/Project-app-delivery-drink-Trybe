@@ -1,5 +1,5 @@
 const postRequest = async (userData, callbacks, endpointData) => {
-  const { setShowErrorMessage, setRole } = callbacks;
+  const { setShowErrorMessage, setRole, setRedirect } = callbacks;
   const { endpoint, statusInvalid } = endpointData;
 
   const requestOptions = {
@@ -17,7 +17,8 @@ const postRequest = async (userData, callbacks, endpointData) => {
     } else {
       const { user: { name, email, role }, token } = await response.json();
       localStorage.setItem('user', JSON.stringify({ name, email, role, token }));
-      setRole(role);
+      if (setRole) setRole(role);
+      setRedirect(true);
     }
   } catch (err) {
     console.log(err);

@@ -3,9 +3,11 @@ const { registerEndpointData } = require('../../utils/endPointsData');
 const { CONFLICT_STATUS, CREATED_STATUS } = require('../../utils/statusCodes');
 
 const adminRegister = async (request, setStatus) => {
+  const { token } = JSON.parse(localStorage.getItem('user'));
+
   const requestOptions = {
+    headers: { 'Content-Type': 'application/json', Authorization: token },
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(request),
   };
 

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
+import adminRegister from '../../services/adminRegister/adminRegister';
 import {
   nameVerification,
   emailVerification,
   passwordVerification } from '../../services/loginAndRegister/validations';
-import adminRegister from '../../services/adminRegister/adminRegister';
 
 import { CREATED_STATUS, CONFLICT_STATUS } from '../../utils/statusCodes';
 
@@ -28,7 +28,7 @@ export default function AdminForm() {
     if (
       nameVerification(name)
       && emailVerification(email)
-      && passwordVerification(password)) {
+      && passwordVerification(password, true)) {
       setDisabled(false);
     } else {
       setDisabled(true);

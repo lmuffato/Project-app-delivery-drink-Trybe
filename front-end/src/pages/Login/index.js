@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import api from '../../api';
@@ -7,6 +7,15 @@ import { useAuth } from '../../contexts/auth';
 
 const validateEmail = (email) => /[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z0-9]+/.test(email);
 const MAX_PWD_LENGTH = 6;
+
+const Form = styled.form`
+  background: ${({ theme }) => theme['light-dark']};
+  box-shadow: 0 0 5px 0 ${({ theme }) => theme.shadow};
+  max-width: 350px;
+  padding: 20px;
+  & > * { margin-top: 40px; }
+  & > *:first-child { margin-top: 0px; }
+`;
 
 function Login() {
   const [errorMessage, setErrorMessage] = useState(null);
@@ -27,8 +36,8 @@ function Login() {
   const canSubmit = validateEmail(email) && password.length >= MAX_PWD_LENGTH;
 
   return (
-    <div style={ { margin: '0 auto', maxWidth: '500px' } }>
-      <form onSubmit={ authUser }>
+    <>
+      <Form onSubmit={ authUser }>
         <Input
           type="email "
           label="Login"
@@ -63,7 +72,7 @@ function Login() {
         >
           Ainda não tenho conta
         </Button>
-      </form>
+      </Form>
 
       {errorMessage
       && (
@@ -71,7 +80,7 @@ function Login() {
           {errorMessage.message}
         </p>
       )}
-    </div>
+    </>
   );
 }
 

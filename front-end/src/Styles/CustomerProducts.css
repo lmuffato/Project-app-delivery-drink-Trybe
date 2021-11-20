@@ -1,3 +1,5 @@
 .bodyCustomerProducts {
+  background-color: blue;
   display: flex;
+  flex-wrap: wrap;
 }

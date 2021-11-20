@@ -1,5 +1,7 @@
 .cardProduct {
-  margin-bottom: 40px;
+  background-color: red;
+  display: inline-block;
+  margin: 40px;
   width: 200px;
 }
 

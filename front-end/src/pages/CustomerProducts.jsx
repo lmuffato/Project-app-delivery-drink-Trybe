@@ -32,26 +32,32 @@ export default function CustomerProducts() {
 
   useEffect(() => {
     validToken();
-  }, []);
+  }, [validToken]);
 
   return (
     <div className="mainCustomerProducts">
       <Navbar />
-      <main className="bodyCustomerProducts">
+      <main>
         { isLoading ? <h3>Carregando...</h3>
-          : listProducts
-            .map((product) => {
-              const { id, name, price, urlImage } = product;
-              return (<CardProduct
-                key={ id }
-                id={ id }
-                drink={ name }
-                cost={ price }
-                thumb={ urlImage }
-                changeSomeStatus={ changeSomeStatus }
-                setChangeSomeStatus={ setChangeSomeStatus }
-              />);
-            })}
+          : (
+            <div className="bodyCustomerProducts">
+              {
+                listProducts
+                  .map((product) => {
+                    const { id, name, price, urlImage } = product;
+                    return (<CardProduct
+                      key={ id }
+                      id={ id }
+                      drink={ name }
+                      cost={ price }
+                      thumb={ urlImage }
+                      changeSomeStatus={ changeSomeStatus }
+                      setChangeSomeStatus={ setChangeSomeStatus }
+                    />);
+                  })
+              }
+            </div>
+          ) }
       </main>
     </div>
   );

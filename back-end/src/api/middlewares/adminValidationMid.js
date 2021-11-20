@@ -1,15 +1,18 @@
 const { verify } = require('jsonwebtoken');
+
 require('dotenv').config();
 const { SECRET } = process.env;
 
 const HTTP_UNAUTHORIZED_STATUS = 401;
 
+const ERROR_MESSAGE = {
+  message: 'Missing auth token',
+};
+
 module.exports = async (req, res, next) => {
   const token = req.headers.authorization;
   if (!token) {
-    return res.status(HTTP_UNAUTHORIZED_STATUS).json({
-      message: 'Missing auth token',
-    });
+    return res.status(HTTP_UNAUTHORIZED_STATUS).json(ERROR_MESSAGE);
   }
   try {
     const { dataValues: { role } } = verify(token, SECRET);

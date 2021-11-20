@@ -25,6 +25,12 @@ const create = async ({ email, requestPassword, name, requestRole }) => {
 
 const findAllUsers = async () => {
   const response = await users.findAll();
+  console.log('find aqui', response);
+  return response;
+};
+
+const deleteUser = async (id) => {
+  const response = await users.destroy({ where: { id } });
   return response;
 };
 
@@ -32,4 +38,5 @@ module.exports = {
   login,
   create,
   findAllUsers,
+  deleteUser,
 };

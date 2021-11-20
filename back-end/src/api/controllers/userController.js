@@ -33,14 +33,31 @@ const create = async (req, res) => {
   }
 };
 
-const findAllUsers = async (req, res) => {
+const findAllUsers = async (_req, res) => {
   try {
     const response = await userService.findAll();
     return res.status(HTTP_OK_STATUS).json(response);
   } catch (error) {
     return res.status(HTTP_ERROR_STATUS).json({
       message: error,
-  });
+    });
+  }
+};
+
+const deleteUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const response = await userService.delete(id);
+    if (response === 0) return res.status(HTTP_ERROR_STATUS).json({
+      message: 'User not found',
+    });
+    return res.status(HTTP_OK_STATUS).json({
+      message: 'User deleted',
+    });
+  } catch (error) {
+    return res.status(HTTP_ERROR_STATUS).json({
+      message: error,
+    });
   }
 };
 
@@ -48,4 +65,5 @@ module.exports = {
   login,
   create,
   findAllUsers,
+  deleteUser,
 };

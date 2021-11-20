@@ -6,7 +6,7 @@ import { getItemFromLocalStorage } from '../services/localStorage';
 import ErrorLogin from './ErrorLogin';
 
 const testId = 'admin_manage__element-invalid-register';
-const messageError = 'Usuário já cadastrado!';
+const messageError = 'Usuário já cadastrado ou Token inválido!';
 
 export default function NewUserForm() {
   const [name, setName] = useState('');

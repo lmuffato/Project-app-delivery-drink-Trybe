@@ -23,21 +23,16 @@ export default function CustomerProducts() {
 
   useEffect(() => {
     setIsLoading(true);
-    getProducts().then((resp) => resp)
-      .then((data) => {
-        setListProducts(data);
-      });
-
     validToken();
+
+    getProducts().then((resp) => setListProducts(resp));
+
     setIsLoading(false);
-  }, [changeSomeStatus]);
+  }, [changeSomeStatus, validToken]);
 
   return (
-
-    <main className="mainCustomerProducts">
-      <nav>
-        <Navbar />
-      </nav>
+    <div className="mainCustomerProducts">
+      <Navbar />
       <main className="bodyCustomerProducts">
         { isLoading ? <h3>Carregando...</h3>
           : listProducts
@@ -52,10 +47,9 @@ export default function CustomerProducts() {
                 changeSomeStatus={ changeSomeStatus }
                 setChangeSomeStatus={ setChangeSomeStatus }
               />);
-            }) }
+            })}
       </main>
-
-    </main>
+    </div>
   );
 }
 // <CardProduct dataTestIdError={ testId } message={ messageError }/>

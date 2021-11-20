@@ -32,7 +32,7 @@ export default function Login() {
       setToLocalStorageUser('user', { login, email });
       return '/customer/products';
     }
-    setToLocalStorage('token', login.token);
+    setToLocalStorage('token', login);
     return '/admin/manage';
   };
 
@@ -40,7 +40,6 @@ export default function Login() {
     try {
       const login = await doLogin(email, password);
       const endpoint = checkRole(login);
-      console.log('endpoint', endpoint);
       setUserData(login);
       setErrorMessage(true);
       history.push(endpoint);
@@ -92,7 +91,6 @@ export default function Login() {
           type="button"
         >
           LOGIN
-
         </button>
         <Link to="/register">
           <button
@@ -100,7 +98,6 @@ export default function Login() {
             type="button"
           >
             Ainda não tenho conta
-
           </button>
         </Link>
       </form>

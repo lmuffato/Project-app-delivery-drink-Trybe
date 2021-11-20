@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import validateEmail from '../validations/validateEmail';
 
 import { createNewUserByAdmin } from '../services/endpointsAPI';
-// import { getItemFromLocalStorage } from '../services/localStorage';
+import { getItemFromLocalStorage } from '../services/localStorage';
 import ErrorLogin from './ErrorLogin';
 
 const testId = 'admin_manage__element-invalid-register';
@@ -15,6 +15,7 @@ export default function NewUserForm() {
   const [role, setRole] = useState('');
   const [disableRegisterButton, setDisableRegisterButton] = useState(false);
   const [errorMessage, setErrorMessage] = useState(true);
+  const [adminData, setAdminData] = useState('');
 
   const handleChange = (target) => {
     const { id, value } = target;
@@ -26,9 +27,8 @@ export default function NewUserForm() {
 
   const createUser = async () => {
     try {
-      // const { token } = await getItemFromLocalStorage('user');
+      const { token } = adminData;
       const result = await createNewUserByAdmin({ name, email, password, role, token });
-      console.log('resulttt', result);
       if (result) {
         setName('');
         setEmail('');
@@ -39,6 +39,11 @@ export default function NewUserForm() {
     } catch (error) {
       setErrorMessage(false);
     }
+  };
+
+  const getAdminData = async () => {
+    const result = await getItemFromLocalStorage('token');
+    setAdminData(result);
   };
 
   useEffect(() => {
@@ -52,6 +57,7 @@ export default function NewUserForm() {
       return (validEmail && validName && validPassword && validRole);
     };
     setDisableRegisterButton(validateFields());
+    getAdminData();
   }, [name, email, password, role]);
 
   return (

@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import Header from '../../components/Header';
 import RequestCard from '../../components/RequestCard';
 import fetchSales from '../../services/MyRequestsPage/fetchSales';
-import formatDate from '../../services/MyRequestsPage/formatDate';
 import dataTestids from '../../utils/dataTestIdsMyRequestPage';
+import formatDate from '../../utils/formatDate';
 import styles from './styles.module.css';
 
 export default function MyRequestsPage() {

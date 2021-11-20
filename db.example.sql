@@ -3,10 +3,10 @@
 -- 'delivery-app' para produção
 -- 'delivery-app-dev' para desenvolvimento
 -- 'delivery-app-test' para o avaliador
-DROP DATABASE IF EXISTS `delivery-app`;
-CREATE DATABASE IF NOT EXISTS `delivery-app`;
+DROP DATABASE IF EXISTS `delivery-app-test`;
+CREATE DATABASE IF NOT EXISTS `delivery-app-test`;
 
-USE `delivery-app`;
+USE `delivery-app-test`;
 
 CREATE TABLE IF NOT EXISTS users (
 	id INT NOT NULL AUTO_INCREMENT,

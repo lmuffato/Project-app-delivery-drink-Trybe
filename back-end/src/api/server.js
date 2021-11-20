@@ -19,6 +19,7 @@ const io = require('socket.io')(server, {
 
 const product = require('../controllers/Products');
 const user = require('../controllers/User');
+const sale = require('../controllers/Sales');
 const validateJwtAdmin = require('../auth/validateJwtAdmin');
 
 const corsOptions = {
@@ -36,6 +37,8 @@ app.post('/register', user.createUser);
 // Adicionar lógica de validação de login
 app.get('/users', user.listUsers);
 app.post('/register/admin', validateJwtAdmin, user.createUser);
+
+app.post('/sales', sale.addNew);
 
 app.use('/images', express.static(path.join(__dirname, '..', '..', '/public')));
 

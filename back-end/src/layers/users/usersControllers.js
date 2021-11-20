@@ -1,6 +1,7 @@
 const { Router } = require('express');
 
-const userMiddlewares = require('./usersMiddlewares'); 
+const userMiddlewares = require('./usersMiddlewares');
+const admRoleMiddleware = require('../authentication/authMiddleware');
 
 const router = Router();
 
@@ -25,6 +26,10 @@ async () => {});
 /* REQUISIÇÃO:
 http POST :3001/login
 */
+
+router.post('/createbyadmin',
+admRoleMiddleware.validateAdmRole,
+userMiddlewares.createByAdmin);
 
 router.post('/token',
 userMiddlewares.verifyTokenNotExpired,

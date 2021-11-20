@@ -7,7 +7,7 @@ import ErrorLogin from '../Components/ErrorLogin';
 import UserContext from '../context/userContext';
 import { doLogin } from '../services/endpointsAPI';
 
-import { setToLocalStorageUser } from '../services/localStorage';
+import { setToLocalStorageUser, setToLocalStorage } from '../services/localStorage';
 import validateEmail from '../validations/validateEmail';
 
 const messageError = 'Login e/ou senha inválidos';
@@ -26,17 +26,20 @@ export default function Login() {
   const [loginButton, setLoginButton] = useState(false);
   const [errorMessage, setErrorMessage] = useState(true);
 
-  const checkRole = (token) => {
-    const { role } = jwtDecode(token);
-    return role === 'administrator' ? '/admin/manage' : '/customer/products';
+  const checkRole = (login) => {
+    const { role } = jwtDecode(login.token);
+    if (role !== 'administrator') {
+      setToLocalStorageUser('user', { login, email });
+      return '/customer/products';
+    }
+    setToLocalStorage('token', login);
+    return '/admin/manage';
   };
 
   const clickLoginButton = async () => {
     try {
       const login = await doLogin(email, password);
-      const { token } = login;
-      const endpoint = checkRole(token);
-      setToLocalStorageUser('user', { login, email });
+      const endpoint = checkRole(login);
       setUserData(login);
       setErrorMessage(true);
       history.push(endpoint);
@@ -88,7 +91,6 @@ export default function Login() {
           type="button"
         >
           LOGIN
-
         </button>
         <Link to="/register">
           <button
@@ -96,7 +98,6 @@ export default function Login() {
             type="button"
           >
             Ainda não tenho conta
-
           </button>
         </Link>
       </form>

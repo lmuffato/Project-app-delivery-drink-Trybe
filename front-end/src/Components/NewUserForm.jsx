@@ -1,12 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import validateEmail from '../validations/validateEmail';
 
+import { createNewUserByAdmin } from '../services/endpointsAPI';
+import { getItemFromLocalStorage } from '../services/localStorage';
+import ErrorLogin from './ErrorLogin';
+
+const testId = 'admin_manage__element-invalid-register';
+const messageError = 'Usuário já cadastrado ou Token inválido!';
+
 export default function NewUserForm() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('');
   const [disableRegisterButton, setDisableRegisterButton] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(true);
+  const [adminData, setAdminData] = useState('');
 
   const handleChange = (target) => {
     const { id, value } = target;
@@ -14,6 +23,27 @@ export default function NewUserForm() {
     if (id === 'user-email') setEmail(value);
     if (id === 'user-password') setPassword(value);
     if (id === 'select-role') setRole(value);
+  };
+
+  const createUser = async () => {
+    try {
+      const { token } = adminData;
+      const result = await createNewUserByAdmin({ name, email, password, role, token });
+      if (result) {
+        setName('');
+        setEmail('');
+        setPassword('');
+        setRole('');
+        setErrorMessage(true);
+      }
+    } catch (error) {
+      setErrorMessage(false);
+    }
+  };
+
+  const getAdminData = async () => {
+    const result = await getItemFromLocalStorage('token');
+    setAdminData(result);
   };
 
   useEffect(() => {
@@ -27,6 +57,7 @@ export default function NewUserForm() {
       return (validEmail && validName && validPassword && validRole);
     };
     setDisableRegisterButton(validateFields());
+    getAdminData();
   }, [name, email, password, role]);
 
   return (
@@ -39,6 +70,7 @@ export default function NewUserForm() {
             type="text"
             name="name"
             id="user-name"
+            value={ name }
             placeholder="Nome e sobrenome"
             data-testid="admin_manage__input-name"
             onChange={ (e) => handleChange(e.target) }
@@ -50,6 +82,7 @@ export default function NewUserForm() {
             type="email"
             name="email"
             id="user-email"
+            value={ email }
             placeholder="seu-email@site.com"
             data-testid="admin_manage__input-email"
             onChange={ (e) => handleChange(e.target) }
@@ -61,6 +94,7 @@ export default function NewUserForm() {
             type="password"
             name="password"
             id="user-password"
+            value={ password }
             placeholder="********"
             data-testid="admin_manage__input-password"
             onChange={ (e) => handleChange(e.target) }
@@ -73,20 +107,23 @@ export default function NewUserForm() {
           data-testid="admin_manage__select-role"
           onChange={ (e) => handleChange(e.target) }
         >
+          <option value="">Selecione</option>
           <option value="seller">Vendedor</option>
           <option value="administrator">Administrador</option>
-          <option value="customer">Cliente</option>
         </select>
         <button
           type="button"
           id="register-button"
           disabled={ !disableRegisterButton }
           data-testid="admin_manage__button-register"
-          onClick={ () => console.log(name, email, password, role) }
+          onClick={ createUser }
         >
           CADASTRAR
         </button>
       </form>
+      <div hidden={ errorMessage }>
+        <ErrorLogin dataTestIdError={ testId } message={ messageError } />
+      </div>
     </>
   );
 }

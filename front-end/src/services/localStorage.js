@@ -5,7 +5,7 @@ export const setToLocalStorageUser = (key, element) => {
   localStorage.setItem(key, JSON.stringify(data));
 };
 
-export const getItemFromLocalStorage = (key) => {
+export const getItemFromLocalStorage = async (key) => {
   const localLenght = localStorage.length;
   if (localLenght < 1) return;
   return JSON.parse(localStorage.getItem(key));

@@ -3,8 +3,9 @@ import { useHistory } from 'react-router-dom';
 import ErrorLogin from '../Components/ErrorLogin';
 
 import validateEmail from '../validations/validateEmail';
+import { setToLocalStorageUser } from '../services/localStorage';
 
-import { createNewUser } from '../services/endpointsAPI';
+import { createNewUser, doLogin } from '../services/endpointsAPI';
 
 const testId = 'common_register__element-invalid_register';
 const messageError = 'Nome e/ou email já cadastrado';
@@ -21,7 +22,8 @@ export default function Register() {
   const clickCadastrarButton = async () => {
     try {
       await createNewUser(name, email, password);
-      setErrorMessage(true);
+      const login = await doLogin(email, password);
+      setToLocalStorageUser('user', { login, email });
       history.push('/customer/products');
     } catch (error) {
       setErrorMessage(false);
@@ -45,6 +47,7 @@ export default function Register() {
       return (validEmail && validName && validPassword);
     };
     setDisableRegisterButton(validateFields());
+    setErrorMessage(true);
   }, [name, email, password]);
 
   return (

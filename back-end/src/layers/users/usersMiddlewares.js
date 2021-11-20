@@ -44,6 +44,21 @@ const createNew = async (req, res) => {
   }
 };
 
+const createByAdmin = async (req, res) => {
+  try {
+    const { name, email, password, role: roole } = req.body;
+    const hash = crypto.createHash('md5').update(password).digest('hex');
+    const oldUserByEmail = await users.findOne({ where: { email } });
+    const oldUserByName = await users.findOne({ where: { name } });
+    if (oldUserByEmail || oldUserByName) return res.status(409).json({ message: false });
+    const obj = { name, email, password: hash, role: roole };
+    await users.create(obj);
+    return res.status(201).json({ message: true });
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+};
+
 const verifyTokenNotExpired = (req, res) => {
   try {
     const { token } = req.body;
@@ -128,5 +143,6 @@ module.exports = {
   deleteById,
   createNew,
   login,
+  createByAdmin,
   verifyTokenNotExpired,
 };

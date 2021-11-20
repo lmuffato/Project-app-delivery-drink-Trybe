@@ -12,36 +12,31 @@ export default function CustomerProducts() {
   const [isLoading, setIsLoading] = useState(false);
   const [changeSomeStatus, setChangeSomeStatus] = useState(false);
 
-  const validToken = async (token) => {
+  const validToken = async () => {
     try {
+      const { token } = await getItemFromLocalStorage('user');
       await checkUserToken(token);
     } catch (e) {
+      console.log('catch da valid token', e.message);
       history.push('/login');
-      // setErrorMessage(false);
     }
   };
 
   useEffect(() => {
     setIsLoading(true);
-    getProducts().then((resp) => resp)
-      .then((data) => {
-        setListProducts(data);
-        setIsLoading(false);
-      });
-  }, []);
-
-  useEffect(() => {
-    const tokenLocalStarege = getItemFromLocalStorage('user');
-    validToken(tokenLocalStarege.token);
-    console.log(changeSomeStatus);
+    getProducts()
+      .then((resp) => resp)
+      .then((data) => setListProducts(data));
+    setIsLoading(false);
   }, [changeSomeStatus]);
 
-  return (
+  useEffect(() => {
+    validToken();
+  }, []);
 
-    <main className="mainCustomerProducts">
-      <nav>
-        <Navbar />
-      </nav>
+  return (
+    <div className="mainCustomerProducts">
+      <Navbar />
       <main className="bodyCustomerProducts">
         { isLoading ? <h3>Carregando...</h3>
           : listProducts
@@ -56,10 +51,9 @@ export default function CustomerProducts() {
                 changeSomeStatus={ changeSomeStatus }
                 setChangeSomeStatus={ setChangeSomeStatus }
               />);
-            }) }
+            })}
       </main>
-
-    </main>
+    </div>
   );
 }
 // <CardProduct dataTestIdError={ testId } message={ messageError }/>

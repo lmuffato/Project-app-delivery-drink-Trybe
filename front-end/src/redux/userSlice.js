@@ -8,6 +8,7 @@ export const slice = createSlice({
     token: '',
     role: '',
     isLogged: false,
+    invalidEmail: false,
   },
   reducers: {
     userLogin(state, { payload }) {

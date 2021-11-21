@@ -6,5 +6,3 @@ setupTests.js
 src/index.js
 build/*
 jest.config.js
-postcss.config.js
-tailwind.config.js

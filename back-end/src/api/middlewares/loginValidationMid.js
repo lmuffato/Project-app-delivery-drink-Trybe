@@ -13,7 +13,7 @@ module.exports = async (req, res, next) => {
   if (validations.error) {
     return res.status(HTTP_ERROR_STATUS).json({
       message: validations.error.details,
-    });
+  });
   }
 
   const alreadyExists = await users.findOne({ where: { email } });

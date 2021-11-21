@@ -6,7 +6,7 @@ const loginSchema = Joi.object({
     .required(),
 
   email: Joi.string()
-    .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net', 'br'] } })
+    .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } })
     .required(),
 });
 

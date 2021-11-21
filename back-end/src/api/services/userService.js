@@ -6,11 +6,12 @@ require('dotenv').config();
 const { SECRET } = process.env;
 
 const login = async (user) => {
+  // eslint-disable-next-line no-unused-vars
   const { password: _, ...userPayload } = user;
 
   const token = jwt.sign(userPayload, SECRET);
 
-  return { name: user.name, email: user.email, token, role: user.role };
+  return { token, role: user.role };
 };
 
 const create = async ({ email, requestPassword, name, requestRole }) => {

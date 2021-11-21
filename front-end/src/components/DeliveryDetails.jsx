@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useState, useEffect, useContext } from 'react';
 import { CssBaseline, Typography, Container, Box, Button } from '@mui/material';
 import DropDown from './DropDown';
@@ -37,8 +36,7 @@ function DeliveryDetails() {
 
   async function handleCreateSale() {
     const payload = JSON.stringify({
-      totalPrice: parseFloat(calculateSubtotal(cartProducts)
-        .toString().replace('.', ',')),
+      totalPrice: parseFloat(calculateSubtotal(cartProducts).toString(), 2),
       deliveryAddress,
       deliveryNumber,
       userId: id,

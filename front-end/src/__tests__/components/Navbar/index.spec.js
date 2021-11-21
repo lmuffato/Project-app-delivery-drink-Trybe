@@ -1,6 +1,6 @@
 import React from 'react';
-import Navbar from '../../../components/Navbar/index'
 import { render } from '@testing-library/react';
+import Navbar from '../../../components/Navbar/index';
 
 describe('Snapshot test', () => {
   it('renders correctly', () => {
@@ -8,7 +8,8 @@ describe('Snapshot test', () => {
       <Navbar
         userType="customer"
         username="João"
-      />)
+      />,
+    );
     expect(JSON).toMatchSnapshot();
   });
 });

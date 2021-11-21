@@ -1,16 +1,18 @@
 import React from 'react';
-import NavItem from '../../../components/Navbar/NavItem';
 import { render } from '@testing-library/react';
+import NavItem from '../../../components/Navbar/NavItem';
 
 describe('Snapshot test', () => {
   it('renders correctly', () => {
     const JSON = render(
       <NavItem
-       active={true}
-       children="Teste"
-       testid="1"
-       variant="secondary"
-      />)
+        active
+        testid="1"
+        variant="secondary"
+      >
+        Teste
+      </NavItem>,
+    );
     expect(JSON).toMatchSnapshot();
   });
 });

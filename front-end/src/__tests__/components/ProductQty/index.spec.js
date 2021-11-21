@@ -1,6 +1,6 @@
 import React from 'react';
-import ProductQty from '../../../components/ProductQty/index';
 import { render } from '@testing-library/react';
+import ProductQty from '../../../components/ProductQty/index';
 
 describe('Snapshot test', () => {
   it('renders correctly', () => {
@@ -9,9 +9,10 @@ describe('Snapshot test', () => {
         id="1"
         label="Label Teste"
         value="Value Teste"
-        onAdd={jest.fn()}
-        onRemove={jest.fn()}
-      />)
+        onAdd={ jest.fn() }
+        onRemove={ jest.fn() }
+      />,
+    );
     expect(JSON).toMatchSnapshot();
   });
 });

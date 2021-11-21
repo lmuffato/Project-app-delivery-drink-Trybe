@@ -1,6 +1,6 @@
 import React from 'react';
-import BadgeItemFinalizado from '../../../components/BadgeItemFinalizado/index'
 import { render } from '@testing-library/react';
+import BadgeItemFinalizado from '../../../components/BadgeItemFinalizado/index';
 
 describe('Snapshot test', () => {
   it('renders correctly', () => {
@@ -8,9 +8,10 @@ describe('Snapshot test', () => {
       <BadgeItemFinalizado
         id="1"
         descricao="Cerveja Brahma"
-        quantidade={2}
-        valorUnitario={4}
-      />)
+        quantidade={ 2 }
+        valorUnitario={ 4 }
+      />,
+    );
     expect(JSON).toMatchSnapshot();
   });
 });

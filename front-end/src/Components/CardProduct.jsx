@@ -38,6 +38,12 @@ export default function CardProduct({ id,
     setPrice(counter * cost);
   }, [counter]);
 
+  useEffect(() => {
+    const newArray = itensList.filter((elem) => elem.quantity > 0);
+    console.log('gggggg', newArray);
+    setItensList(newArray);
+  }, [price]);
+
   function increment() {
     setCounter(counter + 1);
   }

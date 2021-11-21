@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-one-expression-per-line */
 import React, { useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import CardProduct from '../Components/CardProduct';
@@ -22,6 +23,7 @@ export default function CustomerProducts() {
       await checkUserToken(token);
     } catch (e) {
       console.log('catch da valid token', e.message);
+      localStorage.clear();
       history.push('/login');
     }
   };
@@ -56,13 +58,15 @@ export default function CustomerProducts() {
       <Navbar />
       <button
         type="button"
-        data-testid="customer_products__checkout-bottom-value"
+        data-testid="customer_products__button-cart"
         className="buttonVercarrinho"
         onClick={ clickLoginButton }
       >
-        Ver Carrinho: R$
-        {' '}
-        {totalPriceAllProducts}
+        <span data-testid="customer_products__checkout-bottom-value">
+          Ver Carrinho: R$
+          {' '}
+          {totalPriceAllProducts}
+        </span>
       </button>
       <main>
         { isLoading ? <h3>Carregando...</h3>

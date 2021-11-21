@@ -7,7 +7,6 @@ export const loginAction = async ({ email, password }) => {
         headers: {
           Accept: APPLICATION_JSON,
           'Content-Type': APPLICATION_JSON,
-          Authorization,
         },
         body: JSON.stringify({ email, password }),
       });
@@ -27,7 +26,6 @@ export const registerAction = async ({ fullName, email, password }) => {
         headers: {
           Accept: APPLICATION_JSON,
           'Content-Type': APPLICATION_JSON,
-          Authorization,
         },
         body: JSON.stringify({ fullName, email, password }),
       });
@@ -69,7 +67,6 @@ export const fetchSales = async (token) => {
           Authorization: token,
         },
       });
-    console.log('🚀 ~ rawResponse', rawResponse);
     const { result } = await rawResponse.json();
     return result;
   } catch (error) {

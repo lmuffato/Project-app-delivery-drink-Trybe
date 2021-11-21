@@ -28,6 +28,10 @@ exports.create = async ({ fullName: name, email, password }) => {
   const hashedPassword = md5(password);
   const user = await userModel.findOne({ where: [{ name }, { email }] });
   if (user) return null;
-  await userModel.create({ name, email, password: hashedPassword, role: 'customer' });
-  return generateToken({ email: user.email, role: user.role });
+  const newUser = await userModel.create({
+    name, email, password: hashedPassword, role: 'customer' });
+  return generateToken({
+    email: newUser.getDataValue('email'),
+    role: newUser.getDataValue('role'),
+  });
 };

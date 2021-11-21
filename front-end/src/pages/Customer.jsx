@@ -13,6 +13,10 @@ export default function Customer() {
       value: 'orders',
       testId: 'customer_products__element-navbar-link-orders',
     },
+    { name: 'CARRINHO',
+      value: 'cart',
+      testId: 'customer_products__element-navbar-link-orders',
+    },
   ];
   const history = useHistory();
   const location = history.location.pathname;

@@ -24,15 +24,23 @@ export default function CardProduct({ id,
   }, [counter, price]);
 
   useEffect(() => {
-    const objectProducts = {
+    const objectProduct = {
       productId: id, name: drink, quantity: counter, price: cost,
     };
 
-    if (!itensList.length && counter) setItensList([objectProducts]);
-    else {
-      let itemList = itensList.find((item) => item.id === id);
-      if (itemList !== undefined) itemList = objectProducts;
+    let arrayProducts = [...itensList];
+    arrayProducts.forEach((product, index) => {
+      if (product.productId === objectProduct.productId) {
+        arrayProducts[index] = objectProduct;
+      }
+    });
+    const haveProduct = arrayProducts.some((some) => id === some.productId);
+    if (counter > 0 && !haveProduct) {
+      console.log('entrou');
+      arrayProducts = [...itensList, objectProduct];
     }
+
+    setItensList(arrayProducts);
   }, [counter]);
 
   useEffect(() => {

@@ -14,14 +14,12 @@ export default function CartBox() {
         data-testid="customer_products__button-cart"
         disabled={ totalPrice === 0 }
       >
-        <p>
-          Ver Carrinho:
-          <span
-            data-testid="customer_products__checkout-bottom-value"
-          >
-            { `${BRL(totalPrice)}` }
-          </span>
-        </p>
+        Ver Carrinho:
+        <span
+          data-testid="customer_products__checkout-bottom-value"
+        >
+          { `${BRL(totalPrice)}` }
+        </span>
       </Button>
     </Link>
   );

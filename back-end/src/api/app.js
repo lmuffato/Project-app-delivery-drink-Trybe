@@ -11,11 +11,9 @@ const { checkEmail } = require('../middlewares/checkEmail');
 const { checkPassword } = require('../middlewares/checkPassword');
 const { validateToken } = require('../middlewares/validateToken');
 const { checkName } = require('../middlewares/checkName');
-// const validateProducts = require('../middlewares/validateProducts');
-// const validateSeller = require('../middlewares/validateSeller');
-// const validateCustomer = require('../middlewares/validateUser');
 const validateAddress = require('../middlewares/validateAddress');
 const uploadImages = require('../middlewares/uploadImages');
+const validateAdmin = require('../middlewares/validateAdmin');
 
 const corsOptions = {
   origin: '*',
@@ -45,5 +43,12 @@ app.post('/sale',
   saleControllers.register);
 
 app.post('/saleDone', validateToken, saleControllers.getSaleDone);
+app.post('/addUser',
+  validateToken,
+  validateAdmin,
+  checkEmail,
+  checkName,
+  checkPassword,
+  userControllers.addNewUser);
 
 module.exports = app;

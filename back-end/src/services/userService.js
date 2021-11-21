@@ -11,11 +11,11 @@ const login = async (email, password) => {
 
 // Criando o endpoint do cadastro do usuário
 const register = async (name, email, password) => {
-  const user = await database.user.findOne({ where: { email, name } });
+  const user = await database.user.findOne({ where: { email } });
   if (user) return { status: 409, message: { message: 'Conflict' } }; // verificar se usuario já é registrado
   const userRegistred = await database.user.create({ 
     name, email, password, role: 'customer' });
-   
+
     console.log(userRegistred.dataValues);
     
   return { status: 201,
@@ -24,6 +24,20 @@ const register = async (name, email, password) => {
               email: userRegistred.dataValues.email,
               password: userRegistred.dataValues.password,
           } };
+};
+
+const addNewUser = async (name, email, password, role) => {
+  const userEmail = await database.user.findOne({ where: { email } });
+  const userName = await database.user.findOne({ where: { name } });
+  if (userEmail || userName) return { status: 409, message: { message: 'Conflict' } }; // verificar se usuario já é registrado
+  const userRegistred = await database.user.create({ 
+    name, email, password, role });
+    return { status: 201,
+      message: { 
+        name: userRegistred.dataValues.name,
+        email: userRegistred.dataValues.email,
+        role: userRegistred.dataValues.role,
+    } };
 };
 
 const getAllUsers = async () => {
@@ -43,4 +57,5 @@ module.exports = {
   register,
   getAllUsers,
   getAllSellers,
+  addNewUser,
 };

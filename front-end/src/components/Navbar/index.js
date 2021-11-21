@@ -19,7 +19,7 @@ const userConfig = {
     products: { show: false, text: null },
     orders: { show: true, text: 'PEDIDOS' },
   },
-  admin: {
+  administrator: {
     products: { show: false, text: null },
     orders: { show: true, text: 'GERENCIAR USUÁRIOS' },
   },
@@ -29,12 +29,12 @@ function Navbar({ userType, username }) {
   const config = userConfig[userType];
 
   const ordersItem = () => (
-    <NavItem variant="primary" testid={ testids.orders }>
+    <NavItem to="orders" variant="primary" testid={ testids.orders }>
       {config.orders.text}
     </NavItem>
   );
   const productsItem = () => (
-    <NavItem variant="primary" testid={ testids.products }>
+    <NavItem to="products" variant="primary" testid={ testids.products }>
       {config.products.text}
     </NavItem>
   );
@@ -43,8 +43,8 @@ function Navbar({ userType, username }) {
     <NavbarContainer>
       <NavbarWrapper>
         <NavbarGroupLinks>
-          {config.orders.show && ordersItem()}
           {config.products.show && productsItem()}
+          {config.orders.show && ordersItem()}
         </NavbarGroupLinks>
 
         <NavbarGroupLinks>

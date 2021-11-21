@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const NavbarContainer = styled.nav`
@@ -54,15 +55,22 @@ const variants = (variant) => (theme) => {
   }
 };
 
-export const NavItemContainer = styled.li`
-  background-color: ${({ theme, variant, active }) => {
+export const NavItemContainer = styled(NavLink)`
+  &, 
+  &:hover, 
+  &:focus, 
+  &:active {
+    text-decoration: none;
+    color: ${({ theme, variant }) => {
     const currentVariant = variants(variant)(theme);
-    return (active ? currentVariant.activeBg : currentVariant.defaultBg);
-  }};
-  color: ${({ theme, variant, active }) => {
+    return currentVariant.defaultColor;
+  }};;
+  }
+  background-color: ${({ theme, variant }) => {
     const currentVariant = variants(variant)(theme);
-    return active ? currentVariant.activeColor : currentVariant.defaultColor;
+    return currentVariant.defaultBg;
   }};
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -70,7 +78,16 @@ export const NavItemContainer = styled.li`
   padding: 0 20px;
   cursor: pointer;
   user-select: none;
-  &:hover {
-    filter: brightness(1.1)
+  &:hover { filter: brightness(1.1) }
+  &.active {
+    background-color: ${({ theme, variant }) => {
+    const currentVariant = variants(variant)(theme);
+    return currentVariant.activeBg;
+  }};
+  color: ${({ theme, variant }) => {
+    const currentVariant = variants(variant)(theme);
+    return currentVariant.activeColor;
+  }};
   }
+
 `;

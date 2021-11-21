@@ -7,13 +7,13 @@ const authContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [authed, setAuthed] = useState(false);
-  const [token, setToken] = useState(null);
+  const [user, setUser] = useState({});
 
   const context = {
     authed,
     setAuthed,
-    token,
-    setToken,
+    user,
+    setUser,
   };
 
   return (
@@ -28,14 +28,14 @@ AuthProvider.propTypes = {
 };
 
 export const useAuth = () => {
-  const { authed, setAuthed, token, setToken } = useContext(authContext);
+  const { authed, setAuthed, user, setUser } = useContext(authContext);
   const navigation = useNavigate();
 
   /**
    * @param {OkLogin} loginData
    */
   function login(loginData) {
-    setToken(loginData.token);
+    setUser(loginData);
     setAuthed(true);
   }
 
@@ -68,6 +68,7 @@ export const useAuth = () => {
     authed,
     login,
     logout,
+    user,
     logoutNotAuthorized,
     redirectUserByRole,
   };

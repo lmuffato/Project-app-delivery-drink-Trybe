@@ -23,6 +23,7 @@ function AdmPage() {
       password,
       role,
     };
+
     if (!users.find((us) => us.email === email || us.name === name)) {
       const newUsers = [...users, data];
       setUsers(newUsers);
@@ -36,6 +37,7 @@ function AdmPage() {
         Authorization: token,
       },
     });
+
     const { message } = await request.json();
     if (message) {
       setHideErr(false);
@@ -43,6 +45,7 @@ function AdmPage() {
   }
 
   useEffect(() => {
+    setHideErr(true);
     const passwordLength = 6;
     const nameLengh = 12;
     const emailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g;

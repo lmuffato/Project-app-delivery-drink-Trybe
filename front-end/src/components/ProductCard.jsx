@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './ProductCard.css';
 import PropTypes from 'prop-types';
 import { Card, Button } from 'react-bootstrap';
@@ -8,26 +8,25 @@ function ProductCard({ product }) {
   const { cart, setCart } = useContext(CartContext);
   const [quantity, setQuantity] = useState(0);
 
-  function handleClic(e) {
-    if (e.target.innerText === '-' && quantity > 0) {
-      setQuantity(quantity - 1);
-    } else if (e.target.innerText === '+') {
-      setQuantity(quantity + 1);
-    }
-  }
-
-  function handlecart() {
+  function handleCart(qtt) {
+    setQuantity(qtt);
     if (!cart.find((item) => item.name === product.name)) {
-      setCart([...cart, { name: product.name, price: product.price, quantity }]);
+      setCart([...cart, { name: product.name, price: product.price, quantity: qtt }]);
     } else {
       const index = cart.findIndex((item) => item.name === product.name);
-      setCart([...cart, cart[index].quantity = quantity]);
+      const newCart = [...cart];
+      newCart[index].quantity = qtt;
+      setCart(newCart);
     }
   }
 
-  useEffect(() => {
-    handlecart();
-  }, [quantity]);
+  function handleClic(e) {
+    if (e.target.innerText === '-' && quantity > 0) {
+      handleCart(quantity - 1);
+    } else if (e.target.innerText === '+') {
+      handleCart(quantity + 1);
+    }
+  }
 
   return (
     <Card bcart="info" style={ { width: '12rem', alignItems: 'center' } }>
@@ -63,7 +62,7 @@ function ProductCard({ product }) {
             type="number"
             value={ quantity }
             className="quantityInput"
-            onChange={ (e) => setQuantity(e.target.value) }
+            onChange={ (e) => handleCart(e.target.value) }
             data-testid={ `customer_products__input-card-quantity-${product.id}` }
           />
           <Button

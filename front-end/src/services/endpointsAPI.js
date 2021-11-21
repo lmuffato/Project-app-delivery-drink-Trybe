@@ -62,7 +62,7 @@ export const getSales = async () => {
   return result.data;
 };
 
-export const postSales = async (obj) => {
+export const postSales = async (obj) => { // obj = { userId, totalPrice, deliveryAddress, deliveryNumber, status }
   const result = await api.post('/sales', obj);
   return result.data;
 };

@@ -5,7 +5,10 @@ import React, {
 } from 'react';
 import { Link } from 'react-router-dom';
 import NewOrderContext from '../../context/NewOrderContext';
-import { getAllUsersSallers } from '../../services/endpointsAPI';
+import {
+  getAllUsersSallers,
+  postSales,
+} from '../../services/endpointsAPI';
 
 const selectSeller = 'customer_checkout__select-seller';
 const inputAddress = 'ustomer_checkout__input-address';
@@ -13,18 +16,18 @@ const inputAddressNumber = 'customer_checkout__input-addressNumber';
 const buttonSubmitOrder = 'customer_checkout__button-submit-order';
 
 export default function DeliveryDetails() {
+  const { userId } = useContext(NewOrderContext);
   const { sellersList, setSellersList } = useContext(NewOrderContext);
   const { sellerId, setSellerId } = useContext(NewOrderContext);
   const { deliveryAddress, setDeliveryAddress } = useContext(NewOrderContext);
-  const { addressNumber, setAddressNumber } = useContext(NewOrderContext);
+  const { deliveryNumber, setDeliveryNumber } = useContext(NewOrderContext);
+  const { totalPrice } = useContext(NewOrderContext);
   const [isLoading, setIsLoading] = useState(false);
-  // const [sale, setSale] = useState(false)
-  // saleObj = { userId, totalPrice, deliveryAddress, deliveryNumber, status }
 
   const getSellersList = async () => {
     const arr = await getAllUsersSallers();
     setSellersList(arr);
-    setSellerId(arr[0].id);
+    // setSellerId(arr[0].id);
   };
 
   useEffect(() => {
@@ -33,11 +36,32 @@ export default function DeliveryDetails() {
     setIsLoading(false);
   }, []);
 
+  const defaultSeller = () => {
+    if (sellersList.length !== 0) {
+      setSellerId(sellersList[0].id);
+    }
+  };
+
+  useEffect(() => {
+    defaultSeller();
+  }, [sellersList]);
+
   const renderSellersList = () => {
     if (isLoading === true) { return null; }
     const list = sellersList.map((ele, index) => (
       <option key={ index } value={ `${ele.id}` }>{ele.name}</option>));
     return list;
+  };
+
+  const createNewSale = async () => {
+    const obj = {
+      userId,
+      totalPrice,
+      deliveryAddress,
+      deliveryNumber,
+      status: 'pendente',
+    };
+    await postSales(obj);
   };
 
   useEffect(() => {
@@ -90,8 +114,8 @@ export default function DeliveryDetails() {
             id={ `${inputAddressNumber}` }
             placeholder="123"
             onChange={ (e) => {
-              setAddressNumber(e.target.value);
-              console.log(addressNumber);
+              setDeliveryNumber(e.target.value);
+              console.log(deliveryNumber);
             } }
             required
           />
@@ -102,6 +126,7 @@ export default function DeliveryDetails() {
           to="/customer/finished"
           data-testid={ `${buttonSubmitOrder}` }
           className={ `${buttonSubmitOrder}` }
+          onClick={ createNewSale }
         >
           <button type="button">FINALIZAR PEDIDO</button>
         </Link>

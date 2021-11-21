@@ -7,8 +7,8 @@ const { User: users } = require('../../database/models');
 
 const getAllSales = async (req, res, next) => {
   try {
-    const { email, password } = req.user;
-    const { dataValues } = await users.findOne({ where: { email, password } });
+    const { email } = req.user;
+    const { dataValues } = await users.findOne({ where: { email } });
 
     const { role } = dataValues.role;
     if (role === 'customer') {

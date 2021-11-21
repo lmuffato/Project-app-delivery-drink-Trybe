@@ -27,7 +27,7 @@ function Register() {
 
   const registerUser = (ev) => {
     ev.preventDefault();
-    api.registerUser(name, email, password)
+    api.user.create(name, email, password)
       .then((data) => {
         login(data);
         redirectUserByRole(data);

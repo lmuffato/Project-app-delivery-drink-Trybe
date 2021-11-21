@@ -26,31 +26,34 @@ async function login(email, password) {
   }
 }
 
-/**
- * Registra um novo usuário (Cliente) no banco de dados
- * @param {string} name
- * @param {string} email
- * @param {string} password
- * @returns
- */
-async function registerUser(name, email, password) {
-  try {
+const user = {
+  /**
+   * Registra um novo usuário (Cliente) no banco de dados
+   * @param {string} name
+   * @param {string} email
+   * @param {string} password
+   * @returns
+   */
+  async create(name, email, password) {
+    try {
     /**
      * @type {import('axios').AxiosResponse<OkLogin>}
      */
-    const response = await axios.post(
-      `${BASE_URL}/users/register`, { name, email, password },
-    );
-    return response.data;
-  } catch ({ response: { data } }) {
+      const response = await axios.post(
+        `${BASE_URL}/users/register`, { name, email, password },
+      );
+      return response.data;
+    } catch ({ response: { data } }) {
     /**
      * @type {ErrorLogin}
      */
-    const errorRes = data;
-    throw errorRes;
-  }
-}
+      const errorRes = data;
+      throw errorRes;
+    }
+  },
+};
+
 export default {
   login,
-  registerUser,
+  user,
 };

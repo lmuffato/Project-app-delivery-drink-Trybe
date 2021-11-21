@@ -3,15 +3,6 @@ import PropTypes from 'prop-types';
 import NewOrderContext from '../context/NewOrderContext';
 import '../Styles/Cardproducs.css';
 
-// const oderListExemple = [ // Apenas como exemplo, deve ser excluído apos funcionalidade
-//   { productId: 1, name: 'cerveja', quantity: 10, price: 8 },
-//   { productId: 2, name: 'cachaça', quantity: 2, price: 10 },
-//   { productId: 3, name: 'vinho', quantity: 1, price: 60 },
-//   { productId: 4, name: 'whisk', quantity: 5, price: 80 },
-// ];
-
-// console.log(oderListExemple);
-
 export default function CardProduct({ id,
   drink, cost, thumb, changeSomeStatus, setChangeSomeStatus }) {
   const { itensList, setItensList } = useContext(NewOrderContext);

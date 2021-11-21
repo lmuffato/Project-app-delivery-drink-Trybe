@@ -25,9 +25,9 @@ function Register() {
   const [password, setPassword] = useState('');
   const { login, redirectUserByRole } = useAuth();
 
-  const authUser = (ev) => {
+  const registerUser = (ev) => {
     ev.preventDefault();
-    api.login(email, password)
+    api.registerUser(name, email, password)
       .then((data) => {
         login(data);
         redirectUserByRole(data);
@@ -42,7 +42,7 @@ function Register() {
   );
 
   return (
-    <Form onSubmit={ authUser }>
+    <Form onSubmit={ registerUser }>
       <Input
         type="text"
         label="Nome"

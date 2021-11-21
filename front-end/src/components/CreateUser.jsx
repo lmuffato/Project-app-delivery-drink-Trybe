@@ -1,5 +1,4 @@
-/* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   Typography,
   Container,
@@ -8,17 +7,23 @@ import {
   NativeSelect,
   TextField,
 } from '@mui/material';
+import ContextLogin from '../context/ContextLogin';
 
 const existingRoles = ['seller', 'administrator', 'customer'];
 const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
 const MINPASSWORDLENGTH = 6;
 const MINNAMELENGTH = 12;
+const axios = require('axios').default;
+
+const urlBase = 'http://localhost:3001';
 
 function CreateUser() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('seller');
+  const [isCreated, setIsCreated] = useState(false);
+  const { userData: { token } } = useContext(ContextLogin);
 
   const validateEmail = () => emailRegex.test(email);
 
@@ -29,7 +34,23 @@ function CreateUser() {
   const validateLoginInputs = () => (
     validateEmail() && validatePassword() && validateName());
 
-  console.log(role);
+  async function handleCreateNewUSer() {
+    setIsCreated(false);
+    const data = { name, email, password, role };
+    const payload = JSON.stringify(data);
+    const config = {
+      headers: {
+        Authorization: token,
+        'Content-Type': 'application/json',
+      },
+    };
+    try {
+      await axios.post(`${urlBase}/register`, payload, config);
+      setIsCreated(true);
+    } catch (e) {
+      console.log(e.response);
+    }
+  }
   return (
     <Container
       component="div"
@@ -92,11 +113,12 @@ function CreateUser() {
         <Button
           disabled={ !validateLoginInputs() }
           data-testid="admin_manage__button-register"
-          onClick={ () => console.log('criar usuario') }
+          onClick={ () => handleCreateNewUSer() }
         >
           Criar
         </Button>
       </Box>
+      { isCreated && 'Usuario criado' }
     </Container>
   );
 }

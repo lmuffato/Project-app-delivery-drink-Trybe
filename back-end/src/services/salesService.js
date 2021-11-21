@@ -9,7 +9,7 @@ const createSaleElement = async (saleInfo) => {
     deliveryNumber,
     userId,
     sellerId,
-    status: 'pendente',
+    status: 'Pendente',
   }).catch((error) => ({ error: { message: error.message } }));
   return result;
 };

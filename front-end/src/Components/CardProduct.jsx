@@ -40,7 +40,6 @@ export default function CardProduct({ id,
 
   useEffect(() => {
     const newArray = itensList.filter((elem) => elem.quantity > 0);
-    console.log('gggggg', newArray);
     setItensList(newArray);
   }, [price]);
 

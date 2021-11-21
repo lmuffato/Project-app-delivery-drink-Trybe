@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import { useState } from 'react/cjs/react.development';
+import React, { useEffect, useState } from 'react';
 
 import Card from '../components/productCard';
 import Header from '../components/header';
@@ -34,7 +33,7 @@ export default function Produtos() {
     }
   }
 
-  useEffect(() => { getProducts(); }, [getProducts]);
+  useEffect(() => { getProducts(); }, []);
 
   return (
     <div>

@@ -13,25 +13,19 @@ export default function Register() {
 
     if (!emailRegex.test(emailValue) || passwordValue.length < minPasswordLength
     || nameValue.length < minNameLength) {
-      console.log('ainda nao');
       btnRegister.disabled = true;
     } else {
-      console.log('tudo ok');
       btnRegister.disabled = false;
     }
   };
 
-  const makeRegister = async () => {
-    console.log('Fazendo registro........');
-  };
-
   const handleRegister = () => {
-    makeRegister();
+    console.log('Registrando...');
   };
 
-  const handleInput = () => {
-    validations();
-  };
+  // const handleInput = () => {
+  //   validations();
+  // };
 
   return (
     <main>
@@ -42,7 +36,7 @@ export default function Register() {
           type="text"
           placeholder="Insira seu nome: "
           data-testid="common_register__input-name"
-          onChange={ handleInput }
+          onChange={ validations }
           required
         />
       </label>
@@ -53,7 +47,7 @@ export default function Register() {
           type="email"
           placeholder="Insira seu email: "
           data-testid="common_register__input-email"
-          onChange={ handleInput }
+          onChange={ validations }
           required
         />
       </label>
@@ -64,7 +58,7 @@ export default function Register() {
           type="password"
           placeholder="Insira sua senha: "
           data-testid="common_register__input-password"
-          onChange={ handleInput }
+          onChange={ validations }
           required
         />
       </label>

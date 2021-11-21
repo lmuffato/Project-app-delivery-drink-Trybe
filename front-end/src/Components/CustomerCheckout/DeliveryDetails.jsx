@@ -1,10 +1,11 @@
 import React, {
   useEffect,
-  // useState,
+  useState,
   useContext,
 } from 'react';
 import { Link } from 'react-router-dom';
 import NewOrderContext from '../../context/NewOrderContext';
+import { getAllUsersSallers } from '../../services/endpointsAPI';
 
 const selectSeller = 'customer_checkout__select-seller';
 const inputAddress = 'ustomer_checkout__input-address';
@@ -12,14 +13,32 @@ const inputAddressNumber = 'customer_checkout__input-addressNumber';
 const buttonSubmitOrder = 'customer_checkout__button-submit-order';
 
 export default function DeliveryDetails() {
-  const { sellersList } = useContext(NewOrderContext);
+  const { sellersList, setSellersList } = useContext(NewOrderContext);
   const { sellerId, setSellerId } = useContext(NewOrderContext);
   const { deliveryAddress, setDeliveryAddress } = useContext(NewOrderContext);
   const { addressNumber, setAddressNumber } = useContext(NewOrderContext);
+  const [isLoading, setIsLoading] = useState(false);
+  // const [sale, setSale] = useState(false)
+  // saleObj = { userId, totalPrice, deliveryAddress, deliveryNumber, status }
+
+  const getSellersList = async () => {
+    const arr = await getAllUsersSallers();
+    setSellersList(arr);
+    setSellerId(arr[0].id);
+  };
 
   useEffect(() => {
-    setSellerId(sellersList[0].id);
+    setIsLoading(true);
+    getSellersList();
+    setIsLoading(false);
   }, []);
+
+  const renderSellersList = () => {
+    if (isLoading === true) { return null; }
+    const list = sellersList.map((ele, index) => (
+      <option key={ index } value={ `${ele.id}` }>{ele.name}</option>));
+    return list;
+  };
 
   useEffect(() => {
     console.log(sellerId);
@@ -36,13 +55,12 @@ export default function DeliveryDetails() {
             className={ `${selectSeller}` }
             data-testid={ `${selectSeller}` }
             name="SellersList"
-            value={ sellerId }
+            value={ sellerId.id }
             onChange={ (event) => {
               setSellerId(event.target.value);
             } }
           >
-            { sellersList.map((ele, index) => (
-              <option key={ index } value={ `${ele.id}` }>{ele.name}</option>))}
+            { renderSellersList() }
           </select>
         </label>
       </span>

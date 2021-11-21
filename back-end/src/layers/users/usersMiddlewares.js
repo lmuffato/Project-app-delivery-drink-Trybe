@@ -78,6 +78,30 @@ const getAll = async (_req, res) => {
   }
 };
 
+const getAllSellers = async (_req, res) => {
+  try {
+    const data = await users.findAll({
+      where: { role: 'seller' },
+      attributes: { exclude: ['password', 'role'] },
+    });
+    return res.status(200).json(data);
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+};
+
+const getAllCustomers = async (_req, res) => {
+  try {
+    const data = await users.findAll({
+      where: { role: 'customer' },
+      attributes: { exclude: ['password'] },
+    });
+    return res.status(200).json(data);
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+};
+
 // Busca por id utilizando a chave primária
 const getById = async (req, res) => {
   try {
@@ -138,6 +162,8 @@ const removeKeyInObject = (obj, key) => {
 
 module.exports = {
   getAll,
+  getAllSellers,
+  getAllCustomers,
   getById,
   updateById,
   deleteById,

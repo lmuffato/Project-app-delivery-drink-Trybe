@@ -11,10 +11,10 @@ const oderListExemple = [ // Apenas como exemplo, deve ser excluído apos funcio
   { productId: 4, name: 'whisk', quantity: 5, price: 80 },
 ];
 
-const sellersListExample = [ // Apenas como exemplo, deve ser excluído apos funcionalidade
-  { id: 1, name: 'Lewis Hamilton' },
-  { id: 2, name: 'Michael Schumacher' },
-];
+// const sellersListExample = [ // Apenas como exemplo, deve ser excluído apos funcionalidade
+//   { id: 1, name: 'Lewis Hamilton' },
+//   { id: 2, name: 'Michael Schumacher' },
+// ];
 
 const userNameExample = 'Lucas'; // Apenas como exemplo, deve ser excluído apos funcionalidade
 
@@ -22,7 +22,7 @@ function NewOrderProvider({ children }) {
   const [userId, setUserId] = useState(userIdExemple); // Preenche na tela de login
   const [userName, setUserName] = useState(userNameExample); // Preenche na tela de login
   const [itensList, setItensList] = useState(oderListExemple); // Prenchente na tela de produtos
-  const [sellersList, setSellersList] = useState(sellersListExample); // Carrega os dados do sequelize com os nomes e ids dos vendedores (usuários com role adm)
+  const [sellersList, setSellersList] = useState([]); // Carrega os dados do sequelize com os nomes e ids dos vendedores (usuários com role adm)
   const [sellerId, setSellerId] = useState(''); // id do vendedor
   const [deliveryAddress, setDeliveryAddress] = useState(''); // endereço de entrega
   const [addressNumber, setAddressNumber] = useState(''); // numero do endereço

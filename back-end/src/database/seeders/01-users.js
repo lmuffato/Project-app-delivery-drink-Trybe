@@ -26,12 +26,54 @@ module.exports = {
           role: "customer",
         },
         {
-          email: "cirobottini@gmail.com",
-          id: 3,
           name: "Ciro Bottini",
+          id: 4,
           password: "25d55ad283aa400af464c76d713c07ad",
-          role: "seller",
-        },       
+          email: "cirobottini@gmail.com",
+          role: "seller"
+        },
+        {
+          id: 5,
+          name: "Socrates",
+          password: "25d55ad283aa400af464c76d713c07ad",
+          email: "socrates@gmail.com",
+          role: "seller"
+        },
+        {
+          id: 6,
+          name: "Pitagoras",
+          password: "25d55ad283aa400af464c76d713c07ad",
+          email: "pitagoras@gmail.com",
+          role: "seller"
+        },
+        {
+          id: 7,
+          name: "Aristoteles",
+          password: "25d55ad283aa400af464c76d713c07ad",
+          email: "aristoteles@gmail.com",
+          role: "seller"
+        },
+        {
+          id: 8,
+          name: "Friedrich Nietzsche",
+          password: "25d55ad283aa400af464c76d713c07ad",
+          email: "platao@gmail.com",
+          role: "customer"
+        },
+        {
+          id: 9,
+          name: "Confúcio",
+          password: "25d55ad283aa400af464c76d713c07ad",
+          email: "Confucio@gmail.com",
+          role: "customer"
+        },
+        {
+          id: 10,
+          name: "customer",
+          password: "25d55ad283aa400af464c76d713c07ad",
+          email: "customer@gmail.com",
+          role: "customer"
+        },
       ], { timestamps: false });
   },
 

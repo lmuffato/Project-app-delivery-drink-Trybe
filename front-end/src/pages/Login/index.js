@@ -7,7 +7,7 @@ import api from '../../api';
 import { useAuth } from '../../contexts/auth';
 
 const validateEmail = (email) => /[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z0-9]+/.test(email);
-const MAX_PWD_LENGTH = 6;
+const MIN_PWD_LENGTH = 6;
 
 const Form = styled.form`
   background: ${({ theme }) => theme['light-dark']};
@@ -35,7 +35,7 @@ function Login() {
       .catch(setErrorMessage);
   };
 
-  const canSubmit = validateEmail(email) && password.length >= MAX_PWD_LENGTH;
+  const canSubmit = validateEmail(email) && password.length >= MIN_PWD_LENGTH;
 
   return (
     <>

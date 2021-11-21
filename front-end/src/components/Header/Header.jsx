@@ -2,6 +2,7 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
+import { AiOutlineLogout } from 'react-icons/ai';
 import { Nav, NavLink, NavBtnLink } from './HeaderElements';
 
 export default function Header(props) {
@@ -15,26 +16,35 @@ export default function Header(props) {
 
   return (
     <Nav>
-      <NavLink
-        to="/customer/products"
-        data-testid="customer_products__element-navbar-link-products"
-      >
-        <h1>{title}</h1>
-      </NavLink>
-      <NavLink
-        to="/customer/orders"
-        data-testid="customer_products__element-navbar-link-orders"
-      >
-        <h1>{subtitle}</h1>
-      </NavLink>
-      <p>{name}</p>
-      <NavBtnLink
-        to="/"
-        data-testid="customer_products__element-navbar-link-logout"
-        onClick={ logout }
-      >
-        <h1>Logout</h1>
-      </NavBtnLink>
+      <div className="left-container">
+        <NavLink
+          to="/customer/products"
+          data-testid="customer_products__element-navbar-link-products"
+        >
+          <h1>{title}</h1>
+        </NavLink>
+        <NavLink
+          to="/customer/orders"
+          data-testid="customer_products__element-navbar-link-orders"
+        >
+          <h1>{subtitle}</h1>
+        </NavLink>
+      </div>
+      <div className="right-container">
+        <NavLink
+          data-testid="customer_products__element-navbar-link-orders"
+          to="#"
+        >
+          {name}
+        </NavLink>
+        <NavBtnLink
+          to="/"
+          data-testid="customer_products__element-navbar-link-logout"
+          onClick={ logout }
+        >
+          <AiOutlineLogout />
+        </NavBtnLink>
+      </div>
     </Nav>
   );
 }

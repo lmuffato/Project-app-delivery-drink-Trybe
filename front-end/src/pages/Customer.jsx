@@ -23,7 +23,7 @@ export default function Customer() {
   const user = JSON.parse(localStorage.getItem('user'));
   const username = user.name;
 
-  // if (!user) history.push('/login');
+  if (!user) history.push('/login');
 
   return (
     <div className="w-full h-full bg-gray-500">

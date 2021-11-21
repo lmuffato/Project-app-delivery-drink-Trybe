@@ -1,14 +1,16 @@
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
+// const fs = require('fs');
 
 const { users } = require('../../database/models');
 
-const { SECRET } = process.env;
+const SECRET = process.env.SECRET || 'secret_key';
 
 const HTTP_UNATUTHORIZED_STATUS = 401;
 
 module.exports = async (req, res, next) => {
   const token = req.headers.authorization;
+  // const SECRET = getSecret();
 
   if (token === undefined) {
     return res.status(HTTP_UNATUTHORIZED_STATUS).json({ message: 'missing auth token' });

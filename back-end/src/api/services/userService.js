@@ -1,9 +1,10 @@
 const jwt = require('jsonwebtoken');
 const md5 = require('md5');
+// const fs = require('fs');
 const { users } = require('../../database/models');
 require('dotenv').config();
 
-const { SECRET } = process.env;
+const SECRET = process.env.SECRET || 'secret_key';
 
 const login = async (user) => {
   const { password: _, ...userPayload } = user;

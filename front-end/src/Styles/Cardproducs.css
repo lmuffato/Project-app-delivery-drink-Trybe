@@ -15,7 +15,7 @@
 }
 
 .footerCardDrink {
-  background-color: darkseagreen;
+  background-color: rgb(173, 209, 140);
   display: flex;
   flex-direction: column;
   margin-top: -6px;

@@ -1,19 +1,46 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
+import NewOrderContext from '../context/NewOrderContext';
 import '../Styles/Cardproducs.css';
+
+// const oderListExemple = [ // Apenas como exemplo, deve ser excluído apos funcionalidade
+//   { productId: 1, name: 'cerveja', quantity: 10, price: 8 },
+//   { productId: 2, name: 'cachaça', quantity: 2, price: 10 },
+//   { productId: 3, name: 'vinho', quantity: 1, price: 60 },
+//   { productId: 4, name: 'whisk', quantity: 5, price: 80 },
+// ];
+
+// console.log(oderListExemple);
 
 export default function CardProduct({ id,
   drink, cost, thumb, changeSomeStatus, setChangeSomeStatus }) {
+  const { itensList, setItensList } = useContext(NewOrderContext);
+
   const [counter, setCounter] = useState(0);
-  const [price, setPrice] = useState(cost);
+  const [price, setPrice] = useState(cost * counter);
 
   useEffect(() => {
     setChangeSomeStatus(!changeSomeStatus);
   }, [counter, price]);
 
+  useEffect(() => {
+    const objectProducts = {
+      productId: id, name: drink, quantity: counter, price: cost,
+    };
+
+    if (!itensList.length && counter) setItensList([objectProducts]);
+    else {
+      let itemList = itensList.find((item) => item.id === id);
+      if (itemList !== undefined) itemList = objectProducts;
+    }
+  }, [counter]);
+
+  useEffect(() => {
+    setPrice(counter * cost);
+  }, [counter]);
+
   function increment() {
     setCounter(counter + 1);
-    setPrice(counter * cost);
   }
 
   function decrement() {
@@ -21,7 +48,6 @@ export default function CardProduct({ id,
       return 0;
     }
     setCounter(counter - 1);
-    setPrice(counter - cost);
   }
 
   return (

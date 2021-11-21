@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import CardProduct from '../Components/CardProduct';
 import Navbar from '../Components/NavBar';
+import '../Styles/CustomerProducts.css';
 import { getProducts, checkUserToken } from '../services/endpointsAPI';
 import { getItemFromLocalStorage } from '../services/localStorage';
 
@@ -37,6 +38,13 @@ export default function CustomerProducts() {
   return (
     <div className="mainCustomerProducts">
       <Navbar />
+      <button
+        type="button"
+        data-testid="customer_products__checkout-bottom-value"
+        className="buttonVercarrinho"
+      >
+        Ver Carrinho
+      </button>
       <main>
         { isLoading ? <h3>Carregando...</h3>
           : (

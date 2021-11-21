@@ -1,5 +1,14 @@
 .bodyCustomerProducts {
-  background-color: blue;
   display: flex;
   flex-wrap: wrap;
+}
+
+.buttonVercarrinho {
+  background-color: rgb(173, 209, 140);
+  float: left;
+  height: 30px;
+  left: 700px;
+  position: fixed;
+  top: 580px;
+  width: 150px;
 }

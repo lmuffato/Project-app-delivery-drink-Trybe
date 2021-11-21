@@ -22,7 +22,6 @@ function Card({ id, strName, strThumb, strPrice }) {
   }
   function setInputValue(e) {
     setQtd(e.target.value);
-    console.log(qtd);
   }
 
   return (

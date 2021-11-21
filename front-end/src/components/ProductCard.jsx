@@ -12,6 +12,8 @@ export default function ProductCard(props) {
   const store = useStore();
   const dispatch = useDispatch();
 
+  const newPrice = price.split('.').join(',');
+
   useEffect(() => {
     if (qtd > 0) {
       setDisabled(false);
@@ -92,22 +94,26 @@ export default function ProductCard(props) {
   return (
     <div className="w-1/6 m-5 bg-gray-300">
       <div
-        className="bg-center bg-no-repeat bg-contain h-60 bg-white"
-        alt="product Img"
-        data-testid={ `customer_products__img-card-bg-image-${id}` }
-        src={ product.url_image }
-        style={ { backgroundImage: `url(${product.url_image})` } }
+        className="h-60 bg-white"
       >
-        <p
-          data-testid={ `customer_products__element-card-price-${id}` }
-          className="p-2"
+        <div
+          className="flex items-center h-10 bg-white"
         >
-          { `R$ ${price}` }
-        </p>
+          <p className="p-2">R$</p>
+          <p data-testid={ `customer_products__element-card-price-${id}` }>
+            { newPrice }
+          </p>
+        </div>
+        <img
+          className="max-h-40 ml-auto mr-auto"
+          src={ product.url_image }
+          alt="product Img"
+          data-testid={ `customer_products__img-card-bg-image-${id}` }
+        />
       </div>
       <div className="w-full flex flex-col items-center">
         <p data-testid={ `customer_products__element-card-title-${id}` }>{name}</p>
-        <div data-testid={ `customer_products__input-card-quantity-${id}` }>
+        <div className="flex items-center justify-center">
           <button
             className="bg-indigo-600 w-8 text-white hover:bg-indigo-700 m-4
             disabled:bg-indigo-400"
@@ -118,7 +124,12 @@ export default function ProductCard(props) {
           >
             -
           </button>
-          {qtd}
+          <input
+            className="w-1/12 text-center"
+            data-testid={ `customer_products__input-card-quantity-${id}` }
+            value={ qtd }
+            onChange={ (event) => setQtd(event.target.value) }
+          />
           <button
             data-testid={ `customer_products__button-card-add-item-${id}` }
             className="bg-indigo-600 w-8 text-white hover:bg-indigo-700 m-4"

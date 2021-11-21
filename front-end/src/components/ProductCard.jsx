@@ -99,7 +99,7 @@ export default function ProductCard(props) {
         style={ { backgroundImage: `url(${product.url_image})` } }
       >
         <p
-          data-testid={ `customer_products__element-card-price${id}` }
+          data-testid={ `customer_products__element-card-price-${id}` }
           className="p-2"
         >
           { `R$ ${price}` }

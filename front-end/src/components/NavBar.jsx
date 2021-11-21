@@ -12,6 +12,11 @@ export default function NavBar(props) {
     history.push(location.join('/'));
   };
 
+  const logOut = () => {
+    localStorage.removeItem('user');
+    history.push('/login');
+  };
+
   return (
     <nav
       className="absolute w-full flex justify-between h-16 top-0
@@ -43,6 +48,7 @@ export default function NavBar(props) {
           type="button"
           className="w-60 hover:bg-indigo-700"
           data-testid="customer_products__element-navbar-link-logout"
+          onClick={ () => logOut() }
         >
           Sair
         </button>

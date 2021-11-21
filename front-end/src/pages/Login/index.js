@@ -52,7 +52,7 @@ function Login() {
           type="password"
           onChange={ ({ target: { value } }) => setPassword(value) }
           label="Senha"
-          name="email"
+          name="password"
           datatestid="common_login__input-password"
           placeholder={ `${'****'}${'****'}${'***'}` }
         />

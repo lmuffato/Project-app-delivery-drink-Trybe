@@ -19,6 +19,7 @@ const Form = styled.form`
 
 function Register() {
   const [errorMessage, setErrorMessage] = useState(null);
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { login, redirectUserByRole } = useAuth();
@@ -36,51 +37,51 @@ function Register() {
   const canSubmit = validateEmail(email) && password.length >= MAX_PWD_LENGTH;
 
   return (
-    <>
-      <Form onSubmit={ authUser }>
-        <Input
-          type="email "
-          label="Login"
-          name="email"
-          onChange={ ({ target: { value } }) => setEmail(value) }
-          placeholder="email@trybeer.com.br"
-          datatestid="common_login__input-email"
-        />
-        <Input
-          type="password"
-          onChange={ ({ target: { value } }) => setPassword(value) }
-          label="Senha"
-          name="email"
-          datatestid="common_login__input-password"
-          placeholder={ `${'****'}${'****'}${'***'}` }
-        />
+    <Form onSubmit={ authUser }>
+      <Input
+        type="text"
+        label="Nome"
+        name="name"
+        value={ name }
+        onChange={ ({ target: { value } }) => setName(value) }
+        placeholder="Seu nome"
+        datatestid="common_register__input-name"
+      />
+      <Input
+        type="email"
+        label="Email"
+        name="email"
+        value={ email }
+        onChange={ ({ target: { value } }) => setEmail(value) }
+        placeholder="seu-email@site.com.br"
+        datatestid="common_register__input-email"
+      />
+      <Input
+        type="password"
+        onChange={ ({ target: { value } }) => setPassword(value) }
+        label="Senha"
+        value={ password }
+        name="password"
+        datatestid="common_register__input-password"
+        placeholder={ `${'****'}${'****'}${'***'}` }
+      />
 
-        <Button
-          full
-          type="submit"
-          variant="primary"
-          datatestid="common_login__button-login"
-          disabled={ !canSubmit }
-        >
-          LOGIN
-        </Button>
-        <Button
-          full
-          variant="tertiary"
-          datatestid="common_login__button-register"
-          onClick={ authUser }
-        >
-          Ainda não tenho conta
-        </Button>
-      </Form>
-
+      <Button
+        full
+        type="submit"
+        variant="primary"
+        datatestid="common_register__button-register"
+        disabled={ !canSubmit }
+      >
+        CADASTRAR
+      </Button>
       {errorMessage
       && (
-        <p data-testid="common_login__element-invalid-email">
+        <p data-testid="common_register__element-invalid_register">
           {errorMessage.message}
         </p>
       )}
-    </>
+    </Form>
   );
 }
 

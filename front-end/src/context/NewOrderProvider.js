@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import NewOrderContext from './NewOrderContext';
 
-const userIdExemple = 1; // Apenas como exemplo, deve ser excluído apos funcionalidade
-
 const oderListExemple = [ // Apenas como exemplo, deve ser excluído apos funcionalidade
   { productId: 1, name: 'cerveja', quantity: 10, price: 8 },
   { productId: 2, name: 'cachaça', quantity: 2, price: 10 },
@@ -11,21 +9,24 @@ const oderListExemple = [ // Apenas como exemplo, deve ser excluído apos funcio
   { productId: 4, name: 'whisk', quantity: 5, price: 80 },
 ];
 
-const sellersListExample = [ // Apenas como exemplo, deve ser excluído apos funcionalidade
-  { id: 1, name: 'Lewis Hamilton' },
-  { id: 2, name: 'Michael Schumacher' },
-];
+// const sellersListExample = [ // Apenas como exemplo, deve ser excluído apos funcionalidade
+//   { id: 1, name: 'Lewis Hamilton' },
+//   { id: 2, name: 'Michael Schumacher' },
+// ];
 
-const userNameExample = 'Lucas'; // Apenas como exemplo, deve ser excluído apos funcionalidade
+// const userIdExemple = 1; // Apenas como exemplo, deve ser excluído apos funcionalidade
+// const userNameExample = 'Lucas'; // Apenas como exemplo, deve ser excluído apos funcionalidade
 
 function NewOrderProvider({ children }) {
-  const [userId, setUserId] = useState(userIdExemple); // Preenche na tela de login
-  const [userName, setUserName] = useState(userNameExample); // Preenche na tela de login
+  const [userId, setUserId] = useState(''); // Preenche na tela de login
+  const [userName, setUserName] = useState(''); // Preenche na tela de login
+  // Salvar itens da lista nessa variável
   const [itensList, setItensList] = useState(oderListExemple); // Prenchente na tela de produtos
-  const [sellersList, setSellersList] = useState(sellersListExample); // Carrega os dados do sequelize com os nomes e ids dos vendedores (usuários com role adm)
+  const [sellersList, setSellersList] = useState([]); // Carrega os dados do sequelize com os nomes e ids dos vendedores (usuários com role adm)
   const [sellerId, setSellerId] = useState(''); // id do vendedor
   const [deliveryAddress, setDeliveryAddress] = useState(''); // endereço de entrega
-  const [addressNumber, setAddressNumber] = useState(''); // numero do endereço
+  const [deliveryNumber, setDeliveryNumber] = useState(''); // numero do endereço
+  const [totalPrice, setTotalPrice] = useState(''); // valor total do pedido
 
   return (
     <NewOrderContext.Provider
@@ -48,8 +49,12 @@ function NewOrderProvider({ children }) {
         deliveryAddress, // Tela checkout (recebe do input do usuário)
         setDeliveryAddress,
 
-        addressNumber, // Tela checkout (recebe do input do usuário)
-        setAddressNumber,
+        deliveryNumber, // Tela checkout (recebe do input do usuário)
+        setDeliveryNumber,
+
+        totalPrice, // Tela checkout (valor automático)
+        setTotalPrice,
+
       } }
     >
       {children}

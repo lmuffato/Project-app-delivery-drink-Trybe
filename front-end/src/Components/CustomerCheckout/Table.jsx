@@ -1,5 +1,5 @@
 import React, {
-  // useEffect,
+  useEffect,
   // useState,
   useContext,
 } from 'react';
@@ -17,12 +17,8 @@ const testIdTotal = 'customer_checkout__element-order-total-price';
 export default function Table() {
   // const [itensList, setItensList] = useState([]);
   const { itensList, setItensList } = useContext(NewOrderContext);
+  const { totalPrice, setTotalPrice } = useContext(NewOrderContext);
   // const { itensList, setItensList } = useContext(UserContext);
-
-  // useEffect(() => {
-  //   setItensList(arrayDeTest);
-  //   console.log(itensList);
-  // }, []);
 
   const deleteItem = (itemId) => {
     const newList = itensList.filter((ele) => ele.productId !== Number(itemId));
@@ -34,8 +30,13 @@ export default function Table() {
       acc += ele.quantity * ele.price;
       return acc;
     }, 0);
+    setTotalPrice(sum);
     return sum;
   };
+
+  useEffect(() => {
+    totalSum();
+  }, [itensList]);
 
   return (
     <div>
@@ -71,7 +72,7 @@ export default function Table() {
           }
         </tbody>
       </table>
-      <div data-testid={ `${testIdTotal}` }>{`Total: R$ ${totalSum()}`}</div>
+      <div data-testid={ `${testIdTotal}` }>{`Total: R$ ${totalPrice}`}</div>
     </div>
   );
 }

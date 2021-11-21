@@ -12,6 +12,20 @@ async () => {});
 http GET :3001/users
 */
 
+router.get('/sellers',
+userMiddlewares.getAllSellers,
+async () => {});
+/* REQUISIÇÃO:
+http GET :3001/sellers
+*/
+
+router.get('/customers',
+userMiddlewares.getAllCustomers,
+async () => {});
+/* REQUISIÇÃO:
+http GET :3001/sellers
+*/
+
 router.post('/create',
 userMiddlewares.createNew,
 async () => {});

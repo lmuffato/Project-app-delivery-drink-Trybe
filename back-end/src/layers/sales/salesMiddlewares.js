@@ -76,7 +76,6 @@ const createNew = async (req, res) => {
       deliveryNumber,
       status,
     };
-    await sales.create(obj);
     const newData = await sales.create(obj);
     return res.status(201).json(newData);
   } catch (err) {

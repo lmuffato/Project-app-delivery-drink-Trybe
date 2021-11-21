@@ -1,11 +1,10 @@
 import React from 'react';
 
 export default function Register() {
-  const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
-  const minPasswordLength = 6;
-  const minNameLength = 15;
-
   const validations = () => {
+    const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+    const minPasswordLength = 6;
+    const minNameLength = 15;
     const btnRegister = document.getElementById('register-btn');
     const emailValue = document.getElementById('email').value;
     const passwordValue = document.getElementById('password').value;

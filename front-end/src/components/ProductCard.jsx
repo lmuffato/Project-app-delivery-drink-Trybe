@@ -94,29 +94,33 @@ export default function ProductCard(props) {
       <div
         className="bg-center bg-no-repeat bg-contain h-60 bg-white"
         alt="product Img"
+        data-testid={ `customer_products__img-card-bg-image-${id}` }
         src={ product.url_image }
         style={ { backgroundImage: `url(${product.url_image})` } }
       >
         <p
+          data-testid={ `customer_products__element-card-price${id}` }
           className="p-2"
         >
           { `R$ ${price}` }
         </p>
       </div>
       <div className="w-full flex flex-col items-center">
-        <p>{name}</p>
-        <div>
+        <p data-testid={ `customer_products__element-card-title-${id}` }>{name}</p>
+        <div data-testid={ `customer_products__input-card-quantity-${id}` }>
           <button
             className="bg-indigo-600 w-8 text-white hover:bg-indigo-700 m-4
             disabled:bg-indigo-400"
             onClick={ () => removeItem() }
             type="button"
+            data-testid={ `customer_products__button-card-rm-item-${id}` }
             disabled={ disabled }
           >
             -
           </button>
           {qtd}
           <button
+            data-testid={ `customer_products__button-card-add-item-${id}` }
             className="bg-indigo-600 w-8 text-white hover:bg-indigo-700 m-4"
             onClick={ () => addItem() }
             type="button"

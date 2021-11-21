@@ -6,6 +6,7 @@ import ErrorLogin from '../Components/ErrorLogin';
 
 import UserContext from '../context/userContext';
 import { doLogin } from '../services/endpointsAPI';
+import NewOrderContext from '../context/NewOrderContext';
 
 import { setToLocalStorageUser, setToLocalStorage } from '../services/localStorage';
 import validateEmail from '../validations/validateEmail';
@@ -20,6 +21,8 @@ const testIdBtnRegister = 'common_login__button-register';
 export default function Login() {
   const history = useHistory();
   const { setUserData } = useContext(UserContext);
+  const { setUserId } = useContext(NewOrderContext);
+  const { setUserName } = useContext(NewOrderContext);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -41,6 +44,8 @@ export default function Login() {
       const login = await doLogin(email, password);
       const endpoint = checkRole(login);
       setUserData(login);
+      setUserId(login.id);
+      setUserName(login.name);
       setErrorMessage(true);
       history.push(endpoint);
     } catch (error) {

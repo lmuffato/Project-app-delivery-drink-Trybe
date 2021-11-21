@@ -26,23 +26,25 @@ export default function UserProvider({ children }) {
     .toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
 
   const updateCartTotalPrice = () => {
-    let totalPriceTeste = 0;
+    let totalPriceCalc = 0;
     const cart = shoppingCart;
     cart.map((item) => {
-      totalPriceTeste += item.count * Number(item.price);
-      return totalPriceTeste;
+      totalPriceCalc += item.count * Number(item.price);
+      return totalPriceCalc;
     });
-    console.log(totalPriceTeste);
-    setTotalPrice(totalPriceTeste);
+    setTotalPrice(totalPriceCalc);
   };
 
   const updateShoppingCart = (e) => {
     const cart = shoppingCart;
     if (cart.length > 0) {
       if (cart.some((item) => item.id === products[e.target.id - 1].id)) {
-        cart.map((item) => {
+        cart.map((item, index) => {
           if (item.id === products[e.target.id - 1].id) {
             item.count = products[e.target.id - 1].count;
+            if (item.count === 0) {
+              cart.splice(index, 1);
+            }
           }
           return false;
         });
@@ -85,6 +87,7 @@ export default function UserProvider({ children }) {
     BRL,
     handleChange,
     totalPrice,
+    setTotalPrice,
   };
   return (
     <ProductsContext.Provider value={ context }>

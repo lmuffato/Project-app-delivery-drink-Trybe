@@ -49,10 +49,11 @@ export default function ProductCard() {
           </button>
           <input
             id={ prod.id }
+            type="number"
             className="card-header counter"
             value={ prod.count }
             onChange={ (e) => handleChange(e) }
-            data-testid={ `customer_products__input-card-quantity-${prod.id}` }
+            data-testid={ `customer_products__input-card-quantity--${prod.id}` }
           />
           <button
             id={ prod.id }

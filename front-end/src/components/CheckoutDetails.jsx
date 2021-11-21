@@ -12,8 +12,9 @@ export default function CheckoutDetails() {
             className="checkout-seller"
             type="select"
             name="seller"
+            data-testid="customer_checkout__select-seller"
           >
-            <option data-testid="customer_checkout__select-seller">Fulana Pereira</option>
+            <option>Fulana Pereira</option>
           </select>
         </label>
         <label htmlFor="address" className="checkout-detail checkout-detail-address">

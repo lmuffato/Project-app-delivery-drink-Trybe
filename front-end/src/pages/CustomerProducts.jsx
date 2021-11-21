@@ -47,6 +47,10 @@ export default function CustomerProducts() {
     validToken();
   }, [validToken]);
 
+  const clickLoginButton = async () => {
+    history.push('/customer/checkout');
+  };
+
   return (
     <div className="mainCustomerProducts">
       <Navbar />
@@ -54,6 +58,7 @@ export default function CustomerProducts() {
         type="button"
         data-testid="customer_products__checkout-bottom-value"
         className="buttonVercarrinho"
+        onClick={ clickLoginButton }
       >
         Ver Carrinho: R$
         {' '}

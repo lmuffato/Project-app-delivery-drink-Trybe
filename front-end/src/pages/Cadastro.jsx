@@ -34,7 +34,6 @@ export default function Cadastro() {
         },
         responseType: 'json',
       });
-      console.log(response);
       setRedirect(true);
     } catch (error) {
       setErrorMessage(error.response.data.message);

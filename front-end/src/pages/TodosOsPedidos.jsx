@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 
 import Card from '../components/salesCard';
@@ -21,14 +22,13 @@ export default function TodosOsPedidos() {
         headers: { Authorization: local.token },
       });
       setSales(response.data);
-      console.log('RESPONSE -> ', response.data);
       setLoading(false);
     } catch (error) {
       console.error(error);
     }
   }
 
-  useEffect(() => getAllSales(), []);
+  useEffect(() => getAllSales(), [getAllSales]);
 
   /*   const mock = [{
     totalPrice: '50.99',

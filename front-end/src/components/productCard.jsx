@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
@@ -9,7 +10,7 @@ function Card({ id, strName, strThumb, strPrice }) {
   const [qtd, setQtd] = useState(0);
 
   useEffect(() => {
-    addItem(qtd, strPrice, id);
+    addItem(qtd, strPrice, id, strName);
   }, [qtd]);
 
   function addElem() {

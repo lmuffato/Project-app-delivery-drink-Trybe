@@ -65,6 +65,7 @@ export default function CustomerProducts() {
         type="button"
         data-testid="customer_products__button-cart"
         className="buttonVercarrinho"
+        disabled={ totalPriceAllProducts === 0 }
         onClick={ clickLoginButton }
       >
         <span data-testid="customer_products__checkout-bottom-value">

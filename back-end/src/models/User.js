@@ -16,7 +16,7 @@ const login = async ({ email, password }) => {
 };
 
 const createUser = async ({ name, email, password, type }) => {
-  console.log('teste-model');
+  // console.log('teste-model');
   try {
     const newUser = await user.create({ name, email, password, role: type });
     return newUser;

@@ -36,6 +36,7 @@ function Signup() {
       password: newUserData.password,
     }).then((response) => {
       localStorage.setItem('newUser', JSON.stringify(response));
+      console.log(response);
       history.push('/customer/products');
     }).catch((e) => {
       console.log(e);

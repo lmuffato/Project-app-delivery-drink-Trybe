@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import Button from '../Button';
 import InputField from '../InputField';
 import ErrorMessage from '../ErrorMessage';
@@ -16,12 +16,21 @@ export default function LoginForm() {
   const [password, setPassword] = useState('');
   const [disableButton, setDisableButton] = useState(true);
   const [showErrorMessage, setShowErrorMessage] = useState(false);
-  const [redirect, setRedirect] = useState(false);
+  const [role, setRole] = useState('');
+
+  const navigate = useNavigate();
 
   const resetValues = () => {
     setEmail('');
     setPassword('');
   };
+
+  useEffect(() => {
+    const storage = localStorage.getItem('user');
+    if (storage) {
+      setRole(JSON.parse(storage).role);
+    }
+  }, []);
 
   const handleChange = (event, setStateCallback) => {
     const verifications = emailVerification(email) && passwordVerification(password);
@@ -37,15 +46,16 @@ export default function LoginForm() {
     event.preventDefault();
     postRequest(
       { email, password },
-      { setShowErrorMessage, setRedirect },
+      { setShowErrorMessage, setRole },
       loginEndpointData,
     );
     resetValues();
   };
 
-  if (redirect) {
-    return <Navigate to="/customer/products" />;
-  }
+  useEffect(() => {
+    if (role === 'customer') navigate('/customer/products');
+    if (role === 'administrator') navigate('/admin/manage');
+  }, [role]);
 
   return (
     <form className={ styles.loginFormContainer } onSubmit={ handleSubmit }>

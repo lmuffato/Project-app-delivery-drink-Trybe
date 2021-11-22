@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
 import InputField from '../InputField';
 import Button from '../Button';
 import styles from './styles.module.css';
@@ -20,6 +20,12 @@ export default function RegisterForm() {
   const [showErrorMessage, setShowErrorMessage] = useState(false);
   const [disableButton, setDisableButton] = useState(true);
   const [redirect, setRedirect] = useState(false);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (redirect) navigate('/customer/products');
+  }, [redirect]);
 
   const resetValues = () => {
     setName('');
@@ -49,8 +55,6 @@ export default function RegisterForm() {
     );
     resetValues();
   };
-
-  if (redirect) return <Navigate to="/customer/products" />;
 
   return (
     <form className={ styles.registerFormContainer } onSubmit={ handleSubmit }>

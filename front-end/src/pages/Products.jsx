@@ -6,7 +6,7 @@ import { useLocation } from 'react-router-dom';
 import SwiperCore, { Pagination, Navigation } from 'swiper';
 import NavBar from '../components/NavBar';
 import ProductCard from '../components/molecules/ProductCard';
-import Carousel from '../components/Carousel';
+/* import Carousel from '../components/Carousel'; */
 import CartBox from '../components/atoms/CartBox';
 
 export default function Products() {
@@ -28,7 +28,7 @@ export default function Products() {
   return (
     <>
       { renderNavBar() }
-      <Carousel />
+      {/* <Carousel /> */}
       <div className="products">
         <ProductCard />
 

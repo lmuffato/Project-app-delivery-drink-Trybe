@@ -1,11 +1,11 @@
 .products {
   align-items: center;
   display: flex;
-  flex-wrap: wrap;
   font-size: 26px;
   justify-content: space-around;
   margin-bottom: 130px;
   margin-top: 20px;
+  transform: scale(0.3);
 }
 
 .drink-img {
@@ -27,6 +27,7 @@
   position: fixed;
   right: 10px;
   text-decoration: none;
+  transform: translateY(200px);
 }
 
 .cartbox button {

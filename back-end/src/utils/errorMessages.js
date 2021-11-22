@@ -3,6 +3,7 @@ const errorMessages = {
   emptyPassword: '"password" is not allowed to be empty', 
   invalidEmail: '"email" must be a valid email',
   invalidFields: 'Invalid fields',
+  invalidPassword: '"password" must be a valid password',
   invalidToken: 'Expired or invalid token',
   InternalServer: 'Internal Server Error',
   noEmail: '"email" is required',
@@ -15,7 +16,7 @@ const errorMessages = {
   tokenNotFound: 'Token not found',
   unauthorizedUser: 'Unauthorized user',
   userExists: 'User already registered',
-  userNotExists: 'User does not exist', 
+  userNotExists: 'User does not exist',
 };
 
 module.exports = errorMessages;

@@ -12,6 +12,7 @@
     "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
     "start": "node .",
     "dev": "nodemon .",
+    "dev:test": "jest --runInBand",
     "test": "mocha src/tests/**/*$NAME*.test.js --exit",
     "test:coverage": "nyc --all npm run test",
     "test:coverage:json": "nyc --all --reporter=json-summary npm run test",
@@ -38,10 +39,13 @@
     "chai": "4.3.4",
     "chai-http": "4.3.0",
     "eslint-config-trybe-backend": "1.0.3",
+    "frisby": "2.1.2",
+    "jest": "26.0.1",
     "mocha": "8.4.0",
     "nodemon": "2.0.4",
     "nyc": "15.1.0",
     "sequelize-cli": "6.2.0",
+    "shelljs": "^0.8.4",
     "sinon": "10.0.0"
   }
 }

@@ -43,7 +43,7 @@ export default function Headers({ history }) {
   }
   return (
     <div>
-      <h1>test</h1>
+      Deu ruim!
     </div>
   );
 }

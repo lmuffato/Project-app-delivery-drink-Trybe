@@ -7,17 +7,17 @@ export default function OrderCard({ sale }) {
   const { role } = useSelector((state) => state.user);
   return (
     <div>
-      <p data-testid={ `seller_orders__element-order-id-${sale.id}` }>
+      <p data-testid={ `${role}_orders__element-order-id-${sale.id}` }>
         Pedido
         { sale.id }
       </p>
-      <h2 data-testid={ `seller_orders__element-delivery-status-${sale.id}` }>
+      <h2 data-testid={ `${role}_orders__element-delivery-status-${sale.id}` }>
         { sale.status }
       </h2>
-      <p data-testid={ `seller_orders__element-order-date-${sale.id}` }>
+      <p data-testid={ `${role}_orders__element-order-date-${sale.id}` }>
         <strong>{ sale.saleDate }</strong>
       </p>
-      <p data-testid={ `seller_orders__element-card-price-${sale.id}` }>
+      <p data-testid={ `${role}_orders__element-card-price-${sale.id}` }>
         <strong>{ sale.totalPrice }</strong>
       </p>
       { role === 'seller' && (

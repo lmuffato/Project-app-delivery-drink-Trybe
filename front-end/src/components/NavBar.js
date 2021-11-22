@@ -1,20 +1,16 @@
 import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { saveUser } from '../redux/slices/userSlice';
 import { removeUserDataFromLocalStorage } from './ultility';
 
-const handleLogoutClick = (ev, dispatch, history) => {
-  ev.preventDefault();
-
+const handleLogoutClick = (dispatch) => {
   dispatch(saveUser({ name: '', email: '', role: '', token: '' }));
   removeUserDataFromLocalStorage();
-  history.push('/login');
 };
 
 function NavBar() {
   const { name, role } = useSelector((state) => state.user);
-  const history = useHistory();
   const dispatch = useDispatch();
 
   return (
@@ -38,13 +34,13 @@ function NavBar() {
       >
         { name }
       </span>
-      <button
-        type="button"
-        onClick={ (ev) => handleLogoutClick(ev, dispatch, history) }
+      <Link
+        to="/login"
+        onClick={ () => handleLogoutClick(dispatch) }
         data-testid="customer_products__element-navbar-link-logout"
       >
         Sair
-      </button>
+      </Link>
     </nav>
   );
 }

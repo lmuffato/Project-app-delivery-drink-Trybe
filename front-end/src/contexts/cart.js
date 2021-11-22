@@ -9,25 +9,30 @@ export const cartContext = createContext({ cartItens: [],
 export function CartProvider({ children }) {
   const [cartItens, setCartItens] = useState([]);
 
-  const increaseQuantity = (title, price) => {
-    const cartItem = cartItens.find((item) => item.title === title);
+  const increaseQuantity = ({ id, title, price }) => {
+    const cartItem = cartItens.find((item) => item.id === id);
     if (cartItem) {
-      cartItem.quantity += 1;
-      cartItem.subTotal = cartItem.quantity * price;
-      const updated = [...cartItens, cartItem];
+      const updated = cartItens.map((item) => {
+        if (item.id === cartItem.id) {
+          item.quantity += 1;
+          item.subTotal = Number(cartItem.quantity * cartItem.price).toFixed(2);
+        }
+        return item;
+      });
       setCartItens(updated);
+    } else {
+      setCartItens([...cartItens, {
+        id,
+        title,
+        quantity: 1,
+        price: Number(price).toFixed(2),
+        subTotal: Number(price).toFixed(2),
+      }]);
     }
-    console.log(cartItens);
-    setCartItens([...cartItens, {
-      title,
-      quantity: 1,
-      unitaryPrice: price,
-      subTotal: price,
-    }]);
   };
 
-  const decreaseQuantity = (title, price) => {
-    const cartItem = cartItens.find((item) => item.title === title);
+  const decreaseQuantity = (id, price) => {
+    const cartItem = cartItens.find((item) => item.id === id);
     if (cartItem.quantity === 0) {
       cartItem.quantity = 0;
     }

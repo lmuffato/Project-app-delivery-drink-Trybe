@@ -11,12 +11,10 @@ const login = async (req, res) => {
 };
 
 const createUser = async (req, res) => {
-  // console.log('teste-controller');
   const { name, email, password, type = 'customer' } = req.body;
-  // console.log(req.body);
-  const { err, newUser } = await User.createUser(name, email, password, type);
+  const { err, token } = await User.createUser(name, email, password, type);
   if (err) return res.status(409).json(err.message);
-  return res.status(201).json(newUser);
+  return res.status(201).json(token);
 };
 
 const listUsers = async (req, res) => {

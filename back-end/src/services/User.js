@@ -20,7 +20,6 @@ const login = async (email, password) => {
 };
 
 const createUser = async (name, email, password, type) => {
-  // console.log('teste service');
   const { error } = schemaCreatedUser.validate({ name, email, password });
   await User.findUser(name, email);
    
@@ -33,7 +32,7 @@ const createUser = async (name, email, password, type) => {
 
   if (res.err) return { err: { message: 'User already registered' } };
 
-  return { res };
+  return { token: res };
 };
 
 const listUsers = async (role) => {

@@ -1,16 +1,13 @@
-import React, { useContext } from 'react';
-import { useHistory } from 'react-router-dom';
-import { AuthContext } from '../contexts/auth';
+import PropTypes from 'prop-types';
+import React from 'react';
 import imgManHoldingBeer from '../images/man-holding-beer.png';
 import styles from '../styles/pages/Auth.module.scss';
+import LoginForm from '../components/LoginForm';
+import RegisterForm from '../components/RegisterForm';
 
-export default function Auth() {
-  const history = useHistory();
-  const { Alert, isVisible, setInputs, logIn, buttonDisabled } = useContext(AuthContext);
-
+export default function Auth({ location }) {
   return (
     <section className={ styles.auth }>
-      { isVisible && <Alert dataTestId="common_login__element-invalid-email" /> }
       <span className={ styles.manHoldingBeer }>
         <img
           src={ imgManHoldingBeer }
@@ -18,44 +15,17 @@ export default function Auth() {
         />
       </span>
       <img src="./logo-compact.svg" alt="tchau problema" />
-      <form onSubmit={ logIn }>
-        <label htmlFor="email">
-          E-mail:
-          <input
-            id="email"
-            type="email"
-            placeholder="Digite o seu e-mail"
-            onChange={ setInputs }
-            data-testid="common_login__input-email"
-          />
-        </label>
-        <label htmlFor="password">
-          Senha:
-          <input
-            id="password"
-            type="password"
-            placeholder="Digite a sua senha"
-            onChange={ setInputs }
-            data-testid="common_login__input-password"
-          />
-        </label>
-        <button
-          type="submit"
-          data-testid="common_login__button-login"
-          className="primary"
-          disabled={ buttonDisabled }
-        >
-          Entrar
-        </button>
-        <button
-          onClick={ () => history.push('/register') }
-          type="button"
-          data-testid="common_login__button-register"
-          className="link"
-        >
-          Ainda não tenho conta
-        </button>
-      </form>
+      { location.pathname.includes('login') ? (
+        <LoginForm />
+      ) : (
+        <RegisterForm />
+      ) }
     </section>
   );
 }
+
+Auth.propTypes = {
+  location: PropTypes.shape({
+    pathname: PropTypes.string,
+  }).isRequired,
+};

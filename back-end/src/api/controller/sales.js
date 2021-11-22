@@ -9,8 +9,9 @@ const getAllSales = async (req, res, next) => {
   try {
     const { email, password } = req.user;
     const { dataValues } = await users.findOne({ where: { email, password } });
+    console.log(dataValues);
 
-    const { role } = dataValues.role;
+    const { role } = dataValues;
     if (role === 'customer') {
       const sale = await Sale.findAll({ where: { userId: dataValues.id } });
       return res.status(OK).json(sale);

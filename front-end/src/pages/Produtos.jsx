@@ -34,7 +34,7 @@ export default function Produtos() {
     }
   }
 
-  useEffect(() => { getProducts(); }, [getProducts]);
+  useEffect(() => { getProducts(); }, []);
 
   return (
     <div>
@@ -42,21 +42,28 @@ export default function Produtos() {
         loading ? ''
           : <Header props={ headerInfo } />
       }
-
-      {
-        loading ? <p>Loading....</p>
-          : products
-            .map((e, i) => (
-              <Card
-                key={ i }
-                index={ i }
-                id={ e.id }
-                strThumb={ e.url_image }
-                strName={ e.name }
-                strPrice={ e.price }
-              />
-            ))
-      }
+      <div
+        style={ { width: '100vw',
+          height: '100vh',
+          display: 'flex',
+          flexDirection: 'row',
+          flexWrap: 'wrap' } }
+      >
+        {
+          loading ? <p>Loading....</p>
+            : products
+              .map((e, i) => (
+                <Card
+                  key={ i }
+                  index={ i }
+                  id={ e.id }
+                  strThumb={ e.url_image }
+                  strName={ e.name }
+                  strPrice={ e.price }
+                />
+              ))
+        }
+      </div>
       <BottomBox />
     </div>
   );

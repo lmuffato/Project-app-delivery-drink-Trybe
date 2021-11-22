@@ -1,5 +1,6 @@
 import React from 'react';
 import propTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import testIDs from '../../datatestids.json';
 
 export default function ProductCard({ id, status, date, price, address }) {
@@ -11,17 +12,19 @@ export default function ProductCard({ id, status, date, price, address }) {
   const formatDate = (value) => new Intl.DateTimeFormat('pt-BR').format(new Date(value));
   return (
     <div className="card">
-      <div data-testid={ formatTestID('48', id) }>
-        {`Pedido ${leftPad(id)}`}
-      </div>
-      <div>
-        <div>
-          <div data-testid={ formatTestID('49', id) }>{status.toUpperCase()}</div>
-          <div data-testid={ formatTestID('50', id) }>{formatDate(date)}</div>
-          <div data-testid={ formatTestID('51', id) }>{formatPrice(price)}</div>
+      <Link to={ `/seller/orders/${id}` }>
+        <div data-testid={ formatTestID('48', id) }>
+          {`Pedido ${leftPad(id)}`}
         </div>
-        <div data-testid={ formatTestID('52', id) }>{address}</div>
-      </div>
+        <div>
+          <div>
+            <div data-testid={ formatTestID('49', id) }>{status.toUpperCase()}</div>
+            <div data-testid={ formatTestID('50', id) }>{formatDate(date)}</div>
+            <div data-testid={ formatTestID('51', id) }>{formatPrice(price)}</div>
+          </div>
+          <div data-testid={ formatTestID('52', id) }>{address}</div>
+        </div>
+      </Link>
     </div>
   );
 }

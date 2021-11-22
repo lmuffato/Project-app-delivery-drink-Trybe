@@ -28,7 +28,8 @@ const LoginForm = () => {
       setIsHidden(false);
     } else {
       localStorage.setItem('user', JSON.stringify(user));
-      history.push('/customer/products');
+      if (user.role === 'customer') return history.push('/customer/products');
+      if (user.role === 'seller') return history.push('/seller/orders');
     }
   };
 

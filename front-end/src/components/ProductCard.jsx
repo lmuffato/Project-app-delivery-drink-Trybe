@@ -1,11 +1,14 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import noImage from '../images/noimage.jpg';
 import styles from '../styles/components/ProductCard.module.scss';
+import { cartContext } from '../contexts/cart';
 
 export default function ProductCard(props) {
   const [quantity] = useState(0);
   const { className: customClass, image, title, price } = props;
+  const { increaseQuantity } = useContext(cartContext);
+
   return (
     <div { ...props } className={ `${styles.productCard} ${customClass}` }>
       <div className={ styles.image }>
@@ -34,6 +37,7 @@ export default function ProductCard(props) {
           <button
             type="button"
             data-testid="customer_products__button-card-add-item-"
+            onClick={ increaseQuantity }
           >
             +
           </button>

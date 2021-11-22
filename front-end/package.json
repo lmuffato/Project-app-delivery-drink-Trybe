@@ -38,12 +38,6 @@
     "web-vitals": "1.1.2"
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^6.3.12",
-    "@storybook/addon-essentials": "^6.3.12",
-    "@storybook/addon-links": "^6.3.12",
-    "@storybook/node-logger": "^6.3.12",
-    "@storybook/preset-create-react-app": "^3.2.0",
-    "@storybook/react": "^6.3.12",
     "@types/axios": "^0.14.0",
     "@types/styled-components": "^5.1.15",
     "eslint-config-trybe-frontend": "1.2.1",
@@ -80,9 +74,6 @@
   "eslintConfig": {
     "overrides": [
       {
-        "files": [
-          "**/*.stories.*"
-        ],
         "rules": {
           "import/no-anonymous-default-export": "off"
         }

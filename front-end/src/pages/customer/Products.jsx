@@ -21,9 +21,10 @@ export default function Products() {
 
   return (
     <div className={ styles.productsGrid }>
-      { products.map((product) => (
+      { products.map((product, index) => (
         <ProductCard
           key={ product.id }
+          index={ index + 1 }
           id={ product.id }
           title={ product.name }
           image={ product.url_image }

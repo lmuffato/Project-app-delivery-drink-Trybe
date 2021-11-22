@@ -5,9 +5,14 @@ import styles from '../styles/components/ProductCard.module.scss';
 import { cartContext } from '../contexts/cart';
 
 export default function ProductCard(props) {
-  const [quantity] = useState(0);
-  const { className: customClass, image, title, price } = props;
   const { increaseQuantity } = useContext(cartContext);
+  const { className: customClass, image, title, price } = props;
+  const [quantity, setQuantity] = useState(0);
+
+  function addProduct() {
+    increaseQuantity(props);
+    setQuantity(quantity + 1);
+  }
 
   return (
     <div { ...props } className={ `${styles.productCard} ${customClass}` }>
@@ -33,11 +38,12 @@ export default function ProductCard(props) {
             data-testid="customer_products__input-card-quantity-"
             className={ styles.quantity }
             value={ quantity }
+            readOnly
           />
           <button
             type="button"
             data-testid="customer_products__button-card-add-item-"
-            onClick={ increaseQuantity }
+            onClick={ addProduct }
           >
             +
           </button>
@@ -48,6 +54,7 @@ export default function ProductCard(props) {
 }
 
 ProductCard.propTypes = {
+  id: PropTypes.number.isRequired,
   className: PropTypes.string,
   image: PropTypes.string,
   title: PropTypes.string.isRequired,

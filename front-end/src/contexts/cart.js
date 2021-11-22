@@ -31,14 +31,19 @@ export function CartProvider({ children }) {
     }
   };
 
-  const decreaseQuantity = (id, price) => {
+  const decreaseQuantity = ({ id, price }) => {
     const cartItem = cartItens.find((item) => item.id === id);
-    if (cartItem.quantity === 0) {
-      cartItem.quantity = 0;
+    if (cartItem && cartItem.quantity > 0) {
+      let updated = cartItens.map((item) => {
+        if (item.id === id) {
+          item.quantity -= 1;
+          item.subTotal = cartItem.quantity * price;
+        }
+        return item;
+      });
+      if (cartItem.quantity === 0) updated = cartItens.filter((item) => item.id !== id);
+      setCartItens(updated);
     }
-    cartItem.quantity -= 1;
-    cartItem.subTotal = cartItem.quantity * price;
-    setCartItens([...cartItens, cartItem]);
   };
 
   return (

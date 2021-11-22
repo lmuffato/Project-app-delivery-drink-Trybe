@@ -19,7 +19,7 @@ export default function Headers({ history }) {
         >
           { user.name }
         </p>
-        <LogoutButton history={ history } />
+        <LogoutButton />
       </navbar>
     );
   }
@@ -28,7 +28,7 @@ export default function Headers({ history }) {
       <navbar>
         <OrdersButton history={ history } />
         <p>{ user.name }</p>
-        <LogoutButton history={ history } />
+        <LogoutButton />
       </navbar>
     );
   }
@@ -37,7 +37,7 @@ export default function Headers({ history }) {
       <navbar>
         <ManageUsersButton history={ history } />
         <p>{ user.name }</p>
-        <LogoutButton history={ history } />
+        <LogoutButton />
       </navbar>
     );
   }

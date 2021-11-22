@@ -7,7 +7,7 @@ const loginUser = async (req, res) => {
 
   const { token } = createToken(user);
 
-  const response = { name, email, role, token };
+  const response = { name, email, role, token, id };
 
   res.status(httpStatus.ok).json(response);
 };

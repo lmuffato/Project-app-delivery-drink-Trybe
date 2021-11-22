@@ -53,10 +53,5 @@
       "__TESTDESC__": true,
       "__TESTFILE__": true
     }
-  },
-  "dependencies": {
-    "history": "^5.1.0",
-    "md5": "^2.3.0",
-    "react-router-dom": "^6.0.2"
   }
 }

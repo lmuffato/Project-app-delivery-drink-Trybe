@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router';
 import CheckoutCard from '../components/CheckoutCard';
 import CustomerAddress from '../components/CustomerAddress';
+import UserContext from '../context/UserContext';
 import { createSale } from '../services/apis';
 
 function Checkout() {
   const history = useHistory();
+
+  const { sellerId } = useContext(UserContext);
   const [products, setProducts] = useState([]);
   const [totalCheckout, setTotalCheckout] = useState(0);
   const colunas = [
@@ -38,9 +41,10 @@ function Checkout() {
         totalPrice: totalCheckout,
         deliveryAddress: JSON.parse(localStorage.getItem('address')).address,
         deliveryNumber: JSON.parse(localStorage.getItem('address')).number,
-        status: 'PEDIDO REALIZADO',
+        status: 'Pendente',
         products,
         token: JSON.parse(localStorage.getItem('user')).token,
+        sellerId,
       };
       const getSale = await createSale(object);
       history.push(`/customer/orders/${getSale.id}`);

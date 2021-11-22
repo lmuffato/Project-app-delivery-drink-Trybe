@@ -8,12 +8,18 @@ function ApiProvider({ children }) {
   const [sales, setSales] = useState([]);
   const [products, setProducts] = useState([]);
   const [salesProducts, setSalesProducts] = useState([]);
+  const [sellers, setSellers] = useState([]);
   const [att, setAtt] = useState(false);
 
   const getUsers = async () => {
     const apiResult = await fetchUser();
     setUsers(apiResult);
   };
+
+  useEffect(() => {
+    const sellerFiltered = users.filter((user) => user.role === 'seller');
+    setSellers(sellerFiltered);
+  }, [users]);
 
   const getSales = async () => {
     const apiResult = await fetchSale();
@@ -46,6 +52,7 @@ function ApiProvider({ children }) {
         salesProducts,
         att,
         setAtt,
+        sellers,
       } }
     >
       {children}

@@ -25,7 +25,7 @@ export default function OrderDetailsHeader() {
       </div>
       <div data-testid={ dataTestid39 } className="momento">
         <h2>
-          {moment().format('l')}
+          {moment().format('DD/MM/YYYY')}
         </h2>
       </div>
       <div data-testid={ Testid40 } className="status">

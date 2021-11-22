@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-// import { useValidator } from 'react-joi';
+import { useValidator } from 'react-joi';
 import genHashMd5 from 'md5';
-// import {
-//   initialData, schema, explicitCheck,
-// } from '../../utils/validateFormRegisterConfigOptions';
+import {
+  initialData, schema, explicitCheck,
+} from '../../utils/validateFormRegisterConfigOptions';
 import useManagerUsersContext from '../../hooks/useManagerUsersContext';
 import api from '../../services/api';
 import ErrorBackend from '../ErrorBackend';
@@ -13,11 +13,11 @@ const FormRegisterUser = () => {
   const [messageErrorBackend, setMessageErrorBackend] = useState(false);
   const { setUser } = useManagerUsersContext();
 
-  // const {
-  //   state, setData,
-  //   setExplicitField,
-  //   validate,
-  // } = useValidator({ initialData, schema, explicitCheck });
+  const {
+    state, setData,
+    setExplicitField,
+    validate,
+  } = useValidator({ initialData, schema, explicitCheck });
 
   const handleForm = ({ target: { value, name } }) => {
     setData((prevState) => ({

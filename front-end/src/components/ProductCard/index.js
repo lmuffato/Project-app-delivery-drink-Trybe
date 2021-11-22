@@ -15,9 +15,13 @@ function ProductCard({ id, image, price, alt, description, onChange }) {
     <ProductCardContainer>
       <div
         className="product-price"
-        data-testid={ `customer_products__element-card-price-${id}` }
       >
-        {`R$ ${(price || 0).toFixed(2)}`}
+        R$
+        <span
+          data-testid={ `customer_products__element-card-price-${id}` }
+        >
+          {(price || 0).toFixed(2).replace('.', ',')}
+        </span>
       </div>
       <div
         className="product-image"

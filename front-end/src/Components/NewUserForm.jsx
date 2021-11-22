@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import validateEmail from '../validations/validateEmail';
+import UserContext from '../context/userContext';
 
 import { createNewUserByAdmin } from '../services/endpointsAPI';
-import { getItemFromLocalStorage } from '../services/localStorage';
 import ErrorLogin from './ErrorLogin';
 
 const testId = 'admin_manage__element-invalid-register';
 const messageError = 'Usuário já cadastrado ou Token inválido!';
 
 export default function NewUserForm() {
+  const { userData } = useContext(UserContext);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('');
   const [disableRegisterButton, setDisableRegisterButton] = useState(false);
   const [errorMessage, setErrorMessage] = useState(true);
-  const [adminData, setAdminData] = useState('');
 
   const handleChange = (target) => {
     const { id, value } = target;
@@ -27,7 +27,7 @@ export default function NewUserForm() {
 
   const createUser = async () => {
     try {
-      const { token } = adminData;
+      const { token } = userData;
       const result = await createNewUserByAdmin({ name, email, password, role, token });
       if (result) {
         setName('');
@@ -41,11 +41,6 @@ export default function NewUserForm() {
     }
   };
 
-  const getAdminData = async () => {
-    const result = await getItemFromLocalStorage('token');
-    setAdminData(result);
-  };
-
   useEffect(() => {
     const validateFields = () => {
       const twelveNumber = 12;
@@ -57,11 +52,10 @@ export default function NewUserForm() {
       return (validEmail && validName && validPassword && validRole);
     };
     setDisableRegisterButton(validateFields());
-    getAdminData();
   }, [name, email, password, role]);
 
   return (
-    <>
+    <main>
       <h2>Cadastrar Novo Usuário</h2>
       <form>
         <label htmlFor="name">
@@ -109,6 +103,7 @@ export default function NewUserForm() {
         >
           <option value="">Selecione</option>
           <option value="seller">Vendedor</option>
+          <option value="customer">Cliente</option>
           <option value="administrator">Administrador</option>
         </select>
         <button
@@ -124,6 +119,6 @@ export default function NewUserForm() {
       <div hidden={ errorMessage }>
         <ErrorLogin dataTestIdError={ testId } message={ messageError } />
       </div>
-    </>
+    </main>
   );
 }

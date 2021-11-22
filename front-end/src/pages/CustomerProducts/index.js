@@ -1,10 +1,9 @@
 import React from 'react';
+import ProductList from '../../components/ProductList';
 
 function CustomerProducts() {
   return (
-    <div>
-      <p>Customer Products</p>
-    </div>
+    <ProductList />
   );
 }
 

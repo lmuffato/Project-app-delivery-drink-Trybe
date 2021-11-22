@@ -18,12 +18,12 @@ function ProductQty({ label, onRemove, onAdd, value, id }) {
           position="remove"
           onClick={ onRemove }
         />
-        <div
+        <input
+          type="text"
+          value={ value }
           className="center"
           data-testid={ `customer_products__input-card-quantity-${id}` }
-        >
-          {value}
-        </div>
+        />
         <QtyButton
           id={ id }
           position="add"

@@ -48,10 +48,16 @@ function Navbar({ userType, username }) {
         </NavbarGroupLinks>
 
         <NavbarGroupLinks>
-          <NavItem variant="tertiary" testid={ testids.fullname }>
+          <NavItem to="/profile" variant="tertiary" testid={ testids.fullname }>
             {username}
           </NavItem>
-          <NavItem variant="quaternary" testid={ testids.logout }>Sair</NavItem>
+          <NavItem
+            to="/logout"
+            variant="quaternary"
+            testid={ testids.logout }
+          >
+            Sair
+          </NavItem>
         </NavbarGroupLinks>
       </NavbarWrapper>
     </NavbarContainer>

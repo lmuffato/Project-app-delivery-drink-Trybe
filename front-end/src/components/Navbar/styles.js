@@ -4,6 +4,9 @@ import styled from 'styled-components';
 export const NavbarContainer = styled.nav`
   height: 50px;
   display: flex;
+  width: 100%;
+  position: fixed;
+  z-index: 100;
   background-color: ${({ theme }) => theme.primary};
 `;
 
@@ -12,8 +15,9 @@ export const NavbarWrapper = styled.ul`
   justify-content: space-between;
   list-style: none;
   padding: 0;
+  max-width: 1100px;
   flex: 1;
-  margin: 0;
+  margin: 0 auto;
   height: 100%;
 `;
 

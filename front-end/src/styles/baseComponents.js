@@ -122,6 +122,7 @@ export const ProductQtyContainer = styled.div`
     background-color: ${({ theme }) => theme.light};
     font-size: 15px;
     box-sizing: border-box;
+    text-align: center;
   }
 
 `;

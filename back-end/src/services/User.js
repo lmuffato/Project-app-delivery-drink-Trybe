@@ -20,8 +20,10 @@ const login = async (email, password) => {
 };
 
 const createUser = async (name, email, password, type) => {
+  // console.log('teste service');
   const { error } = schemaCreatedUser.validate({ name, email, password });
-
+  await User.findUser(name, email);
+   
   if (error) {
     return { err: { message: error.message } };
   }

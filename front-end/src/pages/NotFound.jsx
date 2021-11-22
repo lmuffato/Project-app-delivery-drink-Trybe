@@ -6,7 +6,6 @@ import Button from '../components/atoms/Button';
 
 export default function NotFound() {
   const history = useHistory();
-  console.log(history);
   return (
     <div className="notFound">
       <h1>PÁGINA NÃO ENCONTRADA</h1>

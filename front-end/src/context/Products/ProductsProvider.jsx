@@ -21,7 +21,6 @@ export default function UserProvider({ children }) {
     .toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
 
   const increment = ({ target: { id } }) => {
-    console.log(id);
     products[id - 1].count += 1;
     setCount(count + 1);
     const price = products.filter((prod) => prod.id === parseFloat(id))

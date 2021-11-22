@@ -1,37 +1,27 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import ProductCard from '../../components/ProductCard';
 import styles from '../../styles/pages/Products.module.scss';
+import api from '../../services/api';
+import { AuthContext } from '../../contexts/auth';
 
 export default function Products() {
-  const mockProducts = [{
-    id: 1,
-    name: 'Skol Lata 250ml',
-    price: '2.20',
-    url_image: 'http://localhost:3001/images/skol_lata_350ml.jpg',
-    sales: [],
-  },
-  {
-    id: 2,
-    name: 'Heineken 600ml',
-    price: '7.50',
-    url_image: 'http://localhost:3001/images/heineken_600ml.jpg',
-    sales: [
-      {
-        id: 1,
-        userId: 3,
-        sellerId: 2,
-        totalPrice: '29.30',
-        deliveryAddress: 'Rua T 15 - Taquaralto - TO',
-        deliveryNumber: '712',
-        saleDate: '2021-12-01T00:00:00.000Z',
-        status: 'concluido',
-        SalesProduct: { saleId: 1, productId: 2, quantity: 6 },
-      }],
-  },
-  ];
+  const [products, setProducts] = useState([]);
+  const { user } = useContext(AuthContext);
+
+  useEffect(() => {
+    (async () => {
+      const response = await api.get('/products', {
+        headers: {
+          authorization: user.token,
+        },
+      });
+      setProducts(await response.data);
+    })();
+  }, [user]);
+
   return (
     <div className={ styles.productsGrid }>
-      { mockProducts.map((product) => (
+      { products.map((product) => (
         <ProductCard
           key={ product.id }
           id={ product.id }

@@ -8,7 +8,7 @@ import ProductQty from '../ProductQty';
 function useMounted() {
   const [isMounted, setIsMounted] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setIsMounted(true);
   }, []);
   return isMounted;
@@ -41,12 +41,12 @@ function ProductCard({ id, image, price, alt, description/* , initialQty */ }) {
     setQty(quantity);
   };
 
-  function remove() {
+  const remove = () => {
     setQty((st) => ((st - 1) <= 0 ? 0 : (st - 1)));
-  }
-  function add() {
+  };
+  const add = () => {
     setQty((st) => st + 1);
-  }
+  };
 
   return (
     <ProductCardContainer>

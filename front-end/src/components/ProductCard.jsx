@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useStore, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-// import { useHistory } from 'react-router-dom';
 import { adddItem } from '../redux/cartSlice';
 
 export default function ProductCard(props) {
@@ -14,18 +13,8 @@ export default function ProductCard(props) {
 
   const newPrice = price.split('.').join(',');
 
-  useEffect(() => {
-    if (qtd > 0) {
-      setDisabled(false);
-    }
-    if (qtd <= 0) {
-      setDisabled(true);
-    }
-  }, [qtd]);
-
-  const createItem = (prevState) => {
+  const createItem = (prevState, item) => {
     const newState = [...prevState];
-    const item = { id, qtd: (qtd + 1) };
     newState.push(item);
     dispatch(adddItem({ newState }));
   };
@@ -40,54 +29,55 @@ export default function ProductCard(props) {
     dispatch(adddItem({ newState }));
   };
 
-  const updateItem = (prevState, operation) => {
+  const updateItem = (prevState, newItem) => {
     const newState = prevState.map((item) => {
-      let newItem = item;
-      if (item.id === id && operation === 'sum') {
-        newItem = {
-          id,
-          qtd: (qtd + 1),
-        };
-      } if (item.id === id && operation === 'sub') {
-        newItem = {
-          id,
-          qtd: (qtd - 1),
-        };
+      if (item.id === id) {
+        return newItem;
       }
-      return newItem;
+      return item;
     });
     dispatch(adddItem({ newState }));
   };
 
-  const addItem = () => {
-    setQtd(qtd + 1);
+  useEffect(() => {
     const prevState = store.getState().shoppingCart.cartItems;
-    let action = 'create';
-    prevState.forEach((item) => {
-      if (item.id === id) {
-        action = 'update';
+    const newItem = {
+      id,
+      qtd,
+      price: parseFloat(price),
+      subtotal: (qtd * parseFloat(price)),
+    };
+    if (qtd > 0) {
+      let action = 'create';
+      prevState.forEach((item) => {
+        if (item.id === id) {
+          action = 'update';
+        }
+      });
+      if (action === 'update') {
+        updateItem(prevState, newItem);
+      } else {
+        createItem(prevState, newItem);
       }
-    });
-    if (action === 'update') {
-      updateItem(prevState, 'sum');
-    } else {
-      createItem(prevState);
+      setDisabled(false);
     }
-  };
-
-  const removeItem = () => {
-    setQtd(qtd - 1);
-    const prevState = store.getState().shoppingCart.cartItems;
-    let action = 'update';
-    prevState.forEach((item) => {
-      if (item.id === id && item.qtd === 1) {
-        action = 'delete';
+    if (qtd <= 0) {
+      setDisabled(true);
+      let action = 'update';
+      prevState.forEach((item) => {
+        if (item.id === id) {
+          action = 'delete';
+        }
+      });
+      if (action === 'delete') {
+        deleteItem(prevState);
       }
-    });
-    if (action === 'delete') {
-      deleteItem(prevState);
-    } else {
-      updateItem(prevState, 'sub');
+    }
+  }, [qtd]);
+
+  const changeInput = (event) => {
+    if (event.target.value > 0) {
+      setQtd(parseInt(event.target.value, 10));
     }
   };
 
@@ -117,7 +107,7 @@ export default function ProductCard(props) {
           <button
             className="bg-indigo-600 w-8 text-white hover:bg-indigo-700 m-4
             disabled:bg-indigo-400"
-            onClick={ () => removeItem() }
+            onClick={ () => setQtd(qtd - 1) }
             type="button"
             data-testid={ `customer_products__button-card-rm-item-${id}` }
             disabled={ disabled }
@@ -128,12 +118,12 @@ export default function ProductCard(props) {
             className="w-1/12 text-center"
             data-testid={ `customer_products__input-card-quantity-${id}` }
             value={ qtd }
-            onChange={ (event) => setQtd(event.target.value) }
+            onChange={ (event) => changeInput(event) }
           />
           <button
             data-testid={ `customer_products__button-card-add-item-${id}` }
             className="bg-indigo-600 w-8 text-white hover:bg-indigo-700 m-4"
-            onClick={ () => addItem() }
+            onClick={ () => setQtd(qtd + 1) }
             type="button"
           >
             +

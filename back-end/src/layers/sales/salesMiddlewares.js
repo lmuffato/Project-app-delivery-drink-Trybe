@@ -1,4 +1,7 @@
-const { sales } = require('../../database/models');
+const {
+  sales,
+  salesProducts,
+} = require('../../database/models');
 
 const getAll = async (req, res) => {
   try {
@@ -83,10 +86,64 @@ const createNew = async (req, res) => {
   }
 };
 
+const formatSale = (saleObj) => {
+  const {
+    userId, totalPrice, deliveryAddress, deliveryNumber, status,
+  } = saleObj;
+  const obj = {
+    userId,
+    totalPrice,
+    deliveryAddress,
+    deliveryNumber,
+    status,
+  };
+  return obj;
+};
+
+const createSale = async (req, res, next) => {
+  try {
+    const { sale, salesProductsArray } = req.body;
+    const obj = formatSale(sale);
+    const newData = await sales.create(obj);
+    req.userInfo = { saleId: newData.id };
+    req.salesProducts = { salesProductsArray };
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+  next();
+};
+
+const formatSalesObjectArray = (saleId, arr) => {
+  const newArr = arr.map(({ productId, quantity }) => {
+    const newObj = {
+     saleId,
+     productId,
+     quantity,
+    };
+    return newObj;
+  });
+  return newArr;
+};
+
+const createManySaleProducts = async (req, res) => {
+  try {
+    const { salesProductsArray } = req.salesProducts;
+    const arr = Object.values(salesProductsArray);
+    const { saleId } = req.userInfo;
+    const newArr = formatSalesObjectArray(saleId, arr[0]);
+    const newData = await salesProducts.bulkCreate(newArr);
+    return res.status(201).json(newData);
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+};
+
 module.exports = {
   getAll,
   getById,
   updateById,
   deleteById,
   createNew,
+  createSale,
+  createManySaleProducts,
 };

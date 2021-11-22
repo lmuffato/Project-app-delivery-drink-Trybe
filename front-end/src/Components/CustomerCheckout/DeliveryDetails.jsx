@@ -7,7 +7,8 @@ import { Link } from 'react-router-dom';
 import NewOrderContext from '../../context/NewOrderContext';
 import {
   getAllUsersSallers,
-  postSales,
+  // postSales,
+  createInSalesAndSalesProducts,
 } from '../../services/endpointsAPI';
 
 const selectSeller = 'customer_checkout__select-seller';
@@ -23,6 +24,7 @@ export default function DeliveryDetails() {
   const { deliveryNumber, setDeliveryNumber } = useContext(NewOrderContext);
   const { totalPrice } = useContext(NewOrderContext);
   const [isLoading, setIsLoading] = useState(false);
+  const { itensList } = useContext(NewOrderContext);
 
   const getSellersList = async () => {
     const arr = await getAllUsersSallers();
@@ -53,15 +55,22 @@ export default function DeliveryDetails() {
     return list;
   };
 
+  const roundValue = (value) => {
+    const newValue = Math.round((value) * 100) / 100;
+    return newValue;
+  };
+
   const createNewSale = async () => {
-    const obj = {
+    const sale = {
       userId,
-      totalPrice,
+      totalPrice: roundValue(totalPrice),
       deliveryAddress,
       deliveryNumber,
       status: 'pendente',
     };
-    await postSales(obj);
+    const saleProductsArray = { saleProductsArray: itensList };
+    await createInSalesAndSalesProducts(sale, saleProductsArray);
+    // await postSales(obj);
   };
 
   useEffect(() => {

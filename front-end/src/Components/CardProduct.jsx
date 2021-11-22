@@ -27,7 +27,6 @@ export default function CardProduct({ id,
     });
     const haveProduct = arrayProducts.some((some) => id === some.productId);
     if (counter > 0 && !haveProduct) {
-      console.log('entrou');
       arrayProducts = [...itensList, objectProduct];
     }
 
@@ -36,17 +35,15 @@ export default function CardProduct({ id,
 
   const roundPrice = () => {
     const totalPrice = Math.round((counter * cost) * 100) / 100;
-    return totalPrice;
+    return totalPrice.toFixed(2);
   };
 
   useEffect(() => {
     setPrice(roundPrice());
-    console.log(roundPrice());
   }, [counter]);
 
   useEffect(() => {
     const newArray = itensList.filter((elem) => elem.quantity > 0);
-    console.log('gggggg', newArray);
     setItensList(newArray);
   }, [price]);
 
@@ -64,12 +61,12 @@ export default function CardProduct({ id,
   return (
     <div key={ id } className="cardProduct">
       <div>
-        <p
+        <span
           data-testid={ `customer_products__element-card-price-${id}` }
           className="unitPrice"
         >
-          {`R$ ${cost}`}
-        </p>
+          {cost.toString().replace('.', ',')}
+        </span>
         <img
           className="imageDrinkCard"
           alt="drink"
@@ -86,33 +83,36 @@ export default function CardProduct({ id,
             }
             onClick={ decrement }
             type="button"
+            className="elementsQuantities"
           >
             -
 
           </button>
-          <p
-            data-testid={
-              `customer_products__input-card-quantity-${id}`
-            }
-          >
-            { counter }
-
-          </p>
+          <input
+            data-testid={ `customer_products__input-card-quantity-${id}` }
+            value={ Number(counter) }
+            onChange={ (e) => setCounter(Number(e.target.value)) }
+            className="elementsQuantities quantity"
+          />
           <button
             data-testid={
               `customer_products__button-card-add-item-${id}`
             }
             onClick={ increment }
             type="button"
+            className="elementsQuantities"
           >
             {' '}
             +
             {' '}
 
           </button>
-          <div>
-            <p>{ price }</p>
-          </div>
+          <span
+            className="elementsQuantities"
+          >
+            { price.toString().replace('.', ',') }
+
+          </span>
         </div>
       </div>
     </div>
@@ -125,5 +125,3 @@ CardProduct.propTypes = {
   cost: PropTypes.string,
   thumb: PropTypes.string,
 }.isRequired;
-
-// thumb

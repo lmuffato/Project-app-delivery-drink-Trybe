@@ -19,6 +19,21 @@ http POST :3001/users displayName='LucasMuffato' email='lucas@gmail.com' passwor
 http POST :3001/users displayName='Lucas' email='lucas' password='lucas' image='lucas'
 */
 
+router.post('/createsale',
+salesMiddlewares.createSale,
+salesMiddlewares.createManySaleProducts,
+async () => {});
+/* REQUISIÇÃO:
+req = {
+  { userId, totalPrice, deliveryAddress, deliveryNumber, status },
+    "saleProducts": [{ quantity, productId }, { quantit, productId }]
+  }  
+}
+
+http POST :3001/users displayName='LucasMuffato' email='lucas@gmail.com' password='lucas123456' image='lucas'
+http POST :3001/users displayName='Lucas' email='lucas' password='lucas' image='lucas'
+*/
+
 router.get('/:id',
 salesMiddlewares.getById,
 async () => {});

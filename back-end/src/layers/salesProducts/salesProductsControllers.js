@@ -19,6 +19,14 @@ http POST :3001/users displayName='LucasMuffato' email='lucas@gmail.com' passwor
 http POST :3001/users displayName='Lucas' email='lucas' password='lucas' image='lucas'
 */
 
+router.post('/many',
+salesProductsMiddlewares.createMany,
+async () => {});
+/* REQUISIÇÃO:
+http POST :3001/users displayName='LucasMuffato' email='lucas@gmail.com' password='lucas123456' image='lucas'
+http POST :3001/users displayName='Lucas' email='lucas' password='lucas' image='lucas'
+*/
+
 router.get('/:id',
 salesProductsMiddlewares.getById,
 async () => {});

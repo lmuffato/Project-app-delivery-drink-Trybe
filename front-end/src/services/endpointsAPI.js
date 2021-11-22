@@ -69,6 +69,12 @@ export const postSales = async (obj) => { // obj = { userId, totalPrice, deliver
   return result.data;
 };
 
+export const createInSalesAndSalesProducts = async (sale, salesProductsArray) => {
+  const data = { sale, salesProductsArray };
+  const result = await api.post('/sales/createsale', data);
+  return result.data;
+};
+
 export const getSalesProducts = async () => {
   const result = await api.get('/salesProducts');
   return result.data;

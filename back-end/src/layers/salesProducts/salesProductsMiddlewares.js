@@ -57,10 +57,21 @@ const createNew = async (req, res) => {
   }
 };
 
+const createMany = async (req, res) => {
+  try {
+    const { saleProducts } = req.body;
+    const newData = await salesProducts.bulkCreate(saleProducts);
+    return res.status(201).json(newData);
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+};
+
 module.exports = {
   getAll,
   getById,
   updateById,
   deleteById,
   createNew,
+  createMany,
 };

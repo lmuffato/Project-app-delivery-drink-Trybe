@@ -25,16 +25,22 @@ export default function Table() {
     setItensList(newList);
   };
 
+  const roundValue = (value) => Math.round((value) * 100) / 100;
+
   const totalSum = () => {
     const sum = itensList.reduce((acc, ele) => {
       acc += ele.quantity * ele.price;
       return acc;
     }, 0);
-    setTotalPrice(sum);
+    setTotalPrice(roundValue(sum));
     return sum;
   };
 
-  const roundValue = (value) => Math.round((value) * 100) / 100;
+  const convertValueToBrlShape = (value) => {
+    const stringValue = `R$ ${value}`;
+    const brlValue = stringValue.replace('.', ',');
+    return brlValue;
+  };
 
   useEffect(() => {
     totalSum();
@@ -75,7 +81,11 @@ export default function Table() {
           }
         </tbody>
       </table>
-      <div data-testid={ `${testIdTotal}` }>{`Total: R$ ${totalPrice}`}</div>
+      <div
+        data-testid={ `${testIdTotal}` }
+      >
+        { `Total: ${convertValueToBrlShape(totalPrice)}`}
+      </div>
     </div>
   );
 }

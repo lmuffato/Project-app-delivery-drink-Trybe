@@ -12,3 +12,7 @@ objPattern = {
 
 // Service -> toda rota, busca o token no local storage, verifica a validação
 // Rotas da aplicação -> T
+// const a = 2.5344555;
+// const c = 1;
+// const b = Math.round((a * c) * 100) / 100;
+// console.log(b);

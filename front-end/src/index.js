@@ -14,7 +14,7 @@ ReactDOM.render(
       <ApiProvider>
       <UserProvider>
         <ProductListProvider>
-          <App />
+            <App />
         </ProductListProvider>
       </UserProvider>
       </ApiProvider>

@@ -9,16 +9,16 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      totalPrice: {
+      total_price: {
         type: Sequelize.DECIMAL(9,2)
       },
-      deliveryAddress: {
+      delivery_address: {
         type: Sequelize.STRING
       },
-      deliveryNumber: {
+      delivery_number: {
         type: Sequelize.STRING
       },
-      saleDate: {
+      sale_date: {
         type: Sequelize.DATE
       },
       updatedAt: {
@@ -27,7 +27,7 @@ module.exports = {
       status: {
         type: Sequelize.STRING
       },
-      userId: {
+      user_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         onUpdate: 'CASCADE',
@@ -37,16 +37,9 @@ module.exports = {
           Key: 'id'
         } 
       },
-      // sellerId: {
-      //   type: Sequelize.INTEGER,
-      //   allowNull: false,
-      //   onUpdate: 'CASCADE',
-      //   onDelete: 'CASCADE',
-      //   references: {
-      //     model: 'users',
-      //     Key: 'id'
-      //   } 
-      // },
+      seller_id: {
+        type: Sequelize.INTEGER,
+      },
     });
   },
 

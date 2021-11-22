@@ -8,23 +8,29 @@ const getSale = rescue(async (_req, res) => {
 });
 
 const create = rescue(async (req, res) => {
-  const { totalPrice, deliveryAddress, deliveryNumber, status, products } = req.body;
+  const { totalPrice, deliveryAddress, deliveryNumber, status, products, sellerId } = req.body;
   const { id } = req.user;                                  // productId vem daqui
 
   const newSale = SaleService.validateEntries({ totalPrice, deliveryAddress, deliveryNumber, status });
   if (newSale.message) return res.status(newSale.status).json({ message: newSale.message });
 
-  const createdSale = await Sale.create({ totalPrice, deliveryAddress, deliveryNumber, status, userId: id });
+  const createdSale = await Sale.create({ 
+    total_price: totalPrice,
+    delivery_address: deliveryAddress,
+    delivery_number: deliveryNumber,
+    status, user_id: id,
+    seller_id: sellerId});
+  console.log(sellerId);
 
   await products.forEach((product) => {
     SaleProduct.create({
-      saleId: createdSale.id,
-      productId: product.id,
+      sale_id: createdSale.id,
+      product_id: product.id,
       quantity: product.quantity,
     });
   });
 
-  res.status(200).json(createdSale); // saleId vem daqui
+  res.status(201).json(createdSale); // saleId vem daqui
 });
 
 // const getSalesProducts = rescue(async (_req, res) => {

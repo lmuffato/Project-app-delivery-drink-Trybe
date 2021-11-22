@@ -1,22 +1,24 @@
 import React, { useContext, useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import ApiContext from '../context/ApiContext';
+import UserContext from '../context/UserContext';
 
-function CustomerAddress() {
-  const { users } = useContext(ApiContext);
-  const [sellers, setSellers] = useState([]);
-  const [sellerSelect, setSellerSelect] = useState('');
+function CustomerAddress({ checkout }) {
+  const { users, sellers } = useContext(ApiContext);
+  const { setSellerId } = useContext(UserContext);
+  // const [sellers, setSellers] = useState([]);
+  const [sellerSelect, setSellerSelect] = useState(sellers[0].name);
   const [address, setAddress] = useState('');
-  const [number, setNumber] = useState(0);
+  const [number, setNumber] = useState('');
 
   useEffect(() => {
-    const teste = users.filter((user) => user.role === 'seller');
-    console.log(teste);
-    setSellers(teste);
-  }, [users, sellerSelect]);
-
-  // useEffect(() => {
-  //   setSellerSelect(sellers[0].name);
-  // }, [sellers]);
+    // const sellerFiltered = users.filter((user) => user.role === 'seller');
+    const sellerArray = users.filter((user) => user.name === sellerSelect);
+    if (sellerArray.length > 0) {
+      setSellerId(sellerArray[0].id);
+    }
+    // setSellers(sellerFiltered);
+  }, [users, sellerSelect, setSellerSelect]);
 
   const onChange = ({ target }) => {
     const { value, name } = target;
@@ -24,6 +26,13 @@ function CustomerAddress() {
     if (name === 'address') setAddress(value);
     if (name === 'number') setNumber(value);
   };
+
+  useEffect(() => {
+    const addressObject = {
+      address, number,
+    };
+    localStorage.setItem('address', JSON.stringify(addressObject));
+  }, [address, number]);
 
   return (
     <div>
@@ -36,9 +45,12 @@ function CustomerAddress() {
           id="seller-select"
           onChange={ onChange }
         >
-          <option value="">Selecione</option>
+          {/* <option value="">Selecione</option> */}
           { sellers.map((seller, index) => (
-            <option key={ index } value={ seller.name }>
+            <option
+              key={ index }
+              value={ seller.name }
+            >
               { seller.name }
             </option>
           )) }
@@ -57,7 +69,7 @@ function CustomerAddress() {
       <label htmlFor="number">
         Número
         <input
-          type="number"
+          type="text"
           data-testid="customer_checkout__input-addressNumber"
           id="number"
           name="number"
@@ -68,11 +80,16 @@ function CustomerAddress() {
       <button
         type="button"
         data-testid="customer_checkout__button-submit-order"
+        onClick={ checkout }
       >
         Finalizar Pedido
       </button>
     </div>
   );
 }
+
+CustomerAddress.propTypes = {
+  checkout: PropTypes.function,
+}.isRequired;
 
 export default CustomerAddress;

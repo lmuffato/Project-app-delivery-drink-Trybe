@@ -6,17 +6,8 @@ import ProductListContext from '../context/ProductListContext';
 
 function CustomerProducts() {
   const history = useHistory();
-  // const [disabled, setDisabled] = useState(true);
   const { products } = useContext(ApiContext);
   const { totalPrice } = useContext(ProductListContext);
-
-  // useEffect(() => {
-  //   console.log(totalPrice);
-  //   if (Number(totalPrice) > 0) {
-  //     setDisabled(false);
-  //   }
-  //   setDisabled(true);
-  // }, [totalPrice]);
 
   return (
     <div>

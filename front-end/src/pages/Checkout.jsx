@@ -1,8 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { useHistory } from 'react-router';
 import CheckoutCard from '../components/CheckoutCard';
 import CustomerAddress from '../components/CustomerAddress';
+import UserContext from '../context/UserContext';
+import { createSale } from '../services/apis';
 
 function Checkout() {
+  const history = useHistory();
+
+  const { sellerId } = useContext(UserContext);
   const [products, setProducts] = useState([]);
   const [totalCheckout, setTotalCheckout] = useState(0);
   const colunas = [
@@ -17,12 +23,35 @@ function Checkout() {
   useEffect(() => {
     setTotalCheckout(products
       .reduce((totalP, product) => totalP + product.total, 0));
-    console.log('olá');
   });
 
   useEffect(() => {
     setProducts(JSON.parse(localStorage.getItem('carrinho')));
   }, []);
+
+  const removeProduct = (name) => {
+    const filteredProducts = products.filter((product) => product.name !== name);
+    setProducts(filteredProducts);
+    localStorage.setItem('carrinho', JSON.stringify(filteredProducts));
+  };
+
+  const checkout = async () => {
+    try {
+      const object = {
+        totalPrice: totalCheckout,
+        deliveryAddress: JSON.parse(localStorage.getItem('address')).address,
+        deliveryNumber: JSON.parse(localStorage.getItem('address')).number,
+        status: 'Pendente',
+        products,
+        token: JSON.parse(localStorage.getItem('user')).token,
+        sellerId,
+      };
+      const getSale = await createSale(object);
+      history.push(`/customer/orders/${getSale.id}`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -36,12 +65,6 @@ function Checkout() {
                   { coluna }
                 </th>
               )) }
-              {/* <th>Item</th>
-              <th>Descrição</th>
-              <th>Quantidade</th>
-              <th>Valor Unitário</th>
-              <th>Sub-total</th>
-              <th>Remover Item</th> */}
             </tr>
           </thead>
           <tbody>
@@ -53,6 +76,7 @@ function Checkout() {
                 qty={ product.quantity }
                 price={ product.price }
                 total={ product.total }
+                onChange={ () => removeProduct(product.name) }
               />
             ))}
           </tbody>
@@ -65,7 +89,9 @@ function Checkout() {
           </span>
         </div>
       </div>
-      <CustomerAddress />
+      <CustomerAddress
+        checkout={ () => checkout() }
+      />
     </>
   );
 }

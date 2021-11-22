@@ -4,12 +4,15 @@ import UserContext from './UserContext';
 
 function UserProvider({ children }) {
   const [loggedUser, setLoggedUser] = useState();
+  const [sellerId, setSellerId] = useState();
 
   return (
     <UserContext.Provider
       value={ {
         loggedUser,
         setLoggedUser,
+        sellerId,
+        setSellerId,
       } }
     >
       {children}

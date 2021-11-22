@@ -2,12 +2,18 @@
 import React, { useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link, Redirect } from 'react-router-dom';
-import UserContext from '../Contexts/User/userContext';
-import DeliveryContext from '../Contexts/Deliveries/DeliveryContext';
-import Header from '../Components/Header';
-import Table from '../Components/Table';
+import UserContext from '../../Contexts/User/userContext';
+import DeliveryContext from '../../Contexts/Deliveries/DeliveryContext';
+import Header from '../../Components/Header';
+import Table from '../../Components/Table';
 
-import { getSellers } from '../utils/Data';
+import { getSellers } from '../../utils/Data';
+import {
+  calculeTotal,
+  formatList,
+  createSalePayload,
+  createUserCart,
+} from './helpers';
 
 const HEADERS = ['Descrição', 'Quantidade', 'Valor Unitário', 'Sub-total'];
 
@@ -23,48 +29,6 @@ const LINK = [
     testId: 'customer_products__element-navbar-link-orders',
   },
 ];
-
-// Helpers
-const calculeSubTotal = ({ quantity, price, name }) => ({
-  name,
-  quantity,
-  price,
-  total: quantity * Number(price),
-});
-
-const calculeTotal = (cart) => cart.reduce((acc, cur) => {
-  acc += cur.total;
-  return acc;
-}, 0);
-
-const formatList = (cart) => cart.map((item) => calculeSubTotal(item));
-
-const createSalePayload = (userId, Sellers, cart) => {
-  const deliveryAddress = document.querySelector('#adress').value;
-  const deliveryNumber = document.querySelector('#number').value;
-  const seller = document.querySelector('#seller').value;
-  const totalPrice = document.querySelector('#total').innerText;
-
-  const sellerId = Sellers.find(({ name }) => name === seller);
-
-  return {
-    deliveryAddress,
-    deliveryNumber,
-    sellerId,
-    userId,
-    totalPrice,
-    status: 'Pendente',
-    orders: cart,
-  };
-};
-
-const createUserCart = (products, quantities) => (
-  products.reduce((acc, cur) => (
-    quantities[cur.id] > 0
-      ? [...acc, { ...cur, quantity: quantities[cur.id].toFixed(2) }]
-      : [...acc]
-  ), [])
-);
 
 function Checkout() {
   const { cart, setCart } = useContext(UserContext);

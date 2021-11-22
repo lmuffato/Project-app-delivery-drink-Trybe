@@ -17,7 +17,7 @@ function OrderCard({ id, status, totalPrice, saleDate }) {
       <div
         data-testid={ `customer_orders__element-card-price-${id}` }
       >
-        { totalPrice }
+        { totalPrice.replace('.', ',') }
       </div>
       <div
         data-testid={ `customer_orders__element-order-date-${id}` }

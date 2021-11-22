@@ -50,7 +50,7 @@ const createByAdmin = async (req, res) => {
     const hash = crypto.createHash('md5').update(password).digest('hex');
     const oldUserByEmail = await users.findOne({ where: { email } });
     const oldUserByName = await users.findOne({ where: { name } });
-    if (oldUserByEmail || oldUserByName) return res.status(401).json({ message: 'conflict' });
+    if (oldUserByEmail || oldUserByName) return res.status(409).json({ message: 'Conflict' });
     await users.create({ name, email, password: hash, role: roole });
     return res.status(201).json({ message: true });
   } catch (err) {

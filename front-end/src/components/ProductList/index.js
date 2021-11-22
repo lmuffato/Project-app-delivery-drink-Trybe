@@ -62,12 +62,14 @@ function ProductList() {
           datatestid="customer_products__button-cart"
           disabled={ cart.length <= 0 }
         >
-          R$
-          <span
-            data-testid="customer_products__checkout-bottom-value"
-          >
-            {total.toFixed(2).replace('.', ',')}
-          </span>
+          <>
+            R$
+            <span
+              data-testid="customer_products__checkout-bottom-value"
+            >
+              {total.toFixed(2).replace('.', ',')}
+            </span>
+          </>
         </Button>
       </div>
     </ProdListContainer>

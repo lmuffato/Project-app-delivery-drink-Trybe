@@ -1,18 +1,52 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
+import { updateProduct, deleteItem } from '../../slices/cart';
 import { ProductCardContainer } from '../../styles/baseComponents';
 import ProductQty from '../ProductQty';
 
-function ProductCard({ id, image, price, alt, description, initialQty }) {
-  const [qty, setQty] = useState(initialQty);
+function useMounted() {
+  const [isMounted, setIsMounted] = useState(false);
+
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
+  return isMounted;
+}
+
+function ProductCard({ id, image, price, alt, description/* , initialQty */ }) {
+  const prod = useSelector((st) => st.cart.products.find((p) => p.id === id));
+  const dispatch = useDispatch();
+  const isMounted = useMounted();
+
+  const [qty, setQty] = useState(prod ? prod.quantity : 0);
+
+  useEffect(() => {
+    if (isMounted) {
+      if (qty === 0) {
+        dispatch(deleteItem({ id }));
+        return;
+      }
+      dispatch(updateProduct({ id, quantity: qty }));
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [qty]);
 
   const inputChange = ({ target: { value } }) => {
+    console.log(value);
     const qt = Number(value);
-    setQty(qt < 0 || Number.isNaN(qt) ? 0 : qt);
+    if (Number.isNaN(qt)) return;
+
+    const quantity = qt <= 0 ? 0 : qt;
+    setQty(quantity);
   };
 
-  function remove() { setQty((st) => ((st - 1) <= 0 ? 0 : (st - 1))); }
-  function add() { setQty((st) => st + 1); }
+  function remove() {
+    setQty((st) => ((st - 1) <= 0 ? 0 : (st - 1)));
+  }
+  function add() {
+    setQty((st) => st + 1);
+  }
 
   return (
     <ProductCardContainer>
@@ -55,11 +89,11 @@ ProductCard.propTypes = {
   image: PropTypes.string.isRequired,
   alt: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  initialQty: PropTypes.number,
+  // initialQty: PropTypes.number,
 };
 
-ProductCard.defaultProps = {
-  initialQty: 0,
-};
+// ProductCard.defaultProps = {
+//   initialQty: 0,
+// };
 
 export default ProductCard;

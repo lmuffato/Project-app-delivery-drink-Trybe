@@ -1,19 +1,18 @@
-import React, { useEffect } from 'react';
-import { /* useSelector,  */useDispatch } from 'react-redux';
+import React from 'react';
+// import { /* useSelector,  */useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import { updateProduct } from '../../slices/cart';
+// import { updateProduct } from '../../slices/cart';
 import { ProductQtyContainer } from '../../styles/baseComponents';
 import QtyButton from './QtyButton';
 
 function ProductQty({ label, onChange, onRemove, onAdd, value, id }) {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  const priceChange = () => {
-    console.log(id);
-    dispatch(updateProduct({ id, quantity: value }));
-  };
+  // const priceChange = () => {
+  //   dispatch(updateProduct({ id, quantity: value }));
+  // };
 
-  useEffect(priceChange, [value]);
+  // useEffect(priceChange, [value]);
 
   return (
     <ProductQtyContainer>

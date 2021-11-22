@@ -22,7 +22,7 @@ export const createNewUserByAdmin = async (obj) => {
   const { name, email, password, role, token } = obj;
   const apiForAdm = axios.create({
     baseURL: `http://localhost:${PORT}`,
-    headers: { authentication: token },
+    headers: { authorization: token },
   });
   const result = await apiForAdm.post('/users/createbyadmin',
     { name, email, password, role });

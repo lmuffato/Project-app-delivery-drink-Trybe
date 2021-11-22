@@ -1,93 +1,101 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import axios from 'axios';
 
-function SignUp() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
-  const [newUser, setNewUser] = useState({});
-  const [error, setError] = useState(true);
+function Signup() {
+  const [newUserData, setNewUserData] = useState({ name: '', email: '', password: '' });
+  const [error, setError] = useState('');
+  const [isDisabled, setIsDisabled] = useState(true);
+  const history = useHistory();
 
-  const validForm = () => {
-    const passwordMinLength = 6;
-    const nameMaxLength = 12;
-    const emailRegex = /\S+@\S+\.\S+/;
-    if (!emailRegex.test(email)
-      || password.length < passwordMinLength || name.length < nameMaxLength) {
-      return true;
-    }
-    return false;
-  };
-
-  const handleClick = async (e, userEmail, userPassword, userName) => {
-    e.preventDefault();
-    const res = await fetch('http://localhost:3001/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ name: userName, email: userEmail, password: userPassword }),
-    });
-    const data = await res.json();
-    setNewUser({ data });
-    if (data.error) {
-      setError(false);
+  useEffect(() => {
+    const passwordLength = 6;
+    const nameLengh = 12;
+    const emailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+    const { name, email, password } = newUserData;
+    if (
+      emailRegex.test(email)
+      && name.length >= nameLengh
+      && password.length >= passwordLength
+    ) {
+      setIsDisabled(false);
     } else {
-      setError(true);
+      setIsDisabled(true);
     }
-    console.log(data);
-    console.log(data.error);
-    console.log(name);
-  };
+  }, [newUserData.name, newUserData.email, newUserData.password, newUserData]);
+
+  function handleChange(event) {
+    const { name, value } = event.target;
+    setNewUserData((prevState) => ({ ...prevState, [name]: value }));
+  }
+
+  async function registerNewUser() {
+    axios.post('http://localhost:3001/register', {
+      name: newUserData.name,
+      email: newUserData.email,
+      password: newUserData.password,
+    }).then((response) => {
+      localStorage.setItem('newUser', JSON.stringify(response));
+      console.log(response);
+      history.push('/customer/products');
+    }).catch((e) => {
+      console.log(e);
+      setError('Usuario já cadastrado');
+    });
+  }
 
   return (
     <div>
-      <h1>Cadastre-se</h1>
-      <form>
-        <input
-          type="text"
-          name="nome"
-          id="nome"
-          value={ name }
-          onChange={ (e) => setName(e.target.value) }
-          placeholder="Seu nome"
-          data-testid="common_register__input-name"
-        />
-        <input
-          type="email"
-          name="email"
-          id="email"
-          value={ email }
-          onChange={ (e) => setEmail(e.target.value) }
-          placeholder="Digite seu email"
-          data-testid="common_register__input-email"
-        />
-        <input
-          type="password"
-          name="password"
-          id="password"
-          value={ password }
-          onChange={ (e) => setPassword(e.target.value) }
-          placeholder="Digite uma senha"
-          data-testid="common_register__input-password"
-        />
+      <div>
+        <label htmlFor="name">
+          Nome
+          <input
+            type="text"
+            name="name"
+            data-testid="common_register__input-name"
+            value={ newUserData.name }
+            onChange={ (event) => handleChange(event) }
+          />
+        </label>
+
+        <label htmlFor="email">
+          Email
+          <input
+            type="text"
+            name="email"
+            data-testid="common_register__input-email"
+            value={ newUserData.email }
+            onChange={ (event) => handleChange(event) }
+          />
+        </label>
+
+        <label htmlFor="password">
+          <span>Senha</span>
+          <input
+            type="password"
+            name="password"
+            data-testid="common_register__input-password"
+            value={ newUserData.password }
+            onChange={ (event) => handleChange(event) }
+          />
+        </label>
 
         <button
-          type="submit"
-          disabled={ validForm() }
+          type="button"
           data-testid="common_register__button-register"
-          onClick={ handleClick }
+          disabled={ isDisabled }
+          onClick={ registerNewUser }
         >
           Cadastrar
         </button>
         <span
-          data-testid="common_login__element-invalid-email"
-          hidden={ error }
+          data-testid="common_register__element-invalid_register"
         >
-          { newUser.error ? newUser.error : '' }
+          {error}
         </span>
-      </form>
+      </div>
     </div>
   );
 }
 
-export default SignUp;
+export default Signup;

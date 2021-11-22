@@ -16,6 +16,7 @@ const login = async ({ email, password }) => {
 };
 
 const createUser = async ({ name, email, password, type }) => {
+  // console.log('teste-model');
   try {
     const newUser = await user.create({ name, email, password, role: type });
     return newUser;
@@ -24,9 +25,9 @@ const createUser = async ({ name, email, password, type }) => {
   }
 };
 
-const findUser = async (email) => {
-  const userFound = await user.findOne({ where: { email } });
-  return userFound;
+const findUser = async (name, email) => {
+  const userFound = await user.findOne({ where: { name, email } });
+  return { userFound };
 };
 
 const listUsers = async (role) => (

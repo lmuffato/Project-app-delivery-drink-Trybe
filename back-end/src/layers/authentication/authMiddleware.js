@@ -13,9 +13,9 @@ const generateToken = (payload) => jwt.sign(payload, secret, jwtConfig);
 const validateAdmRole = async (req, res, next) => {
   try {
     if (!req.headers.authentication) return res.status(409).json({ message: 'forbbiden' });
-    const { authentication } = headers;
+    const { authentication } = req.headers;
     const { role } = jwt.verify(authentication, secret);
-    if (!role || role !== 'administrator') return res.status(409).json({ message: 'No adm user' });;
+    if (!role || role !== 'administrator') return res.status(409).json({ message: 'No adm user' });
     next();
   } catch (err) {
     return res.status(500).json({ message: err });

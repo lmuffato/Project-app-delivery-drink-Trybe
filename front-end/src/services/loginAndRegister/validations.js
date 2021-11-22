@@ -4,9 +4,11 @@ export const emailVerification = (email) => {
   return result;
 };
 
-export const passwordVerification = (password) => {
-  const minimumPasswordLength = 5;
-  return password.length >= minimumPasswordLength;
+export const passwordVerification = (password, isAdmin) => {
+  const PASSWORD_LENGTH = 5;
+  if (isAdmin) return password.length > PASSWORD_LENGTH;
+
+  return password.length >= PASSWORD_LENGTH;
 };
 
 export const nameVerification = (password) => {

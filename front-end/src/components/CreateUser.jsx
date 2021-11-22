@@ -23,6 +23,7 @@ function CreateUser() {
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('seller');
   const [isCreated, setIsCreated] = useState(false);
+  const [invalidRegister, setInvalidRegister] = useState(false);
   const { userData: { token } } = useContext(ContextLogin);
 
   const validateEmail = () => emailRegex.test(email);
@@ -36,6 +37,7 @@ function CreateUser() {
 
   async function handleCreateNewUSer() {
     setIsCreated(false);
+    setInvalidRegister(false);
     const data = { name, email, password, role };
     const payload = JSON.stringify(data);
     const config = {
@@ -48,7 +50,7 @@ function CreateUser() {
       await axios.post(`${urlBase}/register`, payload, config);
       setIsCreated(true);
     } catch (e) {
-      console.log(e.response);
+      setInvalidRegister(true);
     }
   }
   return (
@@ -119,6 +121,14 @@ function CreateUser() {
         </Button>
       </Box>
       { isCreated && 'Usuario criado' }
+      { invalidRegister
+        && (
+          <span
+            data-testid="admin_manage__element-invalid-register"
+          >
+            Por favor crie um usuário válido
+
+          </span>) }
     </Container>
   );
 }

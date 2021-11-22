@@ -5,13 +5,20 @@ import styles from '../styles/components/ProductCard.module.scss';
 import { cartContext } from '../contexts/cart';
 
 export default function ProductCard(props) {
-  const { increaseQuantity } = useContext(cartContext);
+  const { increaseQuantity, decreaseQuantity } = useContext(cartContext);
   const { className: customClass, image, title, price } = props;
   const [quantity, setQuantity] = useState(0);
 
   function addProduct() {
     increaseQuantity(props);
     setQuantity(quantity + 1);
+  }
+
+  function removeProduct() {
+    if (quantity > 0) {
+      decreaseQuantity(props);
+      setQuantity(quantity - 1);
+    }
   }
 
   return (
@@ -30,6 +37,7 @@ export default function ProductCard(props) {
           <button
             type="button"
             data-testid="customer_products__button-card-rm-item-"
+            onClick={ removeProduct }
           >
             -
           </button>

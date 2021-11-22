@@ -1,6 +1,6 @@
 const postRequest = async (userData, callbacks, endpointData) => {
-  const { setShowErrorMessage, setRedirect } = callbacks;
-  const { endpoint, statusInvalid, statusRegisterAccept } = endpointData;
+  const { setShowErrorMessage, setRole, setRedirect } = callbacks;
+  const { endpoint, statusInvalid } = endpointData;
 
   const requestOptions = {
     method: 'POST',
@@ -8,23 +8,21 @@ const postRequest = async (userData, callbacks, endpointData) => {
     body: JSON.stringify({ ...userData }),
   };
 
-  const response = await fetch(endpoint, requestOptions);
-  if (response.status === statusRegisterAccept) {
-    setRedirect(true);
+  try {
+    const response = await fetch(endpoint, requestOptions);
+    if (!response.ok) {
+      if (response.status === statusInvalid) setShowErrorMessage(true);
+      const message = `An error has occured: ${response.status}`;
+      throw new Error(message);
+    } else {
+      const { user: { name, email, role }, token } = await response.json();
+      localStorage.setItem('user', JSON.stringify({ name, email, role, token }));
+      if (setRole) setRole(role);
+      setRedirect(true);
+    }
+  } catch (err) {
+    console.log(err);
   }
-
-  if (response.status === statusInvalid) {
-    setShowErrorMessage(true);
-  }
-
-  const data = await response.json();
-
-  localStorage.setItem('user', JSON.stringify({
-    name: data.user.name,
-    email: data.user.email,
-    role: data.user.role,
-    token: data.token,
-  }));
 };
 
 export default postRequest;

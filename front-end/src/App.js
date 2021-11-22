@@ -3,6 +3,7 @@ import { Route, Routes, Navigate } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import ProductPage from './pages/ProductPage';
+import AdminPage from './pages/AdminPage';
 import { PricesProvider } from './context/productsProvider';
 import MyRequestsPage from './pages/MyRequestsPage';
 import ClientOrderDetails from './pages/ClientOrderDetails';
@@ -30,6 +31,7 @@ function App() {
       />
       <Route path="/customer/orders" element={ <MyRequestsPage /> } />
       <Route path="/customer/orders/:id" element={ <ClientOrderDetails /> } />
+      <Route path="/admin/manage" element={ <AdminPage /> } />
     </Routes>
   );
 }

@@ -21,12 +21,14 @@ export const createSalePayload = (userId, Sellers, cart) => {
 
   const sellerId = Sellers.find(({ name }) => name === seller);
 
+  console.log();
+
   return {
     deliveryAddress,
     deliveryNumber,
-    sellerId,
+    sellerId: sellerId.id,
     userId,
-    totalPrice,
+    totalPrice: Number(totalPrice.replace(',', '.')),
     status: 'Pendente',
     orders: cart,
   };

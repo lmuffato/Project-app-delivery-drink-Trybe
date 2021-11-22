@@ -15,6 +15,8 @@ import {
   createUserCart,
 } from './helpers';
 
+const TOKEN = localStorage.getItem('token');
+
 const HEADERS = ['Descrição', 'Quantidade', 'Valor Unitário', 'Sub-total'];
 
 const LINK = [
@@ -114,8 +116,8 @@ function Checkout() {
             const payload = createSalePayload(user.id, sellers, cart);
 
             const { data: id } = await axios.post(
-              '/sales',
-              payload, { headers: { Authorization: user.token },
+              'http://localhost:3001/sales',
+              payload, { headers: { authorization: TOKEN },
               },
             );
 

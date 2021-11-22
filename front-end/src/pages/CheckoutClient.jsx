@@ -7,6 +7,9 @@ function CheckoutClient() {
   const {
     postShoppingCart, shoppingCart, total, setDelivery, delivery } = useContext(Context);
 
+    const [order, setOrder] = useState(shoppingCart);
+    console.log(order);
+
   return (
     <>
       <Header client={ `${'nome'}` } />

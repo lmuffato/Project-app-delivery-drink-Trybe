@@ -24,8 +24,8 @@ const create = rescue(async (req, res) => {
 
   await products.forEach((product) => {
     SaleProduct.create({
-      saleId: createdSale.id,
-      productId: product.id,
+      sale_id: createdSale.id,
+      product_id: product.id,
       quantity: product.quantity,
     });
   });

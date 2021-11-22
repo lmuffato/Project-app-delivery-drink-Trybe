@@ -1,8 +1,10 @@
 import React from 'react';
 import { Routes, Route, Navigate, Outlet } from 'react-router-dom';
 import AuthProvider from './contexts/auth';
+import CustomerProducts from './pages/CustomerProducts';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import AppContainer from './components/AppContainer';
 import { MainContainer } from './styles/containers';
 
 const placeholderElement = (name) => (
@@ -21,14 +23,15 @@ function App() {
         <Route path="login" element={ <MainContainer><Login /></MainContainer> } />
         <Route path="register" element={ <MainContainer><Register /></MainContainer> } />
 
-        <Route path="customer" element={ placeholderElement('Customer') }>
+        <Route path="customer" element={ <AppContainer /> }>
           <Route index element={ <Navigate to="products" /> } />
-          <Route path="products" element={ <p>products</p> } />
+          <Route path="products" element={ <CustomerProducts /> } />
+          <Route path="orders" element={ <p>orders</p> } />
+          <Route path="checkout" element={ <p>checkout</p> } />
         </Route>
 
         <Route path="seller" element={ placeholderElement('Seller') }>
           <Route index element={ <Navigate to="orders" /> } />
-          <Route path="orders" element={ <p>orders</p> } />
         </Route>
 
         <Route path="admin" element={ placeholderElement('Administrator') }>

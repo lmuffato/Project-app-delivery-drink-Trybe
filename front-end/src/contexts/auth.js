@@ -2,18 +2,19 @@
 import React, { createContext, useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
+import * as storage from '../utils/localStorageManager';
 
 const authContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [authed, setAuthed] = useState(false);
-  const [token, setToken] = useState(null);
+  const [user, setUser] = useState({});
 
   const context = {
     authed,
     setAuthed,
-    token,
-    setToken,
+    user,
+    setUser,
   };
 
   return (
@@ -28,29 +29,31 @@ AuthProvider.propTypes = {
 };
 
 export const useAuth = () => {
-  const { authed, setAuthed, token, setToken } = useContext(authContext);
+  const { authed, setAuthed, user, setUser } = useContext(authContext);
   const navigation = useNavigate();
 
   /**
    * @param {OkLogin} loginData
    */
   function login(loginData) {
-    setToken(loginData.token);
+    setUser(loginData);
+    storage.saveUser(loginData);
     setAuthed(true);
   }
 
   function logout() {
     setAuthed(false);
+    setUser({});
+    storage.deleteUser();
   }
 
   /**
-   * @param {import('axios').AxiosResponse<ErrorLogin>} response
+   * @param {{status: number, message: string}} response
    */
   function logoutNotAuthorized(response) {
     const notAuthorized = 401;
     if (response.status === notAuthorized) {
       logout();
-      token(null);
       navigation('/login');
     }
   }
@@ -68,6 +71,7 @@ export const useAuth = () => {
     authed,
     login,
     logout,
+    user,
     logoutNotAuthorized,
     redirectUserByRole,
   };

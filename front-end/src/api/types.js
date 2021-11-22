@@ -1,15 +1,27 @@
 /**
- *  @typedef {{
- *  id: number;
- *  name: string;
- *  email: string;
- *  role: 'customer' | 'seller' | 'administrator'
- *  token: string;
- * }} OkLogin
+ * @typedef {{
+ * id: number;
+ * name: string;
+ * email: string;
+ * role: 'customer' | 'seller' | 'administrator'
+ * }} User
  */
 
 /**
- *  @typedef {{message: string}} ErrorLogin
+ * @typedef {{
+ * id: number;
+ * price: number;
+ * urlImage: string;
+ * name: string;
+ * }} Product
+ */
+
+/**
+ *  @typedef {User & {token: string}} OkLogin
+ */
+
+/**
+ *  @typedef {{message: string, status: string}} ErrorResponse
  */
 
 /**

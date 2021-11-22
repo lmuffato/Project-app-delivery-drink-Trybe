@@ -21,11 +21,11 @@ export async function create(name, email, password) {
       `${BASE_URL}/users/register`, { name, email, password },
     );
     return response.data;
-  } catch ({ response: { data } }) {
+  } catch ({ response: { status, data: { message } } }) {
     /**
      * @type {ErrorResponse}
      */
-    const errorRes = data;
+    const errorRes = { status, message };
     throw errorRes;
   }
 }
@@ -45,11 +45,11 @@ export async function getById(id, token) {
       `${BASE_URL}/users/${id}`, {}, { headers: { Authorization: token } },
     );
     return response.data;
-  } catch ({ response: { data } }) {
+  } catch ({ response: { status, data: { message } } }) {
     /**
-       * @type {ErrorResponse}
-       */
-    const errorRes = data;
+     * @type {ErrorResponse}
+     */
+    const errorRes = { status, message };
     throw errorRes;
   }
 }
@@ -70,11 +70,11 @@ export async function update(user, id, token) {
       `${BASE_URL}/users/${id}`, user, { headers: { Authorization: token } },
     );
     return response.data;
-  } catch ({ response: { data } }) {
+  } catch ({ response: { status, data: { message } } }) {
     /**
-       * @type {ErrorResponse}
-       */
-    const errorRes = data;
+     * @type {ErrorResponse}
+     */
+    const errorRes = { status, message };
     throw errorRes;
   }
 }
@@ -93,11 +93,11 @@ export async function getAll(token) {
       `${BASE_URL}/users/`, { headers: { Authorization: token } },
     );
     return response.data;
-  } catch ({ response: { data } }) {
+  } catch ({ response: { status, data: { message } } }) {
     /**
-       * @type {ErrorResponse}
-       */
-    const errorRes = data;
+     * @type {ErrorResponse}
+     */
+    const errorRes = { status, message };
     throw errorRes;
   }
 }
@@ -117,11 +117,11 @@ export async function deleteUser(id, token) {
       `${BASE_URL}/users/${id}`, { headers: { Authorization: token } },
     );
     return response.data;
-  } catch ({ response: { data } }) {
+  } catch ({ response: { status, data: { message } } }) {
     /**
-       * @type {ErrorResponse}
-       */
-    const errorRes = data;
+     * @type {ErrorResponse}
+     */
+    const errorRes = { status, message };
     throw errorRes;
   }
 }

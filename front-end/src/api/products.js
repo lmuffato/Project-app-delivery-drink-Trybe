@@ -18,11 +18,11 @@ export async function create(product) {
       `${BASE_URL}/products`, product,
     );
     return response.data;
-  } catch ({ response: { data } }) {
+  } catch ({ response: { status, data: { message } } }) {
     /**
      * @type {ErrorResponse}
      */
-    const errorRes = data;
+    const errorRes = { status, message };
     throw errorRes;
   }
 }
@@ -36,11 +36,11 @@ export async function getById(id, token) {
       `${BASE_URL}/products/${id}`, {}, { headers: { Authorization: token } },
     );
     return response.data;
-  } catch ({ response: { data } }) {
+  } catch ({ response: { status, data: { message } } }) {
     /**
        * @type {ErrorResponse}
        */
-    const errorRes = data;
+    const errorRes = { status, message };
     throw errorRes;
   }
 }
@@ -54,11 +54,11 @@ export async function update(user, id, token) {
       `${BASE_URL}/products/${id}`, user, { headers: { Authorization: token } },
     );
     return response.data;
-  } catch ({ response: { data } }) {
+  } catch ({ response: { status, data: { message } } }) {
     /**
        * @type {ErrorResponse}
        */
-    const errorRes = data;
+    const errorRes = { status, message };
     throw errorRes;
   }
 }
@@ -77,11 +77,11 @@ export async function getAll(token) {
       `${BASE_URL}/products/`, { headers: { Authorization: token } },
     );
     return response.data;
-  } catch ({ response: { data } }) {
+  } catch ({ response: { status, data: { message } } }) {
     /**
        * @type {ErrorResponse}
        */
-    const errorRes = data;
+    const errorRes = { status, message };
     throw errorRes;
   }
 }
@@ -95,11 +95,11 @@ export async function deleteUser(id, token) {
       `${BASE_URL}/products/${id}`, { headers: { Authorization: token } },
     );
     return response.data;
-  } catch ({ response: { data } }) {
+  } catch ({ response: { status, data: { message } } }) {
     /**
        * @type {ErrorResponse}
        */
-    const errorRes = data;
+    const errorRes = { status, message };
     throw errorRes;
   }
 }

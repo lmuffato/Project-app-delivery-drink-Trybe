@@ -23,6 +23,7 @@ function ProductQty({ label, onRemove, onAdd, value, id }) {
           value={ value }
           className="center"
           data-testid={ `customer_products__input-card-quantity-${id}` }
+          onChange={ () => {} }
         />
         <QtyButton
           id={ id }

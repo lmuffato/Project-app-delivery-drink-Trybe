@@ -2,6 +2,7 @@
 import React, { createContext, useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
+import * as storage from '../utils/localStorageManager';
 
 const authContext = createContext();
 
@@ -36,21 +37,23 @@ export const useAuth = () => {
    */
   function login(loginData) {
     setUser(loginData);
+    storage.saveUser(loginData);
     setAuthed(true);
   }
 
   function logout() {
     setAuthed(false);
+    setUser({});
+    storage.deleteUser();
   }
 
   /**
-   * @param {import('axios').AxiosResponse<ErrorLogin>} response
+   * @param {{status: number, message: string}} response
    */
   function logoutNotAuthorized(response) {
     const notAuthorized = 401;
     if (response.status === notAuthorized) {
       logout();
-      token(null);
       navigation('/login');
     }
   }

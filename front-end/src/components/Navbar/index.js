@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import NavItem from './NavItem';
 import { NavbarContainer, NavbarWrapper, NavbarGroupLinks } from './styles';
+import { useAuth } from '../../contexts/auth';
 
 const testids = {
   products: 'customer_products__element-navbar-link-products',
@@ -26,6 +27,7 @@ const userConfig = {
 };
 
 function Navbar({ userType, username }) {
+  const { logout } = useAuth();
   const config = userConfig[userType];
 
   const ordersItem = () => (
@@ -52,9 +54,10 @@ function Navbar({ userType, username }) {
             {username}
           </NavItem>
           <NavItem
-            to="/logout"
+            to="/login"
             variant="quaternary"
             testid={ testids.logout }
+            onClick={ () => { logout(); } }
           >
             Sair
           </NavItem>

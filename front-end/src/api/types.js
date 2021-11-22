@@ -21,7 +21,7 @@
  */
 
 /**
- *  @typedef {{message: string}} ErrorResponse
+ *  @typedef {{message: string, status: string}} ErrorResponse
  */
 
 /**

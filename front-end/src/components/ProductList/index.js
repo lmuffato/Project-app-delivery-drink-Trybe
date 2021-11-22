@@ -16,12 +16,12 @@ const ProdListContainer = styled.div`
 `;
 
 function ProductList() {
-  const { user } = useAuth();
+  const { user, logoutNotAuthorized } = useAuth();
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    api.products.getAll(user.token).then(setProducts);
-  }, [user.token]);
+    api.products.getAll(user.token).then(setProducts).catch(logoutNotAuthorized);
+  }, []);
 
   if (products.length <= 0) return <h1>Loading</h1>;
 
@@ -34,6 +34,7 @@ function ProductList() {
           price={ price }
           description={ name }
           image={ urlImage }
+          alt={ name }
         />
       ))}
     </ProdListContainer>

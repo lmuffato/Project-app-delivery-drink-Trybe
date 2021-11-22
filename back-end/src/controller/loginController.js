@@ -1,11 +1,11 @@
 const jwt = require('jsonwebtoken');
 const fs = require('fs').promises;
-const services = require('../service');
+const { loginService } = require('../service');
 
 const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const login = await services.login(email, password);
+    const login = await loginService.loginUser(email, password);
    
     const privateKey = await fs.readFile('jwt.evaluation.key', 'utf8');
     
@@ -27,4 +27,6 @@ const loginUser = async (req, res) => {
   }
 };
 
-module.exports = loginUser;
+module.exports = {
+  loginUser,
+};

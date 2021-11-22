@@ -56,7 +56,7 @@ export default function Table() {
           {
             itensList.map((ele, index) => (
               <tr key={ index }>
-                <td data-testid={ `${testIdNumber}${index}` }>{index}</td>
+                <td data-testid={ `${testIdNumber}${index + 1}` }>{index + 1 }</td>
                 <td data-testid={ `${testIdName}${index}` }>{ele.name}</td>
                 <td data-testid={ `${testIdQuantity}${index}` }>{ele.quantity}</td>
                 <td data-testid={ `${testIdUnitPrice}${index}` }>{ele.price}</td>

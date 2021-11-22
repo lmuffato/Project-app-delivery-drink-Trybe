@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const { User } = require('../../database/models');
 
 const secret = fs.readFileSync('jwt.evaluation.key', { encoding: 'utf-8' }).trim();
-const jwtConfig = { expiresIn: '30m', algorithm: 'HS256' };
+const jwtConfig = { expiresIn: '7d', algorithm: 'HS256' };
 const err = (code, message) => ({ code, message });
 
 const generateToken = async ({ email, password }) => {

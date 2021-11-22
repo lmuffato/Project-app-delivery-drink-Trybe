@@ -35,19 +35,21 @@ const findOne = async ({ id }) => {
 };
 
 const update = async (user, { id }) => {
-  const data = await User.update(user, { where: { id } });
+  const [data, wasCreated] = await User.upsert(user, { where: { id } });
 
-  if (!data) throw err('notFound', userNotFound);
+  if (!wasCreated) throw err('notFound', userNotFound);
 
   return data;
 };
 
 const destroy = async ({ id }) => {
   const data = await User.destroy({ where: { id } });
-
+  
   if (!data) throw err('notFound', userNotFound);
   
-  return data;
+  const message = 'Usuário deletado com sucesso';
+
+  return { message };
 };
 
 module.exports = { create, findAll, findOne, update, destroy };

@@ -19,7 +19,6 @@ app.use('/products', productsRoute);
 app.use('/sales', salesRoute);
 app.get('/carlos', (_req, res) => res.status(200).json({ message: 'ok' }));
 app.get('/coffee', (_req, res) => res.status(418).end());
-
 app.use(error);
 
 module.exports = app;

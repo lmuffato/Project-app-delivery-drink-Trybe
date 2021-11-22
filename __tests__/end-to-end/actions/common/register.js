@@ -22,7 +22,6 @@ const register = async (page, { database, newUser, hasConflict = false }) => {
     method: "POST",
     status: hasConflict ? conflict : created,
   });
-
   await expect(database).toReturnDataWith({
     query: users.query,
     types: users.types,

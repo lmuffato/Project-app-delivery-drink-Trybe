@@ -1,9 +1,10 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState } from 'react';
 import noImage from '../images/noimage.jpg';
 import styles from '../styles/components/ProductCard.module.scss';
 
 export default function ProductCard(props) {
+  const [quantity] = useState(0);
   const { className: customClass, image, title, price } = props;
   return (
     <div { ...props } className={ `${styles.productCard} ${customClass}` }>
@@ -28,6 +29,7 @@ export default function ProductCard(props) {
             type="number"
             data-testid="customer_products__input-card-quantity-"
             className={ styles.quantity }
+            value={ quantity }
           />
           <button
             type="button"

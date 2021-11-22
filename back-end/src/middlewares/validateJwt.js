@@ -10,7 +10,7 @@ const verify = (token) => {
 };
 
 const validateJWT = async (req, res, next) => {
-  if(req.baseUrl === '/register') return next();
+  if (req.baseUrl === '/register') return next();
   try {
     const token = req.headers.authorization;
 

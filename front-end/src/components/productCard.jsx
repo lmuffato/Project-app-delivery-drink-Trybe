@@ -1,20 +1,11 @@
-/* eslint-disable react/style-prop-object */
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/prop-types */
 import React, { useContext } from 'react';
+import { shape, string } from 'prop-types';
 import '../styles/product.css';
 import Context from '../context/Context';
 
 function ProductCard({ product: { id, name, price, url_image: urlImage } }) {
   const { addProduct, subProduct, inputProduct } = useContext(Context);
-  // Styles:
-  // preço: Absolute inset -1 background-opacity 70%
-  // image: fill
-  // Div pai: Border 1 grey, shadow
-  // Div filho 1: BG White?
-  // Div filho 2: BG Aquamarine
 
-  // data testid por key
   return (
     <section className="productContainer">
       <div className="element">
@@ -63,5 +54,14 @@ function ProductCard({ product: { id, name, price, url_image: urlImage } }) {
     </section>
   );
 }
+
+ProductCard.propTypes = {
+  product: shape({
+    id: string,
+    name: string,
+    url_image: string,
+    price: string,
+  }),
+}.isRequired;
 
 export default ProductCard;

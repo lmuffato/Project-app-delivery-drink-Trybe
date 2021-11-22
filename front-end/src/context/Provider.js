@@ -20,8 +20,8 @@ function Provider({ children }) {
   const [shoppingCart, setShoppingCart] = useState({});
   const [total, setTotal] = useState(0);
   const [delivery, setDelivery] = useState({});
-  const [sellers, setSellers] = useState([]);
-  const [sellerPerson, setSellerPerson] = useState('');
+  // const [sellers, setSellers] = useState([]);
+  // const [sellerPerson, setSellerPerson] = useState('');
 
   /// ////////////////////////Link with BackEnd//////////////////////// ///
 
@@ -45,6 +45,7 @@ function Provider({ children }) {
         console.log(res);
       });
   };
+
   /// ////////////////////////ComponentDidMount//////////////////////// ///
 
   useEffect(() => {
@@ -152,6 +153,7 @@ function Provider({ children }) {
     <Context.Provider
       value={ {
         setUser,
+        get,
         user,
         post,
         handleChange,

@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Context from '../context/Context';
-import Header from '../components/header';
 import ProductCard from '../components/productCard';
 
 function ProductClient() {
@@ -9,10 +8,9 @@ function ProductClient() {
   const navigate = useNavigate();
 
   // setar CSS MASTER
-  // console.log(products);
+
   return (
     <>
-      <Header client={ `${'nome'}` } />
       <button
         onClick={ () => navigate('/customer/checkout') }
         type="button"

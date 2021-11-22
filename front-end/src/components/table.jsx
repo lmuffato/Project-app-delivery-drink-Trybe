@@ -1,5 +1,5 @@
-/* eslint-disable react/prop-types */
 import React, { useContext } from 'react';
+import { string } from 'prop-types';
 import Context from '../context/Context';
 
 function Table({ props }) {
@@ -49,5 +49,12 @@ function Table({ props }) {
     </tr>
   );
 }
+
+Table.propTypes = {
+  productId: string,
+  productName: string,
+  productPrice: string,
+  productQuant: string,
+}.isRequired;
 
 export default Table;

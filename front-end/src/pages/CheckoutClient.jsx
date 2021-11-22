@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Header from '../components/header';
 import Context from '../context/Context';
 import Table from '../components/table';
@@ -7,8 +7,8 @@ function CheckoutClient() {
   const {
     postShoppingCart, shoppingCart, total, setDelivery, delivery } = useContext(Context);
 
-    const [order, setOrder] = useState(shoppingCart);
-    console.log(order);
+  const [order] = useState(shoppingCart);
+  console.log(order);
 
   return (
     <>

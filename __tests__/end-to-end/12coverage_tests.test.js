@@ -25,7 +25,7 @@ beforeAll(async ()=>{
   });
 });
 
-describe.skip(requirement(45), () => {
+describe(requirement(45), () => {
   test("No front-end e no back-end", () => {
     expect(frontEnd.skipped).toStrictEqual(0);
     expect(frontEnd.pct).toBeGreaterThanOrEqual(30);
@@ -37,7 +37,7 @@ describe.skip(requirement(45), () => {
   });
 });
 
-describe.skip(requirement(46), () => {
+describe(requirement(46), () => {
   test("No front-end e no back-end", () => {
     expect(frontEnd.skipped).toStrictEqual(0);
     expect(frontEnd.pct).toBeGreaterThanOrEqual(60);
@@ -49,7 +49,7 @@ describe.skip(requirement(46), () => {
   });
 });
 
-describe.skip(requirement(47), () => {
+describe(requirement(47), () => {
   test("No front-end e no back-end", () => {
     expect(frontEnd.skipped).toStrictEqual(0);
     expect(frontEnd.pct).toBeGreaterThanOrEqual(90);

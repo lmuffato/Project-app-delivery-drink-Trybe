@@ -27,7 +27,6 @@ export default function CardProduct({ id,
     });
     const haveProduct = arrayProducts.some((some) => id === some.productId);
     if (counter > 0 && !haveProduct) {
-      console.log('entrou');
       arrayProducts = [...itensList, objectProduct];
     }
 
@@ -41,7 +40,6 @@ export default function CardProduct({ id,
 
   useEffect(() => {
     setPrice(roundPrice());
-    console.log(roundPrice());
   }, [counter]);
 
   useEffect(() => {
@@ -63,12 +61,12 @@ export default function CardProduct({ id,
   return (
     <div key={ id } className="cardProduct">
       <div>
-        <p
+        <span
           data-testid={ `customer_products__element-card-price-${id}` }
           className="unitPrice"
         >
-          {`R$ ${cost}`}
-        </p>
+          {cost.toString().replace('.', ',')}
+        </span>
         <img
           className="imageDrinkCard"
           alt="drink"
@@ -110,7 +108,7 @@ export default function CardProduct({ id,
 
           </button>
           <div>
-            <p>{ price }</p>
+            <p>{ price.toString().replace('.', ',') }</p>
           </div>
         </div>
       </div>

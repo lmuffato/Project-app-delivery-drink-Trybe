@@ -14,7 +14,9 @@ function OrderCard({ id, status, totalPrice, saleDate }) {
       >
         { status }
       </div>
-      <div>
+      <div
+        data-testid={ `customer_orders__element-card-price-${id}` }
+      >
         { totalPrice }
       </div>
       <div

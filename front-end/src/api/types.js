@@ -8,6 +8,15 @@
  */
 
 /**
+ * @typedef {{
+ * id: number;
+ * price: number;
+ * urlImage: string;
+ * name: string;
+ * }} Product
+ */
+
+/**
  *  @typedef {User & {token: string}} OkLogin
  */
 

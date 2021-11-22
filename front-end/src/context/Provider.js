@@ -3,13 +3,14 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import { io } from 'socket.io-client';// https://github.com/tryber/sd-10a-live-lectures/pull/89/files
 import Context from './Context';
-// import mockProducts from './mockAPI';
+// import { io } from 'socket.io-client';// https://github.com/tryber/sd-10a-live-lectures/pull/89/files
 
 const socket = io('http://localhost:3001');
 
 const Endpoints = {
   login_form: 'login',
   registration_form: 'register',
+  checkout_form: 'sale',
   seller_orders: 'seller/orders',
 };
 
@@ -19,16 +20,8 @@ function Provider({ children }) {
   const [shoppingCart, setShoppingCart] = useState({});
   const [total, setTotal] = useState(0);
   const [delivery, setDelivery] = useState({});
-
-  // user {
-  // name: 'John',
-  // email: 'john@example.com'
-  // role: 'customer/entregador'
-  // token: 'retorno do Back'
-  // }
-
-  // UseEffect para salvar no localStorage
-  // Há um ComponentDidMount após Link with BackEnd
+  const [sellers, setSellers] = useState([]);
+  const [sellerPerson, setSellerPerson] = useState('');
 
   /// ////////////////////////Link with BackEnd//////////////////////// ///
 
@@ -44,22 +37,22 @@ function Provider({ children }) {
       });
   };
 
-  const postShoppingCartURL = 'http://localhost:3001/products';
+  const postShoppingCartURL = 'http://localhost:3001/sale';
   const postShoppingCart = () => {
+    console.log({ shoppingCart, delivery, total });
     axios.post(postShoppingCartURL, { shoppingCart, delivery, total })
       .then((res) => {
         console.log(res);
-        // console.log(res.data);
-        // Aguardar: Retorno do Back para prosseguir
       });
   };
   /// ////////////////////////ComponentDidMount//////////////////////// ///
+
   useEffect(() => {
     const fetchProducts = (async () => {
       await getProducts();
     });
     fetchProducts();
-    setDelivery({ deliveryAndress: 'string', deliveryNumber: 99 });
+    setDelivery({ address: 'string', number: 99 });
     setTotal(0);
   }, []);
 
@@ -76,7 +69,7 @@ function Provider({ children }) {
         return (A * B).toFixed(2);
       });
       const soma = teste.reduce((acc, item) => acc + parseFloat(item), 0);
-      setTotal(soma);
+      setTotal(soma.toFixed(2).toString().replace('.', ','));
     }
     sum();
   }, [shoppingCart]);
@@ -94,11 +87,6 @@ function Provider({ children }) {
   const submitChange = (e, formType) => {
     e.preventDefault();
     return postSubmit(Endpoints[formType]);
-  };
-
-  // Função para enviar o ShoppingCart para o BackEnd
-  const submitShoppingCart = async () => {
-    await postShoppingCart();
   };
 
   // Função disparada no onClick no ProductCard
@@ -154,20 +142,29 @@ function Provider({ children }) {
     setShoppingCart(spread);
   };
 
+  const deleteProduct = (id) => {
+    delete shoppingCart[id];
+    const spread = { ...shoppingCart };
+    setShoppingCart(spread);
+  };
+
   return (
     <Context.Provider
       value={ {
         setUser,
         user,
+        post,
         handleChange,
         submitChange,
         shoppingCart,
         products,
-        submitShoppingCart,
+        setDelivery,
+        delivery,
         addProduct,
         subProduct,
         postShoppingCart,
         inputProduct,
+        deleteProduct,
         socket,
         total } }
     >

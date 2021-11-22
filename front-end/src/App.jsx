@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import SellerOrders from './pages/SellerOrders';
 import Register from './pages/Register';
 import ProductClient from './pages/ProductClient';
+import CheckoutClient from './pages/CheckoutClient';
 import PrivateRoute from './routes/PrivateRoute';
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
       <Route exact path="/products" element={ <ProductClient /> } />
       <Route path="/" element={ <Navigate replace to="/login" /> } />
       <Route path="/customer/products" element={ <ProductClient /> } />
+      <Route path="/customer/checkout" element={ <CheckoutClient /> } />
     </Routes>
   );
 }

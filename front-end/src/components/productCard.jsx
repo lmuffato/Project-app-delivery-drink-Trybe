@@ -1,10 +1,11 @@
+/* eslint-disable react/style-prop-object */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React, { useContext } from 'react';
 import '../styles/product.css';
 import Context from '../context/Context';
 
-function ProductCard({ product: { id, name, price, urlImage } }) {
+function ProductCard({ product: { id, name, price, url_image: urlImage } }) {
   const { addProduct, subProduct, inputProduct } = useContext(Context);
   // Styles:
   // preço: Absolute inset -1 background-opacity 70%
@@ -17,34 +18,25 @@ function ProductCard({ product: { id, name, price, urlImage } }) {
   return (
     <section className="productContainer">
       <div className="element">
-        {/* <h1
-          className="absolute"
-          data-testid="customer_products__element-card-price-"
+        <span
+          data-testid={ `customer_products__element-card-price-${id}` }
         >
-          {price}
-        </h1> */}
+          {price.replace('.', ',')}
+        </span>
         <img
           src={ urlImage }
-          alt="algo"
-          data-testid="customer_products__img-card-bg-image-"
-          // className="absolute"
-        />
-        <h1 data-testid={ `customer_products__element-card-price-${id}` }>
-          {price}
-        </h1>
-        <img
-          src={ urlImage }
+          style={ { width: 20 } }
           alt="algo"
           data-testid={ `customer_products__img-card-bg-image-${id}` }
         />
       </div>
       <div>
-        <span
+        <h1
           className="element"
           data-testid={ `customer_products__element-card-title-${id}` }
         >
           {name}
-        </span>
+        </h1>
         <div className="element">
           <button
             type="button"

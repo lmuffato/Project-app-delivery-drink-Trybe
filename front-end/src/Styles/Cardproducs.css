@@ -24,3 +24,14 @@
 .addQuantities {
   display: flex;
 }
+
+.elementsQuantities {
+  height: 30px;
+  width: 30px;
+}
+
+.quantity {
+  height: 24px;
+  text-justify: center;
+  width: 24px;
+}

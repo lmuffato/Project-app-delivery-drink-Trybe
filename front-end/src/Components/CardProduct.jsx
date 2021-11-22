@@ -83,33 +83,36 @@ export default function CardProduct({ id,
             }
             onClick={ decrement }
             type="button"
+            className="elementsQuantities"
           >
             -
 
           </button>
-          <p
-            data-testid={
-              `customer_products__input-card-quantity-${id}`
-            }
-          >
-            { counter }
-
-          </p>
+          <input
+            data-testid={ `customer_products__input-card-quantity-${id}` }
+            value={ counter }
+            onChange={ (e) => setCounter(Number(e.target.value)) }
+            className="elementsQuantities quantity"
+          />
           <button
             data-testid={
               `customer_products__button-card-add-item-${id}`
             }
             onClick={ increment }
             type="button"
+            className="elementsQuantities"
           >
             {' '}
             +
             {' '}
 
           </button>
-          <div>
-            <p>{ price.toString().replace('.', ',') }</p>
-          </div>
+          <span
+            className="elementsQuantities"
+          >
+            { price.toString().replace('.', ',') }
+
+          </span>
         </div>
       </div>
     </div>

@@ -5,7 +5,7 @@ import React, { useContext } from 'react';
 import '../styles/product.css';
 import Context from '../context/Context';
 
-function ProductCard({ product: { id, name, price, urlImage } }) {
+function ProductCard({ product: { id, name, price, url_image: urlImage } }) {
   const { addProduct, subProduct, inputProduct } = useContext(Context);
   // Styles:
   // preço: Absolute inset -1 background-opacity 70%
@@ -18,22 +18,11 @@ function ProductCard({ product: { id, name, price, urlImage } }) {
   return (
     <section className="productContainer">
       <div className="element">
-        {/* <h1
-          className="absolute"
-          data-testid="customer_products__element-card-price-"
-        >
-          {price}
-        </h1> */}
-        <img
-          src={ urlImage }
-          alt="algo"
-          data-testid="customer_products__img-card-bg-image-"
-        <h1
-          // className="absolute"
+        <span
           data-testid={ `customer_products__element-card-price-${id}` }
         >
           {price.replace('.', ',')}
-        </h1>
+        </span>
         <img
           src={ urlImage }
           style={ { width: 20 } }
@@ -42,12 +31,12 @@ function ProductCard({ product: { id, name, price, urlImage } }) {
         />
       </div>
       <div>
-        <span
+        <h1
           className="element"
           data-testid={ `customer_products__element-card-title-${id}` }
         >
           {name}
-        </span>
+        </h1>
         <div className="element">
           <button
             type="button"

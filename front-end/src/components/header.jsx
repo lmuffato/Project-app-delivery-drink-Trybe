@@ -4,21 +4,33 @@ import Context from '../context/Context';
 
 function Header() {
   const { user } = useContext(Context);
-  console.log(user);
 
   return (
     <div className="container">
-      <div className="border">
-        <h1 data-testid="customer_products__element-navbar-link-products">Produtos</h1>
+      <div
+        className="border"
+        data-testid="customer_products__element-navbar-link-products"
+      >
+        <a
+          href="/#"
+          data-testid="customer_products__element-navbar-link-products"
+        >
+          Produtos
+
+        </a>
       </div>
-      <div className="border">
-        <h1
+      <div className="border" data-testid="customer_products__element-navbar-link-orders">
+        <a
+          href="/#"
           data-testid="customer_products__element-navbar-link-orders"
         >
           Meus Pedidos
-        </h1>
+        </a>
       </div>
-      <div className="border">
+      <div
+        className="border"
+        data-testid="customer_products__element-navbar-user-full-name"
+      >
         <h1
           data-testid="customer_products__element-navbar-user-full-name"
         >
@@ -26,8 +38,13 @@ function Header() {
 
         </h1>
       </div>
-      <div className="border">
-        <h1 data-testid="customer_products__element-navbar-link-logout">Sair</h1>
+      <div className="border" data-testid="customer_products__element-navbar-link-logout">
+        <a
+          href="/#"
+          data-testid="customer_products__element-navbar-link-logout"
+        >
+          Sair
+        </a>
       </div>
     </div>
   );

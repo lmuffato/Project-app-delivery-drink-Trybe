@@ -15,7 +15,6 @@ function PrivateRoute({ element: Element }) {
     const oneSecond = 1000;
 
     if (!token || data.exp * oneSecond < Date.now()) {
-      localStorage.removeItem('token');
       navigate('/login');
     } else {
       const { id, email, name, role } = data;

@@ -152,6 +152,7 @@ function Provider({ children }) {
       value={ {
         setUser,
         user,
+        post,
         handleChange,
         submitChange,
         shoppingCart,

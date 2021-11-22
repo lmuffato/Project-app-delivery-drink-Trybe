@@ -5,11 +5,8 @@ import Login from './pages/Login';
 import SellerOrders from './pages/SellerOrders';
 import Register from './pages/Register';
 import ProductClient from './pages/ProductClient';
-<<<<<<< HEAD
 import CheckoutClient from './pages/CheckoutClient';
-=======
 import PrivateRoute from './routes/PrivateRoute';
->>>>>>> maingroup-13-dev
 
 function App() {
   return (

@@ -45,7 +45,7 @@ export default function Headers({ history }) {
     <div>
       Deu ruim!
     </div>
-  )
+  );
 }
 
 Headers.propTypes = {

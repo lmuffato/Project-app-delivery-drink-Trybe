@@ -1,10 +1,10 @@
 import React from 'react';
 import Navbar from '../Components/NavBar';
 
-const OrderDetails = () => (
-  <div>
-    <Navbar />
-  </div>
-);
-
-export default OrderDetails;
+export default function OrderDetails() {
+  return (
+    <div>
+      <Navbar />
+    </div>
+  );
+}

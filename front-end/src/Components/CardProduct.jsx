@@ -35,7 +35,7 @@ export default function CardProduct({ id,
 
   const roundPrice = () => {
     const totalPrice = Math.round((counter * cost) * 100) / 100;
-    return totalPrice;
+    return totalPrice.toFixed(2);
   };
 
   useEffect(() => {

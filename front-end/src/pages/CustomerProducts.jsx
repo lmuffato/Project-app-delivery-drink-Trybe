@@ -70,7 +70,7 @@ export default function CustomerProducts() {
         <span data-testid="customer_products__checkout-bottom-value">
           Ver Carrinho: R$
           {' '}
-          {totalPriceAllProducts.toString().replace('.', ',')}
+          {totalPriceAllProducts.toFixed(2).toString().replace('.', ',')}
         </span>
       </button>
       <main>

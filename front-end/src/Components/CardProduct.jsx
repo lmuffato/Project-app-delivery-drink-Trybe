@@ -27,6 +27,7 @@ export default function CardProduct({ id,
     });
     const haveProduct = arrayProducts.some((some) => id === some.productId);
     if (counter > 0 && !haveProduct) {
+      console.log('entrou');
       arrayProducts = [...itensList, objectProduct];
     }
 
@@ -34,9 +35,7 @@ export default function CardProduct({ id,
   }, [counter]);
 
   useEffect(() => {
-    const totalPriceSumOneProduct = counter * cost;
-    const valueFormated = totalPriceSumOneProduct.toFixed(2);
-    setPrice(valueFormated);
+    setPrice(counter * cost);
   }, [counter]);
 
   useEffect(() => {

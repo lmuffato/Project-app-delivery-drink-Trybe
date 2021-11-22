@@ -23,8 +23,8 @@ app.get('/users', userController.getAll);
 
 app.get('/coffee', (_req, res) => res.status(418).end());
 
-app.use('/login', userController.login);
-app.get('/register', userController.register);
+app.post('/login', userController.login);
+app.post('/register', userController.register);
 
 app.use(errorHandler);
 

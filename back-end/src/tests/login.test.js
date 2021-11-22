@@ -3,7 +3,7 @@ const frisby = require('frisby');
 
 const url = 'http://localhost:3001';
 
-describe('Login user', () => {
+describe('01 - Login do usuário', () => {
   describe('quando acessa com sucesso', () => {
     it('retorna o código de status 200', async () => {
       await frisby

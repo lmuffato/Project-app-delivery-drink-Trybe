@@ -34,6 +34,7 @@ export default function Products() {
       { mockProducts.map((product) => (
         <ProductCard
           key={ product.id }
+          id={ product.id }
           title={ product.name }
           image={ product.url_image }
           price={ product.price }

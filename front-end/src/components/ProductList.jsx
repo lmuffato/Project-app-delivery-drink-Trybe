@@ -1,10 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
-// import { useStore } from 'react-redux';
 import PropTypes from 'prop-types';
-// import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import ProductCard from './ProductCard';
-// import { userLogin } from '../redux/userSlice';
 
 export default function ProductList(props) {
   const { token } = props;
@@ -30,8 +27,6 @@ export default function ProductList(props) {
   useEffect(() => {
     getProducts();
   }, [getProducts]);
-
-  console.log(products);
 
   return (
     <div className="w-full flex flex-wrap p-20">

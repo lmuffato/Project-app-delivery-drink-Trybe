@@ -1,12 +1,18 @@
 import PropTypes from 'prop-types';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import noImage from '../images/noimage.jpg';
 import styles from '../styles/components/ProductCard.module.scss';
 import { cartContext } from '../contexts/cart';
 
 export default function ProductCard(props) {
+  const { increaseQuantity } = useContext(cartContext);
   const { className: customClass, image, title, price } = props;
-  const { increaseQuantity, decreaseQuantity } = useContext(cartContext);
+  const [quantity, setQuantity] = useState(0);
+
+  function addProduct() {
+    increaseQuantity(props);
+    setQuantity(quantity + 1);
+  }
 
   return (
     <div { ...props } className={ `${styles.productCard} ${customClass}` }>
@@ -32,11 +38,13 @@ export default function ProductCard(props) {
             type="number"
             data-testid="customer_products__input-card-quantity-"
             className={ styles.quantity }
+            value={ quantity }
+            readOnly
           />
           <button
             type="button"
             data-testid="customer_products__button-card-add-item-"
-            onClick={ () => increaseQuantity(title, price) }
+            onClick={ addProduct }
           >
             +
           </button>
@@ -47,6 +55,7 @@ export default function ProductCard(props) {
 }
 
 ProductCard.propTypes = {
+  id: PropTypes.number.isRequired,
   className: PropTypes.string,
   image: PropTypes.string,
   title: PropTypes.string.isRequired,

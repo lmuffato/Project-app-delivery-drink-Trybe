@@ -17,12 +17,12 @@ objPattern = {
 // const b = Math.round((a * c) * 100) / 100;
 // console.log(b);
 
-const a = 50.95;
+// const a = 50.95;
 
-const convertValueToBrlShape = (value) => {
-  const stringValue = `R$ ${value}`;
-  const brlValue = stringValue.replace('.', ',');
-  return brlValue;
-};
+// const convertValueToBrlShape = (value) => {
+//   const stringValue = `R$ ${value}`;
+//   const brlValue = stringValue.replace('.', ',');
+//   return brlValue;
+// };
 
-console.log(convertValueToBrlShape(a));
+// console.log(convertValueToBrlShape(a));

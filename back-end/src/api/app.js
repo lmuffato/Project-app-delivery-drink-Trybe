@@ -9,6 +9,8 @@ const productRouter = require('./router/productRouter');
 const imagesRouter = require('./router/imagesRouter');
 const saleRouter = require('./router/saleRouter');
 
+const SalesController = require('./controllers/sales');
+
 const app = express();
 
 const corsOptions = {
@@ -27,6 +29,7 @@ app.use('/register', registerRouter);
 app.use('/customer', productRouter);
 app.use('/images', imagesRouter);
 app.use('/sale', saleRouter);
+app.get('/sale/:id', SalesController.getById);
 
 app.use((error, _req, res, _next) => {
   res.status(error.status).json({ message: error.message });

@@ -3,14 +3,14 @@ const {
 } = require('http-status-codes');
 
 const { Sale } = require('../../database/models');
-const { User: users } = require('../../database/models');
+const { User: users, ProductsSale } = require('../../database/models');
 
 const getAllSales = async (req, res, next) => {
   try {
     const { email } = req.user;
     const { dataValues } = await users.findOne({ where: { email } });
 
-    const { role } = dataValues.role;
+    const { role } = dataValues;
     if (role === 'customer') {
       const sale = await Sale.findAll({ where: { userId: dataValues.id } });
       return res.status(OK).json(sale);
@@ -38,11 +38,20 @@ const getSalesById = async (req, res, next) => {
 
 const createSale = async (req, res, next) => {
   try {
-    const sale = await Sale.create(req.body);
-    res.status(CREATED).json(sale);
-  } catch (e) {
+    const params = req.body;
+    const sale = await Sale.create(params);
+    
+    const { data } = params;
+    data.forEach(async (product) => {
+    const { id: saleId } = sale.dataValues;
+    const { productId, quantity } = product;
+    await ProductsSale.create({ productId, quantity, saleId });
+    });
+    
+    return res.status(CREATED).json(sale);
+    } catch (e) {
     next({ statusCode: INTERNAL_SERVER_ERROR, message: e.message });
-  }
+    } 
 };
 
 module.exports = {

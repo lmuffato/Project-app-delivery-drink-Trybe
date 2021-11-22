@@ -6,7 +6,6 @@ const axios = require('axios').default;
 
 export default function TodosOsPedidos() {
   const user = localStorage.getItem('user');
-  console.log('USER -> ', user);
   const [sales, setSales] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -28,7 +27,7 @@ export default function TodosOsPedidos() {
     }
   }
 
-  useEffect(() => { getAllSales(); }, []);
+  useEffect(() => getAllSales(), []);
 
   return (
     <div>
@@ -39,7 +38,6 @@ export default function TodosOsPedidos() {
             .map((e, i) => (
               <Card
                 key={ i }
-                index={ i }
                 id={ e.id }
                 status={ e.status }
                 saleDate={ e.saleDate }

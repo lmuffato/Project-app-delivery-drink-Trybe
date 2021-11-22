@@ -28,8 +28,8 @@ app.get('/sellers/:id/sales', saleController.findBySellerId);
 
 app.get('/coffee', (_req, res) => res.status(418).end());
 
-app.use('/login', userController.login);
-app.use('/register', userController.register);
+app.post('/login', userController.login);
+app.post('/register', userController.register);
 
 app.use(errorHandler);
 

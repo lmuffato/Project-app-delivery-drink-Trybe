@@ -38,11 +38,9 @@ const findByIdSale = async (saleId) => {
   return getById;
 };
 
-const findSaleByUserId = (id) => {
-  return Sale.findAll({
-    where: { userId: id },
-  });
-}
+const findSaleByUserId = (id) => Sale.findAll({
+  where: { userId: id },
+});
 
 const getAll = async () => {
   const data = await Sale.findAll();

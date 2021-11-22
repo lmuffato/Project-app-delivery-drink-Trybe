@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { ProductCardContainer } from '../../styles/baseComponents';
 import ProductQty from '../ProductQty';
 
-function ProductCard({ id, image, price, alt, description, onChange }) {
-  const [qty, setQty] = useState(0);
+function ProductCard({ id, image, price, alt, description, initialQty }) {
+  const [qty, setQty] = useState(initialQty);
 
-  useEffect(() => { onChange(qty); }, [onChange, qty]);
+  const inputChange = ({ target: { value } }) => {
+    const qt = Number(value);
+    setQty(qt < 0 || Number.isNaN(qt) ? 0 : qt);
+  };
 
   function remove() { setQty((st) => ((st - 1) <= 0 ? 0 : (st - 1))); }
   function add() { setQty((st) => st + 1); }
@@ -39,6 +42,7 @@ function ProductCard({ id, image, price, alt, description, onChange }) {
           value={ qty }
           onRemove={ remove }
           onAdd={ add }
+          onChange={ inputChange }
         />
       </div>
     </ProductCardContainer>
@@ -51,11 +55,11 @@ ProductCard.propTypes = {
   image: PropTypes.string.isRequired,
   alt: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  onChange: PropTypes.func,
+  initialQty: PropTypes.number,
 };
 
 ProductCard.defaultProps = {
-  onChange: () => {},
+  initialQty: 0,
 };
 
 export default ProductCard;

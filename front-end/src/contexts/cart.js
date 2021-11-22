@@ -37,7 +37,7 @@ export function CartProvider({ children }) {
       let updated = cartItens.map((item) => {
         if (item.id === id) {
           item.quantity -= 1;
-          item.subTotal = cartItem.quantity * price;
+          item.subTotal = Number(cartItem.quantity * price).toFixed(2);
         }
         return item;
       });
@@ -46,8 +46,39 @@ export function CartProvider({ children }) {
     }
   };
 
+  const customizeQuantity = ({ id, title, quantityValue, price }) => {
+    const cartItem = cartItens.find((item) => item.id === id);
+    if (cartItem) {
+      let updated = cartItens.map((item) => {
+        if (item.id === id) {
+          const customQuantity = quantityValue > 0 ? quantityValue : 0;
+          item.quantity = customQuantity;
+          item.subTotal = Number(customQuantity * price).toFixed(2);
+        }
+        return item;
+      });
+      if (quantityValue === 0) updated = cartItens.filter((item) => item.id !== id);
+      setCartItens(updated);
+    } else {
+      setCartItens([{
+        id,
+        title,
+        quantity: quantityValue,
+        price: Number(price).toFixed(2),
+        subTotal: Number(Number(price) * quantityValue).toFixed(2),
+      }]);
+    }
+  };
+
   return (
-    <cartContext.Provider value={ { cartItens, increaseQuantity, decreaseQuantity } }>
+    <cartContext.Provider
+      value={ {
+        cartItens,
+        increaseQuantity,
+        decreaseQuantity,
+        customizeQuantity,
+      } }
+    >
       { children }
     </cartContext.Provider>
   );

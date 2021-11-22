@@ -90,7 +90,7 @@ export default function CardProduct({ id,
           </button>
           <input
             data-testid={ `customer_products__input-card-quantity-${id}` }
-            value={ counter }
+            value={ Number(counter) }
             onChange={ (e) => setCounter(Number(e.target.value)) }
             className="elementsQuantities quantity"
           />

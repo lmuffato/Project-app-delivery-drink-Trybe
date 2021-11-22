@@ -1,12 +1,13 @@
 import PropTypes from 'prop-types';
 import React, { useContext, useState } from 'react';
+import { formatMoney } from 'accounting';
 import noImage from '../images/noimage.jpg';
 import styles from '../styles/components/ProductCard.module.scss';
 import { cartContext } from '../contexts/cart';
 
 export default function ProductCard(props) {
   const { increaseQuantity, decreaseQuantity } = useContext(cartContext);
-  const { className: customClass, image, title, price } = props;
+  const { className: customClass, image, title, price, index } = props;
   const [quantity, setQuantity] = useState(0);
 
   function addProduct() {
@@ -27,30 +28,39 @@ export default function ProductCard(props) {
         <img
           src={ image }
           alt={ title }
-          data-testid="customer_products__img-card-bg-image-"
+          data-testid={ `customer_products__img-card-bg-image-${index}` }
         />
-        <span data-testid="customer_products__element-card-price-">{ `R$${price}` }</span>
+        <span>
+          R$
+          <span data-testid={ `customer_products__element-card-price-${index}` }>
+            { formatMoney(price, { symbol: '', decimal: ',' }) }
+          </span>
+        </span>
       </div>
       <div className={ styles.info }>
-        <h1 data-testid="customer_products__element-card-title-">{ title }</h1>
+        <h1
+          data-testid={ `customer_products__element-card-title-${index}` }
+        >
+          { title }
+        </h1>
         <div>
           <button
             type="button"
-            data-testid="customer_products__button-card-rm-item-"
+            data-testid={ `customer_products__button-card-rm-item-${index}` }
             onClick={ removeProduct }
           >
             -
           </button>
           <input
             type="number"
-            data-testid="customer_products__input-card-quantity-"
+            data-testid={ `customer_products__input-card-quantity-${index}` }
             className={ styles.quantity }
             value={ quantity }
             readOnly
           />
           <button
             type="button"
-            data-testid="customer_products__button-card-add-item-"
+            data-testid={ `customer_products__button-card-add-item-${index}` }
             onClick={ addProduct }
           >
             +
@@ -63,6 +73,7 @@ export default function ProductCard(props) {
 
 ProductCard.propTypes = {
   id: PropTypes.number.isRequired,
+  index: PropTypes.number.isRequired,
   className: PropTypes.string,
   image: PropTypes.string,
   title: PropTypes.string.isRequired,

@@ -9,7 +9,7 @@
     position: relative;
     font-size: 0;
 
-    span {
+    & > span {
       background: var(--primary-color);
       border-radius: 5px 5px 5px 35px;
       color: white;

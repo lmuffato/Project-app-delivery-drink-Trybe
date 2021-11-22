@@ -3,7 +3,11 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import { saveUser } from '../redux/slices/userSlice';
-import { saveUserDataToLocalStorage, validateLogin } from '../components/ultility';
+import {
+  getUserFromLocalStorage,
+  saveUserDataToLocalStorage,
+  validateLogin,
+} from '../components/ultility';
 import Error from '../components/Error';
 
 const datatestid = 'common_login__element-invalid-email';
@@ -15,6 +19,21 @@ export default function Login() {
   const [error, setError] = useState(false);
   const history = useHistory();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const user = getUserFromLocalStorage();
+
+    if (!user) return null;
+
+    dispatch(saveUser(user));
+
+    if (user.role === 'customer') {
+      history.push('/customer/products');
+    }
+    if (user.role === 'seller') {
+      history.push('/seller/orders');
+    }
+  }, [history, dispatch]);
 
   useEffect(() => {
     const sucessValidate = validateLogin(emailInput, passwordInput);
@@ -30,7 +49,7 @@ export default function Login() {
       .then(((res) => {
         const { user: { id, name, email, role }, token } = res.data;
         dispatch(saveUser({ id, name, email, role, token }));
-        saveUserDataToLocalStorage({ name, email, role, token });
+        saveUserDataToLocalStorage({ id, name, email, role, token });
         history.push(role === 'customer' ? '/customer/products' : '/seller/orders');
       }))
       .catch((err) => {

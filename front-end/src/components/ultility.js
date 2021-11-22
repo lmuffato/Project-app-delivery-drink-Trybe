@@ -47,13 +47,15 @@ export const validateLogin = (email, password) => {
   return false;
 };
 
-export const saveUserDataToLocalStorage = ({ name, email, role, token }) => {
-  localStorage.setItem('user', JSON.stringify({ name, email, role, token }));
+export const saveUserDataToLocalStorage = ({ id, name, email, role, token }) => {
+  localStorage.setItem('user', JSON.stringify({ id, name, email, role, token }));
 };
 
 export const removeUserDataFromLocalStorage = () => {
   localStorage.removeItem('user');
 };
+
+export const getUserFromLocalStorage = () => JSON.parse(localStorage.getItem('user'));
 
 export const calcCartTotal = (cart) => cart
   .reduce((acc, prod) => acc + (Number(prod.price) * prod.quantity), 0);

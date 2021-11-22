@@ -6,7 +6,11 @@ import styles from '../styles/components/ProductCard.module.scss';
 import { cartContext } from '../contexts/cart';
 
 export default function ProductCard(props) {
-  const { increaseQuantity, decreaseQuantity } = useContext(cartContext);
+  const {
+    increaseQuantity,
+    decreaseQuantity,
+    customizeQuantity,
+  } = useContext(cartContext);
   const { className: customClass, image, title, price, index } = props;
   const [quantity, setQuantity] = useState(0);
 
@@ -20,6 +24,16 @@ export default function ProductCard(props) {
       decreaseQuantity(props);
       setQuantity(quantity - 1);
     }
+  }
+
+  function customQuantity({ target }) {
+    let { value } = target;
+    if (value < 0) value = 0;
+    let quantityValue = Number(parseInt(String(value), 10));
+    quantityValue = Number.isNaN(quantityValue) ? 0 : quantityValue;
+    target.value = quantityValue;
+    setQuantity(quantityValue);
+    customizeQuantity({ ...props, quantityValue });
   }
 
   return (
@@ -56,7 +70,7 @@ export default function ProductCard(props) {
             data-testid={ `customer_products__input-card-quantity-${index}` }
             className={ styles.quantity }
             value={ quantity }
-            readOnly
+            onChange={ customQuantity }
           />
           <button
             type="button"

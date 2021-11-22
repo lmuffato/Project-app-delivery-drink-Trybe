@@ -34,8 +34,14 @@ export default function CardProduct({ id,
     setItensList(arrayProducts);
   }, [counter]);
 
+  const roundPrice = () => {
+    const totalPrice = Math.round((counter * cost) * 100) / 100;
+    return totalPrice;
+  };
+
   useEffect(() => {
-    setPrice(counter * cost);
+    setPrice(roundPrice());
+    console.log(roundPrice());
   }, [counter]);
 
   useEffect(() => {

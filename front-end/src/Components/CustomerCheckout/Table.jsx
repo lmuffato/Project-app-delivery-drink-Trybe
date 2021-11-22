@@ -34,8 +34,11 @@ export default function Table() {
     return sum;
   };
 
+  const roundValue = (value) => Math.round((value) * 100) / 100;
+
   useEffect(() => {
     totalSum();
+    console.log(itensList);
   }, [itensList]);
 
   return (
@@ -54,7 +57,7 @@ export default function Table() {
                 <td
                   data-testid={ `${testIdSubTotal}${index}` }
                 >
-                  {ele.price * ele.quantity}
+                  { roundValue(ele.price * ele.quantity) }
                 </td>
                 <td>
                   <button

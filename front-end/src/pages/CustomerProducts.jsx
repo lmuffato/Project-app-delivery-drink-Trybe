@@ -28,13 +28,18 @@ export default function CustomerProducts() {
     }
   };
 
+  const roundPrice = (value) => {
+    const totalPrice = Math.round((value) * 100) / 100;
+    return totalPrice;
+  };
+
   useEffect(() => {
     let soma = 0;
     const totalPricePerItem = itensList.map((item) => item.quantity * item.price);
     totalPricePerItem.forEach((element) => {
       soma += element;
     });
-    setTotalPriceAllProducts(soma);
+    setTotalPriceAllProducts(roundPrice(soma));
   }, [itensList]);
 
   useEffect(() => {

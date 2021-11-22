@@ -3,6 +3,12 @@ import moment from 'moment';
 import './OrderDetailsHeader.css';
 
 export default function OrderDetailsHeader() {
+  const dataTestid37 = 'customer_order_details__element-order-details-label-order-id';
+  const dataTestid38 = 'customer_order_details__element-order-details-label-seller-name';
+  const dataTestid39 = 'customer_order_details__element-order-details-label-order-date';
+  const Testid40 = 'customer_order_details__element-order-details-label-delivery-status';
+  const dataTestid47 = 'customer_order_details__button-delivery-check';
+
   const [changeRole, setChangeRole] = useState('EM ANDAMENTO');
 
   const handleChangeStatus = () => {
@@ -11,21 +17,21 @@ export default function OrderDetailsHeader() {
 
   return (
     <div className="container-details">
-      <div className="pedido">
+      <div data-testid={ dataTestid37 } className="pedido">
         <h2>PEDIDO</h2>
       </div>
-      <div className="vendedor">
+      <div data-testid={ dataTestid38 } className="vendedor">
         <h2>VENDEDOR</h2>
       </div>
-      <div className="momento">
+      <div data-testid={ dataTestid39 } className="momento">
         <h2>
           {moment().format('l')}
         </h2>
       </div>
-      <div className="status">
+      <div data-testid={ Testid40 } className="status">
         <h2>{ changeRole }</h2>
       </div>
-      <div className="select-role">
+      <div data-testid={ dataTestid47 } className="select-role">
         <button type="button" onClick={ handleChangeStatus }>MARCAR COMO ENTREGUE</button>
       </div>
     </div>

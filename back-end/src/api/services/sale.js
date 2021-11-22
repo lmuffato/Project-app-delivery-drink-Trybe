@@ -39,4 +39,5 @@ exports.create = async ({ userName,
     productsSaleModel.create({
       productId: product.id, saleId: sale.id, quantity: products[index].quantity });
   });
+  return { id: sale.id };
 };

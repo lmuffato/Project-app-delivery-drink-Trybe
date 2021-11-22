@@ -93,4 +93,18 @@ const getSalesByCustomerId = async (id) => {
   }
 };
 
-module.exports = { postSale, getSalesBySellerId, getSalesByCustomerId };
+const getSaleDetailById = async (id) => {
+  try {
+    const saleDetail = await Sale.findOne({ where: {
+      id,
+    },
+  });
+  if (!saleDetail) return errorMap.saleNotFound;
+
+  return saleDetail;
+  } catch (error) {
+    return errorMap.internalError;
+  }
+};
+
+module.exports = { postSale, getSalesBySellerId, getSalesByCustomerId, getSaleDetailById };

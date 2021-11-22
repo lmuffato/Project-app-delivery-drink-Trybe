@@ -1,9 +1,11 @@
 import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
+import { useHistory } from 'react-router';
 import ContextDeliveryApp from '../../store/ContextDeliveryApp';
 
-export default function LogoutButton({ history }) {
+export default function LogoutButton() {
   const { setUser, setProducts } = useContext(ContextDeliveryApp);
+
+  const history = useHistory();
 
   const handleLogoutClick = (e) => {
     e.preventDefault();
@@ -27,9 +29,3 @@ export default function LogoutButton({ history }) {
     </div>
   );
 }
-
-LogoutButton.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired,
-  }).isRequired,
-};

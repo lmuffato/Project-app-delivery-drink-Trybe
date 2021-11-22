@@ -31,7 +31,7 @@ const LINK = [
 ];
 
 function Checkout() {
-  const { cart, setCart } = useContext(UserContext);
+  const { cart, setCart, user } = useContext(UserContext);
   const { products, quantityProducts } = useContext(DeliveryContext);
   const [sellers, setSellers] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -47,7 +47,7 @@ function Checkout() {
     const onMount = async () => {
       setIsLoading(true);
       setCart(createUserCart(products, quantityProducts));
-      const result = await getSellers();
+      const { result } = await getSellers();
       setSellers(result);
       setIsLoading(false);
     };
@@ -68,15 +68,22 @@ function Checkout() {
           testeId="element-order-table-name-"
         />
         <div data-testid="customer_checkout__element-order-total-price" id="total">
-          { calculeTotal(CART_ITEMS).toFixed(2) }
+          { `${Number(calculeTotal(CART_ITEMS)).toFixed(2)}`.replace('.', ',') }
         </div>
       </div>
       {!isLoading && (
         <form>
           <label htmlFor="seller">
             Vendedor Responsável
-            <select id="seller" data-testeid="customer_checkout__select-seller">
-              <option value="">Fulano</option>
+            <select id="seller" data-testid="customer_checkout__select-seller">
+              { sellers.map((seller, i) => (
+                <option
+                  value={ seller.name }
+                  key={ `seller${i}` }
+                >
+                  { seller.name}
+                </option>
+              ))}
             </select>
           </label>
           <label htmlFor="adress">
@@ -85,7 +92,7 @@ function Checkout() {
               type="text"
               required
               id="adress"
-              data-testeid="customer_checkout__input-address"
+              data-testid="customer_checkout__input-address"
             />
           </label>
           <label htmlFor="number">
@@ -94,7 +101,7 @@ function Checkout() {
               type="number"
               required
               id="number"
-              data-testeid="customer_checkout__input-addressNumber"
+              data-testid="customer_checkout__input-addressNumber"
             />
           </label>
         </form>
@@ -102,7 +109,7 @@ function Checkout() {
       <Link to="/">
         <button
           type="button"
-          data-testeid="customer_checkout__button-submit-order"
+          data-testid="customer_checkout__button-submit-order"
           onClick={ async () => {
             const payload = createSalePayload(user.id, sellers, cart);
 

@@ -3,11 +3,11 @@ export const calculeSubTotal = ({ quantity, price, name }) => ({
   name,
   quantity,
   price,
-  total: quantity * Number(price),
+  total: (quantity * Number(price)).toFixed(2),
 });
 
 export const calculeTotal = (cart) => cart.reduce((acc, cur) => {
-  acc += cur.total;
+  acc += Number(cur.total);
   return acc;
 }, 0);
 

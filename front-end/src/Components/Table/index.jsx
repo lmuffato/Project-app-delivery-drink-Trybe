@@ -26,10 +26,10 @@ function Table({ headers, payload, hasButton, onClick }) {
               {item.quantity}
             </td>
             <td data-testid={ `customer_checkout__element-order-table-unit-price-${i}` }>
-              {`R$ ${item.price}`}
+              {`${item.price}`.replace('.', ',')}
             </td>
             <td data-testid={ `customer_checkout__element-order-table-sub-total-${i}` }>
-              {`R$ ${item.total}`}
+              {`${item.total}`.replace('.', ',')}
             </td>
             {hasButton && (
               <td>

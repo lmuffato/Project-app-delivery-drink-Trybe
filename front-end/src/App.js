@@ -7,9 +7,7 @@ function App() {
   return (
     <div
       className="AppContainer"
-      style={
-        { background: `url('${background}') center / cover` }
-      }
+      style={ { background: `url('${background}') center / cover` } }
     >
       <div className="App">
         <Routes />

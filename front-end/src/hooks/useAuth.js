@@ -73,7 +73,7 @@ export default function useAuth() {
       });
       const { name, email, role, token } = response.data;
       signInUser({ name, email, role, token });
-      if (callback) callback();
+      if (callback) callback({ name, email, role, token });
     } catch (error) {
       throwAuthFailedAlert(error);
     }

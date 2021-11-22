@@ -4,6 +4,7 @@ import NavBar from '../components/NavBar';
 import Auth from '../pages/Auth';
 import ProductsList from '../pages/customer/Products';
 import ProtectedRoute from './ProtectedRoute';
+import AdminPage from '../pages/AdminPage';
 
 export default function Routes() {
   return (
@@ -11,8 +12,9 @@ export default function Routes() {
       <Route path={ ['/login', '/register'] } component={ Auth } />
       <ProtectedRoute path={ ['/customer', '/'] }>
         <NavBar />
+        <Route path="/admin/manage" component={ AdminPage } />
         <Route path="/customer/products" component={ ProductsList } />
-        <Route path="/" render={ () => <Redirect to="/customer/products" /> } />
+        <Route exact path="/" render={ () => <Redirect to="/customer/products" /> } />
       </ProtectedRoute>
     </Switch>
   );

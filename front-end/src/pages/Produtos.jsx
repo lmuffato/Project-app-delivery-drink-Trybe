@@ -1,35 +1,70 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react/cjs/react.development';
 
+import Card from '../components/productCard';
+import Header from '../components/header';
+import BottomBox from '../components/bottomBox';
+
 const axios = require('axios').default;
 
 export default function Produtos() {
-  const token = localStorage.getItem('token');
+  const user = localStorage.getItem('user');
   const [products, setProducts] = useState([]);
-  const [lodaing, setLoading] = useState(true);
-  useEffect(
-    async () => {
-      try {
-        const response = await axios({
-          method: 'get',
-          url: 'http://localhost:3001/products',
-          responseType: 'json',
-          headers: { Authorization: token },
-        });
-        setProducts(response.data);
-        setLoading(false);
-      } catch (error) {
-        console.error(error);
-      }
-    }, [],
-  );
+  const [loading, setLoading] = useState(true);
+
+  const local = JSON.parse(user);
+  const headerInfo = {
+    title: 'Produtos',
+    subtitle: 'Meus Pedidos',
+    name: local.name,
+  };
+
+  async function getProducts() {
+    try {
+      const response = await axios({
+        method: 'get',
+        url: 'http://localhost:3001/products',
+        responseType: 'json',
+        headers: { Authorization: local.token },
+      });
+      setProducts(response.data);
+      setLoading(false);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  useEffect(() => { getProducts(); }, []);
 
   return (
     <div>
-      <h1>Produtos</h1>
-      {lodaing ? <p>Loading....</p> : products.map((product) => {
-        return <img key={ product.id } alt="productImg" src={ product.url_image } />;
-      })}
+      {
+        loading ? ''
+          : <Header props={ headerInfo } />
+      }
+      <div
+        style={ { width: '100vw',
+          height: '100vh',
+          display: 'flex',
+          flexDirection: 'row',
+          flexWrap: 'wrap' } }
+      >
+        {
+          loading ? <p>Loading....</p>
+            : products
+              .map((e, i) => (
+                <Card
+                  key={ i }
+                  index={ i }
+                  id={ e.id }
+                  strThumb={ e.url_image }
+                  strName={ e.name }
+                  strPrice={ e.price }
+                />
+              ))
+        }
+      </div>
+      <BottomBox />
     </div>
   );
 }

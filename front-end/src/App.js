@@ -1,12 +1,17 @@
 import React from 'react';
 import SnackbarProvider from 'react-simple-snackbar';
 import Routes from './routes/Routes';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import CheckoutProvider from './context/checkoutProvider';
+
 
 function App() {
   return (
-    <SnackbarProvider>
-      <Routes />
-    </SnackbarProvider>
+    <CheckoutProvider>
+      <SnackbarProvider>
+        <Routes />
+      </SnackbarProvider>
+    </CheckoutProvider>
   );
 }
 

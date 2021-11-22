@@ -23,7 +23,7 @@ export default function Cadastro() {
   };
   const handleRegister = async () => {
     try {
-      const response = await axios({
+      await axios({
         method: 'post',
         url: 'http://localhost:3001/users',
         data: {

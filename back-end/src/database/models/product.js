@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
       price: DataTypes.STRING,
       url_image: DataTypes.STRING,
     },
-    { tableName: "Products", timestamps: false }
+    { tableName: "products", timestamps: false }
   );
   Product.associate = (_models) => {};
   return Product;

@@ -10,7 +10,9 @@ const loginUser = async (req, res, next) => {
     const user = await users
     .findOne({ where: { email: req.body.email, password: req.body.password } });
     const token = tokenGen(req.body);
-    res.status(OK).json({ token, user: user.role });
+    const { name, email, role } = user.dataValues;
+    const userLocal = { name, email, role, token };
+    res.status(OK).json(userLocal);
   } catch (e) {
     next({ statusCode: INTERNAL_SERVER_ERROR, message: e.message });
   }

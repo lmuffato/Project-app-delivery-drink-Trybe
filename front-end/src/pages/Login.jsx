@@ -19,7 +19,9 @@ export default function Login() {
     const { value } = target;
     handle(value);
   };
-
+  const tokenStorage = (lgUser) => {
+    localStorage.setItem('user', JSON.stringify(lgUser));
+  };
   const validInputs = () => {
     const minPasswordLength = 5;
     const emailPattern = /\b[\w.-]+@[\w.-]+\.\w{2,4}\b/gi;
@@ -28,10 +30,6 @@ export default function Login() {
     setDisabled(!(validEmail && validPassword));
   };
   useEffect(validInputs, [user, password, disabled]);
-
-  const tokenStorage = ({ token }) => {
-    localStorage.setItem('token', token);
-  };
   const handleLogin = async () => loginApi(user, password)
     .then((data) => {
       tokenStorage(data);

@@ -19,9 +19,7 @@ const LINKS = [
 
 function Products() {
   const [disable, setDisable] = useState(true);
-  const {
-    cartValue,
-  } = useContext(DeliveryContext);
+  const { cartValue } = useContext(DeliveryContext);
 
   const history = useHistory();
 

@@ -1,7 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link, Redirect } from 'react-router-dom';
 import UserContext from '../Contexts/User/userContext';
+import DeliveryContext from '../Contexts/Deliveries/DeliveryContext';
 import Header from '../Components/Header';
 import Table from '../Components/Table';
 
@@ -23,11 +25,11 @@ const LINK = [
 ];
 
 // Helpers
-const calculeSubTotalPrice = ({ quantity, price, name }) => ({
+const calculeSubTotal = ({ quantity, price, name }) => ({
   name,
   quantity,
   price,
-  total: quantity * price,
+  total: quantity * Number(price),
 });
 
 const calculeTotal = (cart) => cart.reduce((acc, cur) => {
@@ -35,7 +37,7 @@ const calculeTotal = (cart) => cart.reduce((acc, cur) => {
   return acc;
 }, 0);
 
-const formatList = (cart) => cart.map((item) => calculeSubTotalPrice(item));
+const formatList = (cart) => cart.map((item) => calculeSubTotal(item));
 
 const createSalePayload = (userId, Sellers, cart) => {
   const deliveryAddress = document.querySelector('#adress').value;
@@ -56,8 +58,17 @@ const createSalePayload = (userId, Sellers, cart) => {
   };
 };
 
+const createUserCart = (products, quantities) => (
+  products.reduce((acc, cur) => (
+    quantities[cur.id] > 0
+      ? [...acc, { ...cur, quantity: quantities[cur.id].toFixed(2) }]
+      : [...acc]
+  ), [])
+);
+
 function Checkout() {
   const { cart, setCart } = useContext(UserContext);
+  const { products, quantityProducts } = useContext(DeliveryContext);
   const [sellers, setSellers] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -71,6 +82,7 @@ function Checkout() {
   useEffect(() => {
     const onMount = async () => {
       setIsLoading(true);
+      setCart(createUserCart(products, quantityProducts));
       const result = await getSellers();
       setSellers(result);
       setIsLoading(false);
@@ -92,7 +104,7 @@ function Checkout() {
           testeId="element-order-table-name-"
         />
         <div data-testid="customer_checkout__element-order-total-price" id="total">
-          {calculeTotal(CART_ITEMS)}
+          { calculeTotal(CART_ITEMS).toFixed(2) }
         </div>
       </div>
       {!isLoading && (

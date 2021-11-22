@@ -3,7 +3,6 @@ import validateEmail from '../validations/validateEmail';
 import UserContext from '../context/userContext';
 
 import { createNewUserByAdmin } from '../services/endpointsAPI';
-// import { getItemFromLocalStorage } from '../services/localStorage';
 import ErrorLogin from './ErrorLogin';
 
 const testId = 'admin_manage__element-invalid-register';
@@ -17,7 +16,6 @@ export default function NewUserForm() {
   const [role, setRole] = useState('');
   const [disableRegisterButton, setDisableRegisterButton] = useState(false);
   const [errorMessage, setErrorMessage] = useState(true);
-  // const [adminData, setAdminData] = useState({});
 
   const handleChange = (target) => {
     const { id, value } = target;
@@ -43,14 +41,7 @@ export default function NewUserForm() {
     }
   };
 
-  const getAdminData = async () => {
-    // const result = await getItemFromLocalStorage('token');
-    // setAdminData(result);
-    console.log('user context', userData);
-  };
-
   useEffect(() => {
-    getAdminData();
     const validateFields = () => {
       const twelveNumber = 12;
       const sixNumber = 6;

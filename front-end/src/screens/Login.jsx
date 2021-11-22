@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Box, TextField, Button, Link } from '@mui/material';
 import ContextLogin from '../context/ContextLogin';
+import { verifyUserExistance } from '../utils/LocalStorageFunctions';
 
 function Login() {
   const { makeLogin, invalidEmailError } = useContext(ContextLogin);
@@ -20,8 +21,13 @@ function Login() {
 
   const handleLogin = async () => {
     const response = await makeLogin(email, password);
+    const { role } = verifyUserExistance();
     if (response) {
-      history.push('/customer/products');
+      if (role === 'administrator') {
+        history.push('/admin/manage');
+      } else {
+        history.push('/customer/products');
+      }
     }
   };
 

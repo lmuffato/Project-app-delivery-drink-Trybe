@@ -5,6 +5,7 @@ const loginRouter = require('../routers/loginRouter');
 const registerRouter = require('../routers/registerRouter');
 const productRouter = require('../routers/productRouter');
 const salesRouter = require('../routers/salesRouter');
+const usersRouter = require('../routers/usersRouter');
 
 const app = express();
 
@@ -14,7 +15,6 @@ app.use(cors({
 }));
 app.use(bodyParser.json());
 
-const apiRoutes = express.Router();
 app.use(express.static('public'));
 
 app.use('/login', loginRouter);
@@ -25,6 +25,6 @@ app.use('/products', productRouter);
 
 app.use('/sales', salesRouter);
 
-app.use(apiRoutes);
+app.use('/users', usersRouter);
 
 module.exports = app;

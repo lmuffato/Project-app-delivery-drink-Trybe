@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import Card from '../components/salesCard';
+// import Header from '../components/header';
 
 const axios = require('axios').default;
 
@@ -29,12 +30,43 @@ export default function TodosOsPedidos() {
 
   useEffect(() => getAllSales(), []);
 
+  /*   const mock = [{
+    totalPrice: '50.99',
+    deliveryAddress: 'Rua B',
+    deliveryNumber: '1257',
+    status: 'Em rota de entregaaaaaaaa',
+    saleDate: '2021-11-11',
+    userId: 3,
+    sellerId: 2,
+    id: 1,
+  },
+  {
+    totalPrice: '88.99',
+    deliveryAddress: 'Rua FOdase',
+    deliveryNumber: '666',
+    status: 'Em rota de entregaaaa',
+    saleDate: '2021-11-10',
+    userId: 3,
+    sellerId: 2,
+    id: 2,
+  },
+  {
+    totalPrice: '9999.99',
+    deliveryAddress: 'Rua Absolution',
+    deliveryNumber: '1257',
+    status: 'Em rota de entregaaaa',
+    saleDate: '2021-11-10',
+    userId: 3,
+    sellerId: 2,
+    id: 3,
+  }]; */
+
   return (
     <div>
-      <Header title="Produtos" subtitle="Meus Pedidos" />
+      {/* <Header title="Produtos" subtitle="Meus Pedidos" name="Pa" /> */}
       <h1>Todos Os Pedidos</h1>
       {
-        loading ? <p>Loading....</p>
+        loading ? <div>loading</div>
           : sales
             .map((e, i) => (
               <Card

@@ -52,7 +52,7 @@ export default function NewUserForm() {
       return (validEmail && validName && validPassword && validRole);
     };
     setDisableRegisterButton(validateFields());
-  }, [name, email, password, role]);
+  }, [name, email, password, role, errorMessage]);
 
   return (
     <main>

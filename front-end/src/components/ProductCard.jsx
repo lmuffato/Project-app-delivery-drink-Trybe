@@ -6,7 +6,7 @@ import { cartContext } from '../contexts/cart';
 
 export default function ProductCard(props) {
   const { className: customClass, image, title, price } = props;
-  const { increaseQuantity } = useContext(cartContext);
+  const { increaseQuantity, decreaseQuantity } = useContext(cartContext);
 
   return (
     <div { ...props } className={ `${styles.productCard} ${customClass}` }>
@@ -24,6 +24,7 @@ export default function ProductCard(props) {
           <button
             type="button"
             data-testid="customer_products__button-card-rm-item-"
+            onClick={ () => decreaseQuantity(title, price) }
           >
             -
           </button>
@@ -35,7 +36,7 @@ export default function ProductCard(props) {
           <button
             type="button"
             data-testid="customer_products__button-card-add-item-"
-            onClick={ increaseQuantity }
+            onClick={ () => increaseQuantity(title, price) }
           >
             +
           </button>

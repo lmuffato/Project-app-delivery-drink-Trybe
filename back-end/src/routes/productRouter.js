@@ -1,11 +1,12 @@
 const express = require('express');
 
-const controller = require('../controller');
+const { productController } = require('../controller');
 const midleware = require('../middleware');
 
 const router = express.Router();
 
-router.get('/', midleware.token, controller.product);
-router.put(':id/images', midleware.multer.imageUpload());
+router.get('/', midleware.token, productController.getAllProducts);
+router.get(':id/images', midleware.multer.imageUpload());
+router.get('/:id', productController.getProduct);
 
 module.exports = router; 

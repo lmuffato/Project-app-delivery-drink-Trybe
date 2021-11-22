@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-  up: async (queryInterface, _Sequelize) => {
+  up: async (queryInterface, _Sequelize) => { 
     await queryInterface.bulkInsert('users',
     [{
       id: 1,
@@ -24,7 +24,25 @@ module.exports = {
       password: '1c37466c159755ce1fa181bd247cb925',
       role: 'customer',
     },
-    ], { timestamps: false });
+    // https://www.4devs.com.br/gerador_de_pessoas   
+    {
+      id: 4,
+      name: 'Bruno Renan da Luz',
+      email: 'brunorenandaluz@email.com.br',
+      password: 'C3UkymZebj',
+      role: 'customer',
+    },
+    {
+      id: 5,
+      name: 'Priscila Manuela Nunes',
+      email: 'priscilamanuelanunes@gmail.com',
+      password: 'N0UnSTJbt2',
+      role: 'customer',
+    },
+  ], {
+    timestamps: false,
+    tableName: 'users',
+  });
   },
 
   down: async (queryInterface, _Sequelize) => {

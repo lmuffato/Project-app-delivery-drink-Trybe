@@ -17,7 +17,6 @@ app.use('/images', express.static(path.join(__dirname, '..', '..', '/public')));
 app.use('/users', userRoute);
 app.use('/products', productsRoute);
 app.use('/sales', salesRoute);
-
 app.use(error);
 
 module.exports = app;

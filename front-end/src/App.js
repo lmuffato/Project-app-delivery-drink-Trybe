@@ -4,6 +4,7 @@ import Routes from './routes/Routes';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import CheckoutProvider from './context/checkoutProvider';
 
+
 function App() {
   return (
     <CheckoutProvider>

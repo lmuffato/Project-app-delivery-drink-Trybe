@@ -109,6 +109,7 @@ export default function Cadastro() {
         {redirect ? <Redirect to="/customer/products" /> : null}
         <p data-testid="common_register__element-invalid_register">{errorMessage}</p>
       </form>
+      <h1>{errorMessage}</h1>
     </div>
   );
 }

@@ -27,7 +27,11 @@ function Card({ id, strName, strThumb, strPrice }) {
   return (
     <div
       className="card"
-      style={ { width: '400px', height: '400px', display: 'flex' } }
+      style={ { width: '400px',
+        height: '400px',
+        display: 'flex',
+        flexDirection: 'row',
+        flexWrap: 'wrap' } }
     >
       <h4
         className="card-price"

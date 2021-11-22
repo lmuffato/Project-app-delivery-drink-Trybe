@@ -17,9 +17,7 @@
     "test:coverage:json": "npm run with-env react-scripts test -- --coverage --coverageReporters=\"json-summary\" --watchAll=false --testFailureExitCode=0 --detectOpenHandles --runInBand --forceExit",
     "eject": "npm run with-env react-scripts eject",
     "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json .",
-    "lint:styles": "stylelint **/*.css --config .stylelintrc.json --ignore-disables --allow-empty-input",
-    "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
+    "lint:styles": "stylelint **/*.css --config .stylelintrc.json --ignore-disables --allow-empty-input"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.2",
@@ -73,11 +71,6 @@
   },
   "eslintConfig": {
     "overrides": [
-      {
-        "rules": {
-          "import/no-anonymous-default-export": "off"
-        }
-      }
     ]
   }
 }

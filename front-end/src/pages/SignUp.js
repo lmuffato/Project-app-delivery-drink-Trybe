@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
+import UserContext from '../Contexts/User/userContext';
 
 function Signup() {
   const [newUserData, setNewUserData] = useState({ name: '', email: '', password: '' });
   const [error, setError] = useState('');
   const [isDisabled, setIsDisabled] = useState(true);
+  const { setUser } = useContext(UserContext);
   const history = useHistory();
 
   useEffect(() => {
@@ -35,7 +37,9 @@ function Signup() {
       email: newUserData.email,
       password: newUserData.password,
     }).then((response) => {
-      localStorage.setItem('newUser', JSON.stringify(response));
+      localStorage.setItem('token', response.data.token);
+      localStorage.setItem('user', JSON.stringify(response.data.user));
+      setUser(response.data.user);
       history.push('/customer/products');
     }).catch((e) => {
       console.log(e);

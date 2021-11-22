@@ -16,19 +16,17 @@ export const formatList = (cart) => cart.map((item) => calculeSubTotal(item));
 export const createSalePayload = (userId, Sellers, cart) => {
   const deliveryAddress = document.querySelector('#adress').value;
   const deliveryNumber = document.querySelector('#number').value;
-  const seller = document.querySelector('#seller').value;
+  // const seller = document.querySelector('#seller').value;
   const totalPrice = document.querySelector('#total').innerText;
 
-  const sellerId = Sellers.find(({ name }) => name === seller);
-
-  console.log();
+  // const seller_id = Sellers.find(({ name }) => name === seller);
 
   return {
-    deliveryAddress,
-    deliveryNumber,
-    sellerId: sellerId.id,
-    userId,
-    totalPrice: Number(totalPrice.replace(',', '.')),
+    delivery_address: deliveryAddress,
+    delivery_number: deliveryNumber,
+    seller_id: 2,
+    user_id: userId,
+    total_price: Number(totalPrice.replace(',', '.')),
     status: 'Pendente',
     orders: cart,
   };

@@ -12,9 +12,9 @@ const login = async (req, res) => {
 
 const createUser = async (req, res) => {
   const { name, email, password, type = 'customer' } = req.body;
-  const { err, token } = await User.createUser(name, email, password, type);
-  if (err) return res.status(409).json(err.message);
-  return res.status(201).json(token);
+  const result = await User.createUser(name, email, password, type);
+  if (result.err) return res.status(409).json(result.err.message);
+  return res.status(201).json(result);
 };
 
 const listUsers = async (req, res) => {

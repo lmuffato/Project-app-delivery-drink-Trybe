@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import UserContext from '../../Contexts/User/userContext';
 import DeliveryContext from '../../Contexts/Deliveries/DeliveryContext';
 import Header from '../../Components/Header';
@@ -39,6 +39,8 @@ function Checkout() {
   const [isLoading, setIsLoading] = useState(false);
 
   const CART_ITEMS = formatList(cart);
+
+  const history = useHistory();
 
   const removeItem = (name) => {
     const newItems = cart.filter((item) => item.name !== name);
@@ -115,7 +117,7 @@ function Checkout() {
           onClick={ async () => {
             const payload = createSalePayload(user.id, sellers, cart);
 
-            const { data: id } = await axios.post(
+            const { data: { result: { id } } } = await axios.post(
               'http://localhost:3001/sales',
               payload, { headers: { authorization: TOKEN },
               },
@@ -123,7 +125,7 @@ function Checkout() {
 
             setCart([]);
 
-            return <Redirect to={ `/customer/orders/${id}` } />;
+            return history.push(`/customer/orders/${id}`);
           } }
         >
           FINALIZAR PEDIDO

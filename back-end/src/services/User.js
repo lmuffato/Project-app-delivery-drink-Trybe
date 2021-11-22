@@ -32,7 +32,7 @@ const createUser = async (name, email, password, type) => {
 
   if (res.err) return { err: { message: 'User already registered' } };
 
-  return { token: res };
+  return { token: res.token, user: res.newUser };
 };
 
 const listUsers = async (role) => {

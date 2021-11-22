@@ -15,9 +15,9 @@ const login = async ({ email, password }) => {
 
 const createUser = async ({ name, email, password, type }) => {
   try {
-    await user.create({ name, email, password, role: type });
+    const newUser = await user.create({ name, email, password, role: type });
     const token = newToken(email, name, 'customer');
-    return token;
+    return { token, newUser };
   } catch (e) {
     return { err: e.message };
   }

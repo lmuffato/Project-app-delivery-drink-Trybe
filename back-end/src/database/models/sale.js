@@ -6,8 +6,8 @@ module.exports = (sequelize, DataTypes) => {
     deliveryNumber: DataTypes.STRING(50),
     saleDate: DataTypes.DATE,
     status: DataTypes.STRING(50),
-    userId: { type: DataTypes.INTEGER, primaryKey: true },
-    sellerId: { type: DataTypes.INTEGER, primaryKey: true },
+    // userId: { type: DataTypes.INTEGER, primaryKey: true },
+    // sellerId: { type: DataTypes.INTEGER, primaryKey: true },
     // sellerId: DataTypes.INTEGER 
   },
   {
@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
 
   Sale.associate = (models) => {
     Sale.belongsTo(models.User,
-      { foreignKey: 'user_id', as: 'user' }); // foi alterado de 'userId' para 'user'
+      { foreignKey: 'userId' }); // foi alterado de 'userId' para 'user'
   };
 
   return Sale;

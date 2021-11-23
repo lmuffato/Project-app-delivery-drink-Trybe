@@ -15,9 +15,9 @@ async function createUserService({ name, email, password }) {
     return { isRegistered: true, code: HTTP_CONFLICT, error: "User already registered" };
   };
 
-  await User.create({ name, email, password, role });
+  const user = await User.create({ name, email, password, role });
 
-  const userLogin = { name, email, role };
+  const userLogin = { user_id: user.dataValues.id, name, email, role };
   const token = await createToken(userLogin);
   const data = { name, email, role, token };
 

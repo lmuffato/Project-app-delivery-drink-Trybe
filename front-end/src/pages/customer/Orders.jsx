@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import dayjs from 'dayjs';
 import { formatMoney } from 'accounting';
+import { Link } from 'react-router-dom';
 import api from '../../services/api';
 import { AuthContext } from '../../contexts/auth';
 
@@ -25,25 +26,28 @@ export default function Orders() {
     <>
       { orders.map((order) => {
         const idLength = 4;
+        console.log(order);
         return (
-          <div key={ order.id }>
-            <section data-testid={ `customer_orders__element-order-id-${order.id}` }>
-              {`Pedido ${String(order.id).padStart(idLength, '0')}`}
-            </section>
-            <section
-              data-testid={ `customer_orders__element-delivery-status-${order.id}` }
-            >
-              {order.status}
-            </section>
-            <section>
-              <div data-testid={ `customer_orders__element-order-date-${order.id}` }>
-                {dayjs(order.saleDate).format('DD/MM/YYYY')}
-              </div>
-              <div data-testid={ `customer_orders__element-card-price-${order.id}` }>
-                {formatMoney(order.totalPrice, { symbol: '', decimal: ',' })}
-              </div>
-            </section>
-          </div>
+          <Link key={ order.id } to={ `/customer/orders/${order.id}` }>
+            <div>
+              <section data-testid={ `customer_orders__element-order-id-${order.id}` }>
+                {`Pedido ${String(order.id).padStart(idLength, '0')}`}
+              </section>
+              <section
+                data-testid={ `customer_orders__element-delivery-status-${order.id}` }
+              >
+                {order.status}
+              </section>
+              <section>
+                <div data-testid={ `customer_orders__element-order-date-${order.id}` }>
+                  {dayjs(order.saleDate).format('DD/MM/YYYY')}
+                </div>
+                <div data-testid={ `customer_orders__element-card-price-${order.id}` }>
+                  {formatMoney(order.totalPrice, { symbol: '', decimal: ',' })}
+                </div>
+              </section>
+            </div>
+          </Link>
         );
       }) }
     </>

@@ -15,7 +15,6 @@ const getAllSales = async (req, res) => {
   const { id } = req.user;
   const sales = await Sale.findAll({ where: { userId: id } })
     .catch((e) => ({ error: { message: e.message } }));
-
   if (sales.error !== undefined) {
     return res.status(httpStatus.serverError).json({ error: sales });
   }

@@ -3,6 +3,7 @@ const { SaleProduct } = require('../database/models');
 
 const createSaleElement = async (saleInfo) => {
   const { totalPrice, deliveryAddress, deliveryNumber, userId, sellerId } = saleInfo;
+  console.log(totalPrice, typeof totalPrice);
   const result = await Sale.create({
     totalPrice,
     deliveryAddress,

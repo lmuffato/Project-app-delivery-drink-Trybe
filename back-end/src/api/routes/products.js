@@ -3,6 +3,6 @@ const Products = require('../../controllers/productController');
 
 const router = express.Router();
 
-router.get('/', /* inserir validação do login aqui */ Products.getProducts);
+router.get('/', Products.getProducts);
 
 module.exports = router;

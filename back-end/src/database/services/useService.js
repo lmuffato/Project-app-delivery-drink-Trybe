@@ -43,7 +43,14 @@ async function loginService({ password, email }) {
   return { data, code: HTTP_OK_STATUS };
 };
 
+async function readByRoleService() {
+  const sellers = await User.findAll({ where: { role: "seller" }})
+
+  return { sellers, code: HTTP_OK_STATUS }
+}
+
 module.exports = {
   createUserService,
   loginService,
+  readByRoleService,
 };

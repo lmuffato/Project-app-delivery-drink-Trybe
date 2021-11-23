@@ -17,4 +17,15 @@ export async function loginApi(email, password) {
   }
 }
 
-export const x = 10;
+export async function getSeler(user) {
+  try {
+    const allSellers = (await axios.get(
+      `${BASE_URL}/users/sellers`,
+      { headers: { Authorization: user } },
+      { responseType: 'json' },
+    ));
+    return allSellers.data;
+  } catch ({ response }) {
+    throw response.data.message;
+  }
+}

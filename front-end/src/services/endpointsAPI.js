@@ -62,6 +62,11 @@ export const getSales = async () => {
   return result.data;
 };
 
+export const getSalesByCustomerId = async (id) => {
+  const result = await api.get('/sales', { id });
+  return result.data;
+};
+
 export const postSales = async (obj) => { // obj = { userId, totalPrice, deliveryAddress, deliveryNumber, status }
   const result = await api.post('/sales', obj);
   return result.data;

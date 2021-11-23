@@ -1,10 +1,26 @@
 import React from 'react';
+import { useStore, useDispatch } from 'react-redux';
+import { adddItem } from '../redux/cartSlice';
 
 export default function CartTable() {
   const indexTestId = 'customer_checkout__element-order-table-item-number-';
   const unitPriceTestId = 'customer_checkout__element-order-table-unit-price-';
   const subTotalTestId = 'customer_checkout__element-order-table-sub-total-';
   const cart = JSON.parse(localStorage.getItem('shoppingCart'));
+  const store = useStore();
+  const dispatch = useDispatch();
+
+  const deleteItem = (id) => {
+    const prevState = store.getState().shoppingCart.cartItems;
+    const newState = [];
+    prevState.forEach((item) => {
+      if (item.id !== id) {
+        newState.push(item);
+      }
+    });
+    dispatch(adddItem({ newState }));
+  };
+
   return (
     <table className="border-2">
       <thead>
@@ -51,11 +67,14 @@ export default function CartTable() {
               >
                 { item.subtotal.toFixed(2).split('.').join(',') }
               </td>
-              <td
-                data-testid={ `customer_checkout__element-order-table-remove-${index}` }
-                className="border-2 w-1/12"
-              >
-                Remover item
+              <td className="border-2 w-1/12">
+                <button
+                  data-testid={ `customer_checkout__element-order-table-remove-${index}` }
+                  type="button"
+                  onClick={ () => deleteItem(item.id) }
+                >
+                  Remover item
+                </button>
               </td>
             </tr>
           </tbody>

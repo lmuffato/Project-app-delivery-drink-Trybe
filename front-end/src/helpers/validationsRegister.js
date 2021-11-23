@@ -1,6 +1,6 @@
 const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
 const minPasswordLength = 6;
-const minNameLength = 15;
+const minNameLength = 12;
 // const ERROR_CONFLICT = 409;
 export const validations = (name, email, password) => {
   if (!emailRegex.test(email) || password.length < minPasswordLength

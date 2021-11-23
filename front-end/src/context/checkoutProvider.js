@@ -14,32 +14,29 @@ function RecipesProvider({ children }) {
     }
   }, [aux]);
 
-  async function addItem(qtd, price, id) {
-    console.log(aux);
+  async function addItem(qtd, price, id, name) {
     if (aux) {
       const productBool = aux.some((bool) => bool.id === id);
       if (productBool) {
-        console.log('bool');
         const newSales = aux.map((item) => {
-          if (item.id === id) return { id, price: (qtd * price).toFixed(2) };
+          if (item.id === id) return { id, qtd, name, price: (qtd * price).toFixed(2) };
           return item;
         });
         return setAux(newSales);
       }
 
       if (aux.length === 0 && qtd > 0) {
-        return setAux([...aux, { id, price: (qtd * price).toFixed(2) }]);
+        return setAux([...aux, { id, qtd, name, price: (qtd * price).toFixed(2) }]);
       }
       if (qtd > 0) {
-        console.log('newProduct');
-        return setAux([...aux, { id, price: (qtd * price).toFixed(2) }]);
+        return setAux([...aux, { id, qtd, name, price: (qtd * price).toFixed(2) }]);
       }
-      return setAux([{ price: 0 }]);
+      return null;
     }
   }
 
   return (
-    <CheckoutContext.Provider value={ { addItem, total } }>
+    <CheckoutContext.Provider value={ { addItem, total, aux } }>
       {children}
     </CheckoutContext.Provider>
   );

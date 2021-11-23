@@ -2,7 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router';
 import PropTypes from 'prop-types';
 
-function Header({ props }) {
+function Header(props) {
   const { title, subtitle, name } = props;
   const history = useHistory();
   return (
@@ -41,7 +41,6 @@ function Header({ props }) {
   );
 }
 Header.propTypes = {
-  props: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)).isRequired,
   title: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   subtitle: PropTypes.string.isRequired,

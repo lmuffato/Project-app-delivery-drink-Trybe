@@ -1,5 +1,5 @@
 /* eslint-disable prefer-object-spread */
-const { Sale, User, Product, SaleProduct } = require('../../database/models');
+const { Sale, User, Product } = require('../../database/models');
 const serviceUser = require('./user');
 
 const getAllSale = async () => {
@@ -27,20 +27,14 @@ const createSale = async ({
 };
 
 const getById = async (id) => {
-  const quantity = await SaleProduct.findAll({
-    where: {
-      saleId: id,
-    },
-    attributes: ['quantity'],
-  });
   const sale = await Sale.findByPk(id, {
     include: [
       { model: User, as: 'seller', attributes: { exclude: ['password'] } },
-      { model: Product, as: 'products', through: { attributes: [] } },
+      { model: Product, as: 'products', through: { attributes: ['quantity'] } }, 
     ],
   });
 
-  return { status: 200, data: { sale, quantity } };
+  return { status: 200, data: sale };
 };
 
 module.exports = {

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import formatDate from '../../utils/formatDate';
+// import formatDate from '../../utils/formatDate';
 import styles from './styles.module.css';
 
 export default function OrderDetails({ saleData, products, quantity }) {
@@ -8,13 +8,13 @@ export default function OrderDetails({ saleData, products, quantity }) {
   console.log('PRODUCTS =>', products);
   console.log('QUANTITY =>', quantity);
   const test = products.map((item, i) => ({ ...item, ...quantity[i] }));
-  console.log(test);
-  const thInfos = ['Item', 'Descrição', 'Quantidade', 'Valor Unitário', 'Sub-total'];
+  console.log('PRODUCTS COM QUANTITY =>', test);
+  // const thInfos = ['Item', 'Descrição', 'Quantidade', 'Valor Unitário', 'Sub-total'];
 
   return (
     <main className={ styles.container }>
       <h3>Detalhes do Pedido</h3>
-      <section>
+      {/* <section>
         <div>
           <span>
             {saleData.id}
@@ -40,7 +40,7 @@ export default function OrderDetails({ saleData, products, quantity }) {
             </tr>
           </thead>
         </table>
-      </section>
+      </section> */}
     </main>
   );
 }

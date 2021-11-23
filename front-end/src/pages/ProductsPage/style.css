@@ -14,3 +14,24 @@
   min-height: 100vh;
   padding: 5rem 0;
 }
+
+.cartButton {
+  background-color: rgb(23, 196, 0);
+  border: 0;
+  border-radius: 8px;
+  bottom: 90px;
+  color: rgb(243, 243, 243);
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 700;
+  height: 50px;
+  padding: 3px 7px;
+  position: fixed;
+  right: 90px;
+  transition: 0.3s;
+  width: 180px;
+}
+
+.cartButton:hover {
+  filter: brightness(0.8);
+}

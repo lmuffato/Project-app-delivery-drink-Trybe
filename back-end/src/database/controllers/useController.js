@@ -29,7 +29,18 @@ async function login(req, res) {
   }
 }
 
+async function readByRole(_req, res) {
+  try {
+    const { sellers, code } = await useService.readByRoleService();
+
+    return res.status(code).json(sellers);
+  } catch (e) {
+    return res.status(HTTP_NOT_FOUND).json({ error: e.message });
+  }
+}
+
 module.exports = {
   createUser,
-  login
+  login,
+  readByRole
 }

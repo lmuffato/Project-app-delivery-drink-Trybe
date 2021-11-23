@@ -1,15 +1,62 @@
 import React, { useContext, useState, useEffect } from 'react';
+import jwt from 'jsonwebtoken';
 import { formatMoney } from 'accounting';
+import { useHistory } from 'react-router';
+import dayjs from 'dayjs';
+import { AuthContext } from '../../contexts/auth';
 import { cartContext } from '../../contexts/cart';
+import api from '../../services/api';
+import useInputs from '../../hooks/useInputs';
 
 export default function Checkout() {
+  const { user: userContext } = useContext(AuthContext);
   const { cartItens, removeFromCart } = useContext(cartContext);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [sellers, setSellers] = useState([]);
+  const [inputs, setInputs] = useInputs({ seller: '', address: '', number: '' });
+  const history = useHistory();
 
   useEffect(() => {
     const total = cartItens.reduce((acc, curr) => acc + Number(curr.subTotal), 0);
     setTotalPrice(total);
   }, [cartItens]);
+
+  useEffect(() => {
+    (async () => {
+      const response = await api.get('/register');
+      const users = response.data;
+      const filteredToSellers = users.filter((user) => user.role === 'seller');
+      setSellers(filteredToSellers);
+    })();
+  }, []);
+
+  async function finishOrder(event) {
+    event.preventDefault();
+    const products = cartItens.map(
+      (item) => ({ productId: item.id, quantity: item.quantity }),
+    );
+    const payload = jwt.verify(
+      userContext.token, process.env.REACT_APP_JWT_SECRET_KEY || 'senha_dificil',
+    );
+    const response = await api.post('/sales', {
+      userId: payload.login.id,
+      sellerId: inputs.seller,
+      totalPrice,
+      deliveryAddress: inputs.address,
+      deliveryNumber: inputs.number,
+      saleDate: dayjs().format('YYYY/MM/DD'),
+      status: 'Pendente',
+      products,
+    }, {
+      headers: {
+        authorization: userContext.token,
+      },
+    });
+
+    const { id } = response.data;
+
+    history.push(`/customer/orders/${id}`);
+  }
 
   return (
     <>
@@ -82,11 +129,19 @@ export default function Checkout() {
       </h1>
 
       <h1>Detalhes e endereço para entrega</h1>
-      <form>
+      <form onSubmit={ finishOrder }>
         <label htmlFor="seller">
           P. vendedora responsável:
-          <select id="seller" data-testid="customer_checkout__select-seller">
-            <option value="ok">ok</option>
+          <select
+            id="seller"
+            data-testid="customer_checkout__select-seller"
+            onChange={ setInputs }
+            value={ inputs.seller }
+          >
+            <option value="" disabled hidden>Selecione uma pessoa</option>
+            { sellers.map((seller) => (
+              <option key={ seller.id } value={ seller.id }>{seller.name}</option>
+            )) }
           </select>
         </label>
         <label htmlFor="address">
@@ -95,6 +150,7 @@ export default function Checkout() {
             type="text"
             id="address"
             data-testid="customer_checkout__input-address"
+            onChange={ setInputs }
           />
         </label>
         <label htmlFor="number">
@@ -103,6 +159,7 @@ export default function Checkout() {
             type="number"
             id="number"
             data-testid="customer_checkout__input-addressNumber"
+            onChange={ setInputs }
           />
         </label>
         <button type="submit" data-testid="customer_checkout__button-submit-order">

@@ -37,3 +37,11 @@ export default function OrderDetailsHeader() {
     </div>
   );
 }
+
+// LUCAS MUFFATO ESSES SAO OS DATATESTID QUE VOCE DEVE USAR PARA GERAR A SUA TABLE, TAMU JUNTO MEU REI
+
+// const dataTestid41 = 'customer_order_details__element-order-table-item-number-';
+// const dataTestid42 = 'customer_order_details__element-order-table-name-';
+// const dataTestid43 = 'customer_order_details__element-order-table-quantity-';
+// const dataTestid44 = 'customer_order_details__element-order-table-sub-total-';
+// const dataTestid45 = 'customer_order_details__element-order-total-price-';

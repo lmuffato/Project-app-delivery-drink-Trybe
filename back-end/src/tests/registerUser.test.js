@@ -56,6 +56,53 @@ describe('02 - Registrar novo usuário', () => {
     }); 
   });
 
+  describe('Quando tenta criar usuário já existente', () => {
+    
+    it('Retorna o código de status 409', async () => {
+      await frisby
+        .post(`${url}/register`,
+          {
+            "name": "Silvano Silva e Silva",
+            "email": "silvanosilvaesilva@email.com",
+            "password": "123456",
+            "role": "customer"
+          })
+        .expect('status', 409)
+    });
+
+    it('Retorna um objeto', async () => {
+      await frisby
+        .post(`${url}/register`,
+          {
+            "name": "Silvano Silva e Silva",
+            "email": "silvanosilvaesilva@email.com",
+            "password": "123456",
+            "role": "customer"
+          })
+        .then ((response) => {
+          const { body } = response;
+          const result = JSON.parse(body);
+          expect(result).to.be.a('object');
+        })
+    });
+
+   it('A chave error.message retorna o valor correto', async () => {
+      await frisby
+        .post(`${url}/register`,
+          {
+            "name": "Silvano Silva e Silva",
+            "email": "silvanosilvaesilva@email.com",
+            "password": "123456",
+            "role": "customer"
+          })
+        .then ((response) => {
+          const { body } = response;
+          const result = JSON.parse(body);
+          expect(result.error.message).to.be.equals('User already registered');
+        })
+    }); 
+  });
+
   describe('Quando recebe campos com erro ao criar usuário', () => {
     describe('Campo de nome vazio', () => {
       it('Retorna o código de status 400', async () => {

@@ -1,103 +1,77 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {
+  Grid,
   Card,
-  CardContent,
   Typography,
-  Button,
-  CardMedia,
-  ButtonGroup,
-  TextField,
-  Box,
 } from '@mui/material';
-import ContextProducts from '../context/ContextProducts';
+import StatusCard from './StatusCard';
+
+import convertDateFormat from '../utils/convertDateFormat';
 
 function OrderCard(props) {
-  const { id, name, price, urlImage: image } = props;
-  const [quantity, setQuantity] = useState(0);
-  const { setProductCartQuantity } = useContext(ContextProducts);
-
-  useEffect(() => {
-    setProductCartQuantity(id, +(quantity));// eslint-disable-next-line
-  }, [quantity]);
-
+  const { id, saleDate, status, totalPrice } = props;
+  const contentText = (content, testeid = '') => (
+    <Typography
+      sx={ { fontSize: 14 } }
+      color="text.secondary"
+      data-testid={ testeid }
+      variant="h4"
+    >
+      {content}
+    </Typography>
+  );
+  const rightBox = (content, testid = '') => (
+    <Grid item xs={ 5 }>
+      {contentText(content, testid)}
+    </Grid>
+  );
+  const charQuantity = 4;
+  const orderNumberBox = (
+    <Grid container direction="column" alignItems="center" justifyContent="space-between">
+      <Grid item xs={ 5 }>
+        {contentText('Pedido')}
+      </Grid>
+      <Grid item xs={ 5 } data-testid={ `customer_orders__element-order-id-${id}` }>
+        {contentText(id.toString().padStart(charQuantity, '0'))}
+      </Grid>
+    </Grid>
+  );
+  const dateTestid = `customer_orders__element-order-date-${id}`;
   return (
-    <Card sx={ { maxWidth: 275 } }>
-      <CardContent>
-        <Box
-          sx={ {
-            display: 'flex',
-            flexDirection: 'row',
-            gap: 0.5,
-          } }
+    <Card sx={ { maxWidth: 350 } }>
+      <Grid container direction="row" alignItems="center" justifyContent="stretch">
+        <Grid
+          item
+          xd={ 2 }
+          sx={ { height: '100%' } }
         >
-          <Typography
-            sx={ { fontSize: 14 } }
-            color="text.secondary"
-            gutterBottom
-          >
-            R$
-          </Typography>
-          <Typography
-            sx={ { fontSize: 14 } }
-            color="text.secondary"
-            data-testid={ `customer_products__element-card-price-${id}` }
-            gutterBottom
-          >
-            { price ? price.replace('.', ',') : 0 }
-          </Typography>
-        </Box>
-        <CardMedia
-          component="img"
-          height="125"
-          image={ image }
-          alt={ name }
-          data-testid={ `customer_products__img-card-bg-image-${id}` }
-        />
-        <Typography
-          variant="body2"
-          data-testid={ `customer_products__element-card-title-${id}` }
-        >
-          { name }
-        </Typography>
-      </CardContent>
-      <ButtonGroup>
-        <Button
-          size="medium"
-          data-testid={ `customer_products__button-card-rm-item-${id}` }
-          onClick={ () => {
-            if (quantity !== 0) setQuantity(quantity - 1);
-          } }
-        >
-          -
-        </Button>
-        <TextField
-          sx={ {
-            maxWidth: 50,
-          } }
-          inputProps={ {
-            'data-testid': `customer_products__input-card-quantity-${id}`,
-          } }
-          onChange={ (e) => setQuantity(+(e.target.value)) }
-          value={ quantity.toString() }
-        />
-        <Button
-          size="medium"
-          data-testid={ `customer_products__button-card-add-item-${id}` }
-          onClick={ () => setQuantity(quantity + 1) }
-        >
-          +
-        </Button>
-      </ButtonGroup>
+          {orderNumberBox}
+        </Grid>
+        <Grid item xs={ 3 }>
+          <Grid container direction="row">
+            <StatusCard initialStatus={ status } id={ id } />
+            <Grid
+              container
+              direction="column"
+              alignItems="center"
+              justifyContent="space-around"
+            >
+              {rightBox(convertDateFormat(saleDate), dateTestid)}
+              {rightBox(`R$ ${totalPrice.replace('.', ',')}`)}
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
     </Card>
   );
 }
 
 OrderCard.propTypes = {
   id: PropTypes.number.isRequired,
-  name: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
-  urlImage: PropTypes.string.isRequired,
+  saleDate: PropTypes.string.isRequired,
+  status: PropTypes.string.isRequired,
+  totalPrice: PropTypes.string.isRequired,
 };
 
 export default OrderCard;

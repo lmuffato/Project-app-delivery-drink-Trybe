@@ -43,6 +43,7 @@ export default function ProductCard(props) {
     const prevState = store.getState().shoppingCart.cartItems;
     const newItem = {
       id,
+      name,
       qtd,
       price: parseFloat(price),
       subtotal: (qtd * parseFloat(price)),
@@ -73,7 +74,7 @@ export default function ProductCard(props) {
         deleteItem(prevState);
       }
     }
-  }, [qtd]);
+  }, [qtd, id, price, store]);
 
   const changeInput = (event) => {
     if (event.target.value > 0) {

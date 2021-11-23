@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import Checkout from '../components/Checkout';
 import NavBar from '../components/NavBar';
 import ProductList from '../components/ProductList';
 
@@ -31,6 +32,7 @@ export default function Customer() {
         total += element.subtotal;
       });
       setTotalCart(total.toFixed(2).split('.').join(','));
+      localStorage.setItem('shoppingCart', JSON.stringify(shoppingCart));
       setDisabled(false);
     } else {
       setDisabled(true);
@@ -40,7 +42,6 @@ export default function Customer() {
   useEffect(() => {
     if (location === '/customer/products') {
       setIsVisible('visible');
-      // setDisabled(true);
     } else {
       setIsVisible('hidden');
     }
@@ -55,7 +56,7 @@ export default function Customer() {
         {
           location === '/customer/products'
             ? <ProductList token={ user.token } />
-            : <span>aeaeae</span>
+            : <Checkout totalCart={ totalCart } />
         }
         <button
           data-testid="customer_products__button-cart"

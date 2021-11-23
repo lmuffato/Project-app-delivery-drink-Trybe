@@ -32,7 +32,7 @@ function CustomerProducts() {
       await findProducts();
       setLoading(false);
     }
-    getProducts();
+    getProducts(); // eslint-disable-next-line
   }, []);
 
   const renderProductCard = () => products.map((product, index) => (

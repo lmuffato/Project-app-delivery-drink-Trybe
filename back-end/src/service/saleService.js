@@ -11,7 +11,7 @@ const findProduct = async (id) => {
 };
 
 const createSale = async (
-    { totalPrice, userId, sellerId, deliveryAddress, deliveryNumber, saleDate, status, products },
+    { totalPrice, userId, sellerId, deliveryAddress, deliveryNumber, status, products },
   ) => {
   if (!await findUser(userId)) {
     return { code: 400, message: 'id de usuário inválido' };
@@ -22,7 +22,7 @@ const createSale = async (
   }
 
   const sale = await Sale.create(
-    { totalPrice, userId, sellerId, deliveryAddress, deliveryNumber, saleDate, status, products },
+    { totalPrice, userId, sellerId, deliveryAddress, deliveryNumber, status, products },
   );
   
   const saleId = sale.id;

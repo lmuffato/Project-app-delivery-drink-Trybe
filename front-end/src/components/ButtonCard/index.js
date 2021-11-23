@@ -16,7 +16,7 @@ function ButtonCard({ id, name, price }) {
     return actualCart.quantity;
   });
 
-  const { addToCart, removeProdCart } = useCart();
+  const { addToCart, removeProdCart, manualEntry } = useCart();
 
   const checkQuantity = () => {
     const cart = JSON.parse(localStorage.getItem('carrinho'));
@@ -38,6 +38,12 @@ function ButtonCard({ id, name, price }) {
     checkQuantity();
   };
 
+  const manual = (event) => {
+    const quantity = Number(event.target.value);
+    manualEntry(id, name, price, quantity);
+    checkQuantity();
+  };
+
   return (
     <div className="buttonCardContainer">
       <button
@@ -51,6 +57,7 @@ function ButtonCard({ id, name, price }) {
       <input
         data-testid={ `customer_products__input-card-quantity-${id}` }
         value={ actualQuantityProduct }
+        onChange={ manual }
       />
       <button
         type="button"

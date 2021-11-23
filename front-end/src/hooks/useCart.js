@@ -87,6 +87,27 @@ export function CartProvider({ children }) {
     updateCart(id, name, price, '+');
   };
 
+  const manualEntry = (id, name, price, quantity) => {
+    const cart = JSON.parse(localStorage.getItem('carrinho'));
+    const productUpdate = { id, name, price, quantity };
+
+    if (quantity === 0) {
+      const newCart = cart.filter((productElem) => productElem.id !== id);
+      localStorage.setItem('carrinho', JSON.stringify(newCart));
+      totalCartPrice();
+      return;
+    }
+    const newArrayOfProducts = cart
+      .map((productElem) => {
+        if (productElem.id === id) {
+          return productUpdate;
+        }
+        return productElem;
+      });
+    localStorage.setItem('carrinho', JSON.stringify(newArrayOfProducts));
+    totalCartPrice();
+  };
+
   const removeProdCart = (id, name, price) => {
     const cart = JSON.parse(localStorage.getItem('carrinho'));
     if (!cart || cart.every((elem) => elem.id !== id)) return;
@@ -96,7 +117,7 @@ export function CartProvider({ children }) {
 
   return (
     <CartContext.Provider
-      value={ { totalValue, addToCart, removeProdCart } }
+      value={ { totalValue, addToCart, removeProdCart, manualEntry } }
     >
       {children}
     </CartContext.Provider>

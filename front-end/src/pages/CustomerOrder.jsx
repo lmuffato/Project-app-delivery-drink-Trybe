@@ -12,39 +12,39 @@ const dataTestid35 = 'customer_orders__element-order-date-';
 export default function CustomerOrder() {
   const { userData } = useContext(userContext);
   const [orders, setOrders] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const loadingTag = <h3>Loading ...</h3>;
 
-  const renderTags = () => (
-    <section>
+  const renderTags = (orderNumber, status, date, index) => (
+    <div key={ index }>
       <div className="cardContainer">
         <div data-testid={ dataTestid33 } className="pedido">
-          { dataTestid33 }
+          { orderNumber }
         </div>
         <div data-testid={ dataTestid34 } className="status">
-          { dataTestid34 }
+          { status }
         </div>
         <div data-testid={ dataTestid35 } className="moment">
-          { dataTestid35 }
+          { date }
         </div>
       </div>
-    </section>
+    </div>
   );
 
   useEffect(() => {
     setIsLoading(true);
-    getSalesByCustomerId(userData.id).then((resp) => Json.resp())
-      .then((data) => setOrders(data));
+    getSalesByCustomerId(userData.id).then((resp) => setOrders(resp));
     setIsLoading(false);
-    console.log(orders);
   }, []);
 
   return (
     <div>
+      { console.log(orders) }
       <Navbar />
       {
         !isLoading
-          ? renderTags()
+          ? orders.map((e, index) => renderTags(e.id, e.status, e.saleDate, index))
+
           : loadingTag
       }
     </div>

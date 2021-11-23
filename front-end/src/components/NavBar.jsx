@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import { useHistory } from 'react-router';
 import {
   AppBar,
@@ -10,8 +11,10 @@ import {
 import ContextLogin from '../context/ContextLogin';
 import { logoutUser } from '../utils/LocalStorageFunctions';
 
-function NavBar({ seller=false }) {
-  const { userData: { name } } = useContext(ContextLogin);
+function NavBar({ sellerView = false }) {
+  const { userData } = useContext(ContextLogin);
+  const userInLocalStorage = localStorage.getItem('user');
+  const { name } = userData || JSON.parse(userInLocalStorage);
   const history = useHistory();
   return (
     <AppBar position="static">
@@ -22,20 +25,20 @@ function NavBar({ seller=false }) {
           justifyContent: 'space-around',
         } }
       >
-        { !seller && (
+        { !sellerView && (
           <Link
             href="/customer/products"
             color="#FFF"
             data-testid="customer_products__element-navbar-link-products"
           >
             Produtos
-          </Link> )}
+          </Link>) }
         <Link
           href="/customer/orders"
           color="#FFF"
           data-testid="customer_products__element-navbar-link-orders"
         >
-          { seller ? 'Pedidos' : 'Meus Pedidos' }
+          { sellerView ? 'Pedidos' : 'Meus Pedidos' }
         </Link>
         <Typography
           variant="h6"
@@ -57,5 +60,13 @@ function NavBar({ seller=false }) {
     </AppBar>
   );
 }
+
+NavBar.propTypes = {
+  sellerView: PropTypes.bool,
+};
+
+NavBar.defaultProps = {
+  sellerView: false,
+};
 
 export default NavBar;

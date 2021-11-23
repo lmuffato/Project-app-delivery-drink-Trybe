@@ -1,17 +1,13 @@
 import React, { useState, useEffect } from 'react';
-/*
 import { usePrice } from '../../context/productsProvider';
-import Button from '../Button';
-import InputField from '../InputField';
-*/
+import { saleEndPointData } from '../../utils/endPointsData';
+
 export default function CheckoutForm() {
   const [sellerId, setSellerId] = useState();
-  /*
-  const { totalPrice } = usePrice();
   const [deliveryAddress, setDeliberyAddress] = useState('');
-  const [deliveryNumber, setDeliveryNumber] = useState('');
-  const [status, setStatus] = useState("pendente");
-  */
+  const [deliveryNumber, setDeliveryNumber] = useState(0);
+  const { totalPrice } = usePrice();
+  const status = 'pendente';
   const [allSellers, setAllSellers] = useState([]);
 
   useEffect(() => {
@@ -26,17 +22,41 @@ export default function CheckoutForm() {
       });
   }, []);
 
-  const handleChange = ({ value }) => {
+  const handleChangeSeller = ({ value }) => {
     if (sellerId !== value) setSellerId(value);
   };
 
+  const handleChange = ({ value }, setStateCallback) => {
+    setStateCallback(value);
+  };
+
+  const submitForm = async (event) => {
+    event.preventDefault();
+
+    const { token } = JSON.parse(localStorage.getItem('user'));
+
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', authorization: token },
+      body: JSON.stringify({
+        totalPrice,
+        sellerId,
+        deliveryAddress,
+        deliveryNumber,
+        status,
+      }),
+    };
+
+    await fetch(saleEndPointData.endpoint, requestOptions);
+  };
+
   return (
-    <form action="/customer/checkout" method="POST">
+    <form onSubmit={ submitForm }>
       <label htmlFor="sellerInput">
         P. Vendedora Responsável
         <select
           id="sellerInput"
-          onChange={ ({ target }) => handleChange(target) }
+          onChange={ ({ target }) => handleChangeSeller(target) }
         >
           { allSellers.map((seller) => (
             <option
@@ -48,6 +68,31 @@ export default function CheckoutForm() {
           )) }
         </select>
       </label>
+      <label htmlFor="addressInput">
+        Endereço
+        <input
+          type="text"
+          name="addressInput"
+          id="addressInput"
+          value={ deliveryAddress }
+          onChange={ ({ target }) => handleChange(target, setDeliberyAddress) }
+        />
+      </label>
+      <label htmlFor="numberInput">
+        Número
+        <input
+          type="number"
+          name="numberInput"
+          id="numberInput"
+          value={ deliveryNumber }
+          onChange={ ({ target }) => handleChange(target, setDeliveryNumber) }
+        />
+      </label>
+      <button
+        type="submit"
+      >
+        Finalizar Pedido
+      </button>
     </form>
   );
 }

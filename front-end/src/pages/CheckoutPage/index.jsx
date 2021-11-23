@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Header from '../../components/Header';
 import { usePrice } from '../../context/productsProvider';
 import CheckoutForm from '../../components/CheckoutForm';
@@ -7,12 +7,6 @@ import styles from './styles.module.css';
 
 export default function CheckoutPage() {
   const { putItem, totalPrice } = usePrice();
-
-  useEffect(() => {
-    console.log('Itens adicionados');
-    console.log(putItem);
-    console.log('Tudo ok ?');
-  }, []);
 
   return (
     <div>

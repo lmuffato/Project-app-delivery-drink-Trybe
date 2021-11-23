@@ -10,7 +10,7 @@ import {
 import ContextLogin from '../context/ContextLogin';
 import { logoutUser } from '../utils/LocalStorageFunctions';
 
-function NavBar() {
+function NavBar({ seller=false }) {
   const { userData: { name } } = useContext(ContextLogin);
   const history = useHistory();
   return (
@@ -22,19 +22,20 @@ function NavBar() {
           justifyContent: 'space-around',
         } }
       >
-        <Link
-          href="/customer/products"
-          color="#FFF"
-          data-testid="customer_products__element-navbar-link-products"
-        >
-          Produtos
-        </Link>
+        { !seller && (
+          <Link
+            href="/customer/products"
+            color="#FFF"
+            data-testid="customer_products__element-navbar-link-products"
+          >
+            Produtos
+          </Link> )}
         <Link
           href="/customer/orders"
           color="#FFF"
           data-testid="customer_products__element-navbar-link-orders"
         >
-          Meus Pedidos
+          { seller ? 'Pedidos' : 'Meus Pedidos' }
         </Link>
         <Typography
           variant="h6"

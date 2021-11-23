@@ -44,3 +44,8 @@ export const createSale = async (object) => {
     { headers: { authorization: token } });
   return result.data;
 };
+
+export const getUserById = async (id) => {
+  const result = await api.get('/users/:id', { id });
+  return result.data;
+};

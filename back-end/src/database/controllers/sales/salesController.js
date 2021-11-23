@@ -1,9 +1,14 @@
-const { Sale, SaleProduct } = require('../../models');
+const { Sale, SaleProduct, User, Product } = require('../../models');
 const SaleService = require('../../services/sale/saleSevice');
 const rescue = require('express-rescue');
 
 const getSale = rescue(async (_req, res) => {
-  const allSale = await Sale.findAll();
+  const allSale = await Sale.findAll({
+    include: [
+      { model: Product, as: 'products'},
+      // { model: SaleProduct, as: 'saleProducts', through: { attributes: [] }}
+    ]
+  });
   res.status(200).json(allSale);
 });
 
@@ -14,13 +19,17 @@ const create = rescue(async (req, res) => {
   const newSale = SaleService.validateEntries({ totalPrice, deliveryAddress, deliveryNumber, status });
   if (newSale.message) return res.status(newSale.status).json({ message: newSale.message });
 
+  const sellerName = await User.findByPk(sellerId);
+  const { dataValues } = sellerName;
+
   const createdSale = await Sale.create({ 
     total_price: totalPrice,
     delivery_address: deliveryAddress,
     delivery_number: deliveryNumber,
     status, user_id: id,
-    seller_id: sellerId});
-  console.log(sellerId);
+    seller_id: sellerId,
+    products,
+    seller_name: dataValues.name });
 
   await products.forEach((product) => {
     SaleProduct.create({

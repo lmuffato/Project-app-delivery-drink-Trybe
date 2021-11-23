@@ -8,6 +8,12 @@ const createSale = async (data) => {
   return { status: 201, id: newSale.id };
 };
 
+const getSales = async () => {
+  const sales = await sale.findAll();
+  return { status: 200, data: sales };
+};
+
 module.exports = {
   createSale,
+  getSales,
 };

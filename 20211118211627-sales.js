@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-  up: async (queryInterface, Sequelize) => queryInterface.bulkInsert('Sales',
+  up: async (queryInterface, Sequelize) => queryInterface.bulkInsert('sales',
     [
       {
         user_id: 1,
@@ -10,7 +10,7 @@ module.exports = {
         delivery_address: 'jfaofasdlkfjalsfjalsçdfç',
         delivery_number: '465',
         sale_date: new Date(),
-        status: 'teste',
+        status: 'Pendente',
       },
       {
         user_id: 1,
@@ -19,7 +19,7 @@ module.exports = {
         delivery_address: 'aaaaaaaaaaaa',
         delivery_number: '88',
         sale_date: new Date(),
-        status: 'teste',
+        status: 'Pendente',
       },
       {
         user_id: 1,
@@ -28,8 +28,8 @@ module.exports = {
         delivery_address: 'zzzzzç',
         delivery_number: '63',
         sale_date: new Date(),
-        status: 'teste',
+        status: 'Pendente',
       },], {}),
 
-  down: async (queryInterface, Sequelize) => await queryInterface.bulkDelete('Sales', null, {}),
+  down: async (queryInterface, Sequelize) => await queryInterface.bulkDelete('sales', null, {}),
 };

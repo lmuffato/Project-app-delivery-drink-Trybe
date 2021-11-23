@@ -1,4 +1,3 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import './App.css';

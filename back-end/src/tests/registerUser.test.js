@@ -288,50 +288,50 @@ describe('02 - Registrar novo usuário', () => {
       });
     });
 
-    // describe('Campo de role vazio', () => {
-    //   it('Retorna o código de status 400', async () => {
-    //     await frisby
-    //       .post(`${url}/register`,
-    //         {
-    //           "name": "Fulano Silva e Silva",
-    //           "email": "Fulanosilvaesilva@email.com",
-    //           "password": "123456",
-    //           "role": ""
-    //         })
-    //       .expect('status', 400)
-    //   });
+    describe('Campo de role vazio', () => {
+      it('Retorna o código de status 400', async () => {
+        await frisby
+          .post(`${url}/register`,
+            {
+              "name": "Batuta Silva e Silva",
+              "email": "Batutasilvaesilva@email.com",
+              "password": "123456",
+              "role": ""
+            })
+          .expect('status', 400)
+      });
   
-    //   it('Retorna um objeto', async () => {
-    //     await frisby
-    //       .post(`${url}/register`,
-    //         {
-    //           "name": "Siclano Silva e Silva",
-    //           "email": "Siclanosilvaesilva@email.com",
-    //           "password": "123456",
-    //           "role": ""
-    //         })
-    //       .then ((response) => {
-    //         const { body } = response;
-    //         const result = JSON.parse(body);
-    //         expect(result).to.be.a('object');
-    //       })
-    //   });
+      it('Retorna um objeto', async () => {
+        await frisby
+          .post(`${url}/register`,
+            {
+              "name": "Batutinha Silva e Silva",
+              "email": "Batutinhasilvaesilva@email.com",
+              "password": "123456",
+              "role": ""
+            })
+          .then ((response) => {
+            const { body } = response;
+            const result = JSON.parse(body);
+            expect(result).to.be.a('object');
+          })
+      });
   
-    //   it('A chave error.message retorna o valor correto', async () => {
-    //     await frisby
-    //       .post(`${url}/register`,
-    //         {
-    //           "name": "Beltrano Silva e Silva",
-    //           "email": "beltranosilvaesilva@email.com",
-    //           "password": "123456",
-    //           "role": ""
-    //         })
-    //       .then ((response) => {
-    //         const { body } = response;
-    //         const result = JSON.parse(body);
-    //         expect(result.error.message).to.be.equals('\"role\" is not allowed to be empty');
-    //       })
-    //   });
-    // });
+      it('A chave error.message retorna o valor correto', async () => {
+        await frisby
+          .post(`${url}/register`,
+            {
+              "name": "Beltrana Silva e Silva",
+              "email": "beltranasilvaesilva@email.com",
+              "password": "123456",
+              "role": ""
+            })
+          .then ((response) => {
+            const { body } = response;
+            const result = JSON.parse(body);
+            expect(result.error.message).to.be.equals('\"role\" is not allowed to be empty');
+          })
+      });
+    });
   });
 });

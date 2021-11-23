@@ -13,7 +13,7 @@ export default function CheckoutComprador() {
   const [chooseSeller, setChooseSeller] = useState('Fulana Pereira');
   const [addressNumber, setAddressNumber] = useState('');
   const userName = JSON.parse(userData);
-
+  const totalValue = total.toFixed(2).toString().replace(/\./g, ',');
   async function getSellerId(user) {
     const sellerIncome = await getSeler(user);
     setSeller(sellerIncome);
@@ -51,7 +51,7 @@ export default function CheckoutComprador() {
         />
       ))}
       <h3 data-testid="customer_checkout__element-order-total-price">
-        {`TOTAL R$ ${total}`}
+        {`${totalValue}`}
       </h3>
       <form>
         <select

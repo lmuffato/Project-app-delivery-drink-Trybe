@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export default function CheckoutProduct({ index, id, name, qtd, price }) {
+  const newPrice = (price / qtd).toFixed(2).toString().replace(/\./g, ',');
+  const subtotal = (price).toString().replace(/\./g, ',');
   return (
     <div key={ id }>
       <p
@@ -20,12 +22,12 @@ export default function CheckoutProduct({ index, id, name, qtd, price }) {
       <p
         data-testid={ `customer_checkout__element-order-table-unit-price-${index}` }
       >
-        {price}
+        {newPrice}
       </p>
       <p
         data-testid={ `customer_checkout__element-order-table-sub-total-${index}` }
       >
-        {`R$:${qtd * price}`}
+        {`R$:${subtotal}`}
       </p>
       <button
         type="button"

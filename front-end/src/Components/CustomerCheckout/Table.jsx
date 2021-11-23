@@ -8,7 +8,7 @@ import NewOrderContext from '../../context/NewOrderContext';
 
 const testIdNumber = 'customer_checkout__element-order-table-item-number-';
 const testIdName = 'customer_checkout__element-order-table-name-';
-const testIdQuantity = 'cutomer_checkout__element-order-table-quantity-';
+const testIdQuantity = 'customer_checkout__element-order-table-quantity-';
 const testIdUnitPrice = 'customer_checkout__element-order-table-unit-price-';
 const testIdSubTotal = 'customer_checkout__element-order-table-sub-total-';
 const testIdRemove = 'customer_checkout__element-order-table-remove-';

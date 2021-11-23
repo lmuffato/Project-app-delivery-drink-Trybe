@@ -137,7 +137,12 @@ export default function DeliveryDetails() {
           className={ `${buttonSubmitOrder}` }
           onClick={ createNewSale }
         >
-          <button type="button">FINALIZAR PEDIDO</button>
+          <button
+            type="button"
+            data-testid={ `${buttonSubmitOrder}` }
+          >
+            FINALIZAR PEDIDO
+          </button>
         </Link>
       </div>
     </div>

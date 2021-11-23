@@ -4,7 +4,7 @@ import Header from '../components/Header/Header';
 import CheckoutProduct from '../components/checkoutProduct';
 
 export default function CheckoutComprador() {
-  const { aux } = useContext(CheckoutContext);
+  const { aux, total } = useContext(CheckoutContext);
   const user = localStorage.getItem('user');
 
   const userName = JSON.parse(user);
@@ -20,9 +20,13 @@ export default function CheckoutComprador() {
           name={ name }
           price={ price }
           qtd={ qtd }
+          index={ i }
           key={ i }
         />
       ))}
+      <h3 data-testid="customer_checkout__element-order-total-price">
+        {`TOTAL R$ ${total}`}
+      </h3>
     </div>
   );
 }

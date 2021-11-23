@@ -1,0 +1,162 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snapshot test renders correctly 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        style="display: flex; justify-content: center; align-items: center; width: 90%;"
+      >
+        <div
+          style="background-color: green; display: flex; justify-content: center; align-items: center; color: black; font-weight: bold; font-size: 20px; width: 10%; border-start-start-radius: 10px; border-end-start-radius: 10px;"
+        >
+          <p>
+            1
+          </p>
+        </div>
+        <div
+          style="background-color: blue; display: flex; justify-content: center; align-items: center; color: black; font-weight: bold; font-size: 20px; width: 30%;"
+        >
+          <p>
+            Cerveja Brahma
+          </p>
+        </div>
+        <div
+          style="background-color: purple; display: flex; justify-content: center; align-items: center; color: white; font-weight: bold; font-size: 20px; width: 15%;"
+        >
+          <p>
+            2
+          </p>
+        </div>
+        <div
+          style="background-color: red; display: flex; justify-content: center; align-items: center; color: white; font-weight: bold; font-size: 20px; width: 15%;"
+        >
+          <p>
+            R$ 4.00
+          </p>
+        </div>
+        <div
+          style="background-color: yellow; display: flex; justify-content: center; align-items: center; color: white; font-weight: bold; font-size: 20px; width: 15%;"
+        >
+          <p>
+            R$ 8.00
+          </p>
+        </div>
+        <div
+          style="background-color: green; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 20px; width: 20%; border-top-right-radius: 10px; border-bottom-right-radius: 10px;"
+        >
+          <button
+            style="background-color: green; color: white; height: 64px; font-size: 20px;"
+            type="button"
+          >
+            Remover
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      style="display: flex; justify-content: center; align-items: center; width: 90%;"
+    >
+      <div
+        style="background-color: green; display: flex; justify-content: center; align-items: center; color: black; font-weight: bold; font-size: 20px; width: 10%; border-start-start-radius: 10px; border-end-start-radius: 10px;"
+      >
+        <p>
+          1
+        </p>
+      </div>
+      <div
+        style="background-color: blue; display: flex; justify-content: center; align-items: center; color: black; font-weight: bold; font-size: 20px; width: 30%;"
+      >
+        <p>
+          Cerveja Brahma
+        </p>
+      </div>
+      <div
+        style="background-color: purple; display: flex; justify-content: center; align-items: center; color: white; font-weight: bold; font-size: 20px; width: 15%;"
+      >
+        <p>
+          2
+        </p>
+      </div>
+      <div
+        style="background-color: red; display: flex; justify-content: center; align-items: center; color: white; font-weight: bold; font-size: 20px; width: 15%;"
+      >
+        <p>
+          R$ 4.00
+        </p>
+      </div>
+      <div
+        style="background-color: yellow; display: flex; justify-content: center; align-items: center; color: white; font-weight: bold; font-size: 20px; width: 15%;"
+      >
+        <p>
+          R$ 8.00
+        </p>
+      </div>
+      <div
+        style="background-color: green; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 20px; width: 20%; border-top-right-radius: 10px; border-bottom-right-radius: 10px;"
+      >
+        <button
+          style="background-color: green; color: white; height: 64px; font-size: 20px;"
+          type="button"
+        >
+          Remover
+        </button>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

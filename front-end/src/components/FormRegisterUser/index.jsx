@@ -1,71 +1,101 @@
-import React, { useEffect, useState } from 'react';
-import { useValidator } from 'react-joi';
+import React, { useEffect, useState, useCallback } from 'react';
+// import { useValidator } from 'react-joi';
 import genHashMd5 from 'md5';
-import {
-  initialData, schema, explicitCheck,
-} from '../../utils/validateFormRegisterConfigOptions';
+import useAsync from '../../hooks/useAsync';
+// import {
+//   initialData, schema, explicitCheck,
+// } from '../../utils/validateFormRegisterConfigOptions';
 import useManagerUsersContext from '../../hooks/useManagerUsersContext';
 import api from '../../services/api';
 import ErrorBackend from '../ErrorBackend';
 
+const fetchPostData = (userData) => api.post('/user', userData)
+  .then((response) => response.data)
+  .catch((error) => error.response.data);
+
 const FormRegisterUser = () => {
-  const [enableButton, setEnableButton] = useState(true);
+  // const [enableButton, setEnableButton] = useState(true);
+
   const [messageErrorBackend, setMessageErrorBackend] = useState(false);
+  const [formValidState, setFormValidState] = useState(false);
+  const [formState, setFormState] = useState(
+    { name: '', email: '', password: '', role: 'client' },
+  );
   const { setUser } = useManagerUsersContext();
 
-  const {
-    state, setData,
-    setExplicitField,
-    validate,
-  } = useValidator({ initialData, schema, explicitCheck });
+  const submitApiData = useCallback(() => {
+    const { name, email, password, role } = formState;
+    const passwordHash = genHashMd5(password);
+    return fetchPostData({ name, email, password: passwordHash, role });
+  }, [formState]);
 
-  const handleForm = ({ target: { value, name } }) => {
-    setData((prevState) => ({
+  const { execute, status, value, error } = useAsync(submitApiData, false);
+
+  const handleForm = ({ target }) => {
+    setFormState((prevState) => ({
       ...prevState,
-      [name]: value,
+      [target.name]: target.value,
     }));
   };
 
-  const fetchPostData = async (userData) => {
-    try {
-      await api.post('/user', userData);
-      setMessageErrorBackend(false);
-    } catch (error) {
-      const { data } = error.response;
-      setMessageErrorBackend(data.message);
-      console.log(data.message);
-    }
+  const validationForm = () => {
+    console.log('blur');
+    setFormValidState(true);
   };
+
+  // const validateApiResponse = (userData) => userData;
+  // try {
+  //   await api.post('/user', userData);
+  //   setMessageErrorBackend(false);
+  // } catch (error) {
+  //   const { data } = error.response;
+  //   setMessageErrorBackend(data.message);
+  //   console.log(data.message);
+  // }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    validate();
-    const { name, email, password, role } = state.$data;
-    const passwordHash = genHashMd5(password);
-
-    setUser({ name, email, password, role });
-
-    fetchPostData({ name, email, password: passwordHash, role });
+    // validate();
+    setFormValidState(true);
+    // const { name, email, password, role } = formState;
+    // const passwordHash = genHashMd5(password);
+    execute();
   };
 
+  const http200 = 200;
+  const http300 = 300;
+
   useEffect(() => {
-    const enableOrDisable = state.$auto_invalid;
-    setEnableButton(enableOrDisable);
-  }, [state.$auto_invalid]);
+    if (status === 'idle' || status === 'pending') {
+      return;
+    }
+    if (status === 'success') {
+      if (value.status >= http200 && status < http300) {
+        const { name, email, role } = formState;
+        setUser({ name, email, role });
+        return;
+      }
+      setMessageErrorBackend(value.message);
+      return;
+    }
+    if (status === 'error') {
+      setMessageErrorBackend(error);
+    }
+  }, [status, setUser, formState, setMessageErrorBackend, error, value]);
 
   return (
     <>
-      <form action="POST" onSubmit={ handleSubmit }>
+      <form action="POST">
         <label htmlFor="name">
-          <span>Nome</span>
+          Nome
           <input
             type="text"
             name="name"
             id="name"
             data-testid="admin_manage__input-name"
             onChange={ handleForm }
-            onBlur={ () => setExplicitField('name', true) }
-            value={ state.$data.name }
+            onBlur={ validationForm }
+            value={ formState.name }
             placeholder="Mínimo 12 caracteres"
           />
         </label>
@@ -78,8 +108,8 @@ const FormRegisterUser = () => {
             id="email"
             data-testid="admin_manage__input-email"
             onChange={ handleForm }
-            onBlur={ () => setExplicitField('email', true) }
-            value={ state.$data.email }
+            onBlur={ validationForm }
+            value={ formState.email }
             placeholder="example@email.com"
           />
         </label>
@@ -92,8 +122,8 @@ const FormRegisterUser = () => {
             id="password"
             data-testid="admin_manage__input-password"
             onChange={ handleForm }
-            onBlur={ () => setExplicitField('password', true) }
-            value={ state.$data.password }
+            onBlur={ validationForm }
+            value={ formState.password }
             placeholder="Mínimo 6 caracteres"
           />
         </label>
@@ -105,8 +135,8 @@ const FormRegisterUser = () => {
             data-testid="admin_manage__select-role"
             onChange={ handleForm }
             name="role"
-            onBlur={ () => setExplicitField('role', true) }
-            value={ state.$data.role }
+            onBlur={ validationForm }
+            value={ formState.role }
           >
             <option value="salesman">Vendedor</option>
             <option value="client">Cliente</option>
@@ -117,18 +147,18 @@ const FormRegisterUser = () => {
         <button
           type="submit"
           data-testid="admin_manage__button-register"
-          disabled={ enableButton }
+          disabled={ !formValidState || status === 'pending' }
+          onClick={ handleSubmit }
         >
           cadastrar
         </button>
       </form>
 
-      <span>
-        {state.$errors.name.map((data) => data.$message).join(',')}
-        {state.$errors.email.map((data) => data.$message).join(',')}
-        {state.$errors.password.map((data) => data.$message).join(',')}
-        {state.$errors.role.map((data) => data.$message).join(',')}
-      </span>
+      <pre>
+        { JSON.stringify(formState, null, 2) }
+        {`formvalidstate: ${formValidState}`}
+        {`status: ${status}`}
+      </pre>
 
       { messageErrorBackend && <ErrorBackend messageError={ messageErrorBackend } />}
     </>

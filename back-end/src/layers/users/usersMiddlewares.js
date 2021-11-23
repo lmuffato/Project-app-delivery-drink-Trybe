@@ -10,6 +10,7 @@ const authentication = require('../authentication/authMiddleware');
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
+    console.log('dddd', email);
     const hash = crypto.createHash('md5').update(password).digest('hex');
     const user = await users.findOne({ where: { email, password: hash } });
     if (!user) return res.status(404).json({ message: false });

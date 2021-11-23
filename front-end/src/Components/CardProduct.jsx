@@ -58,6 +58,12 @@ export default function CardProduct({ id,
     setCounter(counter - 1);
   }
 
+  function handleChange(e) {
+    if (Number(e.target.value)) {
+      setCounter(Number(e.target.value));
+    }
+  }
+
   return (
     <div key={ id } className="cardProduct">
       <div>
@@ -91,7 +97,7 @@ export default function CardProduct({ id,
           <input
             data-testid={ `customer_products__input-card-quantity-${id}` }
             value={ Number(counter) }
-            onChange={ (e) => setCounter(Number(e.target.value)) }
+            onChange={ handleChange }
             className="elementsQuantities quantity"
           />
           <button

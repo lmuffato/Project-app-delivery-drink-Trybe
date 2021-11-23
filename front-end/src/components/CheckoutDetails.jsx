@@ -40,26 +40,23 @@ export default function CheckoutDetails() {
   // "deliveryAddress": "Rua Xablau",
   // "deliveryNumber": "100"
 
-  const confirmSale = async (/* products */) => {
+  const confirmSale = async (products) => {
     console.log(sale);
-    const result = await saleAction({ ...sale, /* products,  */token });
+    const result = await saleAction({ ...sale, products, token });
     const saleId = result.result;
     if (saleId) history.push(`/customer/orders/${saleId}`);
   };
 
   const mountSale = () => {
-    const products = [];
-    cart.map((item) => {
-      const { name, count: quantity } = item;
-      products.push({ name, quantity });
-      return products;
-    });
+    const products = cart.map(
+      ({ name, count: quantity }) => ({ name, quantity }),
+    );
     setSale({
       ...sale,
-      // products,
+      products,
       totalPrice,
     });
-    confirmSale(/* products */);
+    confirmSale(products);
   };
 
   const handleChange = ({ target: { name, value } }) => {

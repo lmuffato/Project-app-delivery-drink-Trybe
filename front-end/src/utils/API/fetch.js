@@ -47,7 +47,7 @@ export const fetchProducts = async (token) => {
 };
 
 export const saleAction = async ({
-  token, userId, sellerId, totalPrice, deliveryAddress, deliveryNumber }) => {
+  token, userId, sellerId, totalPrice, deliveryAddress, deliveryNumber, products }) => {
   try {
     const rawResponse = await fetch('http://localhost:3001/sales',
       requestMetadata({
@@ -59,6 +59,7 @@ export const saleAction = async ({
           totalPrice,
           deliveryAddress,
           deliveryNumber,
+          products,
         }) }));
     const saleId = await rawResponse.json();
     return saleId;

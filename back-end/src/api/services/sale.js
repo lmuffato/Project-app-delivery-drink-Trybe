@@ -1,7 +1,9 @@
-const { sale: saleModel } = require('../../database/models');
-const { user: userModel } = require('../../database/models');
-// const { product: productModel } = require('../../database/models');
-// const { productsSale: productsSaleModel } = require('../../database/models');
+const {
+  sale: saleModel,
+  user: userModel,
+  product: productModel,
+  salesProduct: salesProductModel
+} = require('../../database/models');
 
 exports.findAll = async () => {
   const sales = await saleModel.findAll({});
@@ -15,17 +17,17 @@ exports.getOrdersByUserEmail = async ({ email }) => {
 /* const getUserIdByName = async (name) => {
   const user = await userModel.findOne({ where: { name } });
   return user.id;
-};
-const getProductsByName = async (products) => {
+}; */
+const getProductsByName = async (products = []) => {
   const productQueries = products
   .map(({ name }) => productModel.findOne({ where: { name } }));
   return Promise.all(productQueries);
-}; */
+};
 exports.create = async ({ userId,
-  sellerId, totalPrice, deliveryAddress, deliveryNumber }) => {
+  sellerId, totalPrice, deliveryAddress, deliveryNumber, products }) => {
   /* const sellerId = await getUserIdByName(sellerName);
-  const userId = await getUserIdByName(userName);
-  const productsData = await getProductsByName(products); */
+  const userId = await getUserIdByName(userName); */
+  const productsData = await getProductsByName(products);
   const sale = await saleModel.create({
     deliveryAddress,
     deliveryNumber,
@@ -35,9 +37,9 @@ exports.create = async ({ userId,
     sellerId,
     userId,
   });
-  /* productsData.forEach((product, index) => {
-    productsSaleModel.create({
+  productsData.forEach((product, index) => {
+    salesProductModel.create({
       productId: product.id, saleId: sale.id, quantity: products[index].quantity });
-  }); */
+  });
   return { id: sale.id };
 };

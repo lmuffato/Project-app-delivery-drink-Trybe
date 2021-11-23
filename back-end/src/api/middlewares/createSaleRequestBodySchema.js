@@ -11,6 +11,11 @@ const schema = Joi.object({
     .required(),
   deliveryNumber: Joi.number()
     .required(),
+  products: Joi.array()
+    .items({
+      name: Joi.string().required(),
+      quantity: Joi.number().required(),
+    })
 }).required();
 
 module.exports = schema;

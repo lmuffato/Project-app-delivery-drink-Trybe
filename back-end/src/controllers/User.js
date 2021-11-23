@@ -10,9 +10,9 @@ const createUser = async (req, res) => {
 };
 
 const getUser = async (req, res) => {
-  const { email, password } = req.body;
+  const { email } = req.body;
 
-  const { status, message, token } = await userService.getUser(email, password);
+  const { status, message, token } = await userService.getUser(email);
   if (!token) return res.status(status).json({ message });
 
   return res.status(status).json(token);

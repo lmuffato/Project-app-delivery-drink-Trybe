@@ -21,7 +21,7 @@ const create = async (name, email, password) => {
   return { status: 201, token };
 };
 
-const getUser = async (email, password) => {
+const getUser = async (email) => {
   const user = await User.findOne({ where: { email } });
   if (!user) return { status: 500, message: 'Internal Server Error' };
 

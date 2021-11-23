@@ -38,7 +38,7 @@ async function loginService({ password, email }) {
   const { name, role } = await readByEmailService(email);
   const userLogin = { name, role, email };
   const token = await createToken(userLogin);
-  const data = { name, email, role, token, id };
+  const data = { name, email, role, token, id: isUserResgistered.dataValues.id };
 
   return { data, code: HTTP_OK_STATUS };
 };

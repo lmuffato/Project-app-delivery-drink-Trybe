@@ -34,3 +34,10 @@ table {
 td, th {
   padding: 8px;
 }
+
+.order-status-pendente {
+  background-color: yellow;
+  border-radius: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+}

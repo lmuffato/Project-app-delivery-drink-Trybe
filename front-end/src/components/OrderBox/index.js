@@ -34,6 +34,7 @@ function OrderBox({ props }) {
           {saleDate.split('T')[0]}
         </p>
         <p
+          className={ `order-status-${status}` }
           data-testid={ tesStatus }
         >
           {status.toUpperCase()}

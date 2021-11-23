@@ -1,5 +1,4 @@
-/* eslint-disable no-unused-vars */
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Header from '../components/header';
 import Context from '../context/Context';
 import Table from '../components/table';
@@ -10,6 +9,9 @@ function CheckoutClient() {
     shoppingCart,
     total,
     setDelivery, delivery, sellers, setSellerId } = useContext(Context);
+
+  const [order] = useState(shoppingCart);
+  console.log(order);
 
   return (
     <>

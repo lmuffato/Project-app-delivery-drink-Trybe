@@ -1,10 +1,14 @@
 import React, { useState, useContext, useEffect } from 'react';
 import '../styles/form.css';
+import Jwt from 'jsonwebtoken';
 import { Link, useNavigate } from 'react-router-dom';
 import TextInput from './TextInput';
 import Context from '../context/Context';
 import regex from '../utils/regex';
 import errorMap from '../utils/errorMap';
+
+// zebirita@email.com
+// $#zebirita#$
 
 function LoginForm() {
   const { post } = useContext(Context);
@@ -35,7 +39,11 @@ function LoginForm() {
       const { data } = await post('login_form', loginForm);
 
       if (data.token) {
+        const { email, name, role } = Jwt.decode(data.token);
+        const { token } = data;
         localStorage.setItem('token', data.token);
+        localStorage.setItem('user', JSON.stringify({ name, email, role, token }));
+
         navigate('/customer/products');
       }
     } catch ({ response }) {

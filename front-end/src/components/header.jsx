@@ -1,9 +1,16 @@
 import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../styles/header.css';
 import Context from '../context/Context';
 
 function Header() {
   const { user } = useContext(Context);
+  const navigate = useNavigate();
+
+  const logout = () => {
+    localStorage.clear();
+    navigate('/login');
+  };
 
   return (
     <div className="container">
@@ -38,13 +45,15 @@ function Header() {
 
         </h1>
       </div>
-      <div className="border" data-testid="customer_products__element-navbar-link-logout">
-        <a
-          href="/#"
+
+      <div className="border">
+        <button
+          type="button"
           data-testid="customer_products__element-navbar-link-logout"
+          onClick={ logout }
         >
           Sair
-        </a>
+        </button>
       </div>
     </div>
   );

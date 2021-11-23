@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
+import Jwt from 'jsonwebtoken';
 import '../styles/form.css';
 import { useNavigate } from 'react-router-dom';
 import Context from '../context/Context';
@@ -43,7 +44,12 @@ function Registration() {
       const { data } = await post('registration_form', registerForm);
 
       if (data.token) {
+        const { name, email, role } = Jwt.decode(data.token);
+        const { token } = data;
+
         localStorage.setItem('token', data.token);
+        localStorage.setItem('user', JSON.stringify({ name, email, role, token }));
+
         navigate('/customer/products');
       }
     } catch ({ response }) {

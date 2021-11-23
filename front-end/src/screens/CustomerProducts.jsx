@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import {
   Grid,
   Button,
 } from '@mui/material';
+import { Link } from 'react-router-dom';
 import NavBar from '../components/NavBar';
 import ProductCard from '../components/ProductCard';
 import ContextProducts from '../context/ContextProducts';

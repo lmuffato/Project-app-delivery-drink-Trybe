@@ -1,0 +1,29 @@
+.primary, .secondary, .tertiary {
+  border: none;
+  border-radius: 5px;
+  color: #f2fffc;
+  cursor: pointer;
+  font-size: 18px;
+  height: 35px;
+  margin: 10px 0;
+  width: 80%;
+}
+
+.primary {
+  background-color: #036b52;
+}
+
+.primary:disabled {
+  background-color: #b1c2be;
+  color: #036b52;
+  cursor: not-allowed;
+}
+
+.secondary {
+  background-color: #2fc18c;
+}
+
+.tertiary {
+  border: 2px solid #036b52;
+  color: #036b52;
+}

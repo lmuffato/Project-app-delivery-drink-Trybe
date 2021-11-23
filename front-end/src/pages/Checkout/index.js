@@ -15,8 +15,6 @@ import {
   createUserCart,
 } from './helpers';
 
-const TOKEN = localStorage.getItem('token');
-
 const HEADERS = ['Descrição', 'Quantidade', 'Valor Unitário', 'Sub-total'];
 
 const LINK = [
@@ -72,7 +70,7 @@ function Checkout() {
           testeId="element-order-table-name-"
         />
         <div data-testid="customer_checkout__element-order-total-price" id="total">
-          { `${Number(calculeTotal(CART_ITEMS)).toFixed(2)}`.replace('.', ',') }
+          {`${Number(calculeTotal(CART_ITEMS)).toFixed(2)}`.replace('.', ',')}
         </div>
       </div>
       {!isLoading && (
@@ -80,12 +78,12 @@ function Checkout() {
           <label htmlFor="seller">
             Vendedor Responsável
             <select id="seller" data-testid="customer_checkout__select-seller">
-              { sellers.map((seller, i) => (
+              {sellers.map((seller, i) => (
                 <option
                   value={ seller.name }
                   key={ `seller${i}` }
                 >
-                  { seller.name}
+                  {seller.name}
                 </option>
               ))}
             </select>
@@ -119,7 +117,12 @@ function Checkout() {
 
             const { data: { result: { id } } } = await axios.post(
               'http://localhost:3001/sales',
-              payload, { headers: { authorization: TOKEN },
+              JSON.stringify(payload),
+              {
+                headers: {
+                  authorization: localStorage.getItem('token'),
+                  'Content-Type': 'application/json',
+                },
               },
             );
 

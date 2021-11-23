@@ -1,7 +1,6 @@
 const jwt = require("jsonwebtoken");
 const jwtKey = require("fs")
-  .readFileSync("./back-end/jwt.evaluation.key", { encoding: "utf-8" })
-  .trim();
+  .readFileSync("./back-end/jwt.evaluation.key", { encoding: "utf-8" });
 
 const { result, messageDiff } = require("../../utils/assertionAux");
 const { timeout } = require("../../constants").puppeteer;

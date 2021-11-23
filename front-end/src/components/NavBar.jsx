@@ -1,10 +1,9 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 import ButtonLogout from './ButtonLogout';
-import { LoginContext } from '../contexts/Login';
 
 function NavBar() {
-  const { values } = useContext(LoginContext);
+  const { name } = JSON.parse(localStorage.getItem('user'));
 
   return (
     <ul>
@@ -19,7 +18,7 @@ function NavBar() {
         </NavLink>
       </li>
       <li data-testid="customer_products__element-navbar-user-full-name">
-        { values.name || 'username' }
+        { name }
       </li>
       <li data-testid="customer_products__element-navbar-link-logout">
         <ButtonLogout />

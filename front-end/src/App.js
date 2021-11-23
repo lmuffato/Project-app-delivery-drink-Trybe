@@ -4,6 +4,7 @@ import Login from './pages/Login';
 import { LoginProvider } from './contexts/Login';
 import Products from './pages/Products';
 import { ProductsProvider } from './contexts/Products';
+import Checkout from './pages/Checkout';
 
 function App() {
   return (
@@ -25,13 +26,12 @@ function App() {
         exact
         path="/customer/products"
         element={
-          <LoginProvider>
-            <ProductsProvider>
-              <Products />
-            </ProductsProvider>
-          </LoginProvider>
+          <ProductsProvider>
+            <Products />
+          </ProductsProvider>
         }
       />
+      <Route exact path="/customer/checkout" element={ <Checkout /> } />
     </Routes>
   );
 }

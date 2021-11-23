@@ -4,10 +4,7 @@ import { useNavigate } from 'react-router-dom';
 function ButtonLogout() {
   const navigate = useNavigate();
   const logout = () => {
-    localStorage.removeItem('name');
-    localStorage.removeItem('email');
-    localStorage.removeItem('role');
-    localStorage.removeItem('token');
+    localStorage.removeItem('user');
     navigate('/login');
   };
 

@@ -16,17 +16,10 @@ const createUser = async (req, res) => {
 const login = async (req, res) => {
   const { email, password } = req.body;
 
-  const { 
-    status, 
-    data, 
-    token, 
-    id, 
-    name, 
-    role,
-  } = await userService.login(email, password);
+  const { status, data, token, id, name, role } = await userService.login(email, password);
 
   if (token) {
-    return res.status(status).json({ token, id, name, email, role });
+    return res.status(status).json({ id, name, role, email, token });
   }
 
   return res.status(status).json({ data });

@@ -6,7 +6,7 @@ import ProductPage from './pages/ProductPage';
 import AdminPage from './pages/AdminPage';
 import { PricesProvider } from './context/productsProvider';
 import MyRequestsPage from './pages/MyRequestsPage';
-import ClientOrderDetails from './pages/ClientOrderDetails';
+import ClientOrderDetailsPage from './pages/ClientOrderDetailsPage';
 import './App.css';
 
 function App() {
@@ -30,7 +30,7 @@ function App() {
         }
       />
       <Route path="/customer/orders" element={ <MyRequestsPage /> } />
-      <Route path="/customer/orders/:id" element={ <ClientOrderDetails /> } />
+      <Route path="/customer/orders/:id" element={ <ClientOrderDetailsPage /> } />
       <Route path="/admin/manage" element={ <AdminPage /> } />
     </Routes>
   );

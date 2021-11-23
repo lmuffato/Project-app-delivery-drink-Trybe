@@ -2,11 +2,13 @@ const { Router } = require('express');
 
 const path = require('path');
 
+const { HTTP_OK_STATUS } = require('../status');
+
 const router = Router();
 
-router.get(':file', (req, res) => {
+router.get('/:file', (req, res) => {
   const { file } = req.params;
-  res.sendFile(path.resolve(__dirname, `../../public/${file}`));
+  res.status(HTTP_OK_STATUS).sendFile(path.resolve(__dirname, `../../public/${file}`));
 });
 
 module.exports = router;

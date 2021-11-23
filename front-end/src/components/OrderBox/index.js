@@ -1,6 +1,7 @@
 import React from 'react';
 import './style.css';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 
 function OrderBox({ props }) {
   const {
@@ -31,7 +32,7 @@ function OrderBox({ props }) {
         <p
           data-testid="customer_order_details__element-order-details-label-order-date"
         >
-          {saleDate.split('T')[0]}
+          {moment(saleDate).format('DD/MM/yyyy')}
         </p>
         <p
           className={ `order-status-${status}` }

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import moment from 'moment';
 import MenuCostumer from '../../components/MenuCustomer';
 import api from '../../services/api';
 
@@ -44,7 +45,7 @@ function Orders() {
             <p
               data-testid={ `customer_orders__element-order-date-${id}` }
             >
-              {saleDate.split('T')[0]}
+              {moment(saleDate).format('DD/MM/yyyy')}
             </p>
             <p>{totalPrice}</p>
           </div>
@@ -52,8 +53,6 @@ function Orders() {
       );
     })
   );
-
-  console.log(salesOrder);
 
   return (
     <section className="ordersPage">

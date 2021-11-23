@@ -57,7 +57,7 @@ export default function DeliveryDetails() {
 
   const roundValue = (value) => {
     const newValue = Math.round((value) * 100) / 100;
-    return newValue;
+    return newValue.toFixed(2);
   };
 
   const createNewSale = async () => {

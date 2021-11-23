@@ -25,7 +25,10 @@ export default function Table() {
     setItensList(newList);
   };
 
-  const roundValue = (value) => Math.round((value) * 100) / 100;
+  const roundValue = ((value) => {
+    const newValue = Math.round((value) * 100) / 100;
+    return newValue.toFixed(2);
+  });
 
   const totalSum = () => {
     const sum = itensList.reduce((acc, ele) => {
@@ -59,11 +62,15 @@ export default function Table() {
                 <td data-testid={ `${testIdNumber}${index}` }>{index}</td>
                 <td data-testid={ `${testIdName}${index}` }>{ele.name}</td>
                 <td data-testid={ `${testIdQuantity}${index}` }>{ele.quantity}</td>
-                <td data-testid={ `${testIdUnitPrice}${index}` }>{ele.price}</td>
+                <td
+                  data-testid={ `${testIdUnitPrice}${index}` }
+                >
+                  { convertValueToBrlShape(roundValue(ele.price)) }
+                </td>
                 <td
                   data-testid={ `${testIdSubTotal}${index}` }
                 >
-                  { roundValue(ele.price * ele.quantity) }
+                  { convertValueToBrlShape(roundValue(ele.price * ele.quantity)) }
                 </td>
                 <td>
                   <button

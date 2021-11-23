@@ -41,3 +41,17 @@ td, th {
   padding-left: 5px;
   padding-right: 5px;
 }
+
+.order-status-entregue {
+  background-color: rgb(12, 113, 196);
+  border-radius: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.order-status-preparando {
+  background-color: rgb(99, 247, 80);
+  border-radius: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+}

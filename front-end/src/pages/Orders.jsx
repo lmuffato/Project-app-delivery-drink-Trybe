@@ -28,7 +28,7 @@ function Orders() {
           id={ sale.id }
           status={ sale.status }
           totalPrice={ sale.total_price }
-          saleDate={ moment(sale.sale_date).format('L') }
+          saleDate={ moment(sale.sale_date).format(('DD-MM-YYYY')) }
         />
       )) }
     </div>

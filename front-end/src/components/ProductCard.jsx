@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import './ProductCard.css';
 import PropTypes from 'prop-types';
 import { Card, Button } from 'react-bootstrap';
@@ -27,6 +27,17 @@ function ProductCard({ product }) {
       handleCart(quantity + 1);
     }
   }
+
+  function handleQuantity() {
+    const inicialCart = cart.find((item) => item.name === product.name);
+    if (inicialCart) {
+      setQuantity(inicialCart.quantity);
+    }
+  }
+
+  useEffect(() => {
+    handleQuantity();
+  }, []);
 
   return (
     <Card bcart="info" style={ { width: '12rem', alignItems: 'center' } }>

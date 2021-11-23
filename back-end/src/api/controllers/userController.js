@@ -48,11 +48,8 @@ const createAdmin = async (req, res) => {
 
 const deleteUser = async (req, res) => {
   const { id } = req.params;
-  console.log('🚀 ~ file: userController.js ~ line 51 ~ deleteUser ~ req.body', req.params);
 
   const { status, data } = await userService.deleteUser(id);
-  console.log('🚀 ~ file: userController.js ~ line 54 ~ deleteUser ~ status', status);
-  console.log('🚀 ~ file: userController.js ~ line 55 ~ deleteUser ~ data', data);
   
   return res.status(status).json(data);
 };

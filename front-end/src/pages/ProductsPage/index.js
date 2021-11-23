@@ -7,11 +7,18 @@ import './style.css';
 
 const ProductsPage = () => {
   const { products, setProducts } = useContext(ContextProduct);
+  const [totalPriceCart] = React.useState(() => {
+    const cart = JSON.parse(localStorage.getItem('carrinho'));
+    if (cart && cart.length !== 0) {
+      return cart.reduce((acc, elem) => acc + elem.quantity * elem.price);
+    }
+    return 0;
+  });
+
   const [isLoading, setIsLoading] = React.useState(false);
 
   useEffect(() => {
     const fetchProducts = async () => {
-      console.log('Aqui');
       setIsLoading(true);
       const { token } = JSON.parse(localStorage.getItem('user'));
       const array = await api.getProducts(token);
@@ -20,6 +27,14 @@ const ProductsPage = () => {
     };
     fetchProducts();
   }, []);
+
+  // const setQuantity = () => {
+  //   const cart = JSON.parse(localStorage.getItem('carrinho'));
+  //   if (cart) {
+  //     setTotalPriceCart(cart.reduce((acc, elem) => acc + elem.quantity * elem.price));
+  //     return (<div>{ totalPriceCart }</div>);
+  //   }
+  // };
 
   if (isLoading || !products) return <h1>Loading..</h1>;
   if (products) {
@@ -37,6 +52,7 @@ const ProductsPage = () => {
             />
           ))}
         </div>
+        <p>{ totalPriceCart }</p>
       </section>
     );
   }

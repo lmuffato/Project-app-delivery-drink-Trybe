@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import '../styles/Checkout.css';
+// import '../styles/Checkout.css';
 import { useLocation } from 'react-router-dom';
 import CheckoutTable from '../components/CheckoutTable';
 import NavBar from '../components/NavBar';

@@ -1,8 +1,75 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+// import { Redirect } from 'react-router';
+import { useHistory } from 'react-router-dom';
+import ProductsContext from '../context/Products/ProductsContext';
+import { saleAction, getUsers } from '../utils/API/fetch';
 import Button from './atoms/Button';
 // import Input from './atoms/Input';
 
 export default function CheckoutDetails() {
+  const [sale, setSale] = useState({});
+  const [sellers, setSellers] = useState([]);
+  const { totalPrice } = useContext(ProductsContext);
+  const user = JSON.parse(localStorage.getItem('user'));
+  const history = useHistory();
+  const { id: userId, token } = user;
+  const cart = JSON.parse(localStorage.getItem('carrinho'));
+
+  useEffect(() => {
+    setSale({
+      ...sale,
+      userId,
+      sellerId: 1,
+      // userName,
+      token,
+    });
+  }, []);
+
+  useEffect(() => {
+    (async () => {
+      const users = await getUsers();
+      setSellers(users
+        .filter(({ role }) => role === 'seller')
+        .map(({ name, id }) => ({ name, id })));
+    })();
+  }, []);
+
+  // "userId": 1,
+  // "sellerId": 2,
+  // "totalPrice": 150,
+  // "deliveryAddress": "Rua Xablau",
+  // "deliveryNumber": "100"
+
+  const confirmSale = async (/* products */) => {
+    console.log(sale);
+    const result = await saleAction({ ...sale, /* products,  */token });
+    const saleId = result.result;
+    if (saleId) history.push(`/customer/orders/${saleId}`);
+  };
+
+  const mountSale = () => {
+    const products = [];
+    cart.map((item) => {
+      const { name, count: quantity } = item;
+      products.push({ name, quantity });
+      return products;
+    });
+    setSale({
+      ...sale,
+      // products,
+      totalPrice,
+    });
+    confirmSale(/* products */);
+  };
+
+  const handleChange = ({ target: { name, value } }) => {
+    setSale({
+      ...sale,
+      [name]: value,
+      totalPrice,
+    });
+  };
+
   return (
     <>
       <form className="form-customer-checkout">
@@ -11,10 +78,19 @@ export default function CheckoutDetails() {
           <select
             className="checkout-seller"
             type="select"
-            name="seller"
+            name="sellerId"
+            onChange={ handleChange }
             data-testid="customer_checkout__select-seller"
           >
-            <option>Fulana Pereira</option>
+            <option disabled selected>Selecione...</option>
+            { sellers.map((seller) => (
+              <option
+                key={ seller.id }
+                value={ seller.id }
+              >
+                { seller.name }
+              </option>))}
+            ;
           </select>
         </label>
         <label htmlFor="address" className="checkout-detail checkout-detail-address">
@@ -23,7 +99,8 @@ export default function CheckoutDetails() {
             className="checkout-address"
             type="text"
             data-testid="customer_checkout__input-address"
-            name="address"
+            name="deliveryAddress"
+            onChange={ handleChange }
             placeholder="Rua, Avenida, etc..."
           />
         </label>
@@ -36,7 +113,8 @@ export default function CheckoutDetails() {
             className="checkout-address-number"
             type="number"
             data-testid="customer_checkout__input-addressNumber"
-            name="address-number"
+            name="deliveryNumber"
+            onChange={ handleChange }
             placeholder="0"
           />
         </label>
@@ -46,6 +124,7 @@ export default function CheckoutDetails() {
         type="button"
         data-testid="customer_checkout__button-submit-order"
         text="Finalizar pedido"
+        onClick={ mountSale }
       />
     </>
   );

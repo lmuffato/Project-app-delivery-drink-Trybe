@@ -16,12 +16,12 @@ export default function CheckoutTable() {
     cart.splice(index, 1);
     localStorage.setItem('carrinho', JSON.stringify(cart));
     setShoppingCart(cart);
-    let totalPriceCalc = 0;
+    let totalPrice = 0;
     cart.map((item) => {
-      totalPriceCalc += item.count * Number(item.price);
-      return totalPriceCalc;
+      totalPrice += item.count * Number(item.price);
+      return totalPrice;
     });
-    setTotalPrice(totalPriceCalc);
+    setTotalPrice(totalPrice);
   };
   return (
     <table className="table-checkout">

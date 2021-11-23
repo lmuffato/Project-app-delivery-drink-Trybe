@@ -44,6 +44,7 @@ app.post('/sale',
   saleControllers.register);
 
 app.post('/customerSale', validateToken, saleControllers.getCustomerSales);
+
 app.post('/addUser',
   validateToken,
   validateAdmin,

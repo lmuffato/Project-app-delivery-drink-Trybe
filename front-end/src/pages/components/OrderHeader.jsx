@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import ContextDeliveryApp from '../../store/ContextDeliveryApp';
@@ -6,49 +6,52 @@ import fetchSaleUpdate from '../../services/fetchSaleUpdate';
 
 export default function OrderHeader({ sale }) {
   const { user } = useContext(ContextDeliveryApp);
-  const [saleState, setSaleState] = useState({});
-  const [status, setStatus] = useState('Pendente');
+  const [status, setStatus] = useState(sale.status);
+  const DELVTESTID = 'seller_order_details__element-order-details-label-delivery-status';
   const handleClick = async (e) => {
     const updateSale = sale;
     updateSale.status = e.target.value;
     const { token } = user;
-    const response = await fetchSaleUpdate(token, updateSale);
-    setSaleState(response);
+    await fetchSaleUpdate(token, updateSale);
+    console.log(e.target.value);
     setStatus(e.target.value);
   };
+
   useEffect(() => {
-    console.log('sale', sale);
-    setSaleState(sale);
     setStatus(sale.status);
+    console.log(sale.status);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
 
   }, [sale]);
-
+  console.log(status);
+  console.log('sale', sale);
   return (
     <div>
-      { saleState ? (
+      { sale ? (
         <div key={ sale.id }>
           <p>PEDIDO</p>
           <p
             data-testid="seller_order_details__element-order-details-label-order-id"
           >
-            {saleState.id}
+            {sale.id}
           </p>
           <p
             data-testid="seller_order_details__element-order-details-label-order-date"
           >
-            {moment(saleState.sale_date).format('DD/MM/YY')}
+            {moment(sale.sale_date).format('DD/MM/YY')}
           </p>
-          <p data-testid="seller_order_details__element-order-details-label-order-date">
-            PENDENTE
+          <p
+            data-testid={ DELVTESTID }
+          >
+            { status || sale.status }
           </p>
           <button
             type="button"
             data-testid="seller_order_details__button-preparing-check"
-            disabled={ status !== 'Pendente' }
+            disabled={ status !== 'Pendente' && sale.status !== 'Pendente' }
             value="Preparando"
             onClick={ handleClick }
           >

@@ -22,9 +22,7 @@ const create = async (name, email, password) => {
 };
 
 const getUser = async (email, password) => {
-  const MD5password = md5(password);
-
-  const user = await User.findOne({ where: { email }});
+  const user = await User.findOne({ where: { email } });
   if (!user) return { status: 500, message: 'Internal Server Error' };
 
   const { password: _, ...userPayload } = user.dataValues;

@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     totalPrice: { type: DataTypes.DECIMAL, allowNull: false },
     deliveryAddress: { type: DataTypes.STRING, allowNull: false },
     deliveryNumber: { type: DataTypes.STRING, allowNull: false },  
-    saleDate: { type: DataTypes.DATE, allowNull: false },
+    saleDate: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
     status: { type: DataTypes.STRING, allowNull: false }  
   }, {
     tableName: 'sales',

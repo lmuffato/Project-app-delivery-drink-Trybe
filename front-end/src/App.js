@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import Login from './pages/Login';
+import Products from './pages/Products';
 import Register from './pages/Register';
 
 // rotas
@@ -15,6 +16,7 @@ function App() {
         </Route>
         <Route path={ paths.routeLogin } exact component={ Login } />
         <Route path={ paths.routeRegister } exact component={ Register } />
+        <Route path={ paths.routeProducts } exact component={ Products } />
       </Switch>
     </BrowserRouter>
   );

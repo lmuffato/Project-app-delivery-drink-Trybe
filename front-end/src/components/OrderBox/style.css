@@ -1,3 +1,33 @@
 .order-detail-container {
-  background-color: cadetblue;
+  display: flex;
+  flex-direction: column;
+}
+
+.order-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.order-info > * {
+  margin: 10px;
+}
+
+.customer-order-total-price {
+  align-self: flex-end;
+  background-color: #f58f1b;
+  border-radius: 5px;
+  color: white;
+  font-weight: 600;
+  margin: 5px;
+  text-align: center;
+  width: 7em;
+}
+
+table {
+  align-self: center;
+}
+
+td, th {
+  padding: 8px;
 }

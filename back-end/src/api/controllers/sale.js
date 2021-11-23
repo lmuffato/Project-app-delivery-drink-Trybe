@@ -2,10 +2,10 @@ const { StatusCodes, ReasonPhrases } = require('http-status-codes');
 const SaleService = require('../services/sale');
 
 exports.create = async (req, res) => {
-  const { userName, sellerName, totalPrice, deliveryAddress, deliveryNumber, products } = req.body;
+  const { userId, sellerId, totalPrice, deliveryAddress, deliveryNumber } = req.body;
   try {
     const newSale = await SaleService.create({
-      userName, sellerName, totalPrice, deliveryAddress, deliveryNumber, products });
+      userId, sellerId, totalPrice, deliveryAddress, deliveryNumber });
     res.status(StatusCodes.CREATED).json({ result: newSale.id });
   } catch (error) {
     console.error(error);

@@ -1,4 +1,4 @@
-const { Sale, SalesProducts, Product } = require('../models');
+const { Sale, SalesProducts, Product, User } = require('../models');
 const { HTTP_CREATED, HTTP_CONFLICT, HTTP_OK_STATUS, HTTP_NOT_FOUND } = require('../../status');
 
 
@@ -17,6 +17,15 @@ async function create(body) {
 
   return { data: saleId.dataValues.id, code: HTTP_CREATED };
 };
+
+async function getSeller(id) {
+  const user = await User.findOne({
+    where: { id },
+    attributes: {exclude: ['password', 'email']}
+  });
+
+  return user;
+}
 
 async function getByUserId(id) {
   const order = await Sale.findAll({
@@ -41,7 +50,12 @@ async function getByOrderId(id) {
 
   if (!order) return { code: HTTP_NOT_FOUND, error: 'Sale does not exist' };
 
-  return { data: order, code: HTTP_OK_STATUS };
+  const { seller_id: sellerId } = order;
+  const seller = await getSeller(sellerId);
+
+  const orderInfo = {...order.dataValues, seller};
+
+  return { data: orderInfo, code: HTTP_OK_STATUS };
 }
 
 module.exports = {

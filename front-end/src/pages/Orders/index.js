@@ -10,11 +10,10 @@ function Orders() {
   const [salesOrder, setSalesOrder] = useState([]);
 
   useEffect(() => {
-    const { token } = JSON.parse(localStorage.getItem('user'));
-    const magicNumber = 3;
+    const { token, id: userId } = JSON.parse(localStorage.getItem('user'));
 
     const fetchSales = async () => {
-      const salesArray = await api.getSales(magicNumber, token);
+      const salesArray = await api.getSales(userId, token);
 
       setSalesOrder(salesArray);
     };

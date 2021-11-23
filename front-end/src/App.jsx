@@ -8,7 +8,7 @@ import ProductClient from './pages/ProductClient';
 import CheckoutClient from './pages/CheckoutClient';
 import PrivateRoute from './routes/PrivateRoute';
 import OrderDetails from './pages/OrderDetails';
-import OrderClient from './pages/OrderClient';
+import ClientOrders from './pages/ClientOrders';
 
 function App() {
   return (
@@ -30,8 +30,12 @@ function App() {
       />
       <Route path="/customer/checkout" element={ <CheckoutClient /> } />
       <Route
-        path="/customer/orders/9"
-        element={ <PrivateRoute element={ OrderClient } /> }
+        path="/customer/orders/"
+        element={ <PrivateRoute element={ ClientOrders } /> }
+      />
+      <Route
+        path="/customer/orders/:id"
+        element={ <PrivateRoute element={ OrderDetails } /> }
       />
     </Routes>
   );

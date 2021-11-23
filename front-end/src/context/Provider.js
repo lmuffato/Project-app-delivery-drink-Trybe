@@ -13,6 +13,7 @@ const Endpoints = {
   registration_form: 'register',
   checkout_form: 'sale',
   seller_orders: 'seller/orders',
+  customer_orders: 'customer/orders',
 };
 
 function Provider({ children }) {

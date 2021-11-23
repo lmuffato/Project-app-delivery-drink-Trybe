@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Context from '../context/Context';
-import SellerOrderCard from '../components/SellerOrderCard';
+import OrderCard from '../components/OrderCard';
 
 function SellerOrders() {
   const { get } = useContext(Context);
@@ -8,13 +8,13 @@ function SellerOrders() {
 
   useEffect(() => {
     get('seller_orders').then((ordersData) => setOrders(ordersData));
-  }, []);
+  }, [get]);
 
   return (
     <div>
       Tela do cliente
       {
-        orders.map((order) => <SellerOrderCard key={ order.id } order={ order } />)
+        orders.map((order) => <OrderCard key={ order.id } order={ order } />)
       }
     </div>
   );

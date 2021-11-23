@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
   }, 
   {
     timestamps: false,
-    tableName: 'Users',
+    tableName: 'users',
   }, { timestamps: false });
   User.associate = (models) => {
     User.hasMany(models.Sale, { foreignKey: 'user_id' });

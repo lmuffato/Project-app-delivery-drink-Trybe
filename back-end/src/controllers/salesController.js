@@ -8,7 +8,7 @@ const registerSale = async (req, res) => {
   if (error !== undefined) {
     return res.status(httpStatus.serverError).json({ error: { message: error } });
   }
-  return res.status(httpStatus.created).json({ message: `Sale was created with id: ${saleId}` });
+  return res.status(httpStatus.created).json({ saleId });
 };
 
 const getAllSales = async (req, res) => {

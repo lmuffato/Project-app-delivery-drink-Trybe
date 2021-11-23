@@ -19,7 +19,7 @@ async function createUserService({ name, email, password }) {
 
   const userLogin = { user_id: user.dataValues.id, name, email, role };
   const token = await createToken(userLogin);
-  const data = { name, email, role, token };
+  const data = { name, email, role, token, id };
 
   return { data, code: HTTP_CREATED };
 };
@@ -38,7 +38,7 @@ async function loginService({ password, email }) {
   const { id, name, role } = await readByEmailService(email);
   const userLogin = { user_id: id, name, role, email };
   const token = await createToken(userLogin);
-  const data = { name, email, role, token };
+  const data = { name, email, role, token, id };
 
   return { data, code: HTTP_OK_STATUS };
 };

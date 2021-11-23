@@ -5,7 +5,7 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [user, setUser] = useState({});
-  const [showError, setShowError] = useState(true);
+  const [hiddenError, setHiddenError] = useState(true);
 
   const history = useHistory();
 
@@ -26,14 +26,28 @@ function Login() {
       },
       body: JSON.stringify({ email: userEmail, password: userPassword }),
     });
-    const data = await res.json();
-    setUser(data);
-    if (data.error) {
-      setShowError(false);
+    const { data, token, error } = await res.json();
+
+    if (error) {
+      setHiddenError(false);
+      setUser({ error });
     } else {
-      setShowError(true);
-      history.push('/customer/products');
+      setUser(data);
+      localStorage.setItem('token', token);
+
+      if (data.role === 'administrator') {
+        setHiddenError(true);
+        history.push('/admin/manage');
+      } else {
+        setHiddenError(true);
+        history.push('/customer/products');
+      }
     }
+  };
+
+  const signUpRedirect = () => {
+    const path = 'register';
+    history.push(path);
   };
 
   return (
@@ -66,14 +80,14 @@ function Login() {
       <button
         type="button"
         data-testid="common_login__button-register"
-        // onClick={ () => () }
+        onClick={ signUpRedirect }
       >
         Registrar-se
       </button>
 
       <span
         data-testid="common_login__element-invalid-email"
-        hidden={ showError }
+        hidden={ hiddenError }
       >
         { user.error ? user.error : '' }
       </span>

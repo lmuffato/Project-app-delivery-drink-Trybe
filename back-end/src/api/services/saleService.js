@@ -34,7 +34,7 @@ const findBySellerId = async (id) => {
 };
 
 const findByIdSale = async (saleId) => {
-  const getById = await Sale.findById(saleId);
+  const getById = await Sale.findByPk(saleId);
   return getById;
 };
 

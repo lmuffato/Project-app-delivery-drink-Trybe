@@ -1,12 +1,25 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import PropTypes from 'prop-types';
 
 export default function OrderCard({ sale }) {
   const { role } = useSelector((state) => state.user);
+  const history = useHistory();
+
+  const handleCardClick = () => {
+    history.push(`/customer/orders/${sale.id}`);
+  };
+
   return (
-    <div>
+    <div
+      style={ { border: '1px solid black' } }
+      role="link"
+      tabIndex={ 0 }
+      onClick={ handleCardClick }
+      onKeyDown={ handleCardClick }
+    >
       <p data-testid={ `${role}_orders__element-order-id-${sale.id}` }>
         Pedido
         { sale.id }
@@ -15,7 +28,7 @@ export default function OrderCard({ sale }) {
         { sale.status }
       </h2>
       <p data-testid={ `${role}_orders__element-order-date-${sale.id}` }>
-        <strong>{ sale.saleDate }</strong>
+        <strong>{ new Date(sale.saleDate).toLocaleDateString('pt-BR') }</strong>
       </p>
       <p data-testid={ `${role}_orders__element-card-price-${sale.id}` }>
         <strong>{ sale.totalPrice }</strong>

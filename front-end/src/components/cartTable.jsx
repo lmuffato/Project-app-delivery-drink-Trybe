@@ -43,13 +43,13 @@ export default function CartTable() {
                 data-testid={ `${unitPriceTestId}${index}` }
                 className="border-2 w-1/12"
               >
-                { item.price }
+                { item.price.toFixed(2).split('.').join(',') }
               </td>
               <td
                 data-testid={ `${subTotalTestId}${index}` }
                 className="border-2 w-1/12"
               >
-                { item.subtotal }
+                { item.subtotal.toFixed(2).split('.').join(',') }
               </td>
               <td
                 data-testid={ `customer_checkout__element-order-table-remove-${index}` }

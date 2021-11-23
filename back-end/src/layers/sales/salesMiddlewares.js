@@ -18,7 +18,7 @@ const getById = async (req, res) => {
     const { id } = req.params;
     const data = await sales.findByPk(id);
     console.log(data);
-    if (data === null) { return res.status(404).json({ message: 'User does not exist' }); }
+    if (!data) { return res.status(404).json({ message: 'User does not exist' }); }
     return res.status(200).json(data);
   } catch (err) {
     return res.status(500).json({ message: err.message });

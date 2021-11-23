@@ -1,0 +1,13 @@
+.container-details {
+  display: flex;
+  margin-top: 50px;
+  position: fixed;
+  width: 100%;
+}
+
+.container-details div {
+  border-color: aqua;
+  margin: auto 20px auto 40px;
+  text-decoration: none;
+  width: 100%;
+}

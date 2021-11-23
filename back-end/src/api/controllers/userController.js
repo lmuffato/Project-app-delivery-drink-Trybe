@@ -6,7 +6,7 @@ const createUser = async (req, res) => {
 
   const { status, data, token, id, role } = await userService.createUser(newUser);
 
-  if (token) {
+  if (token) {    
     return res.status(status).json({ token, id, name, email, role });
   }
   
@@ -39,20 +39,21 @@ const findAllUsers = async (_req, res) => {
 };
 
 const createAdmin = async (req, res) => {
-  const { status, user, data } = await userService.createUser(req.body);
-
-  if (!user) {
+  const { status, data, token, id, name, email, role } = await userService.createUser(req.body);
+  if (data) {
     return res.status(status).json({ data });
   }
-  
-  return res.status(status).json(user);
+  return res.status(status).json({ token, id, name, email, role });
 };
 
 const deleteUser = async (req, res) => {
-  const { id } = req.body;
+  const { id } = req.params;
+  console.log('🚀 ~ file: userController.js ~ line 51 ~ deleteUser ~ req.body', req.params);
 
   const { status, data } = await userService.deleteUser(id);
-
+  console.log('🚀 ~ file: userController.js ~ line 54 ~ deleteUser ~ status', status);
+  console.log('🚀 ~ file: userController.js ~ line 55 ~ deleteUser ~ data', data);
+  
   return res.status(status).json(data);
 };
 

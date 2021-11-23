@@ -4,6 +4,7 @@ import Register from './pages/Register';
 import { RegisterProvider } from './contexts/Register';
 import Login from './pages/Login';
 import { LoginProvider } from './contexts/Login';
+import Admin from './pages/Admin';
 import Products from './pages/Products';
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
           </LoginProvider>
         }
       />
+      <Route exact path="/admin/manage" element={ <Admin /> } />
       <Route exact path="/customer/products" element={ <Products /> } />
 
     </Routes>

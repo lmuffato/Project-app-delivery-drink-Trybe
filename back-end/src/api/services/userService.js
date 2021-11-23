@@ -1,6 +1,9 @@
 const { Op } = require('sequelize');
 const md5 = require('md5');
 const jwt = require('jsonwebtoken');
+const path = require('path');
+const secret = require('fs')
+.readFileSync(path.join(__dirname, '../../../jwt.evaluation.key'), { encoding: 'utf-8' }).trim(); 
 
 const { User } = require('../../database/models');
 const {
@@ -12,8 +15,6 @@ const jwtConfig = {
   expiresIn: '2h',
   algorithm: 'HS256',
 };
-
-const secret = process.env.SECRET || 'e717vdd^DEp.';
 
 const checkLogin = async (email, password) => {
   const existingUser = await User.findOne({ where: { email, password } });
@@ -41,6 +42,7 @@ const createUser = async ({ name, email, password, role }) => {
   const { password: _, ...userWithoutPassword } = user.dataValues;
   const token = jwt.sign(userWithoutPassword, secret, jwtConfig);
   const { id } = userWithoutPassword;
+    
   return ({ status: 201, token, id, name, email, role });
 };
 

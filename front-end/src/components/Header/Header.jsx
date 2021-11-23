@@ -40,7 +40,7 @@ export default function Header(props) {
         <NavBtnLink
           to="/"
           data-testid="customer_products__element-navbar-link-logout"
-          onClick={ logout }
+          onClick={ () => logout() }
         >
           <AiOutlineLogout />
         </NavBtnLink>

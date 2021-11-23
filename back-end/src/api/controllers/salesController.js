@@ -6,7 +6,8 @@ const HTTP_CREATED_STATUS = 201;
 
 const create = async (req, res) => {
   try {
-    const { userId, sellerId, totalPrice, deliveryAddress, deliveryNumber, productList } = req.body;
+    const { sellerId, totalPrice, deliveryAddress, deliveryNumber, productList } = req.body;
+    const { userId } = req;
     const response = await salesService.create({ 
       userId,
       sellerId,

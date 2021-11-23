@@ -27,18 +27,23 @@ const Login = () => {
 
   const goToProductsPage = async () => {
     const requestToken = await requestLogin(values);
-    const requestUser = await requestUserInfo(requestToken.token);
 
-    const userInfo = { ...requestUser.user, token: requestToken.token };
+    if (requestToken.message) {
+      setErrorMsg(requestToken.message);
+    } else {
+      const requestUser = await requestUserInfo(requestToken.token);
 
-    localStorage.setItem('user', JSON.stringify(userInfo));
+      const userInfo = { ...requestUser.user, token: requestToken.token };
 
-    setUser(userInfo);
+      localStorage.setItem('user', JSON.stringify(userInfo));
 
-    if (!requestToken.token) {
-      return setErrorMsg(result.message);
+      setUser(userInfo);
+
+      if (!requestToken.token) {
+        return setErrorMsg(result.message);
+      }
+      clearInputs();
     }
-    clearInputs();
   };
 
   useEffect(() => {

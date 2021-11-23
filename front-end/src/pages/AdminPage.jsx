@@ -1,7 +1,12 @@
 import React from 'react';
+import NavBar from '../components/NavBar';
+import AdmForm from '../components/admForm/admForm';
 
-export default function AdminPage() {
+export default function AdminPage({ location }) {
   return (
-    <h1>ADMIN PAGE</h1>
+    <div>
+      <NavBar location={ location } />
+      <AdmForm />
+    </div>
   );
 }

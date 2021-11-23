@@ -7,6 +7,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import CartProvider from './contexts/CartProvider';
 import Login from './pages/Login';
 import CustomerCheckout from './pages/CustomerCheckout';
+import Orders from './pages/Orders';
+import OrderDetails from './pages/OrderDetails';
 import AdmPage from './pages/AdmPage';
 import UsersProvider from './contexts/UsersProvider';
 
@@ -18,6 +20,8 @@ function App() {
       </Route>
       <Route path="/login" component={ Login } />
       <Route path="/register" component={ Register } />
+      <Route exact path="/customer/orders" component={ Orders } />
+      <Route path="/customer/orders/:id" component={ OrderDetails } />
       <CartProvider>
         <Route exact path="/customer/products" component={ ClientProducts } />
         <Route path="/customer/checkout" component={ CustomerCheckout } />

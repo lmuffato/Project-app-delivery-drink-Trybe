@@ -66,6 +66,17 @@ function Login() {
     checkBtn();
   }, [email, password]);
 
+  const isLoged = () => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user) {
+      history.push('/customer/products');
+    }
+  };
+
+  useEffect(() => {
+    isLoged();
+  }, []);
+
   return (
     <>
       <Form>

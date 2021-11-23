@@ -32,4 +32,6 @@ app.post('/sale', Sale.createSale);
 
 app.get('/coffee', (_req, res) => res.status(418).end());
 
+app.get('/user/sale/:id', Sale.getAllSales);
+
 module.exports = app;

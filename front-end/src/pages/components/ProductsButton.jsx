@@ -1,7 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 
-export default function ProductsButton({ history }) {
+export default function ProductsButton() {
+  const history = useHistory();
   const handleProductsClick = () => {
     history.push('/customer/products');
   };
@@ -19,9 +20,3 @@ export default function ProductsButton({ history }) {
     </div>
   );
 }
-
-ProductsButton.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired,
-  }).isRequired,
-};

@@ -1,9 +1,12 @@
 import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import ContextDeliveryApp from '../../store/ContextDeliveryApp';
 
-export default function OrdersButton({ history }) {
+export default function OrdersButton() {
   const { user } = useContext(ContextDeliveryApp);
+
+  const history = useHistory();
+
   const handleOrdersClick = () => {
     if (user.role === 'customer') {
       history.push('/customer/orders');
@@ -26,9 +29,3 @@ export default function OrdersButton({ history }) {
     </div>
   );
 }
-
-OrdersButton.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired,
-  }).isRequired,
-};

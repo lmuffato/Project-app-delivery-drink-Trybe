@@ -1,7 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 
-export default function ManageUsersButton({ history }) {
+export default function ManageUsersButton() {
+  const history = useHistory();
   const handleManageUsersClick = () => {
     history.push('/admin/manage');
   };
@@ -18,9 +19,3 @@ export default function ManageUsersButton({ history }) {
     </div>
   );
 }
-
-ManageUsersButton.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired,
-  }).isRequired,
-};

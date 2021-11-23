@@ -5,15 +5,7 @@ import { CartContext } from '../contexts/Cart';
 function ProductCard({ productInfo }) {
   const { name, id, price, urlImage } = productInfo;
   const { cart, setCart } = useContext(CartContext);
-  const [quantity, setQuantity] = useState(() => {
-    const carrinho = JSON.parse(localStorage.getItem('carrinho'));
-    if (carrinho) {
-      const entries = Object.entries(JSON.parse(localStorage.getItem('carrinho')));
-      const beer = entries.find((value) => value[0] === name);
-      return beer ? beer[1] : 0;
-    }
-    return null;
-  });
+  const [quantity, setQuantity] = useState(0);
 
   const onChangeHandler = (event) => {
     setQuantity(event.target.value);
@@ -21,20 +13,31 @@ function ProductCard({ productInfo }) {
 
   const onClickHandler = (event) => {
     if (event.target.name === 'add-item') {
-      setQuantity(quantity + 1);
+      setQuantity(Number(quantity) + 1);
     } else if (quantity > 0) {
       setQuantity(quantity - 1);
     }
   };
 
   useEffect(() => {
-    setCart({
-      ...cart,
-      [name]: {
-        qty: Number(quantity),
-        total: quantity * price,
-      },
-    });
+    if (cart !== undefined) {
+      setCart(cart.map((el) => (
+        [el] === name ? { ...el,
+          qty: Number(quantity),
+          total: (quantity * price).toFixed(2),
+        } : { ...el,
+          [name]: {
+            qty: Number(quantity),
+            total: (quantity * price).toFixed(2),
+          } })));
+    } else {
+      setCart([{
+        [name]: {
+          qty: Number(quantity),
+          total: (quantity * price).toFixed(2),
+        },
+      }]);
+    }
   }, [quantity]);
 
   useEffect(() => {
@@ -43,14 +46,15 @@ function ProductCard({ productInfo }) {
 
   return (
     <div data-testid={ id }>
-      <h1>{ name }</h1>
+      <h1 data-testid={ `customer_products__element-card-title-${id}` }>{ name }</h1>
       <img
+        style={ { width: '80px' } }
         data-testid={ `customer_products__img-card-bg-image-${id}` }
         src={ urlImage }
         alt={ name }
       />
       <h3 data-testid={ `customer_products__element-card-price-${id}` }>
-        { `R$ ${price}` }
+        { price.toString().replace('.', ',') }
       </h3>
       <button
         data-testid={ `customer_products__button-card-add-item-${id}` }

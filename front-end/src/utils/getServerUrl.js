@@ -1,5 +1,11 @@
-require('dotenv').config();
+// require('dotenv').config();
 
-export default function getServerUrl() {
-  return process.env.URL_SERVER;
-}
+// const url = process.env.URL_SERVER;
+// console.log(url);
+
+const getServerUrl = () => (
+  // const url = process.env.URL_SERVER;
+  'http://localhost:3001'
+);
+
+module.exports = getServerUrl;

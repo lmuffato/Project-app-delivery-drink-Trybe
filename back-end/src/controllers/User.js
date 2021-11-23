@@ -1,28 +1,21 @@
-// const { User } = require('../database/models');
 const userService = require('../services/userService');
 
 const createUser = async (req, res) => {
-  const { name, email, password, role } = req.body;
+  const { name, email, password } = req.body;
 
-  const { status, message, token } = await userService.create(name, email, password, role);
+  const { status, message, token } = await userService.create(name, email, password);
   if (!token) return res.status(status).json({ message });
 
   return res.status(status).json(token);
 };
 
 const getUser = async (req, res) => {
-  try {
-    const { user } = req;
+  const { email, password } = req.body;
 
-    if (!user) {
-      throw new Error('Algo deu errado');
-    }
+  const { status, message, token } = await userService.getUser(email, password);
+  if (!token) return res.status(status).json({ message });
 
-    return res.status(200).json(user);
-  } catch (e) {
-    console.log(e.message);
-    res.status(500).json({ message: e.message });
-  }
+  return res.status(status).json(token);
 };
 
 module.exports = { createUser, getUser };

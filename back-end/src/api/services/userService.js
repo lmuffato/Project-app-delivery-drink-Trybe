@@ -22,7 +22,13 @@ const create = async ({ email, requestPassword, name, requestRole }) => {
   return response;
 };
 
+const getUsers = async ({ role }) => {
+  const response = await users.findAll({ where: { role } });
+  return response;
+};
+
 module.exports = {
   login,
   create,
+  getUsers,
 };

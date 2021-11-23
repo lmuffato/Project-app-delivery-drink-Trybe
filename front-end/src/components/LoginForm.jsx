@@ -44,7 +44,12 @@ function LoginForm() {
         localStorage.setItem('token', data.token);
         localStorage.setItem('user', JSON.stringify({ name, email, role, token }));
 
-        navigate('/customer/products');
+        const routes = {
+          customer: '/customer/products',
+          seller: '/seller/orders',
+          administrator: '/admin/manage',
+        };
+        navigate(routes[role]);
       }
     } catch ({ response }) {
       const { status } = response;

@@ -43,7 +43,7 @@ app.post('/sale',
   validateAddress,
   saleControllers.register);
 
-app.post('/saleDone', validateToken, saleControllers.getSaleDone);
+app.post('/customerSale', validateToken, saleControllers.getCustomerSales);
 app.post('/addUser',
   validateToken,
   validateAdmin,

@@ -28,7 +28,7 @@ function Register({ history }) {
     const response = await fetchRegister(name, email, password);
     setRegisterError(response.message);
     if (!response.message) {
-    //  localStorage.setItem('user', JSON.stringify(response));
+      localStorage.setItem('user', JSON.stringify(response));
       return history.push('/customer/products');
     }
   };

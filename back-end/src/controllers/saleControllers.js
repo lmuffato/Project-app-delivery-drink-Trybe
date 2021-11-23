@@ -6,10 +6,16 @@ const register = async (req, res) => {
   return res.status(response.status).json(response.message);
 };
 
+
 const getSaleDone = async (req, res) => {
   const { sale } = req.body;
   const response = await saleServices.getSaleDone(sale);
   return res.status(response.status).json(response.message);
+
+const getCustomerSales = async (req, res) => {
+  const { userId } = req.body;
+  const response = await saleServices.getCustomerSales(userId);
+  res.status(response.status).json(response.message);
 };
 
 const getSellerSales = async (req, res) => {
@@ -32,7 +38,7 @@ const update = async (req, res) => {
 
 module.exports = {
   register,
-  getSaleDone,
+  getCustomerSales,
   getSellerSales,
   getSaleDetails,
   update,

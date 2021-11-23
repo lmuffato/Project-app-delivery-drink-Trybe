@@ -8,6 +8,7 @@ import Register from './pages/Register';
 import SellerOrders from './pages/SellerOrders';
 import CustomerOrders from './pages/CustomerOrders';
 import SaleDetails from './pages/SaleDetails';
+// import CustomerOrdersDetails from './pages/CustomerOrdersDetails';
 
 function App() {
   return (
@@ -21,7 +22,7 @@ function App() {
           <Route path="/register" component={ Register } />
           <Route exact path="/customer/products" component={ CustomerProducts } />
           <Route exact path="/customer/checkout" component={ CustomerCheckout } />
-          <Route exact path="/customer/orders/:id" component={ CustomerOrders } />
+          <Route exact path="/customer/orders" component={ CustomerOrders } />
           <Route exact path="/admin/manage" component={ AdminUsers } />
           <Route exact path="/seller/orders" component={ SellerOrders } />
           <Route exact path="/seller/orders/:id" component={ SaleDetails } />

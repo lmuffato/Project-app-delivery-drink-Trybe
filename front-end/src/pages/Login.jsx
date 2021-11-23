@@ -1,17 +1,19 @@
 import React, { useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import ContextDeliveryApp from '../store/ContextDeliveryApp';
 import checkEmail from '../services/checkEmail';
 import checkPassword from '../services/checkPassword';
 import LoginErrorMessage from './components/LoginErrorMessage';
 import fetchLogin from '../services/fetchLogin';
 
-function Login({ history }) {
+function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [enableButton, setEnableButton] = useState(true);
   const [loginError, setLoginError] = useState('');
   const { setUser } = useContext(ContextDeliveryApp);
+  const history = useHistory();
 
   useEffect(() => {
     if (checkEmail(email) && checkPassword(password)) {
@@ -44,6 +46,16 @@ function Login({ history }) {
   const handleRegisterButtonClick = () => {
     history.push('/register');
   };
+
+  useEffect(() => {
+    const userLocalStorage = JSON.parse(localStorage.getItem('user'));
+    if (userLocalStorage) {
+      setUser(userLocalStorage);
+      history.push('/customer/products');
+    }
+    // returnToProducts('/login');
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div>

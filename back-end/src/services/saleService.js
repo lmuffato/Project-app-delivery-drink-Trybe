@@ -37,10 +37,9 @@ const register = async (customer, sellerId, cartProducts, address) => {
   }
 };
 
-const getSaleDone = async (sale) => {
-  const saleDone = await database.sale.findOne(sale);
-  const { id } = saleDone;
-  return { status: 201, message: { id } };
+const getCustomerSales = async (userId) => {
+  const customerSales = await database.sale.findAll({ where: { userId }, raw: true });
+  return { status: 201, message: { customerSales } };
 };
 
 const getSellerSales = async (sellerId) => {
@@ -64,7 +63,7 @@ const update = async (updateSale) => {
 
 module.exports = {
   register,
-  getSaleDone,
+  getCustomerSales,
   getSellerSales,
   getSaleDetails,
   update,

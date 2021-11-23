@@ -29,6 +29,7 @@ app.route('/admin')
 app.delete('/admin/:id', validateToken, validateAdmin, userController.deleteUser);
 
 app.post('/sales', validateToken, saleController.registerSale);
+
 app.route('/orders')
   .post(validateToken, saleController.registerSale)
   .get(validateToken, saleController.getAllOrders);

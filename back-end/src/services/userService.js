@@ -15,7 +15,17 @@ const create = async (name, email, password) => {
   );
   if (!user) return { status: 500, message: 'Internal Server Error' };
 
-  const { password: _, ...userPayload } = user;
+  const { password: _, ...userPayload } = user.dataValues;
+  const token = jwt.sign(userPayload, SECRET);
+
+  return { status: 201, token };
+};
+
+const getUser = async (email) => {
+  const user = await User.findOne({ where: { email } });
+  if (!user) return { status: 500, message: 'Internal Server Error' };
+
+  const { password: _, ...userPayload } = user.dataValues;
   const token = jwt.sign(userPayload, SECRET);
 
   return { status: 201, token };
@@ -23,4 +33,5 @@ const create = async (name, email, password) => {
 
 module.exports = {
   create,
+  getUser,
 };

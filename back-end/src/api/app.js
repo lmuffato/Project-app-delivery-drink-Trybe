@@ -7,6 +7,7 @@ const registrationRouter = require('../router/registration');
 const productRouter = require('../router/product');
 const saleRouter = require('../router/sale');
 const imageRouter = require('../router/image');
+const sellersRouter = require('../router/sellers');
 
 const app = express();
 
@@ -21,5 +22,6 @@ app.use('/registration', registrationRouter);
 app.use('/products', productRouter);
 app.use('/orders', saleRouter);
 app.use('/images', imageRouter);
+app.use('/sellers', sellersRouter);
 
 module.exports = app;

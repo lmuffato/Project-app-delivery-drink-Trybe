@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './styles.css';
 
 const Select = ({ id, name, onChange, value, options, ...others }) => (
   <select
@@ -8,6 +9,7 @@ const Select = ({ id, name, onChange, value, options, ...others }) => (
     value={ value }
     onChange={ onChange }
     { ...others }
+    className="c_select"
   >
     {
       options.map((option, index) => (

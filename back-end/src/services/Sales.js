@@ -1,5 +1,10 @@
 const Sale = require('../models/Sales');
 
+const getSale = async (id) => {
+const sale = await Sale.getSales(id);
+return sale;
+};
+
 const addNew = async (orders, payload) => {
   try {
     const sale = await Sale.addNew(payload);
@@ -19,4 +24,5 @@ const addNew = async (orders, payload) => {
 
 module.exports = {
   addNew,
+  getSale,
 };

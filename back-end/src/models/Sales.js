@@ -11,7 +11,14 @@ const addRelation = async (payload) => {
   }
 };
 
+const getSales = async (userId) => {
+  const salesList = await sale.findAll({ where: { userId } });
+  console.log(salesList);
+  return salesList;
+};
+
 module.exports = {
   addNew,
   addRelation,
+  getSales,
 };

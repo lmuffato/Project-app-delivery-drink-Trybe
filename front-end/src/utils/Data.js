@@ -11,8 +11,14 @@ export const getSellers = async () => {
   return data;
 };
 
-export const getSales = async () => {
-  const { data } = await axios.get('http://localhost:3001/users?role=sales');
+export const getSales = async (token) => {
+  const { data } = await fetch('http://localhost:3001/sales/', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: token,
+    },
+  });
   return data;
 };
 

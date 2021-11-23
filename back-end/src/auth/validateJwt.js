@@ -7,14 +7,12 @@ require('dotenv').config();
 
 const JWT_SECRET = segredo;
 
-module.exports = async (req, res) => {
+module.exports = async (req, res, next) => {
   const { authorization } = req.headers;
-  console.log('teste')
   if (!authorization) {
     return res.status(401).json(false);
   }
-
-  const { id } = jwt.verify(authorization, JWT_SECRET);
+  const id = jwt.verify(authorization, JWT_SECRET);
   req.headers = id;
   next();
 };

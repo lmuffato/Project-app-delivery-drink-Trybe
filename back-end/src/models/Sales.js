@@ -11,9 +11,8 @@ const addRelation = async (payload) => {
   }
 };
 
-const getSales = async (userId) => {
-  const salesList = await sale.findAll({ where: { userId } });
-  console.log(salesList);
+const getSales = async (id) => {
+  const salesList = await sale.findAll({ where: { userId: id } });
   return salesList;
 };
 

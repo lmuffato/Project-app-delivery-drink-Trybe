@@ -1,8 +1,8 @@
 const Sale = require('../models/Sales');
 
 const getSale = async (id) => {
-const sale = await Sale.getSales(id);
-return sale;
+const result = await Sale.getSales(id);
+return result;
 };
 
 const addNew = async (orders, payload) => {

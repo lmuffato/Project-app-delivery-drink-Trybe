@@ -48,8 +48,27 @@ const getSellerSales = async (sellerId) => {
   return { status: 201, message: { sellerSales } };
 };
 
+const getSaleDetails = async (id) => {
+    const saleDetails = await database.sale
+      .findOne({
+        where: { id },
+        include: 'salesProduct' });
+    console.log(saleDetails);
+    return { status: 201, message: { saleDetails } };
+};
+
+const update = async (updateSale) => {
+  console.log('updateSale at update saleService', updateSale);
+  const saleUpdated = await database.sale
+    .update({ status: updateSale.status }, { where: { id: updateSale.id } });
+  console.log(saleUpdated);
+  return { status: 201, message: { saleUpdated } };
+};
+
 module.exports = {
   register,
   getSaleDone,
   getSellerSales,
+  getSaleDetails,
+  update,
 };

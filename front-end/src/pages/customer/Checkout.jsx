@@ -2,7 +2,6 @@ import React, { useContext, useState, useEffect } from 'react';
 import jwt from 'jsonwebtoken';
 import { formatMoney } from 'accounting';
 import { useHistory } from 'react-router';
-import dayjs from 'dayjs';
 import { AuthContext } from '../../contexts/auth';
 import { cartContext } from '../../contexts/cart';
 import api from '../../services/api';
@@ -44,7 +43,6 @@ export default function Checkout() {
       totalPrice,
       deliveryAddress: inputs.address,
       deliveryNumber: inputs.number,
-      saleDate: dayjs().format('YYYY/MM/DD'),
       status: 'Pendente',
       products,
     }, {

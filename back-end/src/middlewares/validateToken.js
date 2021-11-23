@@ -3,7 +3,7 @@ const path = require('path');
 const fs = require('fs');
 const { tokenNotFound, invalidToken } = require('../utils/errorMap');
 
-const SECRET = fs.readFileSync(path.join(__dirname, '../../jwt.evaluation.key'), 'utf8');
+const SECRET = fs.readFileSync(path.join(__dirname, '../../jwt.evaluation.key'), 'utf8').trim();
 
 const validateToken = (req, _res, next) => {
   try {

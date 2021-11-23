@@ -20,7 +20,7 @@ function DetailHeader({ id, sellerName, date, status }) {
         { date }
       </span>
       <span
-        customer_order_details__element-order-details-label-delivery-status
+        data-testid="customer_order_details__element-order-details-label-delivery-status"
       >
         { status }
       </span>

@@ -5,7 +5,8 @@ const rescue = require('express-rescue');
 const getSale = rescue(async (_req, res) => {
   const allSale = await Sale.findAll({
     include: [
-      { model: Product, as: 'products', through: { attributes: [] }}
+      { model: Product, as: 'products'},
+      // { model: SaleProduct, as: 'saleProducts', through: { attributes: [] }}
     ]
   });
   res.status(200).json(allSale);

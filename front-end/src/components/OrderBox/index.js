@@ -3,7 +3,14 @@ import './style.css';
 import PropTypes from 'prop-types';
 
 function OrderBox({ props }) {
-  const { id, status, sale_date: saleDate, total_price: totalPrice, products } = props;
+  const {
+    id,
+    status,
+    sale_date: saleDate,
+    total_price: totalPrice,
+    products,
+    seller,
+  } = props;
 
   const tesStatus = 'customer_order_details__element-order-details-label-delivery-status';
 
@@ -19,7 +26,7 @@ function OrderBox({ props }) {
         <p
           data-testid="customer_order_details__element-order-details-label-seller-name"
         >
-          P. Vend: Trocar aqui
+          {`P. Vend: ${seller.name}`}
         </p>
         <p
           data-testid="customer_order_details__element-order-details-label-order-date"
@@ -40,27 +47,32 @@ function OrderBox({ props }) {
       </div>
 
       <table>
-        <tr>
-          <th>Item</th>
-          <th>Descrição</th>
-          <th>Quantidade</th>
-          <th>Valor Unitário</th>
-          <th>Sub-total</th>
-        </tr>
-        { products.map((product) => {
-          const { quantity } = product.quantityTotal;
-          const subTotalValue = (quantity * Number(product.price)).toFixed(2);
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Descrição</th>
+            <th>Quantidade</th>
+            <th>Valor Unitário</th>
+            <th>Sub-total</th>
+          </tr>
+        </thead>
 
-          return (
-            <tr key={ product.id }>
-              <td>{ product.id }</td>
-              <td>{ product.name }</td>
-              <td>{ quantity }</td>
-              <td>{ product.price }</td>
-              <td>{ subTotalValue }</td>
-            </tr>
-          );
-        })}
+        <tbody>
+          { products.map((product) => {
+            const { quantity } = product.quantityTotal;
+            const subTotalValue = (quantity * Number(product.price)).toFixed(2);
+
+            return (
+              <tr key={ product.id }>
+                <td>{ product.id }</td>
+                <td>{ product.name }</td>
+                <td>{ quantity }</td>
+                <td>{ product.price }</td>
+                <td>{ subTotalValue }</td>
+              </tr>
+            );
+          })}
+        </tbody>
       </table>
 
       <div className="customer-order-total-price">{`Total: ${totalPrice}`}</div>

@@ -6,7 +6,7 @@ import fetchAllProducts from '../../utils/Data';
 function DeliveryProvider({ children }) {
   const [products, setProducts] = useState([]);
   const [quantityProducts, setQuantityProducts] = useState(0);
-  const [cartValue, setCartValue] = useState(0);
+  const [cartValue, setCartValue] = useState('0.00');
 
   useEffect(() => {
     fetchAllProducts()

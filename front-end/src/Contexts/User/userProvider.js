@@ -1,19 +1,22 @@
-import React, { useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import UserContext from './userContext';
+import { validateToken } from '../../utils/Data';
 
 function UserProvider({ children }) {
   const DEFAULT_USER = {
     id: 0,
     name: '',
     email: '',
-    password: '',
     role: '',
-    token: '',
+    token: localStorage.getItem('token'),
   };
 
   const [user, setUser] = useState(DEFAULT_USER);
   const [cart, setCart] = useState([]);
+  const history = useHistory();
 
   const context = {
     user,
@@ -21,6 +24,16 @@ function UserProvider({ children }) {
     cart,
     setCart,
   };
+
+  useEffect(() => {
+    const validate = async () => {
+      if (user.token) {
+        const data = await validateToken(user.token);
+        return data ? setUser(data) : history.push('/login');
+      }
+    };
+    validate();
+  }, []);
 
   return (
     <UserContext.Provider value={ context }>

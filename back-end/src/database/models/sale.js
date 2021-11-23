@@ -9,10 +9,13 @@ module.exports = (sequelize, DataTypes) => {
     status: DataTypes.STRING,
     userId: DataTypes.INTEGER,
     sellerId: DataTypes.INTEGER,
+    saleDate: DataTypes.DATE,
   },
     {
-      createdAt: 'saleDate',
+      updatedAt: false,
+      createdAt: 'sale_date',
       tableName: 'sales',
+      underscored: true,
     });
 
   Sale.associate = (models) => {

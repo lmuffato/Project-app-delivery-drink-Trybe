@@ -4,9 +4,7 @@ const { newToken } = require('../auth/newJWT');
 const login = async ({ email, password }) => {
   try {
     const userLogin = await user.findOne({ where: { email, password } });
-
     const { email: userEmail, name: userName, role: userRole } = userLogin;
-
     const token = newToken(userEmail, userName, userRole);
 
     return { userLogin, token };
@@ -18,15 +16,16 @@ const login = async ({ email, password }) => {
 const createUser = async ({ name, email, password, type }) => {
   try {
     const newUser = await user.create({ name, email, password, role: type });
-    return newUser;
+    const token = newToken(email, name, 'customer');
+    return { token, newUser };
   } catch (e) {
     return { err: e.message };
   }
 };
 
-const findUser = async (email) => {
-  const userFound = await user.findOne({ where: { email } });
-  return userFound;
+const findUser = async (name, email) => {
+  const userFound = await user.findOne({ where: { name, email } });
+  return { userFound };
 };
 
 const listUsers = async (role) => (

@@ -19,9 +19,7 @@ const LINKS = [
 
 function Products() {
   const [disable, setDisable] = useState(true);
-  const {
-    cartValue,
-  } = useContext(DeliveryContext);
+  const { cartValue } = useContext(DeliveryContext);
 
   const history = useHistory();
 
@@ -30,7 +28,11 @@ function Products() {
   };
 
   useEffect(() => {
-    if (cartValue !== 0) setDisable(false);
+    if (cartValue > 0) {
+      setDisable(false);
+    } else {
+      setDisable(true);
+    }
   }, [cartValue]);
 
   return (
@@ -41,10 +43,14 @@ function Products() {
         disabled={ disable }
         className="buttonCheckout"
         type="button"
-        data-testid="customer_products__checkout-bottom-value"
+        data-testid="customer_products__button-cart"
         onClick={ checkoutRedirect }
       >
-        { `Ver Carrinho: R$ ${cartValue}` }
+        <p
+          data-testid="customer_products__checkout-bottom-value"
+        >
+          { `Ver Carrinho: R$ ${cartValue.replace('.', ',')}` }
+        </p>
       </button>
     </div>
   );

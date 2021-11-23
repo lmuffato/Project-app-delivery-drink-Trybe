@@ -16,4 +16,18 @@ export const getSales = async () => {
   return data;
 };
 
+export const validateToken = async (token) => {
+  const res = await fetch('http://localhost:3001/validToken', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: token,
+    },
+  });
+
+  const result = await res.json();
+
+  return result;
+};
+
 export default fetchAllProducts;

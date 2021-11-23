@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { usePrice } from '../../context/productsProvider';
 import { saleEndPointData } from '../../utils/endPointsData';
 
 export default function CheckoutForm() {
   const [sellerId, setSellerId] = useState();
   const [deliveryAddress, setDeliberyAddress] = useState('');
-  const [deliveryNumber, setDeliveryNumber] = useState(0);
+  const [deliveryNumber, setDeliveryNumber] = useState();
   const { totalPrice } = usePrice();
-  const status = 'pendente';
+  const status = 'Pendente';
   const [allSellers, setAllSellers] = useState([]);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch('http://localhost:3001/user')
@@ -47,7 +50,9 @@ export default function CheckoutForm() {
       }),
     };
 
-    await fetch(saleEndPointData.endpoint, requestOptions);
+    const sale = await fetch(saleEndPointData.endpoint, requestOptions);
+    const object = await sale.json();
+    navigate(`/customer/orders/${object.id}`);
   };
 
   return (
@@ -57,6 +62,7 @@ export default function CheckoutForm() {
         <select
           id="sellerInput"
           onChange={ ({ target }) => handleChangeSeller(target) }
+          data-testid="customer_checkout__select-seller"
         >
           { allSellers.map((seller) => (
             <option
@@ -76,6 +82,7 @@ export default function CheckoutForm() {
           id="addressInput"
           value={ deliveryAddress }
           onChange={ ({ target }) => handleChange(target, setDeliberyAddress) }
+          data-testid="customer_checkout__input-address"
         />
       </label>
       <label htmlFor="numberInput">
@@ -86,10 +93,12 @@ export default function CheckoutForm() {
           id="numberInput"
           value={ deliveryNumber }
           onChange={ ({ target }) => handleChange(target, setDeliveryNumber) }
+          data-testid="customer_checkout__input-addressNumber"
         />
       </label>
       <button
         type="submit"
+        data-testid="customer_checkout__button-submit-order"
       >
         Finalizar Pedido
       </button>

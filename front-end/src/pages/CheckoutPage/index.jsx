@@ -6,7 +6,14 @@ import replaceDotToComma from '../../services/productPages/replaceDotToComa';
 import styles from './styles.module.css';
 
 export default function CheckoutPage() {
-  const { putItem, totalPrice } = usePrice();
+  const { putItem, setPutItem, totalPrice, setTotalPrice } = usePrice();
+
+  const buttonHandle = (index) => {
+    const items = [...putItem];
+    setTotalPrice((totalPrice - (items[index].price * items[index].quantity)).toFixed(2));
+    items.splice(index, 1);
+    setPutItem(items);
+  };
 
   return (
     <div>
@@ -43,7 +50,7 @@ export default function CheckoutPage() {
                 </td>
                 <td
                   data-testid={
-                    `cutomer_checkout__element-order-table-quantity-${i}`
+                    `customer_checkout__element-order-table-quantity-${i}`
                   }
                 >
                   { item.quantity }
@@ -53,14 +60,14 @@ export default function CheckoutPage() {
                     `customer_checkout__element-order-table-unit-price-${i}`
                   }
                 >
-                  { item.price }
+                  { replaceDotToComma(item.price) }
                 </td>
                 <td
                   data-testid={
                     `customer_checkout__element-order-table-sub-total-${i}`
                   }
                 >
-                  { replaceDotToComma(item.price * item.quantity) }
+                  { replaceDotToComma((item.price * item.quantity).toFixed(2)) }
                 </td>
                 <td
                   data-testid={
@@ -69,6 +76,10 @@ export default function CheckoutPage() {
                 >
                   <button
                     type="button"
+                    onClick={ () => buttonHandle(i) }
+                    data-testid={
+                      `customer_checkout__element-order-table-remove-${i}`
+                    }
                   >
                     Remover
                   </button>
@@ -80,7 +91,11 @@ export default function CheckoutPage() {
         </table>
         <div className={ styles.flexend }>
           Total: R$
-          { replaceDotToComma(totalPrice) }
+          <span
+            data-testid="customer_checkout__element-order-total-price"
+          >
+            { replaceDotToComma(totalPrice) }
+          </span>
         </div>
       </div>
 

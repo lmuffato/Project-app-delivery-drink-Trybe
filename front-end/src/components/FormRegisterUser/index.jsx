@@ -129,7 +129,6 @@ const FormRegisterUser = () => {
         {state.$errors.password.map((data) => data.$message).join(',')}
         {state.$errors.role.map((data) => data.$message).join(',')}
       </span>
-      zdflhmadflçhadçklhdtkj
       { messageErrorBackend && <ErrorBackend messageError={ messageErrorBackend } />}
     </>
   );

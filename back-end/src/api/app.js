@@ -6,6 +6,7 @@ const path = require('path');
 const Product = require('../controllers/productsController');
 const User = require('../controllers/UserController');
 const Sale = require('../controllers/saleController');
+const Validation = require('../middlewares/validations');
 
 const app = express();
 app.use(cors());
@@ -17,9 +18,15 @@ app.get('/products', Product.getProducts);
 
 app.post('/user', User.register);
 
+app.post('/user/admin', Validation.validateAdmToken, User.register);
+
 app.post('/user/login', User.getUserbyEmail);
 
 app.get('/sellers', User.getSelers);
+
+app.get('/users', User.getUsers);
+
+app.delete('/user', Validation.validateAdmToken, User.deleteUser);
 
 app.post('/sale', Sale.createSale);
 

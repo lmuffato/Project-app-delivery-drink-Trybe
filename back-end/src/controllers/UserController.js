@@ -25,8 +25,21 @@ const getSelers = async (_req, res) => {
   return res.status(status).json(data);
 };
 
+const getUsers = async (_req, res) => {
+  const { status, data } = await User.getUsers();
+  return res.status(status).json(data);
+};
+
+const deleteUser = async (req, res) => {
+  const { email } = req.body;
+  const { status, data } = await User.deleteUser(email);
+  return res.status(status).json(data);
+};
+
 module.exports = {
     getUserbyEmail,
     register,
     getSelers,
+    getUsers,
+    deleteUser,
 };

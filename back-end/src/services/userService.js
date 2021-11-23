@@ -13,7 +13,7 @@ const secret = 'secret_key';
 
 const getUserbyEmail = async (email) => {
   const myUser = await user.findOne({ where: { email } });
-  console.log(myUser);
+
   if (!myUser) {
     return { status: 404, message: 'email não cadastrado' };
   }
@@ -29,17 +29,18 @@ const getUserbyEmail = async (email) => {
 
 const register = async ({ name, email, password, role }) => {
   const { error } = RegisterSchema.validate({ name, email, password });
-  
+
   if (error) {
-  return { status: 422, message: 'Invalid Data' };
+  return { code: 422, message: 'Invalid Data' };
   }
 
-  const findUser = await user.findOne({ where: { email } });
+  const findUserByEmail = await user.findOne({ where: { email } });
+  const findUserByName = await user.findOne({ where: { name } });
  
-  if (findUser) {
-    return { code: 409, message: 'Email Already Registered' };
+  if (findUserByEmail || findUserByName) {
+    return { code: 409, message: 'User Already Registered' };
   }
-  
+
   const cryptPassword = md5(password);
   const newUser = await user.create({ 
     name, email, password: cryptPassword, role: role || 'customer' });
@@ -52,9 +53,22 @@ const getSelers = async () => {
   return { status: 200, data: selers };
 };
 
+const getUsers = async () => {
+  const users = await user.findAll();
+  return { status: 200, data: users };
+};
+
+const deleteUser = async (email) => {
+  await user.destroy({ where: { email } });
+  const users = await getUsers();
+  return { status: 201, data: users };
+};
+
 module.exports = {
   getUserbyEmail,
   RegisterSchema,
   register,
   getSelers,
+  getUsers,
+  deleteUser,
 };

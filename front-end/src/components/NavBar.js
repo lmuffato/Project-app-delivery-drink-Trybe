@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { saveUser } from '../redux/slices/userSlice';
 import { removeUserDataFromLocalStorage } from './ultility';
+import './NavBar.css';
 
 const handleLogoutClick = (dispatch) => {
   dispatch(saveUser({ name: '', email: '', role: '', token: '' }));

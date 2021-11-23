@@ -53,15 +53,12 @@ const getSaleDetails = async (id) => {
       .findOne({
         where: { id },
         include: 'salesProduct' });
-    console.log(saleDetails);
     return { status: 201, message: { saleDetails } };
 };
 
 const update = async (updateSale) => {
-  console.log('updateSale at update saleService', updateSale);
   const saleUpdated = await database.sale
     .update({ status: updateSale.status }, { where: { id: updateSale.id } });
-  console.log(saleUpdated);
   return { status: 201, message: { saleUpdated } };
 };
 

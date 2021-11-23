@@ -21,7 +21,6 @@ const getSellerSales = async (req, res) => {
 const getSaleDetails = async (req, res) => {
   const { id } = req.body;
   const response = await saleServices.getSaleDetails(id);
-  console.log(response);
   return res.status(response.status).json(response.message);
 };
 

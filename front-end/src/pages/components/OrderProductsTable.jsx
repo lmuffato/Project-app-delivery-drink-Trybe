@@ -69,7 +69,7 @@ export default function OrderProductsTable({ items }) {
               </tr>))}
         </tbody>
       </table>
-      <h4 data-testid="customer_checkout__element-order-total-price">
+      <h4 data-testid="seller_order_details__element-order-total-price">
         { totalPrice() }
       </h4>
     </div>

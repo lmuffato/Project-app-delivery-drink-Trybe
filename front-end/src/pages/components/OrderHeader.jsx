@@ -41,7 +41,7 @@ export default function OrderHeader({ sale }) {
           <p
             data-testid="seller_order_details__element-order-details-label-order-date"
           >
-            {moment(sale.sale_date).format('DD/MM/YY')}
+            {moment(sale.sale_date).format('DD/MM/YYYY')}
           </p>
           <p
             data-testid={ DELVTESTID }
@@ -60,7 +60,7 @@ export default function OrderHeader({ sale }) {
           <button
             type="button"
             data-testid="seller_order_details__button-dispatch-check"
-            disabled={ status !== 'Preparando' }
+            disabled={ status !== 'Preparando' && sale.status !== 'Preparando' }
             value="Em Trânsito"
             onClick={ handleClick }
           >

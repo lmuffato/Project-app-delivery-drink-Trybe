@@ -3,7 +3,7 @@ import { formatMoney } from 'accounting';
 import { cartContext } from '../../contexts/cart';
 
 export default function Checkout() {
-  const { cartItens } = useContext(cartContext);
+  const { cartItens, removeFromCart } = useContext(cartContext);
   const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
@@ -68,7 +68,9 @@ export default function Checkout() {
                   `customer_checkout__element-order-table-remove-${index}`
                 }
               >
-                <button type="button">Remover item</button>
+                <button type="button" onClick={ () => removeFromCart(item.id) }>
+                  Remover item
+                </button>
               </td>
             </tr>
           )) }

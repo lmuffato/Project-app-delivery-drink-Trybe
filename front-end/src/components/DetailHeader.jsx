@@ -27,6 +27,7 @@ function DetailHeader({ id, sellerName, date, status }) {
       <button
         data-testid="customer_order_details__button-delivery-check"
         type="button"
+        disabled="true"
       >
         MARCAR COMO ENTREGUE
       </button>

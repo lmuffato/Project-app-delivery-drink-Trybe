@@ -22,6 +22,7 @@ const user = require('../controllers/User');
 const sale = require('../controllers/Sales');
 const validateJwtAdmin = require('../auth/validateJwtAdmin');
 const validateToken = require('../auth/validateToken');
+const { validateJWT } = require('../auth/validateGeneric');
 
 const corsOptions = {
   origin: 'http://localhost:3000',
@@ -40,7 +41,7 @@ app.get('/users', user.listUsers);
 app.post('/register/admin', validateJwtAdmin, user.createUser);
 app.post('/validToken', validateToken);
 
-app.post('/sales', sale.addNew);
+app.post('/sales', validateJWT, sale.addNew);
 
 app.use('/images', express.static(path.join(__dirname, '..', '..', '/public')));
 

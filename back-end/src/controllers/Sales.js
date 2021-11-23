@@ -5,8 +5,6 @@ const addNew = async (req, res) => {
 
   const { err, sale } = await Sale.addNew(orders, data);
 
-  console.log(err);
-
   if (err) return res.status(500).json({ error: err.message });
 
   res.status(201).json({ result: sale });

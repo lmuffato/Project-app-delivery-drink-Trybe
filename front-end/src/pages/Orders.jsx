@@ -1,51 +1,38 @@
-import React from 'react';
-import CardCostumerOrder from '../components/CardCostumerOrder';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import moment from 'moment';
+import NavBar from '../components/CustomerNavBar';
+import OrderCard from '../components/OrderCard';
 
-class Orders extends React.Component {
-  constructor() {
-    super();
-
-    this.state = {
-      allSales: [],
-    };
-
-    this.fetchAPI = this.fetchAPI.bind(this);
+function Orders() {
+  const [sales, setSales] = useState([]);
+  const { id } = JSON.parse(localStorage.getItem('user'));
+  console.log(sales);
+  async function getSales() {
+    const salesRequest = await axios.get(`http://localhost:3001/user/sale/${id}`);
+    const allSales = salesRequest.data;
+    console.log(allSales);
+    setSales(allSales);
   }
 
-  componentDidMount() {
-    this.fetchAPI();
-  }
+  useEffect(() => {
+    getSales();
+  }, []);
 
-  async fetchAPI() {
-    const user = localStorage.getItem('user');
-    const result = await axios.get('http://localhost:3001/sales/product', {
-      headers: {
-        authorization: JSON.parse(user).token,
-      },
-    });
-    const { data } = result;
-  
-    this.setState({
-      allSales: data,
-    });
-  }
-
-  render() {
-    const { role } = JSON.parse(localStorage.user);
-    const { allSales } = this.state;
-
-    return (
-      <div>
-        { allSales.map((sale, index) => (
-          <CardCostumerOrder
-            key={ `${sale}${index}` }
-            sale={ sale }
-            role={ role }
-          />
-        )) }
-      </div>
-    );
-  }
+  return (
+    <div>
+      <NavBar />
+      { sales.map((sale, index) => (
+        <OrderCard
+          key={ index }
+          id={ sale.id }
+          status={ sale.status }
+          totalPrice={ sale.total_price }
+          saleDate={ moment(sale.sale_date).format('L') }
+        />
+      )) }
+    </div>
+  );
 }
 
 export default Orders;

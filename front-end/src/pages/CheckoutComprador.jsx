@@ -6,6 +6,7 @@ import { getSeler } from '../API/dataBaseCall';
 
 export default function CheckoutComprador() {
   const { aux, total } = useContext(CheckoutContext);
+  console.log('📓 ~ file: CheckoutComprador.jsx ~ line 9 ~ CheckoutComprador ~ aux', aux);
   const userData = localStorage.getItem('user');
   const [seller, setSeller] = useState([]);
   const [address, setAddress] = useState('');
@@ -39,10 +40,9 @@ export default function CheckoutComprador() {
     <div>
       <Header title="Produtos" subtitle="Meus Pedidos" name={ userName.name } />
       <h1>Finalizar pedido</h1>
-      {aux.map(({ id, title, name, price, qtd }, i) => (
+      {aux.map(({ id, name, price, qtd }, i) => (
         <CheckoutProduct
           id={ id }
-          title={ title }
           name={ name }
           price={ price }
           qtd={ qtd }

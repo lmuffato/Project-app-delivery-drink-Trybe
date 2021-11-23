@@ -12,8 +12,15 @@ export default function Login() {
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
   const [redirect, setRedirect] = useState(false);
+  const [path, setPath] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
   const [disabled, setDisabled] = useState(false);
+
+  const pathway = {
+    customer: '/customer/products',
+    administrator: '/admin/manage',
+    seller: '/seller/orders',
+  };
 
   const handleChange = ({ target }, handle) => {
     const { value } = target;
@@ -32,7 +39,9 @@ export default function Login() {
   useEffect(validInputs, [user, password, disabled]);
   const handleLogin = async () => loginApi(user, password)
     .then((data) => {
+      const { role } = data;
       tokenStorage(data);
+      setPath(pathway[role]);
       setRedirect(true);
     })
     .catch(setErrorMessage);
@@ -77,7 +86,7 @@ export default function Login() {
         >
           CADASTRE-SE
         </Button>
-        {redirect && <Redirect to="/customer/products" />}
+        {redirect && <Redirect to={ path } />}
       </form>
       {errorMessage && (
         <Alert

@@ -31,7 +31,7 @@ export default function OrderCard({ sale }) {
         <strong>{ new Date(sale.saleDate).toLocaleDateString('pt-BR') }</strong>
       </p>
       <p data-testid={ `${role}_orders__element-card-price-${sale.id}` }>
-        <strong>{ sale.totalPrice }</strong>
+        <strong>{ sale.totalPrice.replace('.', ',') }</strong>
       </p>
       { role === 'seller' && (
         <p data-testid={ `seller_orders__element-card-address-${sale.id}` }>

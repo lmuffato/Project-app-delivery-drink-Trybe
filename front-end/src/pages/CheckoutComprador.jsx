@@ -33,7 +33,7 @@ export default function CheckoutComprador() {
 
   useEffect(() => {
     getSellerId(userName.token);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <div>
@@ -54,7 +54,11 @@ export default function CheckoutComprador() {
         {`TOTAL R$ ${total}`}
       </h3>
       <form>
-        <select onChange={ handleSeller } value={ chooseSeller }>
+        <select
+          data-testid="customer_checkout__select-seller"
+          onChange={ handleSeller }
+          value={ chooseSeller }
+        >
           {seller.map((sellerid) => (
             <option key={ sellerid.index } value={ sellerid.name }>
               {sellerid.name}
@@ -66,14 +70,22 @@ export default function CheckoutComprador() {
           placeholder="Digite seu Endereço"
           onChange={ handleAddress }
           value={ address }
+          data-testid="customer_checkout__input-address"
         />
         <input
           type="text"
           placeholder="numero"
           onChange={ handleNumber }
           value={ addressNumber }
+          data-testid="customer_checkout__input-addressNumber"
         />
       </form>
+      <button
+        data-testid="customer_checkout__button-submit-order"
+        type="button"
+      >
+        FINALIZAR PEDIDO
+      </button>
     </div>
   );
 }

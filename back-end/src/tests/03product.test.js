@@ -4,8 +4,8 @@ const frisby = require('frisby');
 const url = 'http://localhost:3001';
 
 describe('03 - Retorno de busca por produtos', () => {
-  describe('Busca do tipo getAll', () => {
-    it('Retorna o código de status 200', async () => {
+  describe('Busca por todos os produtos', () => {
+    it('Retorna o codigo de status 200', async () => {
       await frisby
         .get(`${url}/products`)
         .expect('status', 200)
@@ -31,7 +31,7 @@ describe('03 - Retorno de busca por produtos', () => {
         })
     });
 
-    it('Retorna um array com length = 11', async () => {
+    it('O array tem o tamanho de 11 itens', async () => {
       await frisby
         .get(`${url}/products`)
         .then ((response) => {
@@ -43,7 +43,7 @@ describe('03 - Retorno de busca por produtos', () => {
   });
 
   describe('Busca por id', () => {
-    it('Retorna o código de status 200', async () => {
+    it('Retorna o codigo de status 200', async () => {
       await frisby
         .get(`${url}/products/1`)
         .expect('status', 200)
@@ -59,7 +59,7 @@ describe('03 - Retorno de busca por produtos', () => {
         })
     });
 
-    it('O objeto contém os dados do primeiro item', async () => {
+    it('O objeto contem os dados do item acessado', async () => {
       await frisby
         .get(`${url}/products/1`)
         .then ((response) => {

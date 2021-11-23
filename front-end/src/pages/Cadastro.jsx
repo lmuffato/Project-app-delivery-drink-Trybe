@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router';
 
+const md5 = require('md5');
 const axios = require('axios').default;
 
 export default function Cadastro() {
@@ -9,6 +10,7 @@ export default function Cadastro() {
   const [password, setPassword] = useState('');
   const [disable, setDisable] = useState(true);
   const [redirect, setRedirect] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleChange = ({ target }, handle) => {
     const { value } = target;
@@ -26,16 +28,18 @@ export default function Cadastro() {
         url: 'http://localhost:3001/users',
         data: {
           name,
-          password,
+          password: md5(password),
           email: user,
           role: 'customer',
         },
         responseType: 'json',
       });
+      console.log(response);
       setRedirect(true);
     } catch (error) {
+      setErrorMessage(error.response.data.message);
+      console.error(error.response.data.message);
       resetInputs();
-      console.error(error);
     }
     setName('');
     setUser('');
@@ -103,7 +107,9 @@ export default function Cadastro() {
           CADASTRAR
         </button>
         {redirect ? <Redirect to="/customer/products" /> : null}
+        <p data-testid="common_register__element-invalid_register">{errorMessage}</p>
       </form>
+      <h1>{errorMessage}</h1>
     </div>
   );
 }

@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import ProductCard from '../components/ProductCard';
 import * as request from '../services/requests';
+import NavBar from '../components/NavBar';
 
 function Products() {
   const [products, setProducts] = useState([]);
+
+  const dataUser = JSON.parse(localStorage.getItem('dataUser'));
 
   useEffect(() => {
     const getProducts = async () => {
@@ -13,20 +16,13 @@ function Products() {
     getProducts();
   }, []);
 
-  console.log(products);
-
   return (
     <section>
-      <nav>
-        <div>PRODUTOS</div>
-        <div>MEUS PEDIDOS</div>
-        <div> NOME</div>
-        <div>SAIR</div>
-      </nav>
+      <NavBar dataUser={ dataUser } />
       <div>
-        {products.map((product) => (
+        { products.map((product) => (
           <ProductCard key={ product.id } product={ product } />
-        ))}
+        )) }
       </div>
     </section>
   );

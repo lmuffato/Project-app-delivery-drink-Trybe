@@ -1,6 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Redirect } from 'react-router';
+import PropTypes from 'prop-types';
 
-function NavBar() {
+function NavBar({ dataUser }) {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const logout = () => {
+    localStorage.removeItem('dataUser');
+    setIsLoading(true);
+  };
+
   return (
     <nav>
       <ul>
@@ -25,11 +34,12 @@ function NavBar() {
             href="/"
             data-testid="customer_products__element-navbar-user-full-name"
           >
-            Fulano de Tal
+            { dataUser.name }
           </a>
         </li>
         <li>
           <a
+            onClick={ () => logout() }
             href="/"
             data-testid="customer_products__element-navbar-link-logout"
           >
@@ -37,8 +47,19 @@ function NavBar() {
           </a>
         </li>
       </ul>
+      {
+        isLoading && (
+          <Redirect to="/" />
+        )
+      }
     </nav>
   );
 }
+
+NavBar.propTypes = {
+  dataUser: PropTypes.shape({
+    name: PropTypes.string,
+  }).isRequired,
+};
 
 export default NavBar;

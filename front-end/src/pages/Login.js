@@ -22,7 +22,11 @@ const Login = () => {
 
   async function validateLogin(userLogin) {
     const { data, status } = await postUser(userLogin, 'login');
-    if (data.message) setLoginErr(data.message);
+
+    if (data.message || !data.token) setLoginErr(data.message);
+
+    localStorage.setItem('dataUser', JSON.stringify(data));
+
     if (status === STATUS) setIsLoading(true);
   }
 

@@ -1,4 +1,4 @@
-import { parseJwt } from '../utils/utils'
+import { parseJwt } from '../utils/utils';
 
 async function postUser(userData, rota) {
   const response = await fetch(`http://localhost:3001/${rota}`, {
@@ -6,16 +6,14 @@ async function postUser(userData, rota) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(userData),
   });
+
   const token = await response.json();
 
-  const { dataValues: { name, email, role } } = parseJwt(data);
+  if (token.message) return { data: tokem.message, status: response.status };
 
-  const data =  {
-    token,
-    name,
-    email,
-    role,
-  }
+  const { name, email, role } = parseJwt(token);
+
+  const data = { token, name, email, role };
 
   return { data, status: response.status };
 }
@@ -27,17 +25,3 @@ export async function getPruducts() {
 }
 
 export default postUser;
-
-// localStorage.setItem('token', response.token);
-// JSON.parse(localStorage.getItem('ranking'));
-// localStorage.setItem('ranking', JSON.stringify(rankingOnstorage));
-
-// const parseJwt = (token) => {
-//   try {
-//     return JSON.parse(atob(token.split('.')[1]));
-//   } catch (e) {
-//     return null;
-//   }
-// };
-
-// console.log(parseJwt(token))

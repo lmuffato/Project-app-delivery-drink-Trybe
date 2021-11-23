@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import moment from 'moment';
 import MenuCostumer from '../../components/MenuCustomer';
 import api from '../../services/api';
@@ -26,30 +27,36 @@ function Orders() {
       const { id, status, sale_date: saleDate, total_price: totalPrice } = order;
 
       return (
-        <div
-          className="order-container"
+        <Link
           key={ id }
-          data-testid={ `customer_orders__element-order-id-${id}` }
+          to={ `/customer/orders/${id}` }
+          style={ { textDecoration: 'none' } }
         >
-          <div className="info-order">
-            <p>Pedido</p>
-            <p>{id}</p>
-          </div>
           <div
-            className={ `status-order-${status}` }
-            data-testid={ `customer_orders__element-delivery-status-${id}` }
+            className="order-container"
+            key={ id }
+            data-testid={ `customer_orders__element-order-id-${id}` }
           >
-            <p>{status.toUpperCase()}</p>
-          </div>
-          <div className="date-price-order">
-            <p
-              data-testid={ `customer_orders__element-order-date-${id}` }
+            <div className="info-order">
+              <p>Pedido</p>
+              <p>{id}</p>
+            </div>
+            <div
+              className={ `status-order-${status}` }
+              data-testid={ `customer_orders__element-delivery-status-${id}` }
             >
-              {moment(saleDate).format('DD/MM/yyyy')}
-            </p>
-            <p>{totalPrice}</p>
+              <p>{status.toUpperCase()}</p>
+            </div>
+            <div className="date-price-order">
+              <p
+                data-testid={ `customer_orders__element-order-date-${id}` }
+              >
+                {moment(saleDate).format('DD/MM/yyyy')}
+              </p>
+              <p>{totalPrice}</p>
+            </div>
           </div>
-        </div>
+        </Link>
       );
     })
   );

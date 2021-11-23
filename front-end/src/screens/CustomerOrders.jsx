@@ -1,32 +1,62 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
+import { Grid } from '@mui/material';
 import { verifyUserExistance } from '../utils/LocalStorageFunctions';
 import NavBar from '../components/NavBar';
-import getUrlServer from '../utils/getServerUrl';
+import OrderCard from '../components/OrderCard';
 
-require('dotenv').config();
-console.log(process.env.URL_SERVER);
+const getUrlServer = require('../utils/getServerUrl');
 
 function CustomerOrders() {
   const [clientOrders, setClientOrders] = useState([]);
   const user = verifyUserExistance();
   const history = useHistory();
   if (!user) history.push('/login');
-  const { token, id } = user;
+  const { token } = user;
   useEffect(() => {
-    const getClientOrders = async (userId, userToken) => {
+    const getClientOrders = async (userToken) => {
       const headers = { Authorization: userToken };
-      const orders = await axios.get(`${getUrlServer()}/sales/${userId}`, { headers });
+      const orders = await axios.get(`${getUrlServer()}/sales`, { headers });
+      console.log(orders);
       return orders;
     };
-    setClientOrders(getClientOrders(id, token));
+    getClientOrders(token)
+      .then((response) => {
+        setClientOrders(response.data.sales);
+      })
+      .catch((e) => console.log(e.message));
+  // eslint-disable-next-line
   }, []);
   return (
-    <div>
+    <section>
       <NavBar />
-
-    </div>
+      <Grid
+        container
+        direction="row"
+        alignItems="center"
+        justifyContent="flex-start"
+        flexWrap
+        spacing={ 2 }
+      >
+        {
+          clientOrders.map((order, index) => {
+            const { id, saleDate, totalPrice, status } = order;
+            console.log(id, saleDate, totalPrice, status);
+            return (
+              <Grid item xs={ 2 } key={ index }>
+                <OrderCard
+                  id={ id }
+                  saleDate={ saleDate }
+                  status={ status }
+                  totalPrice={ totalPrice }
+                />
+              </Grid>
+            );
+          })
+        }
+      </Grid>
+    </section>
   );
 }
 

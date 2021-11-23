@@ -1,5 +1,5 @@
 const express = require('express');
-const cors = require('cors');
+
 const http = require('http');
 const bodyParser = require('body-parser');
 
@@ -12,12 +12,10 @@ const io = require('socket.io')(server, {
     } });
 const { getSaleById, update } = require('../services');
 const middlewares = require('../middlewares');
-const { useRoutes, sellerRoutes } = require('../routes');
+const { useRoutes, getSalesRouter } = require('../routes');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-app.use(cors());
 
 app.use('/user', useRoutes);
 app.get('/coffee', (_req, res) => res.status(418).end());
@@ -25,7 +23,7 @@ app.get('/coffee', (_req, res) => res.status(418).end());
 app.use(middlewares.routeNotFound);
 
 app.use(middlewares.errorMiddleware);
-app.use('/seller', sellerRoutes);
+app.use('/sales', getSalesRouter);
 
 io.on('connection', (socket) => {
     console.log('conectou');

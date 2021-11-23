@@ -4,6 +4,6 @@ const { getSalesBySeller } = require('../controllers');
 
 const router = express.Router();
 
-router.get('/sales', getSalesBySeller);
+router.get('/seller', getSalesBySeller);
 
 module.exports = router;

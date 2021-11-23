@@ -11,4 +11,6 @@ routes.get('/:id', rescue(userController.findByIdUser));
 routes.put('/:id', rescue(userController.updateUser));
 routes.delete('/:id', rescue(userController.removeUser));
 
+routes.use((_req, _res, _err) => console.log('teste'));
+
 module.exports = routes;

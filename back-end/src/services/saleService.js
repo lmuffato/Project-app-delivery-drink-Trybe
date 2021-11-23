@@ -9,7 +9,8 @@ const createSale = async (data) => {
 };
 
 const getAllSales = async (id) => {
-  const query = { where: { user_id: id } };
+  const userId = 'user_Id';
+  const query = { where: { [userId]: id } };
 
   const allSales = await sale.findAll(query);
   return allSales;

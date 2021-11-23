@@ -2,7 +2,7 @@ const {
   sale: saleModel,
   user: userModel,
   product: productModel,
-  salesProduct: salesProductModel
+  salesProduct: salesProductModel,
 } = require('../../database/models');
 
 exports.findAll = async () => {

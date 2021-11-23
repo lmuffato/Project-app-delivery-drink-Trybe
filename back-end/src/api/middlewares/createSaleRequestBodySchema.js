@@ -15,7 +15,7 @@ const schema = Joi.object({
     .items({
       name: Joi.string().required(),
       quantity: Joi.number().required(),
-    })
+    }),
 }).required();
 
 module.exports = schema;

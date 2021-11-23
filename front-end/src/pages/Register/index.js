@@ -32,18 +32,20 @@ const Register = () => {
   const handleRegister = async () => {
     clearInputs();
 
+    console.log({ values });
+
     const registerUserResponse = await requestRegisterUser(values);
-
-    localStorage.setItem('user', JSON.stringify(registerUserResponse));
-
-    setUser(userInfo);
 
     if (registerUserResponse.message) {
       clearInputs();
-      setErrorMsg(result.message);
-    }
+      setErrorMsg(registerUserResponse.message);
+    } else {
+      localStorage.setItem('user', JSON.stringify(registerUserResponse));
 
-    setUser(result);
+      setUser(registerUserResponse);
+
+      history.push('/customer/products');
+    }
   };
 
   useEffect(() => {

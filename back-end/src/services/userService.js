@@ -21,7 +21,7 @@ module.exports = {
     if (userAlreadyExists) {
       return validateResponse(httpStatusCode.conflit, errors.USER_EXISTS, 'error');
     }
-
+    
     const hash = md5(password);
 
     const { 

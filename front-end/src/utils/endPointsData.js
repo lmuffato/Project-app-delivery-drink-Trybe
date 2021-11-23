@@ -14,7 +14,7 @@ export const saleEndPointData = {
   endpoint: 'http://localhost:3001/sale',
   statusInvalid: 409,
   statusRegisterAccept: 201,
-}
+};
 
 export const getUserEndpoint = {
   endpoint: 'http://localhost:3001/user',

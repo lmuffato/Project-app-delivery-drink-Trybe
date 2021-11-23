@@ -1,13 +1,16 @@
 import React from 'react';
 import './App.css';
 import RoutesComponent from './routes';
+import { CartProvider } from './hooks/useCart';
 import ProviderProduct from './provider/product/ProviderProduct';
 
 function App() {
   return (
-    <ProviderProduct>
-      <RoutesComponent />
-    </ProviderProduct>
+    <CartProvider>
+      <ProviderProduct>
+        <RoutesComponent />
+      </ProviderProduct>
+    </CartProvider>
   );
 }
 

@@ -1,17 +1,18 @@
 import React, { useContext, useEffect } from 'react';
 import Card from '../../components/Card';
 import MenuCostumer from '../../components/MenuCustomer';
+import { useCart } from '../../hooks/useCart';
 import ContextProduct from '../../provider/product/ContextProduct';
 import api from '../../services/api';
 import './style.css';
 
 const ProductsPage = () => {
   const { products, setProducts } = useContext(ContextProduct);
+  const { totalValue } = useCart();
   const [isLoading, setIsLoading] = React.useState(false);
 
   useEffect(() => {
     const fetchProducts = async () => {
-      console.log('Aqui');
       setIsLoading(true);
       const { token } = JSON.parse(localStorage.getItem('user'));
       const array = await api.getProducts(token);
@@ -37,6 +38,17 @@ const ProductsPage = () => {
             />
           ))}
         </div>
+        {totalValue > 0 && (
+          <button
+            type="button"
+            data-testid="customer_products__checkout-bottom-value"
+            className="cartButton"
+          >
+            Ver carrinho:
+            R$
+            {String(totalValue).replace('.', ',')}
+          </button>
+        )}
       </section>
     );
   }

@@ -1,7 +1,9 @@
 const jwt = require('jsonwebtoken');
-const { MISSING_AUTH_TOKEN, JWT_MALFORMED } = require('../messages/errorMessages');
+const path = require('path');
+const secret = require('fs')
+.readFileSync(path.join(__dirname, '../../../jwt.evaluation.key'), { encoding: 'utf-8' }).trim();
 
-const secret = process.env.SECRET || 'e717vdd^DEp.';
+const { MISSING_AUTH_TOKEN, JWT_MALFORMED } = require('../messages/errorMessages');
 
 const validateToken = (req, res, next) => {
   const { authorization } = req.headers;

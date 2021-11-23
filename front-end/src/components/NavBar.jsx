@@ -29,3 +29,8 @@ function NavBar() {
 }
 
 export default NavBar;
+
+NavBar.propTypes = {
+  ids: PropTypes.object,
+  names: PropTypes.object,
+}.isRequired;

@@ -13,41 +13,53 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      user_id: {
+      userId: {
         allowNull: false,
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
+        // defaultValue: 1,
+        field: 'user_id',
         type: Sequelize.INTEGER,
         references: {
           model: 'users',
           key: 'id'
         }
       },
-      seller_id: {
+      sellerId: {
         allowNull: false,
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
+        // defaultValue: 1,
+        field: 'seller_id',
         type: Sequelize.INTEGER,
         references: {
           model: 'users',
           key: 'id'
         }
       },
-      total_price: {
+      totalPrice: {
         allowNull: false,
+        defaultValue: 1,
+        field: 'total_price',
         type: Sequelize.DECIMAL(9,2),
       },
-      delivery_address: {
+      deliveryAddress: {
         allowNull: false,
+        defaultValue: 1,
+        field: 'delivery_address',
         type: Sequelize.STRING,
       },
-      delivery_number: {
+      deliveryNumber: {
         allowNull: false,
+        defaultValue: 1,
+        field: 'delivery_number',
         type: Sequelize.STRING,
       },
-      sale_date: {
-        allowNull: false,
+      saleDate: {
+        // allowNull: false,
         type: Sequelize.DATE,
+        field: 'sale_date',
+        defaultValue: Sequelize.NOW,
       },
       status: {
         allowNull: false,

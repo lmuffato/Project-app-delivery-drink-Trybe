@@ -1,0 +1,16 @@
+const dateFormat = (date) => {
+  const num10 = 10;
+  const num8 = 8;
+  const num5 = 5;
+  const num4 = 4;
+  date = date.substr(0, num10);
+
+  const day = date.substr(num8, 2);
+  const month = date.substr(num5, 2);
+  const year = date.substr(0, num4);
+
+  const newDate = `${day}/${month}/${year}`;
+  return newDate;
+};
+
+export default dateFormat;

@@ -39,6 +39,11 @@ function Login() {
     } else { setDisabled(true); }
   }, [email, password]);
 
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user) history.push('/customer/products');
+  }, []);
+
   return (
     <div>
       Login

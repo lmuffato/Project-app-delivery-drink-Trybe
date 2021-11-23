@@ -2,12 +2,14 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router';
 import CheckoutCard from '../components/CheckoutCard';
 import CustomerAddress from '../components/CustomerAddress';
+import ApiContext from '../context/ApiContext';
 import UserContext from '../context/UserContext';
 import { createSale } from '../services/apis';
 
 function Checkout() {
   const history = useHistory();
 
+  const { setAtt, att } = useContext(ApiContext);
   const { sellerId } = useContext(UserContext);
   const [products, setProducts] = useState([]);
   const [totalCheckout, setTotalCheckout] = useState(0);
@@ -47,6 +49,7 @@ function Checkout() {
         sellerId,
       };
       const getSale = await createSale(object);
+      setAtt(!att);
       history.push(`/customer/orders/${getSale.id}`);
     } catch (error) {
       console.log(error);

@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
     status: DataTypes.STRING,
     user_id: { type: DataTypes.INTEGER, foreignKey: true },
     seller_id: DataTypes.INTEGER,
+    seller_name: DataTypes.STRING
   },
   {
     timestamps: true,

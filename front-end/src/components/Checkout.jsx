@@ -1,17 +1,21 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
+import axios from 'axios';
 import CartTable from './cartTable';
 import DeliveryForm from './DeliveryForm';
 
 export default function Checkout(props) {
   const { totalCart } = props;
+  const url = 'http://localhost:3001';
   const [isDisabled, setIsDisabled] = useState(true);
   const shoppingCart = JSON.parse(localStorage.getItem('shoppingCart'));
-  // const user = JSON.parse(localStorage.getItem('user'));
+  const user = JSON.parse(localStorage.getItem('user'));
   const deliveryData = useSelector((state) => state.shoppingCart.deliveryData);
+  const history = useHistory();
 
-  const handleClick = () => {
+  const handleClick = async () => {
     const data = {
       sellerId: deliveryData.sellerId,
       totalPrice: totalCart.split(',').join('.'),
@@ -19,7 +23,18 @@ export default function Checkout(props) {
       deliveryNumber: deliveryData.number,
       productList: shoppingCart,
     };
-    console.log(data);
+    await axios({
+      method: 'post',
+      url: `${url}/sales`,
+      headers: {
+        Authorization: user.token,
+      },
+      data,
+    })
+      .then((res) => {
+        history.push(`/customer/orders/${res.data}`);
+      })
+      .catch((err) => console.log(err));
   };
 
   return (

@@ -56,6 +56,11 @@ function Login() {
     }
   };
 
+  const reditectToResgister = (event) => {
+    event.preventDefault();
+    navigate('/register');
+  };
+
   return (
     <form onSubmit={ onSubmit }>
       <img src="#" alt="Logotipo" />
@@ -68,8 +73,8 @@ function Login() {
           type="email"
           value={ values.email }
           onChange={ onChange }
-          placeholder="email@tryber.com.br"
           required
+          placeholder="email@tryber.com.br"
         />
       </label>
       <label htmlFor="password">
@@ -91,7 +96,11 @@ function Login() {
       >
         LOGIN
       </button>
-      <button data-testid="common_login__button-register" type="submit">
+      <button
+        data-testid="common_login__button-register"
+        type="submit"
+        onClick={ reditectToResgister }
+      >
         Ainda não tenho conta
       </button>
       <span data-testid="common_login__element-invalid-email">

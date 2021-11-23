@@ -35,6 +35,7 @@ const salesSchema = Joi.object({
   saleDate: Joi.date().required(),
   userId: Joi.number().required(),
   sellerId: Joi.number().required(),
+  data: Joi.array().required(),
 });
 
 module.exports = {

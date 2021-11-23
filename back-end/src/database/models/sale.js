@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
       saleDate: DataTypes.DATE,
       status: DataTypes.STRING,
     },
-    {  tableName:'sales', timestamps: false }
+    { tableName: 'sales', timestamps: false }
   );
   Sale.associate = ( { User } ) => {
     Sale.belongsTo(User, { as: "user" });

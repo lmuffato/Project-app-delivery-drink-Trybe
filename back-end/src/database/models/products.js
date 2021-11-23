@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     price: DataTypes.STRING,
     url_image: DataTypes.STRING,
   }, {
-    tableName: 'Products',
+    tableName: 'products',
     timestamps: false,
   });
 

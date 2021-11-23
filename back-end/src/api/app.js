@@ -5,6 +5,7 @@ const path = require('path');
 
 const userController = require('./controllers/userController');
 const productController = require('./controllers/productController');
+const salesController = require('./controllers/salesController');
 const loginvalidationMid = require('./middlewares/loginValidationMid');
 const registerValidationMid = require('./middlewares/registerValidationMid');
 const authMid = require('./middlewares/authMid');
@@ -19,6 +20,7 @@ app.get('/coffee', (_req, res) => res.status(418).end());
 
 app.post('/login', loginvalidationMid, userController.login);
 app.post('/register', registerValidationMid, userController.create);
+app.post('/sales', authMid, salesController.create);
 
 app.get('/products', authMid, productController.getAll);
 

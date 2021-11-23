@@ -1,6 +1,5 @@
 const jwt = require('jsonwebtoken');
 const md5 = require('md5');
-// const fs = require('fs');
 const { users } = require('../../database/models');
 require('dotenv').config();
 

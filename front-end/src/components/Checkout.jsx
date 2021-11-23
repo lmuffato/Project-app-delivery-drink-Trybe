@@ -22,6 +22,7 @@ export default function Checkout(props) {
           </p>
         </button>
       </div>
+      <h3 className="text-white text-2xl">Detelhes e Endereço para Entrega</h3>
       <div>
         <DeliveryForm />
         <button

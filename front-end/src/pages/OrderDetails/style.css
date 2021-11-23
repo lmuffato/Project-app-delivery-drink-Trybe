@@ -15,7 +15,10 @@
 }
 
 .sale-card {
-  background-color: rgb(170, 247, 119);
+  background-color: black;
+  border-radius: 10px;
+  color: white;
   height: 300px;
-  width: 800px;
+  min-width: 800px;
+  padding: 10px;
 }

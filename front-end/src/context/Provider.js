@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { io } from 'socket.io-client';// https://github.com/tryber/sd-10a-live-lectures/pull/89/files
@@ -15,6 +16,8 @@ const Endpoints = {
 };
 
 function Provider({ children }) {
+  const navigate = useNavigate();
+
   const [user, setUser] = useState({});
   const [products, setProducts] = useState([]);
   const [shoppingCart, setShoppingCart] = useState({});
@@ -39,11 +42,21 @@ function Provider({ children }) {
 
   const postShoppingCartURL = 'http://localhost:3001/sale';
   const postShoppingCart = async () => {
-    console.log({ shoppingCart, delivery, total, sellerId });
-    await axios.post(postShoppingCartURL, { shoppingCart, delivery, total, sellerId })
-      .then((res) => {
-        console.log(res);
-      });
+    const token = localStorage.getItem('token');
+    const objectCart = {};
+    Object.entries(shoppingCart).forEach((item) => {
+      objectCart[item[0]] = item[1].productQuant;
+    });
+
+    const totalToNumber = Number(total.replace(',', '.')).toFixed(2);
+
+    const request = await axios.post(postShoppingCartURL,
+      { shoppingCart: objectCart, delivery, total: totalToNumber, sellerId }, {
+        headers: {
+          authorization: token,
+        } });
+    navigate(`/customer/orders/${request.data.id}`);
+    return request.data.id;
   };
 
   /// ////////////////////////ComponentDidMount//////////////////////// ///
@@ -53,7 +66,7 @@ function Provider({ children }) {
       await getProducts();
     });
     fetchProducts();
-    setDelivery({ address: 'string', number: 99 });
+    setDelivery({ deliveryAddress: 'string', deliveryNumber: 99 });
     setTotal(0);
   }, []);
 
@@ -62,9 +75,6 @@ function Provider({ children }) {
     function sum() {
       const itens = Object.entries(shoppingCart);
       const teste = itens.map((item) => {
-        console.log(Object.values(item[1])[2]);
-        console.log(Object.values(item[1])[3]);
-
         const A = parseFloat(Object.values(item[1])[2]);
         const B = parseFloat(Object.values(item[1])[3]);
         return (A * B).toFixed(2);
@@ -155,7 +165,7 @@ function Provider({ children }) {
         setUser,
         get,
         user,
-        // post,
+        post,
         handleChange,
         submitChange,
         shoppingCart,

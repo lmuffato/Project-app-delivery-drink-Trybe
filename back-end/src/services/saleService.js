@@ -35,7 +35,7 @@ const createNewSaleOnDatabase = async (user, sellerId, total, delivery) => {
 
 const postSale = async (data, user) => {
   const transaction = await sequelize.transaction();
-
+  console.log(data);
   try {
     const { delivery, shoppingCart, total, sellerId } = data;
     const arrProducts = Object.entries(shoppingCart);

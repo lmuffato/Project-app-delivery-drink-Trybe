@@ -4,7 +4,6 @@ const { CREATED, OK } = require('../utils/statusCodeMap');
 const postSale = async (req, res) => {
   const data = req.body;
   const user = req.token;
-
   const result = await saleService.postSale(data, user);
 
   const { error } = result;

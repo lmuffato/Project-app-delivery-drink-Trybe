@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/images', express.static(path.join(__dirname, '.', 'images')));
 
 app.get('/coffee', (_req, res) => res.status(418).end());
-app.get('/users', authMid, userController.getUsers);
+app.get('/users/:role', authMid, userController.getUsers);
 
 app.post('/login', loginvalidationMid, userController.login);
 app.post('/register', registerValidationMid, userController.create);

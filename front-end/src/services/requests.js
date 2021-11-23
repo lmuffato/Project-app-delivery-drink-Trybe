@@ -9,4 +9,10 @@ async function postUser(userData, rota) {
   return { data, status: response.status };
 }
 
+export async function getPruducts() {
+  const response = await fetch('http://localhost:3001/customer/products');
+  const data = await response.json();
+  return { response, data };
+}
+
 export default postUser;

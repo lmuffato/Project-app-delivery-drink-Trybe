@@ -9,7 +9,7 @@ export default function OrderCard({ sale }) {
   const history = useHistory();
 
   const handleCardClick = () => {
-    history.push(`/customer/orders/${sale.id}`);
+    history.push(`/${role}/orders/${sale.id}`);
   };
 
   return (

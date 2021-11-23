@@ -70,6 +70,11 @@ export function CartProvider({ children }) {
     }
   };
 
+  const removeFromCart = (id) => {
+    const cartUpdated = cartItens.filter((item) => item.id !== id);
+    setCartItens(cartUpdated);
+  };
+
   return (
     <cartContext.Provider
       value={ {
@@ -77,6 +82,7 @@ export function CartProvider({ children }) {
         increaseQuantity,
         decreaseQuantity,
         customizeQuantity,
+        removeFromCart,
       } }
     >
       { children }

@@ -1,12 +1,22 @@
 const express = require('express');
 const cors = require('cors');
+const http = require('http');
+const bodyParser = require('body-parser');
+
+const app = express();
+const server = http.createServer(app);
+const io = require('socket.io')(server, {
+    cors: {
+      origin: 'http://localhost:3000', 
+      methods: ['GET', 'POST'], 
+    } });
+const { getSaleById, update } = require('../services');
 const middlewares = require('../middlewares');
 const { useRoutes, sellerRoutes } = require('../routes');
 
-const app = express();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 app.use('/user', useRoutes);
@@ -17,4 +27,18 @@ app.use(middlewares.routeNotFound);
 app.use(middlewares.errorMiddleware);
 app.use('/seller', sellerRoutes);
 
-module.exports = app;
+io.on('connection', (socket) => {
+    console.log('conectou');
+    socket.on('getSale', async (id) => {
+        const sale = await getSaleById(id);
+        console.log(sale);
+        io.emit('takeSale', sale);
+    });
+    socket.on('sendStatus', async ({ id, status }) => {
+        await update('sales', { id }, { status });
+        const updated = await getSaleById(id);
+        io.emit('takeSale', updated);
+    });
+});
+
+module.exports = server;

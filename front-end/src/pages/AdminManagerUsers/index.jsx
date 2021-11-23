@@ -1,5 +1,5 @@
 import React from 'react';
-import FormRegisterUser from '../../components/FormRegisterUser';
+import FormRegisterUser from '../../components';
 
 const AdminManagerUsers = () => (
   <main>

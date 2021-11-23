@@ -25,6 +25,10 @@ function App() {
       <Route path="/" element={ <Navigate replace to="/login" /> } />
       <Route path="/customer/products" element={ <ProductClient /> } />
       <Route path="/customer/checkout" element={ <CheckoutClient /> } />
+      <Route
+        path="/customer/orders/:id"
+        element={ () => <div>Costumer Order ID</div> }
+      />
     </Routes>
   );
 }

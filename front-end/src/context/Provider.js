@@ -1,9 +1,9 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { io } from 'socket.io-client';// https://github.com/tryber/sd-10a-live-lectures/pull/89/files
 import Context from './Context';
-// import { io } from 'socket.io-client';// https://github.com/tryber/sd-10a-live-lectures/pull/89/files
 
 const socket = io('http://localhost:3001');
 
@@ -20,8 +20,8 @@ function Provider({ children }) {
   const [shoppingCart, setShoppingCart] = useState({});
   const [total, setTotal] = useState(0);
   const [delivery, setDelivery] = useState({});
-  const [sellers, setSellers] = useState([]);
-  const [sellerPerson, setSellerPerson] = useState('');
+  const [sellers, setSellers] = useState([{ name: 'rogerin', sellerId: '1' }]);
+  const [sellerId, setSellerId] = useState();
 
   /// ////////////////////////Link with BackEnd//////////////////////// ///
 
@@ -38,9 +38,9 @@ function Provider({ children }) {
   };
 
   const postShoppingCartURL = 'http://localhost:3001/sale';
-  const postShoppingCart = () => {
-    console.log({ shoppingCart, delivery, total });
-    axios.post(postShoppingCartURL, { shoppingCart, delivery, total })
+  const postShoppingCart = async () => {
+    console.log({ shoppingCart, delivery, total, sellerId });
+    await axios.post(postShoppingCartURL, { shoppingCart, delivery, total, sellerId })
       .then((res) => {
         console.log(res);
       });
@@ -153,7 +153,7 @@ function Provider({ children }) {
       value={ {
         setUser,
         user,
-        post,
+        // post,
         handleChange,
         submitChange,
         shoppingCart,
@@ -165,7 +165,9 @@ function Provider({ children }) {
         postShoppingCart,
         inputProduct,
         deleteProduct,
+        setSellerId,
         socket,
+        sellers,
         total } }
     >
       { children }

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useContext } from 'react';
 import Header from '../components/header';
 import Context from '../context/Context';
@@ -5,7 +6,10 @@ import Table from '../components/table';
 
 function CheckoutClient() {
   const {
-    postShoppingCart, shoppingCart, total, setDelivery, delivery } = useContext(Context);
+    postShoppingCart,
+    shoppingCart,
+    total,
+    setDelivery, delivery, sellers, setSellerId } = useContext(Context);
 
   return (
     <>
@@ -37,10 +41,21 @@ function CheckoutClient() {
         <h1>Detalhes e Endereço para Entrega</h1>
         <label htmlFor="vendedor">
           P.Vendedora responsável
-          <select data-testid="customer_checkout__select-seller">
-            <option>Fulano</option>
-            <option>Fulano</option>
-            <option>Fulano</option>
+          <select
+            data-testid="customer_checkout__select-seller"
+            onChange={ (e) => setSellerId(e.target.value) }
+          >
+            <option disabled selected value> -- Selecione -- </option>
+
+            { sellers.map((seller) => (
+              <option
+                key={ seller.sellerId }
+                value={ seller.sellerId }
+              >
+                {seller.name}
+              </option>
+
+            ))}
           </select>
         </label>
         <label htmlFor="endereço">

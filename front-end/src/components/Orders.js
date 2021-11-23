@@ -16,7 +16,7 @@ export default function Orders() {
       .then((res) => {
         dispatch(saveSale(res.data));
       });
-  }, []);
+  }, [dispatch, reqUrl]);
   console.log('usuario aqui', role);
   return (
     <div>

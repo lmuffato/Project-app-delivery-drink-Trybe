@@ -36,7 +36,7 @@ function RecipesProvider({ children }) {
   }
 
   return (
-    <CheckoutContext.Provider value={ { addItem, total, aux } }>
+    <CheckoutContext.Provider value={ { addItem, total, aux, setAux } }>
       {children}
     </CheckoutContext.Provider>
   );

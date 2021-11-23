@@ -18,7 +18,6 @@ export default function CheckoutComprador() {
     const sellerIncome = await getSeler(user);
     setSeller(sellerIncome);
   }
-  console.log(chooseSeller);
 
   function handleSeller({ target: { value } }) {
     setChooseSeller(value);

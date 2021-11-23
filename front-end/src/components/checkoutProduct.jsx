@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import CheckoutContext from '../context/checkoutContext';
 
 export default function CheckoutProduct({ index, id, name, qtd, price }) {
   const newPrice = (price / qtd).toFixed(2).toString().replace(/\./g, ',');
   const subtotal = (price).toString().replace(/\./g, ',');
+  const { aux, setAux } = useContext(CheckoutContext);
+
+  function deleteItem(idx) {
+    const sales = aux.filter((item) => item.id !== idx);
+    setAux(sales);
+  }
+
   return (
     <div key={ id }>
       <p
@@ -32,6 +40,7 @@ export default function CheckoutProduct({ index, id, name, qtd, price }) {
       <button
         type="button"
         data-testid={ `customer_checkout__element-order-table-remove-${index}` }
+        onClick={ () => deleteItem(id) }
       >
         REMOVER
       </button>

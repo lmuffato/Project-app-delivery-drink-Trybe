@@ -13,7 +13,7 @@ app.use(cors());
 
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
-app.use('/products', productsRouter);
+app.use('/customer/products', productsRouter);
 app.use('/sales', salesRouter);
 
 module.exports = app;

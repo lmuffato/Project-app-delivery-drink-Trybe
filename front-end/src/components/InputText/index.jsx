@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './styles.css';
 
 const InputText = ({ name, id, onChange, value, ...others }) => (
   <input
@@ -9,6 +10,7 @@ const InputText = ({ name, id, onChange, value, ...others }) => (
     value={ value }
     id={ id }
     { ...others }
+    className="c_inputText"
   />
 );
 

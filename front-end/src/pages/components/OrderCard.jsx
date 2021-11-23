@@ -5,7 +5,7 @@ import moment from 'moment';
 
 export default function OrderCard({ sale }) {
   const { id, totalPrice, status, sale_date: saleDate } = sale;
-  const date = moment(saleDate).format('DD/MM/YY');
+  const date = moment(saleDate).format('DD/MM/YYYY');
 
   return (
     <Link to={ `/customer/orders/${id}` }>
@@ -19,7 +19,9 @@ export default function OrderCard({ sale }) {
         <p data-testid={ `customer_orders__element-order-date-${id}` }>
           {date}
         </p>
-        <p>{`${totalPrice.replace('.', ',')}`}</p>
+        <p data-testid={ `customer_orders__element-card-price-${id}` }>
+          {`${totalPrice.replace('.', ',')}`}
+        </p>
       </div>
     </Link>
   );

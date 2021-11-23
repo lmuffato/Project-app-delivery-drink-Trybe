@@ -43,7 +43,6 @@ function CardProducts() {
       quantity[product.id] = 0;
     });
     setQuantityProducts(quantity);
-    console.log(products);
   }, [products]);
 
   useEffect(() => {

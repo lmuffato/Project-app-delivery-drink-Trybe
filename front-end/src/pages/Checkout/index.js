@@ -1,11 +1,19 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link, Redirect } from 'react-router-dom';
-import UserContext from '../Contexts/User/userContext';
-import Header from '../Components/Header';
-import Table from '../Components/Table';
+import { Link, useHistory } from 'react-router-dom';
+import UserContext from '../../Contexts/User/userContext';
+import DeliveryContext from '../../Contexts/Deliveries/DeliveryContext';
+import Header from '../../Components/Header';
+import Table from '../../Components/Table';
 
-import { getSellers } from '../utils/Data';
+import { getSellers } from '../../utils/Data';
+import {
+  calculeTotal,
+  formatList,
+  createSalePayload,
+  createUserCart,
+} from './helpers';
 
 const HEADERS = ['Descrição', 'Quantidade', 'Valor Unitário', 'Sub-total'];
 
@@ -22,46 +30,15 @@ const LINK = [
   },
 ];
 
-// Helpers
-const calculeSubTotalPrice = ({ quantity, price, name }) => ({
-  name,
-  quantity,
-  price,
-  total: quantity * price,
-});
-
-const calculeTotal = (cart) => cart.reduce((acc, cur) => {
-  acc += cur.total;
-  return acc;
-}, 0);
-
-const formatList = (cart) => cart.map((item) => calculeSubTotalPrice(item));
-
-const createSalePayload = (userId, Sellers, cart) => {
-  const street = document.querySelector('#adress').value;
-  const number = document.querySelector('#number').value;
-  const seller = document.querySelector('#seller').value;
-  const total = document.querySelector('#total').innerText;
-
-  const sellerId = Sellers.find(({ name }) => name === seller);
-
-  return {
-    street,
-    number,
-    sellerId,
-    userId,
-    total,
-    status: 'Pendente',
-    orders: cart,
-  };
-};
-
 function Checkout() {
-  const { cart, setCart } = useContext(UserContext);
+  const { cart, setCart, user } = useContext(UserContext);
+  const { products, quantityProducts } = useContext(DeliveryContext);
   const [sellers, setSellers] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   const CART_ITEMS = formatList(cart);
+
+  const history = useHistory();
 
   const removeItem = (name) => {
     const newItems = cart.filter((item) => item.name !== name);
@@ -71,7 +48,8 @@ function Checkout() {
   useEffect(() => {
     const onMount = async () => {
       setIsLoading(true);
-      const result = await getSellers();
+      setCart(createUserCart(products, quantityProducts));
+      const { result } = await getSellers();
       setSellers(result);
       setIsLoading(false);
     };
@@ -92,15 +70,22 @@ function Checkout() {
           testeId="element-order-table-name-"
         />
         <div data-testid="customer_checkout__element-order-total-price" id="total">
-          {calculeTotal(CART_ITEMS)}
+          {`${Number(calculeTotal(CART_ITEMS)).toFixed(2)}`.replace('.', ',')}
         </div>
       </div>
       {!isLoading && (
         <form>
           <label htmlFor="seller">
             Vendedor Responsável
-            <select id="seller" data-testeid="customer_checkout__select-seller">
-              <option value="">Fulano</option>
+            <select id="seller" data-testid="customer_checkout__select-seller">
+              {sellers.map((seller, i) => (
+                <option
+                  value={ seller.name }
+                  key={ `seller${i}` }
+                >
+                  {seller.name}
+                </option>
+              ))}
             </select>
           </label>
           <label htmlFor="adress">
@@ -109,7 +94,7 @@ function Checkout() {
               type="text"
               required
               id="adress"
-              data-testeid="customer_checkout__input-address"
+              data-testid="customer_checkout__input-address"
             />
           </label>
           <label htmlFor="number">
@@ -118,7 +103,7 @@ function Checkout() {
               type="number"
               required
               id="number"
-              data-testeid="customer_checkout__input-addressNumber"
+              data-testid="customer_checkout__input-addressNumber"
             />
           </label>
         </form>
@@ -126,19 +111,24 @@ function Checkout() {
       <Link to="/">
         <button
           type="button"
-          data-testeid="customer_checkout__button-submit-order"
+          data-testid="customer_checkout__button-submit-order"
           onClick={ async () => {
             const payload = createSalePayload(user.id, sellers, cart);
 
-            const { data: id } = await axios.post(
-              '/sales',
-              payload, { headers: { Authorization: user.token },
+            const { data: { result: { id } } } = await axios.post(
+              'http://localhost:3001/sales',
+              JSON.stringify(payload),
+              {
+                headers: {
+                  authorization: localStorage.getItem('token'),
+                  'Content-Type': 'application/json',
+                },
               },
             );
 
             setCart([]);
 
-            return <Redirect to={ `/customer/orders/${id}` } />;
+            return history.push(`/customer/orders/${id}`);
           } }
         >
           FINALIZAR PEDIDO

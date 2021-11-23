@@ -8,6 +8,7 @@ module.exports = {
         allowNull: false,
         primaryKey: true,
         references: { model: 'products', key: 'id' },
+        field: 'product_id',
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
       },
@@ -16,10 +17,14 @@ module.exports = {
         allowNull: false,
         primaryKey: true,
         references: { model: 'sales', key: 'id' },
+        field: 'sale_id',
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
       },
-      quantity: { type: Sequelize.INTEGER }
+      quantity: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      }
     });
   },
 

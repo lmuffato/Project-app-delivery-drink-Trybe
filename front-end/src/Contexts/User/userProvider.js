@@ -10,9 +10,8 @@ function UserProvider({ children }) {
     id: 0,
     name: '',
     email: '',
-    password: '',
     role: '',
-    token: '',
+    token: localStorage.getItem('token'),
   };
 
   const [user, setUser] = useState(DEFAULT_USER);
@@ -28,14 +27,9 @@ function UserProvider({ children }) {
 
   useEffect(() => {
     const validate = async () => {
-      const token = localStorage.getItem('token');
-      if (token) {
-        const data = await validateToken(token);
-        if (data) {
-          setUser(data);
-        } else {
-          history.push('/login');
-        }
+      if (user.token) {
+        const data = await validateToken(user.token);
+        return data ? setUser(data) : history.push('/login');
       }
     };
     validate();

@@ -10,13 +10,16 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       totalPrice: {
-        type: Sequelize.DECIMAL(10, 2)
+        type: Sequelize.DECIMAL(10, 2),
+        field: 'total_price',
       },
       deliveryAddress: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        field: 'delivery_address',
       },
       deliveryNumber: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        field: 'delivery_number',
       },
       status: {
         type: Sequelize.STRING
@@ -24,17 +27,20 @@ module.exports = {
       userId: {
         type: Sequelize.INTEGER,
         references: { model: 'users', key: 'id' },
+        field: 'user_id',
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
       sellerId: {
         type: Sequelize.INTEGER,
         references: { model: 'users', key: 'id' },
+        field: 'seller_id',
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
-      saleDate: {
-        type: Sequelize.DATE
+      createdAt: {
+        type: Sequelize.DATE,
+        field: 'sale_date',
       }
     })
   },

@@ -1,23 +1,24 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 const CartContext = createContext();
 
 export function CartProvider({ children }) {
-  const [cartTotalPrice, setCartTotalPrice] = useState(0);
-  const [cartQuantity] = useState(() => {
-    const storagedCart = localStorage.getItem('carrinho');
-    if (storagedCart) {
-      return JSON.parse(storagedCart).length;
-    }
-    return [];
-  });
+  const [totalValue, setTotalValue] = useState(0);
 
-  const updateTotalPrice = () => {
-    const storagedCart = localStorage.getItem('carrinho');
-    setCartTotalPrice(JSON.parse(storagedCart)
-      .reduce((acc, elem) => acc + elem.quantity * elem.price));
+  const totalCartPrice = () => {
+    const cart = JSON.parse(localStorage.getItem('carrinho'));
+    if (cart && cart.length !== 0) {
+      const total = cart.reduce((acc, elem) => acc + elem.quantity * +elem.price, 0);
+      setTotalValue(+total.toFixed(2));
+      return;
+    }
+    setTotalValue(0);
   };
+
+  useEffect(() => {
+    totalCartPrice();
+  }, []);
 
   const updateCart = (id, name, price, param) => {
     const cart = JSON.parse(localStorage.getItem('carrinho'));
@@ -42,6 +43,7 @@ export function CartProvider({ children }) {
     if (actualCart.quantity === 1 && param === '-') {
       const newCart = cart.filter((productElem) => productElem.id !== id);
       localStorage.setItem('carrinho', JSON.stringify(newCart));
+      totalCartPrice();
       return;
     }
     const newArrayOfProducts = cart
@@ -52,6 +54,7 @@ export function CartProvider({ children }) {
         return productElem;
       });
     localStorage.setItem('carrinho', JSON.stringify(newArrayOfProducts));
+    totalCartPrice();
   };
 
   const addToCart = (id, name, price) => {
@@ -66,7 +69,7 @@ export function CartProvider({ children }) {
       };
       const arrayOfProducts = JSON.stringify([product]);
       localStorage.setItem('carrinho', arrayOfProducts);
-      updateTotalPrice();
+      totalCartPrice();
       return;
     }
     if (cart.every((elem) => elem.id !== id)) {
@@ -78,7 +81,7 @@ export function CartProvider({ children }) {
       };
       const arrayOfProducts = JSON.stringify([...cart, product]);
       localStorage.setItem('carrinho', arrayOfProducts);
-      updateTotalPrice();
+      totalCartPrice();
       return;
     }
     updateCart(id, name, price, '+');
@@ -87,13 +90,13 @@ export function CartProvider({ children }) {
   const removeProdCart = (id, name, price) => {
     const cart = JSON.parse(localStorage.getItem('carrinho'));
     if (!cart || cart.every((elem) => elem.id !== id)) return;
-    updateTotalPrice();
+    totalCartPrice();
     updateCart(id, name, price, '-');
   };
 
   return (
     <CartContext.Provider
-      value={ { cartQuantity, cartTotalPrice, addToCart, removeProdCart } }
+      value={ { totalValue, addToCart, removeProdCart } }
     >
       {children}
     </CartContext.Provider>

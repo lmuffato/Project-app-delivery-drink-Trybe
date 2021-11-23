@@ -1,20 +1,14 @@
 import React, { useContext, useEffect } from 'react';
 import Card from '../../components/Card';
 import MenuCostumer from '../../components/MenuCustomer';
+import { useCart } from '../../hooks/useCart';
 import ContextProduct from '../../provider/product/ContextProduct';
 import api from '../../services/api';
 import './style.css';
 
 const ProductsPage = () => {
   const { products, setProducts } = useContext(ContextProduct);
-  const [totalPriceCart] = React.useState(() => {
-    const cart = JSON.parse(localStorage.getItem('carrinho'));
-    if (cart && cart.length !== 0) {
-      return cart.reduce((acc, elem) => acc + elem.quantity * elem.price);
-    }
-    return 0;
-  });
-
+  const { totalValue } = useCart();
   const [isLoading, setIsLoading] = React.useState(false);
 
   useEffect(() => {
@@ -27,14 +21,6 @@ const ProductsPage = () => {
     };
     fetchProducts();
   }, []);
-
-  // const setQuantity = () => {
-  //   const cart = JSON.parse(localStorage.getItem('carrinho'));
-  //   if (cart) {
-  //     setTotalPriceCart(cart.reduce((acc, elem) => acc + elem.quantity * elem.price));
-  //     return (<div>{ totalPriceCart }</div>);
-  //   }
-  // };
 
   if (isLoading || !products) return <h1>Loading..</h1>;
   if (products) {
@@ -52,7 +38,17 @@ const ProductsPage = () => {
             />
           ))}
         </div>
-        <p>{ totalPriceCart }</p>
+        {totalValue > 0 && (
+          <button
+            type="button"
+            data-testid="customer_products__checkout-bottom-value"
+            className="cartButton"
+          >
+            Ver carrinho:
+            R$
+            {String(totalValue).replace('.', ',')}
+          </button>
+        )}
       </section>
     );
   }

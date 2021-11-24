@@ -22,7 +22,10 @@ function LoginPage() {
       const passHash = MD5(password).toString();
       const response = await api.getLogin(email, passHash);
       localStorage.setItem('user', JSON.stringify(response));
-      history.push('/customer/products');
+      console.log('Login', response);
+
+      if (response.role === 'customer') history.push('/customer/products');
+      if (response.role === 'seller') history.push('/seller/orders');
     } catch (e) {
       setError('Login inválido');
     }

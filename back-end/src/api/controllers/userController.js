@@ -34,11 +34,20 @@ const create = async (req, res) => {
 };
 
 const createAdmin = async (req, res) => {
-  const { id, token, data, email, name, role } = await userService.create(req.body);
-  if (data) {
-    return res.status(HTTP_ERROR_STATUS).json({ data });
+  try {
+    const { email, password, name, role } = req.body;
+    const response = await userService.createAdmin({ 
+      email, 
+      requestPassword: password, 
+      name, 
+      requestRole: role,
+    });
+    return res.status(HTTP_CREATED_STATUS).json(response);
+  } catch (error) {
+    return res.status(HTTP_ERROR_STATUS).json({
+      message: error,
+    });
   }
-  return res.status(HTTP_CREATED_STATUS).json({ id, token, email, name, role });
 };
 
 const getAllUsers = async (_req, res) => {

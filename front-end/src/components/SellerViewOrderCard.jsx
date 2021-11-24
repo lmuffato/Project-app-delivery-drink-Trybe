@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import {
   Box,
   Typography,
+  Button,
 } from '@mui/material';
 import converDateFormat from '../utils/convertDateFormat';
 
@@ -17,6 +19,7 @@ function SellerViewOrderCard(props) {
   } = props;
 
   const testIdPrefix = 'seller_orders__';
+  const history = useHistory();
 
   const statusFieldBackgroundColor = () => {
     switch (status.toLowerCase()) {
@@ -53,11 +56,12 @@ function SellerViewOrderCard(props) {
         } }
       >
         <p>Pedido</p>
-        <Typography
+        <Button
+          onClick={ () => history.push(`/seller/orders/${id}`) }
           data-testid={ `${testIdPrefix}element-order-id-${id}` }
         >
           { id }
-        </Typography>
+        </Button>
       </Box>
       <Box
         sx={ {

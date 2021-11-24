@@ -3,36 +3,11 @@ import PropTypes from 'prop-types';
 
 export default function DetailTable(props) {
   const { products } = props;
-  // const [allProducts, setAllProducts] = useState();
-
-  // const getProducts = useCallback(
-  //   async () => {
-  //     await axios({
-  //       method: 'get',
-  //       url: `${url}/products`,
-  //       headers: {
-  //         Authorization: token,
-  //       },
-  //     })
-  //       .then((res) => {
-  //         setAllProducts(res.data);
-  //       })
-  //       .catch((err) => console.log(err));
-  //   }, [setAllProducts, token],
-  // );
-
-  // useEffect(() => {
-  //   getProducts();
-  // }, [getProducts]);
-
-  // useEffect(() => {
-  //   if (allProducts) {
-  //     products.map((product) => ({
-  //       id: product.product_id,
-  //       quantity: product.quantity,
-  //     }));
-  //   }
-  // }, [allProducts]);
+  const itemNumber = 'customer_order_details__element-order-table-item-number-';
+  const tableName = 'customer_order_details__element-order-table-name-';
+  const tableQuantity = 'customer_order_details__element-order-table-quantity-';
+  const subTotal = 'customer_order_details__element-order-table-sub-total-';
+  const totalPrice = 'customer_order_details__element-order-total-price-';
 
   return (
     <table className="border-2">
@@ -50,39 +25,34 @@ export default function DetailTable(props) {
           <tbody key={ index }>
             <tr className="">
               <td
-                data-testid={ `customer_order_details__
-                element-order-table-item-number-${index}` }
+                data-testid={ `${itemNumber}${index}` }
                 className="border-2 w-1/12"
               >
                 { index + 1 }
               </td>
               <td
-                data-testid={ `customer_order_details__
-                element-order-table-name-${index}` }
+                data-testid={ `${tableName}${index}` }
                 className="border-2"
               >
                 { item.name }
               </td>
               <td
-                data-testid={ `customer_order_details__
-                element-order-table-quantity${index}` }
+                data-testid={ `${tableQuantity}${index}` }
                 className="border-2 w-1/12"
               >
                 { item.quantity }
               </td>
               <td
-                data-testid={ `customer_order_details__
-                element-order-table-sub-total-${index}` }
+                data-testid={ `${subTotal}${index}` }
                 className="border-2 w-1/12"
               >
-                { item.price }
+                { item.price.split('.').join(',') }
               </td>
               <td
-                data-testid={ `customer_order_details__
-                element-order-total-price-${index}` }
+                data-testid={ `${totalPrice}${index}` }
                 className="border-2 w-1/12"
               >
-                { item.subtotal }
+                { item.subTotal.split('.').join(',') }
               </td>
             </tr>
           </tbody>
@@ -94,5 +64,4 @@ export default function DetailTable(props) {
 
 DetailTable.propTypes = {
   products: PropTypes.arrayOf(PropTypes.object).isRequired,
-  // token: PropTypes.string.isRequired,
 };

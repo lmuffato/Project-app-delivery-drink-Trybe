@@ -11,6 +11,11 @@ export default function SaleDetail(props) {
   const history = useHistory();
   const location = history.location.pathname.split('/');
   const saleId = location[location.length - 1];
+  const sellerName = 'customer_order_details__element-order-details-label-seller-name';
+  const status = 'customer_order_details__element-order-details-label-delivery-status';
+  let day;
+  let month;
+  let year;
 
   const getSale = useCallback(
     async () => {
@@ -32,7 +37,16 @@ export default function SaleDetail(props) {
     getSale();
   }, [getSale]);
 
-  console.log(sale);
+  if (sale) {
+    const dateArr = sale.sale_date.split('-');
+    const [year2, month2, dayArr] = dateArr;
+    const arr2 = dayArr.split('T');
+    const [arr3] = arr2;
+    day = arr3;
+    year = year2;
+    month = month2;
+  }
+
   if (sale) {
     return (
       <div className="w-full flex flex-wrap p-20">
@@ -45,32 +59,34 @@ export default function SaleDetail(props) {
               {sale.id}
             </p>
             <p
-              data-testid="customer_order_details__
-              element-order-details-label-seller-name"
+              data-testid={ sellerName }
             >
               {sale.seller.name}
             </p>
             <p
-              data-testid="customer_order_details__
-              element-order-details-label-order-date"
+              data-testid="customer_order_details__element-order-details-label-order-date"
             >
-              {sale.sale_date}
+              {`${day}/${month}/${year}`}
             </p>
             <p
-              data-testid="customer_order_details__
-              element-order-details-label-delivery-status"
+              data-testid={ status }
             >
               {sale.status}
             </p>
             <button
               type="button"
               data-testid="customer_order_details__button-delivery-check"
+              disabled
             >
               MARCAR COMO ENTREGUE
             </button>
           </div>
           <DetailTable products={ sale.products } token={ token } />
-          <p>{sale.total_price}</p>
+          <p
+            data-testid="customer_order_details__element-order-total-price"
+          >
+            {sale.total_price.split('.').join(',')}
+          </p>
         </div>
       </div>
     );

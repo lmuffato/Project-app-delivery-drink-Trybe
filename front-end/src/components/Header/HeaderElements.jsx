@@ -1,8 +1,12 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { NavLink as Link } from 'react-router-dom';
 
+export const slice = keyframes`
+
+`;
+
 export const Nav = styled.nav`
-  background-color: #036b52;
+  background-color: hsl(0, 0%, 20%);
   height: 80px;
   display: flex;
   justify-content: space-between;
@@ -12,8 +16,8 @@ export const Nav = styled.nav`
   display: flex;
   justify-content: space-between;
 }
-  svg{
-    font-size: 40px;
+  h1, a{
+    font-family: 'Maven Pro', sans-serif;
 `;
 
 export const NavLink = styled(Link)`
@@ -33,7 +37,7 @@ export const NavLink = styled(Link)`
 
 export const NavBtnLink = styled(Link)`
   border-radius: 4px;
-  background-color: #256c;
+  background-color: hsl(0, 1%, 10%);
   padding: 18px 10px;
   color: #fff;
   border: none;

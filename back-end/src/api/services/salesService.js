@@ -54,7 +54,7 @@ const getAll = async ({ userId, role }) => {
     // include: [{ model: salesProducts, required: true }],
 
 const getById = async ({ id }) => {
-  const response = await sales.findAll({ where: { id }, include: 'products' });
+  const response = await sales.findOne({ where: { id }, include: ['seller', 'products'] });
 
   return response;
 };

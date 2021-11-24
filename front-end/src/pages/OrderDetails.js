@@ -1,28 +1,43 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { saveUser } from '../redux/slices/userSlice';
 import NavBar from '../components/NavBar';
 import OrderDescription from '../components/OrderDescription';
+import {
+  getUserFromLocalStorage,
+} from '../components/ultility';
 
 function OrderDetails() {
-  const { role } = useSelector((state) => state.user);
+  const { id, role } = useSelector((state) => state.user);
   const [prefix, setPrefix] = useState('');
   const [order, setOrder] = useState({});
   const [gotOrder, setGotOrder] = useState(false);
-  const { id } = useParams();
+  const { id: idRoute } = useParams();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (id === 0) {
+      const user = getUserFromLocalStorage();
+
+      if (!user) return null;
+
+      dispatch(saveUser(user));
+    }
+  }, []);
 
   useEffect(() => {
     setPrefix(role === 'customer'
       ? 'customer_order_details__'
       : 'seller_order_details__');
 
-    axios.get(`http://localhost:3001/sales/${id}`)
+    axios.get(`http://localhost:3001/sales/${idRoute}`)
       .then((res) => {
         setOrder(res.data);
         setGotOrder(true);
       });
-  }, [id, role]);
+  }, [idRoute, role]);
 
   return (
     <>

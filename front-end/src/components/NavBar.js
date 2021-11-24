@@ -16,20 +16,22 @@ function NavBar() {
 
   return (
     <nav style={ { backgroundColor: 'yellow' } }>
+      {
+        role === 'customer' && (
+          <Link
+            data-testid="customer_products__element-navbar-link-products"
+            to="/customer/products"
+          >
+            PRODUTOS
+          </Link>
+        )
+      }
       <Link
-        data-testid="customer_products__element-navbar-link-products"
-        to="/customer/products"
+        data-testid="customer_products__element-navbar-link-orders"
+        to={ `/${role}/orders` }
       >
-        PRODUTOS
+        MEUS PEDIDOS
       </Link>
-      { role === 'customer' && (
-        <Link
-          data-testid="customer_products__element-navbar-link-orders"
-          to="/customer/orders"
-        >
-          MEUS PEDIDOS
-        </Link>
-      )}
       <span
         data-testid="customer_products__element-navbar-user-full-name"
       >

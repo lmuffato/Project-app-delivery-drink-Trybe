@@ -34,7 +34,7 @@ module.exports = (sequelize, DataTypes) => {
     );
     models.Sales.belongsTo(models.User,
       { foreignKey: 'sellerId', as: 'seller' }  
-    )
+    );
   }
   
   return Sales;

@@ -1,4 +1,4 @@
-const { Sales, SalesProducts } = require('../../database/models');
+const { Sales, SalesProducts, Products } = require('../../database/models');
 const { User } = require('../../database/models');
 const { ORDERS_NOT_FOUND } = require('../messages/errorMessages');
 
@@ -25,7 +25,10 @@ const registerSale = async (saleData) => {
 const getOrdersByUserId = async (userId) => {
   const userOrders = await Sales.findAll({
     where: { userId },
-    include: { model: User, as: 'seller', attributes: { exclude: ['password'] } },
+    include: [
+      // { model: User, as: 'seller', attributes: { exclude: ['password'] } },
+      { model: Products, as: 'products', through: { attributes: ['quantity'] } },
+    ],
   });
 
   if (userOrders.length === 0) {

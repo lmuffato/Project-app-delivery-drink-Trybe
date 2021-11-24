@@ -12,6 +12,7 @@ export default Joi.object({
     .min(passwordMinLength)
     .message('A senha precisa ter pelo menos 6 caracteres')
     .required(),
+  role: Joi.string(),
   name: Joi.string()
     .min(nameMinLength)
     .message('O nome de usuário deve conter pelo menos 12 caracteres')

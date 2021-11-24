@@ -4,7 +4,7 @@ const { SaleProduct } = require('../database/models');
 const createSaleElement = async (saleInfo) => {
   const { totalPrice, deliveryAddress, deliveryNumber, userId, sellerId } = saleInfo;
   const result = await Sale.create({
-    totalPrice,
+    totalPrice: parseFloat(totalPrice.toFixed(2)),
     deliveryAddress,
     deliveryNumber,
     userId,
@@ -15,20 +15,6 @@ const createSaleElement = async (saleInfo) => {
 };
 
 const registerProductsOnSale = async (saleId, products) => {
-  // console.log(saleId);
-  // const { error } = products.reduce(async (_acc, product) => {
-  //   console.log(_acc);
-  //   const { productId, quantity } = product;
-  //   const { er } = await SaleProduct.create({
-  //     productId,
-  //     saleId,
-  //     quantity,
-  //   }).catch((e) => ({ er: e.message }));
-  //   if (er !== undefined) {
-  //     return { error: { message: er } };
-  //   }
-  // }, {});
-  // return { error };
   const productsInfo = products.map(({ id, quantity }) => ({ productId: id, quantity }));
 
   productsInfo.forEach(async (product) => {

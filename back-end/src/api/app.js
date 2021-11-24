@@ -19,7 +19,7 @@ app.post('/register', registerValidationMid, userController.create);
 
 app.route('/admin')
   .get(adminValidationMid, userController.getAllUsers)
-  .post(adminValidationMid, userController.create)
-  .delete(adminValidationMid, userController.deleteUser);
+  .post(adminValidationMid, userController.createAdmin);
 
+app.delete('/admin/:id', adminValidationMid, userController.deleteUser);
 module.exports = app;

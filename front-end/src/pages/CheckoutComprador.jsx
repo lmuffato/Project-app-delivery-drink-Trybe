@@ -61,20 +61,23 @@ export default function CheckoutComprador() {
   return (
     <div>
       <Header title="Produtos" subtitle="Meus Pedidos" name={ userName.name } />
-      <h1>Finalizar pedido</h1>
-      {aux.map(({ productId, name, price, quantity }, i) => (
-        <CheckoutProduct
-          id={ productId }
-          name={ name }
-          price={ price }
-          qtd={ quantity }
-          index={ i }
-          key={ i }
-        />
-      ))}
-      <h3 data-testid="customer_checkout__element-order-total-price">
-        {`${totalValue}`}
-      </h3>
+      <fieldset>
+        <h3 style={ { margin: '40px', padding: '5px' } }>Finalizar pedido</h3>
+        {aux.map(({ productId, name, price, quantity }, i) => (
+          <CheckoutProduct
+            id={ productId }
+            name={ name }
+            price={ price }
+            qtd={ quantity }
+            index={ i }
+            key={ i }
+          />
+        ))}
+        <h3 data-testid="customer_checkout__element-order-total-price">
+          {`${totalValue}`}
+        </h3>
+      </fieldset>
+
       <form>
         <select
           data-testid="customer_checkout__select-seller"

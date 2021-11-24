@@ -6,7 +6,7 @@ const { User } = require('../database/models');
 const errorMap = require('../utils/errorMap');
 
 const SECRET = fs.readFileSync(path.join(__dirname, '../../jwt.evaluation.key'),
-{ encoding: 'utf-8' });
+{ encoding: 'utf-8' }).trim();
 
 const CUSTOMER_ROLE = 'customer';
 

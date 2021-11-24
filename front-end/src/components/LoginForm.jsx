@@ -51,7 +51,8 @@ function LoginForm() {
         };
         navigate(routes[role]);
       }
-    } catch ({ response }) {
+    } catch (error) {
+      const { response } = error;
       const { status } = response;
       setInvalidLogin(errorMap[status || '500']);
     }

@@ -16,4 +16,6 @@ app.use('/register', registerRouter);
 app.use('/customer/products', productsRouter);
 app.use('/sales', salesRouter);
 
+app.use('/images', express.static('../assets/images'));
+
 module.exports = app;

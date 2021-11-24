@@ -51,7 +51,16 @@ const getAll = async ({ userId, role }) => {
   return response;
 };
 
+    // include: [{ model: salesProducts, required: true }],
+
+const getById = async ({ id }) => {
+  const response = await sales.findAll({ where: { id }, include: 'products' });
+
+  return response;
+};
+
 module.exports = {
   create,
   getAll,
+  getById,
 };

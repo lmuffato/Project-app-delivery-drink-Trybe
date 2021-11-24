@@ -25,6 +25,7 @@ app.post('/register', registerValidationMid, userController.create);
 app.get('/products', authMid, productController.getAll);
 
 app.post('/sales', authMid, salesController.create);
+app.get('/sales/:id', authMid, salesController.getById);
 app.get('/sales', authMid, salesController.getAll);
 
 module.exports = app;

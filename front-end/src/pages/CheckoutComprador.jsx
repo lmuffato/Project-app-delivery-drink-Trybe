@@ -106,35 +106,58 @@ export default function CheckoutComprador() {
           marginRight: '30px' } }
       >
         <form style={ { display: 'flex', justifyContent: 'space-around' } }>
-          <select
-            id="label-select"
-            style={ { height: '40px', width: '250px' } }
-            data-testid="customer_checkout__select-seller"
-            onChange={ handleSeller }
-            value={ chooseSeller }
+          <label
+            htmlFor="vendedor"
+            style={ { display: 'block', textAlign: 'center' } }
           >
-            {seller.map((sellerid) => (
-              <option key={ sellerid.index } value={ sellerid.name }>
-                {sellerid.name}
-              </option>
-            ))}
-          </select>
-          <input
-            style={ { height: '34px', width: '550px', marginLeft: '-80px' } }
-            type="text"
-            placeholder="Digite seu Endereço"
-            onChange={ handleAddress }
-            value={ address }
-            data-testid="customer_checkout__input-address"
-          />
-          <input
-            style={ { height: '34px', width: '250px', marginLeft: '-80px' } }
-            type="text"
-            placeholder="Número"
-            onChange={ handleNumber }
-            value={ addressNumber }
-            data-testid="customer_checkout__input-addressNumber"
-          />
+            Vendedor responsável
+            <br />
+            <select
+              id="vendedor"
+              style={ { height: '40px', width: '250px' } }
+              data-testid="customer_checkout__select-seller"
+              onChange={ handleSeller }
+              value={ chooseSeller }
+            >
+              {seller.map((sellerid) => (
+                <option key={ sellerid.index } value={ sellerid.name }>
+                  {sellerid.name}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label
+            htmlFor="Endereço"
+            style={ { display: 'block', textAlign: 'center', marginLeft: '-80px' } }
+          >
+            Endereço
+            <br />
+            <input
+              id="Endereço"
+              style={ { height: '34px', width: '550px' } }
+              type="text"
+              placeholder="Digite seu Endereço"
+              onChange={ handleAddress }
+              value={ address }
+              data-testid="customer_checkout__input-address"
+            />
+          </label>
+          <label
+            htmlFor="numero"
+            style={ { display: 'block', textAlign: 'center', marginLeft: '-80px' } }
+          >
+            Número
+            <br />
+            <input
+              id="numero"
+              style={ { height: '34px', width: '250px' } }
+              type="text"
+              placeholder="Número"
+              onChange={ handleNumber }
+              value={ addressNumber }
+              data-testid="customer_checkout__input-addressNumber"
+            />
+          </label>
         </form>
         <button
           style={ {

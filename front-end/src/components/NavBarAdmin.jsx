@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router';
 import {
   AppBar,
@@ -7,11 +7,10 @@ import {
   Button,
   Link,
 } from '@mui/material';
-import ContextLogin from '../context/ContextLogin';
-import { logoutUser } from '../utils/LocalStorageFunctions';
+import { logoutUser, verifyUserExistance } from '../utils/LocalStorageFunctions';
 
 function NavBarAdmin() {
-  const { userData: { name } } = useContext(ContextLogin);
+  const { name } = verifyUserExistance();
   const history = useHistory();
   return (
     <AppBar position="static">

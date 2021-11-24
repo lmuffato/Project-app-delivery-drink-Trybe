@@ -14,6 +14,7 @@ text-align: center;
     width: 50px;
     padding: 15px;
     font-size: larger;
+    border-radius:  8px 0px 0px 8px;
 
 
 }
@@ -23,6 +24,7 @@ text-align: center;
     width: 350px;
     padding: 15px;
     font-size: larger;
+    text-align: left;
 
 
 }
@@ -47,6 +49,7 @@ text-align: center;
 
 .subTotalItem {
     background-color: hsl(0, 0%, 50%);
+    color: hsl(0, 0%, 100%);
     width: 80px;
     padding: 15px;
     font-size: larger;
@@ -55,9 +58,13 @@ text-align: center;
 }
 
 .btnRemoveItem {
+    background-color: hsl(0, 0%, 20%);
+    color: hsl(0, 0%, 100%);    
+    width: 110px;
     height: 52px;
     margin-top: 19px;
-    margin-left: 10px;
+    border-radius:  0px 8px 8px 0px;
+
 
 }
 `;

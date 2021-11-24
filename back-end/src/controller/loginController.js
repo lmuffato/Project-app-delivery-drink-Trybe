@@ -8,6 +8,7 @@ const loginUser = async (req, res) => {
     const login = await services.login(email, password);
    
     const privateKey = await fs.readFile('jwt.evaluation.key', 'utf8');
+    console.log(`"${privateKey}"`);
     
     const payload = { login };
 

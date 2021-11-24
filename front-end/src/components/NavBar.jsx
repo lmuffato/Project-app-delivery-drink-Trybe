@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { FaSignOutAlt as SignOutIcon } from 'react-icons/fa';
+import PropTypes from 'prop-types';
 
 import styles from '../styles/components/NavBar.module.scss';
 import { AuthContext } from '../contexts/auth';
@@ -61,3 +62,7 @@ export default function NavBar(props) {
     </header>
   );
 }
+
+NavBar.propTypes = {
+  location: PropTypes.shape({ pathname: PropTypes.string }).isRequired,
+};

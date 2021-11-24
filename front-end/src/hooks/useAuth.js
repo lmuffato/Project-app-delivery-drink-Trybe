@@ -79,12 +79,24 @@ export default function useAuth() {
     }
   }
 
+  async function authAdmFormSubmit(event, { formSchema, formValues }) {
+    event.preventDefault();
+    try {
+      validateForm({ schema: formSchema, values: formValues }).throwErrorIfIsNotValid();
+      // await authenticate({ type: 'register', request: formValues });
+      await api.post('/register', formValues, { headers: { authorization: user.token } });
+    } catch (error) {
+      throwAuthFailedAlert(error);
+    }
+  }
+
   return {
     user,
     logOut,
     alertIsVisible,
     Alert,
     authFormSubmit,
+    authAdmFormSubmit,
     validateForm,
   };
 }

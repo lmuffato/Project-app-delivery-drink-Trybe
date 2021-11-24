@@ -11,6 +11,7 @@ export function AuthProvider({ children }) {
     alertIsVisible,
     Alert,
     authFormSubmit,
+    authAdmFormSubmit,
     validateForm,
   } = useAuth();
 
@@ -22,6 +23,7 @@ export function AuthProvider({ children }) {
         alertIsVisible,
         Alert,
         authFormSubmit,
+        authAdmFormSubmit,
         validateForm,
       } }
     >

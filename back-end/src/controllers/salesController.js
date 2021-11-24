@@ -21,7 +21,17 @@ const getAllSales = async (req, res) => {
   return res.status(httpStatus.ok).json({ sales });
 };
 
+const getSpecificSale = async (req, res) => {
+  const { id } = req.params;
+
+  const sale = await Sale.findOne(
+    { where: { id }, include: { all: true } },
+  );
+  return res.status(200).json(sale);
+};
+
 module.exports = {
   registerSale,
+  getSpecificSale,
   getAllSales,
 };

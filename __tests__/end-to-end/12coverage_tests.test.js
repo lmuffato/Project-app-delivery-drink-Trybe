@@ -37,7 +37,7 @@ describe(requirement(45), () => {
   });
 });
 
-describe.only(requirement(46), () => {
+describe(requirement(46), () => {
   test("No front-end e no back-end", () => {
     expect(frontEnd.skipped).toStrictEqual(0);
     expect(frontEnd.pct).toBeGreaterThanOrEqual(60);

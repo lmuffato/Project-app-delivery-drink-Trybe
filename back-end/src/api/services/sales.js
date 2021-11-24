@@ -1,4 +1,5 @@
-const { Sale } = require('../../database/models');
+/* eslint-disable prefer-object-spread */
+const { Sale, User, Product, SaleProduct } = require('../../database/models');
 const serviceUser = require('./user');
 
 const getAllSale = async () => {
@@ -7,10 +8,10 @@ const getAllSale = async () => {
 };
 
 const createSale = async ({
-   sellerId, totalPrice, deliveryAddress, deliveryNumber, status,
-  }, email) => {
+  sellerId, totalPrice, deliveryAddress, deliveryNumber, status,
+}, email, putItem) => {
   const { id: customerId } = await serviceUser.findByIdRole(email, 'customer');
-
+  
   const sale = await Sale.create({
     userId: customerId,
     sellerId,
@@ -21,11 +22,27 @@ const createSale = async ({
     status,
   });
 
+  JSON.parse(putItem).forEach(async ({ id, quantity }) => {
+    await SaleProduct.create({ saleId: sale.id, productId: id, quantity });
+  });
+
   return { statusCode: 201, data: sale }; // talvez tenha que alterar a resposta de "data"
   // return { statusCode: 201, data: { message: 'pedido realizado com sucesso' } };
+};
+
+const getById = async (id) => {
+  const sale = await Sale.findByPk(id, {
+    include: [
+      { model: User, as: 'seller', attributes: { exclude: ['password'] } },
+      { model: Product, as: 'products', through: { attributes: ['quantity'] } }, 
+    ],
+  });
+
+  return { status: 200, data: sale };
 };
 
 module.exports = {
   getAllSale,
   createSale,
+  getById,
 };

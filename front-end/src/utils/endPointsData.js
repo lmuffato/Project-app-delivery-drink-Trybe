@@ -10,6 +10,10 @@ export const registerEndpointData = {
   statusRegisterAccept: 201,
 };
 
+export const saleEndPointData = {
+  endpoint: 'http://localhost:3001/sale',
+};
+
 export const getUserEndpoint = {
   endpoint: 'http://localhost:3001/user',
 };

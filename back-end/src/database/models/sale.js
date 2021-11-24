@@ -7,19 +7,16 @@ module.exports = (sequelize, DataTypes) => {
     saleDate: DataTypes.DATE,
     status: DataTypes.STRING(50),
     userId: { type: DataTypes.INTEGER, primaryKey: true },
-    sellerId: { type: DataTypes.INTEGER, primaryKey: true },
-    // sellerId: DataTypes.INTEGER 
+    sellerId: { type: DataTypes.INTEGER, primaryKey: true }, 
   },
   {
-    timestamps: false, // remove a obrigatoriedade de utilizar os campos `createdAt` e `updatedAt`
+    timestamps: false,
     tableName: 'sales',
     underscored: true,
   });
-
   Sale.associate = (models) => {
     Sale.belongsTo(models.User,
-      { foreignKey: 'user_id', as: 'user' }); // foi alterado de 'userId' para 'user'
+      { foreignKey: 'sellerId', as: 'seller'});
   };
-
   return Sale;
 };

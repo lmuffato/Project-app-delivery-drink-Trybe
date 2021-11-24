@@ -1,5 +1,3 @@
-// cole esse código dentro do arquivo da migration "user-books"
-
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('salesProducts', {
@@ -24,6 +22,10 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
         primaryKey: true,
+      },
+      quantity: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
       },
     });
   },

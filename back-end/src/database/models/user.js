@@ -12,10 +12,10 @@ module.exports = (sequelize, DataTypes) => {
     underscored: true,
   });
 
-  User.associate = (models) => {
-    User.hasMany(models.Sale, // foi alterado de 'hasOne' para 'hasMany'
-      { foreignKey: 'seller_id', as: 'sellerId' });
-  };
+  // User.associate = (models) => {
+  //   User.hasMany(models.Sale, // foi alterado de 'hasOne' para 'hasMany'
+  //     { foreignKey: 'sellerId', as: 'seller'});
+  // };
 
   return User;
 };

@@ -2,8 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { useHistory } from 'react-router';
-// import DetailTable from './DetailTable';
-// import ProductCard from './ProductCard';
+import DetailTable from './DetailTable';
 
 export default function SaleDetail(props) {
   const { token } = props;
@@ -70,7 +69,7 @@ export default function SaleDetail(props) {
               MARCAR COMO ENTREGUE
             </button>
           </div>
-          {/* <DetailTable products={ sale.products } /> */}
+          <DetailTable products={ sale.products } token={ token } />
           <p>{sale.total_price}</p>
         </div>
       </div>

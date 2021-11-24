@@ -10,6 +10,19 @@ const SALEDATE = 'sale_date';
 const SALEID = 'sale_id';
 const PRODUCTID = 'product_id';
 
+const createSalesProducts = async (productList, saleId) => {
+  productList.forEach(async (product) => {
+    await salesProducts.create({ 
+      [SALEID]: saleId.id,
+      [PRODUCTID]: product.id,
+      quantity: product.qtd,
+      name: product.name,
+      price: product.price,
+      subTotal: product.subtotal,
+    });
+  });
+};
+
 const create = async ({ userId, sellerId, totalPrice, deliveryAddress,
   deliveryNumber, productList }) => {
   const saleId = await sales.create({ 
@@ -22,13 +35,7 @@ const create = async ({ userId, sellerId, totalPrice, deliveryAddress,
     status: 'Pendente',
    });
 
-   productList.forEach(async (product) => {
-    await salesProducts.create({ 
-      [SALEID]: saleId.id,
-      [PRODUCTID]: product.id,
-      quantity: product.qtd,
-    });
-  });
+   await createSalesProducts(productList, saleId);
 
   return saleId.id;
 };

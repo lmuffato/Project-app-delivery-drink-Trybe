@@ -1,6 +1,9 @@
 module.exports = (sequelize, DataTypes) => {
   const salesProducts = sequelize.define('salesProducts', {
-    quantity: DataTypes.INTEGER
+    quantity: DataTypes.INTEGER,
+    name: DataTypes.STRING,
+    price: DataTypes.DECIMAL,
+    subTotal: DataTypes.DECIMAL,
   },
     { timestamps: false, tableName: 'salesProducts' });
 

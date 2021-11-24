@@ -21,7 +21,19 @@ module.exports = {
       quantity: {
         allowNull: false,
         type: Sequelize.INTEGER
-      }
+      },
+      name: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      price: {
+        allowNull: false,
+        type: Sequelize.DECIMAL(10,2)
+      },
+      subTotal: {
+        allowNull: false,
+        type: Sequelize.DECIMAL(10,2)
+      },
     });
   },
   down: async (queryInterface, Sequelize) => {

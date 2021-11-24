@@ -15,7 +15,6 @@ function ProductCard({ productInfo }) {
 
   const cartTotal = () => {
     if (cart) {
-      console.log('entrou');
       setTotal(cart.reduce(getTotal, 0).toFixed(2));
     } else {
       setTotal('0.00');

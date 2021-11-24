@@ -42,33 +42,41 @@ function OrderDetails() {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td data-testid={ `${prefix}element-order-table-item-number-${1}` }>
-                  1
-                </td>
-                <td data-testid={ `${prefix}element-order-table-name-${1}` }>
-                  Cerveja Stella 250ml
-                </td>
-                <td data-testid={ `${prefix}element-order-table-quantity-${1}` }>
-                  3
-                </td>
-                <td data-testid={ `${prefix}element-order-table-unit-price-${1}` }>
-                  R$
-                  { ' ' }
-                  3,50
-                </td>
-                <td data-testid={ `${prefix}element-order-table-sub-total-${1}` }>
-                  R$
-                  { ' ' }
-                  10,50
-                </td>
-              </tr>
+              {
+                order.products.map((product, i) => (
+                  <tr key={ product.id }>
+                    <td
+                      data-testid={ `${prefix}element-order-table-item-number-${i}` }
+                    >
+                      { i + 1 }
+                    </td>
+                    <td data-testid={ `${prefix}element-order-table-name-${i}` }>
+                      { product.name }
+                    </td>
+                    <td data-testid={ `${prefix}element-order-table-quantity-${i}` }>
+                      { product.SaleProduct.quantity }
+                    </td>
+                    <td data-testid={ `${prefix}element-order-table-unit-price-${i}` }>
+                      R$
+                      { ' ' }
+                      { product.price.replace('.', ',') }
+                    </td>
+                    <td data-testid={ `${prefix}element-order-table-sub-total-${i}` }>
+                      R$
+                      { ' ' }
+                      { (product.price * product.SaleProduct.quantity).toFixed(2)
+                        .replace('.', ',') }
+                    </td>
+                  </tr>
+                ))
+              }
             </tbody>
           </table>
           <p
             data-testid={ `${prefix}element-order-total-price` }
           >
-            Total: R$ 28,46
+            Total: R$
+            { order.totalPrice.replace('.', ',') }
           </p>
         </div>
       ) }

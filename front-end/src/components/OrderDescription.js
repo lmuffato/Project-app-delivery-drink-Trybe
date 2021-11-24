@@ -22,14 +22,14 @@ function OrderDescription({ prefix, order, role }) {
         <span
           data-testid={ `${prefix}element-order-details-label-seller-name` }
         >
-          FP
+          { order.seller.name }
         </span>
       ) }
       { ' ' }
       <span
         data-testid={ `${prefix}element-order-details-label-order-date` }
       >
-        07/04/2021
+        { new Date(order.saleDate).toLocaleDateString('pt-BR') }
       </span>
       { ' ' }
       <span
@@ -42,6 +42,7 @@ function OrderDescription({ prefix, order, role }) {
         <button
           type="button"
           data-testid={ `${prefix}button-delivery-check` }
+          disabled
         >
           MARCAR COMO ENTREGUE
         </button>
@@ -56,6 +57,7 @@ function OrderDescription({ prefix, order, role }) {
           <button
             type="button"
             data-testid={ `${prefix}button-dispatch-check` }
+            disabled
           >
             SAIU PARA ENTREGA
           </button>
@@ -70,9 +72,12 @@ OrderDescription.propTypes = {
     id: PropTypes.number,
     status: PropTypes.string,
     saleDate: PropTypes.string,
-    totalPrice: PropTypes.number,
+    totalPrice: PropTypes.string,
     deliveryAddress: PropTypes.string,
-    deliveryNumber: PropTypes.number,
+    deliveryNumber: PropTypes.string,
+    seller: PropTypes.shape({
+      name: PropTypes.string,
+    }),
   }).isRequired,
   role: PropTypes.string.isRequired,
   prefix: PropTypes.string.isRequired,

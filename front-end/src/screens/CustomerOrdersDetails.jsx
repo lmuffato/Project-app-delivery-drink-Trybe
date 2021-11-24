@@ -16,6 +16,7 @@ function CustomerOrdersDetails() {
       setSaleInfo(response);
     };
     getSale();
+    // eslint-disable-next-line
   }, []);
 
   return (

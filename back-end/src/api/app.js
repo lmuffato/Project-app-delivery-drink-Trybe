@@ -24,6 +24,7 @@ app.post('/sales', saleController.create);
 app.get('/users/:id/sales', saleController.findByUserId);
 app.get('/sales', saleController.getAll);
 app.get('/sales/:id', saleController.findByIdSale);
+app.patch('/sales/:id', saleController.updateStatus);
 app.get('/sellers/:id/sales', saleController.findBySellerId);
 
 app.get('/coffee', (_req, res) => res.status(418).end());

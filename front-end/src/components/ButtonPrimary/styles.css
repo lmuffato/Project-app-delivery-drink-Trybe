@@ -2,6 +2,17 @@
   background: var(--color-primary);
   border: none;
   border-radius: 6px;
+  box-shadow: 1px 1px 1px 0.5px silver;
   color: var(--text-light);
+  cursor: pointer;
   padding: 8px;
+}
+
+.c_button_primary:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+
+.c_button_primary:hover {
+  filter: brightness(1.75);
 }

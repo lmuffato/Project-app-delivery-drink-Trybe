@@ -6,12 +6,12 @@ module.exports = (sequelize, DataTypes) => {
       user_id: DataTypes.INTEGER,
       seller_id: DataTypes.INTEGER,
       total_price: DataTypes.FLOAT,
-      delivery_adress: DataTypes.STRING,
+      delivery_address: DataTypes.STRING,
       delivery_number: DataTypes.STRING,
       sale_date: DataTypes.DATE,
       status: DataTypes.STRING, 
     },
-    { timestamps: true, createdAt: 'sale_date',  updatedAt: false, },
+    { timestamps: true, createdAt: 'sale_date',  updatedAt: false, tableName: 'sales' },  
   );
 
   Sale.associate = (models) => {

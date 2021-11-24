@@ -39,9 +39,11 @@ const createAdmin = async (req, res) => {
   const { email, password, name, role } = req.body;
   const userEmail = await users.findOne({ where: { email } });
   const userName = await users.findOne({ where: { name } });
-  if (userEmail || userName) return res.status(HTTP_CONFLICT_STATUS).json({
-    message: 'user alredy registered',
-  });
+  if (userEmail || userName) {
+    return res.status(HTTP_CONFLICT_STATUS).json({
+      message: 'user alredy registered',
+    });
+  };
   const response = await userService.createAdmin({ 
     email, 
     requestPassword: password, 

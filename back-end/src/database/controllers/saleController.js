@@ -14,7 +14,8 @@ async function create(req, res) {
 async function getByUserId(req, res) {
   try {
     const { id } = req.params;
-    const { code, error, data } = await saleService.getByUserId(id);
+    const { role } = req.body;
+    const { code, error, data } = await saleService.getByUserId(id, role);
 
     if (error) return res.status(code).json({ error });
 

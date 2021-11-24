@@ -11,7 +11,7 @@ export default function Header(props) {
 
   function logout() {
     localStorage.clear();
-    history.push('/login');
+    history.push('/');
   }
 
   return (

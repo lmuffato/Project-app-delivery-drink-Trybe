@@ -2,9 +2,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { MdDeliveryDining } from 'react-icons/md';
 import ListNavLinks from './molecules/ListNavLinks';
-import '../styles/NavBar.css';
+// import '../styles/NavBar.css';
 
 export default function NavBar() {
+  const user = JSON.parse(localStorage.getItem('user'));
+
+  const handleClearStorage = () => {
+    localStorage.removeItem('user');
+  };
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-success">
       <div className="container-fluid">
@@ -18,12 +24,13 @@ export default function NavBar() {
           data-testid="customer_products__element-navbar-user-full-name"
           to="users/:id"
         >
-          Fulano de Tal
+          {user ? user.name : null}
         </Link>
         <Link
           className="navbar-brand"
           data-testid="customer_products__element-navbar-link-logout"
           to="/login"
+          onClick={ () => handleClearStorage() }
         >
           sair
         </Link>

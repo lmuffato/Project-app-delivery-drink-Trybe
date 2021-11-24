@@ -4,9 +4,9 @@ const UserService = require('../services/user');
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const jwt = await UserService.login({ email, password });
-    if (jwt) {
-      return res.status(StatusCodes.OK).json({ hasToken: true, token: jwt });
+    const data = await UserService.login({ email, password });
+    if (data) {
+      return res.status(StatusCodes.OK).json({ ...data });
     }
     return res.status(StatusCodes.NOT_FOUND).end();
   } catch (error) {
@@ -22,7 +22,7 @@ exports.register = async (req, res) => {
     const { fullName, email, password } = req.body;
     const jwt = await UserService.create({ fullName, email, password });
     if (jwt) {
-      return res.status(StatusCodes.CREATED).json({ hasToken: true, token: jwt });
+      return res.status(StatusCodes.CREATED).json({ token: jwt });
     }
     return res.status(StatusCodes.CONFLICT).end();
   } catch (error) {

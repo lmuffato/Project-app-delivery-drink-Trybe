@@ -5,7 +5,7 @@ import testID from '../../datatestids.json';
 import Button from '../atoms/Button';
 import Input from '../atoms/Input';
 import ErrorMessage from '../atoms/ErrorMessage';
-import { registerAction } from '../../utils/validations/API/fetch';
+import { registerAction } from '../../utils/API/fetch';
 import validateRegister from '../../utils/validations/joi/register';
 
 const RegisterForm = () => {
@@ -59,6 +59,7 @@ const RegisterForm = () => {
           className="register-password"
           data-testid={ testID[8] }
           name="password"
+          type="password"
           value={ password }
           onChange={ handleChange }
           placeholder="Senha"

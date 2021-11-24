@@ -1,17 +1,12 @@
-const { StatusCodes, ReasonPhrases } = require('http-status-codes');
 const router = require('express').Router();
-const SaleService = require('../services/sale');
+const SaleController = require('../controllers/sale');
+const validateToken = require('../middlewares/validateToken');
+const validateRequestBody = require('../middlewares/validateRequestBody');
 
-router.get('/', async (_req, res) => {
-  try {
-    const sales = await SaleService.findAll();
-    res.status(StatusCodes.OK).json({ result: sales });
-  } catch (error) {
-    console.error(error);
-    res
-      .status(StatusCodes.INTERNAL_SERVER_ERROR)
-      .send(ReasonPhrases.INTERNAL_SERVER_ERROR);
-  }
-});
+router.get('/debug', SaleController.getAllDebug);
+
+router.get('/', validateToken, SaleController.getAllByUser);
+
+router.post('/', validateRequestBody, validateToken, SaleController.create);
 
 module.exports = router;

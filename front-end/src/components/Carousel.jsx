@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function Carousel() {
   return (
-    <div className="container" id="slider-container">
+    <div className="container carousel-container" id="slider-container">
       <div
         className="carousel slide carousel-fade"
         data-bs-ride="carousel"

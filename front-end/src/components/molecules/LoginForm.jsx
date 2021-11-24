@@ -5,8 +5,9 @@ import testID from '../../datatestids.json';
 import Button from '../atoms/Button';
 import Input from '../atoms/Input';
 import ErrorMessage from '../atoms/ErrorMessage';
-import { loginAction } from '../../utils/validations/API/fetch';
+import { loginAction } from '../../utils/API/fetch';
 import validateLogin from '../../utils/validations/joi/login';
+import beerLivery from '../../assets/images/logoBeerlivery.png';
 
 const LoginForm = () => {
   const [login, setLogin] = useState({ email: '', password: '' });
@@ -22,10 +23,11 @@ const LoginForm = () => {
   };
 
   const handleClickEnter = async () => {
-    const token = await loginAction({ email, password });
-    if (!token) {
+    const user = await loginAction({ email, password });
+    if (!user) {
       setIsHidden(false);
     } else {
+      localStorage.setItem('user', JSON.stringify(user));
       history.push('/customer/products');
     }
   };
@@ -38,9 +40,10 @@ const LoginForm = () => {
 
   return (
     <form>
-      <div className="children_container">
+      <div className="children_container_login">
+        <img src={ beerLivery } alt="logo" style={ { width: 180 } } />
         <h3>Login</h3>
-        <h5>Bem-vindo ao Delivery App</h5>
+        <h5>Bem-vindo ao Beerlivery</h5>
         <Input
           className="input-email"
           type="email"
@@ -51,7 +54,8 @@ const LoginForm = () => {
           placeholder="Email"
         />
         <Input
-          className="inputEye"
+          className="input-password"
+          type="password"
           data-testid={ testID[2] }
           name="password"
           value={ password }

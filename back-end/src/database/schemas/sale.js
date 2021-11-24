@@ -32,7 +32,7 @@
   },
   deliveryAddress: {
     allowNull: false,
-    field: 'delivery_adress',
+    field: 'delivery_address',
     type: DataTypes.STRING(100)
   },
   deliveryNumber: {

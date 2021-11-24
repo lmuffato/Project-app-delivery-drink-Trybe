@@ -25,8 +25,10 @@
 
 .card-title {
   align-self: baseline;
-  background-color: aquamarine;
-  padding: 3px;
+  background-color: rgb(11, 131, 17);
+  border-radius: 10px;
+  color: white;
+  padding: 3px 10px;
 }
 
 .counter-container {

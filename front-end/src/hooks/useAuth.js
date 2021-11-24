@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import jwt from 'jsonwebtoken';
 import useAlert from './useAlert';
 import api from '../services/api';
 
@@ -72,7 +73,10 @@ export default function useAuth() {
         request: { email: formValues.email, password: formValues.password },
       });
       const { name, email, role, token } = response.data;
-      signInUser({ name, email, role, token });
+      const { login: { id } } = jwt.verify(
+        token, process.env.REACT_APP_JWT_SECRET_KEY || 'senha_dificil',
+      );
+      signInUser({ id, name, email, role, token });
       if (callback) callback();
     } catch (error) {
       throwAuthFailedAlert(error);

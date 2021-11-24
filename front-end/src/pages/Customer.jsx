@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import Checkout from '../components/Checkout';
 import NavBar from '../components/NavBar';
 import ProductList from '../components/ProductList';
+import SaleDetail from '../components/SaleDetail';
 import UserOrders from '../components/UserOrders';
 
 export default function Customer() {
@@ -52,12 +53,14 @@ export default function Customer() {
 
   const renderComponent = (url) => {
     switch (url) {
+    case '/customer/products':
+      return (<ProductList token={ user.token } />);
     case '/customer/orders':
       return (<UserOrders token={ user.token } />);
     case '/customer/checkout':
       return (<Checkout totalCart={ totalCart } />);
     default:
-      return (<ProductList token={ user.token } />);
+      return (<SaleDetail token={ user.token } />);
     }
   };
 

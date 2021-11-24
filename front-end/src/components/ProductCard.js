@@ -1,10 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 function ProductCard({ product }) {
+  const [quantity, setQuantity] = useState(0);
+
   const { id, name, url_image: urlImage, price } = product;
 
-  console.log(id);
+  const addProduct = () => setQuantity(quantity + 1);
+
+  const removeProduct = () => {
+    if (quantity > 0) {
+      setQuantity(quantity - 1);
+    }
+  };
+
+  const insertManuallyQuantity = ({ target: { value } }) => {
+    setQuantity(value);
+  };
 
   return (
     <div>
@@ -25,17 +37,21 @@ function ProductCard({ product }) {
         <button
           data-testid={ `customer_products__button-card-rm-item-${id}` }
           type="button"
+          onClick={ removeProduct }
         >
           -
         </button>
         <input
           data-testid={ `customer_products__input-card-quantity-${id}` }
-          type="text"
+          type="number"
+          value={ quantity }
           placeholder="0"
+          onChange={ insertManuallyQuantity }
         />
         <button
           data-testid={ `customer_products__button-card-add-item-${id}` }
           type="button"
+          onClick={ addProduct }
         >
           +
         </button>

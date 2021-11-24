@@ -8,36 +8,35 @@ export default function BodySeller() {
       .then(({ data }) => setSales(data))
       .catch(() => console.log('deu ruim'));
   }, []);
-  console.log(sales);
+
   if (!sales) return <p>loading ...</p>;
   return (
-    <p>olá, mundo</p>
-    // <div>
-    //   {
-    //     sales.map((sale, index) => (
-    //       <div
-    //         key={ index }
-    //       >
-    //         <p data-testid={ `seller_orders__element-order-id-${sale.id}` }>
-    //           Pedido:
-    //           {' '}
-    //           { sale.id }
-    //         </p>
-    //         <p data-testid={ `seller_orders__element-delivery-status-${sale.id}` }>
-    //           { sale.status }
-    //         </p>
-    //         <p data-testid={ `seller_orders__element-order-date-${sale.id}` }>
-    //           { sale.saleDate }
-    //         </p>
-    //         <p data-testid={ `seller_orders__element-card-price-${sale.id}` }>
-    //           { sale.totalPrice }
-    //         </p>
-    //         <p data-testid={ `seller_orders__element-card-address-${sale.id}` }>
-    //           { sale.deliveryAddress }
-    //         </p>
-    //       </div>
-    //     ))
-    //   }
-    // </div>
+    <section text="white">
+      {
+        sales.map(({ id, status, saleDate, totalPrice, deliveryAddress }) => (
+          <div key={ id }>
+            <div data-testid={ `seller_orders__element-order-id-${id}` }>
+              Pedido:
+              {' '}
+              { id }
+            </div>
+            <div data-testid={ `seller_orders__element-delivery-status-${id}` }>
+              { status }
+            </div>
+            <div>
+              <span data-testid={ `seller_orders__element-order-date-${id}` }>
+                { saleDate }
+              </span>
+              <span data-testid={ `seller_orders__element-card-price-${id}` }>
+                { totalPrice }
+              </span>
+            </div>
+            <span data-testid={ `seller_orders__element-card-address-${id}` }>
+              { deliveryAddress }
+            </span>
+          </div>
+        ))
+      }
+    </section>
   );
 }

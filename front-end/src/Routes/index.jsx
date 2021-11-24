@@ -13,10 +13,10 @@ export default function Routes() {
       <Route path={ ['/login', '/register'] } component={ Auth } />
       <ProtectedRoute path={ ['/customer', '/'] }>
         <NavBar />
+        <Route path="/seller/orders" component={ Seller } />
         <Route path="/customer/checkout" component={ Checkout } />
         <Route path="/customer/products" component={ ProductsList } />
-        <Route path="/seller/orders" component={ Seller } />
-        <Route path="/" render={ () => <Redirect to="/customer/products" /> } />
+        <Route exact path="/" render={ () => <Redirect to="/customer/products" /> } />
       </ProtectedRoute>
     </Switch>
   );

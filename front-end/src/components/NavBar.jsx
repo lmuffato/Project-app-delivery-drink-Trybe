@@ -11,12 +11,18 @@ export default function NavBar() {
     <header className={ styles.nav }>
       <img src="/logo.svg" alt="tchau problema" />
       <nav>
-        <Link to="/" data-testid="customer_products__element-navbar-link-products">
-          Produtos
-        </Link>
         <Link to="/" data-testid="customer_products__element-navbar-link-orders">
           Meus pedidos
         </Link>
+        {
+          user.role !== 'seller' ? (
+            <Link
+              to="/"
+              data-testid="customer_products__element-navbar-link-products"
+            >
+              Produtos
+            </Link>) : ''
+        }
       </nav>
       <div>
         <strong data-testid="customer_products__element-navbar-user-full-name">

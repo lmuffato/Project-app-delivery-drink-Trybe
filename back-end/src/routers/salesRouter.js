@@ -2,7 +2,7 @@ const { Router } = require('express');
 const {
   registerSale,
   getAllSales,
-  getSpecificSale
+  getSpecificSale,
 } = require('../controllers/salesController');
 const { saleValidations } = require('../middlewares/saleValidations');
 const { validateJWT } = require('../middlewares/validateJwt');

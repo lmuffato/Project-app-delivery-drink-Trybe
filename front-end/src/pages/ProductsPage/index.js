@@ -41,12 +41,15 @@ const ProductsPage = () => {
         {totalValue > 0 && (
           <button
             type="button"
-            data-testid="customer_products__checkout-bottom-value"
             className="cartButton"
           >
             Ver carrinho:
             R$
-            {String(totalValue).replace('.', ',')}
+            <span
+              data-testid="customer_products__checkout-bottom-value"
+            >
+              {String(totalValue.toFixed(2)).replace('.', ',')}
+            </span>
           </button>
         )}
       </section>

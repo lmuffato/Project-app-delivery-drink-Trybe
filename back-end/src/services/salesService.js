@@ -49,17 +49,16 @@ const createSale = async (saleData) => {
 };
 
 const getProductsQuantities = async (sale) => {
-  const productsLength = sale.products.length;
-  const products = sale.products;
-  let quantityArray = [];
-  for (let index = 0; index < productsLength; index += 1) {
-    const [{quantity}] = await SaleProduct.findAll({
-      where: { sale_id: sale.id, product_id: sale.products[index].id},
+  const quantityArray = [];
+  const result = await sale.products.map(async (item) => {
+    const [{ quantity }] = await SaleProduct.findAll({
+      where: { saleId: sale.id, productId: item.id },
       attributes: ['quantity'],
     });
-    quantityArray.push(quantity);
-  }
-  return quantityArray;
+    return quantityArray.push(quantity);
+  });
+
+  return Promise.all(result);
 };
 
 const saleById = async (id) => {
@@ -70,7 +69,7 @@ const saleById = async (id) => {
 
   const productsQuantities = await getProductsQuantities(sale);
   return { sale, productsQuantities };
-}
+};
 
 module.exports = {
   createSale,

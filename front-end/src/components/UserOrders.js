@@ -30,6 +30,14 @@ export default function UserOrders(props) {
     getOrders();
   }, [getOrders]);
 
+  const showdate = (data) => {
+    const dateArr = data.split('-');
+    const [year, month, dayArr] = dateArr;
+    const arr2 = dayArr.split('T');
+    const [day] = arr2;
+    return `${day}/${month}/${year}`;
+  };
+
   return (
     <div className="w-full flex flex-wrap p-20">
       {
@@ -52,10 +60,12 @@ export default function UserOrders(props) {
             <p
               data-testid={ `customer_orders__element-order-date-${order.id}` }
             >
-              {order.sale_date}
+              {showdate(order.sale_date)}
             </p>
-            <p>
-              {order.total_price}
+            <p
+              data-testid={ `customer_orders__element-card-price-${order.id}` }
+            >
+              {order.total_price.split('.').join(',')}
             </p>
           </button>
         ))

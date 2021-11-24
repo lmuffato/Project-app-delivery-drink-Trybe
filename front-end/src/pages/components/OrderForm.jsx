@@ -32,6 +32,7 @@ export default function OrderForm() {
     const address = { street, number };
     try {
       const response = await fetchSale(customer, sellerId, cartProducts, address);
+      console.log(response);
       if (response.data.sale) {
         history.push(`/customer/orders/${response.data.sale.id}`);
       }

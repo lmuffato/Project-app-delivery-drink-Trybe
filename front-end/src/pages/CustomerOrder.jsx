@@ -18,7 +18,7 @@ export default function CustomerOrder() {
   const loadingTag = <h3>Loading ...</h3>;
 
   const renderTags = (orderNumber, status, date, index) => (
-    <Link to={ `/customer/orders ` }>
+    <Link to={ `/customer/orders${orderNumber} ` }>
       <div key={ index }>
         <div className="cardContainer">
           <div data-testid={ `${dataTestid33}-${orderNumber}` } className="pedido">

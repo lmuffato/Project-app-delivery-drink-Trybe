@@ -9,7 +9,7 @@ import Checkout from './pages/Checkout/index';
 import SignUp from './pages/SignUp';
 import Products from './pages/Products';
 import Admin from './pages/Admin';
-import Orders from './pages/orders';
+import Orders from './pages/Orders';
 import OrderDetails from './pages/OrderDetails';
 
 export default function Router() {
@@ -20,7 +20,7 @@ export default function Router() {
           <Switch>
             <Route path="/login" component={ Login } />
             <Route path="/customer/checkout" component={ Checkout } />
-            <Route path="/customer/orders" component={ Orders } />
+            <Route exact path="/customer/orders" component={ Orders } />
             <Route path="/customer/orders/:id" component={ OrderDetails } />
             <Route path="/register" component={ SignUp } />
             <Route path="/customer/products" component={ Products } />

@@ -1,26 +1,19 @@
-import React, { useContext, useEffect, useState } from 'react';
-import DeliveryContext from '../Contexts/Deliveries/DeliveryContext';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 function OrderDetails() {
-  const [orders, setOrders] = useContext(DeliveryContext);
+  const [orders, setOrders] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const { id } = useParams();
 
   useEffect(() => {
-    const getOrder = async (id) => {
-      const data = await fetch('http://localhost:3001/orderDetails', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: {
-          id,
-        },
-      });
+    const getOrder = async () => {
+      const data = await fetch(`http://localhost:3001/orderDetails/${id}`);
       const result = await data.json();
-      setOrders(result);
+      setOrders([result]);
       setIsLoading(false);
     };
-    getOrder(id);
+    getOrder();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

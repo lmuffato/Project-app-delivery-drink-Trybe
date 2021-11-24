@@ -22,7 +22,13 @@ const addNew = async (orders, payload) => {
   }
 };
 
+const getSaleById = async (id) => {
+  const result = await Sale.getSaleById(id);
+  return result;
+};
+
 module.exports = {
   addNew,
   getSale,
+  getSaleById,
 };

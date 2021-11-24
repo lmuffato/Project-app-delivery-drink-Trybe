@@ -47,7 +47,7 @@ function Orders() {
           type="button"
           key={ index }
           data-testid={ `customer_orders__element-order-id-${item.id}` }
-          onClick={ () => history.push(`customer/order/${item.id}`) }
+          onClick={ () => history.push(`/customer/orders/${item.id}`) }
         >
           <div>
             <h5>

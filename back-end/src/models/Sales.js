@@ -16,8 +16,14 @@ const getSales = async (id) => {
   return salesList;
 };
 
+const getSaleById = async (id) => {
+  const salesList = await sale.findOne({ where: { id } });
+  return salesList;
+};
+
 module.exports = {
   addNew,
   addRelation,
   getSales,
+  getSaleById,
 };

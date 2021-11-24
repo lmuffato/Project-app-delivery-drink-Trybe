@@ -28,13 +28,15 @@ const updatePostSchema = Joi.object({
 });
 
 const salesSchema = Joi.object({
-  totalPrice: Joi.string().required(),
-  deliveryAddress: Joi.string().required(),
-  deliveryNumber: Joi.string().required(),
-  status: Joi.string().required(),
-  saleDate: Joi.date().required(),
-  userId: Joi.number().required(),
-  sellerId: Joi.number().required(),
+  sellInfo: Joi.object({
+    totalPrice: Joi.number().required(),
+    deliveryAddress: Joi.string().required(),
+    deliveryNumber: Joi.string().required(),
+    status: Joi.string().required(),
+    saleDate: Joi.string().required(),
+    userId: Joi.number().required(),
+    sellerId: Joi.number().required(),
+  }),
   data: Joi.array().required(),
 });
 

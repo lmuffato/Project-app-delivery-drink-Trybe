@@ -15,21 +15,26 @@ function RecipesProvider({ children }) {
   }, [aux]);
 
   async function addItem(qtd, price, id, name) {
+    const newItem = {
+      productId: id,
+      quantity: qtd,
+      name,
+      price: (qtd * price).toFixed(2) };
     if (aux) {
-      const productBool = aux.some((bool) => bool.id === id);
+      const productBool = aux.some((bool) => bool.productId === id);
       if (productBool) {
         const newSales = aux.map((item) => {
-          if (item.id === id) return { id, qtd, name, price: (qtd * price).toFixed(2) };
+          if (item.productId === id) return newItem;
           return item;
         });
         return setAux(newSales);
       }
 
       if (aux.length === 0 && qtd > 0) {
-        return setAux([...aux, { id, qtd, name, price: (qtd * price).toFixed(2) }]);
+        return setAux([...aux, newItem]);
       }
       if (qtd > 0) {
-        return setAux([...aux, { id, qtd, name, price: (qtd * price).toFixed(2) }]);
+        return setAux([...aux, newItem]);
       }
       return null;
     }

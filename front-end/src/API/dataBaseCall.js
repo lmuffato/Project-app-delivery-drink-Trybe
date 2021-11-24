@@ -29,3 +29,18 @@ export async function getSeler(user) {
     throw response.data.message;
   }
 }
+
+export async function sendRequest({ data, sellInfo, token }) {
+  try {
+    console.log(token);
+    const response = (await axios.post(
+      `${BASE_URL}/sales`,
+      { data, sellInfo },
+      { headers: { Authorization: token } },
+      { responseType: 'json' },
+    ));
+    return response.data;
+  } catch ({ response }) {
+    throw response;
+  }
+}

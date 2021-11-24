@@ -39,9 +39,9 @@ const getSalesById = async (req, res, next) => {
 const createSale = async (req, res, next) => {
   try {
     const params = req.body;
-    const sale = await Sale.create(params);
-    
-    const { data } = params;
+    const { data, sellInfo } = params;
+    const sale = await Sale.create(sellInfo);
+
     data.forEach(async (product) => {
     const { id: saleId } = sale.dataValues;
     const { productId, quantity } = product;

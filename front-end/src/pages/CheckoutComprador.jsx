@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { useHistory } from 'react-router';
 import CheckoutContext from '../context/checkoutContext';
 import Header from '../components/Header/Header';
 import CheckoutProduct from '../components/checkoutProduct';
-import { getSeler } from '../API/dataBaseCall';
+import { getSeler, sendRequest } from '../API/dataBaseCall';
 
 export default function CheckoutComprador() {
   const { aux, total } = useContext(CheckoutContext);
-  console.log('📓 ~ file: CheckoutComprador.jsx ~ line 9 ~ CheckoutComprador ~ aux', aux);
   const userData = localStorage.getItem('user');
   const [seller, setSeller] = useState([]);
   const [address, setAddress] = useState('');
@@ -14,6 +14,8 @@ export default function CheckoutComprador() {
   const [addressNumber, setAddressNumber] = useState('');
   const userName = JSON.parse(userData);
   const totalValue = total.toFixed(2).toString().replace(/\./g, ',');
+  const history = useHistory();
+
   async function getSellerId(user) {
     const sellerIncome = await getSeler(user);
     setSeller(sellerIncome);
@@ -30,21 +32,44 @@ export default function CheckoutComprador() {
   function handleNumber({ target: { value } }) {
     setAddressNumber(value);
   }
+  async function handleEndRequest() {
+    console.log(seller);
+    const sellerId = seller.find((vendedor) => vendedor.name === chooseSeller);
+    if (!sellerId) return;
+    console.log(sellerId);
+    const [month, date, year] = new Date().toLocaleDateString('en-US').split('/');
+    const atualDate = `${year}-${month}-${date}`;
+    const response = await sendRequest({
+      data: aux,
+      sellInfo: {
+        deliveryNumber: addressNumber,
+        deliveryAddress: address,
+        totalPrice: total,
+        status: 'Pendente',
+        userId: userName.id,
+        saleDate: atualDate,
+        sellerId: sellerId.id,
+      },
+      token: userName.token,
+    });
+    if (response) history.push(`/customer/orders/${response.id}`);
+  }
 
   useEffect(() => {
     getSellerId(userName.token);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   return (
     <div>
       <Header title="Produtos" subtitle="Meus Pedidos" name={ userName.name } />
       <h1>Finalizar pedido</h1>
-      {aux.map(({ id, name, price, qtd }, i) => (
+      {aux.map(({ productId, name, price, quantity }, i) => (
         <CheckoutProduct
-          id={ id }
+          id={ productId }
           name={ name }
           price={ price }
-          qtd={ qtd }
+          qtd={ quantity }
           index={ i }
           key={ i }
         />
@@ -82,6 +107,7 @@ export default function CheckoutComprador() {
       <button
         data-testid="customer_checkout__button-submit-order"
         type="button"
+        onClick={ handleEndRequest }
       >
         FINALIZAR PEDIDO
       </button>

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import '../styles/header.css';
 import Context from '../context/Context';
 
@@ -16,30 +16,33 @@ function Header() {
     <div className="container">
       <div
         className="border"
-        data-testid="customer_products__element-navbar-link-products"
+        data-testid={ `${user.role}_products__element-navbar-link-products` }
       >
-        <a
-          href="/#"
-          data-testid="customer_products__element-navbar-link-products"
+        <Link
+          to={ `/${user.role}/products` }
+          data-testid={ `${user.role}_products__element-navbar-link-products` }
         >
           Produtos
 
-        </a>
+        </Link>
       </div>
-      <div className="border" data-testid="customer_products__element-navbar-link-orders">
+      <div
+        className="border"
+        data-testid={ `${user.role}_products__element-navbar-link-orders` }
+      >
         <a
           href="/#"
-          data-testid="customer_products__element-navbar-link-orders"
+          data-testid={ `${user.role}_products__element-navbar-link-orders` }
         >
           Meus Pedidos
         </a>
       </div>
       <div
         className="border"
-        data-testid="customer_products__element-navbar-user-full-name"
+        data-testid={ `${user.role}_products__element-navbar-user-full-name` }
       >
         <h1
-          data-testid="customer_products__element-navbar-user-full-name"
+          data-testid={ `${user.role}_products__element-navbar-user-full-name` }
         >
           { user.name }
 
@@ -49,7 +52,7 @@ function Header() {
       <div className="border">
         <button
           type="button"
-          data-testid="customer_products__element-navbar-link-logout"
+          data-testid={ `${user.role}_products__element-navbar-link-logout` }
           onClick={ logout }
         >
           Sair

@@ -10,9 +10,9 @@ function CheckoutClient() {
   return (
     <>
       <Header client={ `${'nome'}` } />
-      <div>
-        <h1>Finalizar Pedido</h1>
-        <table border="1">
+      <h1>Finalizar Pedido</h1>
+      <table border="1">
+        <thead>
           <tr>
             <td>Item</td>
             <td>Descrição</td>
@@ -21,18 +21,19 @@ function CheckoutClient() {
             <td>Sub-total</td>
             <td>Remover Item</td>
           </tr>
-          { Object.keys(shoppingCart)
-            .map((item) => (<Table
-              props={ shoppingCart[item] }
-              key={ item.id }
-            />))}
-        </table>
+        </thead>
+        { Object.keys(shoppingCart)
+          .map((item, index) => (<Table
+            product={ shoppingCart[item] }
+            index={ index }
+            key={ `product-${shoppingCart[item].productId}` }
+          />))}
+      </table>
 
-        <h1 data-testid="customer_checkout__element-order-total-price">
-          Total: R$
-          { total }
-        </h1>
-      </div>
+      <h1 data-testid="customer_checkout__element-order-total-price">
+        Total: R$
+        { total }
+      </h1>
       <div>
         <h1>Detalhes e Endereço para Entrega</h1>
         <label htmlFor="vendedor">
@@ -64,7 +65,7 @@ function CheckoutClient() {
         <br />
         <br />
         <button
-          data-testid="customer_checkout__input-submit-order"
+          data-testid="customer_checkout__button-submit-order"
           type="submit"
           onClick={ () => postShoppingCart() }
         >

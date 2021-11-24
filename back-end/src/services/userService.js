@@ -23,8 +23,8 @@ const create = async (user) => {
       { name: user.name, email: user.email, password: passwordMD5, role: CUSTOMER_ROLE },
     );
 
-    const { dataValues: { id, name, email } } = result;
-    const payload = { id, name, email };
+    const { dataValues: { id, name, email, role } } = result;
+    const payload = { id, name, email, role };
     const options = { expiresIn: '1d' };
 
     const token = jwt.sign(payload, SECRET, options);

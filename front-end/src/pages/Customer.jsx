@@ -26,7 +26,7 @@ export default function Customer() {
   const [isVisible, setIsVisible] = useState('visible');
   const [disabled, setDisabled] = useState(false);
 
-  if (!user) history.push('/login');
+  // if (!user) history.push('/login');
 
   useEffect(() => {
     if (shoppingCart.length > 0) {

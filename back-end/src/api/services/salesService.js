@@ -48,7 +48,6 @@ const getAll = async ({ userId, role }) => {
     default:
       break;
   }
-
   return response;
 };
 

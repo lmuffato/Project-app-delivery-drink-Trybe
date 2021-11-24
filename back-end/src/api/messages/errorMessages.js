@@ -8,6 +8,7 @@ module.exports = {
   MISSING_AUTH_TOKEN: 'missing auth token',
   NAME_SHORTER_THAN_ALLOWED: '"name" must have a minimum of 12 characters',
   NO_REGISTRED_PRODUCTS: 'There are no registered products.',
+  NO_REGISTRED_SELLERS: 'There are no registered sellers',
   NO_REGISTRED_USERS: 'There are no registered users',
   NON_EXISTENTE_USER: 'Non-existent user.',
   ONLY_ADMINISTRATORS_ACCESS: 'Only administrators have access to this information.',

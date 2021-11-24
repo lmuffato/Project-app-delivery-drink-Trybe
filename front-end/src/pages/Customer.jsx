@@ -49,15 +49,22 @@ export default function Customer() {
 
   if (!user) history.push('/login');
 
+  const renderComponent = (url) => {
+    switch (url) {
+    case '/customer/orders':
+      return (<span>hdaushduash</span>);
+    case '/customer/checkout':
+      return (<Checkout totalCart={ totalCart } />);
+    default:
+      return (<ProductList token={ user.token } />);
+    }
+  };
+
   return (
     <div className="w-full h-full bg-gray-500">
       <NavBar buttonsList={ buttonsList } clientName={ username } />
       <div className="flex content-center">
-        {
-          location === '/customer/products'
-            ? <ProductList token={ user.token } />
-            : <Checkout totalCart={ totalCart } />
-        }
+        { renderComponent(location) }
         <button
           data-testid="customer_products__button-cart"
           type="button"

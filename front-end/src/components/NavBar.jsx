@@ -13,7 +13,7 @@ export default function NavBar(props) {
   };
 
   const logOut = () => {
-    localStorage.removeItem('user');
+    localStorage.clear();
     history.push('/login');
   };
 

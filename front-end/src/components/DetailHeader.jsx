@@ -1,7 +1,26 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import { updateSale } from '../services/apis';
+import ApiContext from '../context/ApiContext';
 
 function DetailHeader({ id, sellerName, date, status, role }) {
+  const { att, setAtt } = useContext(ApiContext);
+
+  const setPreparing = async () => {
+    await updateSale(id, 'Preparando');
+    setAtt(!att);
+  };
+
+  const setGoing = async () => {
+    await updateSale(id, 'Em Trânsito');
+    setAtt(!att);
+  };
+
+  const setDelivered = async () => {
+    await updateSale(id, 'Entregue');
+    setAtt(!att);
+  };
+
   return (
     <header>
       <span
@@ -32,6 +51,8 @@ function DetailHeader({ id, sellerName, date, status, role }) {
         <button
           type="button"
           data-testid="seller_order_details__button-preparing-check"
+          onClick={ setPreparing }
+          disabled={ status !== 'Pendente' }
         >
           PREPARAR PEDIDO
         </button>
@@ -40,7 +61,8 @@ function DetailHeader({ id, sellerName, date, status, role }) {
         <button
           data-testid={ `${role}_order_details__button-delivery-check` }
           type="button"
-          disabled="true"
+          disabled={ status !== 'Em Trânsito' }
+          onClick={ setDelivered }
         >
           MARCAR COMO ENTREGUE
         </button>
@@ -48,7 +70,8 @@ function DetailHeader({ id, sellerName, date, status, role }) {
         <button
           data-testid="seller_order_details__button-dispatch-check"
           type="button"
-          disabled="true"
+          disabled={ status !== 'Preparando' }
+          onClick={ setGoing }
         >
           SAIU PARA ENTREGA
         </button>

@@ -31,7 +31,7 @@ export default function Login() {
 
   const checkRole = (login) => {
     const { role } = jwtDecode(login.token);
-    if (role === 'sellers') {
+    if (role === 'seller') {
       return '/seller/orders';
     }
     if (role === 'administrator') {

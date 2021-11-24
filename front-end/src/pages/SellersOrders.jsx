@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 
-import { getSales } from '../services/endpointsAPI';
+import { getSalesBySellerId } from '../services/endpointsAPI';
+
+import userContext from '../context/userContext';
 
 import Navbar from '../Components/NavBar';
 
@@ -12,7 +14,7 @@ const dataTestid51 = ' seller_orders__element-card-price';
 const dataTestid52 = 'seller_orders__element-card-address';
 
 export default function SellersOrders() {
-  // const { userData } = useContext(userContext);
+  const { userData } = useContext(userContext);
   const [orders, setOrders] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const loadingTag = <h3>Loading ...</h3>;
@@ -43,7 +45,7 @@ export default function SellersOrders() {
 
   useEffect(() => {
     setIsLoading(true);
-    getSales().then((resp) => setOrders(resp),
+    getSalesBySellerId(userData.id).then((resp) => setOrders(resp),
       setIsLoading(false));
   }, []);
 

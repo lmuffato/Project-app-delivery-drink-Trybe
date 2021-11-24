@@ -5,7 +5,6 @@ import Context from '../context/Context';
 function Table({ product, index }) {
   const { productId, productName, productPrice, productQuant } = product;
   const { deleteProduct } = useContext(Context);
-  console.log(index);
 
   return (
     <tbody>

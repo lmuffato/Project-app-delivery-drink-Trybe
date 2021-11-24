@@ -12,6 +12,7 @@ const Endpoints = {
   registration_form: 'register',
   checkout_form: 'sale',
   seller_orders: 'seller/orders',
+  customer_checkout: 'sale',
 };
 
 function Provider({ children }) {
@@ -33,7 +34,7 @@ function Provider({ children }) {
       data,
       {
         headers: {
-          Authorization: token ? `Bearer ${token}` : null,
+          Authorization: token || null,
         },
       });
   };
@@ -41,7 +42,7 @@ function Provider({ children }) {
   const get = (formType, id) => {
     const token = localStorage.getItem('token');
     return axios.get(`http://localhost:3001/${Endpoints[formType]}/${id || ''}`, { headers: {
-      Authorization: token ? `Bearer ${token}` : null,
+      Authorization: token || null,
     } });
   };
 
@@ -55,7 +56,6 @@ function Provider({ children }) {
 
   const postShoppingCartURL = 'http://localhost:3001/sale';
   const postShoppingCart = () => {
-    console.log({ shoppingCart, delivery, total });
     axios.post(postShoppingCartURL, { shoppingCart, delivery, total })
       .then((res) => {
         console.log(res);

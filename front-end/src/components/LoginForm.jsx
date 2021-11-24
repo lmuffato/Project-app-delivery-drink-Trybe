@@ -46,7 +46,8 @@ function LoginForm() {
 
         navigate('/customer/products');
       }
-    } catch ({ response }) {
+    } catch (error) {
+      const { response } = error;
       const { status } = response;
       setInvalidLogin(errorMap[status || '500']);
     }

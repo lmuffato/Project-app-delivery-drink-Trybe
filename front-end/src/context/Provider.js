@@ -28,17 +28,18 @@ function Provider({ children }) {
   const postSubmit = (url) => axios.post(`http://localhost:3001/${url}`, user);
 
   const post = (formType, data, id) => {
-    const { token } = localStorage.getItem('token');
-    return axios.post(`http://localhost:3001/${Endpoints[formType]}/${id || ''}`, {
-      headers: {
-        Authorization: token ? `Bearer ${token}` : null,
-        data,
-      },
-    });
+    const token = localStorage.getItem('token');
+    return axios.post(`http://localhost:3001/${Endpoints[formType]}/${id || ''}`,
+      data,
+      {
+        headers: {
+          Authorization: token ? `Bearer ${token}` : null,
+        },
+      });
   };
 
   const get = (formType, id) => {
-    const { token } = localStorage.getItem('token');
+    const token = localStorage.getItem('token');
     return axios.get(`http://localhost:3001/${Endpoints[formType]}/${id || ''}`, { headers: {
       Authorization: token ? `Bearer ${token}` : null,
     } });

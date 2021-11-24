@@ -18,7 +18,6 @@ function CustomerOrders() {
     const getClientOrders = async (userToken) => {
       const headers = { Authorization: userToken };
       const orders = await axios.get(`${getUrlServer()}/sales`, { headers });
-      console.log(orders);
       return orders;
     };
     getClientOrders(token)
@@ -42,9 +41,13 @@ function CustomerOrders() {
         {
           clientOrders.map((order, index) => {
             const { id, saleDate, totalPrice, status } = order;
-            console.log(id, saleDate, totalPrice, status);
             return (
-              <Grid item xs={ 2 } key={ index }>
+              <Grid
+                item
+                xs={ 2 }
+                key={ index }
+                onClick={ () => history.push(`/customer/orders/${id}`) }
+              >
                 <OrderCard
                   id={ id }
                   saleDate={ saleDate }

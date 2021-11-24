@@ -5,6 +5,8 @@ import Header from '../components/Header/Header';
 import CheckoutProduct from '../components/checkoutProduct';
 import { getSeler, sendRequest } from '../API/dataBaseCall';
 
+const moment = require('moment');
+
 export default function CheckoutComprador() {
   const { aux, total } = useContext(CheckoutContext);
   const userData = localStorage.getItem('user');
@@ -39,18 +41,16 @@ export default function CheckoutComprador() {
     console.log(chooseSeller);
     const sellerId = seller.find((vendedor) => vendedor.name === chooseSeller);
     if (!sellerId) return;
-    const [month, date, year] = new Date().toLocaleDateString('en-US').split('/');
-    const atualDate = `${year}-${month}-${date}`;
     const response = await sendRequest({
       data: aux,
       sellInfo: {
-        deliveryNumber: addressNumber,
-        deliveryAddress: address,
-        totalPrice: total,
+        delivery_number: addressNumber,
+        delivery_address: address,
+        total_price: total,
         status: 'Pendente',
-        userId: userName.id,
-        saleDate: atualDate,
-        sellerId: sellerId.id,
+        user_id: userName.id,
+        sale_date: moment().format(),
+        seller_id: sellerId.id,
       },
       token: userName.token,
     });
@@ -69,9 +69,9 @@ export default function CheckoutComprador() {
     <div>
       <Header title="Produtos" subtitle="Meus Pedidos" name={ userName.name } />
       <h1>Finalizar pedido</h1>
-      {aux.map(({ productId, name, price, quantity }, i) => (
+      {aux.map(({ product_id: prodId, name, price, quantity }, i) => (
         <CheckoutProduct
-          id={ productId }
+          id={ prodId }
           name={ name }
           price={ price }
           qtd={ quantity }

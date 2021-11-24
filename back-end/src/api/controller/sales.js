@@ -5,6 +5,12 @@ const {
 const { Sale } = require('../../database/models');
 const { User: users, ProductsSale } = require('../../database/models');
 
+const ids = {
+  user: 'user_id',
+  seller: 'seller_id',
+  sale: 'sale_id',
+  product: 'product_id',
+};
 const getAllSales = async (req, res, next) => {
   try {
     const { email } = req.user;
@@ -12,11 +18,11 @@ const getAllSales = async (req, res, next) => {
 
     const { role } = dataValues;
     if (role === 'customer') {
-      const sale = await Sale.findAll({ where: { userId: dataValues.id } });
+      const sale = await Sale.findAll({ where: { [ids.user]: dataValues.id } });
       return res.status(OK).json(sale);
     }
     if (role === 'seller') {
-      const sale = await Sale.findAll({ where: { sellerId: dataValues.id } });
+      const sale = await Sale.findAll({ where: { [ids.seller]: dataValues.id } });
       return res.status(OK).json(sale);
     }
 
@@ -43,9 +49,9 @@ const createSale = async (req, res, next) => {
     const sale = await Sale.create(sellInfo);
 
     data.forEach(async (product) => {
-    const { id: saleId } = sale.dataValues;
-    const { productId, quantity } = product;
-    await ProductsSale.create({ productId, quantity, saleId });
+    const { id } = sale.dataValues;
+    const { product_id: prodId, quantity } = product;
+    await ProductsSale.create({ [ids.product]: prodId, quantity, [ids.sale]: id });
     });
     
     return res.status(CREATED).json(sale);

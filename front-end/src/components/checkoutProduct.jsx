@@ -8,7 +8,7 @@ export default function CheckoutProduct({ index, id, name, qtd, price }) {
   const { aux, setAux } = useContext(CheckoutContext);
 
   function deleteItem(idx) {
-    const sales = aux.filter((item) => item.productId !== idx);
+    const sales = aux.filter((item) => item.product_id !== idx);
     setAux(sales);
   }
 

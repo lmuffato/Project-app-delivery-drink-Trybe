@@ -1,10 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 import { NavLink as Link } from 'react-router-dom';
 
-export const slice = keyframes`
-
-`;
-
 export const Nav = styled.nav`
   background-color: hsl(0, 0%, 20%);
   height: 80px;
@@ -31,7 +27,8 @@ export const NavLink = styled(Link)`
   text-transform: uppercase;
 
   &:hover {
-    color: #ffffff82;
+    background-color: hsl(0, 0%, 50%);
+    color: hsl(0, 1%, 10%);
   }
 `;
 

@@ -38,6 +38,7 @@ function OrderCard(props) {
     </Grid>
   );
   const dateTestid = `customer_orders__element-order-date-${id}`;
+  const priceTestid = `customer_orders__element-card-price-${id}`;
   return (
     <Card sx={ { maxWidth: 350 } }>
       <Grid container direction="row" alignItems="center" justifyContent="stretch">
@@ -58,7 +59,7 @@ function OrderCard(props) {
               justifyContent="space-around"
             >
               {rightBox(convertDateFormat(saleDate), dateTestid)}
-              {rightBox(`R$ ${totalPrice.replace('.', ',')}`)}
+              {rightBox(`R$ ${totalPrice.replace('.', ',')}`, priceTestid)}
             </Grid>
           </Grid>
         </Grid>

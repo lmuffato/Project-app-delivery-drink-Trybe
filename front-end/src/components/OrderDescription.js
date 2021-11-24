@@ -5,6 +5,7 @@ const MAX_ORDER_ID_CHARS = 4;
 
 function OrderDescription({ prefix, order, role }) {
   const isCustomer = role === 'customer';
+  console.log(order);
 
   return (
     <p>
@@ -21,7 +22,7 @@ function OrderDescription({ prefix, order, role }) {
         <span
           data-testid={ `${prefix}element-order-details-label-seller-name` }
         >
-          Fulana Pereira
+          FP
         </span>
       ) }
       { ' ' }

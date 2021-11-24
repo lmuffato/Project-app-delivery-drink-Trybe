@@ -10,7 +10,8 @@ export default function CheckoutComprador() {
   const userData = localStorage.getItem('user');
   const [seller, setSeller] = useState([]);
   const [address, setAddress] = useState('');
-  const [chooseSeller, setChooseSeller] = useState('Fulana Pereira');
+  const [chooseSeller, setChooseSeller] = useState();
+  const [loading, setLoading] = useState(true);
   const [addressNumber, setAddressNumber] = useState('');
   const userName = JSON.parse(userData);
   const totalValue = total.toFixed(2).toString().replace(/\./g, ',');
@@ -19,6 +20,7 @@ export default function CheckoutComprador() {
   async function getSellerId(user) {
     const sellerIncome = await getSeler(user);
     setSeller(sellerIncome);
+    setLoading(false);
   }
 
   function handleSeller({ target: { value } }) {
@@ -34,9 +36,9 @@ export default function CheckoutComprador() {
   }
   async function handleEndRequest() {
     console.log(seller);
+    console.log(chooseSeller);
     const sellerId = seller.find((vendedor) => vendedor.name === chooseSeller);
     if (!sellerId) return;
-    console.log(sellerId);
     const [month, date, year] = new Date().toLocaleDateString('en-US').split('/');
     const atualDate = `${year}-${month}-${date}`;
     const response = await sendRequest({
@@ -57,8 +59,11 @@ export default function CheckoutComprador() {
 
   useEffect(() => {
     getSellerId(userName.token);
+    if (loading === false) {
+      setChooseSeller(seller[0].name);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [loading, chooseSeller]);
 
   return (
     <div>

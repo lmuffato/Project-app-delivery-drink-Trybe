@@ -30,10 +30,10 @@ export default function SellersOrders() {
           <div data-testid={ `${dataTestid50}-${sale.id}` } className="moment">
             { sale.saleDate }
           </div>
-          <div data-testid={ `${dataTestid51}-${sale.id}` } className='total-price'>
+          <div data-testid={ `${dataTestid51}-${sale.id}` } className="total-price">
             { sale.totalPrice }
           </div>
-          <div data-testid={ `${dataTestid52}-${sale.id}` } className='adress'>
+          <div data-testid={ `${dataTestid52}-${sale.id}` } className="adress">
             { `${sale.deliveryAddress}, ${sale.deliveryNumber}` }
           </div>
         </div>
@@ -44,8 +44,7 @@ export default function SellersOrders() {
   useEffect(() => {
     setIsLoading(true);
     getSales().then((resp) => setOrders(resp),
-      setIsLoading(false)
-    );
+      setIsLoading(false));
   }, []);
 
   return (

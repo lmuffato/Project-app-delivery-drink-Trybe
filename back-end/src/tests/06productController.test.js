@@ -3,7 +3,7 @@ const { expect } = require('chai');
 
 const productController = require('../controllers/productController');
 
-describe('Ao chamar o controller de produtos', () => {
+describe('06 - Ao chamar o controller de produtos', () => {
   describe('Quando o path informado é /products', () => {
     const response = {};
     const request = {};

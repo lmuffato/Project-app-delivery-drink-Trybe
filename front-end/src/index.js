@@ -9,8 +9,6 @@ import App from './App';
 import theme from './styles/themes';
 import store from './store';
 
-import TableContainer from './components/TableContainer';
-
 ReactDOM.render(
   <React.StrictMode>
     <ReduxProvider store={store}>
@@ -18,7 +16,6 @@ ReactDOM.render(
         <ThemeProvider theme={theme.light}>
           <GlobalStyles />
           <App />
-          {/* <TableContainer hasButton /> */}
         </ThemeProvider>
       </BrowserRouter>
     </ReduxProvider>

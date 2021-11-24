@@ -21,8 +21,10 @@ app.get('/users/:role', authMid, userController.getUsers);
 
 app.post('/login', loginvalidationMid, userController.login);
 app.post('/register', registerValidationMid, userController.create);
-app.post('/sales', authMid, salesController.create);
 
 app.get('/products', authMid, productController.getAll);
+
+app.post('/sales', authMid, salesController.create);
+app.get('/sales', authMid, salesController.getAll);
 
 module.exports = app;

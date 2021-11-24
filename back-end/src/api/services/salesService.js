@@ -33,6 +33,26 @@ const create = async ({ userId, sellerId, totalPrice, deliveryAddress,
   return saleId.id;
 };
 
+const getAll = async ({ userId, role }) => {
+  let response;
+  switch (role) {
+    case 'customer':
+      response = await sales.findAll({ where: { [USERID]: userId } });
+      break;
+    case 'seller':
+      response = await sales.findAll({ where: { [SELLERID]: userId } });
+      break;
+    case 'administrador':
+      response = await sales.findAll();
+      break;  
+    default:
+      break;
+  }
+
+  return response;
+};
+
 module.exports = {
   create,
+  getAll,
 };

@@ -12,7 +12,7 @@ export default function UserOrders(props) {
     async () => {
       await axios({
         method: 'get',
-        url: `${url}/orders`,
+        url: `${url}/sales`,
         headers: {
           Authorization: token,
         },

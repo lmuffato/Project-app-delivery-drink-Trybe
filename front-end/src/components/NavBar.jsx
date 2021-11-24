@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import {
   AppBar,
   Toolbar,
   Typography,
-  Link,
   Button,
 } from '@mui/material';
 import { logoutUser, verifyUserExistance } from '../utils/LocalStorageFunctions';
@@ -26,15 +25,13 @@ function NavBar({ sellerView = false }) {
       >
         { !sellerView && (
           <Link
-            href="/customer/products"
-            color="#FFF"
+            to="/customer/products"
             data-testid="customer_products__element-navbar-link-products"
           >
             Produtos
           </Link>) }
         <Link
-          href="/customer/orders"
-          color="#FFF"
+          to="/customer/orders"
           data-testid="customer_products__element-navbar-link-orders"
         >
           { sellerView ? 'Pedidos' : 'Meus Pedidos' }

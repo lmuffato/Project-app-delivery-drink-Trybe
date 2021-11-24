@@ -1,0 +1,18 @@
+.c_button_secondary {
+  background: var(--color-secondary);
+  border: none;
+  border-radius: 6px;
+  box-shadow: 1px 1px 1px 0.5px silver;
+  color: var(--text-light);
+  cursor: pointer;
+  padding: 8px;
+}
+
+.c_button_secondary:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+
+.c_button_secondary:hover {
+  filter: brightness(1.25);
+}

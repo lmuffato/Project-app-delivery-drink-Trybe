@@ -61,8 +61,13 @@ export default function CheckoutComprador() {
   return (
     <div>
       <Header title="Produtos" subtitle="Meus Pedidos" name={ userName.name } />
-      <fieldset>
-        <h3 style={ { margin: '40px', padding: '5px' } }>Finalizar pedido</h3>
+      <h1 style={ { marginLeft: '20px' } }>Finalizar pedido</h1>
+      <fieldset
+        style={ {
+          paddingTop: '50px',
+          marginLeft: '30px',
+          marginRight: '30px' } }
+      >
         {aux.map(({ productId, name, price, quantity }, i) => (
           <CheckoutProduct
             id={ productId }
@@ -73,45 +78,84 @@ export default function CheckoutComprador() {
             key={ i }
           />
         ))}
-        <h3 data-testid="customer_checkout__element-order-total-price">
-          {`${totalValue}`}
+        <h3
+          data-testid="customer_checkout__element-order-total-price"
+          style={ {
+            textAlign: 'center',
+            fontSize: '2em',
+            marginRight: '190px',
+            marginTop: '50px',
+            paddingTop: '15px',
+            backgroundColor: 'hsl(0 0% 20%)',
+            color: 'white',
+            width: '250px',
+            height: '60px',
+            position: 'relative',
+            float: 'right',
+            borderRadius: '5px' } }
+        >
+          {` Total: R$ ${totalValue}`}
         </h3>
       </fieldset>
-
-      <form>
-        <select
-          data-testid="customer_checkout__select-seller"
-          onChange={ handleSeller }
-          value={ chooseSeller }
-        >
-          {seller.map((sellerid) => (
-            <option key={ sellerid.index } value={ sellerid.name }>
-              {sellerid.name}
-            </option>
-          ))}
-        </select>
-        <input
-          type="text"
-          placeholder="Digite seu Endereço"
-          onChange={ handleAddress }
-          value={ address }
-          data-testid="customer_checkout__input-address"
-        />
-        <input
-          type="text"
-          placeholder="numero"
-          onChange={ handleNumber }
-          value={ addressNumber }
-          data-testid="customer_checkout__input-addressNumber"
-        />
-      </form>
-      <button
-        data-testid="customer_checkout__button-submit-order"
-        type="button"
-        onClick={ handleEndRequest }
+      <h1 style={ { marginLeft: '20px' } }>Detalhes e Endereço para Entrega</h1>
+      <fieldset
+        style={ {
+          paddingTop: '20px',
+          marginTop: '30px',
+          marginLeft: '30px',
+          marginRight: '30px' } }
       >
-        FINALIZAR PEDIDO
-      </button>
+        <form style={ { display: 'flex', justifyContent: 'space-around' } }>
+          <select
+            id="label-select"
+            style={ { height: '40px', width: '250px' } }
+            data-testid="customer_checkout__select-seller"
+            onChange={ handleSeller }
+            value={ chooseSeller }
+          >
+            {seller.map((sellerid) => (
+              <option key={ sellerid.index } value={ sellerid.name }>
+                {sellerid.name}
+              </option>
+            ))}
+          </select>
+          <input
+            style={ { height: '34px', width: '550px', marginLeft: '-80px' } }
+            type="text"
+            placeholder="Digite seu Endereço"
+            onChange={ handleAddress }
+            value={ address }
+            data-testid="customer_checkout__input-address"
+          />
+          <input
+            style={ { height: '34px', width: '250px', marginLeft: '-80px' } }
+            type="text"
+            placeholder="Número"
+            onChange={ handleNumber }
+            value={ addressNumber }
+            data-testid="customer_checkout__input-addressNumber"
+          />
+        </form>
+        <button
+          style={ {
+            fontSize: '1em',
+            display: 'block',
+            marginTop: '20px',
+            marginLeft: 'auto',
+            marginRight: 'auto',
+            paddingTop: '5px',
+            backgroundColor: 'hsl(0 0% 20%)',
+            color: 'white',
+            width: '250px',
+            height: '60px',
+            borderRadius: '5px' } }
+          data-testid="customer_checkout__button-submit-order"
+          type="button"
+          onClick={ handleEndRequest }
+        >
+          FINALIZAR PEDIDO
+        </button>
+      </fieldset>
     </div>
   );
 }

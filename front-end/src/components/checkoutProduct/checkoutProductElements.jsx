@@ -5,7 +5,6 @@ display: flex;
 justify-content: center;
 margin: -30px 30px;
 text-align: center;
-
 }
 
 .numberItem {
@@ -15,8 +14,6 @@ text-align: center;
     padding: 15px;
     font-size: larger;
     border-radius:  8px 0px 0px 8px;
-
-
 }
 
 .nameItem {
@@ -25,8 +22,6 @@ text-align: center;
     padding: 15px;
     font-size: larger;
     text-align: left;
-
-
 }
 
 .quantityItem {
@@ -34,8 +29,6 @@ text-align: center;
     width: 80px;
     padding: 15px;
     font-size: larger;
-
-
 }
 
 .priceItem {
@@ -43,8 +36,6 @@ text-align: center;
     width: 80px;
     padding: 15px;
     font-size: larger;
-
-
 }
 
 .subTotalItem {
@@ -53,8 +44,6 @@ text-align: center;
     width: 80px;
     padding: 15px;
     font-size: larger;
-
-
 }
 
 .btnRemoveItem {
@@ -64,8 +53,6 @@ text-align: center;
     height: 52px;
     margin-top: 19px;
     border-radius:  0px 8px 8px 0px;
-
-
 }
 `;
 

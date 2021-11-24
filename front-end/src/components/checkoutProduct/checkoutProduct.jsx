@@ -14,7 +14,7 @@ export default function CheckoutProduct({ index, id, name, qtd, price }) {
   }
 
   return (
-    <div key={ id }>
+    <div key={ id } border="1px" border-style="groove">
       <CardProduct>
         <p
           className="numberItem"

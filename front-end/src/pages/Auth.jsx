@@ -17,7 +17,15 @@ export default function Auth({ location }) {
         const validJWT = jwt.verify(
           user.token, process.env.REACT_APP_JWT_SECRET_KEY || 'senha_dificil',
         );
-        if (validJWT) history.push('/customer/products');
+        if (validJWT) {
+          switch (validJWT.login.role) {
+          case 'seller': {
+            history.push('/seller/orders');
+            break;
+          }
+          default: history.push('/customer/products');
+          }
+        }
       } catch (error) {
         console.error(error.message);
       }

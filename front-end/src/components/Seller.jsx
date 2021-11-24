@@ -9,7 +9,7 @@ export default function BodySeller() {
       .catch(() => console.log('deu ruim'));
   }, []);
 
-  if (!sales) return <p>loading ...</p>;
+  if (sales.length < 1) return <p>loading ...</p>;
   return (
     <section text="white">
       {

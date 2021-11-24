@@ -22,8 +22,11 @@ export default function Auth() {
       authType: 'login',
     }, ({ role }) => {
       switch (role) {
-      case 'seller': history.push('/seller/orders');
+      case 'seller': {
+        history.push('/seller/orders');
+        console.log(role);
         break;
+      }
       default: history.push('/customer/products');
       }
     });

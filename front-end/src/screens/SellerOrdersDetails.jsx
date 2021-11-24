@@ -28,7 +28,7 @@ function SellerOrdersDetails() {
     };
     getSale();
     setIsLoading(false);
-  }, [id]);
+  }, []);
   return (
     <>
       <NavBarAdmin />

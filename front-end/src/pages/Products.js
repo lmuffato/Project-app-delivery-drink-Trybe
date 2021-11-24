@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ProductCard from '../components/ProductCard';
+import NavBar from '../components/NavBar';
 import * as request from '../services/requests';
 
 function Products() {
@@ -18,10 +19,7 @@ function Products() {
   return (
     <section>
       <nav>
-        <div>PRODUTOS</div>
-        <div>MEUS PEDIDOS</div>
-        <div> NOME</div>
-        <div>SAIR</div>
+        <NavBar />
       </nav>
       <div>
         {products.map((product) => (

@@ -1,6 +1,5 @@
 const Sale = require('../services/Sales');
 
-
 const getSale = async (req, res) => {
   const { id } = req.headers;
   const sale = await Sale.getSale(id);

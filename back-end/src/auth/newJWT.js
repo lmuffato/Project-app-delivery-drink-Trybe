@@ -11,7 +11,7 @@ const newToken = (email, name, role, id) => {
     email,
     name,
     role,
-    id
+    id,
   };
 
   const JWT_CONFIG = {

@@ -20,7 +20,6 @@ const io = require('socket.io')(server, {
 const product = require('../controllers/Products');
 const user = require('../controllers/User');
 const sale = require('../controllers/Sales');
-const saleModel = require('../models/Sales');
 const validateJwtAdmin = require('../auth/validateJwtAdmin');
 const validateToken = require('../auth/validateToken');
 const { validateJWT } = require('../auth/validateGeneric');

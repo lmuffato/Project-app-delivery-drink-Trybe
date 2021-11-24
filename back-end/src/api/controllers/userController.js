@@ -16,17 +16,10 @@ const createUser = async (req, res) => {
 const login = async (req, res) => {
   const { email, password } = req.body;
 
-  const { 
-    status, 
-    data, 
-    token, 
-    id, 
-    name, 
-    role,
-  } = await userService.login(email, password);
+  const { status, data, token, id, name, role } = await userService.login(email, password);
 
   if (token) {
-    return res.status(status).json({ token, id, name, email, role });
+    return res.status(status).json({ id, name, role, email, token });
   }
 
   return res.status(status).json({ data });
@@ -48,11 +41,8 @@ const createAdmin = async (req, res) => {
 
 const deleteUser = async (req, res) => {
   const { id } = req.params;
-  console.log('🚀 ~ file: userController.js ~ line 51 ~ deleteUser ~ req.body', req.params);
 
   const { status, data } = await userService.deleteUser(id);
-  console.log('🚀 ~ file: userController.js ~ line 54 ~ deleteUser ~ status', status);
-  console.log('🚀 ~ file: userController.js ~ line 55 ~ deleteUser ~ data', data);
   
   return res.status(status).json(data);
 };

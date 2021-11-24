@@ -1,18 +1,28 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { NavLink } from 'react-router-dom';
+import ButtonLogout from './ButtonLogout';
 
-function NavBar({ ids: { productId, pageId, userId }, names: { pageName, userName } }) {
+function NavBar() {
+  const { name } = JSON.parse(localStorage.getItem('user'));
+
   return (
     <ul>
-      { productId
-        && <li data-testid={ productId }><NavLink to="/products">Produtos</NavLink></li> }
-      <li data-testid={ pageId }><NavLink to="/orders">{ pageName }</NavLink></li>
-      <li data-testid={ userId }>{ userName }</li>
-      <li
-        data-testid="customer_products__element-navbar-link-logout"
-      >
-        <NavLink to="/logout">Sair</NavLink>
+      <li data-testid="customer_products__element-navbar-link-products">
+        <NavLink to="/products">
+          Produtos
+        </NavLink>
+      </li>
+      <li data-testid="customer_products__element-navbar-link-orders">
+        <NavLink to="/orders">
+          Meus Pedidos
+        </NavLink>
+      </li>
+      <li data-testid="customer_products__element-navbar-user-full-name">
+        { name }
+      </li>
+      <li>
+        <ButtonLogout />
       </li>
     </ul>
   );

@@ -1,39 +1,64 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
 import axios from 'axios';
 import { ProductsContext } from '../contexts/Products';
+import ProductCard from './ProductCard';
+import { CartContext } from '../contexts/Cart';
 
-const listProducts = (products) => {
-  products.map((product, index) => (
-    <div data-testid={ products.id } key={ index }>
-      <h1>{ product.name }</h1>
-      <img src={ product.url } alt={ product.name } />
-      <h3>{ product.price }</h3>
-      <button type="button">-</button>
-      <p>0</p>
-      <button type="button">+</button>
-    </div>
-  ));
-};
+const listProducts = (products) => products.map((product, key) => (
+  <ProductCard key={ key } productInfo={ product } />
+));
 
 function ProductList() {
   const { values, setValues } = useContext(ProductsContext);
+  const { total } = useContext(CartContext);
+  const [isDisabled, setIsDisabled] = useState(true);
+
+  const navigate = useNavigate();
   useEffect(() => {
     async function fetchData() {
-      const products = await axios.get('/products');
-      setValues({ ...values, products });
-    }
+      const { token } = JSON.parse(localStorage.getItem('user'));
 
-    try {
-      fetchData();
-    } catch ({ response }) {
-      console.log(response.data.data);
+      try {
+        const { data: { data } } = await axios.get(
+          'http://localhost:3001/products',
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        );
+        setValues({ ...values, data });
+      } catch (err) {
+        console.log(err);
+      }
     }
-  }, [setValues, values]);
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    if (total > 0) {
+      setIsDisabled(false);
+    } else {
+      setIsDisabled(true);
+    }
+  }, [total]);
 
   return (
     <>
-      { values.products ? listProducts(values.products) : <h1>Loading...</h1> }
-      <p>teste</p>
+      { values.data
+        ? <form>{ listProducts(values.data) }</form>
+        : <h1>Loading...</h1> }
+      <button
+        data-testid="customer_products__button-cart"
+        type="button"
+        onClick={ () => navigate('/customer/checkout') }
+        disabled={ isDisabled }
+      >
+        <p data-testid="customer_products__checkout-bottom-value">
+          { total.toString().replace('.', ',') }
+        </p>
+      </button>
     </>
   );
 }

@@ -1,20 +1,19 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+// import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import {
   AppBar,
   Toolbar,
   Typography,
-  Button,
   Link,
+  Button,
 } from '@mui/material';
-import ContextLogin from '../context/ContextLogin';
-import { logoutUser } from '../utils/LocalStorageFunctions';
+import { logoutUser, verifyUserExistance } from '../utils/LocalStorageFunctions';
 
 function NavBar({ sellerView = false }) {
-  const { userData } = useContext(ContextLogin);
-  const userInLocalStorage = localStorage.getItem('user');
-  const { name } = userData || JSON.parse(userInLocalStorage);
+  const user = verifyUserExistance();
+  const { name } = user;
   const history = useHistory();
   return (
     <AppBar position="static">

@@ -31,6 +31,13 @@ module.exports = {
         password: 'bf54b1c4f8df323ee9206d456323b2ab', //senha é "test-login" bf54b1c4f8df323ee9206d456323b2ab
         role: 'administrador',
       },
+      {
+        id: 5,
+        name: 'test',
+        email: 'test2@email.com',
+        password: 'bf54b1c4f8df323ee9206d456323b2ab', //senha é "test-login" bf54b1c4f8df323ee9206d456323b2ab
+        role: 'costumer',
+      },
       ], { timestamps: false });
   },
 

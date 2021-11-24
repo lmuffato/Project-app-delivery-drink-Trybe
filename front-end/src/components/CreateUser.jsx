@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import {
   Typography,
   Container,
@@ -7,7 +7,7 @@ import {
   NativeSelect,
   TextField,
 } from '@mui/material';
-import ContextLogin from '../context/ContextLogin';
+import { verifyUserExistance } from '../utils/LocalStorageFunctions';
 
 const existingRoles = ['seller', 'administrator', 'customer'];
 const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
@@ -24,7 +24,8 @@ function CreateUser() {
   const [role, setRole] = useState('seller');
   const [isCreated, setIsCreated] = useState(false);
   const [invalidRegister, setInvalidRegister] = useState(false);
-  const { userData: { token } } = useContext(ContextLogin);
+  const user = verifyUserExistance();
+  const { token } = user;
 
   const validateEmail = () => emailRegex.test(email);
 

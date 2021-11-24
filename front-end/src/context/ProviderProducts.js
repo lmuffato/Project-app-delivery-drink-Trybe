@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import ContextProducts from './ContextProducts';
+// import { verifyUserExistance } from '../utils/LocalStorageFunctions';
+import getServerUrl from '../utils/getServerUrl';
 
 const axios = require('axios').default;
 
@@ -8,10 +10,11 @@ function ProviderProducts({ children }) {
   const [allProducts, setAllProducts] = useState([{}]);
   const [cartProducts, setCartProducts] = useState([{}]);
   // const [subtotal, setSubtotal] = useState(0);
-  const urlBase = 'http://localhost:3001';
+  const urlBase = getServerUrl();
 
   const findProducts = async () => {
     const { data: { products } } = await axios.get(`${urlBase}/products`);
+    console.log(products);
     setAllProducts(products);
     return products;
   };

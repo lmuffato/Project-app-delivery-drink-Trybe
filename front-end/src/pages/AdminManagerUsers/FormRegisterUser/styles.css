@@ -1,0 +1,24 @@
+.c_form_registerUser {
+  background: var(--text-light);
+  box-shadow: 1px 1px 1px 0.5px silver;
+  color: var(--text-dark);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 2vh;
+  width: 80vw;
+}
+
+.c_form_registerUser input {
+  width: 15vw;
+}
+
+.c_form_registerUser select {
+  width: 15vw;
+}
+
+.c_form_registerUser button {
+  align-self: center;
+  width: 10vw;
+}

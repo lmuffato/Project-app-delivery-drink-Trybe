@@ -24,7 +24,6 @@ export const NavLink = styled(Link)`
   padding: 0 1rem;
   height: 100%;
   cursor: pointer;
-  text-transform: uppercase;
   transition: all 0.3s ease-in-out;
 
   &:hover {

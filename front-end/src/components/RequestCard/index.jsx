@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './styles.module.css';
+import replaceDotToComma from '../../services/productPages/replaceDotToComa';
 
 export default function RequestCard(
   { requestId, status, date, price, address, number, dataTestId },
@@ -22,7 +23,7 @@ export default function RequestCard(
       </div>
       <div className={ styles.cardSubContainer }>
         <div className={ styles.statusDatePriceContainer }>
-          <div className={ styles[status] }>
+          <div className={ styles[status.toLowerCase()] }>
             <span data-testid={ `${dataTestIdStatus}${requestId}` }>
               {status}
             </span>
@@ -32,7 +33,7 @@ export default function RequestCard(
               {date}
             </span>
             <span data-testid={ `${dataTestIdPrice}${requestId}` }>
-              {`R$ ${price}`}
+              {replaceDotToComma(price)}
             </span>
           </div>
         </div>

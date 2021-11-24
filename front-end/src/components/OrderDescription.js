@@ -55,7 +55,7 @@ function OrderDescription({ prefix, order, role }) {
       { ' ' }
       { isCustomer ? (
         <button
-        onClick={ () => handleClick('Entregue') }
+          onClick={ () => handleClick('Entregue') }
           type="button"
           data-testid={ `${prefix}button-delivery-check` }
         >

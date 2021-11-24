@@ -4,14 +4,11 @@ import PropTypes from 'prop-types';
 export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
-  const [cart, setCart] = useState([
-    JSON.parse(localStorage.getItem('carrinho'))
-    || undefined,
-  ]);
-  // const [cart, setCart] = useState(undefined);
+  const [cart, setCart] = useState(undefined);
+  const [total, setTotal] = useState(0);
 
   return (
-    <CartContext.Provider value={ { cart, setCart } }>
+    <CartContext.Provider value={ { cart, setCart, total, setTotal } }>
       { children }
     </CartContext.Provider>
   );

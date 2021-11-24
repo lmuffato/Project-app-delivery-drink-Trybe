@@ -24,7 +24,6 @@ export default function Auth() {
       switch (role) {
       case 'seller': {
         history.push('/seller/orders');
-        console.log(role);
         break;
       }
       default: history.push('/customer/products');

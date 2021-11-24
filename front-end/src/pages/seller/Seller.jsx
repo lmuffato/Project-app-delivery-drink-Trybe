@@ -35,7 +35,7 @@ export default function BodySeller() {
             <span data-testid={ `seller_orders__element-card-address-${id}` }>
               { deliveryAddress }
             </span>
-            <Link to={ { pathname: `/seller/orders/${id}` } }>Ver Detalhes</Link>
+            <Link to={ `/seller/orders/${id}` }>Ver Detalhes</Link>
           </div>
         ))
       }

@@ -2,7 +2,8 @@ import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import NavBar from '../components/NavBar';
 import Auth from '../pages/Auth';
-import Seller from '../pages/SellerPage';
+import Seller from '../pages/seller/Seller';
+import SellerDetails from '../pages/seller/SellerDetails';
 import ProductsList from '../pages/customer/Products';
 import ProtectedRoute from './ProtectedRoute';
 import Checkout from '../pages/customer/Checkout';
@@ -15,7 +16,8 @@ export default function Routes() {
       <Route path={ ['/login', '/register'] } component={ Auth } />
       <ProtectedRoute path={ ['/customer', '/'] }>
         <NavBar />
-        <Route path="/seller/orders" component={ Seller } />
+        <Route path="/seller/orders/:id" component={ SellerDetails } />
+        <Route exact path="/seller/orders" component={ Seller } />
         <Route path="/customer/orders/:id" component={ OrderDetails } />
         <Route exact path="/customer/orders" component={ Orders } />
         <Route path="/customer/checkout" component={ Checkout } />

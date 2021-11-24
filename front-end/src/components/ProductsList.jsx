@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import axios from 'axios';
 import { ProductsContext } from '../contexts/Products';
@@ -12,6 +12,7 @@ const listProducts = (products) => products.map((product, key) => (
 function ProductList() {
   const { values, setValues } = useContext(ProductsContext);
   const { total } = useContext(CartContext);
+  const [isDisabled, setIsDisabled] = useState(true);
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -35,17 +36,28 @@ function ProductList() {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    if (total > 0) {
+      setIsDisabled(false);
+    } else {
+      setIsDisabled(true);
+    }
+  }, [total]);
+
   return (
     <>
       { values.data
         ? <form>{ listProducts(values.data) }</form>
         : <h1>Loading...</h1> }
       <button
-        data-testid="customer_products__checkout-bottom-value"
+        data-testid="customer_products__button-cart"
         type="button"
         onClick={ () => navigate('/customer/checkout') }
+        disabled={ isDisabled }
       >
-        { total.toFixed(2).toString().replace('.', ',') }
+        <p data-testid="customer_products__checkout-bottom-value">
+          { total.toString().replace('.', ',') }
+        </p>
       </button>
     </>
   );

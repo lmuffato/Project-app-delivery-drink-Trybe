@@ -26,7 +26,8 @@ export default function SellersOrders() {
       <Link to={ `/seller/orders/${sale.id} ` } className="link">
         <div className="card">
           <div data-testid={ `${dataTestid48}-${sale.id}` } className="">
-            Pedido { sale.id }
+            Pedido
+            { sale.id }
           </div>
           <div data-testid={ `${dataTestid49}-${sale.id}` } className="">
             { sale.status }
@@ -35,7 +36,8 @@ export default function SellersOrders() {
             { sale.saleDate }
           </div>
           <div data-testid={ `${dataTestid51}-${sale.id}` } className="">
-            R$ { sale.totalPrice }
+            R$
+            { sale.totalPrice }
           </div>
           <div data-testid={ `${dataTestid52}-${sale.id}` } className="">
             { `${sale.deliveryAddress}, ${sale.deliveryNumber}` }

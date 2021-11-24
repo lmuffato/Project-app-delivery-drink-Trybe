@@ -38,8 +38,21 @@ async function getByOrderId(req, res) {
   }
 };
 
+async function updateStatus(req, res) {
+  try {
+    const { id } = req.params;
+    const { status } = req.body;
+    const { statusUpdated, code } = await saleService.updateStatusService(id, status);
+
+    return res.status(code).json(statusUpdated);
+  } catch (e) {
+    return res.status(HTTP_NOT_FOUND).json({ error: e.message });
+  }
+}
+
 module.exports = {
   create,
   getByUserId,
   getByOrderId,
+  updateStatus
 }

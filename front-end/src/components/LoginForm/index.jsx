@@ -54,6 +54,7 @@ export default function LoginForm() {
 
   useEffect(() => {
     if (role === 'customer') navigate('/customer/products');
+    if (role === 'seller') navigate('/seller/orders');
     if (role === 'administrator') navigate('/admin/manage');
   }, [role]);
 

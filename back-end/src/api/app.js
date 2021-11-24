@@ -44,6 +44,7 @@ app.post('/sale',
   saleControllers.register);
 
 app.post('/customerSale', validateToken, saleControllers.getCustomerSales);
+
 app.post('/addUser',
   validateToken,
   validateAdmin,
@@ -55,7 +56,6 @@ app.post('/addUser',
 app.post('/sellerSale', validateToken, saleControllers.getSellerSales);
 
 app.post('/saleDetails', validateToken, saleControllers.getSaleDetails);
-
 app.patch('/saleUpdate', validateToken, saleControllers.update);
 
 module.exports = app;

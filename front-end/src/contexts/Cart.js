@@ -5,7 +5,7 @@ export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState(undefined);
-  const [total, setTotal] = useState(0);
+  const [total, setTotal] = useState(0.00);
 
   return (
     <CartContext.Provider value={ { cart, setCart, total, setTotal } }>

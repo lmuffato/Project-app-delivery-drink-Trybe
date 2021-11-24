@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import NavItem from './NavItem';
 import { NavbarContainer, NavbarWrapper, NavbarGroupLinks } from './styles';
+import { useAuth } from '../../contexts/auth';
 
 const testids = {
   products: 'customer_products__element-navbar-link-products',
@@ -19,22 +20,23 @@ const userConfig = {
     products: { show: false, text: null },
     orders: { show: true, text: 'PEDIDOS' },
   },
-  admin: {
+  administrator: {
     products: { show: false, text: null },
     orders: { show: true, text: 'GERENCIAR USUÁRIOS' },
   },
 };
 
 function Navbar({ userType, username }) {
+  const { logout } = useAuth();
   const config = userConfig[userType];
 
   const ordersItem = () => (
-    <NavItem variant="primary" testid={ testids.orders }>
+    <NavItem to="orders" variant="primary" testid={ testids.orders }>
       {config.orders.text}
     </NavItem>
   );
   const productsItem = () => (
-    <NavItem variant="primary" testid={ testids.products }>
+    <NavItem to="products" variant="primary" testid={ testids.products }>
       {config.products.text}
     </NavItem>
   );
@@ -43,15 +45,22 @@ function Navbar({ userType, username }) {
     <NavbarContainer>
       <NavbarWrapper>
         <NavbarGroupLinks>
-          {config.orders.show && ordersItem()}
           {config.products.show && productsItem()}
+          {config.orders.show && ordersItem()}
         </NavbarGroupLinks>
 
         <NavbarGroupLinks>
-          <NavItem variant="tertiary" testid={ testids.fullname }>
+          <NavItem to="/profile" variant="tertiary" testid={ testids.fullname }>
             {username}
           </NavItem>
-          <NavItem variant="quaternary" testid={ testids.logout }>Sair</NavItem>
+          <NavItem
+            to="/login"
+            variant="quaternary"
+            testid={ testids.logout }
+            onClick={ () => { logout(); } }
+          >
+            Sair
+          </NavItem>
         </NavbarGroupLinks>
       </NavbarWrapper>
     </NavbarContainer>

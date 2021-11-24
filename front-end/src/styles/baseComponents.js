@@ -32,6 +32,10 @@ export const BaseButton = styled.button`
   &:active {
     filter: brightness(2);
   }
+
+  &:disabled {
+    filter: grayscale(100%)
+  }
 `;
 
 export const InputContainer = styled.div`
@@ -118,6 +122,7 @@ export const ProductQtyContainer = styled.div`
     background-color: ${({ theme }) => theme.light};
     font-size: 15px;
     box-sizing: border-box;
+    text-align: center;
   }
 
 `;

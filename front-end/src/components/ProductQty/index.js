@@ -1,9 +1,19 @@
 import React from 'react';
+// import { /* useSelector,  */useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
+// import { updateProduct } from '../../slices/cart';
 import { ProductQtyContainer } from '../../styles/baseComponents';
 import QtyButton from './QtyButton';
 
-function ProductQty({ label, onRemove, onAdd, value, id }) {
+function ProductQty({ label, onChange, onRemove, onAdd, value, id }) {
+  // const dispatch = useDispatch();
+
+  // const priceChange = () => {
+  //   dispatch(updateProduct({ id, quantity: value }));
+  // };
+
+  // useEffect(priceChange, [value]);
+
   return (
     <ProductQtyContainer>
       <p
@@ -18,12 +28,13 @@ function ProductQty({ label, onRemove, onAdd, value, id }) {
           position="remove"
           onClick={ onRemove }
         />
-        <div
+        <input
+          type="text"
+          value={ value }
           className="center"
           data-testid={ `customer_products__input-card-quantity-${id}` }
-        >
-          {value}
-        </div>
+          onChange={ onChange }
+        />
         <QtyButton
           id={ id }
           position="add"
@@ -40,6 +51,7 @@ ProductQty.propTypes = {
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   onRemove: PropTypes.func.isRequired,
   onAdd: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
 
 export default ProductQty;

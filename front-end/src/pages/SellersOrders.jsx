@@ -18,7 +18,7 @@ export default function SellersOrders() {
   const loadingTag = <h3>Loading ...</h3>;
 
   const renderTags = (sale, index) => (
-    <Link to={ `/sellers/orders/${sale.id} ` }>
+    <Link to={ `/seller/orders/${sale.id} ` }>
       <div key={ index }>
         <div className="cardContainer">
           <div data-testid={ `${dataTestid48}-${sale.id}` } className="pedido">

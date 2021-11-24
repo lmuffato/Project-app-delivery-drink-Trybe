@@ -46,12 +46,9 @@ const postSale = async (data, user) => {
 
     const id = await createNewSaleOnDatabase(user, sellerId, total, delivery);
 
-    Promise.all(arrProducts.map((currProduct) => {
-      console.log(currProduct[1])
-      SaleProduct.create(
-        { saleId: id, productId: currProduct[0], quantity: currProduct[1] },
-      )
-    })).catch((error) => { 
+    Promise.all(arrProducts.map((currProduct) => SaleProduct.create(
+      { saleId: id, productId: currProduct[0], quantity: currProduct[1] },
+    ))).catch((error) => { 
       console.log(error);
     });
 

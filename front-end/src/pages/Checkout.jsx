@@ -1,5 +1,6 @@
 import React from 'react';
 import ButtonTotal from '../components/ButtonTotal';
+import DeliveryDetails from '../components/DeliveryDetails';
 import NavBar from '../components/NavBar';
 
 const testIds = {
@@ -21,6 +22,7 @@ function Checkout() {
         buttonId="customer_checkout__element-order-total-price"
         isDisabled={ false }
       />
+      <DeliveryDetails />
     </>
   );
 }

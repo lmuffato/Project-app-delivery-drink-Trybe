@@ -1,61 +1,36 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import NavBar from '../components/NavBar';
-
-const MAX_ORDER_ID_CHARS = 4;
-const PREFIX = 'customer_order_details__';
+import OrderDescription from '../components/OrderDescription';
 
 function OrderDetails() {
+  const { role } = useSelector((state) => state.user);
+  const [prefix, setPrefix] = useState('');
   const [order, setOrder] = useState({});
+  const [gotOrder, setGotOrder] = useState(false);
   const { id } = useParams();
 
   useEffect(() => {
+    setPrefix(role === 'customer'
+      ? 'customer_order_details__'
+      : 'seller_order_details__');
+
     axios.get(`http://localhost:3001/sales/${id}`)
-      .then((res) => setOrder(res.data));
+      .then((res) => {
+        setOrder(res.data);
+        setGotOrder(true);
+      });
   }, []);
 
   return (
     <>
       <NavBar />
       Detalhes do Pedido
-      { order.id && (
+      { gotOrder && (
         <div>
-          <p>
-            <span
-              data-testid="customer_order_details__element-order-details-label-order-id"
-            >
-              PEDIDO
-              { ' ' }
-              { `${order.id}`.padStart(MAX_ORDER_ID_CHARS, '0') }
-              ;
-            </span>
-            { ' ' }
-            <span
-              data-testid={ `${PREFIX}element-order-details-label-seller-name` }
-            >
-              Fulana Pereira
-            </span>
-            { ' ' }
-            <span
-              data-testid="customer_order_details__element-order-details-label-order-date"
-            >
-              07/04/2021
-            </span>
-            { ' ' }
-            <span
-              data-testid={ `${PREFIX}element-order-details-label-delivery-status` }
-            >
-              {order.status}
-            </span>
-            { ' ' }
-            <button
-              type="button"
-              data-testid="customer_order_details__button-delivery-check"
-            >
-              MARCAR COMO ENTREGUE
-            </button>
-          </p>
+          <OrderDescription prefix={ prefix } order={ order } role={ role } />
           <table style={ { border: '1px solid black' } }>
             <thead>
               <tr>
@@ -68,21 +43,21 @@ function OrderDetails() {
             </thead>
             <tbody>
               <tr>
-                <td data-testid={ `${PREFIX}element-order-table-item-number-${1}` }>
+                <td data-testid={ `${prefix}element-order-table-item-number-${1}` }>
                   1
                 </td>
-                <td data-testid={ `${PREFIX}element-order-table-name-${1}` }>
+                <td data-testid={ `${prefix}element-order-table-name-${1}` }>
                   Cerveja Stella 250ml
                 </td>
-                <td data-testid={ `${PREFIX}element-order-table-quantity-${1}` }>
+                <td data-testid={ `${prefix}element-order-table-quantity-${1}` }>
                   3
                 </td>
-                <td data-testid={ `${PREFIX}element-order-table-unit-price-${1}` }>
+                <td data-testid={ `${prefix}element-order-table-unit-price-${1}` }>
                   R$
                   { ' ' }
                   3,50
                 </td>
-                <td data-testid={ `${PREFIX}element-order-table-sub-total-${1}` }>
+                <td data-testid={ `${prefix}element-order-table-sub-total-${1}` }>
                   R$
                   { ' ' }
                   10,50
@@ -91,7 +66,7 @@ function OrderDetails() {
             </tbody>
           </table>
           <p
-            data-testid={ `${PREFIX}element-order-total-price` }
+            data-testid={ `${prefix}element-order-total-price` }
           >
             Total: R$ 28,46
           </p>

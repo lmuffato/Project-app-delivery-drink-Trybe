@@ -9,7 +9,7 @@ export default function Header() {
     if (!localStorage.getItem('user')) {
       navigate('/login');
     }
-  });
+  }, []);
 
   const handleExitBtn = () => {
     localStorage.removeItem('user');
@@ -19,7 +19,21 @@ export default function Header() {
   const userStorage = localStorage.getItem('user');
   let user = null;
   if (userStorage) {
-    user = JSON.parse(userStorage).name;
+    user = JSON.parse(userStorage);
+  }
+
+  // console.log('user.role', user.role);
+
+  let titleNav = 'Produtos';
+  let titleNavLink = '/customer/products';
+
+  if (user.role === 'seller') {
+    titleNav = 'Pedidos';
+    titleNavLink = '/seller/orders';
+  }
+  if (user.role === 'administrator') {
+    titleNav = 'Gerenciar Usuários';
+    titleNavLink = '/admin/manage';
   }
 
   return (
@@ -27,21 +41,26 @@ export default function Header() {
       <div>
         <Link
           className={ styles.active }
-          to="/customer/products"
-          data-testid="customer_products__element-navbar-link-products"
+          to={ titleNavLink }
+          data-testid={
+            user.role !== 'customer'
+              ? 'customer_products__element-navbar-link-orders'
+              : 'customer_products__element-navbar-link-products'
+          }
         >
-          Produtos
+          { titleNav }
         </Link>
-        <Link
-          to="/customer/orders"
-          data-testid="customer_products__element-navbar-link-orders"
-        >
-          Meus Pedidos
-        </Link>
+        {user.role !== 'customer' ? null : (
+          <Link
+            to="/customer/orders"
+            data-testid="customer_products__element-navbar-link-orders"
+          >
+            Meus Pedidos
+          </Link>)}
       </div>
       <div className={ styles.rightHeader }>
         <p data-testid="customer_products__element-navbar-user-full-name">
-          { user }
+          { user.name }
         </p>
         <button
           type="button"

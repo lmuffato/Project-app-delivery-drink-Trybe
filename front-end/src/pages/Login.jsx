@@ -53,7 +53,6 @@ function Login() {
       setUser(userLocalStorage);
       history.push('/customer/products');
     }
-    // returnToProducts('/login');
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

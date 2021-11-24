@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Grid } from '@mui/material';
 import NavBar from '../components/NavBar';
 import SellerViewOrderCard from '../components/SellerViewOrderCard';
+import { verifyUserExistance } from '../utils/LocalStorageFunctions';
 
 function SellerOrders() {
   const gridStyle = {
@@ -16,13 +17,18 @@ function SellerOrders() {
 
   const [sales, setSales] = useState();
   const apiBaseUrl = 'http://localhost:3001';
+  const user = verifyUserExistance();
+  const { token } = user;
 
   useEffect(() => {
     async function getSales() {
-      const { data } = await axios.get(`${apiBaseUrl}/sales`);
-      setSales(data);
+      const headers = { Authorization: token };
+      const { data } = await axios
+        .get(`${apiBaseUrl}/sales`, { headers });
+      setSales(data.sales);
     }
     getSales();
+    // eslint-disable-next-line
   }, []);
 
   return (

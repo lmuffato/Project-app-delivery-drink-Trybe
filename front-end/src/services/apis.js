@@ -49,3 +49,7 @@ export const getUserById = async (id) => {
   const result = await api.get('/users/:id', { id });
   return result.data;
 };
+
+export const updateSale = async (id, status) => {
+  await api.put(`/sales/${id}`, { status });
+};

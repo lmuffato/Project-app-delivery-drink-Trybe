@@ -42,11 +42,6 @@ const create = rescue(async (req, res) => {
   res.status(201).json(createdSale); // saleId vem daqui
 });
 
-// const getSalesProducts = rescue(async (_req, res) => {
-//   const allSale = await SaleProduct.findAll();
-//   res.status(200).json(allSale);
-// })
-
 const exclude = rescue(async (req, res) => {
   const { id } = req.params;
   await Sale.destroy( { where: { id } });
@@ -60,4 +55,12 @@ const getById = rescue(async (req, res) => {
   res.status(200).json(sale);
 });
 
-module.exports = { getSale, create, exclude, getById };
+const updateSale = rescue(async (req, res) => {
+  const { id } = req.params;
+  const { status } = req.body;
+
+  const updated = await Sale.update({ status }, { where: { id } });
+  return res.status(200).json(updated);
+});
+
+module.exports = { getSale, create, exclude, getById, updateSale };

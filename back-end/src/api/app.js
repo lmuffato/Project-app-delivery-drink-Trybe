@@ -8,6 +8,8 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
+const SALE_ID = '/sales/:id';
+
 const userController = require('../database/controllers/users/userController');
 const productController = require('../database/controllers/products/productController');
 const saleController = require('../database/controllers/sales/salesController');
@@ -36,11 +38,12 @@ app.post('/products', productController.create);
 app.delete('/products/:id', productController.exclude);
 
 app.get('/sales', saleController.getSale);
-app.get('/sales/:id', saleController.getById);
+app.get(SALE_ID, saleController.getById);
 
 app.post('/sales', validateToken, saleController.create);
+app.put(SALE_ID, saleController.updateSale);
 
-app.delete('/sales/:id', saleController.exclude);
+app.delete(SALE_ID, saleController.exclude);
 
 app.post('/login', loginController.login);
 

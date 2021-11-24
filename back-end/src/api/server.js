@@ -14,5 +14,4 @@ const socket = require('../sockets/socketStatus');
 
 socket(io);
 
-app.listen(port);
-console.log(`Api rodando na porta ${port}`);
+server.listen(port, () => console.log(`App listening on port ${port}!`));

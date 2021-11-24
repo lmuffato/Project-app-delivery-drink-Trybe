@@ -6,15 +6,18 @@ import reportWebVitals from './reportWebVitals';
 import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
+import ProductsProvider from './provider/ProductsProvider';
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-    <ManagerUsersProvider>
-      <LoginProvider>
-        <App />
-      </LoginProvider>
-    </ManagerUsersProvider>
+      <ManagerUsersProvider>
+        <LoginProvider>
+          <ProductsProvider>
+            <App />
+          </ProductsProvider>
+        </LoginProvider>
+      </ManagerUsersProvider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root'),

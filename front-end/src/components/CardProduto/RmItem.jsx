@@ -4,7 +4,12 @@ import { string } from 'prop-types';
 function RmItem({ data }) {
   const { id } = data;
   return (
-    <div data-testid={ `customer_products__button-card-rm-item-${id}` } />
+    <button
+      data-testid={ `customer_products__button-card-rm-item-${id}` }
+      type="button"
+    >
+      -
+    </button>
   );
 }
 RmItem.propTypes = {

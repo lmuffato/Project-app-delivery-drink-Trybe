@@ -1,0 +1,24 @@
+.container {
+  width: 100%;
+}
+
+.requestsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+  justify-content: space-between;
+  padding: 5px 0.5rem;
+  width: 100%;
+}
+
+@media screen and ( max-width : 767px ) {
+
+  .requestsContainer {
+    justify-content: center;
+  }
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}

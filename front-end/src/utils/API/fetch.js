@@ -44,8 +44,8 @@ export const fetchProducts = async (token) => {
         method: 'GET',
         headers: {
           Accept: APPLICATION_JSON,
-          'Content-Type': APPLICATION_JSON,
           Authorization: token,
+          'Content-Type': APPLICATION_JSON,
         },
       });
     const { result } = await rawResponse.json();
@@ -56,17 +56,38 @@ export const fetchProducts = async (token) => {
   }
 };
 
-export const fetchSales = async (token) => {
+export const saleAction = async ({
+  token, userId, sellerId, totalPrice, deliveryAddress, deliveryNumber, products }) => {
   try {
     const rawResponse = await fetch('http://localhost:3001/sales',
       {
-        method: 'GET',
+        method: 'POST',
         headers: {
           Accept: APPLICATION_JSON,
-          'Content-Type': APPLICATION_JSON,
           Authorization: token,
+          'Content-Type': APPLICATION_JSON,
         },
+        body: JSON.stringify({
+          userId,
+          sellerId,
+          totalPrice,
+          deliveryAddress,
+          deliveryNumber,
+          products,
+        }),
       });
+    const saleId = await rawResponse.json();
+    return saleId;
+  } catch (error) {
+    console.error(error.message);
+    return null;
+  }
+};
+
+export const getUsers = async () => {
+  try {
+    const rawResponse = await fetch('http://localhost:3001/users',
+      requestMetadata({ method: 'GET' }));
     const { result } = await rawResponse.json();
     return result;
   } catch (error) {

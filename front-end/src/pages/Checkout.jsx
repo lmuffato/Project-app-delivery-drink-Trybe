@@ -1,11 +1,13 @@
-import React from 'react';
-import '../styles/Checkout.css';
+import React, { useContext } from 'react';
+// import '../styles/Checkout.css';
 import { useLocation } from 'react-router-dom';
 import CheckoutTable from '../components/CheckoutTable';
 import NavBar from '../components/NavBar';
 import CheckoutDetails from '../components/CheckoutDetails';
+import ProductsContext from '../context/Products/ProductsContext';
 
 export default function Checkout() {
+  const { totalPrice, BRL } = useContext(ProductsContext);
   const location = useLocation();
 
   const renderNavBar = () => {
@@ -21,7 +23,8 @@ export default function Checkout() {
         <CheckoutTable className="checkout-table" />
         <h2 className="checkout-total">
           <span data-testid="customer_checkout__element-order-total-price">
-            Total: R$ 28,46
+            Total:
+            { BRL(totalPrice) }
           </span>
         </h2>
       </div>

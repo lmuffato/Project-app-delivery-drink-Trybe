@@ -1,10 +1,11 @@
 .products {
   align-items: center;
   display: flex;
-  flex-wrap: wrap;
   font-size: 26px;
   justify-content: space-around;
+  margin-bottom: 130px;
   margin-top: 20px;
+  transform: scale(0.3);
 }
 
 .drink-img {
@@ -16,16 +17,27 @@
   align-items: center;
   background-color: #157347;
   border-radius: 5px;
+  bottom: 20px;
   color: white;
   cursor: pointer;
   display: flex;
   justify-content: center;
+  max-width: 380px;
   padding: 15px;
   position: fixed;
   right: 10px;
   text-decoration: none;
-  top: 120px;
-  width: 280px;
+  transform: translateY(200px);
+}
+
+.cartbox button {
+  background: transparent;
+  border: 0;
+  color: white;
+}
+
+.cartbox span {
+  margin-left: 10px;
 }
 
 .cartbox:hover {

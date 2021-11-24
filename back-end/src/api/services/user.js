@@ -15,7 +15,8 @@ exports.login = async ({ email, password }) => {
   );
   if (user) {
   return {
-    token: generateToken({ email: user.email, role: user.role }),
+    token: generateToken({ email }),
+    id: user.id,
     name: user.name,
     email: user.email,
     role: user.role,
@@ -28,10 +29,6 @@ exports.create = async ({ fullName: name, email, password }) => {
   const hashedPassword = md5(password);
   const user = await userModel.findOne({ where: [{ name }, { email }] });
   if (user) return null;
-  const newUser = await userModel.create({
-    name, email, password: hashedPassword, role: 'customer' });
-  return generateToken({
-    email: newUser.getDataValue('email'),
-    role: newUser.getDataValue('role'),
-  });
+  await userModel.create({ name, email, password: hashedPassword, role: 'customer' });
+  return generateToken({ email });
 };

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { MdDeliveryDining } from 'react-icons/md';
 import ListNavLinks from './molecules/ListNavLinks';
-import '../styles/NavBar.css';
+// import '../styles/NavBar.css';
 
 export default function NavBar() {
   const user = JSON.parse(localStorage.getItem('user'));

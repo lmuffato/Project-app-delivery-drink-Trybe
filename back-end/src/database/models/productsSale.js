@@ -5,7 +5,7 @@ const productsSaleSchema = require('../schemas/productsSale');
  * @return 
  */
  module.exports = (sequelize, DataTypes) => {
-  const productsSale = sequelize.define('productsSale', productsSaleSchema(DataTypes), { timestamps: false });
+  const productsSale = sequelize.define('salesProduct', productsSaleSchema(DataTypes), { timestamps: false });
   productsSale.associate = (models) => {
     models.product.belongsToMany(models.sale, {
       through: productsSale,

@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import CheckoutContext from '../context/checkoutContext';
 import Header from '../components/Header/Header';
-import CheckoutProduct from '../components/checkoutProduct';
+import CheckoutProduct from '../components/checkoutProduct/checkoutProduct';
 import { getSeler, sendRequest } from '../API/dataBaseCall';
 
 export default function CheckoutComprador() {
@@ -33,10 +33,8 @@ export default function CheckoutComprador() {
     setAddressNumber(value);
   }
   async function handleEndRequest() {
-    console.log(seller);
     const sellerId = seller.find((vendedor) => vendedor.name === chooseSeller);
     if (!sellerId) return;
-    console.log(sellerId);
     const [month, date, year] = new Date().toLocaleDateString('en-US').split('/');
     const atualDate = `${year}-${month}-${date}`;
     const response = await sendRequest({

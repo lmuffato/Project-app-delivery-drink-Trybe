@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { NavLink as Link } from 'react-router-dom';
 
-export const Nav = styled.nav`
+export const Nav = styled.div`
   background-color: hsl(0, 0%, 20%);
   height: 80px;
   display: flex;

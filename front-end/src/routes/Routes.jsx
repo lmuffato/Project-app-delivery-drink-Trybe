@@ -23,6 +23,7 @@ export default function Routes() {
     const user = localStorage.getItem('user');
 
     if (user) {
+      console.log(user);
       const roleParse = JSON.parse(user).role;
       return (<Redirect to={ pathway[roleParse] } />);
     }

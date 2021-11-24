@@ -71,6 +71,7 @@ function OrderDetailsDashboard(props) {
         </Typography>
         <Button
           data-testid={ `${testIdsPrefix}button-delivery-check` }
+          disabled
         >
           Marcar com entregue
         </Button>
@@ -79,7 +80,9 @@ function OrderDetailsDashboard(props) {
         { products
           .map((product, index) => <ProductInSaleCard key={ index } { ...product } />) }
       </Box>
-      <Typography>
+      <Typography
+        data-testid={ `${testIdsPrefix}element-order-total-price` }
+      >
         { totalPrice.replace('.', ',') }
       </Typography>
     </Container>

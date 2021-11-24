@@ -12,9 +12,17 @@ const registerSale = async (req, res) => {
 };
 
 const getAllSales = async (req, res) => {
-  const { id } = req.user;
-  const sales = await Sale.findAll({ where: { userId: id } })
+  const customerRequest = (userId) => Sale
+    .findAll({ where: { userId } })
     .catch((e) => ({ error: { message: e.message } }));
+
+  const normalRequest = () => Sale.findAll()
+    .catch((e) => ({ error: { message: e.message } }));
+  
+  const { id, role } = req.user;
+  const sales = role === 'customer'
+    ? await customerRequest(id)
+    : await normalRequest();
   if (sales.error !== undefined) {
     return res.status(httpStatus.serverError).json({ error: sales });
   }

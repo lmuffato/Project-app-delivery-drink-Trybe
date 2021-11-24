@@ -2,10 +2,9 @@ import React, { useEffect, useState, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import UserContext from '../context/UserContext';
 import { setLogin } from '../services/apis';
+import validateEntries from '../services/validateLogin';
 
 function Login() {
-  const PASSWORD_LENGTH = 6;
-
   const history = useHistory();
   const { setLoggedUser } = useContext(UserContext);
 
@@ -26,17 +25,15 @@ function Login() {
       setLoggedUser(loginUser);
       localStorage.setItem('user', JSON.stringify(loginUser));
       setErrorMessage(false);
-      history.push('/customer/products');
+      if (loginUser.role === 'customer') history.push('/customer/products');
+      if (loginUser.role === 'seller') history.push('/seller/orders');
     } catch (error) {
       setErrorMessage(true);
     }
   };
 
   useEffect(() => {
-    const validateEmail = /^[\S]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/g.test(email);
-    if (validateEmail && password.length >= PASSWORD_LENGTH) {
-      setDisabled(false);
-    } else { setDisabled(true); }
+    validateEntries(email, password, setDisabled);
   }, [email, password]);
 
   useEffect(() => {

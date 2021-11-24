@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
-// import CustomerProducts from './pages/CustomerProducts';
+import Seller from './pages/Seller';
 import Customer from './pages/Customer';
 
 function App() {
@@ -13,6 +13,7 @@ function App() {
       <Route path="/login" component={ Login } />
       <Route path="/register" component={ Register } />
       <Route path="/customer" component={ Customer } />
+      <Route path="/seller" component={ Seller } />
     </Switch>
   );
 }

@@ -28,7 +28,7 @@ const createNewSaleOnDatabase = async (user, sellerId, total, delivery) => {
       totalPrice: total,
       deliveryAddress,
       deliveryNumber,
-      status: 'pendente',
+      status: 'Pendente',
     });
 
     return id;
@@ -46,10 +46,13 @@ const postSale = async (data, user) => {
 
     const id = await createNewSaleOnDatabase(user, sellerId, total, delivery);
 
-    Promise.all(arrProducts.map((currProduct) => SaleProduct.create(
-      { saleId: id, productId: currProduct[0], quantity: currProduct[1] },
-    ))).catch((_error) => { 
-      throw new Error();
+    Promise.all(arrProducts.map((currProduct) => {
+      console.log(currProduct[1])
+      SaleProduct.create(
+        { saleId: id, productId: currProduct[0], quantity: currProduct[1] },
+      )
+    })).catch((error) => { 
+      console.log(error);
     });
 
     await transaction.commit();

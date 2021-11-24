@@ -37,7 +37,7 @@ function CheckoutClient() {
 
       const totalConvertedToNumber = Number(total.replace(',', '.')).toFixed(2);
       const data = {
-        shoppingCart,
+        shoppingCart: submitCart,
         delivery,
         total: totalConvertedToNumber,
         sellerId,

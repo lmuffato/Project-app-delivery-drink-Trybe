@@ -5,7 +5,7 @@ import { format } from 'date-fns';
 import RequestCard from '../../components/RequestCard';
 import styles from './styles.module.css';
 
-import { dataTestisSeller } from '../../utils/dataTestIdsMyRequestPage';
+import { dataTestisSeller } from '../../utils/dataTestIds';
 import Header from '../../components/Header';
 
 export default function SellerPage() {
@@ -51,18 +51,3 @@ export default function SellerPage() {
     </main>
   );
 }
-
-// branch main-group-17-client-order-details
-
-// $#zebirita#$
-// fulana@123
-
-// - 12: customer_products__element-navbar-link-orders
-// - 13: customer_products__element-navbar-user-full-name
-// - 14: customer_products__element-navbar-link-logout
-
-// dataTestIdRequest: 'seller_orders__element-order-id-',
-// dataTestIdStatus: 'seller_orders__element-delivery-status-',
-// dataTestIdDate: 'seller_orders__element-order-date-',
-// dataTestIdPrice: 'seller_orders__element-card-price-',
-// dataTestIdAddress: 'seller_orders__element-card-address-',

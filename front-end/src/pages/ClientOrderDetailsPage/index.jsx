@@ -1,31 +1,38 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Header from '../../components/Header';
 import OrderDetails from '../../components/OrderDetails';
+import { useOrderDetails } from '../../context/orderDetailsProvider';
 import fetchSale from '../../services/ClientOrderDetailsPage/fetchSale';
 import styles from './styles.module.css';
 
 export default function ClientOrderDetailsPage() {
-  const [sale, setSale] = useState({});
-  const [products, setProducts] = useState([]);
-  const [quantity, setQuantity] = useState([]);
+  const { sale, setSale, seller, setSeller, setProducts } = useOrderDetails();
   const { id } = useParams();
 
   useEffect(() => {
     const getSales = async () => {
       const data = await fetchSale(id);
-      setProducts(data.sale.products);
-      setQuantity(data.quantity);
-      setSale(data.sale);
+      setSeller(data.seller);
+      setProducts(data.products);
+      setSale(data);
     };
     getSales();
-  }, [id]);
-  if (!sale) return 'Carregando...';
+  }, [id, setProducts, setSale, setSeller]);
+
+  console.log('SALE', sale);
+  console.log('SELLER', seller);
+
   return (
-    <div className={ styles.container }>
+    <main>
       <Header />
-      <OrderDetails saleData={ sale } products={ products } quantity={ quantity } />
-    </div>
+      <h3>Detalhes do Pedido</h3>
+      <section className={ styles.container }>
+        <div className={ styles.orderDetailsContainer }>
+          <OrderDetails />
+        </div>
+      </section>
+    </main>
   );
 }

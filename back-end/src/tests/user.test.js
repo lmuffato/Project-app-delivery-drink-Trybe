@@ -21,6 +21,12 @@ let token =
   password: faker.internet.password(),
 };
 
+const mockNewUserToDelete = {
+  name: faker.name.findName(),
+  email: faker.internet.email(),
+  password: faker.internet.password(),
+};
+
 const randomBigNumber = getRandomInt(500, 5000);
 
 const mockEditedUser = {
@@ -66,8 +72,6 @@ describe('Testa a rota "/users"', () => {
         "/users/register",
         mockNewUser
       );
-
-      token = body.token;
 
       const newUser = { ...mockNewUser };
       delete newUser.password;
@@ -143,14 +147,11 @@ describe('Testa a rota "/users"', () => {
 
   describe('Testa o método DELETE na rota "/users/:id"', () => {
     it('Retorna o status http 200 - OK contendo contendo a message: "Usuário deletado com sucesso" ao deletar um usuário', async () => {
-      const id = getRandomInt(1, 5);
-      const { status, body } = await requestDeleteHelper(`/users/${id}`);
-
-      // const expectedMessage = "Usuário deletado com sucesso";
-      console.log(body)
+      const { body } = await requestPostHelper(`/users/register`, mockNewUserToDelete);
+      const id = body.id;
+      const { status } = await requestDeleteHelper(`/users/${id}`);
 
       expect(status).to.be.equals(200);
-      // expect(body.message).to.be.equals(expectedMessage);
     });
 
     it('Retorna o status http 404 - NOT FOUND contendo contendo a message: ""user" not found" ao deletar um usuário inexistente', async () => {

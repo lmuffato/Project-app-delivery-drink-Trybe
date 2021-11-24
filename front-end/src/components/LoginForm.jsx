@@ -11,7 +11,7 @@ import errorMap from '../utils/errorMap';
 // $#zebirita#$
 
 function LoginForm() {
-  const { post } = useContext(Context);
+  const { post, setUser } = useContext(Context);
   const navigate = useNavigate();
   const [loginForm, setLoginForm] = useState({ email: '', password: '' });
   const [invalidLogin, setInvalidLogin] = useState();
@@ -39,10 +39,12 @@ function LoginForm() {
       const { data } = await post('login_form', loginForm);
 
       if (data.token) {
-        const { email, name, role } = Jwt.decode(data.token);
         const { token } = data;
+        const { email, name, role } = Jwt.decode(token);
+        const user = { name, email, role, token };
         localStorage.setItem('token', data.token);
-        localStorage.setItem('user', JSON.stringify({ name, email, role, token }));
+        localStorage.setItem('user', JSON.stringify(user));
+        setUser(user);
 
         const routes = {
           customer: '/customer/products',
@@ -52,6 +54,7 @@ function LoginForm() {
         navigate(routes[role]);
       }
     } catch (error) {
+      console.log(error);
       const { response } = error;
       const { status } = response;
       setInvalidLogin(errorMap[status || '500']);

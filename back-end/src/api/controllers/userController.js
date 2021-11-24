@@ -36,10 +36,10 @@ const create = async (req, res) => {
 const createAdmin = async (req, res) => {
   const { id, token, data, email, name, role } = await userService.create(req.body);
   if (data) {
-    return res.status(HTTP_ERROR_STATUS).json({ data })
+    return res.status(HTTP_ERROR_STATUS).json({ data });
   }
-  return res.status(HTTP_CREATED_STATUS).json({ id, token, email, name, role});
-}
+  return res.status(HTTP_CREATED_STATUS).json({ id, token, email, name, role });
+};
 
 const getAllUsers = async (_req, res) => {
   try {

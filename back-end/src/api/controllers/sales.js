@@ -14,7 +14,7 @@ const getAllSale = rescue(async (_req, res) => {
     const { sellerId, totalPrice, deliveryAddress, deliveryNumber, status, putItem } = req.body;
     
     const { statusCode, data } = await saleService
-    .createSale({ sellerId, totalPrice, deliveryAddress, deliveryNumber, status }, email, putItem );
+    .createSale({ sellerId, totalPrice, deliveryAddress, deliveryNumber, status }, email, putItem);
 
     res.status(statusCode).json(data);
   };

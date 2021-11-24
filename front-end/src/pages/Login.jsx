@@ -65,7 +65,6 @@ export default function Login() {
 
   return (
     <div>
-      { console.log(React.version) }
       <form>
         <label htmlFor="login">
           Login

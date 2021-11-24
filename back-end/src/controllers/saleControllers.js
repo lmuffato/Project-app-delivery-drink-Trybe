@@ -1,4 +1,5 @@
 const saleServices = require('../services/saleService');
+
 const register = async (req, res) => {
   const { customer, sellerId, cartProducts, address } = req.body;
   const response = await saleServices.register(customer, sellerId, cartProducts, address);

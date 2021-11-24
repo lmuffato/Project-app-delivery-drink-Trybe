@@ -1,46 +1,62 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import formatDate from '../../utils/formatDate';
+// import { format } from 'date-fns';
 import styles from './styles.module.css';
+import { useOrderDetails } from '../../context/orderDetailsProvider';
+import formatDate from '../../utils/formatDate';
 
-export default function OrderDetails({ saleData, products, quantity }) {
-  console.log('SALEDATA =>', saleData);
-  console.log('PRODUCTS =>', products);
-  console.log('QUANTITY =>', quantity);
-  const test = products.map((item, i) => ({ ...item, ...quantity[i] }));
-  console.log('PRODUCTS COM QUANTITY =>', test);
-  // const thInfos = ['Item', 'Descrição', 'Quantidade', 'Valor Unitário', 'Sub-total'];
+export default function OrderDetails() {
+  const { sale, seller, products } = useOrderDetails();
 
   return (
     <main className={ styles.container }>
-      <h3>Detalhes do Pedido</h3>
-      {/* <section>
+      <section className={ styles.orderDetails }>
+        <h3>
+          <span>Pedido:</span>
+          {' '}
+          <span>{sale.id}</span>
+        </h3>
         <div>
-          <span>
-            {saleData.id}
-          </span>
-          <span>
-            Vendedor:
-            {saleData.seller.name}
-          </span>
-          <span>
-            {formatDate(saleData.saleDate)}
-          </span>
-          <span>
-            status
-          </span>
-          <button type="button">
-            marcar como entregue;
-          </button>
+          <span>Vendedor:</span>
+          {' '}
+          <span>{seller.name}</span>
         </div>
-        <table>
-          <thead>
-            <tr>
-              {thInfos.map((info, index) => <th key={ `${info}${index}` }>{info}</th>)}
+        <span>{sale.saleDate ? formatDate(sale.saleDate) : null}</span>
+        <span>{sale.status}</span>
+        <button type="button">marcar como entregue</button>
+      </section>
+      <table className={ styles.tableContainer }>
+        <thead className={ styles.tableHead }>
+          <tr>
+            <th>Item</th>
+            <th>Descrição</th>
+            <th>Quantidade</th>
+            <th>Valor Unitário</th>
+            <th>Sub-total</th>
+          </tr>
+        </thead>
+        <tbody>
+          {products.map((product, index) => (
+            <tr key={ product.id }>
+              <td>{index + 1}</td>
+              <td>{product.name}</td>
+              <td>{product.SaleProduct.quantity}</td>
+              <td>
+                <span>R$</span>
+                {' '}
+                <span>
+                  {product.price}
+                </span>
+              </td>
+              <td>
+                <span>R$</span>
+                {' '}
+                <span>{(product.price * product.SaleProduct.quantity).toFixed(2)}</span>
+              </td>
             </tr>
-          </thead>
-        </table>
-      </section> */}
+          ))}
+        </tbody>
+      </table>
     </main>
   );
 }

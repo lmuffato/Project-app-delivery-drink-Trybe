@@ -9,6 +9,7 @@ import { PricesProvider } from './context/productsProvider';
 import MyRequestsPage from './pages/MyRequestsPage';
 import ClientOrderDetailsPage from './pages/ClientOrderDetailsPage';
 import './App.css';
+import { OrderDetailsProvider } from './context/orderDetailsProvider';
 
 function App() {
   // const userStorage = localStorage.getItem('user');
@@ -36,7 +37,14 @@ function App() {
         element={ <PricesProvider><CheckoutPage /></PricesProvider> }
       />
       <Route path="/customer/orders" element={ <MyRequestsPage /> } />
-      <Route path="/customer/orders/:id" element={ <ClientOrderDetailsPage /> } />
+      <Route
+        path="/customer/orders/:id"
+        element={
+          <OrderDetailsProvider>
+            <ClientOrderDetailsPage />
+          </OrderDetailsProvider>
+        }
+      />
       <Route path="/admin/manage" element={ <AdminPage /> } />
     </Routes>
   );

@@ -1,3 +1,77 @@
 .container {
   width: 100%;
 }
+
+.orderDetails {
+  align-items: center;
+  background: #eaf1ef;
+  border: 1px solid #b1c2be;
+  display: flex;
+  font-weight: 600;
+  height: 45px;
+  justify-content: space-between;
+  padding: 10px;
+  width: 100%;
+}
+
+.orderDetails button {
+  background: #036b52;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-weight: 600;
+  height: 35px;
+  padding: 0 10px;
+  text-transform: uppercase;
+}
+
+.tableContainer {
+  padding: 10px;
+  text-align: center;
+  width: 100%;
+}
+
+.tableHead {
+  font-size: 14px;
+}
+
+.tableContainer tbody td:first-child {
+  background: #00cc9b;
+  border-radius: 5px 0 0 5px;
+  font-weight: 600;
+  height: 2rem;
+  width: 4%;
+}
+
+.tableContainer tbody td:nth-child( 2 ) {
+  background: #eaf1ef;
+  font-weight: 400;
+  padding: 0 0 0 5px;
+  text-align: start;
+}
+
+.tableContainer tbody td:nth-child( 3 ) {
+  background: #036b52;
+  color: white;
+  font-weight: 600;
+  text-align: center;
+  width: 10%;
+}
+
+.tableContainer tbody td:nth-child( 4 ) {
+  background: #421981;
+  color: white;
+  font-weight: 600;
+  text-align: center;
+  width: 10%;
+}
+
+.tableContainer tbody td:nth-child( 5 ) {
+  background: #056cf9;
+  border-radius: 0 5px 5px 0;
+  color: white;
+  font-weight: 600;
+  text-align: center;
+  width: 10%;
+}
+

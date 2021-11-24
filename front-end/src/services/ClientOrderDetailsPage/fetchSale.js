@@ -1,7 +1,10 @@
+import { saleEndPointData } from '../../utils/endPointsData';
+
+const { endpoint } = saleEndPointData;
+
 const fetchSale = async (id) => {
   try {
-    const endpoint = `http://localhost:3001/sale/${id}`;
-    const response = await fetch(endpoint);
+    const response = await fetch(`${endpoint}/${id}`);
     const data = await response.json();
     return data;
   } catch (error) {

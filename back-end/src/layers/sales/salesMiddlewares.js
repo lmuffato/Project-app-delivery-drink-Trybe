@@ -28,9 +28,7 @@ const getById = async (req, res) => {
 const getSalesBySellerId = async (req, res) => {
   try {
     const { id } = req.params;
-    console.log('id no back', id);
-    const data = await sales.findAll({ where: { userId: id } }); ;
-    console.log('data', data);
+    const data = await sales.findAll({ where: { userId: id } });
     if (!data) { return res.status(404).json({ message: 'Seller does not have sells' }); }
     return res.status(200).json(data);
   } catch (err) {

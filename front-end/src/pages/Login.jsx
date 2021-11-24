@@ -8,10 +8,8 @@ export default function Login() {
   const [userEmail, setUserEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showError, setShowError] = useState(false);
-  // const [userRole, setUserRole] = useState('');
   const url = 'http://localhost:3001';
   const dispatch = useDispatch();
-  // const store = useStore();
   const history = useHistory();
 
   const validations = () => {

@@ -1,6 +1,5 @@
 const jwt = require('jsonwebtoken');
 const md5 = require('md5');
-// const fs = require('fs');
 const { users } = require('../../database/models');
 require('dotenv').config();
 
@@ -23,7 +22,13 @@ const create = async ({ email, requestPassword, name, requestRole }) => {
   return response;
 };
 
+const getUsers = async ({ role }) => {
+  const response = await users.findAll({ where: { role } });
+  return response;
+};
+
 module.exports = {
   login,
   create,
+  getUsers,
 };

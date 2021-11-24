@@ -20,7 +20,7 @@ function NavBar() {
       <li data-testid="customer_products__element-navbar-user-full-name">
         { name }
       </li>
-      <li data-testid="customer_products__element-navbar-link-logout">
+      <li>
         <ButtonLogout />
       </li>
     </ul>

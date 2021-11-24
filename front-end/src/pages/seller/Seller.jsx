@@ -15,28 +15,30 @@ export default function BodySeller() {
     <section text="white">
       {
         sales.map(({ id, status, saleDate, totalPrice, deliveryAddress }) => (
-          <div key={ id }>
-            <div data-testid={ `seller_orders__element-order-id-${id}` }>
-              Pedido:
-              {' '}
-              { id }
-            </div>
-            <div data-testid={ `seller_orders__element-delivery-status-${id}` }>
-              { status }
-            </div>
+          <Link to={ `/seller/orders/${id}` } key={ id }>
             <div>
-              <span data-testid={ `seller_orders__element-order-date-${id}` }>
-                { saleDate }
+              <div data-testid={ `seller_orders__element-order-id-${id}` }>
+                Pedido:
+                {' '}
+                { id }
+              </div>
+              <div data-testid={ `seller_orders__element-delivery-status-${id}` }>
+                { status }
+              </div>
+              <div>
+                <span data-testid={ `seller_orders__element-order-date-${id}` }>
+                  { saleDate }
+                </span>
+                <span data-testid={ `seller_orders__element-card-price-${id}` }>
+                  { totalPrice }
+                </span>
+              </div>
+              <span data-testid={ `seller_orders__element-card-address-${id}` }>
+                { deliveryAddress }
               </span>
-              <span data-testid={ `seller_orders__element-card-price-${id}` }>
-                { totalPrice }
-              </span>
+              Ver Detalhes
             </div>
-            <span data-testid={ `seller_orders__element-card-address-${id}` }>
-              { deliveryAddress }
-            </span>
-            <Link to={ `/seller/orders/${id}` }>Ver Detalhes</Link>
-          </div>
+          </Link>
         ))
       }
     </section>

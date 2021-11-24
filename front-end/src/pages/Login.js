@@ -25,7 +25,7 @@ const Login = () => {
 
     if (data.message || !data.token) setLoginErr(data.message);
 
-    localStorage.setItem('dataUser', JSON.stringify(data));
+    localStorage.setItem('user', JSON.stringify(data));
 
     if (status === STATUS) setIsLoading(true);
   }

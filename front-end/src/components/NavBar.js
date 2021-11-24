@@ -6,7 +6,7 @@ function NavBar({ dataUser }) {
   const [isLoading, setIsLoading] = useState(false);
 
   const logout = () => {
-    localStorage.removeItem('dataUser');
+    localStorage.removeItem('user');
     setIsLoading(true);
   };
 

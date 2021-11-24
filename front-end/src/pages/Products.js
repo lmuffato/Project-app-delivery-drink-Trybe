@@ -6,7 +6,7 @@ import NavBar from '../components/NavBar';
 function Products() {
   const [products, setProducts] = useState([]);
 
-  const dataUser = JSON.parse(localStorage.getItem('dataUser'));
+  const dataUser = JSON.parse(localStorage.getItem('user'));
 
   useEffect(() => {
     const getProducts = async () => {

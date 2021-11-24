@@ -23,7 +23,7 @@ const Register = () => {
     const { data, status } = await postUser(userData, 'register');
     if (data.message) setUserErr(data.message);
 
-    localStorage.setItem('dataUser', JSON.stringify(data));
+    localStorage.setItem('user', JSON.stringify(data));
 
     if (status === STATUS) setIsLoading(true);
   }

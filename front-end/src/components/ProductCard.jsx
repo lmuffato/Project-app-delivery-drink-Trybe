@@ -4,44 +4,73 @@ import { CartContext } from '../contexts/Cart';
 
 function ProductCard({ productInfo }) {
   const { name, id, price, urlImage } = productInfo;
-  const { cart, setCart, total, setTotal } = useContext(CartContext);
+  const { cart, setCart, setTotal } = useContext(CartContext);
   const [quantity, setQuantity] = useState(0);
 
   const onChangeHandler = (event) => {
     setQuantity(event.target.value);
   };
 
+  const getTotal = (sum, item) => sum + Number(item.subTotal);
+
+  const cartTotal = () => {
+    if (cart) {
+      console.log('entrou');
+      setTotal(cart.reduce(getTotal, 0).toFixed(2));
+    } else {
+      setTotal('0.00');
+    }
+  };
   const onClickHandler = (event) => {
     if (event.target.name === 'add-item') {
       setQuantity(Number(quantity) + 1);
-      setTotal(total + Number(price));
     } else if (quantity > 0) {
       setQuantity(quantity - 1);
-      setTotal(total - Number(price));
     }
   };
 
   useEffect(() => {
+    cartTotal();
+  }, [cart]);
+
+  useEffect(() => {
     if (cart !== undefined) {
-      setCart(cart.map((el) => (
-        { ...el,
-          [id]: {
+      const x = -1;
+      const index = cart.findIndex((product) => product.productId === id);
+
+      if (index !== x) {
+        const newCart = cart;
+        newCart[index] = {
+          productId: id,
+          name,
+          quantity: Number(quantity),
+          unitPrice: price,
+          subTotal: (quantity * price).toFixed(2),
+        };
+
+        setCart([...newCart]);
+      } else {
+        setCart([
+          ...cart,
+          {
             productId: id,
             name,
             quantity: Number(quantity),
             unitPrice: price,
             subTotal: (quantity * price).toFixed(2),
-          } })));
+          },
+        ]);
+      }
     } else {
-      setCart([{
-        [id]: {
+      setCart([
+        {
           productId: id,
           name,
           quantity: Number(quantity),
           unitPrice: price,
           subTotal: (quantity * price).toFixed(2),
         },
-      }]);
+      ]);
     }
   }, [quantity]);
 

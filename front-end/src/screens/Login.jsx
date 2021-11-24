@@ -1,7 +1,8 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Box, TextField, Button, Link } from '@mui/material';
 import ContextLogin from '../context/ContextLogin';
+import { verifyUserExistance } from '../utils/LocalStorageFunctions';
 
 function Login() {
   const { makeLogin, invalidEmailError } = useContext(ContextLogin);
@@ -18,10 +19,27 @@ function Login() {
 
   const validateLoginInputs = () => validateEmail() && validatePassword();
 
+  useEffect(() => {
+    const user = verifyUserExistance();
+    console.log(user);
+    if (user) {
+      if (user.role === 'administrador') {
+        history.push('/admin/manage');
+      } else {
+        history.push('/customer/products');
+      }
+    }// eslint-disable-next-line
+  }, []);
+
   const handleLogin = async () => {
     const response = await makeLogin(email, password);
+    const { role } = verifyUserExistance();
     if (response) {
-      history.push('/customer/products');
+      if (role === 'administrator') {
+        history.push('/admin/manage');
+      } else {
+        history.push('/customer/products');
+      }
     }
   };
 

@@ -5,6 +5,7 @@ const loginRouter = require('../routers/loginRouter');
 const registerRouter = require('../routers/registerRouter');
 const productRouter = require('../routers/productRouter');
 const salesRouter = require('../routers/salesRouter');
+const usersRouter = require('../routers/usersRouter');
 
 const app = express();
 
@@ -23,5 +24,7 @@ app.use('/register', registerRouter);
 app.use('/products', productRouter);
 
 app.use('/sales', salesRouter);
+
+app.use('/users', usersRouter);
 
 module.exports = app;

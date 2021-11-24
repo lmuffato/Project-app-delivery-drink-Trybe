@@ -4,29 +4,27 @@ const { SaleProduct } = require('../database/models');
 const createSaleElement = async (saleInfo) => {
   const { totalPrice, deliveryAddress, deliveryNumber, userId, sellerId } = saleInfo;
   const result = await Sale.create({
-    totalPrice,
+    totalPrice: parseFloat(totalPrice.toFixed(2)),
     deliveryAddress,
     deliveryNumber,
     userId,
     sellerId,
-    status: 'pendente',
+    status: 'Pendente',
   }).catch((error) => ({ error: { message: error.message } }));
   return result;
 };
 
 const registerProductsOnSale = async (saleId, products) => {
-  const { error } = products.reduce(async (_acc, product) => {
-    const { productId, quantity } = product;
-    const { er } = await SaleProduct.create({
-      productId,
-      saleId,
-      quantity,
-    }).catch((e) => ({ er: e.message }));
-    if (er !== undefined) {
-      return { error: { message: er } };
+  const productsInfo = products.map(({ id, quantity }) => ({ productId: id, quantity }));
+
+  productsInfo.forEach(async (product) => {
+    try {
+      await SaleProduct.create({ ...product, saleId });
+    } catch (e) {
+      return { error: { message: e.message } };
     }
-  }, {});
-  return { error };
+  });
+  return true;
 };
 
 const createSale = async (saleData) => {
@@ -37,9 +35,15 @@ const createSale = async (saleData) => {
     return { error };
   }
   const saleId = dataValues.id;
-  const { error: errorProductsInception } = await registerProductsOnSale(saleId, products);
-  if (errorProductsInception !== undefined) {
-    return { error: errorProductsInception };
+
+  // const { error: errorProductsInception } = await registerProductsOnSale(saleId, products);
+  // if (errorProductsInception !== undefined) {
+  //   return { error: errorProductsInception };
+  // }
+
+  const saleProductResponse = await registerProductsOnSale(saleId, products);
+  if (saleProductResponse.error) {
+    return { error: saleProductResponse };
   }
   return { saleId: dataValues.id };
 };

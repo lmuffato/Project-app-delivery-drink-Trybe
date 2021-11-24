@@ -1,17 +1,15 @@
 import React from 'react';
-// import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import {
   AppBar,
   Toolbar,
   Typography,
-  Link,
   Button,
+  Link,
 } from '@mui/material';
-// import ContextLogin from '../context/ContextLogin';
 import { logoutUser, verifyUserExistance } from '../utils/LocalStorageFunctions';
 
-function NavBar() {
+function NavBarAdmin() {
   const user = verifyUserExistance();
   const { name } = user;
   const history = useHistory();
@@ -30,13 +28,6 @@ function NavBar() {
           data-testid="customer_products__element-navbar-link-products"
         >
           Produtos
-        </Link>
-        <Link
-          href="/customer/orders"
-          color="#FFF"
-          data-testid="customer_products__element-navbar-link-orders"
-        >
-          Meus Pedidos
         </Link>
         <Typography
           variant="h6"
@@ -59,4 +50,4 @@ function NavBar() {
   );
 }
 
-export default NavBar;
+export default NavBarAdmin;

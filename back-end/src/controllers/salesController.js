@@ -8,7 +8,17 @@ const registerSale = async (req, res) => {
   if (error !== undefined) {
     return res.status(httpStatus.serverError).json({ error: { message: error } });
   }
-  return res.status(httpStatus.created).json({ message: `Sale was created with id: ${saleId}` });
+  return res.status(httpStatus.created).json({ saleId });
+};
+
+const getAllSales = async (req, res) => {
+  const { id } = req.user;
+  const sales = await Sale.findAll({ where: { userId: id } })
+    .catch((e) => ({ error: { message: e.message } }));
+  if (sales.error !== undefined) {
+    return res.status(httpStatus.serverError).json({ error: sales });
+  }
+  return res.status(httpStatus.ok).json({ sales });
 };
 
 const getSpecificSale = async (req, res) => {
@@ -23,4 +33,5 @@ const getSpecificSale = async (req, res) => {
 module.exports = {
   registerSale,
   getSpecificSale,
+  getAllSales,
 };

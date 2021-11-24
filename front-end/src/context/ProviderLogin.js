@@ -34,10 +34,13 @@ function ProviderLogin({ children }) {
 
   // ---------------------------------------------/---------------------------------------------------------------//
 
-  const createUser = async (name, email, password) => {
+  const createUser = async (name, email, password, role = 'customer') => {
     setSignUpErrorMessage(false);
+    const data = { name, email, password, role };
     try {
-      await axios.post(`${urlBase}/register`, { name, email, password });
+      await axios.post(`${urlBase}/register`, data);
+      storeUser(data);
+      setUserData(data);
       return true;
     } catch (error) {
       setSignUpErrorMessage(true);

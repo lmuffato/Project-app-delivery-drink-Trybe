@@ -12,7 +12,8 @@ const loginUser = async (passWord, email) => {
 
   const user = await User.findOne({
     where: { email, password },
-    attributes: { exclude: ['id', 'password'] },
+    attributes: { exclude: ['password'] }, // depois
+    // attributes: { exclude: ['id', 'password'] }, // antes
   });
 
   checkUserIfExist(user);

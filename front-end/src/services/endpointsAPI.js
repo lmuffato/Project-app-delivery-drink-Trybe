@@ -66,7 +66,7 @@ export const getSales = async () => {
 
 export const getSalesBySellerId = async (id) => {
   console.log('id no front', id);
-  const result = await api.get('/sales', { id });
+  const result = await api.get(`/sales/${id}`);
   return result.data;
 };
 

@@ -1,6 +1,9 @@
 const { Op } = require('sequelize');
 const md5 = require('md5');
 const jwt = require('jsonwebtoken');
+const path = require('path');
+const secret = require('fs')
+.readFileSync(path.join(__dirname, '../../../jwt.evaluation.key'), { encoding: 'utf-8' }).trim(); 
 
 const { User } = require('../../database/models');
 const {
@@ -13,8 +16,6 @@ const jwtConfig = {
   algorithm: 'HS256',
 };
 
-const secret = process.env.SECRET || 'e717vdd^DEp.';
-
 const checkLogin = async (email, password) => {
   const existingUser = await User.findOne({ where: { email, password } });
 
@@ -22,34 +23,30 @@ const checkLogin = async (email, password) => {
 
   const { id, name, role } = existingUser.dataValues;
 
-  return ({ id, name, email, password, role });
+  return ({ id, name, email, role });
 };
 
 const createUser = async ({ name, email, password, role }) => {
   const hashPassword = md5(password);
-
   const [user, created] = await User.findOrCreate({
     where: {
       [Op.or]: [{ name }, { email }],
     },
-    defaults: {
-      name,
-      email,
-      password: hashPassword,
-      role,
-    },
+    defaults: { name, email, password: hashPassword, role },
   });
-  
+
   if (!created) {
     return ({ status: 409, data: USER_ALREADY_EXIST });
   }
-  
+
   const { password: _, ...userWithoutPassword } = user.dataValues;
-  
-  return ({ status: 201, user: userWithoutPassword });
+  const token = jwt.sign(userWithoutPassword, secret, jwtConfig);
+  const { id } = userWithoutPassword;
+    
+  return ({ status: 201, token, id, name, email, role });
 };
 
-const login = async ({ email, password }) => {
+const login = async (email, password) => {
   if (!email || !password) {
     return ({ status: 404, data: ALL_FIELDS_FILLED });
   }
@@ -61,10 +58,11 @@ const login = async ({ email, password }) => {
   if (!loginCheck) {
     return ({ status: 404, data: INCORRECT_USERNAME_OR_PASSWORD });
   }
+  const { name, role, id } = loginCheck;
 
   const token = jwt.sign(loginCheck, secret, jwtConfig);
-  const { id, name, role } = loginCheck;
-  return ({ status: 200, token, id, name, role, email });
+
+  return ({ status: 200, token, id, name, email, role });
 };
 
 const findAllUsers = async () => {

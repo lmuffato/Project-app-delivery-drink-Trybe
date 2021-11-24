@@ -4,19 +4,19 @@ const createUser = async (req, res) => {
   const { name, email, password } = req.body;
   const newUser = { name, email, password, role: 'customer' };
 
-  const { status, data, user } = await userService.createUser(newUser);
+  const { status, data, token, id, role } = await userService.createUser(newUser);
 
-  if (!user) {
-    return res.status(status).json({ data });
+  if (token) {    
+    return res.status(status).json({ token, id, name, email, role });
   }
   
-  return res.status(status).json(user);
+  return res.status(status).json({ data });
 };
 
 const login = async (req, res) => {
-  const { body } = req;
+  const { email, password } = req.body;
 
-  const { status, data, token, id, name, role, email } = await userService.login(body);
+  const { status, data, token, id, name, role } = await userService.login(email, password);
 
   if (token) {
     return res.status(status).json({ id, name, role, email, token });
@@ -32,20 +32,18 @@ const findAllUsers = async (_req, res) => {
 };
 
 const createAdmin = async (req, res) => {
-  const { status, user, data } = await userService.createUser(req.body);
-
-  if (!user) {
+  const { status, data, token, id, name, email, role } = await userService.createUser(req.body);
+  if (data) {
     return res.status(status).json({ data });
   }
-  
-  return res.status(status).json(user);
+  return res.status(status).json({ token, id, name, email, role });
 };
 
 const deleteUser = async (req, res) => {
-  const { id } = req.body;
+  const { id } = req.params;
 
   const { status, data } = await userService.deleteUser(id);
-
+  
   return res.status(status).json(data);
 };
 

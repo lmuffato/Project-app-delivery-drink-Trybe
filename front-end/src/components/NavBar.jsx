@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import ButtonLogout from './ButtonLogout';
 
@@ -28,3 +29,8 @@ function NavBar() {
 }
 
 export default NavBar;
+
+NavBar.propTypes = {
+  ids: PropTypes.object,
+  names: PropTypes.object,
+}.isRequired;

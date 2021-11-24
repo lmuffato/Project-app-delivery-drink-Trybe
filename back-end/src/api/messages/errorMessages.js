@@ -11,9 +11,13 @@ module.exports = {
   NO_REGISTRED_USERS: 'There are no registered users',
   NON_EXISTENTE_USER: 'Non-existent user.',
   ONLY_ADMINISTRATORS_ACCESS: 'Only administrators have access to this information.',
+  ONLY_SELLERS_ACCESS: 'Only sellers have access to this information.',
   ONLY_ADMINS_REGISTER: 'Only admins can register new roles',
   PASSWORD_SHORTER_THAN_ALLOWED: '"password" must have a minimum of 6 characters',
   SERVER_ERROR: 'Server error.',
   TASK_NOT_FOUND: 'Task not found.',
   USER_ALREADY_EXIST: 'User already exists!',
+  ORDERS_NOT_FOUND: 'Orders not found.',
+  ORDER_STATUS_NOT_AUTHORIZED: 'Order status not authorized.',
+  UNAUTHORIZED_SEARCH: 'Unauthorized search!',
 };

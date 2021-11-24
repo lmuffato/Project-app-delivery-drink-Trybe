@@ -22,7 +22,7 @@ function OrderDetails() {
         setOrder(res.data);
         setGotOrder(true);
       });
-  }, []);
+  }, [id, role]);
 
   return (
     <>

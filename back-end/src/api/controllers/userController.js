@@ -29,9 +29,17 @@ const create = async (req, res) => {
   } catch (error) {
     return res.status(HTTP_ERROR_STATUS).json({
       message: error,
-  });
+    });
   }
 };
+
+const createAdmin = async (req, res) => {
+  const { id, token, data, email, name, role } = await userService.create(req.body);
+  if (data) {
+    return res.status(HTTP_ERROR_STATUS).json({ data })
+  }
+  return res.status(HTTP_CREATED_STATUS).json({ id, token, email, name, role});
+}
 
 const getAllUsers = async (_req, res) => {
   try {
@@ -47,7 +55,7 @@ const getAllUsers = async (_req, res) => {
 const deleteUser = async (req, res) => {
   try {
     const { id } = req.params;
-    const response = await userService.delete(id);
+    const response = await userService.deleteUser(id);
     if (response === 0) {
       return res.status(HTTP_ERROR_STATUS).json({
         message: 'User not found',
@@ -68,4 +76,5 @@ module.exports = {
   create,
   getAllUsers,
   deleteUser,
+  createAdmin,
 };

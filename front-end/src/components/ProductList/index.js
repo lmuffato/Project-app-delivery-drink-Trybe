@@ -67,7 +67,7 @@ function ProductList() {
             <span
               data-testid="customer_products__checkout-bottom-value"
             >
-              {total.toFixed(2).replace('.', ',')}
+              {Number(total).toFixed(2).replace('.', ',')}
             </span>
           </>
         </Button>

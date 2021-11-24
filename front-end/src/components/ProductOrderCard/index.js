@@ -51,7 +51,7 @@ function ProductOrderCard({
           className="info-badge"
           data-testid={ testid.price }
         >
-          {`R$ ${price.toFixed(2)}`}
+          {`R$ ${Number(price).toFixed(2)}`}
         </div>
       </div>
     </div>

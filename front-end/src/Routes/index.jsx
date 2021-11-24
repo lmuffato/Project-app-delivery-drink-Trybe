@@ -6,6 +6,7 @@ import ProductsList from '../pages/customer/Products';
 import ProtectedRoute from './ProtectedRoute';
 import Checkout from '../pages/customer/Checkout';
 import Orders from '../pages/customer/Orders';
+import OrderDetails from '../pages/customer/OrderDetails';
 
 export default function Routes() {
   return (
@@ -13,7 +14,8 @@ export default function Routes() {
       <Route path={ ['/login', '/register'] } component={ Auth } />
       <ProtectedRoute path={ ['/customer', '/'] }>
         <NavBar />
-        <Route path="/customer/orders" component={ Orders } />
+        <Route path="/customer/orders/:id" component={ OrderDetails } />
+        <Route exact path="/customer/orders" component={ Orders } />
         <Route path="/customer/checkout" component={ Checkout } />
         <Route path="/customer/products" component={ ProductsList } />
         <Route path="/" render={ () => <Redirect to="/customer/products" /> } />

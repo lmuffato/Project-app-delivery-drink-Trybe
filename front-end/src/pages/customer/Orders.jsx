@@ -26,7 +26,6 @@ export default function Orders() {
     <>
       { orders.map((order) => {
         const idLength = 4;
-        console.log(order);
         return (
           <Link key={ order.id } to={ `/customer/orders/${order.id}` }>
             <div>

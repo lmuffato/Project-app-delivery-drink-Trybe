@@ -27,10 +27,31 @@ function UserProvider({ children }) {
 
   useEffect(() => {
     const validate = async () => {
-      if (user.token) {
-        const data = await validateToken(user.token);
-        return data ? setUser(data) : history.push('/login');
+      const url = window.location.href;
+      const token = localStorage.getItem('token');
+      if (token) {
+        const data = await validateToken(token);
+        if (data) {
+          setUser(data);
+          return history.push('/customer/products');
+        }
       }
+      return url.includes('/login') ? '' : history.push('/login');
+      // if (token) {
+      //   const data = await validateToken(token);
+      //   console.log('DATA', data);
+      //   if (data) {
+      //     setUser(data);
+      //     return history.push('customer/products');
+      //   }
+      //   if (!data && !(url.includes('/login'))) {
+      //     history.push('/login');
+      //   }
+      //   return data ? setUser(data) : history.push('/login');
+      // }
+      // if (!(url.includes('/login')) && !token) {
+      //   history.push('/login');
+      // }
     };
     validate();
   }, []);

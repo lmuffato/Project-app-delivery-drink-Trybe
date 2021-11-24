@@ -17,24 +17,24 @@ import {
 
 const HEADERS = ['Descrição', 'Quantidade', 'Valor Unitário', 'Sub-total'];
 
-const LINK = [
-  {
-    name: 'PRODUTOS',
-    url: '/customer/products',
-    testId: 'customer_products__element-navbar-link-products',
-  },
-  {
-    name: 'MEUS PEDIDOS',
-    url: '/customer/orders',
-    testId: 'customer_products__element-navbar-link-orders',
-  },
-];
-
 function Checkout() {
   const { cart, setCart, user } = useContext(UserContext);
   const { products, quantityProducts } = useContext(DeliveryContext);
   const [sellers, setSellers] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+
+  const LINK = [
+    {
+      name: 'PRODUTOS',
+      url: '/customer/products',
+      testId: 'customer_products__element-navbar-link-products',
+    },
+    {
+      name: 'MEUS PEDIDOS',
+      url: '/customer/orders',
+      testId: 'customer_products__element-navbar-link-orders',
+    },
+  ];
 
   const CART_ITEMS = formatList(cart);
 

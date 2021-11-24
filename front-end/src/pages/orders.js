@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { getSales } from '../utils/Data';
-// import { getSales } from '../utils/Data';
 import Header from '../Components/Header';
 
 function Orders() {
@@ -8,12 +7,10 @@ function Orders() {
   const [orders, setOrders] = useState([]);
 
   const dateFormatation = (data) => {
-    const dois = 2;
-    const quatro = 4;
     const YMD = data.split('T')[0];
     const i = YMD.split('-');
     const [y, m, d] = i;
-    const DMY = `${d}/${m}/${y.slice(dois, quatro)}`;
+    const DMY = `${d}/${m}/${y}`;
     return DMY;
   };
 
@@ -46,6 +43,7 @@ function Orders() {
         <button
           type="button"
           key={ index }
+          data-testid={ `customer_orders__element-order-id-${item.id}` }
         >
           <div>
             <h5>
@@ -57,19 +55,21 @@ function Orders() {
               { index + 1 }
             </h3>
           </div>
-          <input
-            readOnly="true"
+          <div
             className={ item.status }
             data-testid={ `customer_orders__element-delivery-status-${item.id}` }
-            value={ item.status }
-          />
+          >
+            { item.status }
+          </div>
           <div>
             <h4
               data-testid={ `customer_orders__element-order-date-${item.id}` }
             >
               { dateFormatation(item.sale_date) }
             </h4>
-            <h4>
+            <h4
+              data-testid={ `customer_orders__element-card-price-${item.id}` }
+            >
               {`R$ ${item.totalPrice.replace('.', ',')}`}
             </h4>
           </div>

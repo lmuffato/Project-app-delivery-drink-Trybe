@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 
 const axios = require('axios');
 
@@ -9,12 +9,12 @@ export default function Admin() {
   const [userRole, setUserRole] = useState('seller');
   const [disabled, setDisabled] = useState(true);
   const url = 'http://localhost:3001';
+  const minimumNameLength = 12;
+  const minimumPasswordLength = 6;
 
-  useEffect(() => {
-    const verifyInfo = () => {
-      const regex = /\S+@\S+\.\S+/;
-      const minimumNameLength = 12;
-      const minimumPasswordLength = 6;
+  const verifyInfo = useCallback(
+    () => {
+      const regex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
       if (userName.length >= minimumNameLength
         && userPassword.length >= minimumPasswordLength
         && regex.test(userEmail)
@@ -23,15 +23,20 @@ export default function Admin() {
       } else {
         setDisabled(true);
       }
-    };
-    verifyInfo();
-  }, [userEmail, userName.length, userPassword.length, userRole]);
+    },
+    [userEmail, userName.length, userPassword.length, userRole, setDisabled],
+  );
 
-  const insertUser = async () => {
-    const token = JSON.parse(localStorage.getItem('user').token);
+  useEffect(() => {
+    verifyInfo();
+  }, [verifyInfo]);
+
+  const insertUser = async (e) => {
+    e.preventDefault();
+    const { token } = JSON.parse(localStorage.getItem('user'));
 
     const config = {
-      headers: { Authorization: `Bearer ${token}` },
+      headers: { Authorization: `${token}` },
     };
     try {
       const bodyParameters = {
@@ -42,7 +47,11 @@ export default function Admin() {
       };
       await axios
         .post(`${url}/admin`, bodyParameters, config)
-        .then((res) => res.json());
+        .then((res) => console.log(res.data));
+      setUserName('');
+      setUserEmail('');
+      setUserPassword('');
+      setUserRole('');
     } catch (error) {
       console.log(error);
     }
@@ -95,7 +104,7 @@ export default function Admin() {
           type="submit"
           data-testid="admin_manage__button-register"
           disabled={ disabled }
-          onClick={ insertUser }
+          onClick={ (e) => insertUser(e) }
         >
           Cadastrar
         </button>

@@ -43,7 +43,7 @@ const createAdmin = async (req, res) => {
     return res.status(HTTP_CONFLICT_STATUS).json({
       message: 'user alredy registered',
     });
-  };
+  }
   const response = await userService.createAdmin({ 
     email, 
     requestPassword: password, 

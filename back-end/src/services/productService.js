@@ -4,7 +4,7 @@ const errorMap = require('../utils/errorMap');
 const getAll = async () => {
   try {
     const result = await Product.findAll({});
-    console.log(result);
+
     if (!result) return errorMap.NotFound;
     
     return { result };

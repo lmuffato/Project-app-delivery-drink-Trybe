@@ -107,4 +107,17 @@ const getSaleDetailById = async (id) => {
   }
 };
 
-module.exports = { postSale, getSalesBySellerId, getSalesByCustomerId, getSaleDetailById };
+const getAllSellers = async () => {
+  try {
+    const allSellers = await User.find({ where: { role: 'seller' } });
+  if (!allSellers) return errorMap.notFoundSellers;
+
+  return allSellers;
+  } catch (error) {
+    return errorMap.internalError;
+  }
+};
+
+module.exports = {
+  postSale, getSalesBySellerId, getSalesByCustomerId, getSaleDetailById, getAllSellers,
+};

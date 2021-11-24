@@ -1,10 +1,11 @@
 import React, { useContext, useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+
 import Navbar from '../Components/NavBar';
 
 import { getSalesByCustomerId } from '../services/endpointsAPI';
 
 import userContext from '../context/userContext';
-import { Link } from 'react-router-dom';
 
 const dataTestid33 = 'customer_orders__element-order-id';
 const dataTestid34 = 'customer_orders__element-delivery-status';
@@ -42,7 +43,6 @@ export default function CustomerOrder() {
 
   return (
     <div>
-      { console.log(orders) }
       <Navbar />
       {
         isLoading

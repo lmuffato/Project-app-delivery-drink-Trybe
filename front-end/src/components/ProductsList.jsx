@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router';
 import axios from 'axios';
 import { ProductsContext } from '../contexts/Products';
 import ProductCard from './ProductCard';
+import { CartContext } from '../contexts/Cart';
 
 const listProducts = (products) => products.map((product, key) => (
   <ProductCard key={ key } productInfo={ product } />
@@ -10,6 +11,8 @@ const listProducts = (products) => products.map((product, key) => (
 
 function ProductList() {
   const { values, setValues } = useContext(ProductsContext);
+  const { total } = useContext(CartContext);
+
   const navigate = useNavigate();
   useEffect(() => {
     async function fetchData() {
@@ -42,7 +45,7 @@ function ProductList() {
         type="button"
         onClick={ () => navigate('/customer/checkout') }
       >
-        Valor:
+        { total.toFixed(2).toString().replace('.', ',') }
       </button>
     </>
   );

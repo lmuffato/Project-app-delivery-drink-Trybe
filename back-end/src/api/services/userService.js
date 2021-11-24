@@ -22,9 +22,6 @@ const create = async ({ email, requestPassword, name, requestRole }) => {
 };
 
 const createAdmin = async ({ email, requestPassword, name, requestRole }) => {
-  const userEmail = await users.findOne({ where: { email } });
-  const userName = await users.findOne({ where: { name } });
-  if (userEmail || userName) return { status: 409, message: 'User already registered' };
   const password = md5(requestPassword);
   const response = await users.create({ email, password, name, role: requestRole });
   return response;

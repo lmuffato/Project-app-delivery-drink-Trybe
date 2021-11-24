@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
+
+import UserContext from '../context/userContext';
 import ErrorLogin from '../Components/ErrorLogin';
 
 import validateEmail from '../validations/validateEmail';
@@ -11,6 +13,7 @@ const testId = 'common_register__element-invalid_register';
 const messageError = 'Nome e/ou email já cadastrado';
 
 export default function Register() {
+  const { setUserData } = useContext(UserContext);
   const history = useHistory();
 
   const [name, setName] = useState('');
@@ -24,6 +27,7 @@ export default function Register() {
       await createNewUser(name, email, password);
       const login = await doLogin(email, password);
       setToLocalStorageUser('user', { login, email });
+      setUserData(login);
       history.push('/customer/products');
     } catch (error) {
       setErrorMessage(false);

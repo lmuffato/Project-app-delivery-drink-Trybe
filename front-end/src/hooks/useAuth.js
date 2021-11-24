@@ -76,8 +76,19 @@ export default function useAuth() {
       const { login: { id } } = jwt.verify(
         token, process.env.REACT_APP_JWT_SECRET_KEY || 'senha_dificil',
       );
-      signInUser({ id, name, email, role, token });
+      signInUser({ name, email, role, token, id });
       if (callback) callback({ name, email, role, token });
+    } catch (error) {
+      throwAuthFailedAlert(error);
+    }
+  }
+
+  async function authAdmFormSubmit(event, { formSchema, formValues }) {
+    event.preventDefault();
+    try {
+      validateForm({ schema: formSchema, values: formValues }).throwErrorIfIsNotValid();
+      // await authenticate({ type: 'register', request: formValues });
+      await api.post('/register', formValues, { headers: { authorization: user.token } });
     } catch (error) {
       throwAuthFailedAlert(error);
     }
@@ -89,6 +100,7 @@ export default function useAuth() {
     alertIsVisible,
     Alert,
     authFormSubmit,
+    authAdmFormSubmit,
     validateForm,
   };
 }

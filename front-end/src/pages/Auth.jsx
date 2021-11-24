@@ -23,6 +23,8 @@ export default function Auth({ location }) {
             history.push('/seller/orders');
             break;
           }
+          case 'administrator': history.push('/admin/manage');
+            break;
           default: history.push('/customer/products');
           }
         }

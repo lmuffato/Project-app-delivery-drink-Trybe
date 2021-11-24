@@ -7,7 +7,11 @@ import useInputs from '../hooks/useInputs';
 export default function Auth() {
   const history = useHistory();
   const [inputsValues, setInputsValues] = useInputs({ email: '', password: '' });
-  const { Alert, alertIsVisible, authFormSubmit, validateForm } = useContext(AuthContext);
+  const { Alert,
+    alertIsVisible,
+    authFormSubmit,
+    validateForm,
+  } = useContext(AuthContext);
   const [buttonDisabled, setButtonDisabled] = useState(true);
 
   useEffect(() => {
@@ -26,6 +30,8 @@ export default function Auth() {
         history.push('/seller/orders');
         break;
       }
+      case 'administrator': history.push('/admin/manage');
+        break;
       default: history.push('/customer/products');
       }
     });

@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import ButtonLogout from './ButtonLogout';
 
-function NavBar({ ids: { productId, pageId, userId }, names: { pageName } }) {
+function NavBar({ ids:
+  { pageProductsId: productId, pageOrdersId, userId }, names: { pageName } }) {
   const { name } = JSON.parse(localStorage.getItem('user'));
   const route = '/customer/products';
   return (
@@ -12,7 +13,9 @@ function NavBar({ ids: { productId, pageId, userId }, names: { pageName } }) {
         productId
         && <li data-testid={ productId }><NavLink to={ route }>Produtos</NavLink></li>
       }
-      <li data-testid={ pageId }><NavLink to="/orders">{ pageName }</NavLink></li>
+      <li data-testid={ pageOrdersId }>
+        <NavLink to="/customer/orders">{ pageName }</NavLink>
+      </li>
       <li data-testid={ userId }>{ name }</li>
       <li>
         <ButtonLogout />

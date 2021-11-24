@@ -4,8 +4,8 @@ import ProductsList from '../components/ProductsList';
 import { ProductsProvider } from '../contexts/Products';
 
 const testIds = {
-  productId: 'customer_products__element-navbar-link-products',
-  pageId: 'customer_products__element-navbar-link-orders',
+  pageProductsId: 'customer_products__element-navbar-link-products',
+  pageOrdersId: 'customer_products__element-navbar-link-orders',
   userId: 'customer_products__element-navbar-user-full-name',
 };
 

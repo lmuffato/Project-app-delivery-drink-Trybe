@@ -5,7 +5,7 @@ import UsersTable from '../components/UsersTable';
 import { UsersProvider } from '../contexts/Users';
 
 const testIds = {
-  pageId: 'customer_products__element-navbar-link-orders',
+  pageOrdersId: 'customer_products__element-navbar-link-orders',
   userId: 'customer_products__element-navbar-user-full-name',
 };
 

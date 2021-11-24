@@ -50,8 +50,8 @@ function Login() {
   useEffect(() => {
     // const userLocalStorage = JSON.parse(localStorage.getItem('user'));
     // if (userLocalStorage) {
-      // setUser(userLocalStorage);
-      // history.push('/customer/products');
+    // setUser(userLocalStorage);
+    // history.push('/customer/products');
     // }
     // returnToProducts('/login');
   // eslint-disable-next-line react-hooks/exhaustive-deps

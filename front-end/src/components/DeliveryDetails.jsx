@@ -24,6 +24,31 @@ function DeliveryDetails() {
     setSeller(allSellers.data[0].name);
   };
 
+  const handleClick = async () => {
+    if (seller && address && number) {
+      // const bodyRequest = {
+      //   sellerId, totalPrice, deliveryAddress, deliveryNumber, products,
+      // };
+      const pedido = await fetch('http://localhost:3001/orders', {
+        method: 'GET',
+        mode: 'cors',
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: token,
+        },
+        // body: JSON.stringify(bodyRequest),
+      })
+        .then((result) => result.json());
+      console.log(pedido);
+      // navigate('/customer/checkout');
+      setAllFieldsFilled(false);
+    } else {
+      setAllFieldsFilled(true);
+    }
+  };
+
   useEffect(() => {
     getAllSellers();
   }, []);

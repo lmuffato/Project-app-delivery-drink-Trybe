@@ -4,7 +4,7 @@ import { CartContext } from '../contexts/Cart';
 
 function ProductCard({ productInfo }) {
   const { name, id, price, urlImage } = productInfo;
-  const { cart, setCart } = useContext(CartContext);
+  const { cart, setCart, total, setTotal } = useContext(CartContext);
   const [quantity, setQuantity] = useState(0);
 
   const onChangeHandler = (event) => {
@@ -14,27 +14,32 @@ function ProductCard({ productInfo }) {
   const onClickHandler = (event) => {
     if (event.target.name === 'add-item') {
       setQuantity(Number(quantity) + 1);
+      setTotal(total + Number(price));
     } else if (quantity > 0) {
       setQuantity(quantity - 1);
+      setTotal(total - Number(price));
     }
   };
 
   useEffect(() => {
     if (cart !== undefined) {
       setCart(cart.map((el) => (
-        [el] === name ? { ...el,
-          qty: Number(quantity),
-          total: (quantity * price).toFixed(2),
-        } : { ...el,
-          [name]: {
-            qty: Number(quantity),
-            total: (quantity * price).toFixed(2),
+        { ...el,
+          [id]: {
+            productId: id,
+            name,
+            quantity: Number(quantity),
+            unitPrice: price,
+            subTotal: (quantity * price).toFixed(2),
           } })));
     } else {
       setCart([{
-        [name]: {
-          qty: Number(quantity),
-          total: (quantity * price).toFixed(2),
+        [id]: {
+          productId: id,
+          name,
+          quantity: Number(quantity),
+          unitPrice: price,
+          subTotal: (quantity * price).toFixed(2),
         },
       }]);
     }

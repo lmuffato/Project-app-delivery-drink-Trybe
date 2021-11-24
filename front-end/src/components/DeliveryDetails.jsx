@@ -1,6 +1,7 @@
 import axios from 'axios';
-import React from 'react';
+import React, { useContext } from 'react';
 import { useEffect, useState } from 'react/cjs/react.development';
+import { CartContext } from '../contexts/Cart';
 
 function DeliveryDetails() {
   const [sellersList, setSellersList] = useState(null);
@@ -8,6 +9,10 @@ function DeliveryDetails() {
   const [address, setAddress] = useState(null);
   const [number, setNumber] = useState(null);
   const [allFieldFilled, setAllFieldsFilled] = useState(false);
+
+  const { cart } = useContext(CartContext);
+
+  console.log(cart);
 
   const { token } = JSON.parse(localStorage.getItem('user'));
 
@@ -21,13 +26,17 @@ function DeliveryDetails() {
       },
     );
     setSellersList(allSellers.data);
-    setSeller(allSellers.data[0].name);
+    setSeller(allSellers.data[0]);
   };
 
   const handleClick = async () => {
     if (seller && address && number) {
       // const bodyRequest = {
-      //   sellerId, totalPrice, deliveryAddress, deliveryNumber, products,
+      //   sellerId,
+      //   totalPrice: productSubTotal,
+      //   deliveryAddress,
+      //   deliveryNumber,
+      //   products: cart,
       // };
       const pedido = await fetch('http://localhost:3001/orders', {
         method: 'GET',

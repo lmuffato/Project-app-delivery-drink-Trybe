@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import { NavLink as Link } from 'react-router-dom';
 
 export const Nav = styled.nav`
@@ -25,29 +25,31 @@ export const NavLink = styled(Link)`
   height: 100%;
   cursor: pointer;
   text-transform: uppercase;
+  transition: all 0.3s ease-in-out;
 
   &:hover {
     background-color: hsl(0, 0%, 50%);
     color: hsl(0, 1%, 10%);
+    transition: all 0.3s ease-in-out;
   }
 `;
 
 export const NavBtnLink = styled(Link)`
   border-radius: 4px;
   background-color: hsl(0, 1%, 10%);
-  padding: 18px 10px;
+  padding: 30px 30px;
   color: #fff;
   border: none;
   outline: none;
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.5s ease-in-out;
   text-decoration: none;
   display: flex;
   align-items: center;
   justify-content: center;
 
   &:hover {
-    transition: all 0.2s ease-in-out;
+    transition: all 0.5s ease-in-out;
     background: #fff;
     color: #010606;
   }

@@ -2,7 +2,6 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const path = require('path');
-const routes = require('../routes');
 const http = require('http');
 
 const app = express();
@@ -14,6 +13,7 @@ const io = require('socket.io')(server, {
     } });
 const { getSaleById, update } = require('../services');
 const middlewares = require('../middlewares');
+const routes = require('../routes');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

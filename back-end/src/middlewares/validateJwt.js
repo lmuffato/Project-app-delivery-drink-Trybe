@@ -20,6 +20,7 @@ const validateJWT = async (req, res, next) => {
 
     const payload = verify(token);
     req.payload = payload;
+    req.user = payload;
 
     return next();
   } catch (_e) {

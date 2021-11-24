@@ -1,5 +1,6 @@
 const httpStatus = require('../utils/httpStatus');
 const { createSale, saleById } = require('../services/salesService');
+const { Sale } = require('../database/models');
 
 const registerSale = async (req, res) => {
   const { sale } = req;
@@ -15,9 +16,20 @@ const getSaleById = async (req, res) => {
 
   const response = await saleById(id);
   return res.status(httpStatus.ok).json(response);
-}
+};
+
+const getAllSales = async (req, res) => {
+  const { id } = req.user;
+  const sales = await Sale.findAll({ where: { userId: id } })
+    .catch((e) => ({ error: { message: e.message } }));
+  if (sales.error !== undefined) {
+    return res.status(httpStatus.serverError).json({ error: sales });
+  }
+  return res.status(httpStatus.ok).json({ sales });
+};
 
 module.exports = {
   registerSale,
   getSaleById,
+  getAllSales,
 };

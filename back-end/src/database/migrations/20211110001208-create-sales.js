@@ -25,7 +25,7 @@ module.exports = {
         foreignKey: true,
       },
       totalPrice: {
-        type: Sequelize.INTEGER,  /* DECIMAL(10,2), */
+        type: Sequelize.DECIMAL(9,2),  /* DECIMAL(10,2), */
         field: 'total_price'
       },
       deliveryAddress: {
@@ -38,6 +38,7 @@ module.exports = {
       },
       saleDate: {
         type: Sequelize.DATE,
+        defaultValue: Sequelize.fn("NOW"),
         field: 'sale_date'
       },
       status: {

@@ -1,45 +1,61 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { formatMoney } from 'accounting';
+import { useHistory } from 'react-router';
 import ProductCard from '../../components/ProductCard';
 import styles from '../../styles/pages/Products.module.scss';
+import api from '../../services/api';
+import { AuthContext } from '../../contexts/auth';
+import { cartContext } from '../../contexts/cart';
 
 export default function Products() {
-  const mockProducts = [{
-    id: 1,
-    name: 'Skol Lata 250ml',
-    price: '2.20',
-    url_image: 'http://localhost:3001/images/skol_lata_350ml.jpg',
-    sales: [],
-  },
-  {
-    id: 2,
-    name: 'Heineken 600ml',
-    price: '7.50',
-    url_image: 'http://localhost:3001/images/heineken_600ml.jpg',
-    sales: [
-      {
-        id: 1,
-        userId: 3,
-        sellerId: 2,
-        totalPrice: '29.30',
-        deliveryAddress: 'Rua T 15 - Taquaralto - TO',
-        deliveryNumber: '712',
-        saleDate: '2021-12-01T00:00:00.000Z',
-        status: 'concluido',
-        SalesProduct: { saleId: 1, productId: 2, quantity: 6 },
-      }],
-  },
-  ];
+  const [products, setProducts] = useState([]);
+  const { user } = useContext(AuthContext);
+  const { cartItens } = useContext(cartContext);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const history = useHistory();
+
+  useEffect(() => {
+    (async () => {
+      const response = await api.get('/products', {
+        headers: {
+          authorization: user.token,
+        },
+      });
+      setProducts(await response.data);
+    })();
+  }, [user]);
+
+  useEffect(() => {
+    const total = cartItens.reduce((acc, curr) => acc + Number(curr.subTotal), 0);
+    setTotalPrice(formatMoney(total, {
+      symbol: '',
+      decimal: ',',
+    }));
+  }, [cartItens]);
+
   return (
     <div className={ styles.productsGrid }>
-      { mockProducts.map((product) => (
+      { products.map((product, index) => (
         <ProductCard
           key={ product.id }
+          index={ index + 1 }
           id={ product.id }
           title={ product.name }
           image={ product.url_image }
           price={ product.price }
         />
       )) }
+      <button
+        type="button"
+        data-testid="customer_products__button-cart"
+        disabled={ totalPrice === '0,00' }
+        onClick={ () => history.push('/customer/checkout') }
+      >
+        R$
+        <span data-testid="customer_products__checkout-bottom-value">
+          { totalPrice }
+        </span>
+      </button>
     </div>
   );
 }

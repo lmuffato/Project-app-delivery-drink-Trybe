@@ -3,10 +3,10 @@ module.exports = (sequelize, DataTypes) => {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     userId: DataTypes.STRING,
     sellerId: DataTypes.STRING,
-    totalPrice: { type: DataTypes.INTEGER, allowNull: false },
+    totalPrice: { type: DataTypes.DECIMAL, allowNull: false },
     deliveryAddress: { type: DataTypes.STRING, allowNull: false },
     deliveryNumber: { type: DataTypes.STRING, allowNull: false },  
-    saleDate: { type: DataTypes.DATE, allowNull: false },
+    saleDate: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
     status: { type: DataTypes.STRING, allowNull: false }  
   }, {
     tableName: 'sales',
@@ -15,12 +15,12 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   Sale.associate = (models) => {
-    // Sale.belongsTo(models.User, { foreignKey: 'user_id', as: 'users' });
-    Sale.belongsTo(models.User,
+    Sale.belongsTo(models.User, { foreignKey: 'userId', as: 'user_id' });
+    /* Sale.belongsTo(models.User,
       { foreignKey: 'userId', as: 'users' },
-      { foreignKey: 'sellerId', as: 'users' }
-    );
-    Sale.hasMany(models.SalesProduct, { foreignKey: 'saleId', as: 'salesProducts' });
+      /* { foreignKey: 'sellerId', as: 'users' } 
+    ); */
+
   };
 
   return Sale;

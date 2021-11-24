@@ -10,7 +10,7 @@ const validateJwt = async (req, res, next) => {
 
   try {
     const privateKey = await fs.readFile('jwt.evaluation.key', 'utf8');
-
+   
     const decoded = jwt.verify(token, privateKey);
 
     req.user = decoded;

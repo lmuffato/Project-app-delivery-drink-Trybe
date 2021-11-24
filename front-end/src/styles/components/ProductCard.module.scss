@@ -1,7 +1,8 @@
 .productCard {
   align-items: flex-end;
   display: flex;
-  margin: 80px;
+  // margin: 80px;
+  transform: scale(30%);
 
   .image {
     border: 5px solid var(--secondary-color);
@@ -24,9 +25,9 @@
 
     img {
       border-radius: 15px 15px 0 15px;
-      height: 266px;
+      height: 66px;
       object-fit: cover;
-      width: 230px;
+      width: 30px;
     }
   }
 
@@ -69,8 +70,8 @@
         color: white;
         font-size: 34px;
         font-weight: 600;
-        height: 60px;
-        width: 60px;
+        height: 20px;
+        width: 20px;
 
         &:nth-child(1) {
           background: linear-gradient(transparent, #e2e1e5);

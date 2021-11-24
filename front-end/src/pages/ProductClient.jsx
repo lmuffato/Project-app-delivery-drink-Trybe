@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Context from '../context/Context';
-import Header from '../components/header';
 import ProductCard from '../components/productCard';
 
 function ProductClient() {
@@ -9,15 +8,18 @@ function ProductClient() {
   const navigate = useNavigate();
 
   // setar CSS MASTER
-  // console.log(products);
+
   return (
     <>
-      <Header client={ `${'nome'}` } />
       <button
         onClick={ () => navigate('/customer/checkout') }
+        data-testid="customer_products__button-cart"
         type="button"
+        disabled={ total === '0,00' }
       >
-        { `Ver Carrinho: R$ ${total}` }
+        <span data-testid="customer_products__checkout-bottom-value">
+          { `Ver Carrinho: R$ ${total}` }
+        </span>
       </button>
       <div className="master">
         {

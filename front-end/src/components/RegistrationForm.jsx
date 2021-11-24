@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
+import Jwt from 'jsonwebtoken';
 import '../styles/form.css';
 import { useNavigate } from 'react-router-dom';
 import Context from '../context/Context';
@@ -7,7 +8,7 @@ import regex from '../utils/regex';
 import errorMap from '../utils/errorMap';
 
 function Registration() {
-  const { post } = useContext(Context);
+  const { post, setUser } = useContext(Context);
   const [registerForm, setRegisterForm] = useState({
     name: '',
     email: '',
@@ -43,11 +44,19 @@ function Registration() {
       const { data } = await post('registration_form', registerForm);
 
       if (data.token) {
+        const { token } = data;
+        const { email, name, role } = Jwt.decode(token);
+        const user = { name, email, role, token };
+        console.log(user);
         localStorage.setItem('token', data.token);
-        navigate('/customer/products');
+        localStorage.setItem('user', JSON.stringify(user));
+        setUser(user);
+
+        navigate(`/${role}/products`);
       }
-    } catch ({ response }) {
-      const { status } = response;
+    } catch (error) {
+      console.log(error);
+      const { status } = error.response;
       setErrorMessage(errorMap[status || '500']);
     }
   };

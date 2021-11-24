@@ -1,20 +1,27 @@
-/* eslint-disable react/style-prop-object */
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/prop-types */
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { shape, string } from 'prop-types';
 import '../styles/product.css';
 import Context from '../context/Context';
 
-function ProductCard({ product: { id, name, price, url_image: urlImage } }) {
-  const { addProduct, subProduct, inputProduct } = useContext(Context);
-  // Styles:
-  // preço: Absolute inset -1 background-opacity 70%
-  // image: fill
-  // Div pai: Border 1 grey, shadow
-  // Div filho 1: BG White?
-  // Div filho 2: BG Aquamarine
+function ProductCard({ product }) {
+  const { shoppingCart, setShoppingCart } = useContext(Context);
+  const { id, name, price, url_image: urlImage } = product;
 
-  // data testid por key
+  const [quantity, setQuantity] = useState(0);
+
+  useEffect(() => {
+    if (quantity === 0) {
+      const updatedShoppingCart = { ...shoppingCart };
+      delete updatedShoppingCart[id];
+      setShoppingCart(updatedShoppingCart);
+    } else {
+      setShoppingCart({ ...shoppingCart,
+        [id]: {
+          productId: id, productName: name, productPrice: price, productQuant: quantity,
+        } });
+    }
+  }, [quantity]); // eslint-disable-line
+
   return (
     <section className="productContainer">
       <div className="element">
@@ -41,20 +48,23 @@ function ProductCard({ product: { id, name, price, url_image: urlImage } }) {
           <button
             type="button"
             data-testid={ `customer_products__button-card-rm-item-${id}` }
-            onClick={ () => subProduct(name, id, price) }
+            onClick={ () => quantity > 0 && setQuantity(quantity - 1) }
           >
             -
           </button>
           <input
             type="number"
+            name={ `product-${id}` }
             placeholder="0"
+            value={ quantity }
             data-testid={ `customer_products__input-card-quantity-${id}` }
-            onChange={ (e) => inputProduct(name, id, price, e.target.value) }
+            onChange={ ({ target: { value } }) => Number(value) >= 0
+              && setQuantity(Number(value)) }
           />
           <button
             type="button"
             data-testid={ `customer_products__button-card-add-item-${id}` }
-            onClick={ () => addProduct(name, id, price) }
+            onClick={ () => setQuantity(quantity + 1) }
           >
             +
           </button>
@@ -63,5 +73,14 @@ function ProductCard({ product: { id, name, price, url_image: urlImage } }) {
     </section>
   );
 }
+
+ProductCard.propTypes = {
+  product: shape({
+    id: string,
+    name: string,
+    url_image: string,
+    price: string,
+  }),
+}.isRequired;
 
 export default ProductCard;

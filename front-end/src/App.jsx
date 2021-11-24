@@ -7,6 +7,7 @@ import Register from './pages/Register';
 import ProductClient from './pages/ProductClient';
 import CheckoutClient from './pages/CheckoutClient';
 import PrivateRoute from './routes/PrivateRoute';
+import OrderDetails from './pages/OrderDetails';
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
       <Route exact path="/register" element={ <Register /> } />
       <Route
         path="/seller/order/:id"
-        element={ <PrivateRoute element={ () => <div>Seller Order ID</div> } /> }
+        element={ <PrivateRoute element={ OrderDetails } /> }
       />
       <Route
         path="/seller/order"
@@ -23,7 +24,10 @@ function App() {
       />
       <Route exact path="/products" element={ <ProductClient /> } />
       <Route path="/" element={ <Navigate replace to="/login" /> } />
-      <Route path="/customer/products" element={ <ProductClient /> } />
+      <Route
+        path="/customer/products"
+        element={ <PrivateRoute element={ ProductClient } /> }
+      />
       <Route path="/customer/checkout" element={ <CheckoutClient /> } />
     </Routes>
   );

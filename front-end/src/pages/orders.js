@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { getSales } from '../utils/Data';
 import Header from '../Components/Header';
 
@@ -13,6 +14,8 @@ function Orders() {
     const DMY = `${d}/${m}/${y}`;
     return DMY;
   };
+
+  const history = useHistory();
 
   const LINKS = [
     {
@@ -44,6 +47,7 @@ function Orders() {
           type="button"
           key={ index }
           data-testid={ `customer_orders__element-order-id-${item.id}` }
+          onClick={ () => history.push(`customer/order/${item.id}`) }
         >
           <div>
             <h5>

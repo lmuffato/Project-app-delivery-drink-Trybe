@@ -10,7 +10,7 @@ import SignUp from './pages/SignUp';
 import Products from './pages/Products';
 import Admin from './pages/Admin';
 import Orders from './pages/orders';
-// import detalhesPedidosClientes from './pages/detalhesPedidosClientes';
+import OrderDetails from './pages/OrderDetails';
 
 export default function Router() {
   return (
@@ -21,6 +21,7 @@ export default function Router() {
             <Route path="/login" component={ Login } />
             <Route path="/customer/checkout" component={ Checkout } />
             <Route path="/customer/orders" component={ Orders } />
+            <Route path="/customer/orders/:id" component={ OrderDetails } />
             <Route path="/register" component={ SignUp } />
             <Route path="/customer/products" component={ Products } />
             <Route path="/admin" component={ Admin } />

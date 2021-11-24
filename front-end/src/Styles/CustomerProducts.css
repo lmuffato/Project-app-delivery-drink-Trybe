@@ -4,11 +4,11 @@
 }
 
 .buttonVercarrinho {
-  background-color: rgb(173, 209, 140);
+  background-color: rgb(209, 148, 140);
   float: left;
   height: 30px;
-  left: 700px;
+  /* left: 1050px; */
   position: fixed;
-  top: 300px;
-  width: 200px;
+  top: 80px;
+  width: 100%;
 }

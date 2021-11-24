@@ -3,20 +3,24 @@ import React, {
   useState,
   useContext,
 } from 'react';
-import { Link } from 'react-router-dom';
+import {
+  // Link,
+  useHistory,
+} from 'react-router-dom';
 import NewOrderContext from '../../context/NewOrderContext';
 import {
   getAllUsersSallers,
   // postSales,
   createInSalesAndSalesProducts,
 } from '../../services/endpointsAPI';
-
+          // to="/customer/orders/"
 const selectSeller = 'customer_checkout__select-seller';
-const inputAddress = 'ustomer_checkout__input-address';
+const inputAddress = 'customer_checkout__input-address';
 const inputAddressNumber = 'customer_checkout__input-addressNumber';
 const buttonSubmitOrder = 'customer_checkout__button-submit-order';
 
 export default function DeliveryDetails() {
+  const history = useHistory();
   const { userId } = useContext(NewOrderContext);
   const { sellersList, setSellersList } = useContext(NewOrderContext);
   const { sellerId, setSellerId } = useContext(NewOrderContext);
@@ -60,6 +64,11 @@ export default function DeliveryDetails() {
     return newValue.toFixed(2);
   };
 
+  const redirectToPage = (id) => {
+    const url = `/customer/orders/${id}`;
+    history.push(url);
+  };
+
   const createNewSale = async () => {
     const sale = {
       userId,
@@ -69,7 +78,12 @@ export default function DeliveryDetails() {
       status: 'pendente',
     };
     const saleProductsArray = { saleProductsArray: itensList };
-    await createInSalesAndSalesProducts(sale, saleProductsArray);
+    const saleId = await createInSalesAndSalesProducts(sale, saleProductsArray);
+    // console.log(saleId);
+    redirectToPage(saleId);
+    // const url = '/customer/orders/';
+    // const url = '/customer/products';
+    // history.push(url);
     // await postSales(obj);
   };
 
@@ -131,19 +145,14 @@ export default function DeliveryDetails() {
         </label>
       </span>
       <div>
-        <Link
-          to="/customer/finished"
-          data-testid={ `${buttonSubmitOrder}` }
-          className={ `${buttonSubmitOrder}` }
-          onClick={ createNewSale }
-        >
           <button
             type="button"
+            onClick={ createNewSale }
+            className={ `${buttonSubmitOrder}` }
             data-testid={ `${buttonSubmitOrder}` }
           >
             FINALIZAR PEDIDO
           </button>
-        </Link>
       </div>
     </div>
   );

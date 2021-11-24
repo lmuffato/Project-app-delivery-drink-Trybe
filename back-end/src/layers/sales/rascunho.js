@@ -72,3 +72,8 @@ const saleProducts = {
 };
 
 console.log(saleProducts);
+
+const array1 = [['A', 'B', 'C']];
+const [arr] = array1;
+
+console.log(arr);

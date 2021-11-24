@@ -1,6 +1,9 @@
+// const Sequelize = require('sequelize');
+
 const {
   sales,
   salesProducts,
+  products,
 } = require('../../database/models');
 
 const getAll = async (req, res) => {
@@ -105,7 +108,7 @@ const createSale = async (req, res, next) => {
     const { sale, salesProductsArray } = req.body;
     const obj = formatSale(sale);
     const newData = await sales.create(obj);
-    req.userInfo = { saleId: newData.id };
+    req.saleId = { saleId: newData.id };
     req.salesProducts = { salesProductsArray };
   } catch (err) {
     return res.status(500).json({ message: err.message });
@@ -129,14 +132,45 @@ const createManySaleProducts = async (req, res) => {
   try {
     const { salesProductsArray } = req.salesProducts;
     const arr = Object.values(salesProductsArray);
-    const { saleId } = req.userInfo;
+    const { saleId } = req.saleId;
     const newArr = formatSalesObjectArray(saleId, arr[0]);
-    const newData = await salesProducts.bulkCreate(newArr);
-    return res.status(201).json(newData);
+    // const newData = await salesProducts.bulkCreate(newArr);
+    // return res.status(201).json(newData);
+    await salesProducts.bulkCreate(newArr);
+    return res.status(201).json(saleId);
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }
 };
+
+// eslint-disable-next-line max-lines-per-function
+const getSaleAndSaleProducts = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const obj = await sales.findAll({
+      where: { id },
+      include:
+        [
+          { model: products, as: 'products' },
+        ],
+      });
+    return res.status(200).json(obj);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+// const getSaleAndSaleProducts = async (req, res) => {
+//   try {
+//     const { id } = req.params;
+//     const allProducts = await salesProducts.findAll({ where: { saleId: id } });
+//     const sale = await sales.findOne({ where: { id } });
+//     const obj = { sale, allProducts };
+//     return res.status(200).json(obj);
+//   } catch (err) {
+//     res.status(500).json({ message: err.message });
+//   }
+// };
 
 module.exports = {
   getAll,
@@ -146,4 +180,33 @@ module.exports = {
   createNew,
   createSale,
   createManySaleProducts,
+  getSaleAndSaleProducts,
 };
+
+/* BACKUP
+const getSaleAndSaleProducts = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const obj = await sales.findAll({
+      where: { id },
+      include:
+        [
+          { model: products,
+            include: {
+              model: salesProducts,
+            },
+            as: 'products',
+          // attributes: [[Sequelize.literal('salesProducts.quantity'), 'quantidade']],
+        },
+        ],
+        attributes: [
+          [Sequelize.literal('sales.id'), 'code'],
+          // [Sequelize.literal('salesProducts.quantity'), 'quantidade'],
+        ],
+      });
+    return res.status(200).json(obj);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+*/

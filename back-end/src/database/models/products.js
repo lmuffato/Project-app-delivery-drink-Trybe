@@ -16,5 +16,6 @@ module.exports = (sequelize, DataTypes) => {
   //   products.hasMany(models.sales, // Um usuário pode ter vários posts na tabela BlogPost.
   //     { foreignKey: 'user_id', as: 'sales_user' }); // O campo userId será exibido como 'userPosts' na tabela BlogPost.
   // };
+
   return products;
 };

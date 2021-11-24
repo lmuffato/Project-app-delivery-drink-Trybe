@@ -8,7 +8,7 @@ router.get('/',
 salesMiddlewares.getAll,
 async () => {});
 /* REQUISIÇÃO:
-http GET :3001/users
+http GET :3001/sales
 */
 
 router.get('/oder/:id',

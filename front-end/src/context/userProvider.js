@@ -6,7 +6,6 @@ function UserProvider({ children }) {
   const [userData, setUserData] = useState();
 
   useEffect(() => {
-    console.log(userData);
   }, [userData]);
 
   return (

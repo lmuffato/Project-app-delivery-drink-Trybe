@@ -14,7 +14,7 @@ const getById = async (req, res) => {
     const { id } = req.params;
     const data = await sales.findByPk(id);
     console.log(data);
-    if (data === null) { return res.status(404).json({ message: 'User does not exist' }); }
+    if (!data) { return res.status(404).json({ message: 'User does not exist' }); }
     return res.status(200).json(data);
   } catch (err) {
     return res.status(500).json({ message: err.message });
@@ -81,13 +81,14 @@ const createSale = async (req, res, next) => {
   try {
     const { sale, salesProductsArray } = req.body;
     const obj = formatSale(sale);
+    console.log('obj midd', obj);
     const newData = await sales.create(obj);
     req.saleId = { saleId: newData.id };
     req.salesProducts = { salesProductsArray };
+    next();
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }
-  next();
 };
 
 const formatSalesObjectArray = (saleId, arr) => {

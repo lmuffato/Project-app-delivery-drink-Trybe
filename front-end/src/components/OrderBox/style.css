@@ -1,0 +1,57 @@
+.order-detail-container {
+  background-color: white;
+  border-radius: 10px;
+  color: black;
+  display: flex;
+  flex-direction: column;
+}
+
+.order-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.order-info > * {
+  margin: 10px;
+}
+
+.customer-order-total-price {
+  align-self: flex-end;
+  background-color: #f58f1b;
+  border-radius: 5px;
+  color: white;
+  font-weight: 600;
+  margin: 5px;
+  text-align: center;
+  width: 7em;
+}
+
+table {
+  align-self: center;
+}
+
+td, th {
+  padding: 8px;
+}
+
+.order-status-pendente {
+  background-color: yellow;
+  border-radius: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.order-status-entregue {
+  background-color: rgb(12, 113, 196);
+  border-radius: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.order-status-preparando {
+  background-color: rgb(99, 247, 80);
+  border-radius: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+}

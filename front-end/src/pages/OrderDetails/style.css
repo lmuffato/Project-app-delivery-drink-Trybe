@@ -1,0 +1,24 @@
+.orderDetailsPage {
+  min-height: 100vh;
+  position: relative;
+  width: 100%;
+}
+
+.saleDetailsContainer {
+  background-color: rgb(228, 228, 228);
+  display: flex;
+  gap: 5rem;
+  justify-content: center;
+  margin-top: 7rem;
+  min-height: 100vh;
+  padding: 5rem 0;
+}
+
+.sale-card {
+  background-color: black;
+  border-radius: 10px;
+  color: white;
+  height: 300px;
+  min-width: 800px;
+  padding: 10px;
+}

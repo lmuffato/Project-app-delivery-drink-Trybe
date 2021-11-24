@@ -1,0 +1,51 @@
+.ordersPage {
+  min-height: 100vh;
+  position: relative;
+  width: 100%;
+}
+
+.salesContainer {
+  align-content: center;
+  background-color: rgb(228, 228, 228);
+  display: flex;
+  flex-flow: row wrap;
+  gap: 5rem;
+  justify-content: center;
+  margin-top: 7rem;
+  min-height: 100vh;
+  padding: 5rem 0;
+}
+
+.order-container {
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  max-height: 100px;
+  padding: 5px;
+  width: 400px;
+}
+
+.order-container div {
+  align-content: space-between;
+  align-self: center;
+  display: flex;
+  flex-flow: column wrap;
+  padding: 5px;
+  text-align: center;
+}
+
+.status-order-pendente {
+  background-color: rgb(255, 251, 0);
+  border-radius: 10px;
+  margin: 5px;
+  padding: 5px;
+}
+
+.info-order p {
+  max-height: 5px;
+}
+
+.date-price-order p {
+  max-height: 5px;
+}

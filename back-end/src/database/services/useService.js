@@ -17,9 +17,9 @@ async function createUserService({ name, email, password }) {
 
   const user = await User.create({ name, email, password, role });
 
-  const userLogin = { user_id: user.dataValues.id, name, email, role };
+  const userLogin = { name, email, role };
   const token = await createToken(userLogin);
-  const data = { name, email, role, token };
+  const data = { name, email, role, token, id: user.dataValues.id };
 
   return { data, code: HTTP_CREATED };
 };
@@ -35,10 +35,10 @@ async function loginService({ password, email }) {
     return { invalidPassword: true, code: HTTP_NOT_FOUND, error: "Invalid data" }
   };
 
-  const { id, name, role } = await readByEmailService(email);
-  const userLogin = { user_id: id, name, role, email };
+  const { name, role } = await readByEmailService(email);
+  const userLogin = { name, role, email };
   const token = await createToken(userLogin);
-  const data = { name, email, role, token };
+  const data = { name, email, role, token, id: isUserResgistered.dataValues.id };
 
   return { data, code: HTTP_OK_STATUS };
 };

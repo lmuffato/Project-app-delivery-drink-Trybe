@@ -21,4 +21,20 @@ export default {
     });
     return data;
   },
+  getSales: async (id, token) => {
+    const { data } = await api.get(`/orders/costumer/${id}`, {
+      headers: {
+        Authorization: token,
+      },
+    });
+    return data;
+  },
+  getSaleById: async (id, token) => {
+    const { data } = await api.get(`/orders/${id}`, {
+      headers: {
+        Authorization: token,
+      },
+    });
+    return data;
+  },
 };

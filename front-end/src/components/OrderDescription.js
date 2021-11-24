@@ -58,7 +58,7 @@ function OrderDescription({ prefix, order, role }) {
           onClick={ () => handleClick('Entregue') }
           type="button"
           data-testid={ `${prefix}button-delivery-check` }
-          disabled
+          disabled={ status !== 'Em Trânsito' }
         >
           MARCAR COMO ENTREGUE
         </button>
@@ -68,6 +68,7 @@ function OrderDescription({ prefix, order, role }) {
             onClick={ () => handleClick('Preparando') }
             type="button"
             data-testid={ `${prefix}button-preparing-check` }
+            disabled={ status !== 'Pendente' }
           >
             PREPARAR PEDIDO
           </button>
@@ -75,7 +76,7 @@ function OrderDescription({ prefix, order, role }) {
             onClick={ () => handleClick('Em Trânsito') }
             type="button"
             data-testid={ `${prefix}button-dispatch-check` }
-            disabled
+            disabled={ status !== 'Preparando' }
           >
             SAIU PARA ENTREGA
           </button>

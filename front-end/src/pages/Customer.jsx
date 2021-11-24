@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import Checkout from '../components/Checkout';
 import NavBar from '../components/NavBar';
 import ProductList from '../components/ProductList';
+import UserOrders from '../components/UserOrders';
 
 export default function Customer() {
   const buttonsList = [
@@ -24,6 +25,8 @@ export default function Customer() {
   const [totalCart, setTotalCart] = useState(0);
   const [isVisible, setIsVisible] = useState('visible');
   const [disabled, setDisabled] = useState(false);
+
+  if (!user) history.push('/login');
 
   useEffect(() => {
     if (shoppingCart.length > 0) {
@@ -47,12 +50,10 @@ export default function Customer() {
     }
   }, [location]);
 
-  if (!user) history.push('/login');
-
   const renderComponent = (url) => {
     switch (url) {
     case '/customer/orders':
-      return (<span>hdaushduash</span>);
+      return (<UserOrders token={ user.token } />);
     case '/customer/checkout':
       return (<Checkout totalCart={ totalCart } />);
     default:

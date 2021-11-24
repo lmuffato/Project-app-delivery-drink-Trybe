@@ -7,21 +7,22 @@ import {
 
 const { io } = require('socket.io-client');
 
-const socketServerUrl = 'https://desafio-tecnico-senai-backend.herokuapp.com';
+const socketServerUrl = 'http://localhost:3001';
 const socket = io(socketServerUrl);
 
 function StatusCard({ initialStatus, id }) {
   const [status, setStatus] = useState(initialStatus);
 
   useEffect(() => {
-    socket.on('changeState', ({ newState }) => {
-      setStatus(newState);
+    socket.on('changeState', ({ newState, idToChange }) => {
+      if (idToChange === id) setStatus(newState);
     });
+    // eslint-disable-next-line
   }, []);
   const colorStatus = {
-    pendente: '#ffcc00',
-    preparando: '#99cc00',
-    entregue: '#00cc99',
+    Pendente: '#ffcc00',
+    Preparando: '#99cc00',
+    Entregue: '#00cc99',
   };
   return (
     <Box

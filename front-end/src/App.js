@@ -8,6 +8,7 @@ import AdminPage from './pages/AdminPage';
 import { PricesProvider } from './context/productsProvider';
 import MyRequestsPage from './pages/MyRequestsPage';
 import ClientOrderDetailsPage from './pages/ClientOrderDetailsPage';
+import SellerPage from './pages/SellerPage';
 import './App.css';
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
       />
       <Route path="/customer/orders" element={ <MyRequestsPage /> } />
       <Route path="/customer/orders/:id" element={ <ClientOrderDetailsPage /> } />
+      <Route path="/seller/orders" element={ <SellerPage /> } />
       <Route path="/admin/manage" element={ <AdminPage /> } />
     </Routes>
   );

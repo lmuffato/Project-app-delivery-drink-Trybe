@@ -1,21 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function DetailsCard({ index, name, qtty, price, total }) {
+function DetailsCard({ index, name, qtty, price, total, role }) {
   return (
     <tr>
       <td
-        data-testid={ `customer_order_details__element-order-table-item-number-${index}` }
+        data-testid={ `${role}_order_details__element-order-table-item-number-${index}` }
       >
         { Number(index) + 1 }
       </td>
       <td
-        data-testid={ `customer_order_details__element-order-table-name-${index}` }
+        data-testid={ `${role}_order_details__element-order-table-name-${index}` }
       >
         { name }
       </td>
       <td
-        data-testid={ `customer_order_details__element-order-table-quantity-${index}` }
+        data-testid={ `${role}_order_details__element-order-table-quantity-${index}` }
       >
         { qtty }
       </td>
@@ -23,7 +23,7 @@ function DetailsCard({ index, name, qtty, price, total }) {
         { `R$ ${Number(price).toFixed(2).replace('.', ',')}` }
       </td>
       <td
-        data-testid={ `customer_order_details__element-order-table-sub-total-${index}` }
+        data-testid={ `${role}_order_details__element-order-table-sub-total-${index}` }
       >
         { `R$ ${Number(total).toFixed(2).replace('.', ',')}` }
       </td>

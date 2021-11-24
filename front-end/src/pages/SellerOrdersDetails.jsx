@@ -5,7 +5,7 @@ import DetailHeader from '../components/DetailHeader';
 import dateFormat from '../services/dateFormat';
 import DetailsCard from '../components/DetailsCard';
 
-function OrderDetails({ match: { params: { id } } }) {
+function SellerOrderDetails({ match: { params: { id } } }) {
   const { sales } = useContext(ApiContext);
 
   const colunas = [
@@ -38,7 +38,6 @@ function OrderDetails({ match: { params: { id } } }) {
             </tr>
           </thead>
           <tbody>
-            {/* {console.log('aquiiiii', sales[id - 1].products)} */}
             {sales[id - 1].products.map((product, index) => (
               <DetailsCard
                 role={ JSON.parse(localStorage.getItem('user')).role }
@@ -53,7 +52,7 @@ function OrderDetails({ match: { params: { id } } }) {
           </tbody>
         </table>
         <div
-          data-testid="customer_order_details__element-order-total-price"
+          data-testid="seller_order_details__element-order-total-price"
         >
           { `Total: R$ ${sales[id - 1].total_price.replace('.', ',')}` }
         </div>
@@ -62,7 +61,7 @@ function OrderDetails({ match: { params: { id } } }) {
   ));
 }
 
-OrderDetails.propTypes = ({
+SellerOrderDetails.propTypes = ({
   match: {
     params: {
       id: PropTypes.number,
@@ -70,4 +69,4 @@ OrderDetails.propTypes = ({
   },
 }).isRequired;
 
-export default OrderDetails;
+export default SellerOrderDetails;

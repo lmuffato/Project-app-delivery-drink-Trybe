@@ -58,8 +58,15 @@ async function getByOrderId(id) {
   return { data: orderInfo, code: HTTP_OK_STATUS };
 }
 
+async function updateStatusService(id, status) {
+   await Sale.update({ status }, { where: { id } });
+
+  return { statusUpdated: true, code: HTTP_OK_STATUS };
+}
+
 module.exports = {
   create,
   getByUserId,
   getByOrderId,
+  updateStatusService
 };

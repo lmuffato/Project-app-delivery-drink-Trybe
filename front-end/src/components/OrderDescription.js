@@ -1,10 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const MAX_ORDER_ID_CHARS = 4;
 
 function OrderDescription({ prefix, order, role }) {
   const isCustomer = role === 'customer';
+  const { id } = useParams();
+  const [status, setStatus] = useState(order.status);
+
+  const handleClick = async (message) => {
+    try {
+      await axios.patch(`http://localhost:3001/sales/${id}`, {
+        status: message,
+      }).then((res) => {
+        setStatus(res.data.status);
+      });
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
 
   return (
     <p>
@@ -34,11 +50,12 @@ function OrderDescription({ prefix, order, role }) {
       <span
         data-testid={ `${prefix}element-order-details-label-delivery-status` }
       >
-        {order.status}
+        { status }
       </span>
       { ' ' }
       { isCustomer ? (
         <button
+        onClick={ () => handleClick('Entregue') }
           type="button"
           data-testid={ `${prefix}button-delivery-check` }
         >
@@ -47,12 +64,14 @@ function OrderDescription({ prefix, order, role }) {
       ) : (
         <>
           <button
+            onClick={ () => handleClick('Preparando') }
             type="button"
             data-testid={ `${prefix}button-preparing-check` }
           >
             PREPARAR PEDIDO
           </button>
           <button
+            onClick={ () => handleClick('Em Trânsito') }
             type="button"
             data-testid={ `${prefix}button-dispatch-check` }
           >

@@ -30,7 +30,11 @@ function OrderDetails() {
       Detalhes do Pedido
       { gotOrder && (
         <div>
-          <OrderDescription prefix={ prefix } order={ order } role={ role } />
+          <OrderDescription
+            prefix={ prefix }
+            order={ order }
+            role={ role }
+          />
           <table style={ { border: '1px solid black' } }>
             <thead>
               <tr>

@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
     productId: {type: DataTypes.INTEGER, field: 'product_id'},
     saleId: {type: DataTypes.INTEGER, field: 'sale_id'},
     quantity: {type: DataTypes.INTEGER, field: 'quantity'},
-  },{ timestamps: false, tableName: 'SalesProducts'});
+  },{ timestamps: false, tableName: 'salesProducts'});
   SaleProduct.associate = (models) => {
     models.Product.belongsToMany(models.Sale, {
       as: 'sales',

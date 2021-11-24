@@ -7,7 +7,7 @@ export default function CheckoutForm() {
   const [sellerId, setSellerId] = useState();
   const [deliveryAddress, setDeliberyAddress] = useState('');
   const [deliveryNumber, setDeliveryNumber] = useState();
-  const { totalPrice } = usePrice();
+  const { totalPrice, putItem } = usePrice();
   const status = 'Pendente';
   const [allSellers, setAllSellers] = useState([]);
 
@@ -35,8 +35,16 @@ export default function CheckoutForm() {
 
   const submitForm = async (event) => {
     event.preventDefault();
-
     const { token } = JSON.parse(localStorage.getItem('user'));
+
+    // const quantityItem;
+    // const idItem = [];
+    // putItem.forEach(({ id, quantity}) => {
+    //   quantityItem.push(quantity);
+    //   idItem.push(id);
+    // });
+
+    const itemPut = JSON.stringify([...putItem]);
 
     const requestOptions = {
       method: 'POST',
@@ -47,10 +55,12 @@ export default function CheckoutForm() {
         deliveryAddress,
         deliveryNumber,
         status,
+        putItem: itemPut,
       }),
     };
 
     const sale = await fetch(saleEndPointData.endpoint, requestOptions);
+
     const object = await sale.json();
     navigate(`/customer/orders/${object.id}`);
   };

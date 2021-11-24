@@ -11,11 +11,11 @@ const getAllSale = rescue(async (_req, res) => {
   const createSale = async (req, res) => {
     const { email } = req.user;
     
-    const { sellerId, totalPrice, deliveryAddress, deliveryNumber, status } = req.body;
+    const { sellerId, totalPrice, deliveryAddress, deliveryNumber, status, putItem } = req.body;
     
     const { statusCode, data } = await saleService
-    .createSale({ sellerId, totalPrice, deliveryAddress, deliveryNumber, status }, email);
-    
+    .createSale({ sellerId, totalPrice, deliveryAddress, deliveryNumber, status }, email, putItem );
+
     res.status(statusCode).json(data);
   };
   // });

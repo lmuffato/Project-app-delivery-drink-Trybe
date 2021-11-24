@@ -1,5 +1,5 @@
 /* eslint-disable prefer-object-spread */
-const { Sale, User, Product } = require('../../database/models');
+const { Sale, User, Product, SaleProduct } = require('../../database/models');
 const serviceUser = require('./user');
 
 const getAllSale = async () => {
@@ -9,7 +9,7 @@ const getAllSale = async () => {
 
 const createSale = async ({
   sellerId, totalPrice, deliveryAddress, deliveryNumber, status,
-}, email) => {
+}, email, putItem) => {
   const { id: customerId } = await serviceUser.findByIdRole(email, 'customer');
   
   const sale = await Sale.create({
@@ -21,7 +21,11 @@ const createSale = async ({
     saleDate: new Date(),
     status,
   });
-  
+
+  JSON.parse(putItem).forEach(async ({ id, quantity }) => {
+    await SaleProduct.create({ saleId: sale.id, productId: id, quantity });
+  });
+
   return { statusCode: 201, data: sale }; // talvez tenha que alterar a resposta de "data"
   // return { statusCode: 201, data: { message: 'pedido realizado com sucesso' } };
 };

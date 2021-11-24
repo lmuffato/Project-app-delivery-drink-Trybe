@@ -7,5 +7,6 @@ module.exports = {
     deliveryAddress: Joi.string().required(),
     deliveryNumber: Joi.number().required(),
     status: Joi.string().required(),
+    putItem: Joi.string().required(),
   }),
 };

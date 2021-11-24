@@ -6,6 +6,8 @@ module.exports = (sequelize, DataTypes) => {
     deliveryNumber: DataTypes.STRING(50),
     saleDate: DataTypes.DATE,
     status: DataTypes.STRING(50),
+    userId: { type: DataTypes.INTEGER, primaryKey: true },
+    sellerId: { type: DataTypes.INTEGER, primaryKey: true }, 
   },
   {
     timestamps: false,

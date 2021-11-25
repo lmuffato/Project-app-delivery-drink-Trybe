@@ -25,7 +25,10 @@ function App() {
       <Route exact path="/customer/orders" component={ Orders } />
       <Route path="/customer/orders/:id" component={ OrderDetails } />
       <Route exact path="/seller/orders" component={ SellerOrders } />
-      <Route path="/seller/orders/:id" component={ SellerOrderDetails } />
+      <Route
+        path="/seller/orders/:id"
+        render={ (p) => <SellerOrderDetails { ...p } /> }
+      />
       <CartProvider>
         <Route exact path="/customer/products" component={ ClientProducts } />
         <Route path="/customer/checkout" component={ CustomerCheckout } />

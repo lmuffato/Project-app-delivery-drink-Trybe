@@ -1,24 +1,60 @@
 import React, { useContext, useState } from 'react';
+import { useNavigate } from 'react-router';
 import Header from '../components/header';
 import Context from '../context/Context';
 import Table from '../components/table';
 
 function CheckoutClient() {
-  const {
-    postShoppingCart,
-    shoppingCart,
-    total,
-    setDelivery, delivery, sellers, setSellerId } = useContext(Context);
+  const { post, shoppingCart, total } = useContext(Context);
+  const navigate = useNavigate();
 
-  const [order] = useState(shoppingCart);
-  console.log(order);
+  const [error, setError] = useState(null);
+  const [sellerId, setSellerId] = useState('');
+  const [delivery, setDelivery] = useState({
+    deliveryAddress: '',
+    deliveryNumber: '',
+  });
+
+  const handleChange = ({ target }) => {
+    const { id, value } = target;
+    setDelivery({ ...delivery, [id]: value });
+  };
+
+  const handleSubmit = async () => {
+    if (
+      delivery.deliveryAddress.trim() === ''
+      || delivery.deliveryNumber.trim() === ''
+      || sellerId === ''
+    ) {
+      setError('Preencha todos os campos');
+    } else {
+      const productIds = Object.keys(shoppingCart);
+      const submitCart = {};
+      productIds.forEach((id) => {
+        console.log(id);
+        submitCart[id] = shoppingCart[id].productQuant;
+      });
+
+      const totalConvertedToNumber = Number(total.replace(',', '.')).toFixed(2);
+      const data = {
+        shoppingCart: submitCart,
+        delivery,
+        total: totalConvertedToNumber,
+        sellerId,
+      };
+
+      const { data: { id } } = await post('customer_checkout', data);
+
+      navigate(`/customer/orders/${id}`);
+    }
+  };
 
   return (
     <>
       <Header client={ `${'nome'}` } />
-      <div>
-        <h1>Finalizar Pedido</h1>
-        <table border="1">
+      <h1>Finalizar Pedido</h1>
+      <table border="1">
+        <thead>
           <tr>
             <td>Item</td>
             <td>Descrição</td>
@@ -27,18 +63,19 @@ function CheckoutClient() {
             <td>Sub-total</td>
             <td>Remover Item</td>
           </tr>
-          { Object.keys(shoppingCart)
-            .map((item) => (<Table
-              props={ shoppingCart[item] }
-              key={ item.id }
-            />))}
-        </table>
+        </thead>
+        { Object.keys(shoppingCart)
+          .map((item, index) => (<Table
+            product={ shoppingCart[item] }
+            index={ index }
+            key={ `product-${shoppingCart[item].productId}` }
+          />))}
+      </table>
 
-        <h1 data-testid="customer_checkout__element-order-total-price">
-          Total: R$
-          { total }
-        </h1>
-      </div>
+      <h1 data-testid="customer_checkout__element-order-total-price">
+        Total: R$
+        { total }
+      </h1>
       <div>
         <h1>Detalhes e Endereço para Entrega</h1>
         <label htmlFor="vendedor">
@@ -60,30 +97,36 @@ function CheckoutClient() {
             ))}
           </select>
         </label>
-        <label htmlFor="endereço">
+        <label htmlFor="deliveryAddress">
           Endereço
           <input
             data-testid="customer_checkout__input-address"
+            id="deliveryAddress"
             type="text"
-            onChange={ (e) => setDelivery({ ...delivery,
-              deliveryAddress: e.target.value }) }
+            onChange={ handleChange }
           />
         </label>
-        <label htmlFor="Número">
-          Endereço
+        <label htmlFor="deliveryNumber">
+          Número
           <input
             data-testid="customer_checkout__input-addressNumber"
             type="text"
-            onChange={ (e) => setDelivery({ ...delivery,
-              deliveryNumber: e.target.value }) }
+            id="deliveryNumber"
+            onChange={ handleChange }
           />
         </label>
+        { error && (
+          <div>
+            *
+            {error}
+          </div>
+        )}
         <br />
         <br />
         <button
-          data-testid="customer_checkout__input-submit-order"
+          data-testid="customer_checkout__button-submit-order"
           type="submit"
-          onClick={ () => postShoppingCart() }
+          onClick={ handleSubmit }
         >
           FINALIZAR PEDIDO
         </button>

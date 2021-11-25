@@ -21,16 +21,20 @@ const checkRoleMatch = async (entityId, role) => {
 
 const createNewSaleOnDatabase = async (user, sellerId, total, delivery) => {
   const { deliveryAddress, deliveryNumber } = delivery;
-  const { dataValues: { id } } = await Sale.create({
-    userId: user.id,
-    sellerId,
-    totalPrice: total,
-    deliveryAddress,
-    deliveryNumber,
-    status: 'pendente',
-  });
+  try {
+    const { dataValues: { id } } = await Sale.create({
+      userId: user.id,
+      sellerId,
+      totalPrice: total,
+      deliveryAddress,
+      deliveryNumber,
+      status: 'Pendente',
+    });
 
-  return id;
+    return id;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const postSale = async (data, user) => {
@@ -44,8 +48,8 @@ const postSale = async (data, user) => {
 
     Promise.all(arrProducts.map((currProduct) => SaleProduct.create(
       { saleId: id, productId: currProduct[0], quantity: currProduct[1] },
-    ))).catch((_error) => { 
-      throw new Error();
+    ))).catch((error) => { 
+      console.log(error);
     });
 
     await transaction.commit();

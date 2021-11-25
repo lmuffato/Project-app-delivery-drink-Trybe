@@ -29,11 +29,11 @@ export default function SellerOrdersDetails() {
   useEffect(() => {
     setIsLoading(true);
     getOrderById(id)
-      .then((result) => (
-        setItens(result.itensList),
-        setSale(result.sale),
-        setIsLoading(false)
-      ));
+      .then((result) => {
+        setItens(result.itensList);
+        setSale(result.sale);
+        setIsLoading(false);
+      });
   }, []);
 
   const renderTable = () => (
@@ -52,12 +52,12 @@ export default function SellerOrdersDetails() {
             { sale.status }
           </th>
           <th>
-            <button data-testid={ `${dataTestId57}-${id}` }>
+            <button type="button" data-testid={ `${dataTestId57}-${id}` }>
               PREPARAR PEDIDO
             </button>
           </th>
           <th>
-            <button data-testid={ `${dataTestId58}-${id}` }>
+            <button type="button" data-testid={ `${dataTestId58}-${id}` }>
               SAIU PARA ENTREGA
             </button>
           </th>
@@ -83,7 +83,6 @@ export default function SellerOrdersDetails() {
       </tfoot>
     </table>
   );
-
 
   return (
     <main>

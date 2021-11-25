@@ -6,16 +6,13 @@ const CartContext = createContext();
 export function CartProvider({ children }) {
   const [totalValue, setTotalValue] = useState(0);
 
-  const getCar = () => {
+  function getCar() {
     const localCart = JSON.parse(localStorage.getItem('carrinho'));
-    console.log('Local Cart', localCart);
-
     return localCart;
-  };
+  }
 
-  const totalCartPrice = () => {
+  function totalCartPrice() {
     const cart = getCar();
-    console.log(cart);
     if (cart && cart.length !== 0) {
       const total = cart
         .reduce((acc, elem) => acc + elem.quantity * +elem.price, 0).toFixed(2);
@@ -24,13 +21,13 @@ export function CartProvider({ children }) {
       return;
     }
     setTotalValue(0);
-  };
+  }
 
   useEffect(() => {
     totalCartPrice();
   }, []);
 
-  const updateCart = (id, name, price, param) => {
+  function updateCart(id, name, price, param) {
     const cart = getCar();
     const actualCart = cart.find((elem) => elem.id === id);
     let product;
@@ -66,9 +63,9 @@ export function CartProvider({ children }) {
     console.log('New array', newArrayOfProducts);
     localStorage.setItem('carrinho', JSON.stringify(newArrayOfProducts));
     totalCartPrice();
-  };
+  }
 
-  const addToCart = (id, name, price) => {
+  function addToCart(id, name, price) {
     const cart = getCar();
     if (!cart) {
       console.log(cart);
@@ -96,9 +93,9 @@ export function CartProvider({ children }) {
       return;
     }
     updateCart(id, name, price, '+');
-  };
+  }
 
-  const manualEntry = (id, name, price, quantity) => {
+  function manualEntry(id, name, price, quantity) {
     const cart = getCar();
     const productUpdate = { id, name, price, quantity };
     console.log('Entrei aqui no carrinho entry', id, name, price, quantity);
@@ -131,8 +128,6 @@ export function CartProvider({ children }) {
       return;
     }
 
-    console.log('Carrinho', cart);
-
     const newArrayOfProducts = cart
       .map((productElem) => {
         if (productElem.id === id) {
@@ -143,7 +138,7 @@ export function CartProvider({ children }) {
 
     localStorage.setItem('carrinho', JSON.stringify(newArrayOfProducts));
     totalCartPrice();
-  };
+  }
 
   const removeProdCart = (id, name, price) => {
     const cart = getCar();

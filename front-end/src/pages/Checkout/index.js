@@ -15,7 +15,11 @@ function CheckoutPage() {
       <CheckoutTable cart={ cart } />
       <div>
         Total: R$
-        {totalValue}
+        <span
+          data-testid="customer_checkout__element-order-total-price"
+        >
+          {totalValue}
+        </span>
       </div>
     </section>
   );

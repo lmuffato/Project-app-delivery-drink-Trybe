@@ -1,9 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './style.css';
 
 function CheckoutTable({ cart }) {
+  const dataTestID = (index) => (
+    `customer_checkout__element-order-table-item-number-${index}`
+  );
   return (
-    <table className="checkoutContainer">
+    <table>
       <thead>
         <tr>
           <th>Item</th>
@@ -18,12 +22,36 @@ function CheckoutTable({ cart }) {
       <tbody>
         {cart.map(({ id, name, quantity, price }, index) => (
           <tr key={ id }>
-            <td>{index + 1}</td>
-            <td>{name}</td>
-            <td>{quantity}</td>
-            <td>{price}</td>
-            <td>{+price * +quantity}</td>
-            <td>REMOVER</td>
+            <td
+              data-testid={ dataTestID(index) }
+            >
+              {index + 1}
+            </td>
+            <td
+              data-testid={ `customer_checkout__element-order-table-name-${index}` }
+            >
+              {name}
+            </td>
+            <td
+              data-testid={ `customer_checkout__element-order-table-quantity-${index}` }
+            >
+              {quantity}
+            </td>
+            <td
+              data-testid={ `customer_checkout__element-order-table-unit-price-${index}` }
+            >
+              {price}
+            </td>
+            <td
+              data-testid={ `customer_checkout__element-order-table-sub-total-${index}` }
+            >
+              {+price * +quantity}
+            </td>
+            <td
+              data-testid={ `customer_checkout__element-order-table-remove-${index}` }
+            >
+              REMOVER
+            </td>
           </tr>
         ))}
       </tbody>

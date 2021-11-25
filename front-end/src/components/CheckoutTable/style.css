@@ -1,0 +1,17 @@
+table {
+  border-spacing: 0 0.9rem;
+  width: 70%;
+}
+
+th {
+  color: rgb(243, 243, 243);
+  background: rgb(24, 24, 24);
+  text-align: left;
+}
+
+ td {
+  border-radius: 5px;
+  color: rgb(24, 24, 24);
+  background: rgb(255, 255, 255);
+  padding: 1rem 2rem;
+}

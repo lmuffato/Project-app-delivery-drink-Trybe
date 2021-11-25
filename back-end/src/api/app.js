@@ -16,7 +16,7 @@ const io = require('socket.io')(httpServer, {
 
 const socketsClientSeller = require('../sockets/socketsClientSeller');
 
-socketsClientSeller.deliveryAppSocket(io);
+socketsClientSeller.socketsClientSeller(io);
 
 app.use(cors());
 

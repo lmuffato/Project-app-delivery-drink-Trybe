@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Header from '../../components/Header';
 import RequestCard from '../../components/RequestCard';
 import fetchSales from '../../services/MyRequestsPage/fetchSales';
-import { dataTestids } from '../../utils/dataTestIds';
+import { dataTestIdsClientMyRequest } from '../../utils/dataTestIds';
 import formatDate from '../../utils/formatDate';
 import styles from './styles.module.css';
 
@@ -25,7 +25,7 @@ export default function MyRequestsPage() {
         {sales.map((sale) => (
           <Link key={ sale.id } to={ `/customer/orders/${sale.id}` }>
             <RequestCard
-              dataTestId={ dataTestids }
+              dataTestId={ dataTestIdsClientMyRequest }
               requestId={ sale.id }
               status={ sale.status }
               date={ formatDate(sale.saleDate) }

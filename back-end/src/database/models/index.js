@@ -6,6 +6,33 @@ const Sequelize = require('sequelize');
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.js')[env];
+
+/**
+ * @typedef {{ name: string, price: number, urlImage: string}} Product
+ */
+/**
+ * @typedef {{
+  userId: number,
+  sellerId: number,
+  totalPrice: number,
+  deliveryAddress: string,
+  deliveryNumber: string,
+  saleDate: string,
+  status: string,
+}} Sale
+ */
+/**
+ * @typedef {{ name: string, email: string, password: string, role: string}} User
+ */
+
+/**
+ * @type{{
+ *  Product: import('sequelize').ModelCtor<Model<Product>>,
+ *  Sale: import('sequelize').ModelCtor<Model<Sale>>,
+ *  User: import('sequelize').ModelCtor<Model<{postId: number, categoryId: number}>>
+ *  SalesProduct: import('sequelize').ModelCtor<Model<User>>,
+ * }}
+ */
 const db = {};
 
 let sequelize;

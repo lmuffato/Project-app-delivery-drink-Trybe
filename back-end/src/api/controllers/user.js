@@ -11,7 +11,7 @@ const login = rescue((req, res) => generateToken(req.body)
 const create = rescue((req, res) => User.create(req.body)
   .then((data) => res.status(201).json(data)));
 
-const findAll = rescue((_req, res) => User.findAll()
+const findAll = rescue((req, res) => User.findAll(req.query)
   .then((data) => res.status(200).json(data)));
 
 const findOne = rescue((req, res) => User.findOne(req.params)

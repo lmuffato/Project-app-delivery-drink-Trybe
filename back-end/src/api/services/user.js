@@ -1,4 +1,5 @@
 const md5 = require('md5');
+const { Op } = require('sequelize');
 const { User } = require('../../database/models');
 const generateToken = require('./generateToken');
 
@@ -13,8 +14,10 @@ const create = async ({ name, email, password, role = 'customer' }) => {
   return data;
 };
 
-const findAll = async () => {
+const findAll = async ({ role }) => {
+  const where = (role === undefined || role === '') ? {} : { role };
   const data = await User.findAll({
+      where,
     attributes: {
         exclude: ['password'],
     },

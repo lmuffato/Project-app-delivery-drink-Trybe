@@ -4,7 +4,7 @@ const JoiValidate = require('../middlewares/JoiValidate');
 const { register, user } = require('../utils/JoiSchemas');
 const validate = require('../middlewares/validators');
 
-const route = express.Router();
+const route = express.Router({ mergeParams: true });
 
 route.post('/register', JoiValidate(register), validate.userExists, User.create);
 

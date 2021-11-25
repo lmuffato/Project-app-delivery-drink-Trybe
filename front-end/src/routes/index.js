@@ -18,6 +18,7 @@ function RoutesComponent() {
         <Route exact path="/customer/products" component={ ProductsPage } />
         <Route exact path="/customer/orders" component={ Orders } />
         <Route exact path="/customer/orders/:id" component={ OrderDetails } />
+        <Route exact path="/seller/orders" component={ Orders } />
       </Switch>
     </Routes>
   );

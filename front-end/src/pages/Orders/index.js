@@ -21,20 +21,22 @@ function Orders() {
     fetchSales();
   }, []);
 
-  const createOrders = () => (
-    salesOrder.map((order) => {
+  const createOrders = () => {
+    const { role } = JSON.parse(localStorage.getItem('user'));
+    console.log('Cheguei aqui', role, salesOrder);
+    return salesOrder.map((order) => {
       const { id, status, sale_date: saleDate, total_price: totalPrice } = order;
 
       return (
         <Link
           key={ id }
-          to={ `/customer/orders/${id}` }
+          to={ `/${role}/orders/${id}` }
           style={ { textDecoration: 'none' } }
         >
           <div
             className="order-container"
             key={ id }
-            data-testid={ `customer_orders__element-order-id-${id}` }
+            data-testid={ `${role}_orders__element-order-id-${id}` }
           >
             <div className="info-order">
               <p>Pedido</p>
@@ -42,23 +44,27 @@ function Orders() {
             </div>
             <div
               className={ `status-order-${status}` }
-              data-testid={ `customer_orders__element-delivery-status-${id}` }
+              data-testid={ `${role}_orders__element-delivery-status-${id}` }
             >
               <p>{status.toUpperCase()}</p>
             </div>
             <div className="date-price-order">
               <p
-                data-testid={ `customer_orders__element-order-date-${id}` }
+                data-testid={ `${role}_orders__element-order-date-${id}` }
               >
                 {moment(saleDate).format('DD/MM/yyyy')}
               </p>
-              <p>{totalPrice}</p>
+              <p
+                data-testid={ `seller_orders__element-card-address-${id}` }
+              >
+                {totalPrice}
+              </p>
             </div>
           </div>
         </Link>
       );
-    })
-  );
+    });
+  };
 
   return (
     <section className="ordersPage">

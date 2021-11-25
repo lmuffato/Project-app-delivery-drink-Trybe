@@ -41,4 +41,14 @@ export default {
     const { data } = await api.get('/sellers');
     return data;
   },
+  postSale: async (obj, token) => {
+    console.log(obj, token);
+    const { data } = await api.post('/orders', {
+      headers: {
+        Authorization: token,
+      },
+      obj,
+    });
+    return data;
+  },
 };

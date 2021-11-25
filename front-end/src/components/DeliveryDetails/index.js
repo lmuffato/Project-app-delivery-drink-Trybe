@@ -1,35 +1,64 @@
 import React from 'react';
+import { useCart } from '../../hooks/useCart';
 import { useDeliveryDetails } from '../../hooks/useDeliveryDetails';
+import api from '../../services/api';
+import SelectSellers from '../SelectSellers';
 import './style.css';
 
 function DeliveryDetails() {
-  const { sellers } = useDeliveryDetails();
+  const {
+    sellers,
+    address,
+    setAddress,
+    number,
+    setNumber,
+    selectedSeller,
+    setSelectedSeller } = useDeliveryDetails();
+  const { totalValue } = useCart();
+
+  const formatOrderObj = () => {
+    const cart = JSON.parse(localStorage.getItem('carrinho'));
+    const user = JSON.parse(localStorage.getItem('user'));
+    const products = cart.map(({ id, quantity }) => ({ id, quantity }));
+    const newObj = {
+      userId: user.id,
+      sellerId: +selectedSeller,
+      products,
+      totalPrice: totalValue,
+      deliveryAddress: address,
+      deliveryNumber: number,
+    };
+    return newObj;
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const { token } = JSON.parse(localStorage.getItem('user'));
+    const obj = formatOrderObj();
+    const response = await api.postSale(obj, token);
+    console.log(response);
+  };
+
   if (!sellers) return <h1>Loading</h1>;
   return (
     <div>
       <h3>Detalhes e Endereço para Entrega</h3>
 
-      <form className="deliveryForm">
+      <form className="deliveryForm" onSubmit={ handleSubmit }>
         <div className="deliveryFormContainer">
-          <label htmlFor="seller">
-            P. Vendedora Responsável
-            <select
-              name="seller"
-              id="seller"
-              required
-              data-testid="customer_checkout__select-seller"
-            >
-              {sellers.map(({ id, name }) => (
-                <option value={ name } key={ id }>{name}</option>
-              ))}
-            </select>
-          </label>
+          <SelectSellers
+            selectedSeller={ selectedSeller }
+            setSelectedSeller={ setSelectedSeller }
+            sellers={ sellers }
+          />
 
           <label htmlFor="address">
             Endereço
             <input
               id="address"
               type="text"
+              value={ address }
+              onChange={ (e) => setAddress(e.target.value) }
               placeholder="Travessa Terceira da Castanheira, Bairro Muruci"
               required
               data-testid="customer_checkout__input-address"
@@ -41,6 +70,8 @@ function DeliveryDetails() {
             <input
               id="number"
               type="number"
+              value={ number }
+              onChange={ (e) => setNumber(e.target.value) }
               required
               placeholder="198"
               data-testid="customer_checkout__input-addressNumber"

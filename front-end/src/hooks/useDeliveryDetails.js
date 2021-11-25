@@ -8,6 +8,7 @@ export function DeliveryProvider({ children }) {
   const [sellers, setSellers] = React.useState('');
   const [address, setAddress] = React.useState('');
   const [number, setNumber] = React.useState('');
+  const [selectedSeller, setSelectedSeller] = React.useState('2');
 
   const fetchSellers = async () => {
     const arrayOfSellers = await api.getSellers();
@@ -20,7 +21,15 @@ export function DeliveryProvider({ children }) {
 
   return (
     <DeliveryContext.Provider
-      value={ { sellers, address, setAddress, number, setNumber } }
+      value={ {
+        sellers,
+        address,
+        setAddress,
+        number,
+        setNumber,
+        selectedSeller,
+        setSelectedSeller,
+      } }
     >
       {children}
     </DeliveryContext.Provider>

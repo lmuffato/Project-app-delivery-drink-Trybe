@@ -4,18 +4,29 @@ import styles from './styles.module.css';
 import { useSellerOrderDetails } from '../../context/sellerOrderDetailsProvider';
 import formatDate from '../../utils/formatDate';
 import replaceDotToComma from '../../services/productPages/replaceDotToComa';
+import updateStatusSale from '../../services/UpdateSale/updateStatusSale';
 
 export default function SellerOrderDetails({ dataTestIds }) {
-  const [disabledButton, setDisableButton] = useState(false);
-  const { sale, products } = useSellerOrderDetails();
+  const [disabledPendingButton, setDisablePendingButton] = useState(false);
+  const [disabledDeliveryButton, setDisabledDeliveryButton] = useState(true);
+  const { sale, setSale, products } = useSellerOrderDetails();
 
   useEffect(() => {
-    const status = ['pendente', 'Pendente'];
-
-    if (!status.includes(sale.status) && sale.status) {
-      setDisableButton(true);
+    if (sale.status !== 'Pendente' && sale.status) {
+      setDisablePendingButton(true);
     }
   }, [sale.status]);
+
+  useEffect(() => {
+    if (sale.status === 'Preparando' && sale.status) {
+      setDisabledDeliveryButton(false);
+    }
+  }, [sale.status]);
+
+  const handleChangeStatus = (myStatus) => {
+    updateStatusSale(sale.id, setSale, myStatus);
+    setDisabledDeliveryButton(true);
+  };
 
   return (
     <main className={ styles.container }>
@@ -37,16 +48,18 @@ export default function SellerOrderDetails({ dataTestIds }) {
         </span>
 
         <button
-          disabled={ disabledButton }
+          disabled={ disabledPendingButton }
           data-testid={ dataTestIds['57'] }
+          onClick={ () => handleChangeStatus('Preparando') }
           type="button"
         >
           PREPARAR PEDIDO
         </button>
 
         <button
-          disabled
+          disabled={ disabledDeliveryButton }
           data-testid={ dataTestIds['58'] }
+          onClick={ () => handleChangeStatus('Em Trânsito') }
           type="button"
         >
           SAIU PARA ENTREGA

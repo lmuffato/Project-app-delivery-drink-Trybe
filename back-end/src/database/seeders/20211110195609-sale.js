@@ -6,7 +6,7 @@ module.exports = {
         "delivery_address": "Rua Antonio",
         "delivery_number": "10",
         "sale_date": new Date('2011-08-01T19:58:00.000Z'),
-        "status": "pendente",
+        "status": "Pendente",
         "user_id": 3,
         "seller_id": 2
       },
@@ -15,7 +15,7 @@ module.exports = {
         "delivery_address": "Rua Francisco Antonio",
         "delivery_number": "22",
         "sale_date": new Date('2011-08-01T19:58:00.000Z'),
-        "status": "preparando",
+        "status": "Preparando",
         "user_id": 3,
         "seller_id": 2
       },
@@ -24,7 +24,7 @@ module.exports = {
         "delivery_address": "Rua João Branco",
         "delivery_number": "160",
         "sale_date": new Date('2011-08-01T19:58:00.000Z'),
-        "status": "entregue",
+        "status": "Entregue",
         "user_id": 3,
         "seller_id": 2
       },

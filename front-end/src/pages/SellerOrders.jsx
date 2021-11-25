@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import moment from 'moment';
 import NavBar from '../components/CustomerNavBar';
 import SellerOrderCard from '../components/SellerOrderCard';
 
@@ -25,7 +26,7 @@ function SellerOrders() {
           id={ sale.id }
           status={ sale.status }
           totalPrice={ sale.total_price }
-          saleDate={ sale.sale_date }
+          saleDate={ moment(sale.sale_date).format(('DD/MM/YYYY')) }
           deliveryAddress={ sale.delivery_address }
           deliveryNumber={ sale.delivery_number }
         />

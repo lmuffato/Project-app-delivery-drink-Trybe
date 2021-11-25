@@ -26,6 +26,9 @@ function CustomerNavBar() {
     if (role === 'customer') {
       history.push('/customer/orders');
     }
+    if (role === 'seller') {
+      history.push('/seller/orders');
+    }
   }
 
   function redirectToProds(e) {

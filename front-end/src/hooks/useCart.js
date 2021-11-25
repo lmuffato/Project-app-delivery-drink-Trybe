@@ -8,14 +8,11 @@ export function CartProvider({ children }) {
 
   const getCar = () => {
     const localCart = JSON.parse(localStorage.getItem('carrinho'));
-    console.log('Local Cart', localCart);
-
     return localCart;
   };
 
   const totalCartPrice = () => {
     const cart = getCar();
-    console.log(cart);
     if (cart && cart.length !== 0) {
       const total = cart
         .reduce((acc, elem) => acc + elem.quantity * +elem.price, 0).toFixed(2);
@@ -131,8 +128,6 @@ export function CartProvider({ children }) {
       return;
     }
 
-    console.log('Carrinho', cart);
-
     const newArrayOfProducts = cart
       .map((productElem) => {
         if (productElem.id === id) {
@@ -152,9 +147,16 @@ export function CartProvider({ children }) {
     updateCart(id, name, price, '-');
   };
 
+  const removeTotalItem = (id) => {
+    const cart = getCar();
+    const newCart = cart.filter((productElem) => productElem.id !== id);
+    localStorage.setItem('carrinho', JSON.stringify(newCart));
+    totalCartPrice();
+  };
+
   return (
     <CartContext.Provider
-      value={ { totalValue, addToCart, removeProdCart, manualEntry } }
+      value={ { totalValue, addToCart, removeProdCart, manualEntry, removeTotalItem } }
     >
       {children}
     </CartContext.Provider>

@@ -32,6 +32,10 @@
   width: 180px;
 }
 
+.cartButton:disabled {
+  cursor: not-allowed;
+}
+
 .cartButton:hover {
   filter: brightness(0.8);
 }

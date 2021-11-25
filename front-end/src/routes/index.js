@@ -5,6 +5,7 @@ import RegisterPage from '../pages/Register';
 import ProductsPage from '../pages/ProductsPage';
 import Orders from '../pages/Orders';
 import OrderDetails from '../pages/OrderDetails';
+import CheckoutPage from '../pages/Checkout';
 
 function RoutesComponent() {
   return (
@@ -18,6 +19,7 @@ function RoutesComponent() {
         <Route exact path="/customer/products" component={ ProductsPage } />
         <Route exact path="/customer/orders" component={ Orders } />
         <Route exact path="/customer/orders/:id" component={ OrderDetails } />
+        <Route exact path="/customer/checkout" component={ CheckoutPage } />
       </Switch>
     </Routes>
   );

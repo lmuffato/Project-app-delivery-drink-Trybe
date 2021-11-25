@@ -43,7 +43,6 @@ function Login() {
         role,
         id,
       });
-      console.log(role);
       if (role === 'administrator') {
         navigate('/admin/manage', { replace: true });
       } else if (role === 'seller') {

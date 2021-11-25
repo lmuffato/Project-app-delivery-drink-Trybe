@@ -7,7 +7,6 @@ const { MISSING_AUTH_TOKEN, JWT_MALFORMED } = require('../messages/errorMessages
 
 const validateToken = (req, res, next) => {
   const { authorization } = req.headers;
-  console.log('Bão');
 
   if (!authorization) return res.status(401).json({ data: MISSING_AUTH_TOKEN });
   try {

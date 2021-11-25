@@ -14,8 +14,6 @@ function Products() {
     getProducts();
   }, []);
 
-  console.log(products);
-
   return (
     <section>
       <nav>

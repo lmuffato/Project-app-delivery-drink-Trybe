@@ -15,7 +15,9 @@ app.use('/images', express.static(path
   .join(__dirname, '..', '..', '/public', '/images', '/public')));
 
 app.get('/products', Product.getProducts);
+
 app.get('/sales', Sale.getAllSales);
+
 app.get('/sales/getSales', Sale.getSales);
 
 app.post('/user', User.register);
@@ -35,5 +37,9 @@ app.post('/sale', Sale.createSale);
 app.get('/coffee', (_req, res) => res.status(418).end());
 
 app.get('/user/sale/:id', Sale.getAllSales);
+
+app.patch('/sale/:id', Sale.setSaleStatus);
+
+app.get('/sale/:id', Sale.getProductsSale);
 
 module.exports = app;

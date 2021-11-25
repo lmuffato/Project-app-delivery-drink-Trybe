@@ -72,8 +72,11 @@ function Login() {
 
   const isLoged = () => {
     const user = JSON.parse(localStorage.getItem('user'));
-    if (user) {
+    if (!user) return;
+    if (user.role === 'customer') {
       history.push('/customer/products');
+    } else if (user.role === 'seller') {
+      history.push('/seller/orders');
     }
   };
 

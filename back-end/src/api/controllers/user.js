@@ -1,4 +1,4 @@
-const { StatusCodes, ReasonPhrases } = require('http-status-codes');
+const { StatusCodes } = require('http-status-codes');
 const UserService = require('../services/user');
 
 exports.login = async (req, res) => {
@@ -12,8 +12,8 @@ exports.login = async (req, res) => {
   } catch (error) {
     console.error(error);
     res
-    .status(StatusCodes.INTERNAL_SERVER_ERROR)
-    .send(ReasonPhrases.INTERNAL_SERVER_ERROR);
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .send(error.message);
   }
 };
 
@@ -28,7 +28,7 @@ exports.register = async (req, res) => {
   } catch (error) {
     console.error(error);
     res
-    .status(StatusCodes.INTERNAL_SERVER_ERROR)
-    .send(ReasonPhrases.INTERNAL_SERVER_ERROR);
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .send(error.message);
   }
 };

@@ -1,13 +1,7 @@
-const jwt = require('jsonwebtoken');
 const md5 = require('md5');
 
 const { user: userModel } = require('../../database/models');
-const { getSecretKey } = require('../../utils/parseToken');
-
-const generateToken = (object) => {
-  const JWT_SECRET = getSecretKey();
-  return jwt.sign(object, JWT_SECRET, { expiresIn: '24h' });
-};
+const { generateToken } = require('../../utils/generateToken');
 
 exports.findAll = async () => {
   const users = await userModel.findAll({});
@@ -21,7 +15,7 @@ exports.login = async ({ email, password }) => {
   );
   if (user) {
   return {
-    token: generateToken({ email }),
+    token: generateToken({ email: user.email, role: user.role }),
     id: user.id,
     name: user.name,
     email: user.email,

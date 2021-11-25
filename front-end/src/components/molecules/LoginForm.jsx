@@ -29,15 +29,15 @@ const LoginForm = () => {
     } else {
       let urlByRole;
       switch (user.role) {
-        case 'seller':
-          urlByRole = '/seller/orders';
-          break;
-        case 'administrator':
-          urlByRole = '/admin/manage';
-          break;
-        default:
-          urlByRole = '/customer/products';
-          break;
+      case 'seller':
+        urlByRole = '/seller/orders';
+        break;
+      case 'administrator':
+        urlByRole = '/admin/manage';
+        break;
+      default:
+        urlByRole = '/customer/products';
+        break;
       }
       localStorage.setItem('user', JSON.stringify(user));
       history.push(urlByRole);

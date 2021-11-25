@@ -6,9 +6,9 @@ function ImagemProduto({ data }) {
   return (
     <img
       alt={ name }
-      data-testid={ `customer_products__button-card-add-item-${id}` }
+      data-testid={ `customer_products__img-card-bg-image-${id}` }
       src={ urlImage }
-      className="produto-card-image"
+      className="card-image"
     />
   );
 }

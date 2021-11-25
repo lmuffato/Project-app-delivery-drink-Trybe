@@ -3,14 +3,7 @@ import Joi from 'joi';
 const minCharactersName = 12;
 const minCharactersPassword = 6;
 
-const initialData = {
-  name: '',
-  email: '',
-  password: '',
-  role: 'client',
-};
-
-const schema = Joi.object({
+export default (userData) => Joi.object({
   name: Joi.string().min(minCharactersName).required(),
   email: Joi.string().required()
     .email({
@@ -18,12 +11,4 @@ const schema = Joi.object({
     }).required(),
   password: Joi.string().min(minCharactersPassword).required(),
   role: Joi.string().required(),
-});
-
-const explicitCheck = {
-  name: false,
-  email: false,
-  password: false,
-};
-
-export { initialData, schema, explicitCheck };
+}).validate(userData);

@@ -1,7 +1,9 @@
+require('dotenv').config();
 const express = require('express');
-
-const http = require('http');
+const cors = require('cors');
 const bodyParser = require('body-parser');
+const path = require('path');
+const http = require('http');
 
 const app = express();
 const server = http.createServer(app);
@@ -12,18 +14,19 @@ const io = require('socket.io')(server, {
     } });
 const { getSaleById, update } = require('../services');
 const middlewares = require('../middlewares');
-const { useRoutes, getSalesRouter } = require('../routes');
+const routes = require('../routes');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
+app.use('/', routes);
 
-app.use('/user', useRoutes);
 app.get('/coffee', (_req, res) => res.status(418).end());
 
-app.use(middlewares.routeNotFound);
+app.use(express.static(path.join(__dirname, '../', '../', 'public')));
 
+app.use(middlewares.routeNotFound);
 app.use(middlewares.errorMiddleware);
-app.use('/sales', getSalesRouter);
 
 io.on('connection', (socket) => {
     console.log('conectou');

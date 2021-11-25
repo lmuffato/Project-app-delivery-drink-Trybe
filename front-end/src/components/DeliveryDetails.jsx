@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useContext } from 'react';
 import { useEffect, useState } from 'react/cjs/react.development';
+import { useNavigate } from 'react-router';
 import { CartContext } from '../contexts/Cart';
 
 function DeliveryDetails() {
@@ -9,6 +10,8 @@ function DeliveryDetails() {
   const [address, setAddress] = useState(null);
   const [number, setNumber] = useState(null);
   const [allFieldFilled, setAllFieldsFilled] = useState(false);
+
+  const navigate = useNavigate();
 
   const { cart, total } = useContext(CartContext);
 
@@ -30,9 +33,9 @@ function DeliveryDetails() {
   };
 
   const handleClick = async () => {
-    if (seller && address && number) {
+    if (address && number) {
       const bodyRequest = {
-        sellerId: seller.id,
+        sellerId: seller ? seller.id : 1,
         totalPrice: total,
         deliveryAddress: address,
         deliveryNumber: number,
@@ -51,11 +54,10 @@ function DeliveryDetails() {
           body: JSON.stringify(bodyRequest),
         })
           .then((result) => result.json());
-        console.log(pedido);
+        navigate(`/customer/orders/${pedido.id}`);
       } catch (error) {
         console.log(error);
       }
-      // navigate('/customer/checkout');
       setAllFieldsFilled(false);
     } else {
       setAllFieldsFilled(true);
@@ -66,18 +68,26 @@ function DeliveryDetails() {
     getAllSellers();
   }, []);
 
+  // console.log(sellersList);
+
+  const renderSellersOptions = () => (
+    <select
+      name="sellers-dropdown"
+      id="sellers"
+      data-testid="customer_checkout__select-seller"
+      onChange={ (e) => setSeller(e.target.value) }
+      defaultValue={ sellersList[0].name }
+    >
+      { sellersList
+        .map(({ name }, index) => (<option key={ index }>{name}</option>))}
+    </select>
+  );
+
   return (
     <form>
       <label htmlFor="sellers">
-        <select
-          name="sellers-dropdown"
-          id="sellers"
-          data-testid="customer_checkout__select-seller"
-          onChange={ setSeller }
-        >
-          { sellersList && sellersList
-            .map(({ name }, index) => (<option key={ index }>{name}</option>))}
-        </select>
+        {sellersList
+          && renderSellersOptions()}
       </label>
       <label htmlFor="adress">
         Endereço

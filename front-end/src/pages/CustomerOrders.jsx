@@ -7,7 +7,7 @@ export default function CustomerOrder() {
   console.log('🚀 ~ file: CustomerOrders.jsx ~ line 7 ~ CustomerOrder ~ sales', sales);
   const user = JSON.parse(localStorage.getItem('user'));
   const { token } = user;
-
+  //
   useEffect(() => {
     (async () => {
       const { result } = await saleActionGet({ token });

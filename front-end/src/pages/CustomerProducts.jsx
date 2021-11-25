@@ -55,7 +55,8 @@ export default function CustomerProducts() {
     validToken();
   }, [validToken]);
 
-  const clickLoginButton = async () => {
+  const clickLoginButton = () => {
+    console.log('checkoutaaaaaaaaaaaaa');
     history.push('/customer/checkout');
   };
 

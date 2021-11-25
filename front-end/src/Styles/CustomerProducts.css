@@ -1,14 +1,16 @@
 .bodyCustomerProducts {
-  display: flex;
-  flex-wrap: wrap;
+  position: absolute;
+  top: 50px;
 }
 
 .buttonVercarrinho {
   background-color: rgb(173, 209, 140);
   float: left;
-  height: 30px;
-  left: 700px;
+  font-size: 11px;
+  height: 20px;
+  left: 800px;
   position: fixed;
-  top: 50px;
-  width: 200px;
+  top: 400px;
+  width: 130px;
+  z-index: 10;
 }

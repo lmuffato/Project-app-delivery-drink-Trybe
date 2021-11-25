@@ -35,11 +35,12 @@ function DeliveryDetails() {
   const handleClick = async () => {
     if (address && number) {
       const bodyRequest = {
-        sellerId: seller ? seller.id : 1,
+        sellerId: seller ? seller.id : 2,
         totalPrice: total,
         deliveryAddress: address,
-        deliveryNumber: number,
+        deliveryNumber: String(number),
         products: cart,
+        status: 'Pendente',
       };
       try {
         const pedido = await fetch('http://localhost:3001/orders', {

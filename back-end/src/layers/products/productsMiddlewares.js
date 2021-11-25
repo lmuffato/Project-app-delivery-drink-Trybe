@@ -39,7 +39,7 @@ const getById = async (req, res) => {
 
 const getManyById = async (req, res) => {
   const { id } = req.params;
-  const data = await products.findAll({ where: { id }});
+  const data = await products.findAll({ where: { id } });
   return res.status(200).json(data);
 };
 

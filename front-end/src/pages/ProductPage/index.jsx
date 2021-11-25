@@ -18,11 +18,11 @@ export default function ProductPage() {
       .then((item) => setData(item));
   }, []);
 
-  useEffect(() => {
+  const calculateTotalPrice = () => {
     const prices = putItem
       .reduce((acc, item) => Number(item.price) * item.quantity + acc, 0);
     setTotalPrice(prices.toFixed(2));
-  }, [putItem, setTotalPrice]);
+  };
 
   return (
     <div>
@@ -35,6 +35,7 @@ export default function ProductPage() {
             name={ name }
             price={ price }
             image={ urlImage }
+            calculateTotalPrice={ calculateTotalPrice }
           />
         )) }
       </div>

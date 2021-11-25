@@ -4,37 +4,56 @@ import { usePrice } from '../../context/productsProvider';
 import replaceDotToComa from '../../services/productPages/replaceDotToComa';
 import styles from './styles.module.css';
 
-export default function ItemCard({ id, name, price, image }) {
-  const [inputContent, setInputContent] = useState(0);
+export default function ItemCard({ id, name, price, image, calculateTotalPrice }) {
+  const [quantity, setQuantity] = useState(0);
   const { putItem, setPutItem } = usePrice();
 
-  useEffect(() => {
-    putItem.forEach((item, index) => {
-      if (item.id === id) putItem.splice(index, 1);
-    });
-    setPutItem([...putItem, { id, name, price, quantity: inputContent }]);
-  }, [inputContent]);
-
-  useEffect(() => {
-    putItem.forEach((item, index) => {
-      if (item.quantity === 0) putItem.splice(index, 1);
-    });
-  }, [putItem]);
-
-  const buttonClick = ({ textContent }) => {
-    if (textContent === '+') {
-      setInputContent(inputContent + 1);
-    }
-
-    if (textContent === '-' && inputContent > 0) {
-      setInputContent(inputContent - 1);
+  const handleChange = (event) => {
+    const newItem = { id, name, price };
+    const findItem = putItem.find((item) => item.id === id);
+    if (findItem) {
+      setQuantity(event.target.value.replace(/^0+/, ''));
+      findItem.quantity = Number(event.target.value);
+    } else {
+      setQuantity(event.target.value.replace(/^0+/, ''));
+      setPutItem((prevState) => (
+        [...prevState, { ...newItem, quantity: Number(event.target.value) }]));
     }
   };
 
-  const changeInput = (value) => {
-    if (value === '') setInputContent(0);
-    if ((/^[1-9]\d*$/).test(Number(value))) setInputContent(value);
+  const handleAddItem = () => {
+    const newItem = { id, name, price };
+    const findItem = putItem.find((item) => item.id === id);
+    if (findItem && findItem.quantity) {
+      setQuantity(Number(quantity) + 1);
+      findItem.quantity = Number(quantity) + 1;
+    } else {
+      setQuantity(quantity + 1);
+      setPutItem((prevState) => (
+        [...prevState, { ...newItem, quantity: Number(quantity) + 1 }]));
+    }
   };
+
+  const handleRemoveItem = () => {
+    const findItem = putItem.find((item) => item.id === id);
+    if (quantity === 0) {
+      setQuantity(0);
+      return null;
+    }
+    if (findItem) {
+      setQuantity(quantity - 1);
+      findItem.quantity = quantity - 1;
+    }
+    if (findItem.quantity === 0) {
+      const removeItem = putItem.filter((item) => item.id !== id);
+      setPutItem(removeItem);
+      setQuantity(0);
+    }
+  };
+
+  useEffect(() => {
+    calculateTotalPrice();
+  }, [quantity, putItem, calculateTotalPrice]);
 
   return (
     <div className={ styles.productCard }>
@@ -60,22 +79,22 @@ export default function ItemCard({ id, name, price, image }) {
           <button
             data-testid={ `customer_products__button-card-rm-item-${id}` }
             type="button"
-            onClick={ (e) => buttonClick(e.target) }
+            onClick={ handleRemoveItem }
           >
             -
           </button>
           <input
             data-testid={ `customer_products__input-card-quantity-${id}` }
-            defaultValue={ 0 }
-            value={ inputContent }
-            onChange={ (e) => changeInput(e.target.value) }
+            value={ quantity }
+            onChange={ (event) => handleChange(event) }
             className={ styles.quantityInput }
+            inputMode="numeric"
             type="text"
           />
           <button
             data-testid={ `customer_products__button-card-add-item-${id}` }
             type="button"
-            onClick={ (e) => buttonClick(e.target) }
+            onClick={ handleAddItem }
           >
             +
           </button>

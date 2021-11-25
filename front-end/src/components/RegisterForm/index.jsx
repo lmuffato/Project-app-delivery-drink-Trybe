@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router';
 import InputField from '../InputField';
 import Button from '../Button';
@@ -23,9 +23,13 @@ export default function RegisterForm() {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
+  const conditionalNavigate = useCallback(() => {
     if (redirect) navigate('/customer/products');
-  }, [redirect]);
+  }, [navigate, redirect]);
+
+  useEffect(() => {
+    conditionalNavigate();
+  }, [conditionalNavigate]);
 
   const resetValues = () => {
     setName('');

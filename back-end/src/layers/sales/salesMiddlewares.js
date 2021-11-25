@@ -177,17 +177,17 @@ const getSaleAndSaleProducts = async (req, res) => {
   }
 };
 
-// const getSaleAndSaleProducts = async (req, res) => {
-//   try {
-//     const { id } = req.params;
-//     const allProducts = await salesProducts.findAll({ where: { saleId: id } });
-//     const sale = await sales.findOne({ where: { id } });
-//     const obj = { sale, allProducts };
-//     return res.status(200).json(obj);
-//   } catch (err) {
-//     res.status(500).json({ message: err.message });
-//   }
-// };
+const getOrderFull = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const allProducts = await salesProducts.findAll({ where: { saleId: id } });
+    const sale = await sales.findOne({ where: { id } });
+    const obj = { sale, allProducts };
+    return res.status(200).json(obj);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
 
 module.exports = {
   getAll,
@@ -198,6 +198,7 @@ module.exports = {
   createSale,
   createManySaleProducts,
   getSaleAndSaleProducts,
+  getOrderFull,
 };
 
 /* BACKUP

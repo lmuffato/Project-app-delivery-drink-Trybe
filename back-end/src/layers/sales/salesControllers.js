@@ -11,8 +11,15 @@ async () => {});
 http GET :3001/sales
 */
 
-router.get('/oder/:id',
+router.get('/order/:id',
 salesMiddlewares.getSaleAndSaleProducts,
+async () => {});
+/* REQUISIÇÃO:
+http GET :3001/users
+*/
+
+router.get('/orderfull/:id',
+salesMiddlewares.getOrderFull,
 async () => {});
 /* REQUISIÇÃO:
 http GET :3001/users

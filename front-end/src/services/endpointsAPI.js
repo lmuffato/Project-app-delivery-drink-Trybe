@@ -89,3 +89,8 @@ export const postSalesProducts = async () => {
   const result = await api.post('/salesProducts');
   return result.data;
 };
+
+export const getOrderById = async (id) => {
+  const result = await api.get(`/sales/order/${id}`);
+  return result.data;
+};

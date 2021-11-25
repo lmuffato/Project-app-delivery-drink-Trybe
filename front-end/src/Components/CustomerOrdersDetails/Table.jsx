@@ -11,19 +11,14 @@ const testIdName = 'customer_checkout__element-order-table-name-';
 const testIdQuantity = 'customer_checkout__element-order-table-quantity-';
 const testIdUnitPrice = 'customer_checkout__element-order-table-unit-price-';
 const testIdSubTotal = 'customer_checkout__element-order-table-sub-total-';
-const testIdRemove = 'customer_checkout__element-order-table-remove-';
+// const testIdRemove = 'customer_checkout__element-order-table-remove-';
 const testIdTotal = 'customer_checkout__element-order-total-price';
 
 export default function Table() {
   // const [itensList, setItensList] = useState([]);
-  const { itensList, setItensList } = useContext(NewOrderContext);
+  const { orderItensList } = useContext(NewOrderContext);
   const { totalPrice, setTotalPrice } = useContext(NewOrderContext);
   // const [isLoading, setIsLoading] = useState(false);
-
-  const deleteItem = (itemId) => {
-    const newList = itensList.filter((ele) => ele.productId !== Number(itemId));
-    setItensList(newList);
-  };
 
   const roundValue = ((value) => {
     const newValue = Math.round((value) * 100) / 100;
@@ -31,7 +26,7 @@ export default function Table() {
   });
 
   const totalSum = () => {
-    const sum = itensList.reduce((acc, ele) => {
+    const sum = orderItensList.reduce((acc, ele) => {
       acc += ele.quantity * ele.price;
       return acc;
     }, 0);
@@ -46,10 +41,10 @@ export default function Table() {
   };
 
   useEffect(() => {
-    if (itensList.lengh !== 0) {
+    if (orderItensList.lengh !== 0) {
       totalSum();
     }
-  }, [itensList]);
+  }, [orderItensList]);
 
   return (
     <div>
@@ -57,35 +52,25 @@ export default function Table() {
       <table>
         <TableHeader />
         <tbody>
-          { itensList.lengh === 0 || itensList === undefined ? <h3>Carregando...</h3> : (
-            itensList.map((ele, index) => (
-              <tr key={ index }>
-                <td data-testid={ `${testIdNumber}${index}` }>{index + 1}</td>
-                <td data-testid={ `${testIdName}${index}` }>{ele.name}</td>
-                <td data-testid={ `${testIdQuantity}${index}` }>{ele.quantity}</td>
-                <td
-                  data-testid={ `${testIdUnitPrice}${index}` }
-                >
-                  { convertValueToBrlShape(roundValue(ele.price)) }
-                </td>
-                <td
-                  data-testid={ `${testIdSubTotal}${index}` }
-                >
-                  { convertValueToBrlShape(roundValue(ele.price * ele.quantity)) }
-                </td>
-                <td>
-                  <button
-                    type="button"
-                    data-testid={ `${testIdRemove}${index}` }
-                    className={ `${testIdRemove}` }
-                    id={ ele.productId }
-                    onClick={ (event) => { deleteItem(event.target.id); } }
+          { orderItensList.lengh === 0
+          || orderItensList === undefined ? <h3>Carregando...</h3> : (
+              orderItensList.map((ele, index) => (
+                <tr key={ index }>
+                  <td data-testid={ `${testIdNumber}${index}` }>{index + 1}</td>
+                  <td data-testid={ `${testIdName}${index}` }>{ele.name}</td>
+                  <td data-testid={ `${testIdQuantity}${index}` }>{ele.quantity}</td>
+                  <td
+                    data-testid={ `${testIdUnitPrice}${index}` }
                   >
-                    Excluir
-                  </button>
-                </td>
-              </tr>
-            )))}
+                    { convertValueToBrlShape(roundValue(ele.price)) }
+                  </td>
+                  <td
+                    data-testid={ `${testIdSubTotal}${index}` }
+                  >
+                    { convertValueToBrlShape(roundValue(ele.price * ele.quantity)) }
+                  </td>
+                </tr>
+              )))}
         </tbody>
       </table>
       <div

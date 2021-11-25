@@ -10,7 +10,7 @@ function DeliveryDetails() {
   const [number, setNumber] = useState(null);
   const [allFieldFilled, setAllFieldsFilled] = useState(false);
 
-  const { cart } = useContext(CartContext);
+  const { cart, total } = useContext(CartContext);
 
   console.log(cart);
 
@@ -31,26 +31,30 @@ function DeliveryDetails() {
 
   const handleClick = async () => {
     if (seller && address && number) {
-      // const bodyRequest = {
-      //   sellerId,
-      //   totalPrice: productSubTotal,
-      //   deliveryAddress,
-      //   deliveryNumber,
-      //   products: cart,
-      // };
-      const pedido = await fetch('http://localhost:3001/orders', {
-        method: 'GET',
-        mode: 'cors',
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          Authorization: token,
-        },
-        // body: JSON.stringify(bodyRequest),
-      })
-        .then((result) => result.json());
-      console.log(pedido);
+      const bodyRequest = {
+        sellerId: seller.id,
+        totalPrice: total,
+        deliveryAddress: address,
+        deliveryNumber: number,
+        products: cart,
+      };
+      try {
+        const pedido = await fetch('http://localhost:3001/orders', {
+          method: 'POST',
+          mode: 'cors',
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: token,
+          },
+          body: JSON.stringify(bodyRequest),
+        })
+          .then((result) => result.json());
+        console.log(pedido);
+      } catch (error) {
+        console.log(error);
+      }
       // navigate('/customer/checkout');
       setAllFieldsFilled(false);
     } else {
@@ -81,7 +85,7 @@ function DeliveryDetails() {
           type="text"
           id="adress"
           data-testid="customer_checkout__input-address"
-          onChange={ setAddress }
+          onChange={ (e) => setAddress(e.target.value) }
         />
       </label>
       <label htmlFor="number">
@@ -90,13 +94,13 @@ function DeliveryDetails() {
           type="text"
           id="number"
           data-testid="customer_checkout__input-addressNumber"
-          onChange={ setNumber }
+          onChange={ (e) => setNumber(e.target.value) }
         />
       </label>
       { allFieldFilled && <span>Todos os campos precisam ser preenchidos</span> }
       <button
         type="button"
-        data-testid="customer_checkout__input-addressNumber"
+        data-testid="customer_checkout__button-submit-order"
         onClick={ () => handleClick() }
       >
         Finalizar pedido

@@ -19,10 +19,17 @@
   border: none;
   border-radius: 5px;
   color: white;
+  cursor: pointer;
   font-weight: 600;
   height: 35px;
   padding: 0 10px;
   text-transform: uppercase;
+}
+
+.orderDetails button:disabled {
+  background: #b1c2be;
+  color: #036b52;
+  cursor: not-allowed;
 }
 
 .tableContainer {
@@ -73,5 +80,28 @@
   font-weight: 600;
   text-align: center;
   width: 10%;
+}
+
+.totalPriceContainer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+}
+
+.totalPrice {
+  align-items: center;
+  background: #036b52;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  display: flex;
+  font-weight: 600;
+  height: 35px;
+  justify-content: center;
+  width: 150px;
+}
+
+.totalPrice span:first-child {
+  margin-right: 5px;
 }
 

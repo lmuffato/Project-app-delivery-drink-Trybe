@@ -11,7 +11,6 @@ const createSale = async ({
   sellerId, totalPrice, deliveryAddress, deliveryNumber, status,
 }, email, putItem) => {
   const { id: customerId } = await serviceUser.findByIdRole(email, 'customer');
-  
   const sale = await Sale.create({
     userId: customerId,
     sellerId,
@@ -21,13 +20,10 @@ const createSale = async ({
     saleDate: new Date(),
     status,
   });
-
   JSON.parse(putItem).forEach(async ({ id, quantity }) => {
     await SaleProduct.create({ saleId: sale.id, productId: id, quantity });
   });
-
-  return { statusCode: 201, data: sale }; // talvez tenha que alterar a resposta de "data"
-  // return { statusCode: 201, data: { message: 'pedido realizado com sucesso' } };
+  return { statusCode: 201, data: sale };
 };
 
 const getById = async (id) => {
@@ -37,7 +33,13 @@ const getById = async (id) => {
       { model: Product, as: 'products', through: { attributes: ['quantity'] } }, 
     ],
   });
+  return { status: 200, data: sale };
+};
 
+const update = async (id, newSaleData) => {
+  const { status } = newSaleData;
+  await Sale.update({ status }, { where: { id } });
+  const sale = await getById(id);
   return { status: 200, data: sale };
 };
 
@@ -45,4 +47,5 @@ module.exports = {
   getAllSale,
   createSale,
   getById,
+  update,
 };

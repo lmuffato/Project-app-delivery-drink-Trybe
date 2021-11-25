@@ -1,12 +1,20 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 // import { format } from 'date-fns';
 import styles from './styles.module.css';
 import { useOrderDetails } from '../../context/orderDetailsProvider';
 import formatDate from '../../utils/formatDate';
+import replaceDotToComma from '../../services/productPages/replaceDotToComa';
 
-export default function OrderDetails() {
+export default function OrderDetails({ dataTestIds }) {
+  const [disabledButton, setDisableButton] = useState(false);
   const { sale, seller, products } = useOrderDetails();
+
+  useEffect(() => {
+    if (sale.status !== 'Em Trânsito') {
+      setDisableButton(true);
+    }
+  }, [sale.status]);
 
   return (
     <main className={ styles.container }>
@@ -14,16 +22,26 @@ export default function OrderDetails() {
         <h3>
           <span>Pedido:</span>
           {' '}
-          <span>{sale.id}</span>
+          <span data-testid={ dataTestIds['37'] }>{sale.id}</span>
         </h3>
         <div>
           <span>Vendedor:</span>
           {' '}
-          <span>{seller.name}</span>
+          <span data-testid={ dataTestIds['38'] }>{seller.name}</span>
         </div>
-        <span>{sale.saleDate ? formatDate(sale.saleDate) : null}</span>
-        <span>{sale.status}</span>
-        <button type="button">marcar como entregue</button>
+        <span
+          data-testid={ dataTestIds['39'] }
+        >
+          {sale.saleDate ? formatDate(sale.saleDate) : null}
+        </span>
+        <span data-testid={ dataTestIds['40'] }>{sale.status}</span>
+        <button
+          disabled={ disabledButton }
+          data-testid={ dataTestIds['47'] }
+          type="button"
+        >
+          marcar como entregue
+        </button>
       </section>
       <table className={ styles.tableContainer }>
         <thead className={ styles.tableHead }>
@@ -38,25 +56,38 @@ export default function OrderDetails() {
         <tbody>
           {products.map((product, index) => (
             <tr key={ product.id }>
-              <td>{index + 1}</td>
-              <td>{product.name}</td>
-              <td>{product.SaleProduct.quantity}</td>
+              <td data-testid={ `${dataTestIds['41']}${index}` }>{index + 1}</td>
+              <td data-testid={ `${dataTestIds['42']}${index}` }>{product.name}</td>
+              <td data-testid={ `${dataTestIds['43']}${index}` }>
+                {product.SaleProduct.quantity}
+              </td>
               <td>
                 <span>R$</span>
                 {' '}
-                <span>
+                <span data-testid={ `${dataTestIds['44']}${index}` }>
                   {product.price}
                 </span>
               </td>
               <td>
                 <span>R$</span>
                 {' '}
-                <span>{(product.price * product.SaleProduct.quantity).toFixed(2)}</span>
+                <span data-testid={ `${dataTestIds['45']}${index}` }>
+                  {(product.price * product.SaleProduct.quantity).toFixed(2)}
+                </span>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+      <div className={ styles.totalPriceContainer }>
+        <div className={ styles.totalPrice }>
+          <span>Total:</span>
+          {' '}
+          <span data-testid={ dataTestIds['46'] }>
+            {sale.totalPrice ? replaceDotToComma(sale.totalPrice) : null}
+          </span>
+        </div>
+      </div>
     </main>
   );
 }

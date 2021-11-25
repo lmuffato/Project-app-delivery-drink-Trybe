@@ -19,4 +19,7 @@ saleRouter.post(
   saleController.createSale,
 );
 
+saleRouter.get('/:id', rescue(saleController.getById));
+saleRouter.put('/:id', rescue(saleController.update));
+
 module.exports = saleRouter;

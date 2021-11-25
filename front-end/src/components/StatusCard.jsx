@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   Box,
@@ -13,12 +13,10 @@ const socket = io(socketServerUrl);
 function StatusCard({ initialStatus, id }) {
   const [status, setStatus] = useState(initialStatus);
 
-  useEffect(() => {
-    socket.on('changeState', ({ newState, idToChange }) => {
-      if (idToChange === id) setStatus(newState);
-    });
-    // eslint-disable-next-line
-  }, []);
+  socket.on('changeStatus', ({ newStatus, idToChange }) => {
+    if (idToChange === id) setStatus(newStatus);
+  });
+
   const colorStatus = {
     Pendente: '#ffcc00',
     Preparando: '#99cc00',

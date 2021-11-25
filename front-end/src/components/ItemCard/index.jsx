@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { usePrice } from '../../context/productsProvider';
@@ -66,10 +67,10 @@ export default function ItemCard({ id, name, price, image }) {
           </button>
           <input
             data-testid={ `customer_products__input-card-quantity-${id}` }
-            defaultValue={ 0 }
             value={ inputContent }
             onChange={ (e) => changeInput(e.target.value) }
             className={ styles.quantityInput }
+            inputMode="numeric"
             type="text"
           />
           <button

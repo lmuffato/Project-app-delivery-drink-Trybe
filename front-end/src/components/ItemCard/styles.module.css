@@ -34,8 +34,32 @@
 
 .quantityBtn {
   display: flex;
+  height: 25px;
+}
+
+.quantityBtn button {
+  align-items: center;
+  background: #036b52;
+  border: none;
+  color: white;
+  display: flex;
+  font-size: 25px;
+  font-weight: 600;
+  justify-content: center;
+  width: 25px;
+}
+
+.quantityBtn button:first-child {
+  border-radius: 5px 0 0 5px;
+  padding: 0 0 5px;
+}
+
+.quantityBtn button:last-child {
+  border-radius: 0 5px 5px 0;
 }
 
 .quantityInput {
+  border: none;
+  text-align: center;
   width: 30px;
 }

@@ -42,12 +42,10 @@ export default {
     return data;
   },
   postSale: async (obj, token) => {
-    console.log(obj, token);
-    const { data } = await api.post('/orders', {
+    const { data } = await api.post('/orders', obj, {
       headers: {
         Authorization: token,
       },
-      obj,
     });
     return data;
   },

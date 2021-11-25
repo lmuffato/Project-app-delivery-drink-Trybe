@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router';
 import { useCart } from '../../hooks/useCart';
 import { useDeliveryDetails } from '../../hooks/useDeliveryDetails';
 import api from '../../services/api';
@@ -14,6 +15,7 @@ function DeliveryDetails() {
     setNumber,
     selectedSeller,
     setSelectedSeller } = useDeliveryDetails();
+  const history = useHistory();
   const { totalValue } = useCart();
 
   const formatOrderObj = () => {
@@ -36,7 +38,7 @@ function DeliveryDetails() {
     const { token } = JSON.parse(localStorage.getItem('user'));
     const obj = formatOrderObj();
     const response = await api.postSale(obj, token);
-    console.log(response);
+    history.push(`/customer/orders/${response}`);
   };
 
   if (!sellers) return <h1>Loading</h1>;

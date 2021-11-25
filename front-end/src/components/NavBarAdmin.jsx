@@ -10,8 +10,7 @@ import {
 import { logoutUser, verifyUserExistance } from '../utils/LocalStorageFunctions';
 
 function NavBarAdmin() {
-  const user = verifyUserExistance();
-  const { name } = user;
+  const { name } = verifyUserExistance();
   const history = useHistory();
   return (
     <AppBar position="static">

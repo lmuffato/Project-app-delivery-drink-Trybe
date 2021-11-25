@@ -29,7 +29,7 @@ module.exports = {
         name: 'test',
         email: 'test@email.com',
         password: 'bf54b1c4f8df323ee9206d456323b2ab', //senha é "test-login" bf54b1c4f8df323ee9206d456323b2ab
-        role: 'administrador',
+        role: 'administrator',
       },
       {
         id: 5,

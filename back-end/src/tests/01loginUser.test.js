@@ -3,9 +3,9 @@ const frisby = require('frisby');
 
 const url = 'http://localhost:3001';
 
-describe('01 - Login do usuário', () => {
-  describe('quando acessa com sucesso', () => {
-    it('retorna o código de status 200', async () => {
+describe('01 - Login do usuario', () => {
+  describe('Quando acessa com sucesso', () => {
+    it('Retorna o codigo de status 200', async () => {
       await frisby
         .post(`${url}/login`,
           {
@@ -15,7 +15,7 @@ describe('01 - Login do usuário', () => {
         .expect('status', 200)
     });
 
-    it('retorna um objeto', async () => {
+    it('Retorna um objeto', async () => {
       await frisby
         .post(`${url}/login`,
           {
@@ -29,7 +29,7 @@ describe('01 - Login do usuário', () => {
         })
     });
 
-    it('o objeto possui a chave name', async () => {
+    it('O objeto possui a chave name', async () => {
       await frisby
         .post(`${url}/login`,
           {
@@ -43,7 +43,7 @@ describe('01 - Login do usuário', () => {
         })
     });
 
-    it('a chave name retorna o valor correto', async () => {
+    it('A chave name retorna o valor correto', async () => {
       await frisby
         .post(`${url}/login`,
           {
@@ -57,7 +57,7 @@ describe('01 - Login do usuário', () => {
         })
     });
 
-    it('o objeto possui a chave email', async () => {
+    it('O objeto possui a chave email', async () => {
       await frisby
         .post(`${url}/login`,
           {
@@ -71,7 +71,7 @@ describe('01 - Login do usuário', () => {
         })
     });
 
-    it('a chave email retorna o valor correto', async () => {
+    it('A chave email retorna o valor correto', async () => {
       await frisby
         .post(`${url}/login`,
           {
@@ -85,7 +85,7 @@ describe('01 - Login do usuário', () => {
         })
     });
 
-    it('o objeto possui a chave role', async () => {
+    it('O objeto possui a chave role', async () => {
       await frisby
         .post(`${url}/login`,
           {
@@ -99,7 +99,7 @@ describe('01 - Login do usuário', () => {
         })
     });
 
-    it('a chave role retorna o valor correto', async () => {
+    it('A chave role retorna o valor correto', async () => {
       await frisby
         .post(`${url}/login`,
           {
@@ -113,7 +113,7 @@ describe('01 - Login do usuário', () => {
         })
     });
 
-    it('o objeto possui a chave token', async () => {
+    it('O objeto possui a chave token', async () => {
       await frisby
         .post(`${url}/login`,
           {
@@ -128,8 +128,8 @@ describe('01 - Login do usuário', () => {
     });
   });
 
-  describe('quando não acessa por erro no email ou password', () => {
-    it('email errado informado deve retornar status 400', async () => {
+  describe('Quando nao acessa por erro no email ou password', () => {
+    it('Email errado informado deve retornar status 400', async () => {
       await frisby
         .post(`${url}/login`,
           {
@@ -139,7 +139,7 @@ describe('01 - Login do usuário', () => {
         .expect('status', 400)
     });
 
-    it('verifica mensagem de erro para email errado', async () => {
+    it('Verifica mensagem de erro para email incorreto', async () => {
       await frisby
         .post(`${url}/login`,
           {
@@ -153,7 +153,7 @@ describe('01 - Login do usuário', () => {
         })
     });
 
-    it('password errada informada, deve retornar status 401', async () => {
+    it('Password errada informada, deve retornar status 401', async () => {
       await frisby
         .post(`${url}/login`,
           {
@@ -163,7 +163,7 @@ describe('01 - Login do usuário', () => {
         .expect('status', 401)
     });
 
-    it('verifica mensagem de erro para password errada', async () => {
+    it('Verifica mensagem de erro para password incorreta', async () => {
       await frisby
         .post(`${url}/login`,
           {

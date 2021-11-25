@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const httpStatus = require('../utils/httpStatus');
-const errorMessages = require('../utils/errorMessages');
+const errorMessage = require('../utils/errorMessages');
 
 const secret = process.env.JWT_SECRET || 'secret_key';
 
@@ -15,7 +15,7 @@ const validateJWT = async (req, res, next) => {
     const token = req.headers.authorization;
 
     if (!token) { 
-      return res.status(httpStatus.unauthorized).json({ message: errorMessages.tokenNotFound });
+      return res.status(httpStatus.unauthorized).json({ error: { message: errorMessage.noToken } });
     }
 
     const payload = verify(token);
@@ -24,7 +24,7 @@ const validateJWT = async (req, res, next) => {
 
     return next();
   } catch (_e) {
-    res.status(httpStatus.unauthorized).json({ message: errorMessages.invalidToken });
+    res.status(httpStatus.unauthorized).json({ error: { message: errorMessage.invalidToken } });
   }
 };
 

@@ -21,24 +21,36 @@ function Login() {
 
   useEffect(() => {
     const user = verifyUserExistance();
-    console.log(user);
     if (user) {
-      if (user.role === 'administrador') {
+      switch (user.role.toLowerCase()) {
+      case 'administrator':
         history.push('/admin/manage');
-      } else {
+        break;
+      case 'seller':
+        history.push('/seller/orders');
+        break;
+      default:
         history.push('/customer/products');
+        break;
       }
-    }// eslint-disable-next-line
+    }
+    // eslint-disable-next-line
   }, []);
 
   const handleLogin = async () => {
     const response = await makeLogin(email, password);
     const { role } = verifyUserExistance();
     if (response) {
-      if (role === 'administrator') {
+      switch (role.toLowerCase()) {
+      case 'administrator':
         history.push('/admin/manage');
-      } else {
+        break;
+      case 'seller':
+        history.push('/seller/orders');
+        break;
+      default:
         history.push('/customer/products');
+        break;
       }
     }
   };

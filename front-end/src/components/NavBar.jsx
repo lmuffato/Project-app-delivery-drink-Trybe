@@ -1,17 +1,16 @@
 import React from 'react';
-// import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import {
   AppBar,
   Toolbar,
   Typography,
-  Link,
   Button,
 } from '@mui/material';
-// import ContextLogin from '../context/ContextLogin';
 import { logoutUser, verifyUserExistance } from '../utils/LocalStorageFunctions';
 
-function NavBar() {
+function NavBar({ sellerView = false }) {
   const user = verifyUserExistance();
   const { name } = user;
   const history = useHistory();
@@ -24,19 +23,18 @@ function NavBar() {
           justifyContent: 'space-around',
         } }
       >
+        { !sellerView && (
+          <Link
+            to="/customer/products"
+            data-testid="customer_products__element-navbar-link-products"
+          >
+            Produtos
+          </Link>) }
         <Link
-          href="/customer/products"
-          color="#FFF"
-          data-testid="customer_products__element-navbar-link-products"
-        >
-          Produtos
-        </Link>
-        <Link
-          href="/customer/orders"
-          color="#FFF"
+          to="/customer/orders"
           data-testid="customer_products__element-navbar-link-orders"
         >
-          Meus Pedidos
+          { sellerView ? 'Pedidos' : 'Meus Pedidos' }
         </Link>
         <Typography
           variant="h6"
@@ -58,5 +56,13 @@ function NavBar() {
     </AppBar>
   );
 }
+
+NavBar.propTypes = {
+  sellerView: PropTypes.bool,
+};
+
+NavBar.defaultProps = {
+  sellerView: false,
+};
 
 export default NavBar;

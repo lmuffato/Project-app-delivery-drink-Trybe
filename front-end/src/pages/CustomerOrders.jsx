@@ -19,10 +19,11 @@ export default function CustomerOrder() {
     <div>
       { sales.map((sale) => (
         <div key={ sale.id } style={ { margin: 20 } }>
+          <h5>Pedido</h5>
           <p
             data-testid={ `customer_orders__element-order-id-${sale.id}` }
           >
-            { `Pedido 000${sale.deliveryNumber}` }
+            { sale.deliveryNumber }
           </p>
           <p
             data-testid={ `customer_orders__element-delivery-status-${sale.id}` }

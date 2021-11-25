@@ -13,6 +13,7 @@ const testIds = {
   productQuantity: 'customer_checkout__element-order-table-quantity-',
   productUnitPrice: 'customer_checkout__element-order-table-unit-price-',
   productSubTotal: 'customer_checkout__element-order-table-sub-total-',
+  productRemove: 'customer_checkout__element-order-table-remove-',
 };
 
 const navegationNames = {

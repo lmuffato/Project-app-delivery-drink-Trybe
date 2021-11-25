@@ -10,17 +10,18 @@ function CheckoutTable(props) {
     productName,
     productQuantity,
     productUnitPrice,
-    productSubTotal } } = props;
+    productSubTotal,
+    productRemove } } = props;
 
   const fillTable = ((cartt) => cartt.map(
     ({ productId: id, name, quantity, unitPrice, subTotal }, key) => (
       <tr key={ key }>
-        <td data-testid={ productId + id }>{ id }</td>
-        <td data-testid={ productName + id }>{ name }</td>
-        <td data-testid={ productQuantity + id }>{ quantity}</td>
-        <td data-testid={ productUnitPrice + id }>{ unitPrice }</td>
-        <td data-testid={ productSubTotal + id }>{ subTotal }</td>
-        <td><ButtonRemoveItem id={ id } /></td>
+        <td data-testid={ `${productId}-${key}` }>{ id }</td>
+        <td data-testid={ productName + key }>{ name }</td>
+        <td data-testid={ productQuantity + key }>{ quantity}</td>
+        <td data-testid={ productUnitPrice + key }>{ unitPrice }</td>
+        <td data-testid={ productSubTotal + key }>{ subTotal }</td>
+        <td data-testid={ productRemove + key }><ButtonRemoveItem id={ id } /></td>
       </tr>
     ),
   ));
@@ -60,6 +61,10 @@ CheckoutTable.propTypes = {
       PropTypes.number,
     ]).isRequired,
     productSubTotal: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]).isRequired,
+    productRemove: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.number,
     ]).isRequired,

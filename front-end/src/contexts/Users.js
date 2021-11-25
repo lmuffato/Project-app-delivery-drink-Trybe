@@ -11,7 +11,8 @@ export const UsersProvider = ({ children }) => {
   const application = 'application/json';
 
   const getUsersList = useCallback(async () => {
-    setToken(JSON.parse(localStorage.getItem('token')));
+    const userInfo = JSON.parse(localStorage.getItem('user'));
+    setToken(userInfo.token);
     axios.get('http://localhost:3001/admin', {
       headers: {
         'Access-Control-Allow-Origin': '*',

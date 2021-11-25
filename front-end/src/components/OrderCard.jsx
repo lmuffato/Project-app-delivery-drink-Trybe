@@ -7,11 +7,11 @@ function OrderCard(props) {
   const { user } = useContext(Context);
   const { order } = props;
   const { id, status, date, totalPrice, address } = order;
-
+  console.log(user.role);
   if (user.role === 'seller') {
     return (
       <Link to={ `/seller/orders/${id}` }>
-        <div data-testid={ `seller_ orders__element-order-id-${id}` }>
+        <div data-testid={ `seller_orders__element-order-id-${id}` }>
           Pedido
           {' '}
           { id }
@@ -35,15 +35,15 @@ function OrderCard(props) {
   }
 
   return (
-    <div>
-      <Link
-        to={ `/customer/orders/${id}` }
-        data-testid={ `customer_ orders__element-order-id--${id}` }
-      >
+    <Link
+      to={ `/${user.role}/orders/${id}` }
+      data-testid={ `customer_orders__element-order-id-${id}` }
+    >
+      <span>
         Pedido
         {' '}
         { id }
-      </Link>
+      </span>
       <div data-testid={ `customer_orders__element-delivery-status-${id}` }>
         { status }
       </div>
@@ -55,7 +55,7 @@ function OrderCard(props) {
         {' '}
         { totalPrice }
       </div>
-    </div>
+    </Link>
   );
 }
 

@@ -43,7 +43,14 @@ function Login() {
         role,
         id,
       });
-      navigate('/customer/products', { replace: true });
+      console.log(role);
+      if (role === 'administrator') {
+        navigate('/admin/manage', { replace: true });
+      } else if (role === 'seller') {
+        navigate('/seller/products', { replace: true });
+      } else {
+        navigate('/customer/products', { replace: true });
+      }
     } catch ({ response }) {
       // Source: https://stackoverflow.com/questions/45017822/catching-error-body-using-axios-post
       if (!response) {

@@ -1,14 +1,13 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory, Redirect } from 'react-router-dom';
 import Alert from 'react-bootstrap/Alert';
 import { loginApi } from '../../API/dataBaseCall';
 import { LoginContainer, UserInput } from './loginElements';
 import logo from '../../images/Beer-icon.png';
-import CheckoutContext from '../../context/checkoutContext';
+import checkUser from './localStorage';
 
 export default function Login() {
   const history = useHistory();
-  const { logged, setLogged } = useContext(CheckoutContext);
 
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
@@ -47,9 +46,18 @@ export default function Login() {
     })
     .catch(setErrorMessage);
 
-  if (localStorage.getItem('user')) setLogged(true);
+  useEffect(() => {
+    const magicNumber = 1000;
+    const logged = checkUser();
+    if (logged) {
+      switch (logged.role.toLowerCase()) {
+      default:
+        setTimeout(() => history.push('/customer/products'), magicNumber);
 
-  const redirectComponent = <Redirect to="customer/products" />
+        break;
+      }
+    }
+  }, []);
 
   return (
     <div className="gradientAnimated">
@@ -105,7 +113,6 @@ export default function Login() {
           </Alert>
         )}
       </LoginContainer>
-      {logged ? redirectComponent : null}
     </div>
   );
 }

@@ -47,11 +47,11 @@ const deleteById = async (req, res) => {
 const createNew = async (req, res) => {
   try {
     const {
-      userId, totalPrice, deliveryAddress, deliveryNumber, status,
+      userId, totalPrice, sellerId, deliveryAddress, deliveryNumber, status,
     } = req.body;
     const obj = {
       userId,
-      // sallerId,
+      sellerId,
       totalPrice,
       deliveryAddress,
       deliveryNumber,
@@ -66,10 +66,11 @@ const createNew = async (req, res) => {
 
 const formatSale = (saleObj) => {
   const {
-    userId, totalPrice, deliveryAddress, deliveryNumber, status,
+    userId, sellerId, totalPrice, deliveryAddress, deliveryNumber, status,
   } = saleObj;
   const obj = {
     userId,
+    sellerId,
     totalPrice,
     deliveryAddress,
     deliveryNumber,

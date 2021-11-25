@@ -64,20 +64,8 @@ export const getSales = async () => {
   return result.data;
 };
 
-export const getSalesBySellerId = async (id) => {
+export const getSaleById = async (id) => {
   const result = await api.get(`/sales/${id}`);
-  return result.data;
-};
-
-export const getSalesDetails = async (id) => {
-  console.log('id no front', id);
-  const { data } = await api.get(`/salesProducts/${id}`);
-  const result = await api.get(`/products/order/${data.productId}`);
-  return { data, result };
-};
-
-export const getSalesByCustomerId = async (id) => {
-  const result = await api.get('/sales', { id });
   return result.data;
 };
 
@@ -99,5 +87,10 @@ export const getSalesProducts = async () => {
 
 export const postSalesProducts = async () => {
   const result = await api.post('/salesProducts');
+  return result.data;
+};
+
+export const getOrderById = async (id) => {
+  const result = await api.get(`/sales/order/${id}`);
   return result.data;
 };

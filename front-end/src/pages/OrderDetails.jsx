@@ -1,24 +1,20 @@
-import React from 'react';
+import { useParams } from 'react-router-dom';
+import React, { useEffect } from 'react';
 import Navbar from '../Components/NavBar';
-import { useParams } from "react-router-dom";
-// import React, { useEffect, useState, useContext } from 'react';
 
-export default function OrderDetails({ match }) {
-  const { id } = match.params;
+export default function OrderDetails() {
+  const params = useParams();
+  // const [urlId, setUrlId] = useState('');
   // const [isLoading, setIsLoading] = useState(false);
 
-  // useEffect(() => {
-  //   setIsLoading(true);
-  //   getSellersList();
-  //   setIsLoading(false);
-  // }, []);
+  const printUrl = () => {
+    console.log(params);
+    // }
+  };
 
-  // const printUrl = () => {
-  //   const params = useParams();
-  //     console.log(params);
-  // };
-
-  console.log(id);
+  useEffect(() => {
+    printUrl();
+  }, []);
 
   return (
     <div>

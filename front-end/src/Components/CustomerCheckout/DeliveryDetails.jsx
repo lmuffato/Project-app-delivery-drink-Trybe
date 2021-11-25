@@ -13,7 +13,7 @@ import {
   // postSales,
   createInSalesAndSalesProducts,
 } from '../../services/endpointsAPI';
-          // to="/customer/orders/"
+// to="/customer/orders/"
 const selectSeller = 'customer_checkout__select-seller';
 const inputAddress = 'customer_checkout__input-address';
 const inputAddressNumber = 'customer_checkout__input-addressNumber';
@@ -145,14 +145,14 @@ export default function DeliveryDetails() {
         </label>
       </span>
       <div>
-          <button
-            type="button"
-            onClick={ createNewSale }
-            className={ `${buttonSubmitOrder}` }
-            data-testid={ `${buttonSubmitOrder}` }
-          >
-            FINALIZAR PEDIDO
-          </button>
+        <button
+          type="button"
+          onClick={ createNewSale }
+          className={ `${buttonSubmitOrder}` }
+          data-testid={ `${buttonSubmitOrder}` }
+        >
+          FINALIZAR PEDIDO
+        </button>
       </div>
     </div>
   );

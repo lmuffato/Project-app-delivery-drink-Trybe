@@ -27,10 +27,14 @@ function NewOrderProvider({ children }) {
   const [deliveryAddress, setDeliveryAddress] = useState(''); // endereço de entrega
   const [deliveryNumber, setDeliveryNumber] = useState(''); // numero do endereço
   const [totalPrice, setTotalPrice] = useState(''); // valor total do pedido
+  const [navBarSair, setNavBarSair] = useState(false);
+
+  // localStorage.clear();
 
   useEffect(() => {
-    console.log(itensList, 'aaaaaaaaaaaaa');
-  }, [itensList]);
+    localStorage.clear();
+    setItensList([]);
+  }, [navBarSair]);
 
   return (
     <NewOrderContext.Provider
@@ -59,6 +63,8 @@ function NewOrderProvider({ children }) {
         totalPrice, // Tela checkout (valor automático)
         setTotalPrice,
 
+        navBarSair,
+        setNavBarSair,
       } }
     >
       {children}

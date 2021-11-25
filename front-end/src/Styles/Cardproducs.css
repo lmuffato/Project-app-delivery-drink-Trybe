@@ -1,12 +1,11 @@
 .cardProduct {
-  background-color: red;
   display: inline-block;
-  margin: 40px;
-  width: 200px;
+  margin: 20px;
+  width: 100px;
 }
 
 .imageDrinkCard {
-  width: 200px;
+  width: 100px;
 }
 
 .unitPrice {

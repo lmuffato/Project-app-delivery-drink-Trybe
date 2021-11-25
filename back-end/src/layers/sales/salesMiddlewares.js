@@ -17,7 +17,6 @@ const getById = async (req, res) => {
   try {
     const { id } = req.params;
     const data = await sales.findByPk(id);
-    console.log('data', data);
     if (!data) { return res.status(404).json({ message: 'Seller does not have sells' }); }
     return res.status(200).json(data);
   } catch (err) {

@@ -4,7 +4,11 @@ import NewOrderContext from '../context/NewOrderContext';
 import '../Styles/Navbar.css';
 
 function Navbar() {
-  const { userName } = useContext(NewOrderContext);
+  const { userName, navBarSair, setNavBarSair } = useContext(NewOrderContext);
+  // function handleClick () {
+  //   localStorage.clear();
+  // }
+
   return (
     <div>
       <nav className="icons-container">
@@ -32,7 +36,10 @@ function Navbar() {
           to="/"
           data-testid="customer_products__element-navbar-link-logout"
           className="customer_products__element-navbar-link-logout"
-          onClick={ () => localStorage.clear() }
+          onClick={ () => {
+            setNavBarSair(!navBarSair);
+            localStorage.clear();
+          } }
         >
           Sair
         </Link>

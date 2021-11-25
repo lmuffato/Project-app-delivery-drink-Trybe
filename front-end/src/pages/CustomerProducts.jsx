@@ -39,7 +39,8 @@ export default function CustomerProducts() {
     totalPricePerItem.forEach((element) => {
       soma += element;
     });
-    setTotalPriceAllProducts(roundPrice(soma));
+    if (totalPricePerItem.length)setTotalPriceAllProducts(roundPrice(soma));
+    console.log('tttt soma', soma);
   }, [itensList]);
 
   useEffect(() => {
@@ -54,7 +55,8 @@ export default function CustomerProducts() {
     validToken();
   }, [validToken]);
 
-  const clickLoginButton = async () => {
+  const clickLoginButton = () => {
+    console.log('checkoutaaaaaaaaaaaaa');
     history.push('/customer/checkout');
   };
 

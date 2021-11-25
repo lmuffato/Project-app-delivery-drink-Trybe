@@ -15,8 +15,6 @@ function DeliveryDetails() {
 
   const { cart, total } = useContext(CartContext);
 
-  console.log(cart);
-
   const { token } = JSON.parse(localStorage.getItem('user'));
 
   const getAllSellers = async () => {

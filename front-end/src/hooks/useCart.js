@@ -6,12 +6,12 @@ const CartContext = createContext();
 export function CartProvider({ children }) {
   const [totalValue, setTotalValue] = useState(0);
 
-  function getCar() {
+  const getCar = () => {
     const localCart = JSON.parse(localStorage.getItem('carrinho'));
     return localCart;
-  }
+  };
 
-  function totalCartPrice() {
+  const totalCartPrice = () => {
     const cart = getCar();
     if (cart && cart.length !== 0) {
       const total = cart
@@ -21,13 +21,13 @@ export function CartProvider({ children }) {
       return;
     }
     setTotalValue(0);
-  }
+  };
 
   useEffect(() => {
     totalCartPrice();
   }, []);
 
-  function updateCart(id, name, price, param) {
+  const updateCart = (id, name, price, param) => {
     const cart = getCar();
     const actualCart = cart.find((elem) => elem.id === id);
     let product;
@@ -63,9 +63,9 @@ export function CartProvider({ children }) {
     console.log('New array', newArrayOfProducts);
     localStorage.setItem('carrinho', JSON.stringify(newArrayOfProducts));
     totalCartPrice();
-  }
+  };
 
-  function addToCart(id, name, price) {
+  const addToCart = (id, name, price) => {
     const cart = getCar();
     if (!cart) {
       console.log(cart);
@@ -93,9 +93,9 @@ export function CartProvider({ children }) {
       return;
     }
     updateCart(id, name, price, '+');
-  }
+  };
 
-  function manualEntry(id, name, price, quantity) {
+  const manualEntry = (id, name, price, quantity) => {
     const cart = getCar();
     const productUpdate = { id, name, price, quantity };
     console.log('Entrei aqui no carrinho entry', id, name, price, quantity);
@@ -138,7 +138,7 @@ export function CartProvider({ children }) {
 
     localStorage.setItem('carrinho', JSON.stringify(newArrayOfProducts));
     totalCartPrice();
-  }
+  };
 
   const removeProdCart = (id, name, price) => {
     const cart = getCar();

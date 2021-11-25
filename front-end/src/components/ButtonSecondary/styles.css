@@ -1,5 +1,5 @@
-.c_button_primary {
-  background: var(--color-primary);
+.c_button_secondary {
+  background: var(--color-secondary);
   border: none;
   border-radius: 6px;
   box-shadow: 1px 1px 1px 0.5px silver;
@@ -8,11 +8,11 @@
   padding: 8px;
 }
 
-.c_button_primary:disabled {
+.c_button_secondary:disabled {
   cursor: default;
   opacity: 0.5;
 }
 
-.c_button_primary:hover {
-  filter: brightness(1.75);
+.c_button_secondary:hover {
+  filter: brightness(1.25);
 }

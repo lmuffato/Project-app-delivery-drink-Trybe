@@ -1,11 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './style.css';
+import { useCart } from '../../hooks/useCart';
 
-function CheckoutTable({ cart }) {
+function CheckoutTable({ cart, setCart }) {
+  const { removeTotalItem } = useCart();
+
   const dataTestID = (index) => (
     `customer_checkout__element-order-table-item-number-${index}`
   );
+
+  const handleDelete = (id) => {
+    removeTotalItem(id);
+    setCart(JSON.parse(localStorage.getItem('carrinho')));
+  };
+
   return (
     <table>
       <thead>
@@ -47,10 +56,14 @@ function CheckoutTable({ cart }) {
             >
               {(+price * +quantity).toFixed(2).replace('.', ',')}
             </td>
-            <td
-              data-testid={ `customer_checkout__element-order-table-remove-${index}` }
-            >
-              REMOVER
+            <td>
+              <button
+                type="button"
+                onClick={ () => handleDelete(id) }
+                data-testid={ `customer_checkout__element-order-table-remove-${index}` }
+              >
+                REMOVER
+              </button>
             </td>
           </tr>
         ))}
@@ -61,6 +74,7 @@ function CheckoutTable({ cart }) {
 
 CheckoutTable.propTypes = {
   cart: PropTypes.objectOf.isRequired,
+  setCart: PropTypes.func.isRequired,
 };
 
 export default CheckoutTable;

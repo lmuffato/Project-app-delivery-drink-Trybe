@@ -6,14 +6,14 @@ import { useCart } from '../../hooks/useCart';
 import './style.css';
 
 function CheckoutPage() {
-  const [cart] = React.useState(JSON.parse(localStorage.getItem('carrinho')));
+  const [cart, setCart] = React.useState(JSON.parse(localStorage.getItem('carrinho')));
 
   const { totalValue } = useCart();
 
   return (
     <section className="checkoutPage">
       <MenuCostumer />
-      <CheckoutTable cart={ cart } />
+      <CheckoutTable cart={ cart } setCart={ setCart } />
       <div>
         Total: R$
         <span

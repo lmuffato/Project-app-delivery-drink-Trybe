@@ -147,9 +147,16 @@ export function CartProvider({ children }) {
     updateCart(id, name, price, '-');
   };
 
+  const removeTotalItem = (id) => {
+    const cart = getCar();
+    const newCart = cart.filter((productElem) => productElem.id !== id);
+    localStorage.setItem('carrinho', JSON.stringify(newCart));
+    totalCartPrice();
+  };
+
   return (
     <CartContext.Provider
-      value={ { totalValue, addToCart, removeProdCart, manualEntry } }
+      value={ { totalValue, addToCart, removeProdCart, manualEntry, removeTotalItem } }
     >
       {children}
     </CartContext.Provider>

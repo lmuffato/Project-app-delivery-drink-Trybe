@@ -89,8 +89,7 @@ export default function SellerOrdersDetails() {
               { (item.price * item.quantity).toFixed(2) }
             </th>
           </tr>
-          ))
-        }
+        ))}
         <tr>
           <th data-testid={ dataTestId64 }>
             { `TOTAL: R$ ${sale.totalPrice}` }

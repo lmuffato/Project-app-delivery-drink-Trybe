@@ -26,3 +26,24 @@ export const dataTestIdsClientOrderDetails = {
   46: 'customer_order_details__element-order-total-price',
   47: 'customer_order_details__button-delivery-check',
 };
+
+export const dataTestIdsSellerOrderDetails = {
+  48: 'seller_orders__element-order-id-',
+  49: 'seller_orders__element-delivery-status-',
+  50: 'seller_orders__element-order-date-',
+  51: 'seller_orders__element-card-price-',
+  52: 'seller_orders__element-card-address-',
+  54: 'seller_order_details__element-order-details-label-order-id',
+  55: 'seller_order_details__element-order-details-label-delivery-status',
+  56: 'seller_order_details__element-order-details-label-order-date',
+  57: 'seller_order_details__button-preparing-check',
+  58: 'seller_order_details__button-dispatch-check',
+  59: 'seller_order_details__element-order-table-item-number-<index>',
+  60: 'seller_order_details__element-order-table-name-<index>',
+  61: 'seller_order_details__element-order-table-quantity-<index>',
+  62: 'seller_order_details__element-order-table-unit-price-<index>',
+  63: 'seller_order_details__element-order-table-sub-total-<index>',
+  64: 'seller_order_details__element-order-total-price',
+  65: 'admin_manage__input-name',
+  66: 'admin_manage__input-email',
+};

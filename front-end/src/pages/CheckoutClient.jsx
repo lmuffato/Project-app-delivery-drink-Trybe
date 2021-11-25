@@ -1,19 +1,31 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import Header from '../components/header';
 import Context from '../context/Context';
 import Table from '../components/table';
 
 function CheckoutClient() {
-  const { post, shoppingCart, total } = useContext(Context);
+  const { post, shoppingCart, total, get, setSellers } = useContext(Context);
   const navigate = useNavigate();
 
   const [error, setError] = useState(null);
+  const [sellersArr, setSellersArr] = useState(null);
   const [sellerId, setSellerId] = useState('');
   const [delivery, setDelivery] = useState({
     deliveryAddress: '',
     deliveryNumber: '',
   });
+
+  useEffect(() => {
+    const allSellers = async () => {
+      const { data } = await get('input_sellers');
+      setSellersArr(data);
+      setSellers(data);
+      setSellerId(data[0].id);
+      console.log(data);
+    };
+    allSellers();
+  }, []);
 
   const handleChange = ({ target }) => {
     const { id, value } = target;
@@ -31,7 +43,6 @@ function CheckoutClient() {
       const productIds = Object.keys(shoppingCart);
       const submitCart = {};
       productIds.forEach((id) => {
-        console.log(id);
         submitCart[id] = shoppingCart[id].productQuant;
       });
 
@@ -85,9 +96,9 @@ function CheckoutClient() {
             value={ sellerId }
             onChange={ ({ target: { value } }) => setSellerId(value) }
           >
-            <option value="1">Fulano1</option>
-            <option value="2">Fulano2</option>
-            <option value="3">Fulano3</option>
+            {sellersArr && sellersArr.map((seller) => (
+              <option key={ seller.id } value={ seller.id }>{seller.name}</option>
+            ))}
           </select>
         </label>
         <label htmlFor="deliveryAddress">

@@ -11,7 +11,7 @@ exports.findAll = async () => {
 };
 exports.getOrdersByUserEmail = async ({ email }) => {
   const user = await userModel.findOne({ where: { email } });
-  const sales = await saleModel.findAll({ where: { userId: user.id } });
+  const sales = await saleModel.findAll({ where: { userId: user?.id } });
   return sales;
 };
 /* const getUserIdByName = async (name) => {

@@ -43,7 +43,7 @@ export default function CheckoutDetails() {
   const confirmSale = async (products) => {
     console.log(sale);
     const result = await saleAction({ ...sale, products, token });
-    const saleId = result.result;
+    const saleId = result?.result;
     if (saleId) history.push(`/customer/orders/${saleId}`);
   };
 

@@ -46,8 +46,9 @@ export const fetchProducts = async (token) => {
   }
 };
 
-export const saleAction = async ({
-  token, userId, sellerId, totalPrice, deliveryAddress, deliveryNumber, products }) => {
+export const saleAction = async (sale) => {
+  const { token, userId, sellerId, totalPrice,
+    deliveryAddress, deliveryNumber, products } = sale;
   try {
     const rawResponse = await fetch('http://localhost:3001/sales',
       requestMetadata({
@@ -61,6 +62,22 @@ export const saleAction = async ({
           deliveryNumber,
           products,
         }) }));
+    const saleId = await rawResponse.json();
+    return saleId;
+  } catch (error) {
+    console.error(error.message);
+    return null;
+  }
+};
+
+export const saleActionGet = async (sale) => {
+  const { token } = sale;
+  try {
+    const rawResponse = await fetch('http://localhost:3001/sales',
+      requestMetadata({
+        method: 'GET',
+        Authorization: token,
+      }));
     const saleId = await rawResponse.json();
     return saleId;
   } catch (error) {

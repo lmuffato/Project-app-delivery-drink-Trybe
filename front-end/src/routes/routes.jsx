@@ -5,6 +5,7 @@ import Register from '../pages/Register';
 import NotFound from '../pages/NotFound';
 import Products from '../pages/Products';
 import Checkout from '../pages/Checkout';
+import CustomerOrders from '../pages/CustomerOrders';
 import Sales from '../pages/Sales';
 
 export default function Routes() {
@@ -17,6 +18,7 @@ export default function Routes() {
       <Route exact path="/register" component={ Register } />
       <Route exact path="/customer/products" component={ Products } />
       <Route exact path="/customer/checkout" component={ Checkout } />
+      <Route exact path="/customer/orders" component={ CustomerOrders } />
       <Route exact path="/products" component={ Products } />
       <Route exact path="/sales" component={ Sales } />
       <Route component={ NotFound } />

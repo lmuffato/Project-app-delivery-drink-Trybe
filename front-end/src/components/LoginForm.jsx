@@ -46,7 +46,12 @@ function LoginForm() {
         localStorage.setItem('user', JSON.stringify(user));
         setUser(user);
 
-        navigate(`/${role}/products`);
+        const routes = {
+          customer: '/customer/products',
+          seller: '/seller/orders',
+          administrator: '/admin/manage',
+        };
+        navigate(routes[role]);
       }
     } catch (error) {
       console.log(error);

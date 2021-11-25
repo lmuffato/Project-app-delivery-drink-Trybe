@@ -49,6 +49,16 @@ const getSaleDetailById = async (req, res) => {
   return res.status(OK).json(result);
 };
 
+const getAllSellers = async (req, res) => {
+  const result = await saleService.getAllSellers();
+
+  const { error } = result;
+
+  if (error) return res.status(error.code).json({ message: error.message });
+
+  return res.status(OK).json(result);
+};
+
 module.exports = {
-  postSale, getSalesBySellerId, getSalesByCustomerId, getSaleDetailById,
+  postSale, getSalesBySellerId, getSalesByCustomerId, getSaleDetailById, getAllSellers,
 }; 

@@ -20,7 +20,7 @@ function App() {
         element={ <PrivateRoute element={ OrderDetails } /> }
       />
       <Route
-        path="/seller/order"
+        path="/seller/orders"
         element={ <PrivateRoute element={ SellerOrders } /> }
       />
       <Route path="/" element={ <Navigate replace to="/login" /> } />

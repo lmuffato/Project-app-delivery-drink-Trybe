@@ -13,6 +13,8 @@ const Endpoints = {
   seller_orders: 'seller/orders',
   customer_orders: 'customer/orders',
   customer_checkout: 'sale',
+  input_sellers: 'customer/checkout',
+  seler_login: 'seller/orders',
 };
 
 function Provider({ children }) {
@@ -98,6 +100,8 @@ function Provider({ children }) {
         products,
         deleteProduct,
         setShoppingCart,
+        setSellers,
+        sellers,
         socket,
         total } }
     >

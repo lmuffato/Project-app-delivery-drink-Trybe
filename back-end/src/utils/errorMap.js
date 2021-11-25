@@ -89,4 +89,10 @@ module.exports = {
       message: 'sale not found',
     },
   },
+  notFoundSellers: {
+    error: {
+      code: 404,
+      message: 'Have not Sellers!',
+    },
+  },
 };

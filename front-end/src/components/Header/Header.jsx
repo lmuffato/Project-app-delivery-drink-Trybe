@@ -11,7 +11,7 @@ export default function Header(props) {
 
   function logout() {
     localStorage.clear();
-    history.push('/login');
+    history.push('/');
   }
 
   return (
@@ -32,7 +32,7 @@ export default function Header(props) {
       </div>
       <div className="right-container">
         <NavLink
-          data-testid="customer_products__element-navbar-link-orders"
+          data-testid="customer_products__element-navbar-user-full-name"
           to="#"
         >
           {name}

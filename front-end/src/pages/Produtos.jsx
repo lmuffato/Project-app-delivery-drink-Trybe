@@ -28,14 +28,12 @@ export default function Produtos() {
     }
   }
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { getProducts(); }, []);
 
   return (
     <div>
-      {
-        loading ? ''
-          : <Header title="Produtos" subtitle="Meus Pedidos" name={ userName.name } />
-      }
+      <Header title="Produtos" subtitle="Meus Pedidos" name={ userName.name } />
       <div
         style={ { width: '100vw',
           height: '100vh',

@@ -28,7 +28,7 @@ export default function TodosOsPedidos() {
     }
   }
 
-  useEffect(() => getAllSales(), [getAllSales]);
+  useEffect(() => getAllSales(), []);
 
   return (
     <div>
@@ -42,8 +42,8 @@ export default function TodosOsPedidos() {
                 key={ i }
                 id={ e.id }
                 status={ e.status }
-                saleDate={ e.saleDate }
-                totalPrice={ e.totalPrice }
+                sale_date={ e.sale_date }
+                total_price={ e.total_price }
               />
             ))
       }

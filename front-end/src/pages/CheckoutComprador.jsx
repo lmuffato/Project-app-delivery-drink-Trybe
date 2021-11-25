@@ -5,12 +5,15 @@ import Header from '../components/Header/Header';
 import CheckoutProduct from '../components/checkoutProduct/checkoutProduct';
 import { getSeler, sendRequest } from '../API/dataBaseCall';
 
+const moment = require('moment');
+
 export default function CheckoutComprador() {
   const { aux, total } = useContext(CheckoutContext);
   const userData = localStorage.getItem('user');
   const [seller, setSeller] = useState([]);
   const [address, setAddress] = useState('');
-  const [chooseSeller, setChooseSeller] = useState('Fulana Pereira');
+  const [chooseSeller, setChooseSeller] = useState();
+  const [loading, setLoading] = useState(true);
   const [addressNumber, setAddressNumber] = useState('');
   const userName = JSON.parse(userData);
   const totalValue = total.toFixed(2).toString().replace(/\./g, ',');
@@ -19,6 +22,7 @@ export default function CheckoutComprador() {
   async function getSellerId(user) {
     const sellerIncome = await getSeler(user);
     setSeller(sellerIncome);
+    setLoading(false);
   }
 
   function handleSeller({ target: { value } }) {
@@ -40,13 +44,13 @@ export default function CheckoutComprador() {
     const response = await sendRequest({
       data: aux,
       sellInfo: {
-        deliveryNumber: addressNumber,
-        deliveryAddress: address,
-        totalPrice: total,
+        delivery_number: addressNumber,
+        delivery_address: address,
+        total_price: total,
         status: 'Pendente',
-        userId: userName.id,
-        saleDate: atualDate,
-        sellerId: sellerId.id,
+        user_id: userName.id,
+        sale_date: moment().format(),
+        seller_id: sellerId.id,
       },
       token: userName.token,
     });
@@ -55,8 +59,11 @@ export default function CheckoutComprador() {
 
   useEffect(() => {
     getSellerId(userName.token);
+    if (loading === false) {
+      setChooseSeller(seller[0].name);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [loading, chooseSeller]);
 
   return (
     <div>

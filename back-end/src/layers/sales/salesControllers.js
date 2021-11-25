@@ -35,11 +35,15 @@ http POST :3001/users displayName='Lucas' email='lucas' password='lucas' image='
 */
 
 router.get('/:id',
-salesMiddlewares.getById,
+salesMiddlewares.getSalesBySellerId,
 async () => {});
 /* REQUISIÇÃO:
 http GET :3001/users/1
 */
+
+// router.get('/seller/:id',
+// salesMiddlewares.getById,
+// async () => {});
 
 router.put('/:id',
 salesMiddlewares.updateById,

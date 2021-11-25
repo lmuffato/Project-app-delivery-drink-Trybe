@@ -72,8 +72,8 @@ export const getSalesBySellerId = async (id) => {
 export const getSalesDetails = async (id) => {
   console.log('id no front', id);
   const { data } = await api.get(`/salesProducts/${id}`);
-  const { data: product } = await api.get(`/products/${data.productId}`);
-  return { data, product };
+  const result = await api.get(`/products/order/${data.productId}`);
+  return { data, result };
 };
 
 export const getSalesByCustomerId = async (id) => {

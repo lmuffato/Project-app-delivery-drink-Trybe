@@ -20,15 +20,15 @@ export default function SellerOrdersDetails() {
     return (
       <h2>tem algo</h2>
     );
-  }
+  };
 
   return (
     <main>
       <h4>Página de detalhes</h4>
       {
         isLoading
-        ? loadingTag
-        : renderAlgo()
+          ? loadingTag
+          : renderAlgo()
       }
     </main>
   );

@@ -16,11 +16,22 @@ function CheckoutTable(props) {
   const fillTable = ((cartt) => cartt.map(
     ({ productId: id, name, quantity, unitPrice, subTotal }, key) => (
       <tr key={ key }>
-        <td data-testid={ `${productId}-${key}` }>{ id }</td>
+        <td data-testid={ `${productId}-${key}` }>{ key + 1 }</td>
         <td data-testid={ productName + key }>{ name }</td>
-        <td data-testid={ productQuantity + key }>{ quantity}</td>
-        <td data-testid={ productUnitPrice + key }>{ unitPrice }</td>
-        <td data-testid={ productSubTotal + key }>{ subTotal }</td>
+        <td data-testid={ productQuantity + key }>{ quantity }</td>
+        <td data-testid={ productUnitPrice + key }>
+          { Number(unitPrice).toLocaleString('pt-BR', {
+            currency: 'BRL',
+            minimumFractionDigits: 2,
+          }) }
+        </td>
+        <td data-testid={ productSubTotal + key }>
+          {/* Colocar a vírgula na moeda: https://pt.stackoverflow.com/questions/264503/personalizar-o-tofixed-para-utilizar-v%C3%ADrgula-como-separador-decimal */}
+          { Number(subTotal).toLocaleString('pt-BR', {
+            currency: 'BRL',
+            minimumFractionDigits: 2,
+          }) }
+        </td>
         <td data-testid={ productRemove + key }><ButtonRemoveItem id={ id } /></td>
       </tr>
     ),

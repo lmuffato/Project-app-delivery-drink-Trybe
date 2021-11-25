@@ -7,7 +7,9 @@ export default function Login() {
   const [emailInput, setEmailInput] = useState('');
   const [passwordInput, setPasswordInput] = useState('');
   const [disabledBtn, setDisabledBtn] = useState(true);
-  const [userDatafromAPI, setUserDatafromAPI] = useState('');
+  const [userDatafromAPI, setUserDatafromAPI] = useState(''); 
+
+  // o email value do db, este restorno da requisição vai definir o evento de redirecionamento
 
   const fetchPostData = async (userData) => {
     try {

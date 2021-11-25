@@ -5,6 +5,18 @@ const cors = require('cors');
 const path = require('path');
 
 const app = express();
+const httpServer = require('http').createServer(app);
+
+const io = require('socket.io')(httpServer, {
+  cors: {
+    origin: 'http://localhost:3000',
+    method: ['GET', 'POST'],
+  },
+});
+
+const socketsClientSeller = require('../sockets/socketsClientSeller');
+
+socketsClientSeller.deliveryAppSocket(io);
 
 app.use(cors());
 

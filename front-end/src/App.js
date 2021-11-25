@@ -12,6 +12,7 @@ import SellerPage from './pages/SellerPage';
 import './App.css';
 import { OrderDetailsProvider } from './context/orderDetailsProvider';
 import SellerOrderDetailsPage from './pages/SellerOrderDetailsPage';
+import { SellerOrderDetailsProvider } from './context/sellerOrderDetailsProvider';
 
 function App() {
   return (
@@ -44,7 +45,9 @@ function App() {
       <Route
         path="/seller/orders/:id"
         element={
-          <SellerOrderDetailsPage />
+          <SellerOrderDetailsProvider>
+            <SellerOrderDetailsPage />
+          </SellerOrderDetailsProvider>
         }
       />
       <Route path="/admin/manage" element={ <AdminPage /> } />

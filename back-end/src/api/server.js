@@ -34,7 +34,7 @@ http://localhost:3001/salesProducts
 
 app.use('/imagesProducts', imagesControllers);
 /*
-http://localhost:3001/images
+http://localhost:3001/images //
 */
 
 app.listen(port);

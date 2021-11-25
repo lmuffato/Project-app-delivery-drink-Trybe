@@ -4,10 +4,12 @@ import Register from './pages/Register';
 import { RegisterProvider } from './contexts/Register';
 import Login from './pages/Login';
 import { LoginProvider } from './contexts/Login';
-import Admin from './pages/Admin';
 import Products from './pages/Products';
 import Orders from './pages/Orders';
 import { OrdersProvider } from './contexts/Orders';
+import { ProductsProvider } from './contexts/Products';
+import Checkout from './pages/Checkout';
+import Admin from './pages/Admin';
 
 function App() {
   return (
@@ -33,6 +35,16 @@ function App() {
           </LoginProvider>
         }
       />
+      <Route
+        exact
+        path="/customer/products"
+        element={
+          <ProductsProvider>
+            <Products />
+          </ProductsProvider>
+        }
+      />
+      <Route exact path="/customer/checkout" element={ <Checkout /> } />
       <Route exact path="/admin/manage" element={ <Admin /> } />
       <Route exact path="/customer/products" element={ <Products /> } />
       <Route

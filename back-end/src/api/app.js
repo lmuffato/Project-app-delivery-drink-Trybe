@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const path = require('path');
 const { userController, productsController, saleController } = require('./controllers');
 
 const newUserAuthentication = require('./middleware/validateNewUser');
@@ -12,9 +13,7 @@ const { validateUpdateOrder } = require('./middleware/validateUpdateOrder');
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
-
+app.use('/images', express.static(path.join(__dirname, '..', '..', 'public', 'images')));
 app.get('/coffee', (_req, res) => res.status(418).end());
 
 app.post('/login', userController.login);
@@ -29,7 +28,7 @@ app.route('/admin')
 
 app.delete('/admin/:id', validateToken, validateAdmin, userController.deleteUser);
 
-// app.post('/sales', validateToken, saleController.registerSale);
+app.post('/sales', validateToken, saleController.registerSale);
 
 app.route('/orders')
   .post(validateToken, saleController.registerSale)

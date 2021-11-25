@@ -1,5 +1,5 @@
 const { Sale } = require('../database/models');
-const { SaleProduct, Product } = require('../database/models');
+const { SaleProduct } = require('../database/models');
 
 const createSaleElement = async (saleInfo) => {
   const { totalPrice, deliveryAddress, deliveryNumber, userId, sellerId } = saleInfo;

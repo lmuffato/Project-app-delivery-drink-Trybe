@@ -1,5 +1,5 @@
 const httpStatus = require('../utils/httpStatus');
-const { createSale, saleById } = require('../services/salesService');
+const { createSale } = require('../services/salesService');
 const { Sale } = require('../database/models');
 
 const registerSale = async (req, res) => {

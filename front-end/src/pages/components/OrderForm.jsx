@@ -50,13 +50,14 @@ export default function OrderForm() {
   }, [sellers]);
 
   return (
-    <div>
+    <div className="checkout-details-title">
       <h2>Detalhes e Endereço para Entrega</h2>
       <select
         name="sellers"
         value={ selectedSeller }
         onChange={ handleSelect }
         data-testid="customer_checkout__select-seller"
+        className="checkout-select"
       >
         P. Vendedora Responsável
         { sellers && sellers.map((seller) => (
@@ -72,6 +73,7 @@ export default function OrderForm() {
           placeHolder="Travessa Terceira da Castanheira, Bairo Muruci"
           data-testid="customer_checkout__input-address"
           onChange={ (e) => setStreet(e.target.value) }
+          className="checkout-address-input"
         />
       </label>
       <label htmlFor="numero">
@@ -83,12 +85,14 @@ export default function OrderForm() {
           placeHolder="198"
           data-testid="customer_checkout__input-addressNumber"
           onChange={ (e) => setNumber(e.target.value) }
+          className="checkout-number-input"
         />
       </label>
       <button
         onClick={ handleClick }
         type="submit"
         data-testid="customer_checkout__button-submit-order"
+        className="checkout-order-btn"
       >
         FINALIZAR PEDIDO
       </button>

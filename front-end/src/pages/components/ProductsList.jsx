@@ -2,6 +2,8 @@ import React, { useContext, useEffect } from 'react';
 import ContextDeliveryApp from '../../store/ContextDeliveryApp';
 import RemoveButton from './RemoveButton';
 
+import '../styles/customerCheckoutStyle.css';
+
 export default function ProductsList() {
   const { products, setProducts } = useContext(ContextDeliveryApp);
   const productsCart = products.filter((product) => product.quantity > 0);
@@ -36,15 +38,15 @@ export default function ProductsList() {
   }, [productsCart]);
 
   return (
-    <div>
-      <h2>Finalizar Pedido</h2>
-      <table>
+    <div className="checkout-container">
+      <h2 className="checkout-title">Finalizar Pedido</h2>
+      <table className="checkout-table">
         <thead>
           <tr>
             <th>item</th>
             <th>Descrição</th>
             <th>Quantidade</th>
-            <th>Valor Unitário</th>
+            <th>R$</th>
             <th>Sub-Total</th>
             <th>Remover Item</th>
           </tr>
@@ -96,7 +98,10 @@ export default function ProductsList() {
               </tr>))}
         </tbody>
       </table>
-      <h4 data-testid="customer_checkout__element-order-total-price">
+      <h4
+        data-testid="customer_checkout__element-order-total-price"
+        className="checkout-price"
+      >
         { totalPrice() }
       </h4>
     </div>

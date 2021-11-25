@@ -16,7 +16,7 @@ function CheckoutTable(props) {
   const fillTable = ((cartt) => cartt.map(
     ({ productId: id, name, quantity, unitPrice, subTotal }, key) => (
       <tr key={ key }>
-        <td data-testid={ `${productId}-${key}` }>{ key + 1 }</td>
+        <td data-testid={ `${productId}${key}` }>{ key + 1 }</td>
         <td data-testid={ productName + key }>{ name }</td>
         <td data-testid={ productQuantity + key }>{ quantity }</td>
         <td data-testid={ productUnitPrice + key }>

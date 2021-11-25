@@ -29,11 +29,11 @@ export default function SellerOrdersDetails() {
   useEffect(() => {
     setIsLoading(true);
     getOrderById(id)
-      .then((result) => (
-        setItens(result.itensList),
-        setSale(result.sale),
-        setIsLoading(false)
-      ));
+      .then((result) => {
+        setItens(result.itensList);
+        setSale(result.sale);
+        setIsLoading(false);
+      });
   }, []);
 
   const renderTable = () => (
@@ -83,7 +83,6 @@ export default function SellerOrdersDetails() {
       </tfoot>
     </table>
   );
-
 
   return (
     <main>

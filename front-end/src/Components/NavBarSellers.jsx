@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import NewOrderContext from '../context/NewOrderContext';
 import '../Styles/Navbar.css';
+
 function NavbarSellers() {
   const { userName } = useContext(NewOrderContext);
 
@@ -34,4 +35,3 @@ function NavbarSellers() {
 }
 
 export default NavbarSellers;
-

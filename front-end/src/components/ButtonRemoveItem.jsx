@@ -2,8 +2,7 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { CartContext } from '../contexts/Cart';
 
-function ButtonRemoveItem(props) {
-  const { id } = props;
+function ButtonRemoveItem({ id }) {
   const { cart, setCart } = useContext(CartContext);
 
   const removeItem = () => {

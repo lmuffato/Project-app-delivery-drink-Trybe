@@ -11,13 +11,6 @@ const registerSale = async (req, res) => {
   return res.status(httpStatus.created).json({ saleId });
 };
 
-const getSaleById = async (req, res) => {
-  const { id } = req.params;
-
-  const response = await saleById(id);
-  return res.status(httpStatus.ok).json(response);
-};
-
 const getAllSales = async (req, res) => {
   const customerRequest = (userId) => Sale
     .findAll({ where: { userId } })
@@ -47,7 +40,6 @@ const getSpecificSale = async (req, res) => {
 
 module.exports = {
   registerSale,
-  getSaleById,
   getSpecificSale,
   getAllSales,
 };

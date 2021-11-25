@@ -48,30 +48,6 @@ const createSale = async (saleData) => {
   return { saleId: dataValues.id };
 };
 
-const getProductsQuantities = async (sale) => {
-  const quantityArray = [];
-  const result = await sale.products.map(async (item) => {
-    const [{ quantity }] = await SaleProduct.findAll({
-      where: { saleId: sale.id, productId: item.id },
-      attributes: ['quantity'],
-    });
-    return quantityArray.push(quantity);
-  });
-
-  return Promise.all(result);
-};
-
-const saleById = async (id) => {
-  const [sale] = await Sale.findAll({
-    where: { id },
-    include: [{ model: Product, as: 'products', through: { attributes: [] } }],
-  });
-
-  const productsQuantities = await getProductsQuantities(sale);
-  return { sale, productsQuantities };
-};
-
 module.exports = {
   createSale,
-  saleById,
 };

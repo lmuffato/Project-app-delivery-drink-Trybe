@@ -71,29 +71,29 @@ export default function SellerOrdersDetails() {
           <th data-testid={ `${dataTestId62}-${id}` }>Valor Unitário</th>
           <th data-testid={ `${dataTestId63}-${id}` }>Sub-total</th>
         </tr>
-          { itens.map((item, index) => (
-            <tr key={ index }>
-              <th data-testid={ dataTestId59 }>
-                { index + 1 }
-              </th>
-              <th data-testid={ dataTestId60 }>
-                { item.name }
-              </th>
-              <th data-testid={ dataTestId61 }>
-                { item.quantity }
-              </th>
-              <th data-testid={ dataTestId62 }>
-                { item.price }
-              </th>
-              <th data-testid={ dataTestId63 }>
-                { (item.price * item.quantity).toFixed(2) }
-              </th>
-            </tr>
-            ))
-          }
+        { itens.map((item, index) => (
+          <tr key={ index }>
+            <th data-testid={ dataTestId59 }>
+              { index + 1 }
+            </th>
+            <th data-testid={ dataTestId60 }>
+              { item.name }
+            </th>
+            <th data-testid={ dataTestId61 }>
+              { item.quantity }
+            </th>
+            <th data-testid={ dataTestId62 }>
+              { item.price }
+            </th>
+            <th data-testid={ dataTestId63 }>
+              { (item.price * item.quantity).toFixed(2) }
+            </th>
+          </tr>
+          ))
+        }
         <tr>
           <th data-testid={ dataTestId64 }>
-              { `TOTAL: R$ ${sale.totalPrice}` }
+            { `TOTAL: R$ ${sale.totalPrice}` }
           </th>
         </tr>
       </tbody>

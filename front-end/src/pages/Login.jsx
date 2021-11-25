@@ -31,12 +31,15 @@ export default function Login() {
 
   const checkRole = (login) => {
     const { role } = jwtDecode(login.token);
-    if (role !== 'administrator') {
-      setToLocalStorageUser('user', { login, email });
-      return '/customer/products';
+    if (role === 'seller') {
+      return '/seller/orders';
     }
-    setToLocalStorage('token', login);
-    return '/admin/manage';
+    if (role === 'administrator') {
+      setToLocalStorage('token', login);
+      return '/admin/manage';
+    }
+    setToLocalStorageUser('user', { login, email });
+    return '/customer/products';
   };
 
   const clickLoginButton = async () => {

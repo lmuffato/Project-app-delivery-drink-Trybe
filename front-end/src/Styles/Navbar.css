@@ -27,6 +27,7 @@
 nav {
   background-color: rgb(173, 209, 140);
   display: flex;
+  height: 4rem;
   justify-content: center;
   position: fixed;
   top: 0;

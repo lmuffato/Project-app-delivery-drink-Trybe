@@ -17,8 +17,19 @@ const getById = async (req, res) => {
   try {
     const { id } = req.params;
     const data = await sales.findByPk(id);
-    console.log(data);
-    if (!data) { return res.status(404).json({ message: 'User does not exist' }); }
+    console.log('data', data);
+    if (!data) { return res.status(404).json({ message: 'Seller does not have sells' }); }
+    return res.status(200).json(data);
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+};
+
+const getSalesBySellerId = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const data = await sales.findAll({ where: { userId: id } });
+    if (!data) { return res.status(404).json({ message: 'Seller does not have sells' }); }
     return res.status(200).json(data);
   } catch (err) {
     return res.status(500).json({ message: err.message });
@@ -147,4 +158,5 @@ module.exports = {
   createNew,
   createSale,
   createManySaleProducts,
+  getSalesBySellerId,
 };

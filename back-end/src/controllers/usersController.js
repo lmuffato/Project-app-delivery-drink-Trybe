@@ -20,7 +20,10 @@ const adminList = async (req, res) => {
     { where: { role: ['seller', 'customer'] } }
   );
 
-  return res.status(httpStatus.ok).json(users);
+  const serializedUsers = users
+    .map(({ id, name, email, role }) => ({ id, name, email, role }));
+
+  return res.status(httpStatus.ok).json(serializedUsers);
 };
 
 module.exports = {

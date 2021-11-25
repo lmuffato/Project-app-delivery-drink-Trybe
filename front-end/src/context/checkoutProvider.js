@@ -3,13 +3,16 @@ import { element } from 'prop-types';
 import CheckoutContext from './checkoutContext';
 
 function RecipesProvider({ children }) {
-  // const [alltotalValue, setAllTotalValue] = useState([]);
+  const [logged, setLogged] = useState(false);
   const [aux, setAux] = useState([]);
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
     if (aux) {
-      const result = aux.reduce((curr, next) => curr + parseFloat(next.price), 0);
+      const result = aux.reduce(
+        (curr, next) => curr + parseFloat(next.price),
+        0,
+      );
       setTotal(result);
     }
   }, [aux]);
@@ -19,7 +22,8 @@ function RecipesProvider({ children }) {
       product_id: id,
       quantity: qtd,
       name,
-      price: (qtd * price).toFixed(2) };
+      price: (qtd * price).toFixed(2),
+    };
     if (aux) {
       const productBool = aux.some((bool) => bool.product_id === id);
       if (productBool) {
@@ -41,7 +45,9 @@ function RecipesProvider({ children }) {
   }
 
   return (
-    <CheckoutContext.Provider value={ { addItem, total, aux, setAux } }>
+    <CheckoutContext.Provider
+      value={ { addItem, total, aux, setAux, logged, setLogged } }
+    >
       {children}
     </CheckoutContext.Provider>
   );

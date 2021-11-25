@@ -12,7 +12,7 @@ module.exports = {
         total_price: 23.80,
         status: 'Pendente',
         sale_date: '08/04/21',
-        delivery_adress: 'Rua Irmãos Monteiro, Bairro Pedras',
+        delivery_address: 'Rua Irmãos Monteiro, Bairro Pedras',
         delivery_number: '851'
       },
       { id: 2,
@@ -21,7 +21,7 @@ module.exports = {
         total_price: 14.20,
         status: 'Preparando',
         sale_date: '08/04/21',
-        delivery_adress: 'Rua Vila Bela, Bairro Gurupi',
+        delivery_address: 'Rua Vila Bela, Bairro Gurupi',
         delivery_number: '670'
       },
       { id: 3,
@@ -30,7 +30,7 @@ module.exports = {
         total_price: 28.46,
         status: 'Entregue',
         sale_date: '07/04/21',
-        delivery_adress: 'Rua Sessenta e Dois, Bairro Maranguape II',
+        delivery_address: 'Rua Sessenta e Dois, Bairro Maranguape II',
         delivery_number: '533'
       },
     ], {}),

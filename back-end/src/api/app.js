@@ -15,6 +15,8 @@ app.use('/images', express.static(path
   .join(__dirname, '..', '..', '/public', '/images', '/public')));
 
 app.get('/products', Product.getProducts);
+app.get('/sales', Sale.getAllSales);
+app.get('/sales/getSales', Sale.getSales);
 
 app.post('/user', User.register);
 

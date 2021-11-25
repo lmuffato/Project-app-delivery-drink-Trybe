@@ -8,6 +8,11 @@ const createSale = async (data) => {
   return { status: 201, id: newSale.id };
 };
 
+const getSales = async () => {
+  const sales = await sale.findAll();
+  return { status: 200, data: sales };
+};
+
 const getAllSales = async (id) => {
   const userId = 'user_Id';
   const query = { where: { [userId]: id } };
@@ -18,5 +23,6 @@ const getAllSales = async (id) => {
 
 module.exports = {
   createSale,
+  getSales,
   getAllSales,
 };

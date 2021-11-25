@@ -15,8 +15,8 @@ const postRequest = async (userData, callbacks, endpointData) => {
       const message = `An error has occured: ${response.status}`;
       throw new Error(message);
     } else {
-      const { user: { name, email, role }, token } = await response.json();
-      localStorage.setItem('user', JSON.stringify({ name, email, role, token }));
+      const { user: { id, name, email, role }, token } = await response.json();
+      localStorage.setItem('user', JSON.stringify({ id, name, email, role, token }));
       if (setRole) setRole(role);
       setRedirect(true);
     }

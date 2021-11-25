@@ -24,7 +24,7 @@ function CheckoutClient() {
       setSellerId(data[0].id);
     };
     allSellers();
-  }, []);
+  }, [get, setSellers]);
 
   const handleChange = ({ target }) => {
     const { id, value } = target;
@@ -42,10 +42,6 @@ function CheckoutClient() {
       const productIds = Object.keys(shoppingCart);
       const submitCart = {};
       productIds.forEach((id) => {
-<<<<<<< HEAD
-        // console.log(id);
-=======
->>>>>>> 5c7bbc59d74bb75b8626f3110030eb1c4bb922d4
         submitCart[id] = shoppingCart[id].productQuant;
       });
 

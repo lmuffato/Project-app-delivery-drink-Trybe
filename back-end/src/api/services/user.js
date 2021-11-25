@@ -15,7 +15,7 @@ exports.login = async ({ email, password }) => {
   );
   if (user) {
   return {
-    token: generateToken({ email }),
+    token: generateToken({ email: user.email, role: user.role }),
     id: user.id,
     name: user.name,
     email: user.email,

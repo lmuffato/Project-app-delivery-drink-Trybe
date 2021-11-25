@@ -1,15 +1,9 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import testIDs from '../../datatestids.json';
+import { formatDate, formatPrice, formatTestID, leftPad } from '../../utils/functions';
 
 export default function ProductCard({ id, status, date, price, address }) {
-  const NUMBER_OF_DIGITS = 4;
-  const leftPad = (number) => String(number).padStart(NUMBER_OF_DIGITS, '0');
-  const formatTestID = (ID, idx) => testIDs[ID].replace('<id>', idx);
-  const formatPrice = (value) => new Intl.NumberFormat('pt-BR',
-    { style: 'currency', currency: 'BRL' }).format(value);
-  const formatDate = (value) => new Intl.DateTimeFormat('pt-BR').format(new Date(value));
   return (
     <div className="card">
       <Link to={ `/seller/orders/${id}` }>

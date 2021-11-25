@@ -9,16 +9,12 @@ export default function UserProvider({ children }) {
   const [totalPrice, setTotalPrice] = useState(0);
   const [shoppingCart, setShoppingCart] = useState([]);
 
-  // const user = JSON.parse(localStorage.getItem('user'));
-  // console.log('🚀 ~ file: ProductsProvider.jsx ~ line 12 ~ UserProvider ~ user', user);
-
   useEffect(() => {
     (async () => {
-      // if (user) {
-      const getProducts = await fetchProducts('token');
+      // o || [] é só para não crashar quando o back estiver off ¯\_(ツ)_/¯
+      const getProducts = (await fetchProducts('token')) || [];
       const newProducts = getProducts.map((product) => ({ ...product, count: 0 }));
       setProducts(newProducts);
-      // }
     })();
   }, []);
 

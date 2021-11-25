@@ -8,7 +8,7 @@ import Register from './pages/Register';
 
 function App() {
   return (
-    <div className="App">
+    <div className="bg-gray-500">
       <BrowserRouter>
         <Switch>
           <Route exact path="/" render={ () => <Redirect to="/login" /> } />

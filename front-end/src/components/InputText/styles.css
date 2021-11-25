@@ -1,4 +1,16 @@
+.c_input_container {
+  display: flex;
+  flex-direction: column;
+}
+
+.c_input_container label {
+  cursor: pointer;
+  margin-bottom: 5px;
+  padding-left: 8px;
+}
+
 .c_inputText {
   border-radius: 4px;
+  margin-right: 1vw;
   padding: 6px;
 }

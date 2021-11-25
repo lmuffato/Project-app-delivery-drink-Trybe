@@ -10,19 +10,21 @@ function OrderDetails() {
   const [sale, setSale] = useState('');
   const { id: idOrder } = useParams();
 
+  const { token } = JSON.parse(localStorage.getItem('user'));
+
+  const fetchSale = async () => {
+    const saleFetched = await api.getSaleById(idOrder, token);
+
+    setSale(saleFetched);
+  };
+
   useEffect(() => {
-    const { token } = JSON.parse(localStorage.getItem('user'));
-
-    const fetchSale = async () => {
-      const saleFetched = await api.getSaleById(idOrder, token);
-
-      setSale(saleFetched);
-    };
-
     fetchSale();
-  }, [idOrder]);
+  }, [sale]);
 
-  console.log(sale);
+  const updateOrder = async (statusOrder) => {
+    await api.changeOrderStatus(statusOrder, idOrder, token);
+  };
 
   const createOrder = () => {
     const { role } = JSON.parse(localStorage.getItem('user'));
@@ -31,7 +33,7 @@ function OrderDetails() {
       <div className="saleDetailsContainer">
         <div className="sale-card">
           Detalhe do Pedido
-          <OrderBox props={ { sale, role } } />
+          <OrderBox props={ { sale, role, updateOrder, fetchSale } } />
         </div>
       </div>
     );

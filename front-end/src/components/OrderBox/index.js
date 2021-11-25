@@ -1,4 +1,5 @@
 import React from 'react';
+
 import './style.css';
 import PropTypes from 'prop-types';
 import moment from 'moment';
@@ -13,7 +14,7 @@ function OrderBox({ props }) {
     seller,
   } = props.sale;
 
-  const { role } = props;
+  const { role, updateOrder, fetchSale } = props;
 
   const tesStatus = `${role}_order_details__element-order-details-label-delivery-status`;
 
@@ -21,6 +22,11 @@ function OrderBox({ props }) {
     <button
       type="button"
       data-testid="customer_order_details__button-delivery-check"
+      onClick={ (event) => {
+        event.preventDefault();
+        updateOrder('Entregue');
+        fetchSale();
+      } }
     >
       MARCAR COMO ENTREGUE
     </button>

@@ -19,7 +19,7 @@ function App() {
         element={ <PrivateRoute element={ OrderDetails } /> }
       />
       <Route
-        path="/seller/order"
+        path="/seller/orders"
         element={ <PrivateRoute element={ SellerOrders } /> }
       />
       <Route exact path="/products" element={ <ProductClient /> } />

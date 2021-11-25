@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 function SellerOrderCard(props) {
   const { order } = props;
-  const { id, status, date, price, address } = order;
+  const { id, status, saleDate, totalPrice, address } = order;
 
   return (
     <Link to={ `/seller/orders/${id}` }>
@@ -17,12 +17,12 @@ function SellerOrderCard(props) {
         { status }
       </div>
       <div data-testid={ `seller_orders__element-order-date-${id}` }>
-        { date }
+        { saleDate }
       </div>
       <div data-testid={ `seller_orders__element-card-price-${id}` }>
         R$
         {' '}
-        { price }
+        { totalPrice }
       </div>
       <div data-testid={ `seller_orders__element-card-address-${id}` }>
         { address }

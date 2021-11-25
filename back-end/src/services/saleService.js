@@ -67,13 +67,13 @@ const getSalesBySellerId = async (id) => {
 
     if (!isMatchedRole) return errorMap.unmatchedRole;
 
-    const sellerSales = await Sale.findAll({
+    const [sellerSales] = await Sale.findAll({
       where: {
         sellerId: id,
       },
     });
   
-    return sellerSales;
+    return [sellerSales.dataValues];
   } catch (_error) {
     return errorMap.internalError;
   }
@@ -111,4 +111,18 @@ const getSaleDetailById = async (id) => {
   }
 };
 
-module.exports = { postSale, getSalesBySellerId, getSalesByCustomerId, getSaleDetailById };
+const getAllSellers = async () => {
+  try {
+    const [user] = await User.findAll({ where: { role: 'seller' } });
+
+    if (!user) return errorMap.notFoundSellers;
+    
+    return [user.dataValues];
+  } catch (error) {
+    return errorMap.internalError;
+  }
+};
+
+module.exports = {
+  postSale, getSalesBySellerId, getSalesByCustomerId, getSaleDetailById, getAllSellers,
+};

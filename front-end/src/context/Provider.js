@@ -13,6 +13,8 @@ const Endpoints = {
   checkout_form: 'sale',
   seller_orders: 'seller/orders',
   customer_checkout: 'sale',
+  input_sellers: 'customer/checkout',
+  seler_login: 'seller/orders',
 };
 
 function Provider({ children }) {
@@ -21,7 +23,7 @@ function Provider({ children }) {
   const [shoppingCart, setShoppingCart] = useState({});
   const [total, setTotal] = useState(0);
   const [delivery, setDelivery] = useState({});
-  // const [sellers, setSellers] = useState([]);
+  const [sellers, setSellers] = useState([]);
   // const [sellerPerson, setSellerPerson] = useState('');
 
   /// ////////////////////////Link with BackEnd//////////////////////// ///
@@ -113,6 +115,8 @@ function Provider({ children }) {
         postShoppingCart,
         deleteProduct,
         setShoppingCart,
+        setSellers,
+        sellers,
         socket,
         total } }
     >

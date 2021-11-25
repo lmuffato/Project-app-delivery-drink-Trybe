@@ -2,8 +2,8 @@ const {
   StatusCodes: { CREATED, OK, INTERNAL_SERVER_ERROR, NOT_FOUND },
 } = require('http-status-codes');
 
-const { Sale, sale } = require('../../database/models');
-const { User: users, ProductsSale } = require('../../database/models');
+// const { Sale } = require('../../database/models');
+const { User: users, ProductsSale, Sale } = require('../../database/models');
 
 const ids = {
   user: 'user_id',
@@ -15,7 +15,6 @@ const getAllSales = async (req, res, next) => {
   try {
     const { email } = req.user;
     const { dataValues } = await users.findOne({ where: { email } });
-
 
     const { role } = dataValues;
     if (role === 'customer') {
@@ -29,7 +28,6 @@ const getAllSales = async (req, res, next) => {
 
     res.status(NOT_FOUND).json({ message: 'User not found' });
   } catch (e) {
-    console.log(e)
     next({ statusCode: INTERNAL_SERVER_ERROR, message: e.message });
   }
 };

@@ -6,7 +6,7 @@ function BackgroundContainer({ children }) {
   return (
     <Box
       component="section"
-      sx={ { backgroundColor: '#cbc26d', width: '100vh', height: '100vh' } }
+      sx={ { backgroundColor: '#F6EDDC', width: '100vw', height: '100vh' } }
     >
       {children}
     </Box>

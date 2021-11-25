@@ -23,9 +23,11 @@ function Orders() {
 
   const createOrders = () => {
     const { role } = JSON.parse(localStorage.getItem('user'));
-    console.log('Cheguei aqui', role, salesOrder);
+
     return salesOrder.map((order) => {
       const { id, status, sale_date: saleDate, total_price: totalPrice } = order;
+
+      const statusOrder = status === 'Em Trânsito' ? 'Em-Transito' : status;
 
       return (
         <Link
@@ -43,7 +45,7 @@ function Orders() {
               <p>{id}</p>
             </div>
             <div
-              className={ `status-order-${status}` }
+              className={ `status-order-${statusOrder}` }
               data-testid={ `${role}_orders__element-delivery-status-${id}` }
             >
               <p>{status.toUpperCase()}</p>

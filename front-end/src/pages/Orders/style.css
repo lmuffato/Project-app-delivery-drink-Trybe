@@ -35,8 +35,29 @@
   text-align: center;
 }
 
-.status-order-pendente {
+.status-order-Pendente {
   background-color: rgb(255, 251, 0);
+  border-radius: 10px;
+  margin: 5px;
+  padding: 5px;
+}
+
+.status-order-Entregue {
+  background-color: rgb(12, 113, 196);
+  border-radius: 10px;
+  margin: 5px;
+  padding: 5px;
+}
+
+.status-order-Preparando {
+  background-color: rgb(99, 247, 80);
+  border-radius: 10px;
+  margin: 5px;
+  padding: 5px;
+}
+
+.status-order-Em-Transito {
+  background-color: rgb(248, 167, 17);
   border-radius: 10px;
   margin: 5px;
   padding: 5px;

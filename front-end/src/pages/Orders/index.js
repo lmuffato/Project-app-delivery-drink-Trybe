@@ -48,7 +48,7 @@ function Orders() {
               className={ `status-order-${statusOrder}` }
               data-testid={ `${role}_orders__element-delivery-status-${id}` }
             >
-              <p>{status.toUpperCase()}</p>
+              <p>{status}</p>
             </div>
             <div className="date-price-order">
               <p

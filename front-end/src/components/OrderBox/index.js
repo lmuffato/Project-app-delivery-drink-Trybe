@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import './style.css';
 import PropTypes from 'prop-types';
@@ -14,6 +14,22 @@ function OrderBox({ props }) {
     seller,
   } = props.sale;
 
+  console.log(status);
+
+  const [isDisablePreparing, setIsDisablePreparing] = useState('');
+  const [isDisableTransit, setIsDisableTransit] = useState('');
+
+  useEffect(() => {
+    if (status !== 'Pendente') {
+      setIsDisablePreparing(true);
+      setIsDisableTransit(false);
+    }
+
+    if (status !== 'Preparando') {
+      setIsDisableTransit(true);
+    }
+  }, [status]);
+
   const { role, updateOrder } = props;
 
   const tesStatus = `${role}_order_details__element-order-details-label-delivery-status`;
@@ -25,7 +41,7 @@ function OrderBox({ props }) {
   const createCustomerButton = () => (
     <button
       type="button"
-      disabled={ status !== checkTransit ? 'true' : 'false' }
+      disabled={ status !== checkTransit }
       data-testid="customer_order_details__button-delivery-check"
       onClick={ (event) => {
         event.preventDefault();
@@ -48,9 +64,11 @@ function OrderBox({ props }) {
     <>
       <button
         type="button"
+        disabled={ isDisablePreparing }
         data-testid="seller_order_details__button-preparing-check"
         onClick={ (event) => {
           event.preventDefault();
+          console.log('Cheguei aqui no prepa');
           updateOrder('Preparando');
         } }
       >
@@ -58,6 +76,7 @@ function OrderBox({ props }) {
       </button>
       <button
         type="button"
+        disabled={ isDisableTransit }
         data-testid="seller_order_details__button-dispatch-check"
         onClick={ (event) => {
           event.preventDefault();

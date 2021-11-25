@@ -4,7 +4,6 @@ import { useParams } from 'react-router';
 import { getOrderById } from '../services/endpointsAPI';
 
 import Navbar from '../Components/NavBarSellers';
-import TableHeader from '../Components/SellerOrderDetails/TableHeader';
 
 import '../Styles/SellerOrderDetails.css';
 
@@ -13,12 +12,12 @@ const dataTestId55 = 'seller_order_details__element-order-details-label-delivery
 const dataTestId56 = 'seller_order_details__element-order-details-label-order-date';
 const dataTestId57 = 'seller_order_details__button-preparing-check';
 const dataTestId58 = 'seller_order_details__button-dispatch-check';
-const dataTestId59 = 'seller_order_details__element-order-table-item-number';
-const dataTestId60 = 'seller_order_details__element-order-table-name';
-const dataTestId61 = 'seller_order_details__element-order-table-quantity';
-const dataTestId62 = 'seller_order_details__element-order-table-unit-price';
-const dataTestId63 = 'seller_order_details__element-order-table-sub-total';
-const dataTestId64 = 'seller_order_details__element-order-total-price';
+// const dataTestId59 = 'seller_order_details__element-order-table-item-number';
+// const dataTestId60 = 'seller_order_details__element-order-table-name';
+// const dataTestId61 = 'seller_order_details__element-order-table-quantity';
+// const dataTestId62 = 'seller_order_details__element-order-table-unit-price';
+// const dataTestId63 = 'seller_order_details__element-order-table-sub-total';
+// const dataTestId64 = 'seller_order_details__element-order-total-price';
 
 export default function SellerOrdersDetails() {
   const { id } = useParams();
@@ -37,55 +36,54 @@ export default function SellerOrdersDetails() {
       ));
   }, []);
 
-  const renderTable = () => {
-    return (
-      <table>
-        { console.log(sale)}
-        { console.log(itens)}
-        <thead>
-          <tr>
-            <th data-testid={ `${dataTestId54}-${id}` }>
-              { `PEDIDO ${sale.id} ` }
-            </th>
-            <th data-testid={ `${dataTestId56}-${id}` }>
-              { sale.saleDate }
-            </th>
-            <th data-testid={ `${dataTestId55}-${id}` }>
-              { sale.status }
-            </th>
-            <th>
-              <button data-testid={ `${dataTestId57}-${id}` }>
-                PREPARAR PEDIDO
-              </button>
-            </th>
-            <th>
-              <button data-testid={ `${dataTestId58}-${id}` }>
-                SAIU PARA ENTREGA
-              </button>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th>Item</th>
-            <th>Descrição</th>
-            <th>Quantidade</th>
-            <th>Valor Unitário</th>
-            <th>Sub-total</th>
-          </tr>
-        </tbody>
-        <tfoot>
-          <tr>
-            <th>
-              <div>
-                { `TOTAL: R$ ${sale.totalPrice}` }
-              </div>
-            </th>
-          </tr>
-        </tfoot>
-      </table>
-    );
-  };
+  const renderTable = () => (
+    <table>
+      { console.log(sale)}
+      { console.log(itens)}
+      <thead>
+        <tr>
+          <th data-testid={ `${dataTestId54}-${id}` }>
+            { `PEDIDO ${sale.id} ` }
+          </th>
+          <th data-testid={ `${dataTestId56}-${id}` }>
+            { sale.saleDate }
+          </th>
+          <th data-testid={ `${dataTestId55}-${id}` }>
+            { sale.status }
+          </th>
+          <th>
+            <button data-testid={ `${dataTestId57}-${id}` }>
+              PREPARAR PEDIDO
+            </button>
+          </th>
+          <th>
+            <button data-testid={ `${dataTestId58}-${id}` }>
+              SAIU PARA ENTREGA
+            </button>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>Item</th>
+          <th>Descrição</th>
+          <th>Quantidade</th>
+          <th>Valor Unitário</th>
+          <th>Sub-total</th>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <th>
+            <div>
+              { `TOTAL: R$ ${sale.totalPrice}` }
+            </div>
+          </th>
+        </tr>
+      </tfoot>
+    </table>
+  );
+
 
   return (
     <main>

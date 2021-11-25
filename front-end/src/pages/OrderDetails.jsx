@@ -12,7 +12,6 @@ function OrdersDetails({ match }) {
   const [disableButton, setdisableButton] = useState(true);
   const { id } = match.params;
   const statsDTid = 'customer_order_details__element-order-details-label-delivery-status';
-  console.log(order);
 
   async function getOrder() {
     const request = await axios.get(`http://localhost:3001/sale/${id}`);
@@ -22,7 +21,6 @@ function OrdersDetails({ match }) {
   }
 
   async function buttonStatus() {
-    console.log(orderStatus, 'teste');
     if (orderStatus !== 'Em Trânsito') {
       setdisableButton(true);
     } else {
@@ -152,7 +150,7 @@ function OrdersDetails({ match }) {
         variant="success"
         data-testid="customer_order_details__element-order-total-price"
       >
-        { order.total_price }
+        { order.total_price.replace('.', ',') }
       </Button>
     </div>
   );

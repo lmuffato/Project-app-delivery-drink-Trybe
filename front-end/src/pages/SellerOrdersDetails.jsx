@@ -12,7 +12,6 @@ function SellerOrdersDetails({ match }) {
   const [disableButton, setdisableButton] = useState(true);
   const [transitButton, setTransitButton] = useState(true);
   const { id } = match.params;
-  console.log(order);
 
   async function getOrder() {
     const request = await axios.get(`http://localhost:3001/sale/${id}`);
@@ -165,7 +164,7 @@ function SellerOrdersDetails({ match }) {
         variant="success"
         data-testid="seller_order_details__element-order-total-price"
       >
-        { order.total_price }
+        { order.total_price.replace('.', ',') }
       </Button>
     </div>
   );

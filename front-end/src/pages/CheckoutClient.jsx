@@ -85,16 +85,8 @@ function CheckoutClient() {
             onChange={ (e) => setSellerId(e.target.value) }
           >
             <option disabled selected value> -- Selecione -- </option>
-
-            { sellers.map((seller) => (
-              <option
-                key={ seller.sellerId }
-                value={ seller.sellerId }
-              >
-                {seller.name}
-              </option>
-
-            ))}
+            <option>Fulano 1</option>
+            <option>Fulano 2</option>
           </select>
         </label>
         <label htmlFor="deliveryAddress">

@@ -11,7 +11,25 @@ import VendaEspecífica from '../pages/VendaEspecífica';
 import TodasAsVendas from '../pages/TodasAsVendas';
 import Admin from '../pages/Admin';
 
+const pathway = {
+  login: '/login',
+  customer: '/customer/products',
+  administrator: '/admin/manage',
+  seller: '/seller/orders',
+};
+
 export default function Routes() {
+  function rightRedirect() {
+    const user = localStorage.getItem('user');
+
+    if (user) {
+      console.log(user);
+      const roleParse = JSON.parse(user).role;
+      return (<Redirect to={ pathway[roleParse] } />);
+    }
+    return (<Redirect to="/login" />);
+  }
+
   return (
     <Switch>
       <Route exact path="/register" component={ Cadastro } />
@@ -36,10 +54,8 @@ export default function Routes() {
       {/* P. Vend / Detalhes do Pedidos */}
       <Route exact path="/admin/manage" component={ Admin } />
       {/* P. Adm / Gerenciamento */}
-      <Route exact path="/">
-        <Redirect to="/login" />
-      </Route>
       <Route exact path="/login" component={ Login } />
+      <Route path="/">{rightRedirect() || <Redirect to="/login" />}</Route>
       <Route component={ NotFound } />
     </Switch>
   );

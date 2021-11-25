@@ -1,5 +1,14 @@
 const Joi = require('joi');
 
+const ids = {
+  user: 'user_id',
+  seller: 'seller_id',
+  deliveryNmb: 'delivery_number',
+  saleDate: 'sale_date',
+  deliveryAdd: 'delivery_address',
+  price: 'total_price',
+};
+
 const userSchema = Joi.object({
   name: Joi.string().required().min(8),
   email: Joi.string().email().required(),
@@ -29,13 +38,13 @@ const updatePostSchema = Joi.object({
 
 const salesSchema = Joi.object({
   sellInfo: Joi.object({
-    totalPrice: Joi.number().required(),
-    deliveryAddress: Joi.string().required(),
-    deliveryNumber: Joi.string().required(),
+    [ids.price]: Joi.number().required(),
+    [ids.deliveryAdd]: Joi.string().required(),
+    [ids.deliveryNmb]: Joi.string().required(),
     status: Joi.string().required(),
-    saleDate: Joi.string().required(),
-    userId: Joi.number().required(),
-    sellerId: Joi.number().required(),
+    [ids.saleDate]: Joi.string().required(),
+    [ids.user]: Joi.number().required(),
+    [ids.seller]: Joi.number().required(),
   }),
   data: Joi.array().required(),
 });

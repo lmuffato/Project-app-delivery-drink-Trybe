@@ -32,7 +32,6 @@ export async function getSeler(user) {
 
 export async function sendRequest({ data, sellInfo, token }) {
   try {
-    console.log(token);
     const response = (await axios.post(
       `${BASE_URL}/sales`,
       { data, sellInfo },

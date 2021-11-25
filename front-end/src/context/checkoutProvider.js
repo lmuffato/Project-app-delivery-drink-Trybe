@@ -16,15 +16,15 @@ function RecipesProvider({ children }) {
 
   async function addItem(qtd, price, id, name) {
     const newItem = {
-      productId: id,
+      product_id: id,
       quantity: qtd,
       name,
       price: (qtd * price).toFixed(2) };
     if (aux) {
-      const productBool = aux.some((bool) => bool.productId === id);
+      const productBool = aux.some((bool) => bool.product_id === id);
       if (productBool) {
         const newSales = aux.map((item) => {
-          if (item.productId === id) return newItem;
+          if (item.product_id === id) return newItem;
           return item;
         });
         return setAux(newSales);

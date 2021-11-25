@@ -63,7 +63,7 @@ module.exports = {
       status: {
         allowNull: false,
         defaultValue: 'Pendente',
-        type: Sequelize.ENUM('Pendente', 'Preparando', 'Em Trânsito', 'Entregue'),
+        type: Sequelize.STRING,
       },
       role: {
         allowNull: false,

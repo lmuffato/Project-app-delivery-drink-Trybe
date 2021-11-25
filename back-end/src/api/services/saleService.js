@@ -12,12 +12,13 @@ const findUserById = async (id) => {
 
 const registerSale = async (saleData) => {
   const { products, ...data } = saleData;
-  console.log('Service');
   const { dataValues } = await sales.create(data);
 
-  products.map(({ productId, quantity }) => salesProducts.create({
+  const teste = products.map(({ productId, quantity }) => salesProducts.create({
     productId, saleId: dataValues.id, quantity,
     }));
+
+    await Promise.all(teste);
 
   return dataValues;
 };

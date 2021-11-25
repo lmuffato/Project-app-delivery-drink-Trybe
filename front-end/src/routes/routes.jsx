@@ -6,6 +6,7 @@ import NotFound from '../pages/NotFound';
 import Products from '../pages/Products';
 import Checkout from '../pages/Checkout';
 import Sales from '../pages/Sales';
+import Manage from '../pages/Manage';
 
 export default function Routes() {
   return (
@@ -19,6 +20,7 @@ export default function Routes() {
       <Route exact path="/customer/checkout" component={ Checkout } />
       <Route exact path="/products" component={ Products } />
       <Route exact path="/sales" component={ Sales } />
+      <Route exact path="/admin/manage" component={ Manage } />
       <Route component={ NotFound } />
     </Switch>
   );

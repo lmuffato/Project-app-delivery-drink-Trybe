@@ -20,11 +20,11 @@ export const loginAction = async ({ email, password }) => {
   }
 };
 
-export const registerAction = async ({ fullName, email, password }) => {
+export const registerAction = async ({ fullName, email, password, role }) => {
   try {
     const rawResponse = await fetch('http://localhost:3001/register',
       requestMetadata({ method: 'POST',
-        body: JSON.stringify({ fullName, email, password }) }));
+        body: JSON.stringify({ fullName, email, password, role }) }));
     const token = await rawResponse.json();
     return token;
   } catch (error) {

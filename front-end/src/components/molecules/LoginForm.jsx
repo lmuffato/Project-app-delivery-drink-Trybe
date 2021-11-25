@@ -28,7 +28,8 @@ const LoginForm = () => {
       setIsHidden(false);
     } else {
       localStorage.setItem('user', JSON.stringify(user));
-      history.push('/customer/products');
+      if (user.role === 'administrator') history.push('/admin/manage');
+      if (user.role === 'customer') history.push('/customer/products');
     }
   };
 

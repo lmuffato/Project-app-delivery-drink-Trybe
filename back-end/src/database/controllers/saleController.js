@@ -41,8 +41,8 @@ async function getByOrderId(req, res) {
 async function updateStatus(req, res) {
   try {
     const { id } = req.params;
-    const { status } = req.body;
-    const { statusUpdated, code } = await saleService.updateStatusService(id, status);
+    const { statusOrder } = req.body;
+    const { statusUpdated, code } = await saleService.updateStatusService(id, statusOrder);
 
     return res.status(code).json(statusUpdated);
   } catch (e) {

@@ -19,7 +19,7 @@ function SellerOrders() {
     <div>
       Tela do Vendedor
       { orders
-        && orders.map((order) => <SellerOrderCard key={ order.id } order={ order } />)}
+        && orders.map((order) => <SellerOrderCard key={ order.id } orders={ orders } />)}
     </div>
   );
 }

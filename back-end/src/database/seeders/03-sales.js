@@ -7,28 +7,32 @@ module.exports = {
       [
         {
           user_id: 2,
-          total_price: 10.50,
+          seller_id: 2,
+          total_price: 22.00,
           delivery_address: "Rua A",
           delivery_number: 100,
           status: "Pendente"
         },
         {
           user_id: 1,
-          total_price: 90.50,
+          seller_id: 2,
+          total_price: 44.00,
           delivery_address: "Rua B",
           delivery_number: 200,
           status: "Preparando"
         },
         {
           user_id: 2,
-          total_price: 500,
+          seller_id: 2,
+          total_price: 22.00,
           delivery_address: "Rua C",
           delivery_number: 300,
           status: "Em Trânsito"
         },
         {
           user_id: 2,
-          total_price: 500,
+          seller_id: 2,
+          total_price: 22.00,
           delivery_address: "Rua D",
           delivery_number: 400,
           status: "Entregue"

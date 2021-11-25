@@ -11,6 +11,20 @@ async () => {});
 http GET :3001/sales
 */
 
+router.get('/order/:id',
+salesMiddlewares.getSaleAndSaleProducts,
+async () => {});
+/* REQUISIÇÃO:
+http GET :3001/users
+*/
+
+router.get('/orderfull/:id',
+salesMiddlewares.getOrderFull,
+async () => {});
+/* REQUISIÇÃO:
+http GET :3001/users
+*/
+
 router.post('/',
 salesMiddlewares.createNew,
 async () => {});
@@ -35,15 +49,11 @@ http POST :3001/users displayName='Lucas' email='lucas' password='lucas' image='
 */
 
 router.get('/:id',
-salesMiddlewares.getSalesBySellerId,
+salesMiddlewares.getById,
 async () => {});
 /* REQUISIÇÃO:
 http GET :3001/users/1
 */
-
-// router.get('/seller/:id',
-// salesMiddlewares.getById,
-// async () => {});
 
 router.put('/:id',
 salesMiddlewares.updateById,

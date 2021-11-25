@@ -1,7 +1,4 @@
-const {
-  sales,
-  salesProducts,
-} = require('../../database/models');
+const { sales, salesProducts, products } = require('../../database/models');
 
 const getAll = async (req, res) => {
   try {
@@ -12,42 +9,17 @@ const getAll = async (req, res) => {
   }
 };
 
-// Busca por id utilizando a chave primária
 const getById = async (req, res) => {
   try {
     const { id } = req.params;
     const data = await sales.findByPk(id);
-    if (!data) { return res.status(404).json({ message: 'Seller does not have sells' }); }
+    console.log(data);
+    if (!data) { return res.status(404).json({ message: 'User does not exist' }); }
     return res.status(200).json(data);
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }
 };
-
-const getSalesBySellerId = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const data = await sales.findAll({ where: { userId: id } });
-    if (!data) { return res.status(404).json({ message: 'Seller does not have sells' }); }
-    return res.status(200).json(data);
-  } catch (err) {
-    return res.status(500).json({ message: err.message });
-  }
-};
-
-// Buscar por id utilizando where
-// const getById = async (req, res) => {
-//   try {
-//     const { id } = req.params;
-//     const data = await sales.findOne({
-//       where: { id },
-//       attributes: { exclude: ['password'] },
-//     });
-//     return res.status(200).json(data);
-//   } catch (err) {
-//     res.status(500).json({ message: err.message });
-//   }
-// };
 
 const updateById = async (req, res) => {
   try {
@@ -72,18 +44,14 @@ const deleteById = async (req, res) => {
   }
 };
 
-// const removeKeyInObject = (obj, key) => {
-//   const { [key]: _, ...newObj } = obj;
-//   return newObj;
-// };
-
 const createNew = async (req, res) => {
   try {
     const {
-      userId, totalPrice, deliveryAddress, deliveryNumber, status,
+      userId, totalPrice, sellerId, deliveryAddress, deliveryNumber, status,
     } = req.body;
     const obj = {
       userId,
+      sellerId,
       totalPrice,
       deliveryAddress,
       deliveryNumber,
@@ -98,10 +66,11 @@ const createNew = async (req, res) => {
 
 const formatSale = (saleObj) => {
   const {
-    userId, totalPrice, deliveryAddress, deliveryNumber, status,
+    userId, sellerId, totalPrice, deliveryAddress, deliveryNumber, status,
   } = saleObj;
   const obj = {
     userId,
+    sellerId,
     totalPrice,
     deliveryAddress,
     deliveryNumber,
@@ -116,7 +85,7 @@ const createSale = async (req, res, next) => {
     const obj = formatSale(sale);
     console.log('obj midd', obj);
     const newData = await sales.create(obj);
-    req.userInfo = { saleId: newData.id };
+    req.saleId = { saleId: newData.id };
     req.salesProducts = { salesProductsArray };
     next();
   } catch (err) {
@@ -140,12 +109,85 @@ const createManySaleProducts = async (req, res) => {
   try {
     const { salesProductsArray } = req.salesProducts;
     const arr = Object.values(salesProductsArray);
-    const { saleId } = req.userInfo;
+    const { saleId } = req.saleId;
     const newArr = formatSalesObjectArray(saleId, arr[0]);
-    const newData = await salesProducts.bulkCreate(newArr);
-    return res.status(201).json(newData);
+    // const newData = await salesProducts.bulkCreate(newArr);
+    // return res.status(201).json(newData);
+    await salesProducts.bulkCreate(newArr);
+    return res.status(201).json(saleId);
   } catch (err) {
     return res.status(500).json({ message: err.message });
+  }
+};
+
+const segregateItensList = (obj) => {
+  const arr = obj.products;
+  const itensList = arr.map((ele) => {
+    const newObj = {
+      productId: ele.id,
+      name: ele.name,
+      quantity: ele.salesProducts.quantity,
+      price: ele.price,
+    };
+    return newObj;
+  });
+  return itensList;
+};
+
+const segregateSale = (obj) => {
+  const key = 'products';
+  const { [key]: _, ...newObj } = obj.dataValues;
+  return newObj;
+};
+
+const mountResponseObj = (obj) => {
+  const itensList = segregateItensList(obj);
+  const sale = segregateSale(obj);
+  const newObj = { sale, itensList };
+  // const newObj = Object.assign(sale, itensList);
+  return newObj;
+};
+
+// const removeKeyInObject = (objn, key) => {
+//   const { [key]: _, ...newObj } = objn;
+//    return newObj;
+// };
+
+const getSaleAndSaleProducts = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const obj = await sales.findOne({
+      where: { id },
+      include: [{ model: products, as: 'products' }],
+    });
+    // const { products: _, ...newObj } = obj.dataValues;
+
+    // const newobj = segregateItensList(obj);
+    // console.log(newobj);
+    // delete obj.products;
+    // const newobj = segregateSale(obj);
+    // console.log(newobj);
+
+    // const newObj = removeKeyInObject(obj, 'products');
+    const newObj = mountResponseObj(obj);
+    console.log(newObj);
+    return res.status(200).json(newObj);
+    // return res.status(200).json(obj);
+    // return res.status(200).json(formatedObj);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+const getOrderFull = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const allProducts = await salesProducts.findAll({ where: { saleId: id } });
+    const sale = await sales.findOne({ where: { id } });
+    const obj = { sale, allProducts };
+    return res.status(200).json(obj);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
 };
 
@@ -157,5 +199,51 @@ module.exports = {
   createNew,
   createSale,
   createManySaleProducts,
-  getSalesBySellerId,
+  getSaleAndSaleProducts,
+  getOrderFull,
 };
+
+/* BACKUP
+const getSaleAndSaleProducts = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const obj = await sales.findAll({
+      where: { id },
+      include:
+        [
+          { model: products,
+            include: {
+              model: salesProducts,
+            },
+            as: 'products',
+          // attributes: [[Sequelize.literal('salesProducts.quantity'), 'quantidade']],
+        },
+        ],
+        attributes: [
+          [Sequelize.literal('sales.id'), 'code'],
+          // [Sequelize.literal('salesProducts.quantity'), 'quantidade'],
+        ],
+      });
+    return res.status(200).json(obj);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+// eslint-disable-next-line max-lines-per-function
+const getSaleAndSaleProducts = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const obj = await sales.findAll({
+      where: { id },
+      include:
+        [
+          { model: products, as: 'products' },
+        ],
+      });
+    return res.status(200).json(obj);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+*/

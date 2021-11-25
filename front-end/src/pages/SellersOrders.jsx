@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 
-import { getSalesBySellerId } from '../services/endpointsAPI';
+import { getSaleById } from '../services/endpointsAPI';
 
 import userContext from '../context/userContext';
 
-import Navbar from '../Components/NavBar';
+import Navbar from '../Components/NavBarSellers';
 
 import '../Styles/SellerOrders.css';
 
@@ -49,13 +49,12 @@ export default function SellersOrders() {
 
   useEffect(() => {
     setIsLoading(true);
-    getSalesBySellerId(userData.id).then((resp) => setOrders(resp),
+    getSaleById(userData.id).then((resp) => setOrders([resp]),
       setIsLoading(false));
   }, []);
 
   return (
     <div className="container">
-      { console.log(orders) }
       <Navbar />
       <section className="card-container">
         {

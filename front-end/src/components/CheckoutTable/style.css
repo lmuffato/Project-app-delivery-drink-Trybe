@@ -9,8 +9,8 @@ th {
   text-align: left;
 }
 
- td {
-  background: rgb(255, 255, 255);
+td {
+  background: white;
   border-radius: 5px;
   color: rgb(24, 24, 24);
   padding: 1rem 2rem;

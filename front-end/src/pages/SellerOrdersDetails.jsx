@@ -52,12 +52,12 @@ export default function SellerOrdersDetails() {
             { sale.status }
           </th>
           <th>
-            <button data-testid={ `${dataTestId57}-${id}` }>
+            <button type="button" data-testid={ `${dataTestId57}-${id}` }>
               PREPARAR PEDIDO
             </button>
           </th>
           <th>
-            <button data-testid={ `${dataTestId58}-${id}` }>
+            <button type="button" data-testid={ `${dataTestId58}-${id}` }>
               SAIU PARA ENTREGA
             </button>
           </th>

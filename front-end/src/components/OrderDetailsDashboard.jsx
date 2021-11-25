@@ -20,7 +20,6 @@ function OrderDetailsDashboard(props) {
     totalPrice,
     saleDate,
   } = props;
-  console.log(props);
 
   const typographyBasicStyle = {
     fontSize: 14,
@@ -78,7 +77,12 @@ function OrderDetailsDashboard(props) {
       </Box>
       <Box>
         { products
-          .map((product, index) => <ProductInSaleCard key={ index } { ...product } />) }
+          .map((product, index) => (
+            <ProductInSaleCard
+              key={ index }
+              { ...product }
+              testIdsPrefix="customer_order_details__"
+            />)) }
       </Box>
       <Typography
         data-testid={ `${testIdsPrefix}element-order-total-price` }

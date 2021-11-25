@@ -3,7 +3,7 @@ const { HTTP_CREATED, HTTP_CONFLICT, HTTP_OK_STATUS, HTTP_NOT_FOUND } = require(
 
 
 async function create(body) {
-  const statusOrder = 'pendente';
+  const statusOrder = 'Pendente';
   
   const { userId, sellerId, products, totalPrice, deliveryAddress, deliveryNumber } = body;
 

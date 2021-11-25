@@ -10,7 +10,7 @@ export default function CheckoutTable() {
     (() => {
       setShoppingCart(cart);
     })();
-  }, []);
+  }, [cart]);
   const removeItem = (index) => {
     // const cart = shoppingCart;
     cart.splice(index, 1);

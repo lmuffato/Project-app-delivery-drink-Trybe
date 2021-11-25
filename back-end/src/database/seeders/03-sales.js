@@ -7,6 +7,7 @@ module.exports = {
       [
         {
           user_id: 2,
+          seller_id: 2,
           total_price: 10.50,
           delivery_address: "Rua A",
           delivery_number: 100,
@@ -14,6 +15,7 @@ module.exports = {
         },
         {
           user_id: 1,
+          seller_id: 2,
           total_price: 90.50,
           delivery_address: "Rua B",
           delivery_number: 200,
@@ -21,6 +23,7 @@ module.exports = {
         },
         {
           user_id: 2,
+          seller_id: 2,
           total_price: 500,
           delivery_address: "Rua C",
           delivery_number: 300,
@@ -28,6 +31,7 @@ module.exports = {
         },
         {
           user_id: 2,
+          seller_id: 2,
           total_price: 500,
           delivery_address: "Rua D",
           delivery_number: 400,

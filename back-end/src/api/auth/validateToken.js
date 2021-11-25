@@ -12,6 +12,7 @@ const validateToken = (req, res, next) => {
   try {
     const auth = authorization.split(' ')[1];
     const token = jwt.verify(auth, secret);
+    
     if (!token) {
       return res.status(401).json({ data: JWT_MALFORMED });
     }

@@ -36,7 +36,7 @@ app.route('/orders')
 
 app.put('/orders/:id', validateToken, validateUpdateOrder, saleController.updateOrder);
 
-app.get('/orders/customerId/:id', validateToken, saleController.getOrdersByUserId);
+app.get('/orders/customerId', validateToken, saleController.getOrdersByUserId);
 
 app.get('/orders/sellerId/:id', validateToken, validateSeller, saleController.getOrdersBySellerId);
 

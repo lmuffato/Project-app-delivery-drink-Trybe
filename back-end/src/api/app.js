@@ -34,4 +34,6 @@ app.get('/coffee', (_req, res) => res.status(418).end());
 
 app.get('/user/sale/:id', Sale.getAllSales);
 
+app.get('/sale/:id', Sale.getProductsSale);
+
 module.exports = app;

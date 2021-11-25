@@ -1,10 +1,10 @@
-const { sale } = require('../database/models/index');
-const salesProduct = require('./saleProductService');
+const { sale, user, product } = require('../database/models/index');
+const salesProductService = require('./saleProductService');
 
 const createSale = async (data) => {
   const { cart } = data;
   const newSale = await sale.create(data);
-  salesProduct.createSalesProduct(cart, newSale.id);
+  salesProductService.createSalesProduct(cart, newSale.id);
   return { status: 201, id: newSale.id };
 };
 
@@ -16,7 +16,19 @@ const getAllSales = async (id) => {
   return allSales;
 };
 
+const getProductsOfSale = async (saleId) => {
+    const fetchSale = await sale.findByPk(saleId, {
+      include: [
+        { model: user, as: 'seller', attributes: { exclude: ['password'] } },
+        { model: product, as: 'products', through: { attributes: ['quantity'] } }, 
+      ],
+    });
+  
+    return { status: 200, data: fetchSale };
+  };
+
 module.exports = {
   createSale,
   getAllSales,
+  getProductsOfSale,
 };

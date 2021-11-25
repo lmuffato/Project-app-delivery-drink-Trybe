@@ -2,28 +2,15 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 function ProductCard({ product }) {
-  const [quantity, setQuantity] = useState(0);
-
-  const { id, name, url_image: urlImage, price } = product;
-
-  const addProduct = () => setQuantity(quantity + 1);
-
-  const removeProduct = () => {
-    if (quantity > 0) {
-      setQuantity(quantity - 1);
-    }
-  };
-
-  const insertManuallyQuantity = ({ target: { value } }) => {
-    setQuantity(value);
-  };
+  const { id, name, url_image: urlImage } = product;
+  const value = product.price.replace('.', ',');
 
   return (
     <div>
       <span
         data-testid={ `customer_products__element-card-price-${id}` }
       >
-        {`R$ ${price}`}
+        { value }
       </span>
       <img
         data-testid={ `customer_products__img-card-bg-image-${id}` }
@@ -43,8 +30,8 @@ function ProductCard({ product }) {
         </button>
         <input
           data-testid={ `customer_products__input-card-quantity-${id}` }
-          type="number"
-          value={ quantity }
+          value={ 0 }
+          type="text"
           placeholder="0"
           onChange={ insertManuallyQuantity }
         />

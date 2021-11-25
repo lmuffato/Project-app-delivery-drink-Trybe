@@ -28,7 +28,7 @@ const getUser = async (email) => {
   const { password: _, ...userPayload } = user.dataValues;
   const token = jwt.sign(userPayload, SECRET);
 
-  return { status: 201, token };
+  return { status: 200, token };
 };
 
 module.exports = {

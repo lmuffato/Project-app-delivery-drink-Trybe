@@ -18,6 +18,8 @@ function OrderBox({ props }) {
 
   const tesStatus = `${role}_order_details__element-order-details-label-delivery-status`;
 
+  const statusOrder = status === 'Em Trânsito' ? 'Em-Transito' : status;
+
   const createCustomerButton = () => (
     <button
       type="button"
@@ -81,7 +83,7 @@ function OrderBox({ props }) {
           {moment(saleDate).format('DD/MM/yyyy')}
         </p>
         <p
-          className={ `order-status-${status}` }
+          className={ `order-status-${statusOrder}` }
           data-testid={ tesStatus }
         >
           {status.toUpperCase()}

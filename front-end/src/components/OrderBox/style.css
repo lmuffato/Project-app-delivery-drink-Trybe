@@ -35,22 +35,29 @@ td, th {
   padding: 8px;
 }
 
-.order-status-pendente {
+.order-status-Pendente {
   background-color: yellow;
   border-radius: 5px;
   padding-left: 5px;
   padding-right: 5px;
 }
 
-.order-status-entregue {
+.order-status-Entregue {
   background-color: rgb(12, 113, 196);
   border-radius: 5px;
   padding-left: 5px;
   padding-right: 5px;
 }
 
-.order-status-preparando {
+.order-status-Preparando {
   background-color: rgb(99, 247, 80);
+  border-radius: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.order-status-Em-Transito {
+  background-color: rgb(248, 167, 17);
   border-radius: 5px;
   padding-left: 5px;
   padding-right: 5px;

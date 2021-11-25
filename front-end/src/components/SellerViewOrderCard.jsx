@@ -36,6 +36,7 @@ function SellerViewOrderCard(props) {
 
   return (
     <Box
+      onClick={ () => history.push(`/seller/orders/${id}`) }
       sx={ {
         display: 'flex',
         flexDirection: 'row',
@@ -57,7 +58,6 @@ function SellerViewOrderCard(props) {
       >
         <p>Pedido</p>
         <Button
-          onClick={ () => history.push(`/seller/orders/${id}`) }
           data-testid={ `${testIdPrefix}element-order-id-${id}` }
         >
           { id }

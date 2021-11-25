@@ -9,9 +9,9 @@ import {
 import convertDateFormat from '../utils/convertDateFormat';
 import ProductInSaleCard from './ProductInSaleCard';
 
-const testIdsPrefix = 'customer_order_details__';
+const testIdsPrefix = 'seller_order_details__';
 
-function OrderDetailsDashboard(props) {
+function SellerOrderTable(props) {
   const {
     id,
     seller: { name },
@@ -69,10 +69,15 @@ function OrderDetailsDashboard(props) {
           { status }
         </Typography>
         <Button
-          data-testid={ `${testIdsPrefix}button-delivery-check` }
+          data-testid={ `${testIdsPrefix}button-preparing-check` }
+        >
+          Preparar Pedido
+        </Button>
+        <Button
+          data-testid={ `${testIdsPrefix}button-dispatch-check` }
           disabled
         >
-          Marcar com entregue
+          Saiu para entrega
         </Button>
       </Box>
       <Box>
@@ -81,7 +86,7 @@ function OrderDetailsDashboard(props) {
             <ProductInSaleCard
               key={ index }
               { ...product }
-              testIdsPrefix="customer_order_details__"
+              testIdsPrefix="seller_order_details__"
             />)) }
       </Box>
       <Typography
@@ -93,7 +98,7 @@ function OrderDetailsDashboard(props) {
   );
 }
 
-OrderDetailsDashboard.propTypes = {
+SellerOrderTable.propTypes = {
   id: PropTypes.number.isRequired,
   saleDate: PropTypes.string.isRequired,
   status: PropTypes.string.isRequired,
@@ -102,4 +107,4 @@ OrderDetailsDashboard.propTypes = {
   products: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-export default OrderDetailsDashboard;
+export default SellerOrderTable;

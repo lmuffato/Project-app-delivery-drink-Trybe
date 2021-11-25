@@ -27,8 +27,14 @@ const getSaleById = async (id) => {
   return result;
 };
 
+const getSaleDetails = async (id) => {
+  const sale = await Sale.getSaleDetails(id);
+  return sale;
+};
+
 module.exports = {
   addNew,
   getSale,
   getSaleById,
+  getSaleDetails,
 };

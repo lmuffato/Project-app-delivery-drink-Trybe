@@ -6,10 +6,13 @@ function OrderDetails() {
   const [isLoading, setIsLoading] = useState(true);
   const { id } = useParams();
 
+  // const saleId = 'item.products.saleProduct.saleId';
+
   useEffect(() => {
     const getOrder = async () => {
       const data = await fetch(`http://localhost:3001/orderDetails/${id}`);
       const result = await data.json();
+      console.log(result);
       setOrders([result]);
       setIsLoading(false);
     };
@@ -28,31 +31,79 @@ function OrderDetails() {
               Pedido
             </h4>
             <h4
-              data-testid={ `customer_products__element-order-date-${item.id}` }
+              data-testid="customer_order_details__
+              element-order-details-label-order-id"
             >
-              { item.index + 1 }
+              { item.id }
             </h4>
-            <p>
+            <p
+              data-testid="customer_order_details__
+              element-order-details-label-seller-name"
+            >
               P. Vend:
               {' '}
-              { item.name }
+              { item.seller.name }
             </p>
-            <h4>
+            <h4
+              data-testid="customer_order_details__element-order-details-label-order-date"
+            >
               { item.sale_date }
             </h4>
             <div
               readOnly
               className={ item.status }
+              data-testid="customer_order_details__
+              element-order-details-label-delivery-status"
             >
               { item.status }
             </div>
             <button
               type="button"
+              data-testid="customer_order_details__button-delivery-check"
             >
               MARCAR COMO ENTREGUE
             </button>
-            <h4>
-              { item.total_price }
+            {item.products.map((product, i) => (
+              <div
+                key={ id }
+              >
+                <p
+                  data-testid={ `customer_order_details__
+                  element-order-table-item-number-${i}` }
+                >
+                  {i + 1}
+                </p>
+                <p
+                  data-testid={ `customer_order_
+                  details__element-order-table-name-${i}` }
+                >
+                  {product.name }
+                </p>
+                <p
+                  data-testid={ `customer_order_details__
+                  element-order-table-quantity-${id}` }
+                >
+                  {product.saleProduct.quantity }
+                </p>
+                <p
+                  data-testid={ `customer_order_details__
+                element-order-details-label-order-${id}` }
+                >
+                  {product.price }
+                </p>
+                <p
+                  data-testid={ `customer_order_details__
+                  element-order-table-sub-total-${id}` }
+                >
+                  {product.saleProduct.quantity * product.price}
+                </p>
+              </div>
+            ))}
+            <h4
+              data-testid={ `customer_order_details__
+              element-order-total-price-${id}` }
+            >
+              { item.price }
             </h4>
           </div>
         </div>

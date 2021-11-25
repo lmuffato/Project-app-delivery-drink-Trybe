@@ -5,10 +5,9 @@ import LoginForm from '../components/LoginForm';
 function Login() {
   const navigate = useNavigate();
   useEffect(() => {
-    const user = localStorage.getItem('user');
-    console.log(user);
-    if (user) navigate('/customer/products');
-  }, []);
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user) navigate(`/${user.role}/products`);
+  }, [navigate]);
 
   return (
     <div className="App">

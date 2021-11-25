@@ -10,6 +10,7 @@ import { OrdersProvider } from './contexts/Orders';
 import { ProductsProvider } from './contexts/Products';
 import Checkout from './pages/Checkout';
 import Admin from './pages/Admin';
+import OrderDetails from './pages/OrderDetails';
 
 function App() {
   return (
@@ -53,6 +54,15 @@ function App() {
         element={
           <OrdersProvider>
             <Orders />
+          </OrdersProvider>
+        }
+      />
+      <Route
+        exact
+        path="/customer/orders/:id"
+        element={
+          <OrdersProvider>
+            <OrderDetails />
           </OrdersProvider>
         }
       />

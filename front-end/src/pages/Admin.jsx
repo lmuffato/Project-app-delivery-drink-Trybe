@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
-
+/* import NavBar from '../components/NavBar'; */
 const axios = require('axios');
 
 export default function Admin() {
@@ -8,6 +8,7 @@ export default function Admin() {
   const [userPassword, setUserPassword] = useState('');
   const [userRole, setUserRole] = useState('seller');
   const [disabled, setDisabled] = useState(true);
+  const [invalidRegister, setInvalidRegister] = useState(false);
   const url = 'http://localhost:3001';
   const minimumNameLength = 12;
   const minimumPasswordLength = 6;
@@ -54,12 +55,13 @@ export default function Admin() {
       setUserRole('');
     } catch (error) {
       console.log(error);
+      setInvalidRegister(true);
     }
   };
 
   return (
-    <form>
-      <fieldset>
+    <main>
+      <form>
         <label htmlFor="new-user">
           Nome
           <input
@@ -108,7 +110,13 @@ export default function Admin() {
         >
           Cadastrar
         </button>
-      </fieldset>
-    </form>
+        { invalidRegister
+          && (
+            <span data-testid="admin_manage__element-invalid-register">
+              Usuário invalido ou já cadastrado
+            </span>
+          ) }
+      </form>
+    </main>
   );
 }

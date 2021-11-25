@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   Box,
@@ -20,10 +20,16 @@ function OrderDetailsDashboard(props) {
     id,
     seller: { name },
     products,
-    status,
+    status: initialStatus,
     totalPrice,
     saleDate,
   } = props;
+
+  const [status, setStatus] = useState(initialStatus);
+
+  socket.on('changeStatus', ({ newStatus, idToChange }) => {
+    if (idToChange === id) setStatus(newStatus);
+  });
 
   const typographyBasicStyle = {
     fontSize: 14,

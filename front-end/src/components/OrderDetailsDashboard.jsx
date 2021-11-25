@@ -8,6 +8,10 @@ import {
 } from '@mui/material';
 import convertDateFormat from '../utils/convertDateFormat';
 import ProductInSaleCard from './ProductInSaleCard';
+import StatusCard from './StatusCard';
+import socketInstance from '../utils/socketInstance';
+
+const socket = socketInstance();
 
 const testIdsPrefix = 'customer_order_details__';
 
@@ -66,11 +70,15 @@ function OrderDetailsDashboard(props) {
           sx={ typographyBasicStyle }
           data-testid={ `${testIdsPrefix}element-order-details-label-delivery-status` }
         >
-          { status }
+          <StatusCard initialStatus={ status } id={ id } />
         </Typography>
         <Button
           data-testid={ `${testIdsPrefix}button-delivery-check` }
-          disabled
+          disabled={ status !== 'Em Trânsito' }
+          onClick={
+            () => socket
+              .emit('changeStatus', { newStatus: 'Entregue', idToChange: id })
+          }
         >
           Marcar com entregue
         </Button>

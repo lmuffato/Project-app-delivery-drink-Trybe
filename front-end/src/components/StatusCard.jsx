@@ -4,11 +4,9 @@ import {
   Box,
   Typography,
 } from '@mui/material';
+import socketInstance from '../utils/socketInstance';
 
-const { io } = require('socket.io-client');
-
-const socketServerUrl = 'http://localhost:3001';
-const socket = io(socketServerUrl);
+const socket = socketInstance();
 
 function StatusCard({ initialStatus, id }) {
   const [status, setStatus] = useState(initialStatus);

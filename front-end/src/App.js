@@ -6,6 +6,8 @@ import Login from './pages/Login';
 import { LoginProvider } from './contexts/Login';
 import Admin from './pages/Admin';
 import Products from './pages/Products';
+import Orders from './pages/Orders';
+import { OrdersProvider } from './contexts/Orders';
 
 function App() {
   return (
@@ -33,7 +35,15 @@ function App() {
       />
       <Route exact path="/admin/manage" element={ <Admin /> } />
       <Route exact path="/customer/products" element={ <Products /> } />
-
+      <Route
+        exact
+        path="/customer/orders"
+        element={
+          <OrdersProvider>
+            <Orders />
+          </OrdersProvider>
+        }
+      />
     </Routes>
   );
 }

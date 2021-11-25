@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable array-bracket-spacing */
 import React, { useContext, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -18,7 +20,7 @@ function Login() {
         isValidEmail(values.email) && isValidPassword(values.password),
       errorMessage: null,
     });
-  }, [setValues, values, values.email, values.password]);
+  }, [ values.email, values.password]);
 
   const onChange = (event) => {
     const { value, name } = event.target;

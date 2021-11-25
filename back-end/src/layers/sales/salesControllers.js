@@ -38,10 +38,6 @@ router.get('/:id',
 salesMiddlewares.getSalesBySellerId,
 async () => {});
 
-router.get('/order/:id',
-salesMiddlewares.getSaleDetails,
-async => {});
-
 // router.get('/seller/:id',
 // salesMiddlewares.getById,
 // async () => {});

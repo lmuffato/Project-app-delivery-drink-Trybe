@@ -38,7 +38,7 @@ export default {
     return data;
   },
   changeOrderStatus: async (statusOrder) => {
-    const { data } = await api.put(`/orders/${id}`, {
+    const { data } = await api.put(`/sellers/orders/${id}`, {
       headers: {
         Authorization: token,
       },

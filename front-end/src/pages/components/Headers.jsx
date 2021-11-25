@@ -1,19 +1,18 @@
 import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
 import ContextDeliveryApp from '../../store/ContextDeliveryApp';
 import ProductsButton from './ProductsButton';
 import OrdersButton from './OrdersButton';
 import LogoutButton from './LogoutButton';
-import ManageUsersButton from './ManageEmployeesButton';
+import ManageUsersButton from './ManageUsersButton';
 
-export default function Headers({ history }) {
+export default function Headers() {
   const { user } = useContext(ContextDeliveryApp);
 
   if (user.role === 'customer') {
     return (
       <navbar>
-        <ProductsButton history={ history } />
-        <OrdersButton history={ history } />
+        <ProductsButton />
+        <OrdersButton />
         <p
           data-testid="customer_products__element-navbar-user-full-name"
         >
@@ -26,7 +25,7 @@ export default function Headers({ history }) {
   if (user.role === 'seller') {
     return (
       <navbar>
-        <OrdersButton history={ history } />
+        <OrdersButton />
         <p>{ user.name }</p>
         <LogoutButton />
       </navbar>
@@ -35,7 +34,7 @@ export default function Headers({ history }) {
   if (user.role === 'administrator') {
     return (
       <navbar>
-        <ManageUsersButton history={ history } />
+        <ManageUsersButton />
         <p>{ user.name }</p>
         <LogoutButton />
       </navbar>
@@ -47,9 +46,3 @@ export default function Headers({ history }) {
     </div>
   );
 }
-
-Headers.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired,
-  }).isRequired,
-};

@@ -14,6 +14,7 @@ const { checkName } = require('../middlewares/checkName');
 const validateAddress = require('../middlewares/validateAddress');
 const uploadImages = require('../middlewares/uploadImages');
 const validateAdmin = require('../middlewares/validateAdmin');
+// const validateSaleAndSeller = require('../middlewares/validateSaleAndSeller');
 
 const corsOptions = {
   origin: '*',
@@ -43,6 +44,7 @@ app.post('/sale',
   saleControllers.register);
 
 app.post('/customerSale', validateToken, saleControllers.getCustomerSales);
+
 app.post('/addUser',
   validateToken,
   validateAdmin,
@@ -52,5 +54,8 @@ app.post('/addUser',
   userControllers.addNewUser);
 
 app.post('/sellerSale', validateToken, saleControllers.getSellerSales);
+
+app.post('/saleDetails', validateToken, saleControllers.getSaleDetails);
+app.patch('/saleUpdate', validateToken, saleControllers.update);
 
 module.exports = app;

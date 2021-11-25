@@ -1,82 +1,75 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import moment from 'moment';
 
-export default function CustomerDetailsCard({ sale }) {
-  const { id, totalPrice, status, sale_date: saleDate } = sale;
+export default function CustomerDetailsCard({ items }) {
+  const subTotalCalc = (product) => {
+    const { quantity, price } = product;
+    const subtotal = quantity * parseFloat(price, 2);
+    const res = subtotal.toFixed(2).toString().replace(/\./, ',');
+    return res;
+  };
 
-  const date = moment(saleDate).format('DD/MM/YYYY');
+  const totalPrice = () => {
+    const price = items.reduce((acc, product) => acc
+    + Number(product.price) * product.quantity, 0);
+    return price.toFixed(2).toString().replace(/\./, ',');
+  };
 
   return (
     <div>
-      <tr>
-        <th data-testid="customer_order_details__element-order-details-label-order-id">
-          {`Pedido ${id}`}
-        </th>
-
-        <th data-testid="customer_order_details__element-order-details-label-seller-name">
-          {`P. Vend:${totalPrice}`}
-        </th>
-        <th data-testid="customer_order_details__element-order-details-label-order-date">
-          {date}
-        </th>
-        <th
-          data-testid="customer_order_details__element-order-
-        details-label-delivery-status"
-        >
-          {status}
-        </th>
-        <th
-          data-testid="customer_order_details__element-order-
-        details-label-delivery-check"
-        >
-          {}
-        </th>
-      </tr>
-      <tbody>
-        <tr>
-          <td
-            data-testid={ `customer_order_details__element-
-          order-table-item-number-${totalPrice}` }
-          >
-            {}
-          </td>
-          <td
-            data-testid={ `customer_order_details__element-
-          order-table-name-${id}` }
-          >
-            {}
-          </td>
-          <td
-            data-testid={ `customer_order_details__element-
-          order-table-quantity-${id}` }
-          >
-            {}
-          </td>
-          <td
-            data-testid={ `customer_order_details__element-
-          order-table-sub-total-${id}` }
-          >
-            {}
-          </td>
-          <td
-            data-testid={ `customer_order_details__element-
-          order$-total-price-${id}` }
-          >
-            {}
-          </td>
-        </tr>
-      </tbody>
-      <p>{`Total: R$${totalPrice}`}</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Descrição</th>
+            <th>Quantidade</th>
+            <th>Valor Unitário</th>
+            <th>Sub-Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            items.map((product, index) => (
+              <tr Key={ product.id }>
+                <td
+                  data-testid={ `customer_order_details__element-
+          order-table-item-number-${index}` }
+                >
+                  {index + 1}
+                </td>
+                <td
+                  data-testid={ `customer_order_details__element-
+          order-table-name-${index}` }
+                >
+                  {product.name}
+                </td>
+                <td
+                  data-testid={ `customer_order_details__element-
+          order-table-quantity-${index}` }
+                >
+                  {product.quantity}
+                </td>
+                <td
+                  data-testid={ `customer_order_details__element-
+          order-table-sub-total-${index}` }
+                >
+                  {product.price.replace(/\./, ',')}
+                </td>
+                <td
+                  data-testid={ `customer_order_details__element-
+          order$-total-price-${index}` }
+                >
+                  {subTotalCalc(product)}
+                </td>
+              </tr>))
+          }
+        </tbody>
+      </table>
+      <p>{`Total: R$${totalPrice()}`}</p>
     </div>
   );
 }
 
 CustomerDetailsCard.propTypes = {
-  sale: PropTypes.shape({
-    status: PropTypes.string.isRequired,
-    sale_date: PropTypes.string.isRequired,
-    totalPrice: PropTypes.string.isRequired,
-    id: PropTypes.number.isRequired,
-  }).isRequired,
+  items: PropTypes.string.isRequired,
 };

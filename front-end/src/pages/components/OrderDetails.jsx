@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react';
+// import moment from 'moment';
 import PropTypes from 'prop-types';
 import ContextDeliveryApp from '../../store/ContextDeliveryApp';
 import fetchSaleDetails from '../../services/fetchSaleDetails';
 import fetchSellerSale from '../../services/fetchSellerSales';
-import OrderHeaderCustomer from './OrderHeaderCustomer';
+import OrderHeader from './OrderHeader';
 import fetchProducts from '../../services/fetchProducts';
-import CustomerDetailsCard from './CustomerDetailsCard';
+import OrderProductsTable from './OrderProductsTable';
 
-export default function CustomerDetailsList({ id }) {
+export default function OrderDetails({ id }) {
   const { user } = useContext(ContextDeliveryApp);
   const [saleDetails, setSaleDetails] = useState({});
   const [sale, setSale] = useState({});
@@ -33,7 +34,6 @@ export default function CustomerDetailsList({ id }) {
   const getSale = async () => {
     const { token, id: sellerId } = user;
     const salesBySeller = await fetchSellerSale(token, sellerId);
-    console.log(salesBySeller);
     const saleById = salesBySeller.data.sellerSales.filter((s) => {
       console.log(s.id, id);
       return s.id.toString() === id;
@@ -43,7 +43,6 @@ export default function CustomerDetailsList({ id }) {
 
   useEffect(() => {
     getSale();
-    console.log(getSale);
     getSaleDetails();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -52,16 +51,14 @@ export default function CustomerDetailsList({ id }) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sale]);
 
-  // console.log(sale.status);
-
   return (
     <div>
-      <OrderHeaderCustomer sale={ sale } />
-      { saleDetails[0] ? <CustomerDetailsCard items={ saleDetails } sale={ sale } /> : ''}
+      <OrderHeader sale={ sale } />
+      { saleDetails[0] ? <OrderProductsTable items={ saleDetails } sale={ sale } /> : ''}
     </div>
   );
 }
 
-CustomerDetailsList.propTypes = {
+OrderDetails.propTypes = {
   id: PropTypes.string.isRequired,
 };

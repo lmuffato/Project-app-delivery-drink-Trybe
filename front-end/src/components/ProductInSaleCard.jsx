@@ -5,14 +5,13 @@ import {
   Typography,
 } from '@mui/material';
 
-const testIdsPrefix = 'customer_order_details__';
-
 function ProductInSaleCard(props) {
   const {
     id,
     name,
     price,
     SaleProduct: { quantity },
+    testIdsPrefix,
   } = props;
 
   const calcSubtotal = () => (price * +(quantity)).toFixed(2);
@@ -85,6 +84,7 @@ ProductInSaleCard.propTypes = {
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
+  testIdsPrefix: PropTypes.string.isRequired,
   SaleProduct: PropTypes.shape({
     quantity: PropTypes.string.isRequired,
     saleId: PropTypes.number.isRequired,

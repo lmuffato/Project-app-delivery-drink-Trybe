@@ -11,26 +11,59 @@ function OrderBox({ props }) {
     total_price: totalPrice,
     products,
     seller,
-  } = props;
+  } = props.sale;
 
-  const tesStatus = 'customer_order_details__element-order-details-label-delivery-status';
+  const { role } = props;
+
+  const tesStatus = `${role}_order_details__element-order-details-label-delivery-status`;
+
+  const createCustomerButton = () => (
+    <button
+      type="button"
+      data-testid="customer_order_details__button-delivery-check"
+    >
+      MARCAR COMO ENTREGUE
+    </button>
+  );
+
+  const createSellerName = () => (
+    <p
+      data-testid="customer_order_details__element-order-details-label-seller-name"
+    >
+      {`P. Vend: ${seller.name}`}
+    </p>
+  );
+
+  const createSellerButtons = () => (
+    <>
+      <button
+        type="button"
+        data-testid="seller_order_details__button-preparing-check"
+      >
+        PREPARAR PEDIDO
+      </button>
+      <button
+        type="button"
+        data-testid="seller_order_details__button-dispatch-check"
+      >
+        SAIU PARA ENTREGA
+      </button>
+    </>
+  );
 
   return (
     <div className="order-detail-container">
-
       <div className="order-info">
         <p
-          data-testid="customer_order_details__element-order-details-label-order-id"
+          data-testid={ `${role}_order_details__element-order-details-label-order-id` }
         >
           {`Pedido ${id}`}
         </p>
+        { role === 'customer'
+          ? createSellerName()
+          : null }
         <p
-          data-testid="customer_order_details__element-order-details-label-seller-name"
-        >
-          {`P. Vend: ${seller.name}`}
-        </p>
-        <p
-          data-testid="customer_order_details__element-order-details-label-order-date"
+          data-testid={ `${role}_order_details__element-order-details-label-order-date` }
         >
           {moment(saleDate).format('DD/MM/yyyy')}
         </p>
@@ -40,12 +73,9 @@ function OrderBox({ props }) {
         >
           {status.toUpperCase()}
         </p>
-        <button
-          type="button"
-          data-testid="customer_order_details__button-delivery-check"
-        >
-          MARCAR COMO ENTREGUE
-        </button>
+        { role === 'customer'
+          ? createCustomerButton()
+          : createSellerButtons() }
       </div>
 
       <table>
@@ -60,24 +90,50 @@ function OrderBox({ props }) {
         </thead>
 
         <tbody>
-          { products.map((product) => {
+          { products.map((product, index) => {
             const { quantity } = product.quantityTotal;
             const subTotalValue = (quantity * Number(product.price)).toFixed(2);
+            const dataTestIdTextTable = '_order_details__element-order-table-';
 
             return (
               <tr key={ product.id }>
-                <td>{ product.id }</td>
-                <td>{ product.name }</td>
-                <td>{ quantity }</td>
-                <td>{ product.price }</td>
-                <td>{ subTotalValue }</td>
+                <td
+                  data-testid={ `${role}${dataTestIdTextTable}item-number-${index}` }
+                >
+                  { product.id }
+                </td>
+                <td
+                  data-testid={ `${role}${dataTestIdTextTable}name-${index}` }
+                >
+                  { product.name }
+                </td>
+                <td
+                  data-testid={ `${role}${dataTestIdTextTable}quantity-${index}` }
+                >
+                  { quantity }
+                </td>
+                <td
+                  data-testid={ `${role}${dataTestIdTextTable}unit-price-${index}` }
+                >
+                  { product.price }
+                </td>
+                <td
+                  data-testid={ `${role}${dataTestIdTextTable}sub-total-${index}` }
+                >
+                  { subTotalValue }
+                </td>
               </tr>
             );
           })}
         </tbody>
       </table>
 
-      <div className="customer-order-total-price">{`Total: ${totalPrice}`}</div>
+      <div
+        className="customer-order-total-price"
+        data-testid={ `${role}_order_details__element-order-total-price` }
+      >
+        {`Total: ${totalPrice}`}
+      </div>
     </div>
   );
 }

@@ -46,23 +46,11 @@ function CheckoutTable(props) {
 
 CheckoutTable.propTypes = {
   testIds: PropTypes.shape({
-    productId: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number,
-    ]).isRequired,
+    productId: PropTypes.string.isRequired,
     productName: PropTypes.string.isRequired,
-    productQuantity: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number,
-    ]).isRequired,
-    productUnitPrice: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number,
-    ]).isRequired,
-    productSubTotal: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number,
-    ]).isRequired,
+    productQuantity: PropTypes.string.isRequired,
+    productUnitPrice: PropTypes.string.isRequired,
+    productSubTotal: PropTypes.string.isRequired,
   }).isRequired,
 };
 

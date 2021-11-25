@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Seller from './pages/Seller';
 import Customer from './pages/Customer';
+import Admin from './pages/Admin';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Route path="/register" component={ Register } />
       <Route path="/customer" component={ Customer } />
       <Route path="/seller" component={ Seller } />
+      <Route path="/admin/manage" component={ Admin } />
     </Switch>
   );
 }

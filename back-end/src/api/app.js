@@ -27,6 +27,7 @@ app.get('/users', userController.getUser);
 app.get('/users/:id', userController.getById);
 
 app.post('/users', userController.create);
+app.post('/users/admin', validateToken, userController.create);
 
 app.delete('/users/:id', userController.exclude);
 

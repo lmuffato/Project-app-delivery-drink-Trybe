@@ -27,6 +27,7 @@ function Login() {
       setErrorMessage(false);
       if (loginUser.role === 'customer') history.push('/customer/products');
       if (loginUser.role === 'seller') history.push('/seller/orders');
+      if (loginUser.role === 'administrator') history.push('/admin/manage');
     } catch (error) {
       setErrorMessage(true);
     }

@@ -38,7 +38,6 @@ function OrderDetails({ match: { params: { id } } }) {
             </tr>
           </thead>
           <tbody>
-            {/* {console.log('aquiiiii', sales[id - 1].products)} */}
             {sales[id - 1].products.map((product, index) => (
               <DetailsCard
                 role={ JSON.parse(localStorage.getItem('user')).role }

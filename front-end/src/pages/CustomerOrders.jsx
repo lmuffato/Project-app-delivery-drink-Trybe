@@ -23,7 +23,7 @@ export default function CustomerOrder() {
           <p
             data-testid={ `customer_orders__element-order-id-${sale.id}` }
           >
-            { sale.deliveryNumber }
+            { sale.id }
           </p>
           <p
             data-testid={ `customer_orders__element-delivery-status-${sale.id}` }

@@ -38,3 +38,16 @@ exports.getAllByUser = async (req, res) => {
       .send(ReasonPhrases.INTERNAL_SERVER_ERROR);
   }
 };
+
+exports.getByID = async (req, res) => {
+  const { id } = req.params;
+  try {
+  const order = await SaleService.getOrderByID({ id });
+  res.status(StatusCodes.OK).json({ result: order });
+  } catch (error) {
+  console.error(error);
+  res
+  .status(StatusCodes.INTERNAL_SERVER_ERROR)
+  .send(error.message);
+  }
+  }; 

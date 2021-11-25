@@ -86,6 +86,22 @@ export const saleActionGet = async (sale) => {
   }
 };
 
+export const saleActionGetById = async (sale) => {
+  const { token } = sale;
+  try {
+    const rawResponse = await fetch('http://localhost:3001/sales',
+      requestMetadata({
+        method: 'GET',
+        Authorization: token,
+      }));
+    const saleId = await rawResponse.json();
+    return saleId;
+  } catch (error) {
+    console.error(error.message);
+    return null;
+  }
+};
+
 export const getUsers = async () => {
   try {
     const rawResponse = await fetch('http://localhost:3001/users',

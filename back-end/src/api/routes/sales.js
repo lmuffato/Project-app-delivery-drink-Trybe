@@ -9,4 +9,6 @@ router.get('/', validateToken, SaleController.getAllByUser);
 
 router.post('/', validateRequestBody, validateToken, SaleController.create);
 
+router.get('/:id', SaleController.getByID); 
+
 module.exports = router;

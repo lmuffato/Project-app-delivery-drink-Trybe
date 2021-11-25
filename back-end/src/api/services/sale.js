@@ -45,3 +45,18 @@ exports.create = async ({ userId,
   });
   return { id: sale.id };
 };
+
+exports.getOrderByID = async ({ id: saleId }) => {
+  const { dataValues } = await saleModel.findOne({ where: { id: saleId } });
+  const productIDs = await salesProductModel.findAll({ where: { saleId } });
+  const productQueries = productIDs
+  .map(({ productId }) => (productModel.findOne({ where: { id: productId } })));
+  const products = await Promise.all(productQueries);
+  const formattedProducts = products.map(({ name, price }, index) => ({
+  description: name,
+  unitaryValue: price,
+  quantity: productIDs[index].quantity,
+  subTotal: price * productIDs[index].quantity,
+  }));
+  return { ...dataValues, products: formattedProducts };
+  }; 

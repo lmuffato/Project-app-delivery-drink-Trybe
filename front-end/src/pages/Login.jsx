@@ -7,6 +7,8 @@ import checkPassword from '../services/checkPassword';
 import LoginErrorMessage from './components/LoginErrorMessage';
 import fetchLogin from '../services/fetchLogin';
 
+import './styles/loginStyle.css';
+
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -57,12 +59,12 @@ function Login() {
   }, []);
 
   return (
-    <div>
-      <h1>
+    <div className="login-container">
+      <h1 className="login-title">
         Login
       </h1>
-      <form>
-        <label htmlFor="email-input">
+      <form className="login-form">
+        <label htmlFor="email-input" className="login-email-label">
           <input
             id="email-input"
             type="text"
@@ -70,10 +72,11 @@ function Login() {
             data-testid="common_login__input-email"
             value={ email }
             onChange={ (e) => setEmail(e.target.value) }
+            className="login-username"
           />
         </label>
 
-        <label htmlFor="password-input">
+        <label htmlFor="password-input" className="login-password-input">
           <input
             id="password-input"
             type="password"
@@ -81,6 +84,7 @@ function Login() {
             data-testid="common_login__input-password"
             value={ password }
             onChange={ (e) => setPassword(e.target.value) }
+            className="login-password"
           />
         </label>
         <button
@@ -89,6 +93,7 @@ function Login() {
           disabled={ enableButton }
           data-testid="common_login__button-login"
           onClick={ handleLoginButtonClick }
+          className="login-btn"
         >
           Login
         </button>
@@ -97,6 +102,7 @@ function Login() {
           type="button"
           data-testid="common_login__button-register"
           onClick={ handleRegisterButtonClick }
+          className="login-register-btn"
         >
           Ainda não tenho conta
         </button>

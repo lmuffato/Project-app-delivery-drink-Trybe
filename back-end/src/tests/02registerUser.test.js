@@ -4,14 +4,14 @@ const shell = require('shelljs');
 
 const url = 'http://localhost:3001';
 
-describe('02 - Registrar novo usuário', () => {
+describe('02 - Cadastrar novo usuario', () => {
   
   shell.cd('..');
   shell.exec('npm run db:reset');
   
-  describe('Quando cria usuário com sucesso', () => {
+  describe('Quando cria usuario com sucesso', () => {
     
-    it('Retorna o código de status 201', async () => {
+    it('Retorna o codigo de status 201', async () => {
       await frisby
         .post(`${url}/register`,
           {
@@ -56,9 +56,9 @@ describe('02 - Registrar novo usuário', () => {
     }); 
   });
 
-  describe('Quando tenta criar usuário já existente', () => {
+  describe('Quando tenta criar usuario ja existente', () => {
     
-    it('Retorna o código de status 409', async () => {
+    it('Retorna o codigo de status 409', async () => {
       await frisby
         .post(`${url}/register`,
           {
@@ -103,9 +103,9 @@ describe('02 - Registrar novo usuário', () => {
     }); 
   });
 
-  describe('Quando recebe campos com erro ao criar usuário', () => {
+  describe('Quando recebe campos com erro ao criar usuario', () => {
     describe('Campo de nome vazio', () => {
-      it('Retorna o código de status 400', async () => {
+      it('Retorna o codigo de status 400', async () => {
         await frisby
           .post(`${url}/register`,
             {
@@ -151,7 +151,7 @@ describe('02 - Registrar novo usuário', () => {
     });
 
     describe('Campo de email vazio', () => {
-      it('Retorna o código de status 400', async () => {
+      it('Retorna o codigo de status 400', async () => {
         await frisby
           .post(`${url}/register`,
             {
@@ -196,8 +196,8 @@ describe('02 - Registrar novo usuário', () => {
       });
     });
 
-    describe('Campo de senha(password) vazia', () => {
-      it('Retorna o código de status 400', async () => {
+    describe('Campo de senha vazia', () => {
+      it('Retorna o codigo de status 400', async () => {
         await frisby
           .post(`${url}/register`,
             {
@@ -242,8 +242,8 @@ describe('02 - Registrar novo usuário', () => {
       });
     });
 
-    describe('Campo de senha(password) tamanho inválido', () => {
-      it('Retorna o código de status 400', async () => {
+    describe('Campo de senha com tamanho invalido', () => {
+      it('Retorna o codigo de status 400', async () => {
         await frisby
           .post(`${url}/register`,
             {
@@ -288,50 +288,50 @@ describe('02 - Registrar novo usuário', () => {
       });
     });
 
-    // describe('Campo de role vazio', () => {
-    //   it('Retorna o código de status 400', async () => {
-    //     await frisby
-    //       .post(`${url}/register`,
-    //         {
-    //           "name": "Fulano Silva e Silva",
-    //           "email": "Fulanosilvaesilva@email.com",
-    //           "password": "123456",
-    //           "role": ""
-    //         })
-    //       .expect('status', 400)
-    //   });
+    describe('Campo de role vazio', () => {
+      it('Retorna o codigo de status 400', async () => {
+        await frisby
+          .post(`${url}/register`,
+            {
+              "name": "Batuta Silva e Silva",
+              "email": "Batutasilvaesilva@email.com",
+              "password": "123456",
+              "role": ""
+            })
+          .expect('status', 400)
+      });
   
-    //   it('Retorna um objeto', async () => {
-    //     await frisby
-    //       .post(`${url}/register`,
-    //         {
-    //           "name": "Siclano Silva e Silva",
-    //           "email": "Siclanosilvaesilva@email.com",
-    //           "password": "123456",
-    //           "role": ""
-    //         })
-    //       .then ((response) => {
-    //         const { body } = response;
-    //         const result = JSON.parse(body);
-    //         expect(result).to.be.a('object');
-    //       })
-    //   });
+      it('Retorna um objeto', async () => {
+        await frisby
+          .post(`${url}/register`,
+            {
+              "name": "Batutinha Silva e Silva",
+              "email": "Batutinhasilvaesilva@email.com",
+              "password": "123456",
+              "role": ""
+            })
+          .then ((response) => {
+            const { body } = response;
+            const result = JSON.parse(body);
+            expect(result).to.be.a('object');
+          })
+      });
   
-    //   it('A chave error.message retorna o valor correto', async () => {
-    //     await frisby
-    //       .post(`${url}/register`,
-    //         {
-    //           "name": "Beltrano Silva e Silva",
-    //           "email": "beltranosilvaesilva@email.com",
-    //           "password": "123456",
-    //           "role": ""
-    //         })
-    //       .then ((response) => {
-    //         const { body } = response;
-    //         const result = JSON.parse(body);
-    //         expect(result.error.message).to.be.equals('\"role\" is not allowed to be empty');
-    //       })
-    //   });
-    // });
+      it('A chave error.message retorna o valor correto', async () => {
+        await frisby
+          .post(`${url}/register`,
+            {
+              "name": "Beltrana Silva e Silva",
+              "email": "beltranasilvaesilva@email.com",
+              "password": "123456",
+              "role": ""
+            })
+          .then ((response) => {
+            const { body } = response;
+            const result = JSON.parse(body);
+            expect(result.error.message).to.be.equals('\"role\" is not allowed to be empty');
+          })
+      });
+    });
   });
 });

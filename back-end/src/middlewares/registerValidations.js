@@ -11,14 +11,17 @@ const emailNotExists = async (email) => {
   return { isExist: false };
 };
 
+const registerSchema = Joi.object({
+  email: Joi.string().email().required(),
+  password: Joi.string().min(6).required(),
+  name: Joi.string().min(12).required(),
+  role: Joi.string().required(),
+});
+
 const validateNewUserData = async (req, res, next) => {
-  const { email, password, name } = req.body;
-  const registerSchema = Joi.object({
-    email: Joi.string().email().required(),
-    password: Joi.string().min(6).required(),
-    name: Joi.string().min(12).required(),
-  });
-  const { error } = registerSchema.validate({ email, password, name });
+  const { email, password, name, role } = req.body;
+
+  const { error } = registerSchema.validate({ email, password, name, role });
   if (error) {
     const { message } = error;
     return res.status(httpStatus.badRequest).json({ error: { message } });

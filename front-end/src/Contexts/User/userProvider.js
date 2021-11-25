@@ -27,10 +27,22 @@ function UserProvider({ children }) {
 
   useEffect(() => {
     const validate = async () => {
-      if (user.token) {
-        const data = await validateToken(user.token);
-        return data ? setUser(data) : history.push('/login');
+      const url = window.location.href;
+      const token = localStorage.getItem('token');
+      if (token) {
+        const data = await validateToken(token);
+        if (data) {
+          setUser(data);
+          return history.push('/customer/products');
+        }
+        if (data) {
+          setUser(data);
+          return history.push('/customer/products');
+        }
       }
+
+      return url.includes('/login') || url
+        .includes('/register') ? '' : history.push('/login');
     };
     validate();
   }, []);

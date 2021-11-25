@@ -1,5 +1,11 @@
 const Sale = require('../services/Sales');
 
+const getSale = async (req, res) => {
+  const { id } = req.headers;
+  const sale = await Sale.getSale(id);
+  res.status(200).json(sale);
+};
+
 const addNew = async (req, res) => {
   const { orders, ...data } = req.body;
 
@@ -10,6 +16,14 @@ const addNew = async (req, res) => {
   res.status(201).json({ result: sale });
 };
 
+const getSaleById = async (req, res) => {
+  const { id } = req.params;
+  const sale = await Sale.getSaleById(id);
+  res.status(200).json(sale);
+};
+
 module.exports = {
   addNew,
+  getSale,
+  getSaleById,
 };

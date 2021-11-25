@@ -6,11 +6,12 @@ const segredo = require('fs')
 
 const JWT_SECRET = segredo;
 
-const newToken = (email, name, role) => {
+const newToken = (email, name, role, id) => {
   const payload = {
     email,
     name,
     role,
+    id,
   };
 
   const JWT_CONFIG = {

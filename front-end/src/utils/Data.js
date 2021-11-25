@@ -11,6 +11,18 @@ export const getSellers = async () => {
   return data;
 };
 
+export const getSales = async (token) => {
+  const data = await fetch('http://localhost:3001/sales/', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: token,
+    },
+  });
+  const result = await data.json();
+  return result;
+};
+
 export const validateToken = async (token) => {
   const res = await fetch('http://localhost:3001/validToken', {
     method: 'POST',

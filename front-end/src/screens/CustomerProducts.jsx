@@ -4,6 +4,7 @@ import {
   Button,
 } from '@mui/material';
 import { Link } from 'react-router-dom';
+import BackgroundContainer from '../components/BackgroundContainer';
 import NavBar from '../components/NavBar';
 import ProductCard from '../components/ProductCard';
 import ContextProducts from '../context/ContextProducts';
@@ -40,7 +41,7 @@ function CustomerProducts() {
   ));
 
   return (
-    <div>
+    <BackgroundContainer>
       <NavBar />
 
       { loading
@@ -58,7 +59,7 @@ function CustomerProducts() {
           { calculateSubtotal(cartProducts).toString().replace('.', ',') }
         </Link>
       </Button>
-    </div>
+    </BackgroundContainer>
   );
 }
 

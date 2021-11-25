@@ -8,6 +8,7 @@ describe('07 - Ao chamar o controller de criacao de novo usuario', () => {
   describe('Quando o payload informado é válido', () => {
     shell.cd('..');
     shell.exec('npm run db:reset');
+    shell.cd('back-end');
 
     const response = {};
     const request = {};

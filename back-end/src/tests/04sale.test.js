@@ -8,6 +8,7 @@ describe('04 - Retorno de sales', () => {
   
   shell.cd('..');
   shell.exec('npm run db:reset');
+  shell.cd('back-end');
 
   describe('Quando a venda efetuada com sucesso', () => {
     it('Retorna o codigo de status 201 e o saleId: 1', async () => {

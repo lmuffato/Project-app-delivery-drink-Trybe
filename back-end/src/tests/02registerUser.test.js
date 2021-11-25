@@ -8,6 +8,7 @@ describe('02 - Cadastrar novo usuario', () => {
   
   shell.cd('..');
   shell.exec('npm run db:reset');
+  shell.cd('back-end');
   
   describe('Quando cria usuario com sucesso', () => {
     

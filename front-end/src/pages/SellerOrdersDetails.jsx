@@ -36,6 +36,10 @@ export default function SellerOrdersDetails() {
       });
   }, []);
 
+  const putComma = (value) => {
+    return value.toString().replace('.', ',');
+  }
+
   const renderTable = () => (
     <table>
       { console.log(itens) }
@@ -83,16 +87,16 @@ export default function SellerOrdersDetails() {
               { item.quantity }
             </th>
             <th data-testid={ dataTestId62 }>
-              { item.price }
+              { putComma(item.price) }
             </th>
             <th data-testid={ dataTestId63 }>
-              { (item.price * item.quantity).toFixed(2) }
+              { putComma((item.price * item.quantity).toFixed(2)) }
             </th>
           </tr>
         ))}
         <tr>
           <th data-testid={ dataTestId64 }>
-            { `TOTAL: R$ ${sale.totalPrice}` }
+            { `TOTAL: R$ ${putComma(sale.totalPrice)}` }
           </th>
         </tr>
       </tbody>

@@ -7,15 +7,19 @@ function SellerOrders() {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    get('seller_orders').then((ordersData) => setOrders(ordersData));
-  }, []);
+    const getOrders = async () => {
+      const { data } = await get('seler_login');
+      console.log(data);
+      setOrders(data);
+    };
+    getOrders();
+  }, [get]);
 
   return (
     <div>
-      Tela do cliente
-      {
-        orders.map((order) => <SellerOrderCard key={ order.id } order={ order } />)
-      }
+      Tela do Vendedor
+      { orders
+        && orders.map((order) => <SellerOrderCard key={ order.id } order={ order } />)}
     </div>
   );
 }

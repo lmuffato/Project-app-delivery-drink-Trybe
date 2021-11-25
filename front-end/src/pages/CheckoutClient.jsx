@@ -22,7 +22,6 @@ function CheckoutClient() {
       setSellersArr(data);
       setSellers(data);
       setSellerId(data[0].id);
-      console.log(data);
     };
     allSellers();
   }, []);

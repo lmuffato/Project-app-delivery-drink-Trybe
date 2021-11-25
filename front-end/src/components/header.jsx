@@ -31,7 +31,7 @@ function Header() {
         data-testid={ `${user.role}_products__element-navbar-link-orders` }
       >
         <a
-          href="/#"
+          href="/seller/orders"
           data-testid={ `${user.role}_products__element-navbar-link-orders` }
         >
           Meus Pedidos

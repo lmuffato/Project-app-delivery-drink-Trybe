@@ -24,14 +24,18 @@ function OrderDetails() {
 
   console.log(sale);
 
-  const createOrder = () => (
-    <div className="saleDetailsContainer">
-      <div className="sale-card">
-        Detalhe do Pedido
-        <OrderBox props={ sale } />
+  const createOrder = () => {
+    const { role } = JSON.parse(localStorage.getItem('user'));
+
+    return (
+      <div className="saleDetailsContainer">
+        <div className="sale-card">
+          Detalhe do Pedido
+          <OrderBox props={ { sale, role } } />
+        </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   return (
     <section className="orderDetailsPage">

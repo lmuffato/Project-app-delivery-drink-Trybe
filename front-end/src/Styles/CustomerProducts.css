@@ -6,9 +6,10 @@
 .buttonVercarrinho {
   background-color: rgb(173, 209, 140);
   float: left;
-  height: 30px;
-  left: 700px;
+  font-size: 5px;
+  height: 15px;
+  left: 0;
   position: fixed;
-  top: 50px;
-  width: 200px;
+  top: 0;
+  width: 70px;
 }

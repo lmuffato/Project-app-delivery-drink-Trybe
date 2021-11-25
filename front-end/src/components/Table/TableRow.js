@@ -42,7 +42,7 @@ const productInfo = (product, onClick, type) => {
   return (
     <tr>
       <td className="row_index secondary" data-testid={ `${tid.index}${index}` }>
-        {index}
+        {index + 1}
       </td>
       <td className="row_description" data-testid={ `${tid.name}${index}` }>
         {name}
@@ -94,7 +94,7 @@ const users = (data, onClick) => {
         className="row_id secondary"
         data-testid={ `${adminManagement.index}${index}` }
       >
-        {index}
+        {index + 1}
       </td>
       <td className="row_name" data-testid={ `${adminManagement.name}${index}` }>
         {name}

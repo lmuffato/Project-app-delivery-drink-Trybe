@@ -12,12 +12,12 @@ const dataTestId55 = 'seller_order_details__element-order-details-label-delivery
 const dataTestId56 = 'seller_order_details__element-order-details-label-order-date';
 const dataTestId57 = 'seller_order_details__button-preparing-check';
 const dataTestId58 = 'seller_order_details__button-dispatch-check';
-// const dataTestId59 = 'seller_order_details__element-order-table-item-number';
-// const dataTestId60 = 'seller_order_details__element-order-table-name';
-// const dataTestId61 = 'seller_order_details__element-order-table-quantity';
-// const dataTestId62 = 'seller_order_details__element-order-table-unit-price';
-// const dataTestId63 = 'seller_order_details__element-order-table-sub-total';
-// const dataTestId64 = 'seller_order_details__element-order-total-price';
+const dataTestId59 = 'seller_order_details__element-order-table-item-number';
+const dataTestId60 = 'seller_order_details__element-order-table-name';
+const dataTestId61 = 'seller_order_details__element-order-table-quantity';
+const dataTestId62 = 'seller_order_details__element-order-table-unit-price';
+const dataTestId63 = 'seller_order_details__element-order-table-sub-total';
+const dataTestId64 = 'seller_order_details__element-order-total-price';
 
 export default function SellerOrdersDetails() {
   const { id } = useParams();
@@ -38,8 +38,8 @@ export default function SellerOrdersDetails() {
 
   const renderTable = () => (
     <table>
-      { console.log(sale)}
-      { console.log(itens)}
+      { console.log(itens) }
+      { console.log(sale) }
       <thead>
         <tr>
           <th data-testid={ `${dataTestId54}-${id}` }>
@@ -66,21 +66,37 @@ export default function SellerOrdersDetails() {
       <tbody>
         <tr>
           <th>Item</th>
-          <th>Descrição</th>
-          <th>Quantidade</th>
-          <th>Valor Unitário</th>
-          <th>Sub-total</th>
+          <th data-testid={ `${dataTestId60}-${id}` }>Descrição</th>
+          <th data-testid={ `${dataTestId61}-${id}` }>Quantidade</th>
+          <th data-testid={ `${dataTestId62}-${id}` }>Valor Unitário</th>
+          <th data-testid={ `${dataTestId63}-${id}` }>Sub-total</th>
         </tr>
-      </tbody>
-      <tfoot>
+          { itens.map((item, index) => (
+            <tr key={ index }>
+              <th data-testid={ dataTestId59 }>
+                { index + 1 }
+              </th>
+              <th data-testid={ dataTestId60 }>
+                { item.name }
+              </th>
+              <th data-testid={ dataTestId61 }>
+                { item.quantity }
+              </th>
+              <th data-testid={ dataTestId62 }>
+                { item.price }
+              </th>
+              <th data-testid={ dataTestId63 }>
+                { (item.price * item.quantity).toFixed(2) }
+              </th>
+            </tr>
+            ))
+          }
         <tr>
-          <th>
-            <div>
+          <th data-testid={ dataTestId64 }>
               { `TOTAL: R$ ${sale.totalPrice}` }
-            </div>
           </th>
         </tr>
-      </tfoot>
+      </tbody>
     </table>
   );
 

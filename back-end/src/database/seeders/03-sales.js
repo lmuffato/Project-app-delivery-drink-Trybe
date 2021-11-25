@@ -8,7 +8,7 @@ module.exports = {
         {
           user_id: 2,
           seller_id: 2,
-          total_price: 10.50,
+          total_price: 22.00,
           delivery_address: "Rua A",
           delivery_number: 100,
           status: "Pendente"
@@ -16,7 +16,7 @@ module.exports = {
         {
           user_id: 1,
           seller_id: 2,
-          total_price: 90.50,
+          total_price: 44.00,
           delivery_address: "Rua B",
           delivery_number: 200,
           status: "Preparando"
@@ -24,7 +24,7 @@ module.exports = {
         {
           user_id: 2,
           seller_id: 2,
-          total_price: 500,
+          total_price: 22.00,
           delivery_address: "Rua C",
           delivery_number: 300,
           status: "Em Trânsito"
@@ -32,7 +32,7 @@ module.exports = {
         {
           user_id: 2,
           seller_id: 2,
-          total_price: 500,
+          total_price: 22.00,
           delivery_address: "Rua D",
           delivery_number: 400,
           status: "Entregue"

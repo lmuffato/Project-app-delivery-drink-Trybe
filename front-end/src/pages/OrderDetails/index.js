@@ -20,10 +20,12 @@ function OrderDetails() {
 
   useEffect(() => {
     fetchSale();
-  }, [sale]);
+  }, []);
 
   const updateOrder = async (statusOrder) => {
     await api.changeOrderStatus(statusOrder, idOrder, token);
+
+    fetchSale();
   };
 
   const createOrder = () => {
@@ -33,7 +35,7 @@ function OrderDetails() {
       <div className="saleDetailsContainer">
         <div className="sale-card">
           Detalhe do Pedido
-          <OrderBox props={ { sale, role, updateOrder, fetchSale } } />
+          <OrderBox props={ { sale, role, updateOrder } } />
         </div>
       </div>
     );

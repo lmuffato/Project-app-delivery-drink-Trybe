@@ -14,7 +14,7 @@ function OrderBox({ props }) {
     seller,
   } = props.sale;
 
-  const { role, updateOrder, fetchSale } = props;
+  const { role, updateOrder } = props;
 
   const tesStatus = `${role}_order_details__element-order-details-label-delivery-status`;
 
@@ -25,7 +25,6 @@ function OrderBox({ props }) {
       onClick={ (event) => {
         event.preventDefault();
         updateOrder('Entregue');
-        fetchSale();
       } }
     >
       MARCAR COMO ENTREGUE
@@ -48,7 +47,6 @@ function OrderBox({ props }) {
         onClick={ (event) => {
           event.preventDefault();
           updateOrder('Preparando');
-          fetchSale();
         } }
       >
         PREPARAR PEDIDO
@@ -59,7 +57,6 @@ function OrderBox({ props }) {
         onClick={ (event) => {
           event.preventDefault();
           updateOrder('Em Trânsito');
-          fetchSale();
         } }
       >
         SAIU PARA ENTREGA

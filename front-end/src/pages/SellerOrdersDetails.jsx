@@ -36,9 +36,7 @@ export default function SellerOrdersDetails() {
       });
   }, []);
 
-  const putComma = (value) => {
-    return value.toString().replace('.', ',');
-  }
+  const putComma = (value) => value.toString().replace('.', ',');
 
   const renderTable = () => (
     <table>

@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 function SellerOrderCard({ id, status, totalPrice,
   saleDate, deliveryAddress, deliveryNumber }) {
   const history = useHistory();
-  console.log(`id ==========> ${id}`);
+
   return (
     <button
       type="button"

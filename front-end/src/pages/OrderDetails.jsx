@@ -1,20 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import axios from 'axios';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import NavBar from '../components/CustomerNavBar';
 
 function OrdersDetails({ match }) {
-  const [order, setOrder] = useState([]);
-  const [orderStatus, setOrderStatus] = useState(order.status);
+  const [order, setOrder] = useState(null);
+  const [orderStatus, setOrderStatus] = useState('');
   const { id } = match.params;
   const statsDTid = 'customer_order_details__element-order-details-label-delivery-status';
+  console.log(order);
 
   async function getOrder() {
-    const request = await axios.get(`http://localhost:3001/user/sale/${id}`);
+    const request = await axios.get(`http://localhost:3001/sale/${id}`);
     const mySale = request.data;
-    setOrder(mySale);
+    setOrder({ ...mySale });
+    setOrderStatus(mySale.status);
   }
 
   async function setSaleStatus(status) {
@@ -25,6 +28,8 @@ function OrdersDetails({ match }) {
   useEffect(() => {
     getOrder();
   }, []);
+
+  if (!order) return <p>Carregando...</p>;
 
   return (
     <div>
@@ -43,12 +48,12 @@ function OrdersDetails({ match }) {
         <th
           data-testid="customer_order_details__element-order-details-label-seller-name"
         >
-          {order.seller}
+          {order.seller.name}
         </th>
         <th
           data-testid="customer_order_details__element-order-details-label-order-date"
         >
-          {order.sale_date}
+          { moment(order.sale_date).format(('DD/MM/YYYY')) }
         </th>
         <th
           data-testid={ statsDTid }
@@ -99,7 +104,7 @@ function OrdersDetails({ match }) {
                       `seller_order_details__element-order-table-quantity-${index}`
                     }
                   >
-                    { item.quantity }
+                    { item.salesProduct.quantity }
                   </span>
                 </td>
                 <td>
@@ -119,7 +124,7 @@ function OrdersDetails({ match }) {
                       `seller_order_details__element-order-table-sub-total-${index}`
                     }
                   >
-                    { (item.price * item.quantity)
+                    { (item.price * item.salesProduct.quantity)
                       .toFixed(2).toString().replace('.', ',') }
                   </span>
                 </td>
@@ -128,6 +133,12 @@ function OrdersDetails({ match }) {
           }
         </tbody>
       </Table>
+      <Button
+        variant="success"
+        data-testid="customer_order_details__element-order-total-price"
+      >
+        { order.total_price }
+      </Button>
     </div>
   );
 }

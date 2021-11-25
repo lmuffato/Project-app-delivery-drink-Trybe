@@ -6,7 +6,7 @@ import OrderDetails from '../../components/OrderDetails';
 import { useOrderDetails } from '../../context/orderDetailsProvider';
 import fetchSale from '../../services/ClientOrderDetailsPage/fetchSale';
 import styles from './styles.module.css';
-import dataTestIds from '../../utils/dataTestidsClientOrderDetails';
+import { dataTestIdsClientOrderDetails } from '../../utils/dataTestIds';
 
 export default function ClientOrderDetailsPage() {
   const { sale, setSale, seller, setSeller, setProducts } = useOrderDetails();
@@ -31,7 +31,7 @@ export default function ClientOrderDetailsPage() {
       <h3>Detalhes do Pedido</h3>
       <section className={ styles.container }>
         <div className={ styles.orderDetailsContainer }>
-          <OrderDetails dataTestIds={ dataTestIds } />
+          <OrderDetails dataTestIds={ dataTestIdsClientOrderDetails } />
         </div>
       </section>
     </main>

@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import '../styles/customerProductsStyle.css';
+
 export default function ShopCartCard({ value, history }) {
   const handleClick = () => {
     history.push('/customer/checkout');

@@ -18,11 +18,14 @@ function OrderBox({ props }) {
 
   const tesStatus = `${role}_order_details__element-order-details-label-delivery-status`;
 
-  const statusOrder = status === 'Em Trânsito' ? 'Em-Transito' : status;
+  const checkTransit = 'Em Trânsito';
+
+  const statusOrder = status === checkTransit ? 'Em-Transito' : status;
 
   const createCustomerButton = () => (
     <button
       type="button"
+      disabled={ status !== checkTransit ? 'true' : 'false' }
       data-testid="customer_order_details__button-delivery-check"
       onClick={ (event) => {
         event.preventDefault();
@@ -86,7 +89,7 @@ function OrderBox({ props }) {
           className={ `order-status-${statusOrder}` }
           data-testid={ tesStatus }
         >
-          {status.toUpperCase()}
+          {status}
         </p>
         { role === 'customer'
           ? createCustomerButton()
@@ -145,9 +148,13 @@ function OrderBox({ props }) {
 
       <div
         className="customer-order-total-price"
-        data-testid={ `${role}_order_details__element-order-total-price` }
       >
-        {`Total: ${totalPrice}`}
+        { 'Total: ' }
+        <span
+          data-testid={ `${role}_order_details__element-order-total-price` }
+        >
+          {totalPrice.replace('.', ',')}
+        </span>
       </div>
     </div>
   );

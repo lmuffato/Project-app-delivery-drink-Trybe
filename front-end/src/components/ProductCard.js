@@ -1,22 +1,67 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { CartContext } from '../context/cart';
 
 function ProductCard({ product }) {
-  const [quantity, setQuantity] = useState(0);
+  const { cart, setCart } = useContext(CartContext);
 
   const { id, name, url_image: urlImage, price } = product;
 
-  const addProduct = () => setQuantity(quantity + 1);
+  useEffect(() => {
+    if (cart[id]?.quantity === 0) {
+      const array = Object.entries(cart).filter(
+        ({ quantity }) => quantity !== 0,
+      );
+      const filtered = array.filter((value) => value[1].quantity !== 0);
+      const validProducts = Object.fromEntries(filtered);
+      setCart(validProducts);
+    }
+  }, [cart]);
+
+  const formatPrice = (value) => parseFloat(value).toFixed(2);
+
+  const addProduct = (value) => {
+    if (cart[id]) {
+      setCart({
+        ...cart,
+        [id]: {
+          ...cart[id],
+          quantity: Number(value) || cart[id].quantity + 1,
+          totalPrice: value
+            ? formatPrice(Number(value) * Number(price))
+            : formatPrice((cart[id].quantity + 1) * Number(price)),
+        },
+      });
+    } else {
+      setCart({
+        ...cart,
+        [id]: {
+          name,
+          quantity: Number(value) || 1,
+          totalPrice: formatPrice(Number(price)),
+        },
+      });
+    }
+  };
 
   const removeProduct = () => {
-    if (quantity > 0) {
-      setQuantity(quantity - 1);
+    if (cart[id].quantity > 0) {
+      setCart({
+        ...cart,
+        [id]: {
+          ...cart[id],
+          quantity: cart[id].quantity - 1,
+          totalPrice: formatPrice(Number(cart[id].totalPrice) - Number(price)),
+        },
+      });
     }
   };
 
   const insertManuallyQuantity = ({ target: { value } }) => {
-    setQuantity(value);
+    addProduct(value);
   };
+
+  const handleClickAdd = () => addProduct();
 
   return (
     <div>
@@ -44,14 +89,14 @@ function ProductCard({ product }) {
         <input
           data-testid={ `customer_products__input-card-quantity-${id}` }
           type="number"
-          value={ quantity }
+          value={ cart[id]?.quantity || 0 }
           placeholder="0"
           onChange={ insertManuallyQuantity }
         />
         <button
           data-testid={ `customer_products__button-card-add-item-${id}` }
           type="button"
-          onClick={ addProduct }
+          onClick={ handleClickAdd }
         >
           +
         </button>

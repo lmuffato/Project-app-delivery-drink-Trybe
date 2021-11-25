@@ -3,7 +3,7 @@ import { CssBaseline, Typography, Container, Box, Button } from '@mui/material';
 import DropDown from './DropDown';
 import Input from './Input';
 import ContextProducts from '../context/ContextProducts';
-import ContextLogin from '../context/ContextLogin';
+import { verifyUserExistance } from '../utils/LocalStorageFunctions';
 
 const { useHistory } = require('react-router-dom');
 
@@ -23,7 +23,7 @@ function DeliveryDetails() {
     cartProducts,
     calculateSubtotal,
   } = useContext(ContextProducts);
-  const { userData: { id, token } } = useContext(ContextLogin);
+  const { id, token } = verifyUserExistance();
 
   useEffect(() => {
     const getSellers = async () => {

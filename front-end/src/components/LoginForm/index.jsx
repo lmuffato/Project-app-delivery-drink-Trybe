@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../Button';
 import InputField from '../InputField';
@@ -52,11 +52,15 @@ export default function LoginForm() {
     resetValues();
   };
 
-  useEffect(() => {
+  const conditionalNavigate = useCallback(() => {
     if (role === 'customer') navigate('/customer/products');
     if (role === 'seller') navigate('/seller/orders');
     if (role === 'administrator') navigate('/admin/manage');
-  }, [role]);
+  }, [navigate, role]);
+
+  useEffect(() => {
+    conditionalNavigate();
+  }, [conditionalNavigate]);
 
   return (
     <form className={ styles.loginFormContainer } onSubmit={ handleSubmit }>

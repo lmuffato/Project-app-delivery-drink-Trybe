@@ -92,7 +92,7 @@ describe(requirement(23), () => {
   });
 });
 
-describe(requirement(24), () => {
+describe.only(requirement(24), () => {
   test("O avaliador acessará a tela de detalhes do último pedido pela tela de pedidos, após o checkout do mesmo", async () => {
     const { saleId } = order;
 

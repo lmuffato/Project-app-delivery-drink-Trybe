@@ -1,6 +1,4 @@
-/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { io } from 'socket.io-client';// https://github.com/tryber/sd-10a-live-lectures/pull/89/files
@@ -18,15 +16,10 @@ const Endpoints = {
 };
 
 function Provider({ children }) {
-  const navigate = useNavigate();
-
   const [user, setUser] = useState({});
   const [products, setProducts] = useState([]);
   const [shoppingCart, setShoppingCart] = useState({});
   const [total, setTotal] = useState(0);
-  const [delivery, setDelivery] = useState({});
-  const [sellers, setSellers] = useState([{ name: 'rogerin', sellerId: '1' }]);
-  const [sellerId, setSellerId] = useState();
 
   /// ////////////////////////Link with BackEnd//////////////////////// ///
 
@@ -58,25 +51,6 @@ function Provider({ children }) {
       });
   };
 
-  const postShoppingCartURL = 'http://localhost:3001/sale';
-  const postShoppingCart = async () => {
-    const token = localStorage.getItem('token');
-    const objectCart = {};
-    Object.entries(shoppingCart).forEach((item) => {
-      objectCart[item[0]] = item[1].productQuant;
-    });
-
-    const totalToNumber = Number(total.replace(',', '.')).toFixed(2);
-
-    const request = await axios.post(postShoppingCartURL,
-      { shoppingCart: objectCart, delivery, total: totalToNumber, sellerId }, {
-        headers: {
-          authorization: token,
-        } });
-    navigate(`/customer/orders/${request.data.id}`);
-    return request.data.id;
-  };
-
   /// ////////////////////////ComponentDidMount//////////////////////// ///
 
   useEffect(() => {
@@ -84,7 +58,6 @@ function Provider({ children }) {
       await getProducts();
     });
     fetchProducts();
-    setDelivery({ deliveryAddress: 'string', deliveryNumber: 99 });
     setTotal(0);
   }, []);
 
@@ -123,14 +96,9 @@ function Provider({ children }) {
         submitChange,
         shoppingCart,
         products,
-        setDelivery,
-        delivery,
-        postShoppingCart,
         deleteProduct,
-        setSellerId,
         setShoppingCart,
         socket,
-        sellers,
         total } }
     >
       { children }

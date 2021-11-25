@@ -16,26 +16,23 @@ function Header() {
     <div className="container">
       <div
         className="border"
-        data-testid={ `${user.role}_products__element-navbar-link-products` }
       >
         <Link
           to={ `/${user.role}/products` }
           data-testid={ `${user.role}_products__element-navbar-link-products` }
         >
           Produtos
-
         </Link>
       </div>
       <div
         className="border"
-        data-testid={ `${user.role}_products__element-navbar-link-orders` }
       >
-        <a
-          href="/#"
+        <Link
+          to={ `/${user.role}/orders` }
           data-testid={ `${user.role}_products__element-navbar-link-orders` }
         >
           Meus Pedidos
-        </a>
+        </Link>
       </div>
       <div
         className="border"

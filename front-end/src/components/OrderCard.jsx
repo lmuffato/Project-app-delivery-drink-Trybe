@@ -35,12 +35,15 @@ function OrderCard(props) {
   }
 
   return (
-    <Link to={ `/customer/orders/${id}` }>
-      <div data-testid={ `customer_ orders__element-order-id-${id}` }>
+    <div>
+      <Link
+        to={ `/customer/orders/${id}` }
+        data-testid={ `customer_ orders__element-order-id--${id}` }
+      >
         Pedido
         {' '}
         { id }
-      </div>
+      </Link>
       <div data-testid={ `customer_orders__element-delivery-status-${id}` }>
         { status }
       </div>
@@ -52,7 +55,7 @@ function OrderCard(props) {
         {' '}
         { totalPrice }
       </div>
-    </Link>
+    </div>
   );
 }
 

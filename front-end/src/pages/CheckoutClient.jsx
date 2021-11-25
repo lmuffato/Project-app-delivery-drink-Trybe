@@ -31,7 +31,7 @@ function CheckoutClient() {
       const productIds = Object.keys(shoppingCart);
       const submitCart = {};
       productIds.forEach((id) => {
-        console.log(id);
+        // console.log(id);
         submitCart[id] = shoppingCart[id].productQuant;
       });
 
@@ -42,9 +42,8 @@ function CheckoutClient() {
         total: totalConvertedToNumber,
         sellerId,
       };
-
       const { data: { id } } = await post('customer_checkout', data);
-
+      console.log(id);
       navigate(`/customer/orders/${id}`);
     }
   };
@@ -84,9 +83,9 @@ function CheckoutClient() {
             data-testid="customer_checkout__select-seller"
             onChange={ (e) => setSellerId(e.target.value) }
           >
-            <option disabled selected value> -- Selecione -- </option>
-            <option>Fulano 1</option>
-            <option>Fulano 2</option>
+            <option value="1">Fulano1</option>
+            <option value="2">Fulano2</option>
+            <option value="3">Fulano3</option>
           </select>
         </label>
         <label htmlFor="deliveryAddress">

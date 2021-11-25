@@ -70,6 +70,12 @@ export const getSalesBySellerId = async (id) => {
   return result.data;
 };
 
+export const getSalesDetails = async (id) => {
+  console.log('id no front', id);
+  const result = await api.get(`/sales/order/${id}`);
+  return result.data;
+};
+
 export const getSalesByCustomerId = async (id) => {
   const result = await api.get('/sales', { id });
   return result.data;

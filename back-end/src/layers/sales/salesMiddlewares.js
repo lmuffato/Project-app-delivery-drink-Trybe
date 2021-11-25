@@ -36,6 +36,10 @@ const getSalesBySellerId = async (req, res) => {
   }
 };
 
+const getSaleDetails = async (req, res) => {
+  return res.status(200).json({ data: 'entrou' });
+};
+
 // Buscar por id utilizando where
 // const getById = async (req, res) => {
 //   try {
@@ -159,4 +163,5 @@ module.exports = {
   createSale,
   createManySaleProducts,
   getSalesBySellerId,
+  getSaleDetails,
 };

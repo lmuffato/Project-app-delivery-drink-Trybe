@@ -5,7 +5,8 @@ const fs = require('fs');
 const { User } = require('../database/models');
 const errorMap = require('../utils/errorMap');
 
-const SECRET = fs.readFileSync(path.join(__dirname, '../../jwt.evaluation.key'), { encoding: 'utf8'}).trim();
+const SECRET = fs.readFileSync(path.join(__dirname, '../../jwt.evaluation.key'),
+{ encoding: 'utf-8' }).trim();
 
 const CUSTOMER_ROLE = 'customer';
 
@@ -22,8 +23,8 @@ const create = async (user) => {
       { name: user.name, email: user.email, password: passwordMD5, role: CUSTOMER_ROLE },
     );
 
-    const { dataValues: { id, name, email } } = result;
-    const payload = { id, name, email };
+    const { dataValues: { id, name, email, role } } = result;
+    const payload = { id, name, email, role };
     const options = { expiresIn: '1d' };
 
     const token = jwt.sign(payload, SECRET, options);

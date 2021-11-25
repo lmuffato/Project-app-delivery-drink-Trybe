@@ -13,9 +13,13 @@ function ProductClient() {
     <>
       <button
         onClick={ () => navigate('/customer/checkout') }
+        data-testid="customer_products__button-cart"
         type="button"
+        disabled={ total === '0,00' }
       >
-        { `Ver Carrinho: R$ ${total}` }
+        <span data-testid="customer_products__checkout-bottom-value">
+          { `Ver Carrinho: R$ ${total}` }
+        </span>
       </button>
       <div className="master">
         {

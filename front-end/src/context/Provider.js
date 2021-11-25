@@ -14,6 +14,7 @@ const Endpoints = {
   checkout_form: 'sale',
   seller_orders: 'seller/orders',
   customer_orders: 'customer/orders',
+  customer_checkout: 'sale',
 };
 
 function Provider({ children }) {
@@ -30,8 +31,24 @@ function Provider({ children }) {
   /// ////////////////////////Link with BackEnd//////////////////////// ///
 
   const postSubmit = (url) => axios.post(`http://localhost:3001/${url}`, user);
-  const post = (formType, data) => axios.post(`http://localhost:3001/${Endpoints[formType]}`, data);
-  const get = (formType, id) => axios.get(`http://localhost:3001/${Endpoints[formType]}/${id}`);
+
+  const post = (formType, data, id) => {
+    const token = localStorage.getItem('token');
+    return axios.post(`http://localhost:3001/${Endpoints[formType]}/${id || ''}`,
+      data,
+      {
+        headers: {
+          Authorization: token || null,
+        },
+      });
+  };
+
+  const get = (formType, id) => {
+    const token = localStorage.getItem('token');
+    return axios.get(`http://localhost:3001/${Endpoints[formType]}/${id || ''}`, { headers: {
+      Authorization: token || null,
+    } });
+  };
 
   const getProductsURL = 'http://localhost:3001/products';
   const getProducts = () => {
@@ -74,13 +91,10 @@ function Provider({ children }) {
   // Atualiza o valor Total no botão de Checkout
   useEffect(() => {
     function sum() {
-      const itens = Object.entries(shoppingCart);
-      const teste = itens.map((item) => {
-        const A = parseFloat(Object.values(item[1])[2]);
-        const B = parseFloat(Object.values(item[1])[3]);
-        return (A * B).toFixed(2);
-      });
-      const soma = teste.reduce((acc, item) => acc + parseFloat(item), 0);
+      const items = Object.values(shoppingCart);
+      const soma = items.reduce((acc, { productQuant, productPrice }) => (
+        acc + productQuant * productPrice
+      ), 0);
       setTotal(soma.toFixed(2).toString().replace('.', ','));
     }
     sum();
@@ -88,70 +102,9 @@ function Provider({ children }) {
 
   /// ////////////////////////Components Functions//////////////////////// ///
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    const setuser = { ...user,
-      [name]: value,
-    };
-    setUser(setuser);
-  };
-
   const submitChange = (e, formType) => {
     e.preventDefault();
     return postSubmit(Endpoints[formType]);
-  };
-
-  // Função disparada no onClick no ProductCard
-  const addProduct = (name, id, price) => {
-    const currentItemsinCart = Object.keys(shoppingCart);
-    if (currentItemsinCart.includes(id.toString())) {
-      const update = shoppingCart[id].productQuant;
-      return setShoppingCart({ ...shoppingCart,
-        [id]: {
-          productId: id, productName: name, productPrice: price, productQuant: update + 1,
-        } });
-    }
-    const cart = {
-      productId: id,
-      productName: name,
-      productPrice: price,
-      productQuant: 1,
-    };
-    const spread = { ...shoppingCart, [id]: cart };
-    setShoppingCart(spread);
-  };
-
-  const subProduct = (name, id, price) => {
-    const currentItemsinCart = Object.keys(shoppingCart);
-    if (currentItemsinCart.includes(id.toString())) {
-      const update = shoppingCart[id].productQuant;
-      if (update === 0) return null;
-      return setShoppingCart({ ...shoppingCart,
-        [id]: {
-          productId: id, productName: name, productPrice: price, productQuant: update - 1,
-        } });
-    }
-  };
-
-  const inputProduct = (name, id, price, value) => {
-    const currentItemsinCart = Object.keys(shoppingCart);
-    if (currentItemsinCart.includes(id.toString())) {
-      return setShoppingCart({ ...shoppingCart,
-        [id]: {
-          productId: id,
-          productName: name,
-          productPrice: price,
-          productQuant: parseInt(value, 10),
-        } });
-    }
-    const cart = {
-      productId: id,
-      productName: name,
-      productPrice: price,
-      productQuant: parseInt(value, 10),
-    };
-    const spread = { ...shoppingCart, [id]: cart };
-    setShoppingCart(spread);
   };
 
   const deleteProduct = (id) => {
@@ -167,18 +120,15 @@ function Provider({ children }) {
         get,
         user,
         post,
-        handleChange,
         submitChange,
         shoppingCart,
         products,
         setDelivery,
         delivery,
-        addProduct,
-        subProduct,
         postShoppingCart,
-        inputProduct,
         deleteProduct,
         setSellerId,
+        setShoppingCart,
         socket,
         sellers,
         total } }

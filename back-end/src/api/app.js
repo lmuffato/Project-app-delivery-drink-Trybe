@@ -40,4 +40,6 @@ app.get('/user/sale/:id', Sale.getAllSales);
 
 app.patch('/sale/:id', Sale.setSaleStatus);
 
+app.get('/sale/:id', Sale.getProductsSale);
+
 module.exports = app;

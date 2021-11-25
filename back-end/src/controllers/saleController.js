@@ -29,9 +29,16 @@ const setSaleStatus = async (req, res) => {
   return res.status(201).json(updatedSale);
 };
 
+const getProductsSale = async (req, res) => {
+  const { id } = req.params;
+  const { status, data } = await Sale.getProductsOfSale(id);
+  res.status(status).json(data);
+};
+
 module.exports = {
   createSale,
   getSales,
   getAllSales,
   setSaleStatus,
+  getProductsSale,
 };

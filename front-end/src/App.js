@@ -6,6 +6,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import AppContainer from './components/AppContainer';
 import { MainContainer } from './styles/containers';
+import CustomerCheckout from './pages/CustomerCheckout';
 
 const placeholderElement = (name) => (
   <div>
@@ -27,7 +28,7 @@ function App() {
           <Route index element={ <Navigate to="products" /> } />
           <Route path="products" element={ <CustomerProducts /> } />
           <Route path="orders" element={ <p>orders</p> } />
-          <Route path="checkout" element={ <p>checkout</p> } />
+          <Route path="checkout" element={ <CustomerCheckout /> } />
         </Route>
 
         <Route path="seller" element={ placeholderElement('Seller') }>

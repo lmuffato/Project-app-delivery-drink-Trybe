@@ -5,8 +5,8 @@ const TableContainer = styled.div`
 
   table {
     width: 100%;
-    padding: 10px;
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0 10px;
   }
 
   .primary {
@@ -60,6 +60,10 @@ const TableContainer = styled.div`
 
   td {
     text-align: center;
+  }
+
+  tbody tr {
+    margin-bottom: 10px;
   }
 
   tbody td {

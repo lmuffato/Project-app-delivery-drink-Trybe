@@ -21,11 +21,7 @@ const Login = () => {
   }
 
   async function validateLogin(userLogin) {
-    console.log('validateLogin:', userLogin);
-
     const { data, status } = await postUser(userLogin, 'login');
-
-    console.log(data, status);
 
     if (data.message) setLoginErr(data.message);
     if (status === STATUS) setIsLoading(true);

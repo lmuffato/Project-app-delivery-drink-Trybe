@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import '../styles/customerProductsStyle.css';
+
 export default function CheckOutButton({ value, history }) {
   const handleClick = () => {
     history.push('/customer/checkout');
@@ -13,6 +15,7 @@ export default function CheckOutButton({ value, history }) {
         type="submit"
         disabled={ value <= 0 }
         onClick={ handleClick }
+        className="checkout-btn"
       >
         CheckOut
       </button>

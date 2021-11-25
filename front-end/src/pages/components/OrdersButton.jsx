@@ -2,6 +2,8 @@ import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import ContextDeliveryApp from '../../store/ContextDeliveryApp';
 
+import '../styles/customerProductsStyle.css';
+
 export default function OrdersButton() {
   const { user } = useContext(ContextDeliveryApp);
 
@@ -24,6 +26,7 @@ export default function OrdersButton() {
           value="MEUS PEDIDOS"
           data-testid="customer_products__element-navbar-link-orders"
           onClick={ handleOrdersClick }
+          className="orders-btn"
         />
       </label>
     </div>

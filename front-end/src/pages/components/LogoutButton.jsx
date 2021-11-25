@@ -2,6 +2,8 @@ import React, { useContext } from 'react';
 import { useHistory } from 'react-router';
 import ContextDeliveryApp from '../../store/ContextDeliveryApp';
 
+import '../styles/customerProductsStyle.css';
+
 export default function LogoutButton() {
   const { setUser, setProducts } = useContext(ContextDeliveryApp);
 
@@ -23,6 +25,7 @@ export default function LogoutButton() {
         type="submit"
         data-testid="customer_products__element-navbar-link-logout"
         onClick={ handleLogoutClick }
+        className="logout-btn"
       >
         SAIR
       </button>

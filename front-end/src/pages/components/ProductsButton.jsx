@@ -1,6 +1,8 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
+import '../styles/customerProductsStyle.css';
+
 export default function ProductsButton() {
   const history = useHistory();
   const handleProductsClick = () => {
@@ -15,6 +17,7 @@ export default function ProductsButton() {
           value="PRODUTOS"
           data-testid="customer_products__element-navbar-link-products"
           onClick={ handleProductsClick }
+          className="products-btn"
         />
       </label>
     </div>

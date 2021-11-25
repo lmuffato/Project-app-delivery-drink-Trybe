@@ -6,6 +6,7 @@ const validateRequestBody = require('../middlewares/validateRequestBody');
 router.get('/debug', SaleController.getAllDebug);
 router.get('/', validateToken, SaleController.getAllByUser);
 router.get('/:id', SaleController.getByID);
+router.put('/:id', validateToken, SaleController.changeOrderStatus);
 router.post('/', validateRequestBody, validateToken, SaleController.create);
 
 module.exports = router;

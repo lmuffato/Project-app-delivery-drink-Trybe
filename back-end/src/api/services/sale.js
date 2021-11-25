@@ -45,6 +45,12 @@ exports.getOrderByID = async ({ id: saleId }) => {
   return { ...dataValues, products: formattedProducts };
 };
 
+exports.changeOrderStatus = async ({ id, newStatus }) => {
+  const order = await saleModel.findOne({ where: { id } });
+  const updatedOrder = await order.update({ status: newStatus });
+  return updatedOrder;
+};
+
 /* const getUserIdByName = async (name) => {
   const user = await userModel.findOne({ where: { name } });
   return user.id;

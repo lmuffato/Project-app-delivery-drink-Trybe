@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 import { dataTestIdsClientOrderDetails } from '../../utils/dataTestIds';
 
 export default function ClientOrderDetailsPage() {
-  const { sale, setSale, seller, setSeller, setProducts } = useOrderDetails();
+  const { setSale, setSeller, setProducts } = useOrderDetails();
   const { id } = useParams();
 
   useEffect(() => {
@@ -21,9 +21,6 @@ export default function ClientOrderDetailsPage() {
     };
     getSales();
   }, [id, setProducts, setSale, setSeller]);
-
-  console.log('SALE', sale);
-  console.log('SELLER', seller);
 
   return (
     <main>

@@ -26,8 +26,6 @@ export default function Header() {
     user = JSON.parse(userStorage);
   }
 
-  // console.log('user.role', user.role);
-
   let titleNav = 'Produtos';
   let titleNavLink = '/customer/products';
 

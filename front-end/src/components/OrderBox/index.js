@@ -45,12 +45,22 @@ function OrderBox({ props }) {
       <button
         type="button"
         data-testid="seller_order_details__button-preparing-check"
+        onClick={ (event) => {
+          event.preventDefault();
+          updateOrder('Preparando');
+          fetchSale();
+        } }
       >
         PREPARAR PEDIDO
       </button>
       <button
         type="button"
         data-testid="seller_order_details__button-dispatch-check"
+        onClick={ (event) => {
+          event.preventDefault();
+          updateOrder('Em Trânsito');
+          fetchSale();
+        } }
       >
         SAIU PARA ENTREGA
       </button>

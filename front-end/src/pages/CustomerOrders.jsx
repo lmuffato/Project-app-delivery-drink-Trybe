@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import moment from 'moment';
-import { saleActionGet } from '../utils/API/fetch';
+import { fetchSales } from '../utils/API/fetch';
 
 export default function CustomerOrder() {
   const [sales, setSale] = useState([]);
@@ -10,7 +10,8 @@ export default function CustomerOrder() {
   //
   useEffect(() => {
     (async () => {
-      const { result } = await saleActionGet({ token });
+      const result = await fetchSales(token);
+      console.log('🚀 ~ file: CustomerOrders.jsx ~ line 14 ~ result', result);
       setSale(result);
     })();
   }, [token]);
@@ -33,12 +34,12 @@ export default function CustomerOrder() {
           <p
             data-testid={ `customer_orders__element-order-date-${sale.id}` }
           >
-            { moment(sale.saleDate).format('DD/MM/YY') }
+            { moment(sale.date).format('DD/MM/YYYY') }
           </p>
           <p
             data-testid={ `customer_orders__element-card-price-${sale.id}` }
           >
-            { sale.totalPrice }
+            { sale.price.replace('.', ',') }
           </p>
         </div>
       )) }

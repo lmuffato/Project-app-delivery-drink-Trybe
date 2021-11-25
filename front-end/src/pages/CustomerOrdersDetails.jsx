@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { saleActionGet } from '../utils/API/fetch';
+import { saleActionGetById } from '../utils/API/fetch';
 
 export default function CustomerOrdersDetails() {
-  const [orderDetails, setOrderDetails] = useState([])
-  console.log('🚀', orderDetails);
+  const [orderDetails, setOrderDetails] = useState([]);
+  console.log('🚀 ~ f', orderDetails);
+
+  const id = 1;
 
   useEffect(() => {
     (async () => {
-      const { result } = await saleActionGetById(id);
+      const result = await saleActionGetById(id);
       setOrderDetails(result);
     })();
-  }, [token]);
+  }, []);
 
   return (
     <div style={ { margin: 30 } }>

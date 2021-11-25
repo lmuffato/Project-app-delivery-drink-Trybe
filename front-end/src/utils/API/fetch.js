@@ -104,6 +104,24 @@ export const fetchSales = async (token) => {
   }
 };
 
+export const saleActionGetById = async (id) => {
+  try {
+    const rawResponse = await fetch(`http://localhost:3001/sales/${id}`,
+      {
+        method: 'GET',
+        headers: {
+          Accept: APPLICATION_JSON,
+          'Content-Type': APPLICATION_JSON,
+        },
+      });
+    const { result } = await rawResponse.json();
+    return result;
+  } catch (error) {
+    console.error(error.message);
+    return null;
+  }
+};
+
 export const getUsers = async () => {
   try {
     const rawResponse = await fetch('http://localhost:3001/users',

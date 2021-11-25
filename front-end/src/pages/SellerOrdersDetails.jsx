@@ -1,49 +1,85 @@
-import React from 'react';
-import { useLocation, useParams } from 'react-router';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router';
 import NavBar from '../components/NavBar';
 import { formatDate, formatPrice,
   getTestID, formatTestID, leftPad } from '../utils/functions';
-// TODO: Trocar mock por requisição de dados no back
-const mock = {
-  id: 4,
-  saleDate: '2021-11-25T02:20:56.000Z',
-  status: 'Pendente',
-  totalPrice: 23.80,
-  products: [
-    {
-      description: 'Skol Lata 250ml',
-      quantity: 4,
-      unitaryValue: 2.20,
-      subTotal: 8.80,
-    },
-    {
-      description: 'Heineken 600ml',
-      quantity: 2,
-      unitaryValue: 7.50,
-      subTotal: 15.00,
-    },
-  ] };
+import { fetchSaleByID, changeOrderStatus } from '../utils/API/fetch';
+
 export default function SellerOrders() {
+  const [order, setOrder] = useState(null);
+  const [inProgress, setInProgress] = useState(false);
+  const [readyToDelivery, setReadyToDelivery] = useState(false);
+  const user = JSON.parse(localStorage.getItem('user'));
+  const { token } = user;
   const { id } = useParams();
-  const location = useLocation();
-  const renderNavBar = () => {
-    if (location.pathname !== 'login' && location.pathname !== 'register') {
-      return (<NavBar />);
+
+  const handleClick = ({ target }) => {
+    const { name } = target;
+    let newStatus;
+
+    if (name === 'prepare-order') {
+      newStatus = 'Preparando';
+      setInProgress(!inProgress);
+      setReadyToDelivery(!readyToDelivery);
+      changeOrderStatus({ token, id, newStatus });
+    } else {
+      newStatus = 'Em Trânsito';
+      setReadyToDelivery(!readyToDelivery);
+      changeOrderStatus({ token, id, newStatus });
     }
   };
+
+  useEffect(() => {
+    (async () => {
+      const orderData = await fetchSaleByID(id);
+      switch (orderData.status) {
+      case 'Preparando':
+        setInProgress(!inProgress);
+        setReadyToDelivery(!readyToDelivery);
+        break;
+      case 'Em Trânsito':
+        setInProgress(!inProgress);
+        break;
+      case 'Entregue':
+        setInProgress(!inProgress);
+        break;
+      default:
+        break;
+      }
+      setOrder(orderData);
+    })();
+  }, []);
+
+  if (!order) return <p>Loading...</p>;
   return (
     <>
-      { renderNavBar() }
+      <NavBar />
       <div className="card-top-bar">
         <div data-testid={ getTestID('54') }>{`Pedido ${leftPad(id)}`}</div>
-        <div data-testid={ getTestID('56') }>{formatDate(mock.saleDate)}</div>
-        <div data-testid={ getTestID('55') }>{mock.status}</div>
-        <button data-testid={ getTestID('57') } type="button">PREPARAR PEDIDO</button>
-        <button data-testid={ getTestID('58') } type="button">SAIU PARA ENTREGA</button>
+        <div data-testid={ getTestID('56') }>{formatDate(order.saleDate)}</div>
+        <div data-testid={ getTestID('55') }>{order.status}</div>
+        <button
+          data-testid={ getTestID('57') }
+          name="prepare-order"
+          disabled={ inProgress }
+          onClick={ handleClick }
+          type="button"
+        >
+          PREPARAR PEDIDO
+        </button>
+        <button
+          data-testid={ getTestID('58') }
+          name="deliver-order"
+          disabled={ !readyToDelivery }
+          onClick={ handleClick }
+          type="button"
+        >
+          SAIU PARA ENTREGA
+        </button>
       </div>
       <div className="card-list">
         <ul>
-          {mock
+          {order
             .products
             .map(({ description, quantity, unitaryValue, subTotal }, index) => (
               <li key={ index }>
@@ -59,7 +95,7 @@ export default function SellerOrders() {
               </li>
             ))}
         </ul>
-        <div data-testid={ getTestID('64') }>{formatPrice(mock.totalPrice)}</div>
+        <div data-testid={ getTestID('64') }>{formatPrice(order.totalPrice)}</div>
       </div>
     </>
   );

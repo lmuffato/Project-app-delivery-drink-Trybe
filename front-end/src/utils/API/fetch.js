@@ -103,6 +103,44 @@ export const fetchSales = async (token) => {
   }
 };
 
+export const fetchSaleByID = async (id) => {
+  try {
+    const rawResponse = await fetch(`http://localhost:3001/sales/${id}`,
+      {
+        method: 'GET',
+        headers: {
+          Accept: APPLICATION_JSON,
+          'Content-Type': APPLICATION_JSON,
+        },
+      });
+    const { result } = await rawResponse.json();
+    return result;
+  } catch (error) {
+    console.error(error.message);
+    return null;
+  }
+};
+
+export const changeOrderStatus = async ({ token, id, newStatus }) => {
+  try {
+    const rawResponse = await fetch(`http://localhost:3001/sales/${id}`,
+      {
+        method: 'PUT',
+        headers: {
+          Accept: APPLICATION_JSON,
+          Authorization: token,
+          'Content-Type': APPLICATION_JSON,
+        },
+        body: JSON.stringify({ newStatus }),
+      });
+    const { result: status } = await rawResponse.json();
+    return status;
+  } catch (error) {
+    console.error(error.message);
+    return null;
+  }
+};
+
 export const getUsers = async () => {
   try {
     const rawResponse = await fetch('http://localhost:3001/users',

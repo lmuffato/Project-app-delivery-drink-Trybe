@@ -10,7 +10,7 @@ module.exports = {
       },
         name: { type: Sequelize.STRING(100), allowNull: false, unique: true },
         price: { type: Sequelize.DECIMAL(4,2), allowNull: false },
-        urlImage: { type: Sequelize.STRING(200), allowNull: false },
+        url_image: { type: Sequelize.STRING(200), allowNull: false },
       });
   },
 

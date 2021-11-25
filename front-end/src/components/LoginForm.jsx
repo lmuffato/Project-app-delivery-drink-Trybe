@@ -1,13 +1,17 @@
 import React, { useState, useContext, useEffect } from 'react';
 import '../styles/form.css';
+import Jwt from 'jsonwebtoken';
 import { Link, useNavigate } from 'react-router-dom';
 import TextInput from './TextInput';
 import Context from '../context/Context';
 import regex from '../utils/regex';
 import errorMap from '../utils/errorMap';
 
+// zebirita@email.com
+// $#zebirita#$
+
 function LoginForm() {
-  const { post } = useContext(Context);
+  const { post, setUser } = useContext(Context);
   const navigate = useNavigate();
   const [loginForm, setLoginForm] = useState({ email: '', password: '' });
   const [invalidLogin, setInvalidLogin] = useState();
@@ -35,10 +39,18 @@ function LoginForm() {
       const { data } = await post('login_form', loginForm);
 
       if (data.token) {
+        const { token } = data;
+        const { email, name, role } = Jwt.decode(token);
+        const user = { name, email, role, token };
         localStorage.setItem('token', data.token);
-        navigate('/customer/products');
+        localStorage.setItem('user', JSON.stringify(user));
+        setUser(user);
+
+        navigate(`/${role}/products`);
       }
-    } catch ({ response }) {
+    } catch (error) {
+      console.log(error);
+      const { response } = error;
       const { status } = response;
       setInvalidLogin(errorMap[status || '500']);
     }

@@ -3,6 +3,7 @@ const saleService = require('../services/saleService');
 
 async function create(req, res) {
   try {
+    console.log(req.body);
     const { code, data } = await saleService.create(req.body);
 
     return res.status(code).json(data);

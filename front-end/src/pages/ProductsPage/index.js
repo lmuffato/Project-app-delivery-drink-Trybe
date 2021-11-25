@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from 'react';
+import { useHistory } from 'react-router';
 import Card from '../../components/Card';
 import MenuCostumer from '../../components/MenuCustomer';
 import { useCart } from '../../hooks/useCart';
@@ -7,6 +8,7 @@ import api from '../../services/api';
 import './style.css';
 
 const ProductsPage = () => {
+  const history = useHistory();
   const { products, setProducts } = useContext(ContextProduct);
   const { totalValue } = useCart();
   const [isLoading, setIsLoading] = React.useState(false);
@@ -21,6 +23,8 @@ const ProductsPage = () => {
     };
     fetchProducts();
   }, []);
+
+  const handleClickCart = () => history.push('/customer/checkout');
 
   if (isLoading || !products) return <h1>Loading..</h1>;
   if (products) {
@@ -38,10 +42,13 @@ const ProductsPage = () => {
             />
           ))}
         </div>
-        {totalValue > 0 && (
+        {totalValue >= 0 && (
           <button
             type="button"
             className="cartButton"
+            onClick={ handleClickCart }
+            data-testid="customer_products__button-cart"
+            disabled={ totalValue === 0 }
           >
             Ver carrinho:
             R$

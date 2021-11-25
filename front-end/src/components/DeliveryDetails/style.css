@@ -1,0 +1,19 @@
+.deliveryForm {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.deliveryFormContainer {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.deliveryFormContainer > label {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

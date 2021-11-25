@@ -1,4 +1,4 @@
-const { Sales, SalesProducts } = require('../../database/models');
+const { sales, salesProducts } = require('../../database/models');
 const { User } = require('../../database/models');
 const { ORDERS_NOT_FOUND } = require('../messages/errorMessages');
 
@@ -12,18 +12,18 @@ const findUserById = async (id) => {
 
 const registerSale = async (saleData) => {
   const { products, ...data } = saleData;
+  console.log('Service');
+  const { dataValues } = await sales.create(data);
 
-  const { dataValues } = await Sales.create(data);
-
-  products.map(({ productId, quantity }) => SalesProducts.create({
-     productId, saleId: dataValues.id, quantity,
+  products.map(({ productId, quantity }) => salesProducts.create({
+    productId, saleId: dataValues.id, quantity,
     }));
 
   return dataValues;
 };
 
 const getOrdersByUserId = async (userId) => {
-  const userOrders = await Sales.findAll({
+  const userOrders = await sales.findAll({
     where: { userId },
     include: { model: User, as: 'seller', attributes: { exclude: ['password'] } },
   });
@@ -39,7 +39,7 @@ const getOrdersByUserId = async (userId) => {
 };
 
 const getAllOrders = async () => {
-  const allOrders = await Sales.findAll({
+  const allOrders = await sales.findAll({
     include: [
       { model: User, as: 'user', attributes: { exclude: ['password'] } },
       { model: User, as: 'seller', attributes: { exclude: ['password'] } },
@@ -52,7 +52,7 @@ const getAllOrders = async () => {
 };
 
 const getOrdersBySellerId = async (sellerId) => {
-  const sellerOrders = await Sales.findAll({
+  const sellerOrders = await sales.findAll({
     where: { sellerId },
     include: { model: User, as: 'user', attributes: { exclude: ['password'] } },
   });
@@ -68,12 +68,12 @@ const getOrdersBySellerId = async (sellerId) => {
 };
 
 const updateOrder = async (id, status) => {
-  await Sales.update(
+  await sales.update(
     { status },
     { where: { id } },
   );
 
-  const updatedOrder = await Sales.findByPk(id);
+  const updatedOrder = await sales.findByPk(id);
 
   return updatedOrder;
 };

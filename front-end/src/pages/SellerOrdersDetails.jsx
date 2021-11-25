@@ -2,16 +2,23 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import Table from 'react-bootstrap/Table';
+import Button from 'react-bootstrap/Button';
 import NavBar from '../components/CustomerNavBar';
 
 function SellerOrdersDetails({ match }) {
   const [order, setOrder] = useState([]);
+  const [orderStatus, setOrderStatus] = useState(order.status);
   const { id } = match.params;
 
   async function getOrder() {
-    const reqeust = await axios.get(`http://localhost:3001/user/sale/${id}`);
-    const mySale = reqeust.data;
+    const request = await axios.get(`http://localhost:3001/user/sale/${id}`);
+    const mySale = request.data;
     setOrder(mySale);
+  }
+
+  async function setSaleStatus(status) {
+    await axios.patch(`http://localhost:3001/sale/${id}`, { status });
+    setOrderStatus(status);
   }
 
   useEffect(() => {
@@ -22,6 +29,45 @@ function SellerOrdersDetails({ match }) {
     <div>
       <NavBar fixed="top" />
       <h3>Detalhe do Pedido</h3>
+      <br />
+      <Table>
+        <th>
+          PEDIDO 000
+          <span
+            data-testid="seller_order_details__element-order-details-label-order-id"
+          >
+            {id}
+          </span>
+        </th>
+        <th
+          data-testid="seller_order_details__element-order-details-label-order-date"
+        >
+          {order.sale_date}
+        </th>
+        <th
+          data-testid="seller_order_details__element-order-details-label-delivery-status"
+        >
+          {orderStatus}
+        </th>
+        <th>
+          <Button
+            variant="success"
+            data-testid="seller_order_details__button-preparing-check"
+            onClick={ () => setSaleStatus('Preparando') }
+          >
+            PREPARAR PEDIDO
+          </Button>
+        </th>
+        <th>
+          <Button
+            variant="success"
+            data-testid="seller_order_details__button-dispatch-check"
+            onClick={ () => setSaleStatus('Em Trânsito') }
+          >
+            SAIU PARA ENTREGA
+          </Button>
+        </th>
+      </Table>
       <Table striped bordered hover variant="dark">
         <thead>
           <tr>
@@ -34,7 +80,7 @@ function SellerOrdersDetails({ match }) {
         </thead>
         <tbody>
           {
-            order.map((item, index) => (
+            order.products.map((item, index) => (
               <tr key={ item.name }>
                 <td
                   data-testid={

@@ -3,14 +3,21 @@ import PropTypes from 'prop-types';
 import { CartContext } from '../contexts/Cart';
 import ButtonRemoveItem from './ButtonRemoveItem';
 
-function CheckoutTable(props) {
+function CheckoutTable() {
   const { cart } = useContext(CartContext);
-  const { testIds: {
+  const testIds = {
+    productId: 'customer_checkout__element-order-table-item-number-',
+    productName: 'customer_checkout__element-order-table-name-',
+    productQuantity: 'customer_checkout__element-order-table-quantity-',
+    productUnitPrice: 'customer_checkout__element-order-table-unit-price-',
+    productSubTotal: 'customer_checkout__element-order-table-sub-total-',
+  };
+  const {
     productId,
     productName,
     productQuantity,
     productUnitPrice,
-    productSubTotal } } = props;
+    productSubTotal } = testIds;
 
   const fillTable = ((cartt) => cartt.map(
     ({ productId: id, name, quantity, unitPrice, subTotal }, key) => (

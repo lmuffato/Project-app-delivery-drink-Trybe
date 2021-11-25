@@ -39,7 +39,7 @@ const getById = async (id) => {
 const update = async (id, status) => {
   await Sale.update({ status }, { where: { id } });
   const sale = await getById(id);
-  return { statusData: 200, data: sale };
+  return { statusCode: 200, data: sale };
 };
 
 module.exports = {

@@ -35,23 +35,14 @@ function UserProvider({ children }) {
           setUser(data);
           return history.push('/customer/products');
         }
+        if (data) {
+          setUser(data);
+          return history.push('/customer/products');
+        }
       }
-      return url.includes('/login') ? '' : history.push('/login');
-      // if (token) {
-      //   const data = await validateToken(token);
-      //   console.log('DATA', data);
-      //   if (data) {
-      //     setUser(data);
-      //     return history.push('customer/products');
-      //   }
-      //   if (!data && !(url.includes('/login'))) {
-      //     history.push('/login');
-      //   }
-      //   return data ? setUser(data) : history.push('/login');
-      // }
-      // if (!(url.includes('/login')) && !token) {
-      //   history.push('/login');
-      // }
+
+      return url.includes('/login') || url
+        .includes('/register') ? '' : history.push('/login');
     };
     validate();
   }, []);

@@ -8,6 +8,11 @@ import CartProvider from './contexts/CartProvider';
 import Login from './pages/Login';
 import CustomerCheckout from './pages/CustomerCheckout';
 import SellerOrders from './pages/SellerOrders';
+import Orders from './pages/Orders';
+import OrderDetails from './pages/OrderDetails';
+import AdmPage from './pages/AdmPage';
+import SellerOrderDetails from './pages/SellerOrdersDetails';
+import UsersProvider from './contexts/UsersProvider';
 
 function App() {
   return (
@@ -17,11 +22,17 @@ function App() {
       </Route>
       <Route path="/login" component={ Login } />
       <Route path="/register" component={ Register } />
+      <Route exact path="/customer/orders" component={ Orders } />
+      <Route path="/customer/orders/:id" component={ OrderDetails } />
+      <Route exact path="/seller/orders" component={ SellerOrders } />
+      <Route path="/seller/orders/:id" component={ SellerOrderDetails } />
       <CartProvider>
         <Route exact path="/customer/products" component={ ClientProducts } />
         <Route path="/customer/checkout" component={ CustomerCheckout } />
       </CartProvider>
-      <Route path="/seller/orders" component={ SellerOrders } />
+      <UsersProvider>
+        <Route exact path="/admin/manage" component={ AdmPage } />
+      </UsersProvider>
     </>
   );
 }

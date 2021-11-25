@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import CustomerNavBar from '../components/CustomerNavBar';
-import OrderCard from '../components/OrderCard';
+import NavBar from '../components/CustomerNavBar';
+import SellerOrderCard from '../components/SellerOrderCard';
 
 function SellerOrders() {
-  const [ordersList, setOrdersList] = useState([]);
+  const [sales, setSales] = useState([]);
 
   async function getOrders() {
-    const ordersReq = await axios.get('http://localhost:3001/sales');
-    const orders = ordersReq.data;
-    console.log(orders);
-    setOrdersList(orders);
+    const salesReq = await axios.get('http://localhost:3001/sales/getSales');
+    const allSales = salesReq.data;
+    setSales(allSales);
   }
 
   useEffect(() => {
@@ -18,11 +17,20 @@ function SellerOrders() {
   }, []);
 
   return (
-    <>
-      <CustomerNavBar fixed="top" />
-      { ordersList.map((o) => <div key={ o.id }><OrderCard order={ o } /></div>) }
-    </>
-  );
+    <div>
+      <NavBar />
+      { sales.map((sale, index) => (
+        <SellerOrderCard
+          key={ index }
+          id={ sale.id }
+          status={ sale.status }
+          totalPrice={ sale.total_price }
+          saleDate={ sale.sale_date }
+          deliveryAddress={ sale.delivery_address }
+          deliveryNumber={ sale.delivery_number }
+        />
+      )) }
+    </div>);
 }
 
 export default SellerOrders;

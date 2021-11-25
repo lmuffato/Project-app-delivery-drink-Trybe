@@ -1,30 +1,41 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router';
 
-function OrderCard({ order }) {
+function OrderCard({ id, status, totalPrice, saleDate }) {
+  const history = useHistory();
+
   return (
-    <div data-testid={ `seller_orders__element-order-id-${order.id}` }>
-      <p data-testid={ `seller_orders__element-delivery-status-${order.id}` }>
-        {order.status}
-      </p>
-      <p data-testid={ `seller_orders__element-order-date-${order.id}` }>
-        {order.sale_date}
-      </p>
-      <p data-testid={ `seller_orders__element-card-price-${order.id}` }>
-        {order.total_price}
-      </p>
-      <p data-testid={ `seller_orders__element-card-address-${order.id}` }>
-        {order.delivery_address}
-      </p>
-      <p data-testid={ `seller_orders__element-card-address-${order.id}` }>
-        {order.delivery_number}
-      </p>
-    </div>
+    <button
+      type="button"
+      onClick={ () => history.push(`/customer/orders/${id}`) }
+    >
+      <div
+        data-testid={ `customer_orders__element-order-id-${id}` }
+      >
+        { id }
+      </div>
+      <div
+        data-testid={ `customer_orders__element-delivery-status-${id}` }
+      >
+        { status }
+      </div>
+      <div
+        data-testid={ `customer_orders__element-card-price-${id}` }
+      >
+        { totalPrice.replace('.', ',') }
+      </div>
+      <div
+        data-testid={ `customer_orders__element-order-date-${id}` }
+      >
+        { saleDate }
+      </div>
+    </button>
   );
 }
 
 OrderCard.propTypes = {
-  order: PropTypes.objectOf(PropTypes.string).isRequired,
-};
+  id: PropTypes.number,
+}.isRequired;
 
 export default OrderCard;

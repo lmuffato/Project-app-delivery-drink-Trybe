@@ -21,7 +21,15 @@ function Login() {
         token,
       };
       localStorage.setItem('user', JSON.stringify(localStrg));
-      history.push('/customer/products');
+      if (user.role === 'customer') {
+        history.push('/customer/products');
+      }
+      if (user.role === 'seller') {
+        history.push('/seller/orders');
+      }
+      if (user.role === 'administrator') {
+        history.push('/admin/manage');
+      }
     }
   }
 
@@ -61,6 +69,17 @@ function Login() {
     setHideWarning(true);
     checkBtn();
   }, [email, password]);
+
+  const isLoged = () => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user) {
+      history.push('/customer/products');
+    }
+  };
+
+  useEffect(() => {
+    isLoged();
+  }, []);
 
   return (
     <>

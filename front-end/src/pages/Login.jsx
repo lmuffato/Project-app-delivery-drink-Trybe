@@ -91,7 +91,7 @@ function Login() {
             onChange={ (e) => setEmail(e.target.value) }
           />
           <Form.Text className="text-muted">
-            Well never share your email with anyone else.
+            We will never share your email with anyone else.
           </Form.Text>
         </Form.Group>
 

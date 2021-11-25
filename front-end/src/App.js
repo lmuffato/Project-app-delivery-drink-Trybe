@@ -11,6 +11,8 @@ import ClientOrderDetailsPage from './pages/ClientOrderDetailsPage';
 import SellerPage from './pages/SellerPage';
 import './App.css';
 import { OrderDetailsProvider } from './context/orderDetailsProvider';
+import SellerOrderDetailsPage from './pages/SellerOrderDetailsPage';
+import { SellerOrderDetailsProvider } from './context/sellerOrderDetailsProvider';
 
 function App() {
   return (
@@ -38,6 +40,14 @@ function App() {
           <OrderDetailsProvider>
             <ClientOrderDetailsPage />
           </OrderDetailsProvider>
+        }
+      />
+      <Route
+        path="/seller/orders/:id"
+        element={
+          <SellerOrderDetailsProvider>
+            <SellerOrderDetailsPage />
+          </SellerOrderDetailsProvider>
         }
       />
       <Route path="/admin/manage" element={ <AdminPage /> } />

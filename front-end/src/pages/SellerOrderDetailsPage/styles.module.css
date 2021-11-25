@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.orderDetailsContainer {
+  border: 1px solid #b1c2be;
+  display: flex;
+  height: 500px;
+  justify-content: center;
+  margin-top: 25px;
+  width: 1150px;
+}

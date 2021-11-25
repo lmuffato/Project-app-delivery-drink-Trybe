@@ -7,28 +7,29 @@ const getAllSale = rescue(async (_req, res) => {
   res.status(status).json(data);
 });
 
-  const createSale = async (req, res) => {
-    const { email } = req.user;
-    
-    const { sellerId, totalPrice, deliveryAddress, deliveryNumber, status, putItem } = req.body;
-    
-    const { statusCode, data } = await saleService
-    .createSale({ sellerId, totalPrice, deliveryAddress, deliveryNumber, status }, email, putItem);
-
-    res.status(statusCode).json(data);
-  };
+const createSale = async (req, res) => {
+  const { email } = req.user;
   
-  const getById = async (req, res) => {
-    const { id } = req.params;
-    const { status, data } = await saleService.getById(id);
-    res.status(status).json(data);
-  };
+  const { sellerId, totalPrice, deliveryAddress, deliveryNumber, status, putItem } = req.body;
+  
+  const { statusCode, data } = await saleService
+  .createSale({ sellerId, totalPrice, deliveryAddress, deliveryNumber, status }, email, putItem);
 
-  const update = async (req, res) => {
-    const { id } = req.params;
-    const { status, data } = await saleService(id);
-    res.status(status).json(data);
-  };
+  res.status(statusCode).json(data);
+};
+  
+const getById = async (req, res) => {
+  const { id } = req.params;
+  const { status, data } = await saleService.getById(id);
+  res.status(status).json(data);
+};
+
+const update = async (req, res) => {
+  const { id } = req.params;
+  const { status } = req.body;
+  const { statusCode, data } = await saleService.update(id, status);
+  res.status(statusCode).json(data);
+};
   
 module.exports = {
   getAllSale,

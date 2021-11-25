@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 // import { format } from 'date-fns';
+import updateStatusSale from '../../services/UpdateSale/updateStatusSale';
 import styles from './styles.module.css';
 import { useOrderDetails } from '../../context/orderDetailsProvider';
 import formatDate from '../../utils/formatDate';
@@ -8,13 +9,17 @@ import replaceDotToComma from '../../services/productPages/replaceDotToComa';
 
 export default function OrderDetails({ dataTestIds }) {
   const [disabledButton, setDisableButton] = useState(false);
-  const { sale, seller, products } = useOrderDetails();
+  const { sale, setSale, seller, products } = useOrderDetails();
 
   useEffect(() => {
-    if (sale.status !== 'Em Trânsito') {
+    if (sale.status !== 'Em Trânsito' && sale.status) {
       setDisableButton(true);
     }
   }, [sale.status]);
+
+  const handleDelivered = (myStatus) => {
+    updateStatusSale(sale.id, setSale, myStatus);
+  };
 
   return (
     <main className={ styles.container }>
@@ -38,6 +43,7 @@ export default function OrderDetails({ dataTestIds }) {
         <button
           disabled={ disabledButton }
           data-testid={ dataTestIds['47'] }
+          onClick={ () => handleDelivered('Entregue') }
           type="button"
         >
           marcar como entregue

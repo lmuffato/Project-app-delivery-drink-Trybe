@@ -8,12 +8,13 @@ export default function NavBar(props) {
   const location = history.location.pathname.split('/');
 
   const handleRedirect = (event) => {
-    location[location.length - 1] = event.target.value;
-    history.push(location.join('/'));
+    const { value } = event.target;
+    const newLocation = `/${location[1]}/${value}`;
+    history.push(newLocation);
   };
 
   const logOut = () => {
-    localStorage.removeItem('user');
+    localStorage.clear();
     history.push('/login');
   };
 

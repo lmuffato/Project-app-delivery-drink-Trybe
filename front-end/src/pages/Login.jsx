@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
@@ -11,6 +11,7 @@ export default function Login() {
   const url = 'http://localhost:3001';
   const dispatch = useDispatch();
   const history = useHistory();
+  const userLocal = JSON.parse(localStorage.getItem('user'));
 
   const validations = () => {
     const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
@@ -37,12 +38,22 @@ export default function Login() {
     return userRole;
   };
 
-  const handleLogin = async () => {
-    const userRole = await makeLogin();
+  const redirect = (userRole) => {
     if (userRole === 'customer') history.push('/customer/products');
     if (userRole === 'administrator') history.push('/admin/manage');
     if (userRole === 'seller') history.push('/seller/orders');
   };
+
+  const handleLogin = async () => {
+    const userRole = await makeLogin();
+    redirect(userRole);
+  };
+
+  useEffect(() => {
+    if (userLocal) {
+      redirect(userLocal.role);
+    }
+  }, []);
 
   return (
     <main

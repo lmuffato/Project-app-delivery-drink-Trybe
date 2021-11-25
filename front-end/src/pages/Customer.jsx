@@ -4,6 +4,8 @@ import { useHistory } from 'react-router-dom';
 import Checkout from '../components/Checkout';
 import NavBar from '../components/NavBar';
 import ProductList from '../components/ProductList';
+import SaleDetail from '../components/SaleDetail';
+import UserOrders from '../components/UserOrders';
 
 export default function Customer() {
   const buttonsList = [
@@ -24,6 +26,8 @@ export default function Customer() {
   const [totalCart, setTotalCart] = useState(0);
   const [isVisible, setIsVisible] = useState('visible');
   const [disabled, setDisabled] = useState(false);
+
+  // if (!user) history.push('/login');
 
   useEffect(() => {
     if (shoppingCart.length > 0) {
@@ -47,17 +51,24 @@ export default function Customer() {
     }
   }, [location]);
 
-  if (!user) history.push('/login');
+  const renderComponent = (url) => {
+    switch (url) {
+    case '/customer/products':
+      return (<ProductList token={ user.token } />);
+    case '/customer/orders':
+      return (<UserOrders token={ user.token } />);
+    case '/customer/checkout':
+      return (<Checkout totalCart={ totalCart } />);
+    default:
+      return (<SaleDetail token={ user.token } />);
+    }
+  };
 
   return (
     <div className="w-full h-full bg-gray-500">
       <NavBar buttonsList={ buttonsList } clientName={ username } />
       <div className="flex content-center">
-        {
-          location === '/customer/products'
-            ? <ProductList token={ user.token } />
-            : <Checkout totalCart={ totalCart } />
-        }
+        { renderComponent(location) }
         <button
           data-testid="customer_products__button-cart"
           type="button"

@@ -42,11 +42,13 @@ const ProductsPage = () => {
             />
           ))}
         </div>
-        {totalValue > 0 && (
+        {totalValue >= 0 && (
           <button
             type="button"
             className="cartButton"
             onClick={ handleClickCart }
+            data-testid="customer_products__button-cart"
+            disabled={ totalValue === 0 }
           >
             Ver carrinho:
             R$

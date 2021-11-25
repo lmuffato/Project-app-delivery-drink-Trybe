@@ -4,14 +4,14 @@ table {
 }
 
 th {
-  color: rgb(243, 243, 243);
   background: rgb(24, 24, 24);
+  color: rgb(243, 243, 243);
   text-align: left;
 }
 
  td {
+  background: rgb(255, 255, 255);
   border-radius: 5px;
   color: rgb(24, 24, 24);
-  background: rgb(255, 255, 255);
   padding: 1rem 2rem;
 }

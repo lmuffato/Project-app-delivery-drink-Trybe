@@ -1,5 +1,6 @@
 import React from 'react';
 import CheckoutTable from '../../components/CheckoutTable';
+import DeliveryDetails from '../../components/DeliveryDetails';
 import MenuCostumer from '../../components/MenuCustomer';
 import { useCart } from '../../hooks/useCart';
 import './style.css';
@@ -18,9 +19,10 @@ function CheckoutPage() {
         <span
           data-testid="customer_checkout__element-order-total-price"
         >
-          {totalValue}
+          {totalValue.toFixed(2).replace('.', ',')}
         </span>
       </div>
+      <DeliveryDetails />
     </section>
   );
 }

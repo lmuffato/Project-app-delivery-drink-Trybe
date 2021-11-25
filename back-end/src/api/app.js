@@ -34,6 +34,8 @@ app.route('/orders')
   .post(validateToken, saleController.registerSale)
   .get(validateToken, saleController.getAllOrders);
 
+app.get('/sellers', validateToken, userController.findAllSellers);
+
 app.put('/orders/:id', validateToken, validateUpdateOrder, saleController.updateOrder);
 
 app.get('/orders/customerId', validateToken, saleController.getOrdersByUserId);

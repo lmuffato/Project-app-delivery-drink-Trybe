@@ -10,7 +10,7 @@ const validateToken = (req, res, next) => {
 
   if (!authorization) return res.status(401).json({ data: MISSING_AUTH_TOKEN });
   try {
-    const auth = authorization.split(' ')[1];
+    const auth = authorization.split(' ').length > 1 ? authorization.split(' ')[1] : authorization;
     const token = jwt.verify(auth, secret);
     
     if (!token) {

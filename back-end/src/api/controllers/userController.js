@@ -47,10 +47,17 @@ const deleteUser = async (req, res) => {
   return res.status(status).json(data);
 };
 
+const findAllSellers = async (_req, res) => {
+  const { status, data } = await userService.findAllSellers();
+
+  res.status(status).json(data);
+};
+
 module.exports = {
   login,
   createUser,
   findAllUsers,
   createAdmin,
   deleteUser,
+  findAllSellers,
 };

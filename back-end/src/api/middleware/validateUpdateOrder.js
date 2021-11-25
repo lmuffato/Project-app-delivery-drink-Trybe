@@ -1,8 +1,8 @@
-const { Sales } = require('../../database/models');
+const { sales } = require('../../database/models');
 const { ORDERS_NOT_FOUND, ORDER_STATUS_NOT_AUTHORIZED } = require('../messages/errorMessages');
 
 const findOrderById = async (id) => {
-  const order = await Sales.findByPk(id);
+  const order = await sales.findByPk(id);
 
   if (!order) return null;
 

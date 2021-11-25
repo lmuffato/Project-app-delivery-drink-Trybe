@@ -15,10 +15,8 @@ const testIdSubTotal = 'customer_checkout__element-order-table-sub-total-';
 const testIdTotal = 'customer_checkout__element-order-total-price';
 
 export default function Table() {
-  // const [itensList, setItensList] = useState([]);
   const { orderItensList } = useContext(NewOrderContext);
   const { totalPrice, setTotalPrice } = useContext(NewOrderContext);
-  // const [isLoading, setIsLoading] = useState(false);
 
   const roundValue = ((value) => {
     const newValue = Math.round((value) * 100) / 100;

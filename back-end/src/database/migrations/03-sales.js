@@ -22,18 +22,18 @@ module.exports = {
         field: 'user_id'
       },
 
-      sellerId: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: "users",
-          key: "id",
-        },
-        onUpdate: "CASCADE",
-        onDelete: "CASCADE",
-        foreignKey: true,
-        field: 'seller_id'
-      },
+      // sellerId: {
+      //   type: Sequelize.INTEGER,
+      //   allowNull: false,
+      //   references: {
+      //     model: "users",
+      //     key: "id",
+      //   },
+      //   onUpdate: "CASCADE",
+      //   onDelete: "CASCADE",
+      //   foreignKey: true,
+      //   field: 'seller_id'
+      // },
 
       totalPrice: {
         type: Sequelize.DECIMAL(9,2),

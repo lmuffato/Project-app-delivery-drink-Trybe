@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom'; // 1
 import React, { useEffect, useState, useContext } from 'react';
 import Navbar from '../Components/NavBar';
 import { getOrderById } from '../services/endpointsAPI';
@@ -12,7 +12,7 @@ export default function OrderDetails() {
   // const { setItensList } = useContext(NewOrderContext);
   const { orderSale, setOrderSale } = useContext(NewOrderContext);
   const { orderItensList, setOrderItensList } = useContext(NewOrderContext);
-  const params = useParams();
+  const params = useParams(); // 2
 
   const printUrl = () => {
     // console.log(params);

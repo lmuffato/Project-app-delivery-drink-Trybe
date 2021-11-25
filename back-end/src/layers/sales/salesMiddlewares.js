@@ -47,11 +47,11 @@ const deleteById = async (req, res) => {
 const createNew = async (req, res) => {
   try {
     const {
-      userId, sallerId, totalPrice, deliveryAddress, deliveryNumber, status,
+      userId, totalPrice, deliveryAddress, deliveryNumber, status,
     } = req.body;
     const obj = {
       userId,
-      sallerId,
+      // sallerId,
       totalPrice,
       deliveryAddress,
       deliveryNumber,

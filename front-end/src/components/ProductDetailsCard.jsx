@@ -37,7 +37,7 @@ function ProductDetailsCard(props) {
       </div>
       <table>
         <tr>
-          <th>Item</th> 
+          <th>Item</th>
           <th>Descrição</th>
           <th>Quantidade</th>
           <th>Valor Unitário</th>

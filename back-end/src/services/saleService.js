@@ -19,8 +19,10 @@ const checkRoleMatch = async (entityId, role) => {
   return dataValues.role === role;
 };
 
-const createNewSaleOnDatabase = async (user, sellerId, total, delivery) => {
+const createNewSaleOnDatabase = async (user, data) => {
+  const { sellerId, total, delivery } = data;
   const { deliveryAddress, deliveryNumber } = delivery;
+
   try {
     const { dataValues: { id } } = await Sale.create({
       userId: user.id,
@@ -39,12 +41,12 @@ const createNewSaleOnDatabase = async (user, sellerId, total, delivery) => {
 
 const postSale = async (data, user) => {
   const transaction = await sequelize.transaction();
-  console.log(data);
+
   try {
-    const { delivery, shoppingCart, total, sellerId } = data;
+    const { shoppingCart } = data;
     const arrProducts = Object.entries(shoppingCart);
 
-    const id = await createNewSaleOnDatabase(user, sellerId, total, delivery);
+    const id = await createNewSaleOnDatabase(user, data);
 
     Promise.all(arrProducts.map((currProduct) => SaleProduct.create(
       { saleId: id, productId: currProduct[0], quantity: currProduct[1] },

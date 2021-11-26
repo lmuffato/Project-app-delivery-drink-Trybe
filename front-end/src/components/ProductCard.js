@@ -13,10 +13,11 @@ function ProductCard({ product }) {
 
   const addProduct = () => {
     setCartItem({
-      id,
+      productId: id,
       name,
       quantity: cartItem ? cartItem.quantity + 1 : 1,
-      totalPrice: cartItem
+      unitPrice: price,
+      subTotal: cartItem
         ? formatPrice((cartItem.quantity + 1) * Number(price))
         : price,
     });
@@ -25,7 +26,7 @@ function ProductCard({ product }) {
       setCartItem({
         ...cartStorage[id],
         quantity: cartStorage[id].quantity + 1,
-        totalPrice: formatPrice((cartStorage[id].quantity + 1) * Number(price)),
+        subTotal: formatPrice((cartStorage[id].quantity + 1) * Number(price)),
       });
     }
     setQuantity(quantity + 1);
@@ -36,7 +37,7 @@ function ProductCard({ product }) {
       setCartItem({
         ...cartItem,
         quantity: cartItem.quantity - 1,
-        totalPrice: formatPrice(Number(cartItem.totalPrice) - Number(price)),
+        subTotal: formatPrice(Number(cartItem.subTotal) - Number(price)),
       });
       setQuantity(quantity - 1);
     }
@@ -50,10 +51,11 @@ function ProductCard({ product }) {
 
   const insertManuallyQuantity = ({ target: { value } }) => {
     setCartItem({
-      id,
+      productId: id,
       name,
       quantity: Number(value),
-      totalPrice: formatPrice(Number(value) * Number(price)),
+      unitPrice: price,
+      subTotal: formatPrice(Number(value) * Number(price)),
     });
 
     setQuantity(value);

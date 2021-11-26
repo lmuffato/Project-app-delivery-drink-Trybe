@@ -5,6 +5,9 @@ function SaleCard({ sale }) {
   const { id, status } = sale;
   const saleDate = sale.sale_date;
 
+  console.log(sale);
+  console.log(sale.sale_date);
+
   return (
     <div>
       <span
@@ -13,11 +16,11 @@ function SaleCard({ sale }) {
         { `Pedido ${id}` }
       </span>
 
-      <p data-testid={ `customer_products__element-card-title-${id}` }>
+      <p data-testid={ `customer_products__element-order-date-${id}` }>
         { status }
       </p>
 
-      <p data-testid={ `customer_products__element-card-title-${id}` }>
+      <p data-testid={ `customer_products__element-order-date-${id}` }>
         { saleDate }
       </p>
     </div>

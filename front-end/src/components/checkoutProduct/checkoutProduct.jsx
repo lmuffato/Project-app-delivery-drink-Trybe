@@ -7,9 +7,9 @@ export default function CheckoutProduct({ index, id, name, qtd, price }) {
   const newPrice = (price / qtd).toFixed(2).toString().replace(/\./g, ',');
   const subtotal = (price).toString().replace(/\./g, ',');
   const { aux, setAux } = useContext(CheckoutContext);
-
+  
   function deleteItem(idx) {
-    const sales = aux.filter((item) => item.productId !== idx);
+    const sales = aux.filter((item) => item.product_id !== idx);
     setAux(sales);
   }
 

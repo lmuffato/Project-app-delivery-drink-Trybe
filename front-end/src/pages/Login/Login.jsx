@@ -4,7 +4,6 @@ import Alert from 'react-bootstrap/Alert';
 import { loginApi } from '../../API/dataBaseCall';
 import { LoginContainer, UserInput } from './loginElements';
 import logo from '../../images/Beer-icon.png';
-import checkUser from './localStorage';
 
 export default function Login() {
   const history = useHistory();
@@ -47,12 +46,12 @@ export default function Login() {
     .catch(setErrorMessage);
 
   useEffect(() => {
-    const magicNumber = 1000;
+    const ONE_SECOND = 1000;
     const logged = checkUser();
     if (logged) {
       switch (logged.role.toLowerCase()) {
       default:
-        setTimeout(() => history.push('/customer/products'), magicNumber);
+        setTimeout(() => history.push('/customer/products'), ONE_SECOND);
 
         break;
       }

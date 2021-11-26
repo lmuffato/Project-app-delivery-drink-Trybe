@@ -73,9 +73,9 @@ export default function CheckoutComprador() {
           marginLeft: '30px',
           marginRight: '30px' } }
       >
-        {aux.map(({ productId, name, price, quantity }, i) => (
+        {aux.map(({ product_id, name, price, quantity }, i) => (
           <CheckoutProduct
-            id={ productId }
+            id={ product_id }
             name={ name }
             price={ price }
             qtd={ quantity }

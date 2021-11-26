@@ -11,24 +11,8 @@ import VendaEspecífica from '../pages/VendaEspecífica';
 import TodasAsVendas from '../pages/TodasAsVendas';
 import Admin from '../pages/Admin';
 
-// const pathway = {
-//   login: '/login',
-//   customer: '/customer/products',
-//   administrator: '/admin/manage',
-//   seller: '/seller/orders',
-// };
 
 export default function Routes() {
-  // function rightRedirect() {
-  //   const user = localStorage.getItem('user');
-
-  //   if (user) {
-  //     console.log(user);
-  //     const roleParse = JSON.parse(user).role;
-  //     return (<Redirect to={ pathway[roleParse] } />);
-  //   }
-  //   return (<Redirect to="/login" />);
-  // }
 
   return (
     <Switch>

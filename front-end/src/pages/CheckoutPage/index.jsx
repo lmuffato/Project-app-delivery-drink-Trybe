@@ -99,8 +99,8 @@ export default function CheckoutPage() {
         </div>
       </div>
 
-      <div>
-        <h2> Detalhes e Endereço para Entrega</h2>
+      <div className={ styles.container }>
+        <h2 className={ styles.flexstart }> Detalhes e Endereço para Entrega</h2>
         <CheckoutForm />
       </div>
     </div>

@@ -14,7 +14,7 @@ const DATA_ITEM_P = 'customer_order_details__element-order-table-sub-total-';
 const DATA_ITEM_TP = 'customer_order_details__element-order-total-price-';
 
 function OrderDetails() {
-  const { get, products, total } = useContext(Context);
+  const { get, products } = useContext(Context);
   const id = useLocation().pathname.split('/');
   const { length } = id;
   const [order, setOrder] = useState();
@@ -71,33 +71,32 @@ function OrderDetails() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            {currProducts && currProducts.map((product, index) => (
-              <>
-                <td
-                  data-testid={ `${DATA_ITEM_N}${index}` }
-                  key={ product.productId.name }
-                >
-                  {index + 1}
-                </td>
-                <td data-testid={ `${DATA_ITEM_D}${index}` }>
-                  {product.productId.name}
-                </td>
-                <td data-testid={ `${DATA_ITEM_Q}${index}` }>{product.quantity}</td>
-                <td>
-                  {product.productId.price}
-                </td>
-                <td
-                  data-testid={ `${DATA_ITEM_P}${index}` }
-                >
-                  {Number(product.quantity) * Number(product.productId.price) }
-                </td>
-              </>
-            ))}
-          </tr>
+          {currProducts && currProducts.map((product, index) => (
+            <tr key={ product.productId.name }>
+              <td
+                data-testid={ `${DATA_ITEM_N}${index}` }
+              >
+                {index + 1}
+              </td>
+              <td data-testid={ `${DATA_ITEM_D}${product.saleId}` }>
+                {product.productId.name}
+              </td>
+              <td data-testid={ `${DATA_ITEM_Q}${product.saleId}` }>
+                {product.quantity}
+              </td>
+              <td data-testid={ `${DATA_ITEM_P}${product.saleId}` }>
+                {product.price}
+              </td>
+              <td
+                data-testid={ `${DATA_ITEM_TP}${order.id}` }
+              >
+                {Number(product.quantity) * Number(product.productId.price) }
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
-      <h1 data-testid={ `${DATA_ITEM_TP}${index}` }>{total}</h1>
+      <h1>{order.totalPrice}</h1>
 
     </div>
   );

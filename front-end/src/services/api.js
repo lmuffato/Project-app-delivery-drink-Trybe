@@ -37,6 +37,15 @@ export default {
     });
     return data;
   },
+  changeOrderStatus: async (statusOrder, id, token) => {
+    const { data } = await api.put(`/sellers/orders/${id}`, {
+      headers: {
+        Authorization: token,
+      },
+      statusOrder,
+    });
+    return data;
+  },
   getSellers: async () => {
     const { data } = await api.get('/sellers');
     return data;

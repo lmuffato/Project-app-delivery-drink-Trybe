@@ -12,10 +12,22 @@ const MenuCostumer = () => {
     .name[0].toUpperCase());
   const [pathname] = React.useState(history.location.pathname);
 
+  const { role } = JSON.parse(localStorage.getItem('user'));
+
   const handleLogout = () => {
     localStorage.clear();
     history.push('/login');
   };
+
+  const productLink = () => (
+    <Link
+      to="/customer/products"
+      className={ pathname === '/customer/products' ? 'active' : '' }
+      data-testid="customer_products__element-navbar-link-products"
+    >
+      Produtos
+    </Link>
+  );
 
   return (
     <header className="menuCostumer">
@@ -25,16 +37,10 @@ const MenuCostumer = () => {
         <IoMdBeer />
       </h1>
       <div className="linksContainer">
+        { role === 'customer' ? productLink() : null }
         <Link
-          to="/customer/products"
-          className={ pathname === '/customer/products' ? 'active' : '' }
-          data-testid="customer_products__element-navbar-link-products"
-        >
-          Produtos
-        </Link>
-        <Link
-          to="/customer/orders"
-          className={ pathname === '/customer/orders' ? 'active' : '' }
+          to={ `/${role}/orders` }
+          className={ pathname === `/${role}/orders` ? 'active' : '' }
           data-testid="customer_products__element-navbar-link-orders"
         >
           Pedidos

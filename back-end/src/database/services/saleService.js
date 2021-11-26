@@ -3,7 +3,7 @@ const { HTTP_CREATED, HTTP_CONFLICT, HTTP_OK_STATUS, HTTP_NOT_FOUND } = require(
 
 
 async function create(body) {
-  const statusOrder = 'pendente';
+  const statusOrder = 'Pendente';
   
   const { userId, sellerId, products, totalPrice, deliveryAddress, deliveryNumber } = body;
 
@@ -27,9 +27,17 @@ async function getSeller(id) {
   return user;
 }
 
-async function getByUserId(id) {
+async function getByUserId(id, role) {
+  let checkUserId = '';
+
+  if (role === 'customer') {
+    checkUserId = 'user_id';
+  } if (role === 'seller') {
+    checkUserId = 'seller_id';
+  }
+
   const order = await Sale.findAll({
-    where: { user_id: id },
+    where: { [checkUserId]: id },
     include: [
       { model: Product, as:'products', through: { attributes: ['quantity'], as: 'quantityTotal' } },
     ],

@@ -26,6 +26,10 @@ async () => {});
 http GET :3001/users/1
 */
 
+router.get('/order/:id',
+productsMiddlewares.getManyById,
+async () => {});
+
 router.put('/:id',
 productsMiddlewares.updateById,
 async () => {});

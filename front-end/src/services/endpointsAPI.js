@@ -64,8 +64,8 @@ export const getSales = async () => {
   return result.data;
 };
 
-export const getSalesByCustomerId = async (id) => {
-  const result = await api.get('/sales', { id });
+export const getSaleById = async (id) => {
+  const result = await api.get(`/sales/${id}`);
   return result.data;
 };
 

@@ -15,14 +15,14 @@ export default function Rout() {
   return (
     <Switch>
       <Route path="/customer/orders/:id" component={ OrderDetails } />
-      <Route path="/sellers/orders/:id" component={ SellerOrdersDetails } />
+      <Route path="/seller/orders/:id" component={ SellerOrdersDetails } />
       <Route path="/login" component={ Login } />
       <Route path="/register" component={ Register } />
       <Route path="/customer/products" component={ CustomerProducts } />
       <Route path="/customer/checkout" component={ CustomerCheckout } />
       <Route path="/customer/finished" component={ FinishedOrder } />
       <Route path="/customer/orders" component={ CustomerOrder } />
-      <Route path="/sellers/orders" component={ SellerOrders } />
+      <Route path="/seller/orders" component={ SellerOrders } />
       <Route path="/admin/manage" component={ AdminManage } />
       <Route exact path="/"><Redirect to="/login" /></Route>
     </Switch>

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import Navbar from '../Components/NavBar';
 
-import { getSalesByCustomerId } from '../services/endpointsAPI';
+import { getSaleById } from '../services/endpointsAPI';
 
 import userContext from '../context/userContext';
 
@@ -37,7 +37,7 @@ export default function CustomerOrder() {
 
   useEffect(() => {
     setIsLoading(true);
-    getSalesByCustomerId(userData.id).then((resp) => setOrders(resp));
+    getSaleById(userData.id).then((resp) => setOrders(resp));
     setIsLoading(false);
   }, []);
 

@@ -1,5 +1,5 @@
 import React, { useState,
-  // useEffect,
+  useEffect,
 } from 'react';
 import PropTypes from 'prop-types';
 import NewOrderContext from './NewOrderContext';
@@ -35,6 +35,14 @@ function NewOrderProvider({ children }) {
   // useEffect(() => {
   //   console.log(itensList, 'aaaaaaaaaaaaa');
   // }, [itensList]);
+  const [navBarSair, setNavBarSair] = useState(false);
+
+  // localStorage.clear();
+
+  useEffect(() => {
+    localStorage.clear();
+    setItensList([]);
+  }, [navBarSair]);
 
   return (
     <NewOrderContext.Provider
@@ -68,6 +76,8 @@ function NewOrderProvider({ children }) {
         orderSale,
         setOrderSale,
 
+        navBarSair,
+        setNavBarSair,
       } }
     >
       {children}

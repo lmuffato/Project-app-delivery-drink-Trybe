@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Alert from 'react-bootstrap/Alert';
 import HeaderAdmin from '../components/Header/HeaderAdmin';
 import { postNewUser } from '../API/dataBaseCall';
 
@@ -12,6 +13,7 @@ export default function Admin() {
   const [disabled, setDisabled] = useState(true);
   const [role, setRole] = useState('Administrator');
   const [name, setName] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleChange = ({ target }, handle) => {
     const { value } = target;
@@ -37,14 +39,14 @@ export default function Admin() {
     if (pass.length < minPass) return false;
     return true;
   };
-  async function handleRegister() {
-    const newUser = await postNewUser(userName.token, {
+
+  const handleRegister = async () => {
+    await postNewUser(userName.token, {
       name,
       email,
       password: md5(password),
-      role });
-    console.log('📓 ~ file: Admin.jsx ~ line 46 ~ handleRegister ~ newUser', newUser);
-  }
+      role }).catch(setErrorMessage);
+  };
 
   useEffect(() => {
     if (verifyName(name) && verifyPassword(password) && verifyUser(email)) {
@@ -98,6 +100,14 @@ export default function Admin() {
           CADASTRAR
         </button>
       </form>
+      {errorMessage && (
+        <Alert
+          data-testid="admin_manage__element-invalid-register"
+          variant="danger"
+        >
+          {errorMessage.message}
+        </Alert>
+      )}
     </div>
   );
 }

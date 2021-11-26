@@ -13,20 +13,25 @@ const dataTestId74 = 'admin_manage__element-user-table-remove';
 export default function AdminManage() {
   const [isLoading, setIsLoading] = useState(false);
   const [users, setUsers] = useState([]);
-  const loadingTag = <h3>Loading ...</h3>
+  const loadingTag = <h3>Loading ...</h3>;
+
+  const filterRole = (arr) => {
+    const onlyUsers = arr.filter((e) => e.role !== 'administrator');
+    setUsers(onlyUsers);
+  };
 
   useEffect(() => {
     setIsLoading(true);
     getAllUsers()
       .then((resp) => {
-        setUsers(resp);
+        filterRole(resp);
         setIsLoading(false);
       });
   }, []);
 
   const renderTable = () => (
     <table>
-        { console.log(users) }
+      { console.log('users', users) }
       <thead>
         <tr>
           <th>Item</th>
@@ -38,23 +43,19 @@ export default function AdminManage() {
       </thead>
       <tbody>
         {
-          users.map((user, index) => {
-            if (user.role !== 'administrator') {
-              return (
-                <tr key={ index }>
-                  <th data-testid={ `${dataTestId70}-${index + 1}` }>{index + 1}</th>
-                  <th data-testid={ `${dataTestId71}-${index + 1}` }>{ user.name }</th>
-                  <th data-testid={ `${dataTestId72}-${index + 1}` }>{ user.email }</th>
-                  <th data-testid={ `${dataTestId73}-${index + 1}` }>{ user.role }</th>
-                  <th>
-                    <button type="button" data-testid={ `${dataTestId74}-${index + 1}` }>
-                      Excluir
-                    </button>
-                  </th>
-                </tr>
-              );
-            }
-          })
+          users.map((user, index) => (
+            <tr key={ index }>
+              <th data-testid={ `${dataTestId70}-${index + 1}` }>{index + 1}</th>
+              <th data-testid={ `${dataTestId71}-${index + 1}` }>{ user.name }</th>
+              <th data-testid={ `${dataTestId72}-${index + 1}` }>{ user.email }</th>
+              <th data-testid={ `${dataTestId73}-${index + 1}` }>{ user.role }</th>
+              <th>
+                <button type="button" data-testid={ `${dataTestId74}-${index + 1}` }>
+                  Excluir
+                </button>
+              </th>
+            </tr>
+          ))
         }
       </tbody>
     </table>

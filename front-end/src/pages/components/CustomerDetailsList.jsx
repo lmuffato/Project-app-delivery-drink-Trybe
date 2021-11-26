@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import ContextDeliveryApp from '../../store/ContextDeliveryApp';
 import fetchSaleDetails from '../../services/fetchSaleDetails';
-import fetchSellerSale from '../../services/fetchSellerSales';
+import fetchCustomerSales from '../../services/fetchCustomerSales';
 import OrderHeaderCustomer from './OrderHeaderCustomer';
 import fetchProducts from '../../services/fetchProducts';
 import CustomerDetailsCard from './CustomerDetailsCard';
@@ -16,6 +16,7 @@ export default function CustomerDetailsList({ id }) {
     const sellerId = user.id;
     const { token } = user;
     const details = await fetchSaleDetails(token, id, sellerId);
+    //  console.log(details);
     const { products } = await fetchProducts(token);
     const list = details.data.saleDetails.salesProduct;
     const orderProducts = list ? list.map((item) => {
@@ -28,13 +29,14 @@ export default function CustomerDetailsList({ id }) {
       return item;
     }) : console.log(list);
     setSaleDetails(orderProducts);
+    //   console.log(orderProducts);
   };
 
   const getSale = async () => {
     const { token, id: sellerId } = user;
-    const salesBySeller = await fetchSellerSale(token, sellerId);
+    const salesBySeller = await fetchCustomerSales(token, sellerId);
     console.log(salesBySeller);
-    const saleById = salesBySeller.data.sellerSales.filter((s) => {
+    const saleById = salesBySeller.data.customerSales.filter((s) => {
       console.log(s.id, id);
       return s.id.toString() === id;
     });
@@ -43,7 +45,6 @@ export default function CustomerDetailsList({ id }) {
 
   useEffect(() => {
     getSale();
-    console.log(getSale);
     getSaleDetails();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

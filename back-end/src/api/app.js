@@ -56,6 +56,8 @@ app.post('/addUser',
 app.post('/sellerSale', validateToken, saleControllers.getSellerSales);
 
 app.post('/saleDetails', validateToken, saleControllers.getSaleDetails);
+app.post('/salesUserSellers', validateToken, saleControllers.getSalesUserSellers);
+
 app.patch('/saleUpdate', validateToken, saleControllers.update);
 
 module.exports = app;

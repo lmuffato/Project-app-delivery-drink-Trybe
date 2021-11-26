@@ -30,6 +30,12 @@ const getSaleDetails = async (req, res) => {
   return res.status(response.status).json(response.message);
 };
 
+const getSalesUserSellers = async (req, res) => {
+  const { id } = req.body;
+  const response = await saleServices.getSalesUserSellers(id);
+  return res.status(response.status).json(response.message);
+};
+
 const update = async (req, res) => {
   const { updateSale } = req.body;
   const response = await saleServices.update(updateSale);
@@ -42,5 +48,6 @@ module.exports = {
   getSellerSales,
   getSaleDetails,
   update,
+  getSalesUserSellers,
   getSaleDone,
 };

@@ -41,7 +41,7 @@ app.post('/register', user.createUser);
 app.get('/users', user.listUsers);
 app.post('/register/admin', validateJwtAdmin, user.createUser);
 app.post('/validToken', validateToken);
-app.get('/orderDetails/:id', sale.getSaleById);
+app.get('/orderDetails/:id', sale.getSaleDetails);
 app.post('/sales', validateJWT, sale.addNew);
 app.get('/sales', getIdByToken, sale.getSale);
 app.use('/images', express.static(path.join(__dirname, '..', '..', '/public')));

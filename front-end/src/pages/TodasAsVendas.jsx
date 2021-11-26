@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 
 import Card from '../components/salesCard';
 import Header from '../components/Header/Header';
-import { getSaleById } from '../API/dataBaseCall';
 
 const axios = require('axios').default;
 

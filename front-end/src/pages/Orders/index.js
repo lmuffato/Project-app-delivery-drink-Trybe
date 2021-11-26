@@ -64,7 +64,7 @@ function Orders() {
               <p
                 data-testid={ `customer_orders__element-card-price-${id}` }
               >
-                { totalPrice }
+                { totalPrice.replace('.', ',') }
               </p>
               {role === 'seller' && (
                 <p data-testid={ `seller_orders__element-card-address-${id}` }>

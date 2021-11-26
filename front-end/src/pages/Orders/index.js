@@ -25,7 +25,13 @@ function Orders() {
     const { role } = JSON.parse(localStorage.getItem('user'));
 
     return salesOrder.map((order) => {
-      const { id, status, sale_date: saleDate, total_price: totalPrice } = order;
+      const {
+        id,
+        status,
+        sale_date: saleDate,
+        total_price: totalPrice,
+        delivery_address: deliveryAdress,
+      } = order;
 
       const statusOrder = status === 'Em Trânsito' ? 'Em-Transito' : status;
 
@@ -38,11 +44,10 @@ function Orders() {
           <div
             className="order-container"
             key={ id }
-            data-testid={ `${role}_orders__element-order-id-${id}` }
           >
             <div className="info-order">
               <p>Pedido</p>
-              <p>{id}</p>
+              <p data-testid={ `${role}_orders__element-order-id-${id}` }>{id}</p>
             </div>
             <div
               className={ `status-order-${statusOrder}` }
@@ -57,10 +62,15 @@ function Orders() {
                 {moment(saleDate).format('DD/MM/yyyy')}
               </p>
               <p
-                data-testid={ `seller_orders__element-card-address-${id}` }
+                data-testid={ `customer_orders__element-card-price-${id}` }
               >
-                {totalPrice}
+                { totalPrice.replace('.', ',') }
               </p>
+              {role === 'seller' && (
+                <p data-testid={ `seller_orders__element-card-address-${id}` }>
+                  { deliveryAdress }
+                </p>
+              )}
             </div>
           </div>
         </Link>

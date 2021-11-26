@@ -22,7 +22,6 @@ function LoginPage() {
       const passHash = MD5(password).toString();
       const response = await api.getLogin(email, passHash);
       localStorage.setItem('user', JSON.stringify(response));
-      console.log('Login', response);
 
       if (response.role === 'customer') history.push('/customer/products');
       if (response.role === 'seller') history.push('/seller/orders');
@@ -30,6 +29,14 @@ function LoginPage() {
       setError('Login inválido');
     }
   };
+
+  React.useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user) {
+      if (user.role === 'customer') history.push('/customer/products');
+      if (user.role === 'seller') history.push('/seller/orders');
+    }
+  }, []);
 
   return (
     <section className="login-page">

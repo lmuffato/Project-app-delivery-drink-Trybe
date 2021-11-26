@@ -38,6 +38,7 @@ function DeliveryDetails() {
     const { token } = JSON.parse(localStorage.getItem('user'));
     const obj = formatOrderObj();
     const response = await api.postSale(obj, token);
+    console.log(response);
     history.push(`/customer/orders/${response}`);
   };
 

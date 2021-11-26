@@ -10,6 +10,7 @@ import CustomerCheckout from './pages/CustomerCheckout';
 import CustomerDetails from './pages/CustomerDetails';
 import CustomerOrders from './pages/CustomerOrders';
 import SellerOrders from './pages/SellerOrders';
+import SellerDetails from './pages/SellerDetails';
 
 function App() {
   return (
@@ -32,7 +33,10 @@ function App() {
 
         <Route path="seller" element={ <AppContainer /> }>
           <Route index element={ <Navigate to="orders" /> } />
-          <Route path="orders" element={ <SellerOrders /> } />
+          <Route path="orders">
+            <Route index element={ <SellerOrders /> } />
+            <Route path=":id" element={ <SellerDetails /> } />
+          </Route>
         </Route>
 
         <Route path="admin" element={ <AppContainer /> }>

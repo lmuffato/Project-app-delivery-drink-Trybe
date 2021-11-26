@@ -1,39 +1,19 @@
-import React, {
-  useEffect,
-  // useState,
-  useContext,
-} from 'react';
-import TableHeader from './TableHeader';
+import React, { useContext } from 'react';
 import NewOrderContext from '../../context/NewOrderContext';
 
-const testIdNumber = 'customer_checkout__element-order-table-item-number-';
-const testIdName = 'customer_checkout__element-order-table-name-';
-const testIdQuantity = 'cutomer_checkout__element-order-table-quantity-';
-const testIdUnitPrice = 'customer_checkout__element-order-table-unit-price-';
-const testIdSubTotal = 'customer_checkout__element-order-table-sub-total-';
-const testIdRemove = 'customer_checkout__element-order-table-remove-';
-const testIdTotal = 'customer_checkout__element-order-total-price';
+const testId22 = 'customer_checkout__element-order-table-item-number-';
+const testId23 = 'customer_checkout__element-order-table-name-';
+const testId24 = 'customer_checkout__element-order-table-quantity-';
+const testId25 = 'customer_checkout__element-order-table-unit-price-';
+const testId26 = 'customer_checkout__element-order-table-sub-total-';
+const testId27 = 'customer_checkout__element-order-table-remove-';
 
 export default function Table() {
-  // const [itensList, setItensList] = useState([]);
   const { itensList, setItensList } = useContext(NewOrderContext);
-  const { totalPrice, setTotalPrice } = useContext(NewOrderContext);
-  // const { itensList, setItensList } = useContext(UserContext);
 
-  const deleteItem = (itemId) => {
-    const newList = itensList.filter((ele) => ele.productId !== Number(itemId));
-    setItensList(newList);
-  };
-
-  const roundValue = (value) => Math.round((value) * 100) / 100;
-
-  const totalSum = () => {
-    const sum = itensList.reduce((acc, ele) => {
-      acc += ele.quantity * ele.price;
-      return acc;
-    }, 0);
-    setTotalPrice(roundValue(sum));
-    return sum;
+  const roundValue = (value) => {
+    const newValue = Math.round((value) * 100) / 100;
+    return newValue.toFixed(2);
   };
 
   const convertValueToBrlShape = (value) => {
@@ -42,50 +22,67 @@ export default function Table() {
     return brlValue;
   };
 
-  useEffect(() => {
-    totalSum();
-    console.log(itensList);
-  }, [itensList]);
+  const deleteItenInTheList = (itemId) => {
+    const newList = itensList.filter((ele) => ele.productId !== Number(itemId));
+    setItensList(newList);
+  };
+
+  const renderColumnsName = () => (
+    <tr>
+      <th>Item</th>
+      <th>Descrição</th>
+      <th>Quantidade</th>
+      <th>Valor Unitário</th>
+      <th>Sub-total</th>
+    </tr>
+  );
+
+  const renderRowsTable = () => {
+    if (itensList.lengh !== 0 || itensList !== undefined) {
+      return (
+        itensList.map((ele, index) => (
+          <tr key={ index }>
+            <td data-testid={ `${testId22}${index}` }>{index + 1}</td>
+            <td data-testid={ `${testId23}${index}` }>{ele.name}</td>
+            <td data-testid={ `${testId24}${index}` }>{ele.quantity}</td>
+            <td
+              data-testid={ `${testId25}${index}` }
+            >
+              { convertValueToBrlShape(roundValue(ele.price)) }
+            </td>
+            <td
+              data-testid={ `${testId26}${index}` }
+            >
+              { convertValueToBrlShape(roundValue(ele.price * ele.quantity)) }
+            </td>
+            <td>
+              <button
+                type="button"
+                data-testid={ `${testId27}${index}` }
+                className={ `${testId27}` }
+                id={ ele.productId }
+                onClick={ (event) => { deleteItenInTheList(event.target.id); } }
+              >
+                Excluir
+              </button>
+            </td>
+          </tr>
+        ))
+      );
+    }
+  };
 
   return (
     <div>
       <h3>Finalizar Pedido</h3>
       <table>
-        <TableHeader />
+        <thead>
+          { renderColumnsName() }
+        </thead>
         <tbody>
-          {
-            itensList.map((ele, index) => (
-              <tr key={ index }>
-                <td data-testid={ `${testIdNumber}${index}` }>{index}</td>
-                <td data-testid={ `${testIdName}${index}` }>{ele.name}</td>
-                <td data-testid={ `${testIdQuantity}${index}` }>{ele.quantity}</td>
-                <td data-testid={ `${testIdUnitPrice}${index}` }>{ele.price}</td>
-                <td
-                  data-testid={ `${testIdSubTotal}${index}` }
-                >
-                  { roundValue(ele.price * ele.quantity) }
-                </td>
-                <td>
-                  <button
-                    type="button"
-                    data-testid={ `${testIdRemove}${index}` }
-                    className={ `${testIdRemove}` }
-                    id={ ele.productId }
-                    onClick={ (event) => { deleteItem(event.target.id); } }
-                  >
-                    Excluir
-                  </button>
-                </td>
-              </tr>
-            ))
-          }
+          { renderRowsTable() }
         </tbody>
       </table>
-      <div
-        data-testid={ `${testIdTotal}` }
-      >
-        { `Total: ${convertValueToBrlShape(totalPrice)}`}
-      </div>
     </div>
   );
 }

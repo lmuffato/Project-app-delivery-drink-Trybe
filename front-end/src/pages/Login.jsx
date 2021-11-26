@@ -31,7 +31,7 @@ export default function Login() {
 
   const checkRole = (login) => {
     const { role } = jwtDecode(login.token);
-    console.log('aaaaaa', role);
+    // console.log('aaaaaa', role);
     if (role === 'seller') {
       return '/seller/orders';
     }

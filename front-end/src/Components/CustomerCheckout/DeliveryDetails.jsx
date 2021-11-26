@@ -1,35 +1,41 @@
-import React, {
-  useEffect,
-  useState,
-  useContext,
-} from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import NewOrderContext from '../../context/NewOrderContext';
-import {
-  getAllUsersSallers,
-  // postSales,
+import UserContext from '../../context/userContext';
+import { getAllUsersSallers,
   createInSalesAndSalesProducts,
 } from '../../services/endpointsAPI';
 
 const selectSeller = 'customer_checkout__select-seller';
-const inputAddress = 'ustomer_checkout__input-address';
+const inputAddress = 'customer_checkout__input-address';
 const inputAddressNumber = 'customer_checkout__input-addressNumber';
 const buttonSubmitOrder = 'customer_checkout__button-submit-order';
 
 export default function DeliveryDetails() {
+  const history = useHistory();
+  const { userData } = useContext(UserContext);
   const { userId } = useContext(NewOrderContext);
   const { sellersList, setSellersList } = useContext(NewOrderContext);
   const { sellerId, setSellerId } = useContext(NewOrderContext);
   const { deliveryAddress, setDeliveryAddress } = useContext(NewOrderContext);
   const { deliveryNumber, setDeliveryNumber } = useContext(NewOrderContext);
-  const { totalPrice } = useContext(NewOrderContext);
+  const { totalPrice,
+    setTotalPrice,
+  } = useContext(NewOrderContext);
   const [isLoading, setIsLoading] = useState(false);
-  const { itensList } = useContext(NewOrderContext);
+  const { itensList, setItensList } = useContext(NewOrderContext);
 
   const getSellersList = async () => {
     const arr = await getAllUsersSallers();
     setSellersList(arr);
-    // setSellerId(arr[0].id);
+  };
+
+  const clearGlobalStates = () => {
+    setDeliveryAddress('');
+    setDeliveryNumber('');
+    setTotalPrice('');
+    setSellerId('');
+    setItensList([]);
   };
 
   useEffect(() => {
@@ -48,6 +54,36 @@ export default function DeliveryDetails() {
     defaultSeller();
   }, [sellersList]);
 
+  const roundValue = (value) => {
+    const newValue = Math.round((value) * 100) / 100;
+    return newValue.toFixed(2);
+  };
+
+  const redirectToPage = (id) => {
+    const url = `/customer/orders/${id}`;
+    history.push(url);
+  };
+
+  const createNewSale = async () => {
+    const { token } = userData;
+    const sale = {
+      userId,
+      totalPrice: roundValue(totalPrice),
+      sellerId,
+      deliveryAddress,
+      deliveryNumber,
+      status: 'Pendente',
+    };
+    const saleProductsArray = { saleProductsArray: itensList };
+    const saleId = await createInSalesAndSalesProducts(token, sale, saleProductsArray);
+    clearGlobalStates();
+    redirectToPage(saleId);
+  };
+
+  useEffect(() => {
+    console.log(sellerId);
+  }, [sellerId]);
+
   const renderSellersList = () => {
     if (isLoading === true) { return null; }
     const list = sellersList.map((ele, index) => (
@@ -55,91 +91,85 @@ export default function DeliveryDetails() {
     return list;
   };
 
-  const roundValue = (value) => {
-    const newValue = Math.round((value) * 100) / 100;
-    return newValue;
-  };
+  const renderInputSelecSellerOptions = () => (
+    <span>
+      <label htmlFor={ `${selectSeller}` }>
+        <p>P. Vendedora Responsável</p>
+        <select
+          id={ `${selectSeller}` }
+          className={ `${selectSeller}` }
+          data-testid={ `${selectSeller}` }
+          name="SellersList"
+          value={ sellerId }
+          onChange={ (event) => {
+            setSellerId(event.target.value);
+          } }
+        >
+          { renderSellersList() }
+        </select>
+      </label>
+    </span>
+  );
 
-  const createNewSale = async () => {
-    const sale = {
-      userId,
-      totalPrice: roundValue(totalPrice),
-      deliveryAddress,
-      deliveryNumber,
-      status: 'pendente',
-    };
-    const saleProductsArray = { saleProductsArray: itensList };
-    await createInSalesAndSalesProducts(sale, saleProductsArray);
-    // await postSales(obj);
-  };
+  const renderInputAddress = () => (
+    <span>
+      <label htmlFor={ `${inputAddress}` }>
+        <p>Endereço</p>
+        <input
+          data-testid={ `${inputAddress}` }
+          type="text"
+          className={ `${inputAddress}` }
+          id={ `${inputAddress}` }
+          placeholder="Avenida Principa, Centro, Vitória"
+          onChange={ (e) => {
+            setDeliveryAddress(e.target.value); console.log(deliveryAddress);
+          } }
+          required
+        />
+      </label>
+    </span>
+  );
 
-  useEffect(() => {
-    console.log(sellerId);
-  }, [sellerId]);
+  const renderInputAddressNumber = () => (
+    <span>
+      <label htmlFor={ `${inputAddressNumber}` }>
+        <p>Número</p>
+        <input
+          data-testid={ `${inputAddressNumber}` }
+          type="text"
+          className={ `${inputAddressNumber}` }
+          id={ `${inputAddressNumber}` }
+          placeholder="123"
+          onChange={ (e) => {
+            setDeliveryNumber(e.target.value);
+            console.log(deliveryNumber);
+          } }
+          required
+        />
+      </label>
+    </span>
+  );
+
+  const renderButtonFinishOrder = () => (
+    <div>
+      <button
+        type="button"
+        onClick={ createNewSale }
+        className={ `${buttonSubmitOrder}` }
+        data-testid={ `${buttonSubmitOrder}` }
+      >
+        FINALIZAR PEDIDO
+      </button>
+    </div>
+  );
 
   return (
     <div>
-      <span>
-        <h3>Detalhes e Endereço para Entrega</h3>
-        <label htmlFor={ `${selectSeller}` }>
-          <p>P. Vendedora Responsável</p>
-          <select
-            id={ `${selectSeller}` }
-            className={ `${selectSeller}` }
-            data-testid={ `${selectSeller}` }
-            name="SellersList"
-            value={ sellerId.id }
-            onChange={ (event) => {
-              setSellerId(event.target.value);
-            } }
-          >
-            { renderSellersList() }
-          </select>
-        </label>
-      </span>
-      <span>
-        <label htmlFor={ `${inputAddress}` }>
-          <p>Endereço</p>
-          <input
-            data-testid={ `${inputAddress}` }
-            type="text"
-            className={ `${inputAddress}` }
-            id={ `${inputAddress}` }
-            placeholder="Avenida Principa, Centro, Vitória"
-            onChange={ (e) => {
-              setDeliveryAddress(e.target.value); console.log(deliveryAddress);
-            } }
-            required
-          />
-        </label>
-      </span>
-      <span>
-        <label htmlFor={ `${inputAddressNumber}` }>
-          <p>Número</p>
-          <input
-            data-testid={ `${inputAddressNumber}` }
-            type="text"
-            className={ `${inputAddressNumber}` }
-            id={ `${inputAddressNumber}` }
-            placeholder="123"
-            onChange={ (e) => {
-              setDeliveryNumber(e.target.value);
-              console.log(deliveryNumber);
-            } }
-            required
-          />
-        </label>
-      </span>
-      <div>
-        <Link
-          to="/customer/finished"
-          data-testid={ `${buttonSubmitOrder}` }
-          className={ `${buttonSubmitOrder}` }
-          onClick={ createNewSale }
-        >
-          <button type="button">FINALIZAR PEDIDO</button>
-        </Link>
-      </div>
+      <h3>Detalhes e Endereço para Entrega</h3>
+      { renderInputSelecSellerOptions() }
+      { renderInputAddress() }
+      { renderInputAddressNumber() }
+      { renderButtonFinishOrder() }
     </div>
   );
 }

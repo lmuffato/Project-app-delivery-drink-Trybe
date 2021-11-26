@@ -25,6 +25,10 @@ async () => {});
 http GET :3001/users
 */
 
+router.get('/allordersbycustomer',
+salesMiddlewares.getAllOrdersByCustomers,
+async () => {});
+
 router.post('/',
 salesMiddlewares.createNew,
 async () => {});
@@ -47,6 +51,10 @@ req = {
 http POST :3001/users displayName='LucasMuffato' email='lucas@gmail.com' password='lucas123456' image='lucas'
 http POST :3001/users displayName='Lucas' email='lucas' password='lucas' image='lucas'
 */
+
+router.patch('/updatesale/:id',
+salesMiddlewares.updateStatus,
+async () => {});
 
 router.get('/:id',
 salesMiddlewares.getById,

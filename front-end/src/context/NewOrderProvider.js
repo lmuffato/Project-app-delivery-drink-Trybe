@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState,
+  useEffect,
+} from 'react';
 import PropTypes from 'prop-types';
 import NewOrderContext from './NewOrderContext';
 
@@ -27,6 +29,13 @@ function NewOrderProvider({ children }) {
   const [deliveryAddress, setDeliveryAddress] = useState(''); // endereço de entrega
   const [deliveryNumber, setDeliveryNumber] = useState(''); // numero do endereço
   const [totalPrice, setTotalPrice] = useState(''); // valor total do pedido
+  const [orderItensList, setOrderItensList] = useState([]); // detalhe da venda concluída
+  const [orderSale, setOrderSale] = useState({}); // detalhe da venda concluída
+  const [disableBtnCustomer, setDisableBtnCustomer] = useState(true); // detalhe da venda concluída
+
+  // useEffect(() => {
+  //   console.log(itensList, 'aaaaaaaaaaaaa');
+  // }, [itensList]);
   const [navBarSair, setNavBarSair] = useState(false);
 
   // localStorage.clear();
@@ -63,8 +72,17 @@ function NewOrderProvider({ children }) {
         totalPrice, // Tela checkout (valor automático)
         setTotalPrice,
 
+        orderItensList,
+        setOrderItensList,
+        orderSale,
+        setOrderSale,
+
         navBarSair,
         setNavBarSair,
+
+        disableBtnCustomer,
+        setDisableBtnCustomer,
+
       } }
     >
       {children}

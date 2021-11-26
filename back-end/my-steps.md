@@ -1,3 +1,8 @@
+reinicializar o banco de dados:
+npx sequelize db:create
+npx sequelize db:migrate
+npx sequelize db:seed:all
+
 0. Pacotes instalados
 
 Obs.: Pode acontecer de mesmo após fechar a aplicação no terminal, retornar um erro afirmando que a porta 3000 já está em uso. Para resolver isso, basta usar o comando abaixo no terminal:

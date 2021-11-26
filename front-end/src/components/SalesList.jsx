@@ -6,7 +6,7 @@ export default function SalesList() {
   const [sales, setSales] = useState([]);
   useEffect(() => {
     const getSales = async () => {
-      const token = localStorage.getItem('token');
+      const { token } = JSON.parse(localStorage.getItem('user'));
       const path = window.location.href;
       const url = path.includes('seller')
         ? '/seller/sales' : '/user/sales';

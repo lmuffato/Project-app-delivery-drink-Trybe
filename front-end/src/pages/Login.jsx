@@ -23,7 +23,11 @@ function Login() {
       localStorage.setItem('user', JSON.stringify(localStrg));
       if (user.role === 'customer') {
         history.push('/customer/products');
-      } else if (user.role === 'administrator') {
+      }
+      if (user.role === 'seller') {
+        history.push('/seller/orders');
+      }
+      if (user.role === 'administrator') {
         history.push('/admin/manage');
       }
     }
@@ -68,8 +72,11 @@ function Login() {
 
   const isLoged = () => {
     const user = JSON.parse(localStorage.getItem('user'));
-    if (user) {
+    if (!user) return;
+    if (user.role === 'customer') {
       history.push('/customer/products');
+    } else if (user.role === 'seller') {
+      history.push('/seller/orders');
     }
   };
 

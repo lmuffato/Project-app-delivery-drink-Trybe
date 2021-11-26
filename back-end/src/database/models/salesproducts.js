@@ -3,28 +3,31 @@ const salesProduct = (sequelize, DataTypes) => {
     sale_id: {
       primaryKey: true,
       type: DataTypes.INTEGER,
-      references: {
-        model: 'sales',
-        key: 'id',
-      }
+      allowNull: false,
     },
     product_id: {
       primaryKey: true,
       type: DataTypes.INTEGER,
-      references: {
-        model: 'products',
-        key: 'id',
-      }
+      allowNull: false,
     },
     quantity: DataTypes.INTEGER,
+    allowNull: false,
   }, { timestamps: false });
 
-  salesProduct.associate = ({ sale }) => {
-    salesProduct.belongsTo(sale, { foreignKey: 'sale_id', as: 'sale' });
-  };
+  salesProduct.associate = (models) => {
+    models.sale.belongsToMany(models.product, {
+      as: 'products',
+      through: salesProduct,
+      foreignKey: 'sale_Id',
+      otherKey: 'product_Id',
+    });
 
-  salesProduct.associate = ({ product }) => {
-    salesProduct.belongsTo(product, { foreignKey: 'product_id', as: 'product' });
+    models.product.belongsToMany(models.sale, {
+      as: 'sales',
+      through: salesProduct,
+      foreignKey: 'product_Id',
+      otherKey: 'sale_Id',
+    });
   };
 
   return salesProduct;

@@ -1,36 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import moment from 'moment';
 import axios from 'axios';
+import moment from 'moment';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import NavBar from '../components/CustomerNavBar';
 
-function OrdersDetails({ match }) {
+function SellerOrdersDetails({ match }) {
   const [order, setOrder] = useState(null);
   const [orderStatus, setOrderStatus] = useState('');
   const [disableButton, setdisableButton] = useState(true);
+  const [transitButton, setTransitButton] = useState(true);
   const { id } = match.params;
-  const statsDTid = 'customer_order_details__element-order-details-label-delivery-status';
 
   async function getOrder() {
     const request = await axios.get(`http://localhost:3001/sale/${id}`);
     const mySale = request.data;
-    setOrder({ ...mySale });
+    setOrder(mySale);
     setOrderStatus(mySale.status);
   }
-
-  async function buttonStatus() {
-    if (orderStatus !== 'Em Trânsito') {
-      setdisableButton(true);
-    } else {
-      setdisableButton(false);
-    }
-  }
-
-  useEffect(() => {
-    buttonStatus();
-  }, [orderStatus]);
 
   async function setSaleStatus(status) {
     await axios.patch(`http://localhost:3001/sale/${id}`, { status });
@@ -40,6 +28,27 @@ function OrdersDetails({ match }) {
   useEffect(() => {
     getOrder();
   }, []);
+
+  async function prepareStatus() {
+    if (orderStatus !== 'Pendente') {
+      setdisableButton(true);
+    } else {
+      setdisableButton(false);
+    }
+  }
+
+  async function transitStatus() {
+    if (orderStatus !== 'Preparando') {
+      setTransitButton(true);
+    } else {
+      setTransitButton(false);
+    }
+  }
+
+  useEffect(() => {
+    prepareStatus();
+    transitStatus();
+  }, [orderStatus]);
 
   if (!order) return <p>Carregando...</p>;
 
@@ -52,34 +61,39 @@ function OrdersDetails({ match }) {
         <th>
           PEDIDO 000
           <span
-            data-testid="customer_order_details__element-order-details-label-order-id"
+            data-testid="seller_order_details__element-order-details-label-order-id"
           >
             {id}
           </span>
         </th>
         <th
-          data-testid="customer_order_details__element-order-details-label-seller-name"
-        >
-          {order.seller.name}
-        </th>
-        <th
-          data-testid="customer_order_details__element-order-details-label-order-date"
+          data-testid="seller_order_details__element-order-details-label-order-date"
         >
           { moment(order.sale_date).format(('DD/MM/YYYY')) }
         </th>
         <th
-          data-testid={ statsDTid }
+          data-testid="seller_order_details__element-order-details-label-delivery-status"
         >
           {orderStatus}
         </th>
         <th>
           <Button
             variant="success"
-            data-testid="customer_order_details__button-delivery-check"
-            onClick={ () => setSaleStatus('Entregue') }
+            data-testid="seller_order_details__button-preparing-check"
+            onClick={ () => setSaleStatus('Preparando') }
             disabled={ disableButton }
           >
-            MARCAR COMO ENTREGUE
+            PREPARAR PEDIDO
+          </Button>
+        </th>
+        <th>
+          <Button
+            variant="success"
+            data-testid="seller_order_details__button-dispatch-check"
+            onClick={ () => setSaleStatus('Em Trânsito') }
+            disabled={ transitButton }
+          >
+            SAIU PARA ENTREGA
           </Button>
         </th>
       </Table>
@@ -148,7 +162,7 @@ function OrdersDetails({ match }) {
       </Table>
       <Button
         variant="success"
-        data-testid="customer_order_details__element-order-total-price"
+        data-testid="seller_order_details__element-order-total-price"
       >
         { order.total_price.replace('.', ',') }
       </Button>
@@ -156,8 +170,8 @@ function OrdersDetails({ match }) {
   );
 }
 
-OrdersDetails.propTypes = {
+SellerOrdersDetails.propTypes = {
   match: PropTypes.shape().isRequired,
 };
 
-export default OrdersDetails;
+export default SellerOrdersDetails;

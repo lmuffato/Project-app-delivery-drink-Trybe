@@ -1,38 +1,37 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import moment from 'moment';
 import NavBar from '../components/CustomerNavBar';
-import OrderCard from '../components/OrderCard';
+import SellerOrderCard from '../components/SellerOrderCard';
 
-function Orders() {
+function SellerOrders() {
   const [sales, setSales] = useState([]);
-  const { id } = JSON.parse(localStorage.getItem('user'));
-  console.log(sales);
-  async function getSales() {
-    const salesRequest = await axios.get(`http://localhost:3001/user/sale/${id}`);
-    const allSales = salesRequest.data;
-    console.log(allSales);
+
+  async function getOrders() {
+    const salesReq = await axios.get('http://localhost:3001/sales/getSales');
+    const allSales = salesReq.data;
     setSales(allSales);
   }
 
   useEffect(() => {
-    getSales();
+    getOrders();
   }, []);
 
   return (
     <div>
       <NavBar />
       { sales.map((sale, index) => (
-        <OrderCard
+        <SellerOrderCard
           key={ index }
           id={ sale.id }
           status={ sale.status }
           totalPrice={ sale.total_price }
           saleDate={ moment(sale.sale_date).format(('DD/MM/YYYY')) }
+          deliveryAddress={ sale.delivery_address }
+          deliveryNumber={ sale.delivery_number }
         />
       )) }
-    </div>
-  );
+    </div>);
 }
 
-export default Orders;
+export default SellerOrders;

@@ -12,6 +12,7 @@ function CustomerCheckout() {
   return (
     <div>
       <CustomerNavBar />
+      <h3>Finalizar Pedido</h3>
       <Table striped bordered hover variant="dark">
         <thead>
           <tr>

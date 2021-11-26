@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const { Sale, SaleProduct, User } = require('../database/models');
+const { Sale, SaleProduct, User, Product } = require('../database/models');
 const errorMap = require('../utils/errorMap');
 
 const config = require('../database/config/config');
@@ -117,15 +117,18 @@ const getSaleDetailById = async (id) => {
 
 const getProductsSalesBySaleId = async (id) => {
   try {
-    const salesProducts = await SaleProduct.findAll({ where: {
-      saleId: id,
-    },
+    const salesProducts = await Sale.findByPk(id, {
+    include: [
+      { model: Product, as: 'products', through: { attributes: [] } },
+    ],
   });
+  console.log(salesProducts);
+
   if (!salesProducts) return errorMap.saleError;
 
   return salesProducts;
   } catch (error) {
-    return errorMap.internalError;
+    console.log(error);
   }
 };
 

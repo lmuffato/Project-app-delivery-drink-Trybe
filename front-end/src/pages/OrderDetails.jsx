@@ -14,11 +14,11 @@ const DATA_ITEM_P = 'customer_order_details__element-order-table-sub-total-';
 const DATA_ITEM_TP = 'customer_order_details__element-order-total-price-';
 
 function OrderDetails() {
-  const { get, products } = useContext(Context);
+  const { get } = useContext(Context);
   const id = useLocation().pathname.split('/');
   const { length } = id;
   const [order, setOrder] = useState();
-  const [currProducts, setProducts] = useState();
+  const [currProducts, setProducts] = useState([]);
 
   useEffect(() => {
     const getOrders = async () => {
@@ -32,17 +32,18 @@ function OrderDetails() {
       const { data } = await
       get('customer_orders', id[length - 1]);
 
-      data.forEach(async (item) => {
-        item.productId = await
-        (products.find((itemId) => (item.productId === itemId.id)));
-      });
+      console.log(data);
 
-      setProducts(data);
+      // data.forEach(async (item) => {
+      //   item.productId = await
+      //   (products.find((itemId) => (item.productId === itemId.id)));
+      // });
+
+      setProducts([]);
     };
     getOrders();
   }, []);
 
-  console.log(currProducts);
   if (!order) return (<div>Loading...</div>);
   return (
     <div>
@@ -71,7 +72,7 @@ function OrderDetails() {
           </tr>
         </thead>
         <tbody>
-          {currProducts && currProducts.map((product, index) => (
+          { currProducts.map((product, index) => (
             <tr key={ product.productId.name }>
               <td
                 data-testid={ `${DATA_ITEM_N}${index}` }
@@ -85,6 +86,7 @@ function OrderDetails() {
                 {product.quantity}
               </td>
               <td data-testid={ `${DATA_ITEM_P}${product.saleId}` }>
+                {console.log(product)}
                 {product.price}
               </td>
               <td

@@ -7,21 +7,28 @@ function SaleCard({ sale }) {
   const saleDate = sale.sale_date;
 
   return (
-    <div id="saleCard">
-      <span
-        data-testid={ `customer_products__element-order-date-${id}` }
+    <a
+      href={ `/customer/orders/${id}` }
+      data-testid={ `customer_products__element-order-date-${id}` }
+    >
+      <button
+        type="button"
+        value={ id }
+        id="saleCard"
       >
-        { `Pedido ${id}` }
-      </span>
+        <span>
+          { `Pedido ${id}` }
+        </span>
 
-      <p data-testid={ `customer_products__element-order-date-${id}` }>
-        { status }
-      </p>
+        <p>
+          { status }
+        </p>
 
-      <p data-testid={ `customer_products__element-order-date-${id}` }>
-        { saleDate }
-      </p>
-    </div>
+        <span>
+          { saleDate }
+        </span>
+      </button>
+    </a>
   );
 }
 

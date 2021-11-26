@@ -75,9 +75,7 @@ export default function PedidoEspecífico({ location }) {
         } }
       >
         Total: R$
-        <span
-          data-testid="customer_order_details__element-order-total-price"
-        >
+        <span>
           {total}
 
         </span>

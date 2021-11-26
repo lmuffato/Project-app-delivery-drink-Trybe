@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import moment from 'moment';
 import { getUsers, saleActionGetById } from '../utils/API/fetch';
 
 export default function CustomerOrdersDetails() {
@@ -39,7 +40,7 @@ export default function CustomerOrdersDetails() {
           <p
             data-testid={ dataTestId.deliveryNumber }
           >
-            { order.deliveryNumber }
+            { order.id }
           </p>
           <p
             data-testid={ dataTestId.sellerName }
@@ -49,7 +50,7 @@ export default function CustomerOrdersDetails() {
           <p
             data-testid={ dataTestId.saleDate }
           >
-            { order.saleDate }
+            { moment(order.saleDate).format('DD/MM/YYYY') }
           </p>
           <p
             data-testid={ dataTestId.status }
@@ -89,14 +90,16 @@ export default function CustomerOrdersDetails() {
               <li
                 data-testid="customer_order_details__element-order-total-price"
               >
-                { product.subTotal }
+                { (product.subTotal)
+                  .toString()
+                  .replace('.', ',')}
               </li>
 
             </ul>
           ))}
           <button
             type="button"
-            data-testid={ dataTestId.entregue }
+            data-testid="customer_order_details__button-delivery-check"
             disabled
           >
             MARCAR COMO ENTREGUE

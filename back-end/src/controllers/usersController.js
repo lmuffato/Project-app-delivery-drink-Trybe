@@ -26,7 +26,23 @@ const adminList = async (req, res) => {
   return res.status(httpStatus.ok).json(serializedUsers);
 };
 
+const removeUser = async (req, res) => {
+  const { role } = req.user;
+  const { id } = req.params;
+
+  if (role !== 'administrator') return res
+    .status(httpStatus.unauthorized)
+    .json();
+
+  await User.destroy({ where: { id } });
+  
+  return res
+    .status(httpStatus.ok)
+    .json({ message: `Deleted user with id ${id}` })
+}
+
 module.exports = {
   listUsers,
   adminList,
+  removeUser,
 };

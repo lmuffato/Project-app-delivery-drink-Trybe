@@ -9,6 +9,7 @@ import InputText from '../../../components/InputText';
 import Label from '../../../components/Label';
 import Select from '../../../components/Select';
 import ButtonPrimary from '../../../components/ButtonPrimary';
+import SubTitle from '../../../components/SubTitle';
 
 const fetchPostData = (userData) => api.post('/user', userData)
   .then((response) => response.data)
@@ -70,6 +71,8 @@ const FormRegisterUser = () => {
 
   return (
     <>
+      <SubTitle subtitle="Cadastrar novo usuário" />
+
       <form onSubmit={ handleSubmit } action="POST">
         <Label id="name" name="Nome" />
         <InputText

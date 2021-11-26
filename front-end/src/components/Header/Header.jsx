@@ -1,17 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import { AiOutlineLogout } from 'react-icons/ai';
 import { Nav, NavLink, NavBtnLink } from './HeaderElements';
+import CheckoutContext from '../../context/checkoutContext';
 
 export default function Header(props) {
   const { title, subtitle, name } = props;
+  const { setAux } = useContext(CheckoutContext);
   const history = useHistory();
 
   function logout() {
     localStorage.clear();
     history.push('/');
+    setAux([]);
   }
 
   return (

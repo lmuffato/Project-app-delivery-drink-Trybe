@@ -84,13 +84,13 @@ export async function update(user, id, token) {
  * @param {string} token
  * @returns
  */
-export async function getAll(token) {
+export async function getAll(token, role = '') {
   try {
     /**
        * @type {import('axios').AxiosResponse<User[]>}
        */
     const response = await axios.get(
-      `${BASE_URL}/users/`, { headers: { Authorization: token } },
+      `${BASE_URL}/users?role=${role}`, { headers: { Authorization: token } },
     );
     return response.data;
   } catch ({ response: { status, data: { message } } }) {

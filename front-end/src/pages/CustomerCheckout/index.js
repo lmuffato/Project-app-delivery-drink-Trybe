@@ -38,7 +38,7 @@ function CustomerCheckout() {
   };
 
   if (cart.length === 0) return <h1>Sem itens no carrinho</h1>;
-
+  const totalPrice = items.reduce((a, b) => a + b.price * b.quantity, 0);
   return (
     <>
       <h2>Finalizar Pedido</h2>
@@ -51,16 +51,14 @@ function CustomerCheckout() {
         <Button variant="primary">
           R$
           <span data-testid="customer_checkout__element-order-total-price">
-            {items.reduce(
-              (a, b) => a + b.price * b.quantity, 0,
-            ).toFixed(2).replace('.', ',')}
+            {totalPrice.toFixed(2).replace(/\./, ',')}
           </span>
         </Button>
       </ShadowContainer>
 
       <h2>Detalhes e Endereço para Entrega</h2>
       <ShadowContainer>
-        <SelectSeller />
+        <SelectSeller cartItems={ cart } totalPrice={ totalPrice } />
       </ShadowContainer>
 
     </>

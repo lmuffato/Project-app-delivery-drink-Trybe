@@ -11,9 +11,7 @@ import VendaEspecífica from '../pages/VendaEspecífica';
 import TodasAsVendas from '../pages/TodasAsVendas';
 import Admin from '../pages/Admin';
 
-
 export default function Routes() {
-
   return (
     <Switch>
       <Route exact path="/register" component={ Cadastro } />

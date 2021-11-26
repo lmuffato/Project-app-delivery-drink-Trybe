@@ -3,7 +3,7 @@ const {
 } = require('http-status-codes');
 
 const { Sale } = require('../../database/models');
-const { User: users, ProductsSale } = require('../../database/models');
+const { User: users, ProductsSale, Product } = require('../../database/models');
 
 const ids = {
   user: 'user_id',
@@ -37,7 +37,13 @@ const getSalesById = async (req, res, next) => {
   try {
     const { id } = req.params;
     const sale = await Sale.findByPk(id);
-    res.status(OK).json(sale);
+    const saleProd = await ProductsSale.findAll({ where: { [ids.sale]: id } });
+    const products = await Promise.all(saleProd.map(async (prod) => {
+      console.log(prod);
+      const find = await Product.findByPk(prod.dataValues[ids.product]);
+      return { find, quantity: prod.dataValues.quantity };
+    }));
+    res.status(OK).json({ sale, products });
   } catch (e) {
     next({ statusCode: INTERNAL_SERVER_ERROR, message: e.message });
   }

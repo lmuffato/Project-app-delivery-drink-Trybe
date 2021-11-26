@@ -47,14 +47,9 @@ export default function Login() {
 
   useEffect(() => {
     const ONE_SECOND = 1000;
-    const logged = checkUser();
+    const logged = localStorage.getItem('user');
     if (logged) {
-      switch (logged.role.toLowerCase()) {
-      default:
-        setTimeout(() => history.push('/customer/products'), ONE_SECOND);
-
-        break;
-      }
+      setTimeout(() => history.push('/customer/products'), ONE_SECOND);
     }
   }, []);
 

@@ -6,8 +6,10 @@ import Context from '../context/Context';
 function OrderCard(props) {
   const { user } = useContext(Context);
   const { order } = props;
-  const { id, status, date, totalPrice, address } = order;
-  console.log(user.role);
+  const { id, status, saleDate, totalPrice, address } = order;
+
+  const formatDate = saleDate.split('T')[0].split('-').reverse().join('/');
+
   if (user.role === 'seller') {
     return (
       <Link to={ `/seller/orders/${id}` }>
@@ -20,12 +22,13 @@ function OrderCard(props) {
           { status }
         </div>
         <div data-testid={ `seller_orders__element-order-date-${id}` }>
-          { date }
+          { formatDate }
         </div>
-        <div data-testid={ `seller_orders__element-card-price-${id}` }>
+        <div>
           R$
-          {' '}
-          { totalPrice }
+          <span data-testid={ `seller_orders__element-card-price-${id}` }>
+            {totalPrice.replace('.', ',') }
+          </span>
         </div>
         <div data-testid={ `seller_orders__element-card-address-${id}` }>
           { address }
@@ -48,12 +51,13 @@ function OrderCard(props) {
         { status }
       </div>
       <div data-testid={ `customer_orders__element-order-date-${id}` }>
-        { date }
+        { formatDate }
       </div>
-      <div data-testid={ `customer_orders__element-card-price-${id}` }>
+      <div>
         R$
-        {' '}
-        { totalPrice }
+        <span data-testid={ `customer_orders__element-card-price-${id}` }>
+          { totalPrice.replace('.', ',') }
+        </span>
       </div>
     </Link>
   );

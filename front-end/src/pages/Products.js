@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import ProductCard from '../components/ProductCard';
 import NavBar from '../components/NavBar';
 import * as request from '../services/requests';
+import { CartContext } from '../context/cart';
 
 function Products() {
+  const { cartStorage } = useContext(CartContext);
   const [products, setProducts] = useState([]);
-  const [cartStorage, setCartStorage] = useState();
+  const [totalCart, setTotalCart] = useState('0.00');
 
   useEffect(() => {
     const getProducts = async () => {
@@ -14,12 +16,19 @@ function Products() {
     };
 
     getProducts();
-
-    const storage = JSON.parse(localStorage.getItem('carrinho'));
-    if (storage) {
-      setCartStorage(storage);
-    }
   }, []);
+
+  useEffect(() => {
+    if (cartStorage) {
+      let value = Object.values(cartStorage)
+        .map((item) => item.subTotal)
+        .reduce((acc, item) => acc + Number(item), 0);
+
+      value = parseFloat(value).toFixed(2).replace('.', ',');
+
+      setTotalCart(value);
+    }
+  }, [cartStorage]);
 
   const dataUser = JSON.parse(localStorage.getItem('user'));
 
@@ -36,6 +45,12 @@ function Products() {
             cartStorage={ cartStorage }
           />
         ))}
+        <button type="button">
+          R$
+          <span data-testid="customer_products__checkout-bottom-value">
+            {totalCart}
+          </span>
+        </button>
       </div>
     </section>
   );

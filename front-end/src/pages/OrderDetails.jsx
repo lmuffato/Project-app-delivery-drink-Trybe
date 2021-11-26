@@ -1,5 +1,5 @@
 import React from 'react';
-import CheckoutTable from '../components/CheckoutTable';
+import OrderDetailsTable from '../components/OrderDetailsTable';
 
 function ProductDetails() {
   const testIds = {
@@ -11,7 +11,7 @@ function ProductDetails() {
   };
 
   return (
-    <CheckoutTable testIds={ testIds } />
+    <OrderDetailsTable testIds={ testIds } />
   );
 }
 

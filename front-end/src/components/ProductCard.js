@@ -2,14 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function ProductCard({ product }) {
-  const { id, name, url_image: urlImage, price } = product;
+
+  const { id, name, url_image: urlImage } = product;
+  const value = product.price.replace('.', ',');
+
 
   return (
     <div>
       <span
         data-testid={ `customer_products__element-card-price-${id}` }
       >
-        {`R$ ${price}`}
+        { value }
       </span>
       <img
         data-testid={ `customer_products__img-card-bg-image-${id}` }
@@ -23,17 +26,21 @@ function ProductCard({ product }) {
         <button
           data-testid={ `customer_products__button-card-rm-item-${id}` }
           type="button"
+          onClick={ removeProduct }
         >
           -
         </button>
         <input
           data-testid={ `customer_products__input-card-quantity-${id}` }
+          value={ 0 }
           type="text"
           placeholder="0"
+          onChange={ insertManuallyQuantity }
         />
         <button
           data-testid={ `customer_products__button-card-add-item-${id}` }
           type="button"
+          onClick={ addProduct }
         >
           +
         </button>

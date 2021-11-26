@@ -1,6 +1,5 @@
-const { Sale, User } = require('../database/models');
+const { Sale } = require('../database/models');
 // const saleSchema = require('../schemas/saleSchema');
-const jwt = require('jsonwebtoken');
 
 const create = async (order) => {
   // const validateSale = saleSchema.validateSale.validate(order);

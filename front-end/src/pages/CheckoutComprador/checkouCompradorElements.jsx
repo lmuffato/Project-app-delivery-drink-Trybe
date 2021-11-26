@@ -40,7 +40,7 @@ justify-content: space-around;
 }
 
 .label-vendedor {
-display: block
+display: block;
 text-align: center;
 }
 
@@ -60,9 +60,8 @@ background-color: hsl(0 0% 20%);
 color: white;
 width: 250px;
 height: 60px;
-borde-radius: 5px;
+border-radius: 5px;
 }
-
 `;
 
 export default CheckoutContainer;

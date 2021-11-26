@@ -1,0 +1,45 @@
+const md5 = require('md5');
+const jwt = require('jsonwebtoken');
+// const fs = require('fs');
+// const path = require('path');
+const { User } = require('../database/models');
+
+const CUSTOMER = 'customer';
+// const SECRET = fs.readFileSync(path.join(__dirname, '../../jwt.evaluation.key'), 'utf8');
+
+const SECRET = 'secret_key';
+
+const create = async (name, email, password) => {
+  const MD5password = md5(password);
+
+  const user = await User.create(
+    { name, email, password: MD5password, role: CUSTOMER },
+  );
+  if (!user) return { status: 500, message: 'Internal Server Error' };
+
+  const { password: _, ...userPayload } = user.dataValues;
+  const token = jwt.sign(userPayload, SECRET);
+  const data = { name: user.dataValues.name,
+    email: user.dataValues.email,
+    role: user.dataValues.role };
+
+  return { status: 201, token, data };
+};
+
+const getUser = async (email) => {
+  const user = await User.findOne({ where: { email } });
+  if (!user) return { status: 500, message: 'Internal Server Error' };
+
+  const { password: _, ...userPayload } = user.dataValues;
+  const token = jwt.sign(userPayload, SECRET);
+  const data = { name: user.dataValues.name,
+    email: user.dataValues.email,
+    role: user.dataValues.role };
+
+  return { status: 200, token, data };
+};
+
+module.exports = {
+  create,
+  getUser,
+};

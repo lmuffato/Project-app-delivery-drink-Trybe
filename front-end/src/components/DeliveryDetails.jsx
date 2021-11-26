@@ -1,13 +1,12 @@
 import axios from 'axios';
-import React, { useContext } from 'react';
-import { useEffect, useState } from 'react/cjs/react.development';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { CartContext } from '../contexts/Cart';
 
 function DeliveryDetails() {
   const [sellersList, setSellersList] = useState(null);
   const [seller, setSeller] = useState(null);
-  const [address, setAddress] = useState(null);
+  const [address, setAddress] = useState('');
   const [number, setNumber] = useState(null);
   const [allFieldFilled, setAllFieldsFilled] = useState(false);
 
@@ -26,6 +25,7 @@ function DeliveryDetails() {
         },
       },
     );
+    console.log(allSellers);
     setSellersList(allSellers.data);
     setSeller(allSellers.data[0]);
   };

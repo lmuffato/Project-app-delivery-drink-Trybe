@@ -1,40 +1,12 @@
 import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
 import { CartContext } from '../contexts/Cart';
-import ButtonRemoveItem from './ButtonRemoveItem';
+import OrderItem from './OrderItem';
 
-function CheckoutTable(props) {
+function CheckoutTable() {
   const { cart } = useContext(CartContext);
-  const { testIds: {
-    productName,
-    productQuantity,
-    productUnitPrice,
-    productSubTotal,
-    productRemove } } = props;
-
   const fillTable = ((cartt) => cartt.map(
-    ({ productId: id, name, quantity, unitPrice, subTotal }, key) => (
-      <tr key={ key }>
-        <td data-testid={ `customer_checkout__element-order-table-item-number--${key}` }>
-          { key + 1 }
-        </td>
-        <td data-testid={ productName + key }>{ name }</td>
-        <td data-testid={ productQuantity + key }>{ quantity }</td>
-        <td data-testid={ productUnitPrice + key }>
-          { Number(unitPrice).toLocaleString('pt-BR', {
-            currency: 'BRL',
-            minimumFractionDigits: 2,
-          }) }
-        </td>
-        <td data-testid={ productSubTotal + key }>
-          {/* Colocar a vírgula na moeda: https://pt.stackoverflow.com/questions/264503/personalizar-o-tofixed-para-utilizar-v%C3%ADrgula-como-separador-decimal */}
-          { Number(subTotal).toLocaleString('pt-BR', {
-            currency: 'BRL',
-            minimumFractionDigits: 2,
-          }) }
-        </td>
-        <td data-testid={ productRemove + key }><ButtonRemoveItem id={ id } /></td>
-      </tr>
+    (info, index) => (
+      <OrderItem info={ info } index={ index } key={ index } />
     ),
   ));
 
@@ -56,16 +28,5 @@ function CheckoutTable(props) {
     </table>
   );
 }
-
-CheckoutTable.propTypes = {
-  testIds: PropTypes.shape({
-    productId: PropTypes.string.isRequired,
-    productName: PropTypes.string.isRequired,
-    productQuantity: PropTypes.string.isRequired,
-    productUnitPrice: PropTypes.string.isRequired,
-    productSubTotal: PropTypes.string.isRequired,
-    productRemove: PropTypes.string.isRequired,
-  }).isRequired,
-};
 
 export default CheckoutTable;

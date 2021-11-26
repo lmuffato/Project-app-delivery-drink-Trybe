@@ -20,10 +20,10 @@ export default function DeliveryDetails() {
   const { deliveryAddress, setDeliveryAddress } = useContext(NewOrderContext);
   const { deliveryNumber, setDeliveryNumber } = useContext(NewOrderContext);
   const { totalPrice,
-    setTotalPrice,
+    // setTotalPrice,
   } = useContext(NewOrderContext);
   const [isLoading, setIsLoading] = useState(false);
-  const { itensList, setItensList } = useContext(NewOrderContext);
+  const { itensList,  /* setItensList */ } = useContext(NewOrderContext);
 
   const getSellersList = async () => {
     const arr = await getAllUsersSallers();
@@ -53,7 +53,7 @@ export default function DeliveryDetails() {
   useEffect(() => {
     const seller = async () => {
       defaultSeller();
-    }
+    };
     seller();
   }, [sellersList]);
 
@@ -62,10 +62,10 @@ export default function DeliveryDetails() {
     return newValue.toFixed(2);
   };
 
-  const redirectToPage = (id) => {
-    const url = `/customer/orders/${id}`;
-    history.push(url);
-  };
+  // const redirectToPage = (id) => {
+  //   const url = `/customer/orders/${id}`;
+  //   history.push(url);
+  // };
 
   const createNewSale = async () => {
     const { token } = userData;

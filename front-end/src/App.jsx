@@ -9,6 +9,7 @@ import ProductClient from './pages/ProductClient';
 import PrivateRoute from './routes/PrivateRoute';
 import OrderDetails from './pages/OrderDetails';
 import ClientOrders from './pages/ClientOrders';
+import AdminManage from './pages/AdminManage';
 
 function App() {
   return (
@@ -36,6 +37,10 @@ function App() {
       <Route
         path="/customer/orders/:id"
         element={ <PrivateRoute element={ OrderDetails } /> }
+      />
+      <Route
+        path="/admin/manage"
+        element={ <PrivateRoute element={ AdminManage } /> }
       />
     </Routes>
   );

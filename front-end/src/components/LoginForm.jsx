@@ -62,7 +62,7 @@ function LoginForm() {
   };
 
   return (
-    <div className="border">
+    <div>
       <form action="submit">
         <TextInput
           name="email"

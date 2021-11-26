@@ -2,6 +2,20 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { statusChange } from '../utils/Data';
 import dateFormatation, { priceFormat } from '../utils/Format';
+import Header from '../Components/Header';
+
+const LINKS = [
+  {
+    name: 'PRODUTOS',
+    url: '/customer/products',
+    testId: 'customer_products__element-navbar-link-products',
+  },
+  {
+    name: 'MEUS PEDIDOS',
+    url: '/customer/orders',
+    testId: 'customer_products__element-navbar-link-orders',
+  },
+];
 
 function OrderDetails() {
   const [orders, setOrders] = useState([]);
@@ -39,6 +53,7 @@ function OrderDetails() {
 
   return (
     <div>
+      <Header links={ LINKS } />
       {isLoading ? 'Loading' : orders.map((item, index) => (
         <div
           key={ index }

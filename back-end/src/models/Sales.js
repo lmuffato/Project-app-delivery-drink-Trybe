@@ -16,6 +16,12 @@ const getSales = async (id) => {
   return salesList;
 };
 
+const getSalesBySellerId = async (id) => {
+  const salesList = await sale.findAll({ where: { sellerId: id } });
+  console.log(salesList);
+  return salesList;
+};
+
 const getSaleById = async (id) => {
   const salesList = await sale.findOne({ where: { id } });
   return salesList;
@@ -64,4 +70,5 @@ module.exports = {
   getSaleById,
   getSaleDetails,
   changeStatus,
+  getSalesBySellerId,
 };

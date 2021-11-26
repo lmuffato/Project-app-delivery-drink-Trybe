@@ -22,6 +22,7 @@ function Provider({ children }) {
   const [products, setProducts] = useState([]);
   const [shoppingCart, setShoppingCart] = useState({});
   const [total, setTotal] = useState(0);
+  const [sellers, setSellers] = useState();
 
   /// ////////////////////////Link with BackEnd//////////////////////// ///
 

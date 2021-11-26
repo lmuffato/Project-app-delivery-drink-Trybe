@@ -90,7 +90,7 @@ export default function CustomerOrdersDetails() {
               <li
                 data-testid="customer_order_details__element-order-total-price"
               >
-                { (product.subTotal)
+                { (order.totalPrice)
                   .toString()
                   .replace('.', ',')}
               </li>

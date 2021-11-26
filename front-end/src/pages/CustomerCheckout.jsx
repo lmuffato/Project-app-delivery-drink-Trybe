@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import Table from 'react-bootstrap/Table';
+import './CustomerCheckout.css';
 import CheckoutBtn from '../components/CheckoutBtn';
 import CheckoutTr from '../components/CheckoutTr';
 import CustomerNavBar from '../components/CustomerNavBar';
@@ -13,7 +14,7 @@ function CustomerCheckout() {
     <div>
       <CustomerNavBar />
       <h3>Finalizar Pedido</h3>
-      <Table striped bordered hover variant="dark">
+      <Table striped bordered hover variant="dark" className="checkout-table">
         <thead>
           <tr>
             <th>item</th>
@@ -36,7 +37,7 @@ function CustomerCheckout() {
         </tbody>
       </Table>
       <CheckoutBtn testId="customer_checkout__element-order-total-price" />
-      <SendOrder />
+      <SendOrder className="send-form" />
     </div>
   );
 }

@@ -1,0 +1,12 @@
+.send-form {
+  border: 1px solid rgb(78, 78, 78);
+  border-radius: 5px;
+  margin-left: 30px;
+  margin-right: 30px;
+  margin-top: 20px;
+  padding: 30px;
+}
+
+.checkBtn {
+  margin-left: 30px;
+}

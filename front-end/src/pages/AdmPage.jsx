@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Form, Row, Col, Button } from 'react-bootstrap';
+import './AdmPage.css';
 import CustomerNavBar from '../components/CustomerNavBar';
 import UserList from '../components/UserList';
 import UsersContext from '../contexts/UsersContext';
@@ -86,7 +87,7 @@ function AdmPage() {
   return (
     <div>
       <CustomerNavBar userRole="administrator" />
-      <Form>
+      <Form className="adm-form">
         <Row className="mb-3">
           <Form.Group as={ Col } controlId="formGridPassword">
             <Form.Label>Nome</Form.Label>
@@ -136,9 +137,6 @@ function AdmPage() {
       >
         Usuario já cadastrado
       </span>
-      <br />
-      <br />
-      <br />
       <UserList />
     </div>
   );

@@ -81,7 +81,7 @@ function SendOrder() {
   }
 
   return (
-    <div>
+    <div className="send-form">
       <h3>Detalhes e Endereço para Entrega</h3>
       <Form>
         <Row className="mb-3">

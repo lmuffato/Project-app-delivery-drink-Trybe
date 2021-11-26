@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
-import OrderCard from '../components/molecules/TempOrderCard';
+import OrderCard from '../components/molecules/OrderCard';
 import NavBar from '../components/NavBar';
 import { fetchSales } from '../utils/API/fetch';
 

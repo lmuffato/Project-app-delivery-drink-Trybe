@@ -27,9 +27,20 @@ const LoginForm = () => {
     if (!user) {
       setIsHidden(false);
     } else {
+      let urlByRole;
+      switch (user.role) {
+      case 'seller':
+        urlByRole = '/seller/orders';
+        break;
+      case 'administrator':
+        urlByRole = '/admin/manage';
+        break;
+      default:
+        urlByRole = '/customer/products';
+        break;
+      }
       localStorage.setItem('user', JSON.stringify(user));
-      if (user.role === 'customer') return history.push('/customer/products');
-      if (user.role === 'seller') return history.push('/seller/orders');
+      history.push(urlByRole);
     }
   };
 

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import moment from 'moment';
-import { getUsers, saleActionGetById } from '../utils/API/fetch';
+import { getUsers, fetchSaleByID } from '../utils/API/fetch';
 import { getTestID, formatTestID } from '../utils/functions';
+import NavBar from '../components/NavBar';
 
 export default function CustomerOrdersDetails() {
   const [orderDetails, setOrderDetails] = useState(null);
@@ -11,7 +12,7 @@ export default function CustomerOrdersDetails() {
 
   useEffect(() => {
     (async () => {
-      const result = await saleActionGetById(idOrder);
+      const result = await fetchSaleByID(idOrder);
       const users = await getUsers();
       setOrderDetails(result);
       setSellerName(users.find(({ id }) => id === result.sellerId).name);
@@ -20,6 +21,7 @@ export default function CustomerOrdersDetails() {
   if (!orderDetails) return <div>Carregando...</div>;
   return (
     <div className="customer-orders-details-container">
+      <NavBar />
       <div key={ orderDetails.id }>
         <h3>Detalhe do Pedido</h3>
         <p

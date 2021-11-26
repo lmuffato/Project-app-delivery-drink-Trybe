@@ -43,8 +43,22 @@ exports.getAllByUser = async (req, res) => {
 exports.getByID = async (req, res) => {
   const { id } = req.params;
   try {
-    const sale = await SaleService.getOrderByID({ id });
-    res.status(StatusCodes.OK).json({ result: sale });
+    const order = await SaleService.getOrderByID({ id });
+    res.status(StatusCodes.OK).json({ result: order });
+  } catch (error) {
+    console.error(error);
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .send(error.message);
+  }
+};
+
+exports.changeOrderStatus = async (req, res) => {
+  const { id } = req.params;
+  const { newStatus } = req.body;
+  try {
+    const updatedOrder = await SaleService.changeOrderStatus({ id, newStatus });
+    res.status(StatusCodes.OK).json({ result: updatedOrder });
   } catch (error) {
     console.error(error);
     res

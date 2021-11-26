@@ -28,7 +28,8 @@ const LoginForm = () => {
       setIsHidden(false);
     } else {
       localStorage.setItem('user', JSON.stringify(user));
-      history.push('/customer/products');
+      if (user.role === 'customer') return history.push('/customer/products');
+      if (user.role === 'seller') return history.push('/seller/orders');
     }
   };
 
@@ -38,6 +39,16 @@ const LoginForm = () => {
 
   const errorMessageContent = () => 'Email/senha inválido! Verifique os dados inseridos';
 
+  const user = JSON.parse(localStorage.getItem('user'));
+  if (user && user.role === 'customer') {
+    history.push('/customer/products');
+  }
+  if (user && user.role === 'seller') {
+    history.push('/seller/orders');
+  }
+  if (user && user.role === 'administrator') {
+    history.push('/admin/manage');
+  }
   return (
     <form>
       <div className="children_container_login">

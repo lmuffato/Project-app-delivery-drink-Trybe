@@ -47,7 +47,7 @@ const ListNavLinks = () => {
           <Link
             className="nav-link sales-nav-link"
             aria-current="page"
-            to="/sales"
+            to="/customer/orders"
           >
             MEUS PEDIDOS
           </Link>

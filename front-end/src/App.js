@@ -10,7 +10,7 @@ import MyRequestsPage from './pages/MyRequestsPage';
 import ClientOrderDetailsPage from './pages/ClientOrderDetailsPage';
 import SellerPage from './pages/SellerPage';
 import './App.css';
-import { OrderDetailsProvider } from './context/orderDetailsProvider';
+/* import { OrderDetailsProvider } from './context/orderDetailsProvider'; */
 import SellerOrderDetailsPage from './pages/SellerOrderDetailsPage';
 import { SellerOrderDetailsProvider } from './context/sellerOrderDetailsProvider';
 import { SocketProvider } from './context/socketProvider';
@@ -53,9 +53,9 @@ function App() {
         path="/customer/orders/:id"
         element={
           <SocketProvider>
-            <OrderDetailsProvider>
+            <SellerOrderDetailsProvider>
               <ClientOrderDetailsPage />
-            </OrderDetailsProvider>
+            </SellerOrderDetailsProvider>
           </SocketProvider>
         }
       />

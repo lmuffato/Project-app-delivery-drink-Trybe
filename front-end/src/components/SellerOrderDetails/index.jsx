@@ -29,9 +29,10 @@ export default function SellerOrderDetails({ dataTestIds }) {
   }, [sale.status]);
 
   const handleChangeStatus = (myStatus) => {
-    updateStatusSale(sale.id, setSale, myStatus);
+    const { id } = sale;
+    updateStatusSale(id, setSale, myStatus);
     setDisabledDeliveryButton(true);
-    socket.emit('changeStatus', myStatus);
+    socket.emit('changeStatus', { id, myStatus });
   };
 
   return (
@@ -50,7 +51,7 @@ export default function SellerOrderDetails({ dataTestIds }) {
         </span>
 
         <span data-testid={ dataTestIds['55'] }>
-          {socketStatus || sale.status}
+          {socketStatus ? socketStatus.myStatus : sale.status}
         </span>
 
         <button

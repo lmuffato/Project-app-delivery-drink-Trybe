@@ -7,17 +7,15 @@ import OrderCard from '../components/OrderCard';
 function Orders() {
   const [sales, setSales] = useState([]);
   const { id } = JSON.parse(localStorage.getItem('user'));
-  console.log(sales);
-  async function getSales() {
-    const salesRequest = await axios.get(`http://localhost:3001/user/sale/${id}`);
-    const allSales = salesRequest.data;
-    console.log(allSales);
-    setSales(allSales);
-  }
 
   useEffect(() => {
+    async function getSales() {
+      const salesRequest = await axios.get(`http://localhost:3001/user/sale/${id}`);
+      const allSales = salesRequest.data;
+      setSales(allSales);
+    }
     getSales();
-  }, []);
+  }, [id]);
 
   return (
     <div>

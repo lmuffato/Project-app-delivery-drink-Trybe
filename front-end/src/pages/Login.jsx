@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './Login.css';
 import { Form, Button } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import md5 from 'md5';
@@ -33,16 +34,6 @@ function Login() {
     }
   }
 
-  function checkBtn() {
-    const passwordLength = 6;
-    const re = /\S+@\S+\.\S+/;
-    if (password.length >= passwordLength && re.test(email)) {
-      setDisAbleBtn(false);
-      return;
-    }
-    setDisAbleBtn(true);
-  }
-
   async function loginClic() {
     const data = { email };
     const myBody = JSON.stringify(data);
@@ -66,27 +57,35 @@ function Login() {
   }
 
   useEffect(() => {
+    function checkBtn() {
+      const passwordLength = 6;
+      const re = /\S+@\S+\.\S+/;
+      if (password.length >= passwordLength && re.test(email)) {
+        setDisAbleBtn(false);
+        return;
+      }
+      setDisAbleBtn(true);
+    }
     setHideWarning(true);
     checkBtn();
   }, [email, password]);
 
-  const isLoged = () => {
-    const user = JSON.parse(localStorage.getItem('user'));
-    if (!user) return;
-    if (user.role === 'customer') {
-      history.push('/customer/products');
-    } else if (user.role === 'seller') {
-      history.push('/seller/orders');
-    }
-  };
-
   useEffect(() => {
+    const isLoged = () => {
+      const user = JSON.parse(localStorage.getItem('user'));
+      if (!user) return;
+      if (user.role === 'customer') {
+        history.push('/customer/products');
+      } else if (user.role === 'seller') {
+        history.push('/seller/orders');
+      }
+    };
     isLoged();
-  }, []);
+  }, [history]);
 
   return (
     <>
-      <Form>
+      <Form className="login-form">
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control
@@ -98,7 +97,7 @@ function Login() {
             onChange={ (e) => setEmail(e.target.value) }
           />
           <Form.Text className="text-muted">
-            Well never share your email with anyone else.
+            We will never share your email with anyone else.
           </Form.Text>
         </Form.Group>
 

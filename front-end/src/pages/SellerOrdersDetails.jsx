@@ -13,51 +13,44 @@ function SellerOrdersDetails({ match }) {
   const [transitButton, setTransitButton] = useState(true);
   const { id } = match.params;
 
-  async function getOrder() {
-    const request = await axios.get(`http://localhost:3001/sale/${id}`);
-    const mySale = request.data;
-    setOrder(mySale);
-    setOrderStatus(mySale.status);
-  }
-
   async function setSaleStatus(status) {
     await axios.patch(`http://localhost:3001/sale/${id}`, { status });
     setOrderStatus(status);
   }
 
   useEffect(() => {
+    async function getOrder() {
+      const request = await axios.get(`http://localhost:3001/sale/${id}`);
+      const mySale = request.data;
+      setOrder(mySale);
+      setOrderStatus(mySale.status);
+    }
     getOrder();
-  }, []);
-
-  async function prepareStatus() {
-    if (orderStatus !== 'Pendente') {
-      setdisableButton(true);
-    } else {
-      setdisableButton(false);
-    }
-  }
-
-  async function transitStatus() {
-    if (orderStatus !== 'Preparando') {
-      setTransitButton(true);
-    } else {
-      setTransitButton(false);
-    }
-  }
+  }, [id]);
 
   useEffect(() => {
+    async function prepareStatus() {
+      if (orderStatus !== 'Pendente') {
+        setdisableButton(true);
+      } else {
+        setdisableButton(false);
+      }
+    }
+
+    async function transitStatus() {
+      if (orderStatus !== 'Preparando') {
+        setTransitButton(true);
+      } else {
+        setTransitButton(false);
+      }
+    }
     prepareStatus();
     transitStatus();
   }, [orderStatus]);
 
-  if (!order) return <p>Carregando...</p>;
-
-  return (
-    <div>
-      <NavBar fixed="top" />
-      <h3>Detalhe do Pedido</h3>
-      <br />
-      <Table>
+  function tableRow() {
+    return (
+      <tr>
         <th>
           PEDIDO 000
           <span
@@ -96,6 +89,21 @@ function SellerOrdersDetails({ match }) {
             SAIU PARA ENTREGA
           </Button>
         </th>
+      </tr>
+    );
+  }
+
+  if (!order) return <p>Carregando...</p>;
+
+  return (
+    <div>
+      <NavBar fixed="top" />
+      <h3>Detalhe do Pedido</h3>
+      <br />
+      <Table>
+        <thead>
+          { tableRow() }
+        </thead>
       </Table>
       <Table striped bordered hover variant="dark">
         <thead>

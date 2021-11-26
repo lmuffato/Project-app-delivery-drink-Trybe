@@ -31,6 +31,7 @@ function CheckoutBtn({ testId }) {
 
   return (
     <Button
+      className="checkBtn"
       disabled={ disableBtn }
       data-testid={ testId }
       variant="success"

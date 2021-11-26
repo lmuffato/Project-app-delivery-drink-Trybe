@@ -22,7 +22,7 @@ function ClientProducts() {
   return (
     <div>
       <CustomerNavBar fixed="top" />
-      <Row xs={ 1 } md={ 4 } className="g-4">
+      <Row xs={ 2 } md={ 4 } className="g-2">
         {
           productList.map((prod) => (
             <div key={ prod.name } className="productCard">

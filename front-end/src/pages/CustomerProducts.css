@@ -1,4 +1,16 @@
 .card {
+  align-items: center;
   height: 290px;
+  margin-left: auto;
+  margin-right: auto;
   margin-top: 20px;
+  width: 150px;
+}
+
+.card-body {
+  align-items: center;
+}
+
+.checkBtn {
+  background-color: gray;
 }

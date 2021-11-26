@@ -28,19 +28,18 @@ function ProductCard({ product }) {
     }
   }
 
-  function handleQuantity() {
-    const inicialCart = cart.find((item) => item.name === product.name);
-    if (inicialCart) {
-      setQuantity(inicialCart.quantity);
-    }
-  }
-
   useEffect(() => {
+    function handleQuantity() {
+      const inicialCart = cart.find((item) => item.name === product.name);
+      if (inicialCart) {
+        setQuantity(inicialCart.quantity);
+      }
+    }
     handleQuantity();
-  }, []);
+  }, [cart, product]);
 
   return (
-    <Card bcart="info" style={ { width: '12rem', alignItems: 'center' } }>
+    <Card bcart="info" className="card">
       <Card.Img
         data-testid={ `customer_products__img-card-bg-image-${product.id}` }
         variant="top"
@@ -66,6 +65,7 @@ function ProductCard({ product }) {
             data-testid={ `customer_products__button-card-rm-item-${product.id}` }
             variant="primary"
             onClick={ (e) => handleClic(e) }
+            size="sm"
           >
             -
           </Button>
@@ -80,6 +80,7 @@ function ProductCard({ product }) {
             data-testid={ `customer_products__button-card-add-item-${product.id}` }
             variant="primary"
             onClick={ (e) => handleClic(e) }
+            size="sm"
           >
             +
           </Button>

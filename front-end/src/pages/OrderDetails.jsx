@@ -13,22 +13,14 @@ function OrdersDetails({ match }) {
   const { id } = match.params;
   const statsDTid = 'customer_order_details__element-order-details-label-delivery-status';
 
-  async function getOrder() {
-    const request = await axios.get(`http://localhost:3001/sale/${id}`);
-    const mySale = request.data;
-    setOrder({ ...mySale });
-    setOrderStatus(mySale.status);
-  }
-
-  async function buttonStatus() {
-    if (orderStatus !== 'Em Trânsito') {
-      setdisableButton(true);
-    } else {
-      setdisableButton(false);
-    }
-  }
-
   useEffect(() => {
+    async function buttonStatus() {
+      if (orderStatus !== 'Em Trânsito') {
+        setdisableButton(true);
+      } else {
+        setdisableButton(false);
+      }
+    }
     buttonStatus();
   }, [orderStatus]);
 
@@ -38,17 +30,18 @@ function OrdersDetails({ match }) {
   }
 
   useEffect(() => {
+    async function getOrder() {
+      const request = await axios.get(`http://localhost:3001/sale/${id}`);
+      const mySale = request.data;
+      setOrder({ ...mySale });
+      setOrderStatus(mySale.status);
+    }
     getOrder();
-  }, []);
+  }, [id]);
 
-  if (!order) return <p>Carregando...</p>;
-
-  return (
-    <div>
-      <NavBar fixed="top" />
-      <h3>Detalhe do Pedido</h3>
-      <br />
-      <Table>
+  function tableRow() {
+    return (
+      <tr>
         <th>
           PEDIDO 000
           <span
@@ -82,6 +75,21 @@ function OrdersDetails({ match }) {
             MARCAR COMO ENTREGUE
           </Button>
         </th>
+      </tr>
+    );
+  }
+
+  if (!order) return <p>Carregando...</p>;
+
+  return (
+    <div>
+      <NavBar fixed="top" />
+      <h3>Detalhe do Pedido</h3>
+      <br />
+      <Table>
+        <thead>
+          { tableRow() }
+        </thead>
       </Table>
       <Table striped bordered hover variant="dark">
         <thead>

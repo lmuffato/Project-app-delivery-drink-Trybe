@@ -19,7 +19,7 @@ function CustomerNavBar() {
     } else if (role === 'seller') {
       setLinkMsg('PEDIDOS');
     }
-  }, []);
+  }, [role]);
 
   function redirectToOrders(e) {
     e.preventDefault();

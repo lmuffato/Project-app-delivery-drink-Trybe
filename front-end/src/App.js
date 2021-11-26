@@ -22,9 +22,9 @@ function App() {
       <Route exact path="/customer/checkout" component={ CustomerCheckout } />
       <Route exact path="/admin/manage" component={ AdminManage } />
       <Route exact path="/customer/orders" component={ Orders } />
+      <Route exact path="/seller/orders" component={ Orders } />
       <Route exact path="/customer/orders/:id" component={ OrderDetails } />
       <Route exact path="/seller/orders/:id" component={ OrderDetails } />
-      <Route exact path="/seller/orders" component={ Orders } />
     </Switch>
   );
 }

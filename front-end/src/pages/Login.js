@@ -12,6 +12,12 @@ import Error from '../components/Error';
 
 const datatestid = 'common_login__element-invalid-email';
 
+const selectRouteToPush = (role) => {
+  if (role === 'seller') return '/seller/orders';
+  if (role === 'administrator') return '/admin/manage';
+  return '/customer/products';
+};
+
 export default function Login() {
   const [emailInput, setEmailInput] = useState('');
   const [passwordInput, setPasswordInput] = useState('');
@@ -33,6 +39,9 @@ export default function Login() {
     if (user.role === 'seller') {
       history.push('/seller/orders');
     }
+    if (user.role === 'administrator') {
+      history.push('/admin/manage');
+    }
   }, [history, dispatch]);
 
   useEffect(() => {
@@ -50,7 +59,7 @@ export default function Login() {
         const { user: { id, name, email, role }, token } = res.data;
         dispatch(saveUser({ id, name, email, role, token }));
         saveUserDataToLocalStorage({ id, name, email, role, token });
-        history.push(role === 'customer' ? '/customer/products' : '/seller/orders');
+        history.push(selectRouteToPush(role));
       }))
       .catch((err) => {
         console.log(err);

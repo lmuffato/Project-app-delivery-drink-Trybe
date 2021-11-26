@@ -6,7 +6,6 @@ import ButtonRemoveItem from './ButtonRemoveItem';
 function CheckoutTable(props) {
   const { cart } = useContext(CartContext);
   const { testIds: {
-    // productId,
     productName,
     productQuantity,
     productUnitPrice,
@@ -65,7 +64,7 @@ CheckoutTable.propTypes = {
     productQuantity: PropTypes.string.isRequired,
     productUnitPrice: PropTypes.string.isRequired,
     productSubTotal: PropTypes.string.isRequired,
-    productRemove: Proptypes.string.isRequired,
+    productRemove: PropTypes.string.isRequired,
   }).isRequired,
 };
 

@@ -2,7 +2,7 @@ const {
   StatusCodes: { CREATED, OK, INTERNAL_SERVER_ERROR, NOT_FOUND },
 } = require('http-status-codes');
 
-const { Sale } = require('../../database/models');
+const { Sale, User } = require('../../database/models');
 const { User: users, ProductsSale, Product } = require('../../database/models');
 
 const ids = {
@@ -44,7 +44,11 @@ const getSalesById = async (req, res, next) => {
       });
       return { ...find.dataValues, quantity: prod.dataValues.quantity };
     }));
-    res.status(OK).json({ ...data, products });
+    const { name: sellerName } = await User.findByPk(data.seller_id, {
+      attributes:{ exclude: ['id', 'role', 'password', 'email']}
+    })
+
+    res.status(OK).json({ ...data, products, sellerName });
   } catch (e) {
     next({ statusCode: INTERNAL_SERVER_ERROR, message: e.message });
   }

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { validateAll } from './ultility';
 
-function NewUserFromAdmin() {
+function NewUserFormFromAdmin() {
   const [nameInput, setNameInput] = useState('');
   const [emailInput, setEmailInput] = useState('');
   const [passwordInput, setPasswordInput] = useState('');
@@ -89,4 +89,4 @@ function NewUserFromAdmin() {
   );
 }
 
-export default NewUserFromAdmin;
+export default NewUserFormFromAdmin;

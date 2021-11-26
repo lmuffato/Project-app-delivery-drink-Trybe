@@ -1,5 +1,6 @@
 import React from 'react';
-import NewUserForm from '../components/NewUserForm';
+import NewUserFormFromAdmin from '../components/NewUserFormFromAdmin';
+// import UserListForAdmin from '../components/UserListForAdmin';
 
 function AdminManager() {
   return (
@@ -7,9 +8,12 @@ function AdminManager() {
       <header>CRIAR HEADER</header>
       <div>
         <h2>Cadastrar Novo Usuário</h2>
-        <NewUserForm />
+        <NewUserFormFromAdmin />
       </div>
-      <h1> Lista de Usuarios</h1>
+      <div>
+        <h1> Lista de Usuarios</h1>
+        {/* <UserListForAdmin /> */}
+      </div>
     </div>
   );
 }

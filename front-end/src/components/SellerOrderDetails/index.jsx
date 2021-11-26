@@ -10,6 +10,7 @@ export default function SellerOrderDetails({ dataTestIds }) {
   const [disabledPendingButton, setDisablePendingButton] = useState(false);
   const [disabledDeliveryButton, setDisabledDeliveryButton] = useState(true);
   const { sale, setSale, products } = useSellerOrderDetails();
+  const { status } = sale;
 
   useEffect(() => {
     if (sale.status !== 'Pendente' && sale.status) {
@@ -43,7 +44,11 @@ export default function SellerOrderDetails({ dataTestIds }) {
           {sale.saleDate && formatDate(sale.saleDate) }
         </span>
 
-        <span data-testid={ dataTestIds['55'] }>
+        <span
+          className={ styles[status ? status
+            .toLowerCase().replace('â', 'a').replace(' ', '') : null] }
+          data-testid={ dataTestIds['55'] }
+        >
           {sale.status}
         </span>
 

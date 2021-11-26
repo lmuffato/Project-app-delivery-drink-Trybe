@@ -26,6 +26,10 @@
   text-transform: uppercase;
 }
 
+.orderDetails button:hover {
+  filter: brightness(0.9);
+}
+
 .orderDetails button:disabled {
   background: #b1c2be;
   color: #036b52;
@@ -105,3 +109,32 @@
   margin-right: 5px;
 }
 
+.pendente, .preparando, .entregue, .emtransito {
+  align-items: center;
+  background: white;
+  border-radius: 5px;
+  display: flex;
+  font-size: 1rem;
+  font-weight: 800;
+  height: 35px;
+  justify-content: center;
+  margin: 0 5px;
+  min-width: 8rem;
+  padding: 10px;
+}
+
+.pendente {
+  background: #ccb800;
+}
+
+.preparando {
+  background: #66cc01;
+}
+
+.entregue {
+  background: #00cc9b;
+}
+
+.emtransito {
+  background: #e74c3c;
+}

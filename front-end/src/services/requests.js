@@ -23,7 +23,7 @@ export async function getSales(dataUser) {
   });
 
   const sales = await response.json();
-  return { sales };
+  return sales;
 }
 
 export default postUser;

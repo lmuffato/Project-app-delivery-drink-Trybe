@@ -8,13 +8,13 @@ import LinkLogout from './LinkLogout';
 function NavBar() {
   const path = useLocation().pathname;
   return (
-    <div>
+    <div data-testid="customer_products__element-navbar-link-products">
       { path.includes('customer')
-        ? <LinkProducts data-testid="customer_products__element-navbar-link-products" />
+        ? <LinkProducts />
         : null}
-      <LinkOrders data-testid="customer_products__element-navbar-link-orders" />
-      <UserFullName data-testid="customer_products__element-navbar-user-full-name" />
-      <LinkLogout data-testid="customer_products__element-navbar-link-logout" />
+      <LinkOrders />
+      <UserFullName />
+      <LinkLogout />
     </div>
   );
 }

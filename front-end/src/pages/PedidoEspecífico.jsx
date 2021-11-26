@@ -23,7 +23,6 @@ export default function PedidoEspecífico({ location }) {
     setSale(result);
     setLoading(false);
   }
-  console.log(products);
   useEffect(() => requestAPI(), [requestAPI]);
   useEffect(() => {
     if (products) {

@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 function Form(props) {
   const { setChooseSeller, setAddress, setAddressNumber, value } = props;
   const { chooseSeller, seller, address, addressNumber } = value;
-  console.log(value);
   return (
     <div>
       <form>

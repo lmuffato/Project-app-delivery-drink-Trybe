@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
+import Alert from 'react-bootstrap/Alert';
 import CheckoutContext from '../../context/checkoutContext';
 import Header from '../../components/Header/Header';
 import CheckoutProduct from '../../components/checkoutProduct/checkoutProduct';
@@ -16,6 +17,7 @@ export default function CheckoutComprador() {
   const [addressNumber, setAddressNumber] = useState('');
   const userName = JSON.parse(userData);
   const totalValue = total.toFixed(2).toString().replace(/\./g, ',');
+  const [errorMessage, setErrorMessage] = useState('');
   const history = useHistory();
 
   async function getSellerId(user) {
@@ -31,16 +33,16 @@ export default function CheckoutComprador() {
     const response = await sendRequest({
       data: aux,
       sellInfo: {
-        deliveryNumber: addressNumber,
-        deliveryAddress: address,
-        totalPrice: total,
+        delivery_number: addressNumber,
+        delivery_address: address,
+        total_price: total,
         status: 'Pendente',
-        userId: userName.id,
-        saleDate: atualDate,
-        sellerId: sellerId.id,
+        user_id: userName.id,
+        sale_date: atualDate,
+        seller_id: sellerId.id,
       },
       token: userName.token,
-    });
+    }).catch(setErrorMessage);
     if (response) history.push(`/customer/orders/${response.id}`);
   }
 
@@ -88,6 +90,14 @@ export default function CheckoutComprador() {
           </button>
         </fieldset>
       </div>
+      {errorMessage && (
+        <Alert
+          data-testid="common_login__element-invalid-email"
+          variant="danger"
+        >
+          {errorMessage}
+        </Alert>
+      )}
     </CheckoutContainer>
   );
 }

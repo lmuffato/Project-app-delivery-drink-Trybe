@@ -18,7 +18,7 @@ export const loginAction = async ({ email, password }) => {
   }
 };
 
-export const registerAction = async ({ fullName, email, password }) => {
+export const registerAction = async ({ fullName, email, password, role }) => {
   try {
     const rawResponse = await fetch('http://localhost:3001/register',
       {
@@ -27,10 +27,30 @@ export const registerAction = async ({ fullName, email, password }) => {
           Accept: APPLICATION_JSON,
           'Content-Type': APPLICATION_JSON,
         },
-        body: JSON.stringify({ fullName, email, password }),
+        body: JSON.stringify({ fullName, email, password, role }),
       });
     const token = await rawResponse.json();
     return token;
+  } catch (error) {
+    console.error(error.message);
+    return null;
+  }
+};
+
+export const adminRegisterAction = async ({ fullName, email, password, role, token }) => {
+  try {
+    const rawResponse = await fetch('http://localhost:3001/admin/register',
+      {
+        method: 'POST',
+        headers: {
+          Accept: APPLICATION_JSON,
+          Authorization: token,
+          'Content-Type': APPLICATION_JSON,
+        },
+        body: JSON.stringify({ fullName, email, password, role }),
+      });
+    const result = await rawResponse.json();
+    return result;
   } catch (error) {
     console.error(error.message);
     return null;

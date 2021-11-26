@@ -9,11 +9,12 @@ import { loginAction } from '../../utils/API/fetch';
 import validateLogin from '../../utils/validations/joi/login';
 import beerLivery from '../../assets/images/logoBeerlivery.png';
 
-const LoginForm = () => {
+export default function LoginForm() {
   const [login, setLogin] = useState({ email: '', password: '' });
   const [isHidden, setIsHidden] = useState(true);
   const { email, password } = login;
   const history = useHistory();
+
   const handleChange = ({ target: { name, value } }) => {
     setIsHidden(true);
     setLogin({
@@ -24,24 +25,11 @@ const LoginForm = () => {
 
   const handleClickEnter = async () => {
     const user = await loginAction({ email, password });
-    if (!user) {
-      setIsHidden(false);
-    } else {
-      let urlByRole;
-      switch (user.role) {
-      case 'seller':
-        urlByRole = '/seller/orders';
-        break;
-      case 'administrator':
-        urlByRole = '/admin/manage';
-        break;
-      default:
-        urlByRole = '/customer/products';
-        break;
-      }
-      localStorage.setItem('user', JSON.stringify(user));
-      history.push(urlByRole);
-    }
+    localStorage.setItem('user', JSON.stringify(user));
+    if (user && user.role === 'administrator') history.push('/admin/manage');
+    if (user && user.role === 'seller') history.push('/seller/orders');
+    if (user && user.role === 'customer') history.push('/customer/products');
+    return setIsHidden(false);
   };
 
   const handleClickRegister = () => {
@@ -51,15 +39,10 @@ const LoginForm = () => {
   const errorMessageContent = () => 'Email/senha inválido! Verifique os dados inseridos';
 
   const user = JSON.parse(localStorage.getItem('user'));
-  if (user && user.role === 'customer') {
-    history.push('/customer/products');
-  }
-  if (user && user.role === 'seller') {
-    history.push('/seller/orders');
-  }
-  if (user && user.role === 'administrator') {
-    history.push('/admin/manage');
-  }
+  if (user && user.role === 'administrator') history.push('/admin/manage');
+  if (user && user.role === 'seller') history.push('/seller/orders');
+  if (user && user.role === 'customer') history.push('/customer/products');
+
   return (
     <form>
       <div className="children_container_login">
@@ -108,6 +91,4 @@ const LoginForm = () => {
       </div>
     </form>
   );
-};
-
-export default LoginForm;
+}

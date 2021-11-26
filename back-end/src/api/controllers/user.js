@@ -19,8 +19,8 @@ exports.login = async (req, res) => {
 
 exports.register = async (req, res) => {
   try {
-    const { fullName, email, password } = req.body;
-    const jwt = await UserService.create({ fullName, email, password });
+    const { fullName, email, password, role = 'customer' } = req.body;
+    const jwt = await UserService.create({ fullName, email, password, role });
     if (jwt) {
       return res.status(StatusCodes.CREATED).json({ token: jwt });
     }

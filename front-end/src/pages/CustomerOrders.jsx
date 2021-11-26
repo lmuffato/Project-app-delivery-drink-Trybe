@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import moment from 'moment';
 import { fetchSales } from '../utils/API/fetch';
+import NavBar from '../components/NavBar';
 
 export default function CustomerOrder() {
   const [sales, setSale] = useState([]);
-  console.log('🚀 ~ file: CustomerOrders.jsx ~ line 7 ~ CustomerOrder ~ sales', sales);
   const user = JSON.parse(localStorage.getItem('user'));
   const { token } = user;
 
@@ -14,13 +14,13 @@ export default function CustomerOrder() {
   useEffect(() => {
     (async () => {
       const result = await fetchSales(token);
-      console.log('🚀 ~ file: CustomerOrders.jsx ~ line 14 ~ result', result);
       setSale(result);
     })();
-  }, [token]);
+  }, []);
 
   return (
     <div>
+      <NavBar />
       { sales.map((sale) => (
         <button
           type="button"

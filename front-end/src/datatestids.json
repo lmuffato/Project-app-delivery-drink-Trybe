@@ -63,6 +63,7 @@
   "64": "seller_order_details__element-order-total-price",
   "65": "admin_manage__input-name",
   "66": "admin_manage__input-email",
+  "67": "admin_manage__element-invalid-register",
   "68": "admin_manage__select-role",
   "69": "admin_manage__button-register",
   "70": "admin_manage__element-user-table-item-number-<index>",

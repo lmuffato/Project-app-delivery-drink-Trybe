@@ -119,7 +119,7 @@ const getProductsSalesBySaleId = async (id) => {
   try {
     const salesProducts = await Sale.findByPk(id, {
     include: [
-      { model: Product, as: 'products', through: { attributes: [] } },
+      { model: Product, as: 'products', through: { attributes: ['quantity'] } },
     ],
   });
   console.log(salesProducts);

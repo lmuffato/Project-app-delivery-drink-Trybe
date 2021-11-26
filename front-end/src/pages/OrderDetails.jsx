@@ -29,17 +29,10 @@ function OrderDetails() {
 
       setOrder(saleDetail);
 
-      const { data } = await
+      const { data: { products } } = await
       get('customer_orders', id[length - 1]);
 
-      console.log(data);
-
-      // data.forEach(async (item) => {
-      //   item.productId = await
-      //   (products.find((itemId) => (item.productId === itemId.id)));
-      // });
-
-      setProducts([]);
+      setProducts(products);
     };
     getOrders();
   }, []);
@@ -73,14 +66,14 @@ function OrderDetails() {
         </thead>
         <tbody>
           { currProducts.map((product, index) => (
-            <tr key={ product.productId.name }>
+            <tr key={ product.name }>
               <td
                 data-testid={ `${DATA_ITEM_N}${index}` }
               >
                 {index + 1}
               </td>
               <td data-testid={ `${DATA_ITEM_D}${product.saleId}` }>
-                {product.productId.name}
+                {product.name}
               </td>
               <td data-testid={ `${DATA_ITEM_Q}${product.saleId}` }>
                 {product.quantity}
@@ -92,7 +85,7 @@ function OrderDetails() {
               <td
                 data-testid={ `${DATA_ITEM_TP}${order.id}` }
               >
-                {Number(product.quantity) * Number(product.productId.price) }
+                {Number(product.SaleProduct.quantity) * Number(product.price) }
               </td>
             </tr>
           ))}

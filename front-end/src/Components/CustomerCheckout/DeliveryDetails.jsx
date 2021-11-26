@@ -72,7 +72,7 @@ export default function DeliveryDetails() {
       sellerId,
       deliveryAddress,
       deliveryNumber,
-      status: 'pendente',
+      status: 'Pendente',
     };
     const saleProductsArray = { saleProductsArray: itensList };
     const saleId = await createInSalesAndSalesProducts(token, sale, saleProductsArray);

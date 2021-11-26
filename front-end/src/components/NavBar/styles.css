@@ -3,6 +3,7 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
+  width: 100vw;
 }
 
 .c_navbar > div {
@@ -13,9 +14,10 @@
   color: var(--text-light);
   cursor: pointer;
   line-height: 80px;
+  min-width: 15vw;
+  padding: 0 10px;
   text-align: center;
   text-decoration: none;
-  width: 15vw;
 }
 
 .c_link .active {
@@ -30,12 +32,13 @@
   cursor: pointer;
   display: flex;
   justify-content: center;
-  width: 10vw;
+  min-width: 10vw;
+  padding: 0 10px;
 }
 
 .c_username {
   background-color: var(--color-tertiary);
   color: var(--text-light);
+  min-width: 15vw;
   text-align: center;
-  width: 15vw;
 }

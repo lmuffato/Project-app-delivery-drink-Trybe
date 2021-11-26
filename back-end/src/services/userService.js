@@ -68,14 +68,10 @@ const adminCreate = async (user) => {
     if (userAlreadyExists) return errorMap.userAlreadyExists;
     
     const passwordMD5 = md5(password);
-    
+    const ROLE = 'customer';
+
     const result = await User.create(
-      { 
-        name: user.name,
-        email: user.email,
-        password: passwordMD5,
-        role: user.role || CUSTOMER_ROLE,
-      },
+      { name: user.name, email: user.email, password: passwordMD5, role: user.role || ROLE },
     );
     // console.log(result);
     const { dataValues: { id, name, email, role } } = result;

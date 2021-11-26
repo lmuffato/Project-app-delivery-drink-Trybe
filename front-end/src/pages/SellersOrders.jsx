@@ -18,8 +18,8 @@ const dataTestid52 = 'seller_orders__element-card-address';
 export default function SellersOrders() {
   const { userData } = useContext(userContext);
   const [orders, setOrders] = useState([]);
-  // const [isLoading, setIsLoading] = useState(true);
-  // const loadingTag = <h3>Loading ...</h3>;
+  const [isLoading, setIsLoading] = useState(true);
+  const loadingTag = <h3>Loading ...</h3>;
 
   const renderTags = (sale, index) => (
     <div key={ index } className="unit-card-container">
@@ -58,9 +58,9 @@ export default function SellersOrders() {
       <Navbar />
       <section className="card-container">
         {
-          // isLoading
-          // ? loadingTag
-          orders.map((e, index) => renderTags(e, index))
+          isLoading
+            ? loadingTag
+            : orders.map((e, index) => renderTags(e, index))
         }
       </section>
     </div>

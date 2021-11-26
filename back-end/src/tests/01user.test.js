@@ -9,13 +9,13 @@ chai.use(chaiHttp);
 let token =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkRlbGl2ZXJ5IEFwcCBBZG1pbiIsImVtYWlsIjoiYWRtQGRlbGl2ZXJ5YXBwLmNvbSIsInJvbGUiOiJhZG1pbmlzdHJhdG9yIiwiaWF0IjoxNjM3Njk2Njg2fQ.F5RblxMueIXmtL13rO2I2So9Tt0PXEJg8Br_UETiliI";
 
-  function getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min)) + min;
-  }
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min;
+}
 
-  const mockNewUser = {
+const mockNewUser = {
   name: faker.name.findName(),
   email: faker.internet.email(),
   password: faker.internet.password(),
@@ -33,14 +33,14 @@ const mockEditedUser = {
   name: `Usuário de teste - Id: ${randomBigNumber}`,
   email: faker.internet.email(),
   password: faker.internet.password(),
-  role: 'customer'
+  role: "customer",
 };
 
 const mockEditedInvalidPassword = {
   name: `Usuário de teste - Id: ${randomBigNumber}`,
   email: faker.internet.email(),
-  password: '',
-  role: 'customer'
+  password: "",
+  role: "customer",
 };
 
 const mockInvalidUser = {
@@ -126,7 +126,7 @@ describe('Testa a rota "/users"', () => {
   });
 
   describe('Testa o método PUT na rota "/users/:id"', () => {
-    it('Retorna o status http 200 - OK contendo um objeto referente ao usuário editado', async () => {
+    it("Retorna o status http 200 - OK contendo um objeto referente ao usuário editado", async () => {
       const id = getRandomInt(1, 5);
 
       const { status } = await requestPutHelper(`/users/${id}`, mockEditedUser);
@@ -136,7 +136,10 @@ describe('Testa a rota "/users"', () => {
     it('Retorna o status http 406 - NOT ACCEPTABLE contendo a message: ""password" is not allowed to be empty" quando uma senha não é fornecida', async () => {
       const id = getRandomInt(1, 5);
 
-      const { status, body } = await requestPutHelper(`/users/${id}`, mockEditedInvalidPassword);
+      const { status, body } = await requestPutHelper(
+        `/users/${id}`,
+        mockEditedInvalidPassword
+      );
 
       const expectedMessage = '"password" is not allowed to be empty';
 
@@ -147,7 +150,10 @@ describe('Testa a rota "/users"', () => {
 
   describe('Testa o método DELETE na rota "/users/:id"', () => {
     it('Retorna o status http 200 - OK contendo contendo a message: "Usuário deletado com sucesso" ao deletar um usuário', async () => {
-      const { body } = await requestPostHelper(`/users/register`, mockNewUserToDelete);
+      const { body } = await requestPostHelper(
+        `/users/register`,
+        mockNewUserToDelete
+      );
       const id = body.id;
       const { status } = await requestDeleteHelper(`/users/${id}`);
 
@@ -155,7 +161,9 @@ describe('Testa a rota "/users"', () => {
     });
 
     it('Retorna o status http 404 - NOT FOUND contendo contendo a message: ""user" not found" ao deletar um usuário inexistente', async () => {
-      const { status, body } = await requestDeleteHelper(`/users/${randomBigNumber}`);
+      const { status, body } = await requestDeleteHelper(
+        `/users/${randomBigNumber}`
+      );
 
       const expectedMessage = '"user" not found';
 

@@ -24,7 +24,7 @@ const mockNewSale = {
   deliveryAddress: faker.address.streetName(),
   deliveryNumber: getRandomInt(1, 1000).toString(),
   status: "pendente",
-  cart: [3]
+  cart: [3],
 };
 
 const mockEditedSale = {
@@ -34,7 +34,7 @@ const mockEditedSale = {
   deliveryAddress: faker.address.streetName(),
   deliveryNumber: getRandomInt(1, 1000).toString(),
   status: "pendente",
-  cart: [3]
+  cart: [3],
 };
 
 const mockSaleToDelete = {
@@ -44,7 +44,7 @@ const mockSaleToDelete = {
   deliveryAddress: faker.address.streetName(),
   deliveryNumber: getRandomInt(1, 1000).toString(),
   status: "pendente",
-  cart: [3]
+  cart: [3],
 };
 
 const requestPostHelper = async (endpoint, body) => {
@@ -70,12 +70,9 @@ const requestDeleteHelper = async (endpoint) => {
 describe('Testa a rota "/sales"', () => {
   describe('Testa o método POST na rota "/sales"', () => {
     it("Retorna o status http 201 - CREATED e um objeto contendo a nova venda adicionada", async () => {
-      const { status, body } = await requestPostHelper(
-        "/sales",
-        mockNewSale
-      );
-        const newSale = mockNewSale;
-        delete mockNewSale.cart;
+      const { status, body } = await requestPostHelper("/sales", mockNewSale);
+      const newSale = mockNewSale;
+      delete mockNewSale.cart;
 
       expect(status).to.be.equals(201);
       expect(body).to.be.an("object");
@@ -95,7 +92,7 @@ describe('Testa a rota "/sales"', () => {
 
   describe('Testa o método GET na rota "/sales/:id"', () => {
     it("Retorna o status http 200 - OK contendo um objeto referente a venda buscada", async () => {
-      const id = getRandomInt(3, 5);
+      const id = 1;
       const { status, body } = await requestGetHelper(`/sales/${id}`);
 
       expect(status).to.be.equals(200);
@@ -119,10 +116,7 @@ describe('Testa a rota "/sales"', () => {
     it("Retorna o status http 200 - OK contendo um objeto referente à venda editada", async () => {
       const id = getRandomInt(3, 5);
 
-      const { status } = await requestPutHelper(
-        `/sales/${id}`,
-        mockEditedSale
-      );
+      const { status } = await requestPutHelper(`/sales/${id}`, mockEditedSale);
 
       expect(status).to.be.equals(200);
     });
@@ -130,10 +124,7 @@ describe('Testa a rota "/sales"', () => {
 
   describe('Testa o método DELETE na rota "/sales/:id"', () => {
     it("Retorna o status http 204 - NO CONTENT ao deletar uma venda", async () => {
-      const { body } = await requestPostHelper(
-        "/sales",
-        mockSaleToDelete
-      );
+      const { body } = await requestPostHelper("/sales", mockSaleToDelete);
 
       const id = body.id;
       const { status } = await requestDeleteHelper(`/sales/${id}`);

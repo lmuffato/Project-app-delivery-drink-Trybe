@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-closing-tag-location */
 import React, { useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
 import Context from '../context/Context';
@@ -43,63 +42,57 @@ function OrderDetails() {
   }, []);
 
   console.log(order);
-
+  if (!order) return (<div>Loading...</div>);
   return (
     <div>
-      Detalhes do Pedido
-      {
-        order
-        && <>
-          <table>
-            <thead>
-              <tr>
-                <th data-testid={ DATA_TEST_ID }>{order.id}</th>
-                <th data-testid={ DATA_TEST_N }>{order.sellerId}</th>
-                <th data-testid={ DATA_TEST_DA }>
-                  {order.saleDate.split('T')[0].split('-').reverse().join('/')}
-                </th>
-                <th data-testid={ DATA_S }>{order.status}</th>
-                <th>Marcar como entrege</th>
-              </tr>
-            </thead>
-          </table>
+      <table>
+        <thead>
+          <tr>
+            <th data-testid={ DATA_TEST_ID }>{order.id}</th>
+            <th data-testid={ DATA_TEST_N }>{order.sellerId}</th>
+            <th data-testid={ DATA_TEST_DA }>
+              {order.saleDate.split('T')[0].split('-').reverse().join('/')}
+            </th>
+            <th data-testid={ DATA_S }>{order.status}</th>
+            <th>Marcar como entrege</th>
+          </tr>
+        </thead>
+      </table>
 
-          <table>
-            <thead>
-              <tr>
-                <th>Item</th>
-                <th>Descrição</th>
-                <th>Quantidade</th>
-                <th>Valor Unitário</th>
-                <th>Sub Total</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                {currProducts && currProducts.map((product, index) => (
-                  <>
-                    <td
-                      data-testid={ `${DATA_ITEM_N}${index}` }
-                      key={ product.productId.name }
-                    >
-                      {index + 1}
-                    </td>
-                    <td data-testid={ `${DATA_ITEM_D}${index}` }>
-                      {product.productId.name}
-                    </td>
-                    <td data-testid={ `${DATA_ITEM_Q}${index}` }>{product.quantity}</td>
-                    <td data-testid={ `${DATA_ITEM_P}${index}` }>
-                      {product.productId.price}
-                    </td>
-                    <td data-testid={ `${DATA_ITEM_TP}${index}` }>{order.totalPrice}</td>
-                  </>
-                ))}
-              </tr>
-            </tbody>
-          </table>
-          <h1>{total}</h1>
-        </>
-      }
+      <table>
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Descrição</th>
+            <th>Quantidade</th>
+            <th>Valor Unitário</th>
+            <th>Sub Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            {currProducts && currProducts.map((product, index) => (
+              <>
+                <td
+                  data-testid={ `${DATA_ITEM_N}${index}` }
+                  key={ product.productId.name }
+                >
+                  {index + 1}
+                </td>
+                <td data-testid={ `${DATA_ITEM_D}${index}` }>
+                  {product.productId.name}
+                </td>
+                <td data-testid={ `${DATA_ITEM_Q}${index}` }>{product.quantity}</td>
+                <td data-testid={ `${DATA_ITEM_P}${index}` }>
+                  {product.productId.price}
+                </td>
+                <td data-testid={ `${DATA_ITEM_TP}${index}` }>{order.totalPrice}</td>
+              </>
+            ))}
+          </tr>
+        </tbody>
+      </table>
+      <h1>{total}</h1>
 
     </div>
   );

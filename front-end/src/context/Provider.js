@@ -15,6 +15,7 @@ const Endpoints = {
   customer_checkout: 'sale',
   input_sellers: 'customer/checkout',
   seler_login: 'seller/orders',
+  admin_register: 'register/admin',
 };
 
 function Provider({ children }) {

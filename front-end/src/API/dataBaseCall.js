@@ -46,7 +46,6 @@ export async function sendRequest({ data, sellInfo, token }) {
 
 export async function getSaleById(token, id) {
   try {
-    console.log(token);
     const response = (await axios.get(
       `${BASE_URL}/sales/${id}`,
       { headers: { Authorization: token } },

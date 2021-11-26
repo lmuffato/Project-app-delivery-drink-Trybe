@@ -36,14 +36,15 @@ const getAllSales = async (req, res, next) => {
 const getSalesById = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const sale = await Sale.findByPk(id);
+    const { dataValues: { ...data } } = await Sale.findByPk(id);
     const saleProd = await ProductsSale.findAll({ where: { [ids.sale]: id } });
     const products = await Promise.all(saleProd.map(async (prod) => {
-      console.log(prod);
-      const find = await Product.findByPk(prod.dataValues[ids.product]);
-      return { find, quantity: prod.dataValues.quantity };
+      const find = await Product.findByPk(prod.dataValues[ids.product], {
+        attributes: { exclude: ['url_image'] },
+      });
+      return { ...find.dataValues, quantity: prod.dataValues.quantity };
     }));
-    res.status(OK).json({ sale, products });
+    res.status(OK).json({ ...data, products });
   } catch (e) {
     next({ statusCode: INTERNAL_SERVER_ERROR, message: e.message });
   }

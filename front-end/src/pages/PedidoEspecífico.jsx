@@ -10,18 +10,18 @@ export default function PedidoEspecífico({ location }) {
   const split = path.split('orders/')[1];
   const saleID = parseInt(split, 10);
   const [products, setProducts] = useState([]);
+  console.log('📓 ~ file: PedidoEspecífico.jsx ~ line 13 ~ PedidoEspecífico ~ products', products);
 
   async function requestAPI() {
     const result = await getSaleById(userName.token, saleID);
-
     return result;
   }
 
   useEffect(async () => {
     const data = await requestAPI();
-    setProducts(data.products);
+    setProducts(data);
   }, []);
-  console.log(products);
+
   return (
     <div>
       <Header title="Produtos" subtitle="Meus Pedidos" name={ userName.name } />

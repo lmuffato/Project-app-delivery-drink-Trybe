@@ -14,8 +14,11 @@ const socket = io.connect('http://localhost:3001');
 
 export default function OrderDetails({ dataTestIds }) {
   const [disabledButton, setDisableButton] = useState(false);
+
   const { sale, setSale, seller, products } = useSellerOrderDetails();
   const { socketStatus } = useSocket();
+
+  const { status } = sale;
 
   useEffect(() => {
     if (sale.status !== 'Em Trânsito' && sale.status) {
@@ -55,9 +58,15 @@ export default function OrderDetails({ dataTestIds }) {
         >
           {sale.saleDate ? formatDate(sale.saleDate) : null}
         </span>
-        <span data-testid={ dataTestIds['40'] }>
+
+        <span
+          className={ styles[status ? status
+            .toLowerCase().replace('â', 'a').replace(' ', '') : null] }
+          data-testid={ dataTestIds['40'] }
+        >
           {socketStatus ? socketStatus.myStatus : sale.status}
         </span>
+
         <button
           disabled={ disabledButton }
           data-testid={ dataTestIds['47'] }

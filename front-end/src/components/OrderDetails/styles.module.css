@@ -5,7 +5,7 @@
 .orderDetails {
   align-items: center;
   background: #eaf1ef;
-  border: 1px solid #b1c2be;
+  border-bottom: 1px solid #b1c2be;
   display: flex;
   font-weight: 600;
   height: 45px;
@@ -24,6 +24,10 @@
   height: 35px;
   padding: 0 10px;
   text-transform: uppercase;
+}
+
+.orderDetails button:hover {
+  filter: brightness(0.9);
 }
 
 .orderDetails button:disabled {
@@ -105,3 +109,60 @@
   margin-right: 5px;
 }
 
+.pendente, .preparando, .entregue, .emtransito {
+  align-items: center;
+  background: white;
+  border-radius: 5px;
+  display: flex;
+  font-size: 1rem;
+  font-weight: 800;
+  height: 35px;
+  justify-content: center;
+  margin: 0 5px;
+  min-width: 8rem;
+  padding: 10px;
+}
+
+.pendente {
+  background: #ccb800;
+}
+
+.preparando {
+  background: #66cc01;
+}
+
+.entregue {
+  background: #00cc9b;
+}
+
+.emtransito {
+  background: #e74c3c;
+}
+
+@media screen and ( max-width : 767px ) {
+
+  .orderDetails {
+    flex-direction: column;
+    height: 12rem;
+  }
+
+  .tableContainer {
+    width: 100%;
+  }
+
+  .tableHead {
+    font-size: 0.6rem;
+  }
+
+  .tableContainer tbody td:first-child {
+    padding: 0 10px;
+  }
+
+  .tableContainer tbody td:nth-child( 4 ) {
+    padding: 5px 10px;
+  }
+
+  .tableContainer tbody td:nth-child( 5 ) {
+    padding: 5px 10px;
+  }
+}

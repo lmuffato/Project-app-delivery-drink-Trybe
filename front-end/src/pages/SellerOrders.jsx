@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Context from '../context/Context';
-import OrderCard from '../components/OrderCard';
+import OrderCard from '../components/SellerOrderCard';
 
 function SellerOrders() {
   const { get } = useContext(Context);

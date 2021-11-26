@@ -107,7 +107,23 @@ const getSaleDetailById = async (id) => {
   });
   if (!saleDetail) return errorMap.saleNotFound;
 
-  return saleDetail;
+  const seller = await User.findByPk(saleDetail.sellerId);
+
+  return { saleDetail, seller };
+  } catch (error) {
+    return errorMap.internalError;
+  }
+};
+
+const getProductsSalesBySaleId = async (id) => {
+  try {
+    const salesProducts = await SaleProduct.findAll({ where: {
+      saleId: id,
+    },
+  });
+  if (!salesProducts) return errorMap.saleError;
+
+  return salesProducts;
   } catch (error) {
     return errorMap.internalError;
   }
@@ -126,5 +142,10 @@ const getAllSellers = async () => {
 };
 
 module.exports = {
-  postSale, getSalesBySellerId, getSalesByCustomerId, getSaleDetailById, getAllSellers,
+  postSale,
+  getSalesBySellerId,
+  getSalesByCustomerId,
+  getSaleDetailById,
+  getAllSellers,
+  getProductsSalesBySaleId,
 };

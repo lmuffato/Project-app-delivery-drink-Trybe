@@ -3,8 +3,8 @@ import { shape, string } from 'prop-types';
 import { Link } from 'react-router-dom';
 
 function SellerOrderCard(props) {
-  const { order } = props;
-  const { id, status, saleDate, totalPrice, address } = order;
+  const { orders } = props;
+  const { id, status, saleDate, totalPrice, address } = orders;
 
   return (
     <Link to={ `/seller/orders/${id}` }>

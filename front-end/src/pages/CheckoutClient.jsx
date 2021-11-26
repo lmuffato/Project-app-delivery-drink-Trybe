@@ -24,7 +24,7 @@ function CheckoutClient() {
       setSellerId(data[0].id);
     };
     allSellers();
-  }, []);
+  }, [get, setSellers]);
 
   const handleChange = ({ target }) => {
     const { id, value } = target;

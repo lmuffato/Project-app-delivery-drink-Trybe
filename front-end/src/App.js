@@ -11,6 +11,7 @@ import CustomerDetails from './pages/CustomerDetails';
 import CustomerOrders from './pages/CustomerOrders';
 import SellerOrders from './pages/SellerOrders';
 import SellerDetails from './pages/SellerDetails';
+import AdminManegement from './pages/AdminManagement';
 
 function App() {
   return (
@@ -41,7 +42,7 @@ function App() {
 
         <Route path="admin" element={ <AppContainer /> }>
           <Route index element={ <Navigate to="manage" /> } />
-          <Route path="manage" element={ <p>manage</p> } />
+          <Route path="manage" element={ <AdminManegement /> } />
         </Route>
 
         <Route path="*" element={ <h1>Not Found</h1> } />

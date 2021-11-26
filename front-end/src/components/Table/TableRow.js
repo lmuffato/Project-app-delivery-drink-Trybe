@@ -86,7 +86,7 @@ const adminManagement = {
 };
 
 const users = (data, onClick) => {
-  const { name, email, role } = data;
+  const { name, email, role, index } = data;
 
   return (
     <tr>

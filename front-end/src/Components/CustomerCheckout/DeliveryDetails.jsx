@@ -23,7 +23,7 @@ export default function DeliveryDetails() {
     // setTotalPrice,
   } = useContext(NewOrderContext);
   const [isLoading, setIsLoading] = useState(false);
-  const { itensList,  /* setItensList */ } = useContext(NewOrderContext);
+  const { itensList } = useContext(NewOrderContext);
 
   const getSellersList = async () => {
     const arr = await getAllUsersSallers();

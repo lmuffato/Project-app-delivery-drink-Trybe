@@ -4,6 +4,7 @@ import Context from '../context/Context';
 
 const DATA_TEST_ID = 'customer_order_details__element-order-details-label-order-id';
 const DATA_TEST_N = 'customer_order_details__element-order-details-label-seller-name';
+const DATA_B = 'customer_order_details__button-delivery-check';
 const DATA_TEST_DA = 'customer_order_details__element-order-details-label-order-date';
 const DATA_S = 'customer_order_details__element-order-details-label-delivery-status';
 const DATA_ITEM_N = 'customer_order_details__element-order-table-item-number-';
@@ -41,7 +42,7 @@ function OrderDetails() {
     getOrders();
   }, []);
 
-  console.log(order);
+  console.log(currProducts);
   if (!order) return (<div>Loading...</div>);
   return (
     <div>
@@ -54,7 +55,7 @@ function OrderDetails() {
               {order.saleDate.split('T')[0].split('-').reverse().join('/')}
             </th>
             <th data-testid={ DATA_S }>{order.status}</th>
-            <th>Marcar como entrege</th>
+            <button type="button" data-testid={ DATA_B }>Marcar como entrege</button>
           </tr>
         </thead>
       </table>
@@ -83,16 +84,20 @@ function OrderDetails() {
                   {product.productId.name}
                 </td>
                 <td data-testid={ `${DATA_ITEM_Q}${index}` }>{product.quantity}</td>
-                <td data-testid={ `${DATA_ITEM_P}${index}` }>
+                <td>
                   {product.productId.price}
                 </td>
-                <td data-testid={ `${DATA_ITEM_TP}${index}` }>{order.totalPrice}</td>
+                <td
+                  data-testid={ `${DATA_ITEM_P}${index}` }
+                >
+                  {Number(product.quantity) * Number(product.productId.price) }
+                </td>
               </>
             ))}
           </tr>
         </tbody>
       </table>
-      <h1>{total}</h1>
+      <h1 data-testid={ `${DATA_ITEM_TP}${index}` }>{total}</h1>
 
     </div>
   );

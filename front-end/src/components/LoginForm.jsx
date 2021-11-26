@@ -17,14 +17,13 @@ export default function Login() {
   const fetchPostData = async (userData) => {
     try {
       const data = await api.post('/user/login', userData);
-      if (data.status > errorLoginHTTP) {
+      const condition = data.status > errorLoginHTTP;
+      console.log(condition);
+      if (condition) {
         setErrorLogin(true);
         return;
       }
-      localStorage.setItem('token', data.data.token);
-      localStorage.setItem('email', data.data.email);
-      localStorage.setItem('role', data.data.role);
-      localStorage.setItem('name', data.data.name);
+      localStorage('user', JSON.stringify(data.data));
       const redirectRoutes = {
         customer: '/customer/products',
         seller: '/seller/orders',

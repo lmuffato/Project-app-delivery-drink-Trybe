@@ -5,7 +5,7 @@ import ButtonRemoveItem from './ButtonRemoveItem';
 function OrderItem({ info: { name, quantity, unitPrice, subTotal, productId }, index }) {
   return (
     <tr>
-      <td data-testid={ `customer_checkout__element-order-table-item-number--${index}` }>
+      <td data-testid={ `customer_checkout__element-order-table-item-number-${index}` }>
         { index + 1 }
       </td>
       <td data-testid={ `customer_checkout__element-order-table-name-${index}` }>

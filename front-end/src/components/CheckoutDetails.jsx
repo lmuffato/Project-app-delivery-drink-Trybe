@@ -43,6 +43,7 @@ export default function CheckoutDetails() {
   const confirmSale = async (products) => {
     console.log(sale);
     const result = await saleAction({ ...sale, products, token });
+    console.log('🚀 ~ file: CheckoutDetails.jsx ~ line 46 ~ confirmSale ~ result', result);
     const saleId = result.result;
     if (saleId) history.push(`/customer/orders/${saleId}`);
   };

@@ -56,8 +56,9 @@ export const fetchProducts = async (token) => {
   }
 };
 
-export const saleAction = async ({
-  token, userId, sellerId, totalPrice, deliveryAddress, deliveryNumber, products }) => {
+export const saleAction = async (sale) => {
+  const { token, userId, sellerId, totalPrice,
+    deliveryAddress, deliveryNumber, products } = sale;
   try {
     const rawResponse = await fetch('http://localhost:3001/sales',
       {
@@ -103,7 +104,7 @@ export const fetchSales = async (token) => {
   }
 };
 
-export const fetchSaleByID = async (id) => {
+export const saleActionGetById = async (id) => {
   try {
     const rawResponse = await fetch(`http://localhost:3001/sales/${id}`,
       {

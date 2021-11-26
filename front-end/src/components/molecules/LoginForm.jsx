@@ -50,6 +50,16 @@ const LoginForm = () => {
 
   const errorMessageContent = () => 'Email/senha inválido! Verifique os dados inseridos';
 
+  const user = JSON.parse(localStorage.getItem('user'));
+  if (user && user.role === 'customer') {
+    history.push('/customer/products');
+  }
+  if (user && user.role === 'seller') {
+    history.push('/seller/orders');
+  }
+  if (user && user.role === 'administrator') {
+    history.push('/admin/manage');
+  }
   return (
     <form>
       <div className="children_container_login">

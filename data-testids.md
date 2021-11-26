@@ -33,8 +33,8 @@
 - 32: customer_checkout__button-submit-order
 - 33: customer_orders__element-order-id-<id>
 - 34: customer_orders__element-delivery-status-<id>
--
 - 35: customer_orders__element-order-date-<id>
+- 36: customer_orders__element-card-price-<id>
 - 37: customer_order_details__element-order-details-label-order-id
 - 38: customer_order_details__element-order-details-label-seller-name
 - 39: customer_order_details__element-order-details-label-order-date
@@ -44,7 +44,7 @@
 - 43: customer_order_details__element-order-table-quantity-<index>
 - 44: customer_order_details__element-order-table-sub-total-<index>
 - 45: customer_order_details__element-order-total-price-<index>
--
+- 46:
 - 47: customer_order_details__button-delivery-check
 - 48: seller_orders__element-order-id-<id>
 - 49: seller_orders__element-delivery-status-<id>

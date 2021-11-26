@@ -9,4 +9,6 @@ router.get('/:id', SaleController.getByID);
 router.put('/:id', validateToken, SaleController.changeOrderStatus);
 router.post('/', validateRequestBody, validateToken, SaleController.create);
 
+router.get('/:id', SaleController.getByID); 
+
 module.exports = router;

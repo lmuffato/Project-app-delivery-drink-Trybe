@@ -10,7 +10,7 @@ const router = Router();
 
 router.get('/', listUsers);
 
-router.get('/admin', validateJWT,  adminList);
+router.get('/admin', validateJWT, adminList);
 
 router.delete('/:id', validateJWT, removeUser);
 

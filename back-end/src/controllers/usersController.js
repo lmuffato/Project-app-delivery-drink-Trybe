@@ -9,15 +9,15 @@ const listUsers = async (req, res) => {
 };
 
 const adminList = async (req, res) => {
-  const { role } = req.user;
+  const { role: reqUserRole } = req.user;
 
-  if (role.toLowerCase() !== 'administrator') {
+  if (reqUserRole.toLowerCase() !== 'administrator') {
     return res
       .status(httpStatus.unauthorized)
       .json();
   }
   const users = await User.findAll(
-    { where: { role: ['seller', 'customer'] } }
+    { where: { role: ['seller', 'customer'] } },
   );
 
   const serializedUsers = users
@@ -30,16 +30,18 @@ const removeUser = async (req, res) => {
   const { role } = req.user;
   const { id } = req.params;
 
-  if (role !== 'administrator') return res
+  if (role !== 'administrator') {
+ return res
     .status(httpStatus.unauthorized)
-    .json();
+    .json(); 
+}
 
   await User.destroy({ where: { id } });
   
   return res
     .status(httpStatus.ok)
-    .json({ message: `Deleted user with id ${id}` })
-}
+    .json({ message: `Deleted user with id ${id}` });
+};
 
 module.exports = {
   listUsers,

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Header from '../components/Header/Header';
@@ -11,15 +12,10 @@ export default function PedidoEspecífico({ location }) {
   const split = path.split('orders/')[1];
   const saleID = parseInt(split, 10);
   const [products, setProducts] = useState([]);
-<<<<<<< HEAD
-  console.log('📓 ~ file: PedidoEspecífico.jsx ~ line 13 ~ PedidoEspecífico ~ products',
-    products);
-=======
   const [total, setTotal] = useState(0);
   const [sale, setSale] = useState();
   const [date, setDate] = useState('');
   const [loading, setLoading] = useState(true);
->>>>>>> main-group-18
 
   async function requestAPI() {
     const result = await getSaleById(userName.token, saleID);
@@ -28,7 +24,7 @@ export default function PedidoEspecífico({ location }) {
     setLoading(false);
   }
   console.log(products);
-  useEffect(() => requestAPI(), []);
+  useEffect(() => requestAPI(), [requestAPI]);
   useEffect(() => {
     if (products) {
       const result = products.reduce(
@@ -41,13 +37,6 @@ export default function PedidoEspecífico({ location }) {
     }
   }, [products]);
 
-<<<<<<< HEAD
-  useEffect(async () => {
-    const data = await requestAPI();
-    setProducts(data);
-  }, [requestAPI]);
-
-=======
   useEffect(() => {
     if (sale) setDate(new Date(sale.sale_date).toLocaleDateString('pt-br'));
   }, [sale]);
@@ -55,7 +44,6 @@ export default function PedidoEspecífico({ location }) {
     setSale({ ...sale, status: 'Entregue' });
   }
   if (loading) return <p>Loading...</p>;
->>>>>>> main-group-18
   return (
     <div>
       <Header title="Produtos" subtitle="Meus Pedidos" name={ userName.name } />

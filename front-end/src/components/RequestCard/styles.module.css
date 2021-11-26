@@ -21,7 +21,7 @@
   height: 100%;
 }
 
-.requestId, .dateAndPrice, .pendente, .preparando, .entregue {
+.requestId, .dateAndPrice, .pendente, .preparando, .entregue, .emtransito {
   align-items: center;
   background: white;
   border-radius: 5px;
@@ -71,7 +71,7 @@
   width: 100%;
 }
 
-.pendente, .preparando, .entregue {
+.pendente, .preparando, .entregue, .emtransito {
   font-size: 1rem;
   font-weight: 800;
   margin: 0 5px;
@@ -88,6 +88,10 @@
 
 .entregue {
   background: #00cc9b;
+}
+
+.emtransito {
+  background: #e74c3c;
 }
 
 @media screen and ( max-width : 767px ) {

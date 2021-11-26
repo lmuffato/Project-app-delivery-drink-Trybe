@@ -22,7 +22,7 @@ const findAll = async ({ role }) => {
     },
   });
 
-  return data;
+  return data.filter((user) => user.role !== 'administrator');
 };
 
 const findOne = async ({ id }) => {

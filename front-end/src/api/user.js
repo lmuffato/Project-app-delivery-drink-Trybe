@@ -84,13 +84,33 @@ export async function update(user, id, token) {
  * @param {string} token
  * @returns
  */
-export async function getAll(token, role = '') {
+export async function getAll(token) {
   try {
     /**
        * @type {import('axios').AxiosResponse<User[]>}
        */
     const response = await axios.get(
-      `${BASE_URL}/users?role=${role}`, { headers: { Authorization: token } },
+      `${BASE_URL}/users/`, { headers: { Authorization: token } },
+    );
+    return response.data;
+  } catch ({ response: { status, data: { message } } }) {
+    /**
+     * @type {ErrorResponse}
+     */
+    const errorRes = { status, message };
+    throw errorRes;
+  }
+}
+
+export async function createUser(name, email, password, { role = 'customer', token }) {
+  console.log(token);
+  try {
+    /**
+     * @type {import('axios').AxiosResponse<User>}
+     */
+    const response = await axios.post(
+      `${BASE_URL}/users`, { name, email, password, role },
+      { headers: { authorization: token } },
     );
     return response.data;
   } catch ({ response: { status, data: { message } } }) {

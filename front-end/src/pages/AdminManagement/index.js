@@ -28,11 +28,26 @@ function AdminManegement() {
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [role, setRole] = useState('customer');
+  const [invalidInfo, setInvalidInfo] = useState('');
 
-  useEffect(() => {
+  const getAllUsers = () => {
     api.user.getAll(user.token).then(setUsers);
+  };
+
+  const createUser = (ev) => {
+    console.log(user);
+    ev.preventDefault();
+    api.user.createUser(name, email, password, { role, token: user.token })
+      .then(getAllUsers).catch((x) => setInvalidInfo(x.message));
+  };
+
+  const deleteUser = (userData) => {
+    api.user.deleteUser(userData.id, user.token)
+      .then(getAllUsers);
+  };
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  useEffect(getAllUsers, []);
 
   if (users.length === 0) return <h1>Loading</h1>;
 
@@ -46,7 +61,7 @@ function AdminManegement() {
   return (
     <AdminContainer>
       <h2>Cadastrar novo produto</h2>
-      <form className="container">
+      <form className="container" onSubmit={ createUser }>
         <Input
           label="Nome"
           datatestid="admin_manage__input-name"
@@ -79,13 +94,21 @@ function AdminManegement() {
         <Button
           datatestid="admin_manage__button-register"
           disabled={ validateInputs }
+          type="submit"
         >
           CADASTRAR
         </Button>
+        {invalidInfo && (
+          <p
+            data-testid="admin_manage__element-invalid-register"
+          >
+            {invalidInfo}
+          </p>
+        )}
       </form>
       <h2>Lista de usuários</h2>
       <div className="container">
-        <Table items={ items } type="admin" />
+        <Table items={ items } onDelete={ deleteUser } type="admin" />
       </div>
     </AdminContainer>
   );

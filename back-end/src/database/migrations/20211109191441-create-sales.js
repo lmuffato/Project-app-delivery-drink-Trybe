@@ -8,12 +8,32 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      user_id: { type: Sequelize.INTEGER },
-      seller_id: { type: Sequelize.INTEGER },
-      total_price: { type: Sequelize.DECIMAL(9,2) },
-      delivery_address: { type: Sequelize.STRING },
-      delivery_number: { type: Sequelize.STRING },
-      sale_date: { type: Sequelize.DATE },
+      userId: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        field: 'user_id',
+      },
+      sellerId: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        field: 'seller_id',
+      },
+      totalPrice: {
+        type: Sequelize.DECIMAL(9,2),
+        field: 'total_price',
+      },
+      deliveryAddress: {
+        type: Sequelize.STRING,
+        field: 'delivery_address',
+      },
+      deliveryNumber: {
+        type: Sequelize.STRING,
+        field: 'delivery_number',
+      },
+      sale_date: {
+        type: Sequelize.DATE,
+        field: 'sale_date',
+      },
       status: { type: Sequelize.STRING },
     });
   },

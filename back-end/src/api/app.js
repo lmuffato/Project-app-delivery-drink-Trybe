@@ -5,6 +5,7 @@ const path = require('path');
 const errorHandler = require('./middlewares/errorHandler');
 const userController = require('./controllers/userController');
 const productController = require('./controllers/productController');
+const saleController = require('./controllers/saleController');
 
 const app = express();
 
@@ -20,6 +21,12 @@ app.get('/products/:id', productController.getOne);
 app.get('/products', productController.getAll);
 
 app.get('/users', userController.getAll);
+app.post('/sales', saleController.create);
+app.get('/users/:id/sales', saleController.findByUserId);
+app.get('/sales', saleController.getAll);
+app.get('/sales/:id', saleController.findByIdSale);
+app.patch('/sales/:id', saleController.updateStatus);
+app.get('/sellers/:id/sales', saleController.findBySellerId);
 
 app.get('/coffee', (_req, res) => res.status(418).end());
 

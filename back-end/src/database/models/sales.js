@@ -1,24 +1,42 @@
 module.exports = (sequelize, DataTypes) => {
-  const Sale = sequelize.define('Sale',{
+  const Sale = sequelize.define('Sale', {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       allowNull: false,
       autoIncrement: true,
     },
-    user_id: { type: DataTypes.INTEGER },
-    seller_id: { type: DataTypes.INTEGER },
-    total_price: { type: DataTypes.DECIMAL(9,2) },
-    delivery_address: { type: DataTypes.STRING },
-    delivery_number: { type: DataTypes.STRING },
-    sala_date: { type: DataTypes.DATE },
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    sellerId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    totalPrice: { type: DataTypes.DECIMAL(9,2) },
+    deliveryAddress: { type: DataTypes.STRING },
+    deliveryNumber: { type: DataTypes.STRING },
+    saleDate: {
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
+    },
     status: { type: DataTypes.STRING },
-  }, { timestamps: true, tableName: 'sales' });
+  }, {
+    timestamps: false,
+    tableName: 'sales',
+    underscored: true,
+  });
 
   Sale.associate = (models) => {
     models.Sale.belongsTo(models.User, { 
       as: 'user',
-      foreignKey: ['user_id, seller_id'],
+      foreignKey: 'userId',
+    });
+
+    models.Sale.belongsTo(models.User, { 
+      as: 'seller',
+      foreignKey: 'sellerId',
     });
   }
 

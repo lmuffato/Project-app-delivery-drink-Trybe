@@ -1,7 +1,7 @@
 const md5 = require('md5');
 const jwt = require('jsonwebtoken');
-const fs = require('fs');
-const path = require('path');
+// const fs = require('fs');
+// const path = require('path');
 const { User } = require('../database/models');
 
 const CUSTOMER = 'customer';

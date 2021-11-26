@@ -8,7 +8,8 @@ module.exports = (sequelize, DataTypes) => {
     sellerId: {
       type: DataTypes.INTEGER,
       foreignKey: true,
-      field: 'seller_id'
+      field: 'seller_id',
+      defaultValue: 0,
     },
     totalPrice: {type: DataTypes.DECIMAL, field: 'total_price'},
     deliveryAddress: {type: DataTypes.STRING, field: 'delivery_address'},

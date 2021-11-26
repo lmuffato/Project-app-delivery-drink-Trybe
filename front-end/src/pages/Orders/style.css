@@ -1,5 +1,6 @@
 .ordersPage {
-  min-height: 100vh;
+  min-height: 88vh;
+  background-color: rgb(228, 228, 228);
   position: relative;
   width: 100%;
 }
@@ -12,18 +13,45 @@
   gap: 5rem;
   justify-content: center;
   margin-top: 7rem;
-  min-height: 100vh;
   padding: 5rem 0;
 }
 
 .order-container {
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  background-color: white;
+  border-radius: 5px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   max-height: 100px;
   padding: 5px;
   width: 400px;
+  position: relative;
+}
+
+.order-container:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  background: linear-gradient(90deg, #1a1a1a, #ed7c2b);
+  transition: 1s;
+}
+
+.order-container:hover:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  background: linear-gradient(90deg,#1a1a1a, #1a1a1a)
 }
 
 .order-container div {
@@ -38,6 +66,7 @@
 .status-order-Pendente {
   background-color: rgb(255, 251, 0);
   border-radius: 10px;
+  font-weight: 700;
   margin: 5px;
   padding: 5px;
 }
@@ -45,6 +74,7 @@
 .status-order-Entregue {
   background-color: rgb(12, 113, 196);
   border-radius: 10px;
+  font-weight: 700;
   margin: 5px;
   padding: 5px;
 }
@@ -52,6 +82,7 @@
 .status-order-Preparando {
   background-color: rgb(99, 247, 80);
   border-radius: 10px;
+  font-weight: 700;
   margin: 5px;
   padding: 5px;
 }
@@ -63,10 +94,25 @@
   padding: 5px;
 }
 
+.info-order {
+  background: rgb(207, 207, 207);
+  border-radius: 4px;
+}
+
 .info-order p {
   max-height: 5px;
 }
 
 .date-price-order p {
   max-height: 5px;
+}
+
+.orderUserName {
+  position: absolute;
+  bottom: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #575757;
+  font-size: 1.3rem;
+  font-weight: 700;
 }

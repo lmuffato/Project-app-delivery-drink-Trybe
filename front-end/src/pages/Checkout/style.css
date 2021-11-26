@@ -8,3 +8,8 @@
   padding: 40px 20px;
   width: 100%;
 }
+
+.totalCheckoutValue {
+  font-weight: 700;
+  border-bottom: 4px solid rgb(27, 27, 27);
+}

@@ -64,10 +64,14 @@ function Orders() {
               <p
                 data-testid={ `customer_orders__element-card-price-${id}` }
               >
+                R$
                 { totalPrice.replace('.', ',') }
               </p>
               {role === 'seller' && (
-                <p data-testid={ `seller_orders__element-card-address-${id}` }>
+                <p
+                  data-testid={ `seller_orders__element-card-address-${id}` }
+                  className="orderUserName"
+                >
                   { deliveryAdress }
                 </p>
               )}
@@ -82,7 +86,7 @@ function Orders() {
     <section className="ordersPage">
       <MenuCostumer />
       <div className="salesContainer">
-        { salesOrder !== undefined ? createOrders() : <p>Sem pedidos!</p>}
+        { salesOrder.length > 0 ? createOrders() : <h1>Sem pedidos!</h1>}
       </div>
     </section>
   );

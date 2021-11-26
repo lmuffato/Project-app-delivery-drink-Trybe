@@ -172,6 +172,7 @@ function OrderBox({ props }) {
         <span
           data-testid={ `${role}_order_details__element-order-total-price` }
         >
+          R$
           {totalPrice.replace('.', ',')}
         </span>
       </div>

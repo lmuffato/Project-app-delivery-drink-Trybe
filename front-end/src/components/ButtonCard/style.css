@@ -38,3 +38,7 @@
 button > svg {
   font-size: 20px;
 }
+
+.removeButton, .addButton {
+  border-radius: 2px;
+}

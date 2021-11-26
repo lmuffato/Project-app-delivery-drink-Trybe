@@ -14,7 +14,7 @@ function CheckoutPage() {
     <section className="checkoutPage">
       <MenuCostumer />
       <CheckoutTable cart={ cart } setCart={ setCart } />
-      <div>
+      <div className="totalCheckoutValue">
         Total: R$
         <span
           data-testid="customer_checkout__element-order-total-price"

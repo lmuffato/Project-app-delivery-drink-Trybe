@@ -18,7 +18,8 @@
 
 .customer-order-total-price {
   align-self: flex-end;
-  background-color: #f58f1b;
+  background-color: #1b1b1b;
+  padding: 3px 6px;
   border-radius: 5px;
   color: white;
   font-weight: 600;

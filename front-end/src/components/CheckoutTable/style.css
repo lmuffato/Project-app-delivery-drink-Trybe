@@ -15,3 +15,18 @@ td {
   color: rgb(24, 24, 24);
   padding: 1rem 2rem;
 }
+
+.removeButtonCheckout {
+  background: rgb(245, 69, 69);
+  padding: 10px 15px;
+  border: 0;
+  border-radius: 3px;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.removeButtonCheckout:hover {
+  filter: brightness(0.9);
+}

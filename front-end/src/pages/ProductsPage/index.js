@@ -42,7 +42,7 @@ const ProductsPage = () => {
             />
           ))}
         </div>
-        {totalValue >= 0 && (
+        {totalValue > 0 && (
           <button
             type="button"
             className="cartButton"

@@ -65,6 +65,7 @@ function DeliveryDetails() {
               placeholder="Travessa Terceira da Castanheira, Bairro Muruci"
               required
               data-testid="customer_checkout__input-address"
+              className="addressInput"
             />
           </label>
 
@@ -78,6 +79,7 @@ function DeliveryDetails() {
               required
               placeholder="198"
               data-testid="customer_checkout__input-addressNumber"
+              className="numInput"
             />
           </label>
         </div>
@@ -85,6 +87,7 @@ function DeliveryDetails() {
         <button
           type="submit"
           data-testid="customer_checkout__button-submit-order"
+          className="finishOrder"
         >
           FINALIZAR PEDIDO
         </button>

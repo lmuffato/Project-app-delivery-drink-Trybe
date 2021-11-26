@@ -54,6 +54,7 @@ function CheckoutTable({ cart, setCart }) {
             <td
               data-testid={ `customer_checkout__element-order-table-sub-total-${index}` }
             >
+              R$
               {(+price * +quantity).toFixed(2).replace('.', ',')}
             </td>
             <td>
@@ -61,6 +62,7 @@ function CheckoutTable({ cart, setCart }) {
                 type="button"
                 onClick={ () => handleDelete(id) }
                 data-testid={ `customer_checkout__element-order-table-remove-${index}` }
+                className="removeButtonCheckout"
               >
                 REMOVER
               </button>

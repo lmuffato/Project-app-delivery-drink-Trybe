@@ -1,3 +1,36 @@
-* {
-  color: black;
+.selectSeller {
+  height: 35px;
+  width: 140px;
+  border-radius: 5px;
+}
+
+.addressInput {
+  height: 30px;
+  width: 230px;
+  border-radius: 5px;
+  border: 0.2px solid black;
+  margin-right: 2rem;
+}
+
+.numInput {
+  height: 30px;
+  width: 50px;
+  border-radius: 5px;
+  border: 0.2px solid black;
+}
+
+.finishOrder {
+  margin-top: 2rem;
+  padding: 9px 15px;
+  background-color: rgb(15, 15, 15);
+  color: white;
+  border: 0;
+  font-weight: 700;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: 0.2s;
+}
+
+.finishOrder:hover {
+  box-shadow: 0 0 10px black;
 }

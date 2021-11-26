@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './style.css';
 
 function SelectSellers({ sellers, selectedSeller, setSelectedSeller }) {
   return (
@@ -12,6 +13,7 @@ function SelectSellers({ sellers, selectedSeller, setSelectedSeller }) {
         value={ selectedSeller }
         onChange={ ({ target }) => setSelectedSeller(target.value) }
         data-testid="customer_checkout__select-seller"
+        className="selectSeller"
       >
         {sellers.map(({ id, name }) => (
           <option value={ id } key={ id }>{name}</option>

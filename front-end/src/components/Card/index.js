@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ButtonCard from '../ButtonCard';
-// import './style.css';
+import './style.css';
 
 function Card({ id, name, price, url }) {
   return (
@@ -10,7 +10,6 @@ function Card({ id, name, price, url }) {
       id={ id }
     >
       <img
-        style={ { width: '10px' } }
         src={ url }
         alt={ name }
         data-testid={ `customer_products__img-card-bg-image-${id}` }

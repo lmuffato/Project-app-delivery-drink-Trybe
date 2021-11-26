@@ -52,10 +52,6 @@ export const UsersProvider = ({ children }) => {
     }
   }, [getUsersList]);
 
-  useEffect(() => {
-    console.log(usersList);
-  }, [usersList]);
-
   return (
     <UsersContext.Provider
       value={

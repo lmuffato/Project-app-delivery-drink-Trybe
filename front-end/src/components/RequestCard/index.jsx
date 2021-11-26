@@ -23,7 +23,10 @@ export default function RequestCard(
       </div>
       <div className={ styles.cardSubContainer }>
         <div className={ styles.statusDatePriceContainer }>
-          <div className={ styles[status.toLowerCase()] }>
+          <div
+            className={ styles[status
+              .toLowerCase().replace('â', 'a').replace(' ', '')] }
+          >
             <span data-testid={ `${dataTestIdStatus}${requestId}` }>
               {status}
             </span>

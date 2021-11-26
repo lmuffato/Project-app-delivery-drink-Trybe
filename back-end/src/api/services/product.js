@@ -2,10 +2,16 @@ const { Product } = require('../../database/models');
 
 const err = (code, message) => ({ code, message });
 const productNotFound = '"product" not found';
+const productDuplicated = '"product" is already in the database';
 
 const create = async (product) => {
-  const data = await Product.create(product);
-
+  let data;
+  try {
+    data = await Product.create(product);
+  } catch (error) {
+   throw err('conflict', productDuplicated);
+  }
+  
   return data;
 };
 

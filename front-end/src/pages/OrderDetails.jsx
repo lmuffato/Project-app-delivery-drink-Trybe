@@ -39,6 +39,46 @@ function OrdersDetails({ match }) {
     getOrder();
   }, [id]);
 
+  function tableRow() {
+    return (
+      <tr>
+        <th>
+          PEDIDO 000
+          <span
+            data-testid="customer_order_details__element-order-details-label-order-id"
+          >
+            {id}
+          </span>
+        </th>
+        <th
+          data-testid="customer_order_details__element-order-details-label-seller-name"
+        >
+          {order.seller.name}
+        </th>
+        <th
+          data-testid="customer_order_details__element-order-details-label-order-date"
+        >
+          { moment(order.sale_date).format(('DD/MM/YYYY')) }
+        </th>
+        <th
+          data-testid={ statsDTid }
+        >
+          {orderStatus}
+        </th>
+        <th>
+          <Button
+            variant="success"
+            data-testid="customer_order_details__button-delivery-check"
+            onClick={ () => setSaleStatus('Entregue') }
+            disabled={ disableButton }
+          >
+            MARCAR COMO ENTREGUE
+          </Button>
+        </th>
+      </tr>
+    );
+  }
+
   if (!order) return <p>Carregando...</p>;
 
   return (
@@ -47,41 +87,9 @@ function OrdersDetails({ match }) {
       <h3>Detalhe do Pedido</h3>
       <br />
       <Table>
-        <tr>
-          <th>
-            PEDIDO 000
-            <span
-              data-testid="customer_order_details__element-order-details-label-order-id"
-            >
-              {id}
-            </span>
-          </th>
-          <th
-            data-testid="customer_order_details__element-order-details-label-seller-name"
-          >
-            {order.seller.name}
-          </th>
-          <th
-            data-testid="customer_order_details__element-order-details-label-order-date"
-          >
-            { moment(order.sale_date).format(('DD/MM/YYYY')) }
-          </th>
-          <th
-            data-testid={ statsDTid }
-          >
-            {orderStatus}
-          </th>
-          <th>
-            <Button
-              variant="success"
-              data-testid="customer_order_details__button-delivery-check"
-              onClick={ () => setSaleStatus('Entregue') }
-              disabled={ disableButton }
-            >
-              MARCAR COMO ENTREGUE
-            </Button>
-          </th>
-        </tr>
+        <thead>
+          { tableRow() }
+        </thead>
       </Table>
       <Table striped bordered hover variant="dark">
         <thead>

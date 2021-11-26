@@ -48,14 +48,9 @@ function SellerOrdersDetails({ match }) {
     transitStatus();
   }, [orderStatus]);
 
-  if (!order) return <p>Carregando...</p>;
-
-  return (
-    <div>
-      <NavBar fixed="top" />
-      <h3>Detalhe do Pedido</h3>
-      <br />
-      <Table>
+  function tableRow() {
+    return (
+      <tr>
         <th>
           PEDIDO 000
           <span
@@ -94,6 +89,21 @@ function SellerOrdersDetails({ match }) {
             SAIU PARA ENTREGA
           </Button>
         </th>
+      </tr>
+    );
+  }
+
+  if (!order) return <p>Carregando...</p>;
+
+  return (
+    <div>
+      <NavBar fixed="top" />
+      <h3>Detalhe do Pedido</h3>
+      <br />
+      <Table>
+        <thead>
+          { tableRow() }
+        </thead>
       </Table>
       <Table striped bordered hover variant="dark">
         <thead>

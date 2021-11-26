@@ -43,7 +43,6 @@ export default function TodosOsPedidos() {
                 status={ e.status }
                 sale_date={ e.sale_date }
                 total_price={ e.total_price }
-                option
               />
             ))
       }

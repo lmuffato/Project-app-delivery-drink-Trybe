@@ -32,9 +32,20 @@ const getSaleDetails = async (id) => {
   return sale;
 };
 
+const changeStatus = async (id) => {
+  await Sale.changeStatus(id);
+};
+
+const getSalesBySellerId = async (id) => {
+  const salesList = await Sale.getSalesBySellerId(id);
+  return salesList;
+};
+
 module.exports = {
   addNew,
   getSale,
   getSaleById,
   getSaleDetails,
+  changeStatus,
+  getSalesBySellerId,
 };

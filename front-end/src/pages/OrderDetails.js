@@ -1,9 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { statusChange } from '../utils/Data';
+import dateFormatation, { priceFormat } from '../utils/Format';
+import Header from '../Components/Header';
+
+const LINKS = [
+  {
+    name: 'PRODUTOS',
+    url: '/customer/products',
+    testId: 'customer_products__element-navbar-link-products',
+  },
+  {
+    name: 'MEUS PEDIDOS',
+    url: '/customer/orders',
+    testId: 'customer_products__element-navbar-link-orders',
+  },
+];
 
 function OrderDetails() {
   const [orders, setOrders] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [update, setUpdate] = useState(false);
   const { id } = useParams();
 
   // const saleId = 'item.products.saleProduct.saleId';
@@ -18,7 +35,7 @@ function OrderDetails() {
     };
     getOrder();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [update]);
 
   const dataTestIds = {
     sellerName: 'customer_order_details__element-order-details-label-seller-name',
@@ -29,12 +46,14 @@ function OrderDetails() {
     subtotal: 'customer_order_details__element-order-table-sub-total-',
   };
 
-  const changeStatus = async () => {
-    console.log('status');
+  const changeStatus = async (saleId) => {
+    await statusChange(saleId);
+    return update === false ? setUpdate(true) : setUpdate(false);
   };
 
   return (
     <div>
+      <Header links={ LINKS } />
       {isLoading ? 'Loading' : orders.map((item, index) => (
         <div
           key={ index }
@@ -58,7 +77,7 @@ function OrderDetails() {
             <h4
               data-testid="customer_order_details__element-order-details-label-order-date"
             >
-              { item.sale_date }
+              { dateFormatation(item.saleDate) }
             </h4>
             <div
               readOnly
@@ -71,7 +90,7 @@ function OrderDetails() {
               type="button"
               data-testid="customer_order_details__button-delivery-check"
               disabled={ item.status !== 'Em Trânsito' }
-              onClick={ () => changeStatus() }
+              onClick={ () => changeStatus(item.id) }
             >
               MARCAR COMO ENTREGUE
             </button>
@@ -97,19 +116,22 @@ function OrderDetails() {
                 <p
                   data-testid={ `${dataTestIds.labelOrder}${id}` }
                 >
-                  {product.price }
+                  { priceFormat(product.price) }
                 </p>
                 <p
                   data-testid={ `${dataTestIds.subtotal}${id}` }
                 >
-                  {product.saleProduct.quantity * product.price}
+                  { () => {
+                    const result = product.saleProduct.quantity * product.price;
+                    return priceFormat(result);
+                  }}
                 </p>
               </div>
             ))}
             <h4
               data-testid="customer_order_details__element-order-total-price"
             >
-              { item.price }
+              { priceFormat(item.price) }
             </h4>
           </div>
         </div>

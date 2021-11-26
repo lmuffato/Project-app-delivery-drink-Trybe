@@ -42,9 +42,12 @@ function Login() {
       if (data.role === 'administrator') {
         setHiddenError(true);
         history.push('/admin/manage');
-      } else {
+      } else if (data.role === 'customer') {
         setHiddenError(true);
         history.push('/customer/products');
+      } else {
+        setHiddenError(true);
+        history.push('/seller/orders');
       }
     }
   };

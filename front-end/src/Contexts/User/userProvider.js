@@ -31,13 +31,13 @@ function UserProvider({ children }) {
       const token = localStorage.getItem('token');
       if (token) {
         const data = await validateToken(token);
-        if (data) {
+        if (data.role === 'customer') {
           setUser(data);
           return history.push('/customer/products');
         }
-        if (data) {
+        if (data.role === 'seller') {
           setUser(data);
-          return history.push('/customer/products');
+          return history.push('/seller/orders');
         }
       }
 

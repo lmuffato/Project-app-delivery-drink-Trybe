@@ -1,9 +1,10 @@
 import React from 'react';
 import NavBar from '../../components/NavBar/NavBar';
 import FormRegisterUser from './FormRegisterUser';
+import './styles.css';
 
 const AdminManagerUsers = () => (
-  <main>
+  <main className="c_adminManagerUsersPage">
     <NavBar />
     <FormRegisterUser />
   </main>

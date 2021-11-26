@@ -6,10 +6,10 @@ import useManagerUsersContext from '../../../hooks/useManagerUsersContext';
 import api from '../../../services/api';
 import ErrorBackend from '../../../components/ErrorBackend';
 import InputText from '../../../components/InputText';
-import Label from '../../../components/Label';
 import Select from '../../../components/Select';
 import ButtonPrimary from '../../../components/ButtonPrimary';
 import SubTitle from '../../../components/SubTitle';
+import './styles.css';
 
 const fetchPostData = (userData) => api.post('/user', userData)
   .then((response) => response.data)
@@ -70,45 +70,51 @@ const FormRegisterUser = () => {
   }, [status, setUser, formState, setMessageErrorBackend, error, value]);
 
   return (
-    <>
+    <div>
       <SubTitle subtitle="Cadastrar novo usuário" />
-
-      <form onSubmit={ handleSubmit } action="POST">
-        <Label id="name" name="Nome" />
+      <form
+        onSubmit={ handleSubmit }
+        action="POST"
+        className="c_form_registerUser"
+      >
         <InputText
+          type="text"
           id="name"
+          label="nome"
           name="name"
           onChange={ handleForm }
           value={ formState.name }
-          placeholder="Mínimo 12 caracteres"
+          placeholder="Nome e sobrenome"
           data-testid="admin_manage__input-name"
+          autoFocus="autoFocus"
         />
 
-        <Label id="email" name="Email" />
         <InputText
+          type="text"
           id="email"
+          label="Email"
           name="email"
           onChange={ handleForm }
           value={ formState.email }
-          placeholder="example@email.com"
+          placeholder="seu-email@site.com.br"
           data-testid="admin_manage__input-email"
         />
 
-        <Label id="password" name="Senha" />
         <InputText
+          label="Senha"
+          type="password"
           id="password"
           name="password"
           onChange={ handleForm }
           value={ formState.password }
-          placeholder="Mínimo 6 caracteres"
+          placeholder="*********"
           data-testid="admin_manage__input-password"
         />
-
-        <Label id="role" name="Tipo" />
 
         <Select
           id="role"
           name="role"
+          label="Tipo"
           onChange={ handleForm }
           value={ formState.role }
           data-testid="admin_manage__select-role"
@@ -128,7 +134,7 @@ const FormRegisterUser = () => {
       </form>
 
       { messageErrorBackend && <ErrorBackend messageError={ messageErrorBackend } />}
-    </>
+    </div>
   );
 };
 

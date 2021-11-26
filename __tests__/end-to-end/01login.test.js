@@ -46,7 +46,7 @@ describe(requirement(2), () => {
   });
 });
 
-describe.skip(requirement(3), () => {
+describe(requirement(3), () => {
   const logins = [
     {
       email: "cliente@email",
@@ -105,7 +105,7 @@ describe.skip(requirement(3), () => {
   });
 });
 
-describe.skip(requirement(4), () => {
+describe(requirement(4), () => {
   const login = {
     email: internet.email().toLowerCase(),
     password: internet.password(passwordMinLen),

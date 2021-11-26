@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import Input from './atoms/Input';
 import Button from './atoms/Button';
 import testID from '../datatestids.json';
-import { adminRegisterAction, getUsers } from '../utils/API/fetch';
+import { adminRegisterAction } from '../utils/API/fetch';
 import validateRegister from '../utils/validations/joi/adminRegister';
 
 export default function AdminCreateUser() {
+  const [alreadyRegistered, setAlreadyRegistered] = useState(false);
   const [register, setRegister] = useState({
     fullName: '',
     email: '',
@@ -27,20 +28,16 @@ export default function AdminCreateUser() {
   };
 
   const handleClick = async () => {
-    const users = await getUsers();
-    const userExists = users.some(
-      (userData) => (userData.name === fullName || userData.email === email),
+    const response = await adminRegisterAction(
+      { fullName, email, password, role, token },
     );
-    console.log(userExists);
-    if (userExists) return null;
-    const newUser = await adminRegisterAction({ fullName, email, password, role, token });
+    if (!response.token) setAlreadyRegistered(true);
     setRegister({
       fullName: '',
       email: '',
       password: '',
       role: '',
     });
-    console.log(newUser);
   };
 
   return (
@@ -97,6 +94,12 @@ export default function AdminCreateUser() {
           text="Cadastrar"
         />
       </form>
+      <div
+        data-testid={ testID[67] }
+        disabled={ alreadyRegistered }
+      >
+        Nome/Email já cadastrado!
+      </div>
     </section>
   );
 }

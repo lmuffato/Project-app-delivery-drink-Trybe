@@ -41,11 +41,8 @@ function CheckoutClient() {
     } else {
       const productIds = Object.keys(shoppingCart);
       const submitCart = {};
+
       productIds.forEach((id) => {
-<<<<<<< HEAD
-        // console.log(id);
-=======
->>>>>>> 5c7bbc59d74bb75b8626f3110030eb1c4bb922d4
         submitCart[id] = shoppingCart[id].productQuant;
       });
 
@@ -57,7 +54,6 @@ function CheckoutClient() {
         sellerId,
       };
       const { data: { id } } = await post('customer_checkout', data);
-      console.log(id);
       navigate(`/customer/orders/${id}`);
     }
   };

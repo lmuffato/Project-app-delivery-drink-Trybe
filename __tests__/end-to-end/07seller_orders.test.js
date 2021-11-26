@@ -57,7 +57,7 @@ beforeEach(async () => {
   );
 });
 
-describe.only(requirement(27), () => {
+describe(requirement(27), () => {
   test("O avaliador ira testar se existem data-testids para até os dez primeiros itens contidos na tabela 'sales'", async () => {
     for (const { id } of orderList) {
       await expect(page).toFindElement(
@@ -79,7 +79,7 @@ describe.only(requirement(27), () => {
   });
 });
 
-describe(requirement(28), () => {
+describe.only(requirement(28), () => {
   test("O avaliador ira testar se os dados associados aos data-testids dos dez primeiros itens batem com os do banco de dados", async () => {
     for (const {
       id,

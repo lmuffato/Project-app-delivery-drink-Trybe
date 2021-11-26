@@ -13,10 +13,10 @@ function NavBar() {
   const renderLink = () => {
     if (path.includes('customer')) {
       return (
-        <>
+        <div>
           <LinkProducts />
           <LinkOrders />
-        </>
+        </div>
       );
     }
 

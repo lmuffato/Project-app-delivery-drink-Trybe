@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import CardSale from './cardSale';
+import api from '../services/api';
 
 export default function SalesList() {
   const [sales, setSales] = useState([]);
   useEffect(() => {
     const getSales = async () => {
-      const token = localStorage.getItem('token');
+      const { token } = JSON.parse(localStorage.getItem('user'));
       const path = window.location.href;
       const url = path.includes('seller')
-        ? 'http://localhost:3100/sales/seller' : 'http://localhost:3100/sales/user';
-      const response = await fetch(url, { headers: { authentication: token } });
-      const json = await response.json();
-      setSales([...json]);
+        ? '/seller/sales' : '/user/sales';
+      console.log(url);
+      const response = await api(url, { headers: { authentication: token } });
+      console.log(response);
+      setSales([]);
     };
     getSales();
-  });
+  }, []);
   const renderSales = () => sales.map((sale) => (
     <CardSale key={ sale.id } sale={ sale } />));
 

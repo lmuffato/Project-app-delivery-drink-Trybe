@@ -3,8 +3,8 @@ require('dotenv').config();
 
 const SECRET = process.env.SECRET || 'segredo';
 
-const passwordToken = (paylod) => {
-    const token = jwt.sign({ paylod }, SECRET);
+const passwordToken = (payload) => {
+    const token = jwt.sign({ payload }, SECRET);
     return token;
 };
 

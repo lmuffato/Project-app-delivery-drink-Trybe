@@ -12,27 +12,23 @@ export default function Login() {
   const [errorLogin, setErrorLogin] = useState(false);
 
   // o email value do db, este restorno da requisição vai definir o evento de redirecionamento
-  const errorLoginHTTP = 400;
-  const navigate = useNavigate();
+  // const errorLoginHTTP = 200;
+  const navegate = useNavigate();
   const fetchPostData = async (userData) => {
-    try {
-      const data = await api.post('/user/login', userData);
-      if (data.status > errorLoginHTTP) {
-        setErrorLogin(true);
-        return;
-      }
-
-      const user = data.data;
-      localStorage.setItem('user', JSON.stringify(user));
-
+    const data = await api.post('/user/login', userData);
+    const condition = await Object.keys(data.data);
+    console.log(condition);
+    if (condition.length === 1) {
+      console.log('dentro if');
+      setErrorLogin(true);
+    } else {
+      localStorage.setItem('user', JSON.stringify(data.data));
       const redirectRoutes = {
         customer: '/customer/products',
         seller: '/seller/orders',
         administrator: '/admin/manage',
       };
-      navigate(redirectRoutes[data.data.role]);
-    } catch (error) {
-      setErrorLogin(true);
+      navegate(redirectRoutes[data.data.role]);
     }
   };
 
@@ -58,6 +54,7 @@ export default function Login() {
             } }
           />
         </label>
+        <h2>{emailInput}</h2>
         <br />
         <label htmlFor="input-password">
           <input
@@ -72,6 +69,7 @@ export default function Login() {
             } }
           />
         </label>
+        <h2>{passwordInput}</h2>
         <br />
         <button
           data-testid="common_login__button-login"
@@ -81,13 +79,8 @@ export default function Login() {
         >
           LOGIN
         </button>
-        <Link to="/register">
-          <button
-            type="button"
-            data-testid="common_login__button-register"
-          >
-            Ainda não tenho conta
-          </button>
+        <Link to="/register" data-testid="common_login__button-register">
+          Ainda não tenho conta
         </Link>
       </form>
       {

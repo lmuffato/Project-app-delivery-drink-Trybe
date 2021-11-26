@@ -24,7 +24,7 @@ function ProductCard({ product }) {
         <button
           data-testid={ `customer_products__button-card-rm-item-${id}` }
           type="button"
-          onClick={ removeProduct }
+          // onClick={ removeProduct }
         >
           -
         </button>
@@ -33,12 +33,12 @@ function ProductCard({ product }) {
           value={ 0 }
           type="text"
           placeholder="0"
-          onChange={ insertManuallyQuantity }
+          // onChange={ insertManuallyQuantity }
         />
         <button
           data-testid={ `customer_products__button-card-add-item-${id}` }
           type="button"
-          onClick={ addProduct }
+          // onClick={ addProduct }
         >
           +
         </button>

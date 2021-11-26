@@ -14,10 +14,11 @@ function Products() {
     getProducts();
   }, []);
 
+  const dataUser = JSON.parse(localStorage.getItem('user'));
   return (
     <section>
       <nav>
-        <NavBar />
+        <NavBar dataUser={ dataUser } />
       </nav>
       <div>
         {products.map((product) => (

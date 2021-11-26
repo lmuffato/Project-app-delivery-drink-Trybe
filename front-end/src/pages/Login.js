@@ -21,10 +21,15 @@ const Login = () => {
   }
 
   async function validateLogin(userLogin) {
-    const { data, status } = await postUser(userLogin, 'login');
+    const { message, data, status, token } = await postUser(userLogin, 'login');
 
-    if (data.message) setLoginErr(data.message);
-    if (status === STATUS) setIsLoading(true);
+    if (message) setLoginErr(message);
+    if (status === STATUS) {
+      const user = { token, ...data };
+
+      localStorage.setItem('user', JSON.stringify(user));
+      setIsLoading(true);
+    }
   }
 
   useEffect(() => {

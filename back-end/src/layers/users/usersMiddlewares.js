@@ -107,6 +107,7 @@ const getById = async (req, res) => {
   try {
     const { id } = req.params;
     const data = await users.findByPk(id,
+      // { attributes: ['name'],
       { attributes: { exclude: ['password'] },
     });
     if (data === null) { return res.status(404).json({ message: 'User does not exist' }); }

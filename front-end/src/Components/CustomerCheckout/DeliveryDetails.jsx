@@ -84,6 +84,7 @@ export default function DeliveryDetails() {
     const sale = {
       userId,
       totalPrice: roundValue(totalPrice),
+      sellerId,
       deliveryAddress,
       deliveryNumber,
       status: 'pendente',
@@ -109,7 +110,7 @@ export default function DeliveryDetails() {
             className={ `${selectSeller}` }
             data-testid={ `${selectSeller}` }
             name="SellersList"
-            value={ sellerId.id }
+            value={ sellerId }
             onChange={ (event) => {
               setSellerId(event.target.value);
             } }

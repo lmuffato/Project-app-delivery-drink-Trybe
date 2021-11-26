@@ -48,6 +48,10 @@ http POST :3001/users displayName='LucasMuffato' email='lucas@gmail.com' passwor
 http POST :3001/users displayName='Lucas' email='lucas' password='lucas' image='lucas'
 */
 
+router.patch('/updatesale/:id',
+salesMiddlewares.updateStatus,
+async () => {});
+
 router.get('/:id',
 salesMiddlewares.getById,
 async () => {});

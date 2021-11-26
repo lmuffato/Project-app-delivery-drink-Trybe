@@ -94,3 +94,14 @@ export const getOrderById = async (id) => {
   const result = await api.get(`/sales/order/${id}`);
   return result.data;
 };
+
+export const updateSaleStatus = async (id, status) => {
+  const obj = { status };
+  const result = await api.patch(`/sales/updatesale/${id}`, obj);
+  return result.data;
+};
+
+export const getUserById = async (id) => {
+  const result = await api.get(`/sales/order/${id}`);
+  return result.data;
+};

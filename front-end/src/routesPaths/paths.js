@@ -5,6 +5,7 @@ const paths = {
   routeLogin: '/login',
   routeRegister: '/register',
   routeProducts: '/customer/products',
+  routeCheckout: '/customer/checkout',
 };
 
 export default paths;

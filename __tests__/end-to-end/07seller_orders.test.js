@@ -79,7 +79,7 @@ describe(requirement(27), () => {
   });
 });
 
-describe.only(requirement(28), () => {
+describe(requirement(28), () => {
   test("O avaliador ira testar se os dados associados aos data-testids dos dez primeiros itens batem com os do banco de dados", async () => {
     for (const {
       id,

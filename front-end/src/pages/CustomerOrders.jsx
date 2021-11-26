@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import moment from 'moment';
 import { fetchSales } from '../utils/API/fetch';
 
@@ -7,7 +8,9 @@ export default function CustomerOrder() {
   console.log('🚀 ~ file: CustomerOrders.jsx ~ line 7 ~ CustomerOrder ~ sales', sales);
   const user = JSON.parse(localStorage.getItem('user'));
   const { token } = user;
-  //
+
+  const history = useHistory();
+
   useEffect(() => {
     (async () => {
       const result = await fetchSales(token);
@@ -19,7 +22,12 @@ export default function CustomerOrder() {
   return (
     <div>
       { sales.map((sale) => (
-        <div key={ sale.id } style={ { margin: 20 } }>
+        <button
+          type="button"
+          key={ sale.id }
+          style={ { margin: 20 } }
+          onClick={ () => history.push(`/customer/orders/${sale.id}`) }
+        >
           <h5>Pedido</h5>
           <p
             data-testid={ `customer_orders__element-order-id-${sale.id}` }
@@ -41,7 +49,7 @@ export default function CustomerOrder() {
           >
             { sale.price.replace('.', ',') }
           </p>
-        </div>
+        </button>
       )) }
     </div>
   );

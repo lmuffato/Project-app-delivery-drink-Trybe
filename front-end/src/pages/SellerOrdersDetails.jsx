@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router';
+
+import UserContext from '../context/userContext';
 
 import { getOrderById } from '../services/endpointsAPI';
 
@@ -20,6 +22,7 @@ const dataTestId63 = 'seller_order_details__element-order-table-sub-total';
 const dataTestId64 = 'seller_order_details__element-order-total-price';
 
 export default function SellerOrdersDetails() {
+  const { userData } = useContext(UserContext);
   const { id } = useParams();
   const [itens, setItens] = useState([]);
   const [sale, setSale] = useState({});
@@ -28,7 +31,8 @@ export default function SellerOrdersDetails() {
 
   useEffect(() => {
     setIsLoading(true);
-    getOrderById(id)
+    const { token } = userData;
+    getOrderById(token, id)
       .then((result) => {
         setItens(result.itensList);
         setSale(result.sale);

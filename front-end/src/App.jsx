@@ -7,7 +7,8 @@ import SellerOrders from './pages/SellerOrders';
 import CheckoutClient from './pages/CheckoutClient';
 import ProductClient from './pages/ProductClient';
 import PrivateRoute from './routes/PrivateRoute';
-import OrderDetails from './pages/OrderDetails';
+import CustomerOrderDetails from './pages/CustomerOrderDetails';
+import SellerOrderDetails from './pages/SellerOrderDetails';
 import ClientOrders from './pages/ClientOrders';
 import AdminManage from './pages/AdminManage';
 
@@ -16,10 +17,6 @@ function App() {
     <Routes>
       <Route exact path="/login" element={ <Login /> } />
       <Route exact path="/register" element={ <Register /> } />
-      <Route
-        path="/seller/order/:id"
-        element={ <PrivateRoute element={ OrderDetails } /> }
-      />
       <Route
         path="/seller/orders"
         element={ <PrivateRoute element={ SellerOrders } /> }
@@ -36,7 +33,11 @@ function App() {
       />
       <Route
         path="/customer/orders/:id"
-        element={ <PrivateRoute element={ OrderDetails } /> }
+        element={ <PrivateRoute element={ CustomerOrderDetails } /> }
+      />
+      <Route
+        path="/seller/orders/:id"
+        element={ <PrivateRoute element={ SellerOrderDetails } /> }
       />
       <Route
         path="/admin/manage"

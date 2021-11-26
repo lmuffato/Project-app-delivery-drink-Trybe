@@ -8,7 +8,7 @@ function SellerOrders() {
 
   useEffect(() => {
     const getOrders = async () => {
-      const { data } = await get('seler_login');
+      const { data } = await get('seller_login');
       setOrders(data);
     };
     getOrders();

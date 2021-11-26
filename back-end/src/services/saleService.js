@@ -69,13 +69,13 @@ const getSalesBySellerId = async (id) => {
 
     if (!isMatchedRole) return errorMap.unmatchedRole;
 
-    const [sellerSales] = await Sale.findAll({
+    const result = await Sale.findAll({
       where: {
         sellerId: id,
       },
     });
   
-    return [sellerSales.dataValues];
+    return result;
   } catch (_error) {
     return errorMap.internalError;
   }

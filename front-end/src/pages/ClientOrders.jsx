@@ -1,11 +1,8 @@
-/* eslint-disable no-unused-vars */
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Context from '../context/Context';
 import OrderCard from '../components/OrderCard';
 
 function ClientOrders() {
-  const { user } = useContext(Context);
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {

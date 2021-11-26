@@ -87,7 +87,7 @@ function ProductCard({ product }) {
         <input
           data-testid={ `customer_products__input-card-quantity-${id}` }
           type="number"
-          value={ cart[id]?.quantity || 0 }
+          value={ quantity }
           placeholder="0"
           onChange={ insertManuallyQuantity }
         />

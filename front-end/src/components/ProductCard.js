@@ -2,10 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function ProductCard({ product }) {
-
   const { id, name, url_image: urlImage } = product;
   const value = product.price.replace('.', ',');
-
 
   return (
     <div>

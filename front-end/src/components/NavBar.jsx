@@ -22,6 +22,7 @@ function NavBar({ sellerView = false }) {
           flexDirection: 'row',
           justifyContent: 'space-around',
         } }
+        component="nav"
       >
         { !sellerView && (
           <Link
@@ -31,7 +32,7 @@ function NavBar({ sellerView = false }) {
             Produtos
           </Link>) }
         <Link
-          to="/customer/orders"
+          to={ sellerView ? '/seller/orders' : '/customer/orders' }
           data-testid="customer_products__element-navbar-link-orders"
         >
           { sellerView ? 'Pedidos' : 'Meus Pedidos' }

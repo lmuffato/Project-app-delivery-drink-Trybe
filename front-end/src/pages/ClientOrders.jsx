@@ -7,7 +7,6 @@ import OrderCard from '../components/OrderCard';
 function ClientOrders() {
   const { user } = useContext(Context);
   const [orders, setOrders] = useState([]);
-  console.log(user);
 
   useEffect(() => {
     const fetchOrder = (async () => {
@@ -21,8 +20,6 @@ function ClientOrders() {
     });
     fetchOrder();
   }, []);
-
-  console.log(orders);
 
   return (
     <div>

@@ -15,8 +15,6 @@ function Products() {
   }, []);
 
   const dataUser = JSON.parse(localStorage.getItem('user'));
-  console.log(dataUser);
-
   return (
     <section>
       <nav>

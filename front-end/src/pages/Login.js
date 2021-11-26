@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory, Redirect } from 'react-router-dom';
-import jwtDecode from 'jwt-decode';
+// import jwtDecode from 'jwt-decode';
 import paths from '../routesPaths/paths';
 import { goRoute } from '../utils/utils';
 import postUser from '../services/requests';
@@ -26,13 +26,9 @@ const Login = () => {
 
     if (data.message) setLoginErr(data.message);
     if (status === STATUS) {
-      const { name, email, role } = jwtDecode(data);
-      if (!name || !email || !role) return false;
+      // const { name, email, role } = jwtDecode(data);
 
-      console.log({ name, email, role });
-
-      const objectDataUser = { name, email, role, token: data };
-      localStorage.setItem('user', JSON.stringify(objectDataUser));
+      localStorage.setItem('user', JSON.stringify(data));
       setIsLoading(true);
     }
   }

@@ -4,8 +4,6 @@ import PropTypes from 'prop-types';
 function ProductCard({ product }) {
   const { id, name, url_image: urlImage, price } = product;
 
-  console.log(id);
-
   return (
     <div>
       <span

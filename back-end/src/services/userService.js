@@ -18,7 +18,7 @@ const create = async (name, email, password) => {
   const { password: _, ...userPayload } = user.dataValues;
   const token = jwt.sign(userPayload, SECRET);
 
-  return { status: 201, token };
+  return { status: 201, userPayload, token };
 };
 
 const getUser = async (email) => {
@@ -28,9 +28,7 @@ const getUser = async (email) => {
   const { password: _, ...userPayload } = user.dataValues;
   const token = jwt.sign(userPayload, SECRET);
 
-  // console.log(jwt.verify('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwibmFtZSI6Iklnc29uZml1cmUgUm9kcmlndWVzIEZlbGl4IiwiZW1haWwiOiJpZ3NvbjY2MEBnbWFpbC5jb20iLCJyb2xlIjoiY3VzdG9tZXIiLCJpYXQiOjE2Mzc4ODc4NTB9.KmnhZKymJxTLdXLymhL7IOXxCvDJCQm7W6S8PWFEu1c', SECRET));
-
-  return { status: 200, token };
+  return { status: 200, userPayload, token };
 };
 
 module.exports = {

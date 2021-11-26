@@ -9,22 +9,27 @@ function SaleCard({ sale }) {
   return (
     <a
       href={ `/customer/orders/${id}` }
-      data-testid={ `customer_products__element-order-date-${id}` }
     >
       <button
         type="button"
         value={ id }
         id="saleCard"
       >
-        <span>
+        <span
+          data-testid={ `customer_orders__element-order-id-${id}` }
+        >
           { `Pedido ${id}` }
         </span>
 
-        <p>
+        <p
+          data-testid={ `customer_orders__element-delivery-status-${id}` }
+        >
           { status }
         </p>
 
-        <span>
+        <span
+          data-testid={ `customer_orders__element-order-date-${id}` }
+        >
           { saleDate }
         </span>
       </button>

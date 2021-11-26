@@ -1,15 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import '../styles/saleCard.css';
 
 function SaleCard({ sale }) {
   const { id, status } = sale;
   const saleDate = sale.sale_date;
 
-  console.log(sale);
-  console.log(sale.sale_date);
-
   return (
-    <div>
+    <div id="saleCard">
       <span
         data-testid={ `customer_products__element-order-date-${id}` }
       >

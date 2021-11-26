@@ -4,6 +4,7 @@ import Alert from 'react-bootstrap/Alert';
 import { loginApi } from '../../API/dataBaseCall';
 import { LoginContainer, UserInput } from './loginElements';
 import logo from '../../images/Beer-icon.png';
+import checkUser from './localStorage';
 
 export default function Login() {
   const history = useHistory();
@@ -44,6 +45,19 @@ export default function Login() {
       setRedirect(true);
     })
     .catch(setErrorMessage);
+
+  useEffect(() => {
+    const magicNumber = 1000;
+    const logged = checkUser();
+    if (logged) {
+      switch (logged.role.toLowerCase()) {
+      default:
+        setTimeout(() => history.push('/customer/products'), magicNumber);
+
+        break;
+      }
+    }
+  }, []);
 
   return (
     <div className="gradientAnimated">

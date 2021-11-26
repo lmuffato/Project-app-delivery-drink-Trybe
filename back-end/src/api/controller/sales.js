@@ -2,7 +2,6 @@ const {
   StatusCodes: { CREATED, OK, INTERNAL_SERVER_ERROR, NOT_FOUND },
 } = require('http-status-codes');
 
-// const { Sale } = require('../../database/models');
 const { User: users, ProductsSale, Sale } = require('../../database/models');
 
 const ids = {

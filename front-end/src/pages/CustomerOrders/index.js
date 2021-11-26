@@ -13,10 +13,10 @@ const OrdersContainer = styled.div`
 
 function ProductOrderStatus() {
   const [data, setData] = useState([]);
-  const { user, redirectUserByRole } = useAuth();
+  const { user, logoutNotAuthorized } = useAuth();
 
   useEffect(() => {
-    api.sales.getAll(user.token).then(setData).catch(redirectUserByRole);
+    api.sales.getAll(user.token).then(setData).catch(logoutNotAuthorized);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

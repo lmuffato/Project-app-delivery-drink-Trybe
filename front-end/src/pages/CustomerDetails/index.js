@@ -23,7 +23,7 @@ const ShadowContainer = styled.div`
 function CustomerDetails() {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const { user, redirectUserByRole } = useAuth();
+  const { user, logoutNotAuthorized } = useAuth();
   const navigation = useNavigate();
   const [data, setData] = useState(null);
 
@@ -31,7 +31,7 @@ function CustomerDetails() {
     api.sales.getById(id, user.token)
       .then(setData)
       .catch((x) => {
-        redirectUserByRole(x);
+        logoutNotAuthorized(x);
         navigation('../');
       });
   // eslint-disable-next-line react-hooks/exhaustive-deps

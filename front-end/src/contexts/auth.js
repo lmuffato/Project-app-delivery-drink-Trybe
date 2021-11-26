@@ -18,12 +18,18 @@ const AuthProvider = ({ children }) => {
   const navigation = useNavigate();
   const { pathname } = useLocation();
 
+  const routes = {
+    customer: 'customer',
+    seller: 'seller',
+    administrator: 'admin',
+  };
+
   useEffect(() => {
     const evaluatorTimeout = 1000;
     if ((pathname === '/login' || pathname === '/register') && authed) {
       console.log(user);
       setTimeout(() => {
-        navigation(user.role);
+        navigation(routes[user.role]);
       }, evaluatorTimeout);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -81,9 +87,9 @@ export const useAuth = () => {
    * @param {OkLogin} userInfo
    */
   function redirectUserByRole(userInfo) {
-    if (userInfo.role === 'administrator') return navigation('/customer');
+    if (userInfo.role === 'administrator') return navigation('/admin');
     if (userInfo.role === 'customer') return navigation('/customer');
-    if (userInfo.role === 'seller') return navigation('/customer');
+    if (userInfo.role === 'seller') return navigation('/seller');
   }
 
   return {

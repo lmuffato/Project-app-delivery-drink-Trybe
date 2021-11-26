@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route, Navigate, Outlet } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import AuthProvider from './contexts/auth';
 import CustomerProducts from './pages/CustomerProducts';
 import Login from './pages/Login';
@@ -9,13 +9,7 @@ import { MainContainer } from './styles/containers';
 import CustomerCheckout from './pages/CustomerCheckout';
 import CustomerDetails from './pages/CustomerDetails';
 import CustomerOrders from './pages/CustomerOrders';
-
-const placeholderElement = (name) => (
-  <div>
-    <h1>{name}</h1>
-    <Outlet />
-  </div>
-);
+import SellerOrders from './pages/SellerOrders';
 
 function App() {
   return (
@@ -36,11 +30,12 @@ function App() {
           <Route path="checkout" element={ <CustomerCheckout /> } />
         </Route>
 
-        <Route path="seller" element={ placeholderElement('Seller') }>
+        <Route path="seller" element={ <AppContainer /> }>
           <Route index element={ <Navigate to="orders" /> } />
+          <Route path="orders" element={ <SellerOrders /> } />
         </Route>
 
-        <Route path="admin" element={ placeholderElement('Administrator') }>
+        <Route path="admin" element={ <AppContainer /> }>
           <Route index element={ <Navigate to="manage" /> } />
           <Route path="manage" element={ <p>manage</p> } />
         </Route>

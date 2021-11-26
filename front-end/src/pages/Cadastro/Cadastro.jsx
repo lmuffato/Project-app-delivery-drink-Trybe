@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router';
+import CadastroElements from './CadastroElements';
 
 const md5 = require('md5');
 const axios = require('axios').default;
@@ -70,45 +71,50 @@ export default function Cadastro() {
   }, [name, user, password]);
 
   return (
-    <div>
-      <h1>Cadastro</h1>
-      <form>
-        <input
-          type="text"
-          data-testid="common_register__input-name"
-          placeholder="Name"
-          name="email"
-          value={ name }
-          onChange={ (e) => handleChange(e, setName) }
-        />
-        <input
-          type="text"
-          data-testid="common_register__input-email"
-          placeholder="Email"
-          name="email"
-          value={ user }
-          onChange={ (e) => handleChange(e, setUser) }
-        />
-        <input
-          type="password"
-          data-testid="common_register__input-password"
-          placeholder="Senha"
-          value={ password }
-          onChange={ (e) => handleChange(e, setPassword) }
-          name="senha"
-        />
-        <button
-          type="button"
-          disabled={ disable }
-          data-testid="common_register__button-register"
-          onClick={ () => handleRegister() }
-        >
-          CADASTRAR
-        </button>
-        {redirect ? <Redirect to="/customer/products" /> : null}
-        <p data-testid="common_register__element-invalid_register">{errorMessage}</p>
-      </form>
-      <h1>{errorMessage}</h1>
-    </div>
+    <CadastroElements>
+      <div className="gradientAnimated">
+        <fieldset>
+          <h1>CADASTRO</h1>
+          <form>
+            <input
+              type="text"
+              data-testid="common_register__input-name"
+              placeholder="Name"
+              name="email"
+              value={ name }
+              onChange={ (e) => handleChange(e, setName) }
+            />
+            <input
+              type="text"
+              data-testid="common_register__input-email"
+              placeholder="Email"
+              name="email"
+              value={ user }
+              onChange={ (e) => handleChange(e, setUser) }
+            />
+            <input
+              type="password"
+              data-testid="common_register__input-password"
+              placeholder="Senha"
+              value={ password }
+              onChange={ (e) => handleChange(e, setPassword) }
+              name="senha"
+            />
+            <button
+              type="button"
+              disabled={ disable }
+              data-testid="common_register__button-register"
+              onClick={ () => handleRegister() }
+            >
+              Register
+            </button>
+            {redirect ? <Redirect to="/customer/products" /> : null}
+            <p data-testid="common_register__element-invalid_register">{errorMessage}</p>
+          </form>
+          <h1>{errorMessage}</h1>
+        </fieldset>
+      </div>
+
+    </CadastroElements>
   );
 }

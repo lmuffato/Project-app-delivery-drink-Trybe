@@ -9,7 +9,8 @@ function SellerHeader() {
           data-testid="customer_products__element-navbar-link-orders"
           type="button"
         >
-          PEDIDOS
+          {JSON.parse(localStorage.getItem('user')).role === 'seller' ? 'PEDIDOS'
+            : 'GERENCIAR USUÁRIOS'}
         </button>
       </Link>
       <Link to="/perfil">

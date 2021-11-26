@@ -14,9 +14,7 @@ const getUser = rescue(async (_req, res) => {
 });
 
 const create = rescue(async (req, res) => {
-  const { name, email, password } = req.body;
-  const role = 'customer';
-
+  const { name, email, password, role = 'customer' } = req.body;
   const newUser = await userService.validateEntries({ name, email, password, role });
   if (newUser.message) return res.status(newUser.status).json({ message: newUser.message });
   const md5Password = crypto.createHash('md5').update(password).digest('hex');

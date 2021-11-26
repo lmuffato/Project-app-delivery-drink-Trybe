@@ -36,6 +36,15 @@ export const createUser = async (name, email, password) => {
   return result.data;
 };
 
+export const createUserByAdmin = async (obj) => {
+  const { name, email, password, role, token } = obj;
+  console.log(obj);
+  const result = await api.post('/users/admin',
+    { name, email, password, role },
+    { headers: { authorization: token } });
+  return result.data;
+};
+
 export const createSale = async (object) => {
   const { totalPrice, deliveryAddress,
     deliveryNumber, status, products, token, sellerId } = object;

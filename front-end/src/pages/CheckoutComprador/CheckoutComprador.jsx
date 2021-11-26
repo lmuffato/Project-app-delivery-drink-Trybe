@@ -57,14 +57,15 @@ export default function CheckoutComprador() {
         <Header title="Produtos" subtitle="Meus Pedidos" name={ userName.name } />
         <h1>Finalizar pedido</h1>
         <fieldset className="fieldSet-1">
-          {aux.map(({ productId, name, price, quantity }, i) => (
+          {aux.map(({ product_id: prodId, name, price, quantity }, i) => (
             <CheckoutProduct
-              id={ productId }
+              id={ prodId }
               name={ name }
               price={ price }
               qtd={ quantity }
               index={ i }
               key={ i }
+              option
             />
           ))}
           <h3 data-testid="customer_checkout__element-order-total-price">

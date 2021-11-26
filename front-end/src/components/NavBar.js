@@ -1,33 +1,34 @@
 import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { saveUser } from '../redux/slices/userSlice';
 import { removeUserDataFromLocalStorage } from './ultility';
+import './NavBar.css';
 
-const handleLogoutClick = (ev, dispatch, history) => {
-  ev.preventDefault();
-
+const handleLogoutClick = (dispatch) => {
   dispatch(saveUser({ name: '', email: '', role: '', token: '' }));
   removeUserDataFromLocalStorage();
-  history.push('/login');
 };
 
 function NavBar() {
-  const { name } = useSelector((state) => state.user);
-  const history = useHistory();
+  const { name, role } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   return (
     <nav style={ { backgroundColor: 'yellow' } }>
-      <Link
-        data-testid="customer_products__element-navbar-link-products"
-        to="/customer/products"
-      >
-        PRODUTOS
-      </Link>
+      {
+        role === 'customer' && (
+          <Link
+            data-testid="customer_products__element-navbar-link-products"
+            to="/customer/products"
+          >
+            PRODUTOS
+          </Link>
+        )
+      }
       <Link
         data-testid="customer_products__element-navbar-link-orders"
-        to="/customer/orders"
+        to={ `/${role}/orders` }
       >
         MEUS PEDIDOS
       </Link>
@@ -36,13 +37,13 @@ function NavBar() {
       >
         { name }
       </span>
-      <button
-        type="button"
-        onClick={ (ev) => handleLogoutClick(ev, dispatch, history) }
+      <Link
+        to="/login"
+        onClick={ () => handleLogoutClick(dispatch) }
         data-testid="customer_products__element-navbar-link-logout"
       >
         Sair
-      </button>
+      </Link>
     </nav>
   );
 }

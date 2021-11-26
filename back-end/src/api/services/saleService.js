@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const { Sale, SaleProduct } = require('../../database/models');
+const { User, Sale, SaleProduct, Product } = require('../../database/models');
 const config = require('../../database/config/config');
 const AppError = require('../utils/AppError');
 
@@ -26,7 +26,7 @@ const create = async ({ products, ...saleObj }) => {
   }
 };
 
-const findById = async (id) => {
+const findBySellerId = async (id) => {
   const getAll = await Sale.findAll({
     where: { sellerId: id },
   });
@@ -34,18 +34,36 @@ const findById = async (id) => {
 };
 
 const findByIdSale = async (saleId) => {
-  const getById = await Sale.findById(saleId);
+  const getById = await Sale.findByPk(saleId, {
+    subQuery: false,
+    include: [
+      { model: User, as: 'user' },
+      { model: User, as: 'seller' },
+      { model: Product, as: 'products', through: { attributes: ['quantity'] } },
+    ],
+  });
   return getById;
 };
+
+const findSaleByUserId = (id) => Sale.findAll({
+  where: { userId: id },
+});
 
 const getAll = async () => {
   const data = await Sale.findAll();
   return data;
 };
 
+const updateStatus = async (id, status) => {
+  const saleUpdated = await Sale.update({ status }, { where: { id } });
+  return saleUpdated;
+};
+
 module.exports = {
   create,
-  findById,
+  findBySellerId,
   getAll,
   findByIdSale,
+  findSaleByUserId,
+  updateStatus,
 };

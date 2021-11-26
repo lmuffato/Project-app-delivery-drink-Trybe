@@ -23,10 +23,10 @@ const create = async (req, res, next) => {
   }
 };
 
-const findById = async (req, res, next) => {
+const findBySellerId = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const sale = await saleService.findById(id);
+    const sale = await saleService.findBySellerId(id);
 
     return res.status(200).json(sale);
   } catch (err) {
@@ -43,7 +43,7 @@ const getAll = async (req, res) => {
 const findByIdSale = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const sale = await saleService.findById(id);
+    const sale = await saleService.findByIdSale(id);
 
     return res.status(200).json(sale);
   } catch (err) {
@@ -51,9 +51,34 @@ const findByIdSale = async (req, res, next) => {
   }
 };
 
+const findByUserId = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const sale = await saleService.findSaleByUserId(id);
+
+    return res.status(200).json(sale);
+  } catch (err) {
+    next(err);
+  }
+};
+
+const updateStatus = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { status } = req.body;
+    await saleService.updateStatus(id, status);
+    const findSaleById = await saleService.findByIdSale(id);
+    return res.status(200).json(findSaleById);
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   create,
-  findById,
+  findBySellerId,
   getAll,
   findByIdSale,
+  findByUserId,
+  updateStatus,
 };

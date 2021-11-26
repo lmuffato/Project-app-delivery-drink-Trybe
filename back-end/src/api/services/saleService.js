@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-const { Sales, SalesProducts, Products } = require('../../database/models');
-=======
 const { sales, salesProducts } = require('../../database/models');
->>>>>>> 9ccbd97ccb7a8494ff47dcf553a4a224ae602cbf
-const { User } = require('../../database/models');
+const { User, Products } = require('../../database/models');
 const { ORDERS_NOT_FOUND } = require('../messages/errorMessages');
 
 const findUserById = async (id) => {

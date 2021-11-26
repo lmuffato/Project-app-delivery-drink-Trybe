@@ -8,6 +8,7 @@ function NewUserFormFromAdmin() {
   const [passwordInput, setPasswordInput] = useState('');
   const [roleInput, setRoleInput] = useState('seller');
   const [isValid, setIsValid] = useState(false);
+  const [err, setErr] = useState(false);
 
   useEffect(() => {
     const sucessValidate = validateAll(nameInput, emailInput, passwordInput);
@@ -15,13 +16,17 @@ function NewUserFormFromAdmin() {
   }, [nameInput, emailInput, passwordInput]);
 
   const newUserRegister = async (e) => {
-    e.preventDefault();
-    await axios.post('http://localhost:3001/register', {
-      name: nameInput,
-      email: emailInput,
-      password: passwordInput,
-      role: roleInput,
-    }, { headers: { Authorization: JSON.parse(localStorage.getItem('user')).token } });
+    try {
+      e.preventDefault();
+      await axios.post('http://localhost:3001/register', {
+        name: nameInput,
+        email: emailInput,
+        password: passwordInput,
+        role: roleInput,
+      }, { headers: { Authorization: JSON.parse(localStorage.getItem('user')).token } });
+    } catch (_error) {
+      setErr(true);
+    }
   };
   return (
     <form method="post">
@@ -85,6 +90,7 @@ function NewUserFormFromAdmin() {
       >
         Cadastrar
       </button>
+      { err && <p data-testid="admin_manage__element-invalid-register">Invalid data</p> }
     </form>
   );
 }

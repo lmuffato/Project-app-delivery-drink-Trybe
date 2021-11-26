@@ -40,7 +40,7 @@ export async function sendRequest({ data, sellInfo, token }) {
     ));
     return response.data;
   } catch ({ response }) {
-    throw response;
+    throw response.data.message;
   }
 }
 
@@ -53,6 +53,6 @@ export async function getSaleById(token, id) {
     ));
     return response.data;
   } catch ({ response }) {
-    throw response;
+    throw response.data.message;
   }
 }

@@ -5,12 +5,13 @@ import Header from '../components/Header/Header';
 
 const axios = require('axios').default;
 
-export default function TodosOsPedidos() {
+export default function TodosAsVendas() {
   const user = localStorage.getItem('user');
   const [sales, setSales] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const userName = JSON.parse(user);
+
   async function getAllSales() {
     try {
       const response = await axios({
@@ -26,9 +27,8 @@ export default function TodosOsPedidos() {
     }
   }
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => getAllSales(), []);
-
+  console.log(sales);
   return (
     <div>
       <Header title="Produtos" subtitle="Meus Pedidos" name={ userName.name } />
@@ -37,13 +37,21 @@ export default function TodosOsPedidos() {
         loading ? <div>loading</div>
           : sales
             .map((e, i) => (
-              <Card
-                key={ i }
-                id={ e.id }
-                status={ e.status }
-                sale_date={ e.sale_date }
-                total_price={ e.total_price }
-              />
+              <div key={ i }>
+                <Card
+                  id={ e.id }
+                  status={ e.status }
+                  sale_date={ e.sale_date }
+                  total_price={ e.total_price }
+                  sales={ sales }
+                />
+                <span
+                  data-testid={ `seller_orders__element-card-address-${e.id}` }
+                >
+                  {`${e.delivery_address},${e.delivery_number}`}
+
+                </span>
+              </div>
             ))
       }
     </div>

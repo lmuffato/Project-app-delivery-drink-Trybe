@@ -10,10 +10,10 @@ function Table({ type, items, onDelete }) {
       <table>
         <TableHeader type={ type } />
         <tbody>
-          {items.map((data) => (
+          {items.map((data, index) => (
             <TableRow
               key={ data.id }
-              data={ data }
+              data={ { ...data, index } }
               type={ type }
               onClick={ onDelete }
             />

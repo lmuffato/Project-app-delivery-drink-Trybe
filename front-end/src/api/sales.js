@@ -12,12 +12,31 @@ export async function create(product, token) {
     );
     return response.data;
   } catch ({ response: { status, data: { message } } }) {
-    /**
-     * @type {ErrorResponse}
-     */
     const errorRes = { status, message };
     throw errorRes;
   }
 }
 
-export const a = 10;
+export async function getAll(token) {
+  try {
+    const response = await axios.get(
+      `${BASE_URL}/sales/`, { headers: { Authorization: token } },
+    );
+    return response.data;
+  } catch ({ response: { status, data: { message } } }) {
+    const errorRes = { status, message };
+    throw errorRes;
+  }
+}
+
+export async function getById(id, token) {
+  try {
+    const response = await axios.get(
+      `${BASE_URL}/sales/${id}`, { headers: { Authorization: token } },
+    );
+    return response.data;
+  } catch ({ response: { status, data: { message } } }) {
+    const errorRes = { status, message };
+    throw errorRes;
+  }
+}

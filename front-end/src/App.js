@@ -7,6 +7,8 @@ import Register from './pages/Register';
 import AppContainer from './components/AppContainer';
 import { MainContainer } from './styles/containers';
 import CustomerCheckout from './pages/CustomerCheckout';
+import CustomerDetails from './pages/CustomerDetails';
+import CustomerOrders from './pages/CustomerOrders';
 
 const placeholderElement = (name) => (
   <div>
@@ -27,7 +29,10 @@ function App() {
         <Route path="customer" element={ <AppContainer /> }>
           <Route index element={ <Navigate to="products" /> } />
           <Route path="products" element={ <CustomerProducts /> } />
-          <Route path="orders" element={ <p>orders</p> } />
+          <Route path="orders">
+            <Route index element={ <CustomerOrders /> } />
+            <Route path=":id" element={ <CustomerDetails /> } />
+          </Route>
           <Route path="checkout" element={ <CustomerCheckout /> } />
         </Route>
 

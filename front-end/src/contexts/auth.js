@@ -1,14 +1,33 @@
 /// <reference path="../api/types.js" />
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import jwdDecode from 'jwt-decode';
 import * as storage from '../utils/localStorageManager';
 
 const authContext = createContext();
 
+const localStorageUser = JSON.parse(localStorage.getItem('user'));
+
+const localUser = localStorageUser === null ? {}
+  : { ...localStorageUser, ...jwdDecode(localStorageUser.token) };
+
 const AuthProvider = ({ children }) => {
-  const [authed, setAuthed] = useState(false);
-  const [user, setUser] = useState({});
+  const [authed, setAuthed] = useState(localStorageUser !== null);
+  const [user, setUser] = useState(localUser);
+  const navigation = useNavigate();
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    const evaluatorTimeout = 1000;
+    if ((pathname === '/login' || pathname === '/register') && authed) {
+      console.log(user);
+      setTimeout(() => {
+        navigation(user.role);
+      }, evaluatorTimeout);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname]);
 
   const context = {
     authed,

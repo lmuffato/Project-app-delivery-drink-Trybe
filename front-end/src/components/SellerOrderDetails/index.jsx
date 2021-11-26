@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import io from 'socket.io-client';
 import styles from './styles.module.css';
 import { useSellerOrderDetails } from '../../context/sellerOrderDetailsProvider';
 import formatDate from '../../utils/formatDate';
 import replaceDotToComma from '../../services/productPages/replaceDotToComa';
 import updateStatusSale from '../../services/UpdateSale/updateStatusSale';
+import { useSocket } from '../../context/socketProvider';
+
+const socket = io.connect('http://localhost:3001');
 
 export default function SellerOrderDetails({ dataTestIds }) {
   const [disabledPendingButton, setDisablePendingButton] = useState(false);
   const [disabledDeliveryButton, setDisabledDeliveryButton] = useState(true);
   const { sale, setSale, products } = useSellerOrderDetails();
+  const { socketStatus } = useSocket();
   const { status } = sale;
 
   useEffect(() => {
@@ -25,8 +30,10 @@ export default function SellerOrderDetails({ dataTestIds }) {
   }, [sale.status]);
 
   const handleChangeStatus = (myStatus) => {
-    updateStatusSale(sale.id, setSale, myStatus);
+    const { id } = sale;
+    updateStatusSale(id, setSale, myStatus);
     setDisabledDeliveryButton(true);
+    socket.emit('changeStatus', { id, myStatus });
   };
 
   return (
@@ -49,7 +56,7 @@ export default function SellerOrderDetails({ dataTestIds }) {
             .toLowerCase().replace('â', 'a').replace(' ', '') : null] }
           data-testid={ dataTestIds['55'] }
         >
-          {sale.status}
+          {socketStatus ? socketStatus.myStatus : sale.status}
         </span>
 
         <button

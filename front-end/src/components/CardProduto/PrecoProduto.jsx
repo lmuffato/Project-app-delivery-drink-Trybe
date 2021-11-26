@@ -3,9 +3,10 @@ import { number, string } from 'prop-types';
 
 function PrecoProduto({ data }) {
   const { id, price } = data;
+  const priceProduct = Number(price).toFixed(2).replace('.', ',');
   return (
     <p data-testid={ `customer_products__element-card-price-${id}` }>
-      { price }
+      { priceProduct }
     </p>
   );
 }

@@ -20,6 +20,18 @@ function OrderDetails() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const dataTestIds = {
+    sellerName: 'customer_order_details__element-order-details-label-seller-name',
+    deliveryStatus: 'customer_order_details__element-order-details-label-delivery-status',
+    itemNumber: 'customer_order_details__element-order-table-item-number-',
+    itemQuantity: 'customer_order_details__element-order-table-quantity-',
+    labelOrder: 'customer_order_details__element-order-details-label-order-',
+  };
+
+  const changeStatus = async () => {
+    console.log('status');
+  };
+
   return (
     <div>
       {isLoading ? 'Loading' : orders.map((item, index) => (
@@ -31,14 +43,12 @@ function OrderDetails() {
               Pedido
             </h4>
             <h4
-              data-testid="customer_order_details__
-              element-order-details-label-order-id"
+              data-testid="customer_order_details__element-order-details-label-order-id"
             >
               { item.id }
             </h4>
             <p
-              data-testid="customer_order_details__
-              element-order-details-label-seller-name"
+              data-testid={ dataTestIds.sellerName }
             >
               P. Vend:
               {' '}
@@ -52,14 +62,15 @@ function OrderDetails() {
             <div
               readOnly
               className={ item.status }
-              data-testid="customer_order_details__
-              element-order-details-label-delivery-status"
+              data-testid={ dataTestIds.deliveryStatus }
             >
               { item.status }
             </div>
             <button
               type="button"
               data-testid="customer_order_details__button-delivery-check"
+              disabled={ item.status !== 'Em Trânsito' }
+              onClick={ () => changeStatus() }
             >
               MARCAR COMO ENTREGUE
             </button>
@@ -68,40 +79,34 @@ function OrderDetails() {
                 key={ id }
               >
                 <p
-                  data-testid={ `customer_order_details__
-                  element-order-table-item-number-${i}` }
+                  data-testid={ `${dataTestIds.itemNumber}${i}` }
                 >
                   {i + 1}
                 </p>
                 <p
-                  data-testid={ `customer_order_
-                  details__element-order-table-name-${i}` }
+                  data-testid={ `customer_order_details__element-order-table-name-${i}` }
                 >
                   {product.name }
                 </p>
                 <p
-                  data-testid={ `customer_order_details__
-                  element-order-table-quantity-${id}` }
+                  data-testid={ `${dataTestIds.itemQuantity}${id}` }
                 >
                   {product.saleProduct.quantity }
                 </p>
                 <p
-                  data-testid={ `customer_order_details__
-                element-order-details-label-order-${id}` }
+                  data-testid={ `${ dataTestIds.labelOrder}${id}` }
                 >
                   {product.price }
                 </p>
                 <p
-                  data-testid={ `customer_order_details__
-                  element-order-table-sub-total-${id}` }
+                  data-testid={ `customer_order_details__element-order-table-sub-total-${id}` }
                 >
                   {product.saleProduct.quantity * product.price}
                 </p>
               </div>
             ))}
             <h4
-              data-testid={ `customer_order_details__
-              element-order-total-price-${id}` }
+              data-testid="customer_order_details__element-order-total-price"
             >
               { item.price }
             </h4>

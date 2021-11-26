@@ -14,11 +14,9 @@ const registerSale = async (saleData) => {
   const { products, ...data } = saleData;
   const { dataValues } = await sales.create(data);
 
-  const teste = products.map(({ productId, quantity }) => salesProducts.create({
+  products.forEach(({ productId, quantity }) => salesProducts.create({
     productId, saleId: dataValues.id, quantity,
     }));
-
-    await Promise.all(teste);
 
   return dataValues;
 };
@@ -27,7 +25,6 @@ const getOrdersByUserId = async (userId) => {
   const userOrders = await sales.findAll({
     where: { userId },
     include: [
-      // { model: User, as: 'seller', attributes: { exclude: ['password'] } },
       { model: Products, as: 'products', through: { attributes: ['quantity'] } },
     ],
   });
@@ -37,7 +34,6 @@ const getOrdersByUserId = async (userId) => {
   }
 
   const ordersData = await findUserById(userId);
-  ordersData.orders = userOrders;
 
   return ({ ordersData });
 };
@@ -49,8 +45,6 @@ const getAllOrders = async () => {
       { model: User, as: 'seller', attributes: { exclude: ['password'] } },
     ],
   });
-
-  console.log(allOrders);
   
   return allOrders;
 };

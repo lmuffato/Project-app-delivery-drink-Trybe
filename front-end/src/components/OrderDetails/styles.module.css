@@ -5,7 +5,7 @@
 .orderDetails {
   align-items: center;
   background: #eaf1ef;
-  border: 1px solid #b1c2be;
+  border-bottom: 1px solid #b1c2be;
   display: flex;
   font-weight: 600;
   height: 45px;
@@ -137,4 +137,32 @@
 
 .emtransito {
   background: #e74c3c;
+}
+
+@media screen and ( max-width : 767px ) {
+
+  .orderDetails {
+    flex-direction: column;
+    height: 12rem;
+  }
+
+  .tableContainer {
+    width: 100%;
+  }
+
+  .tableHead {
+    font-size: 0.6rem;
+  }
+
+  .tableContainer tbody td:first-child {
+    padding: 0 10px;
+  }
+
+  .tableContainer tbody td:nth-child( 4 ) {
+    padding: 5px 10px;
+  }
+
+  .tableContainer tbody td:nth-child( 5 ) {
+    padding: 5px 10px;
+  }
 }

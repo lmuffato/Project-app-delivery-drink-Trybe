@@ -6,6 +6,7 @@ function LinkManagerUsers() {
     <Link
       to="/admin/manage"
       data-testid="customer_products__element-navbar-link-orders"
+      className="c_link c_link--managerUsers"
     >
       GERENCIAR USUÁRIOS
     </Link>

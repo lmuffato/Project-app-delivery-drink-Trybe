@@ -5,7 +5,11 @@ function LinkOrders() {
   const path = window.location.href;
   const url = path.includes('seller') ? '/seller/orders' : '/customer/orders';
   return (
-    <Link to={ url }>
+    <Link
+      to={ url }
+      className="c_link c_link--orders"
+      data-testid="customer_products__element-navbar-link-orders"
+    >
       Meus pedidos
     </Link>
   );

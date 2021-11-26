@@ -5,27 +5,41 @@ import LinkOrders from './LinkOrders';
 import UserFullName from './UserFullName';
 import LinkLogout from './LinkLogout';
 import LinkManagerUsers from './LinkManagerUsers';
+import './styles.css';
 
 function NavBar() {
   const path = useLocation().pathname;
-  console.log(path.includes('admin'));
+
+  const renderLink = () => {
+    if (path.includes('customer')) {
+      return (
+        <>
+          <LinkProducts />
+          <LinkOrders />
+        </>
+      );
+    }
+
+    if (path.includes('seller')) {
+      return (
+        <LinkOrders />
+      );
+    }
+
+    if (path.includes('admin')) {
+      return (
+        <LinkManagerUsers />
+      );
+    }
+  };
+
   return (
-    <div>
-      { path.includes('customer')
-        ? <LinkProducts data-testid="customer_products__element-navbar-link-products" />
-        && <LinkOrders data-testid="customer_products__element-navbar-link-orders" />
-        : null}
-
-      { path.includes('seller')
-        ? <LinkOrders data-testid="customer_products__element-navbar-link-orders" />
-        : null}
-
-      { path.includes('admin')
-        ? <LinkManagerUsers />
-        : null}
-
-      <UserFullName data-testid="customer_products__element-navbar-user-full-name" />
-      <LinkLogout data-testid="customer_products__element-navbar-link-logout" />
+    <div className="c_navbar">
+      { renderLink() }
+      <div>
+        <UserFullName />
+        <LinkLogout />
+      </div>
     </div>
   );
 }

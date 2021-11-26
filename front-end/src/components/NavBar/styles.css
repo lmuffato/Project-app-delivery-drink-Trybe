@@ -1,0 +1,41 @@
+.c_navbar {
+  background: var(--color-primary);
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.c_navbar > div {
+  display: flex;
+}
+
+.c_link {
+  color: var(--text-light);
+  cursor: pointer;
+  line-height: 80px;
+  text-align: center;
+  text-decoration: none;
+  width: 15vw;
+}
+
+.c_link .active {
+  background: var(--color-secondary);
+  color: var(--text-dark);
+}
+
+.c_link--logout {
+  align-items: center;
+  background-color: var(--color-quaternary);
+  color: var(--text-light);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  width: 10vw;
+}
+
+.c_username {
+  background-color: var(--color-tertiary);
+  color: var(--text-light);
+  text-align: center;
+  width: 15vw;
+}

@@ -5,7 +5,9 @@ const path = require('path');
 const { User } = require('../database/models');
 
 const CUSTOMER = 'customer';
-const SECRET = fs.readFileSync(path.join(__dirname, '../../jwt.evaluation.key'), 'utf8');
+// const SECRET = fs.readFileSync(path.join(__dirname, '../../jwt.evaluation.key'), 'utf8');
+
+const SECRET = 'secret_key';
 
 const create = async (name, email, password) => {
   const MD5password = md5(password);
@@ -17,8 +19,11 @@ const create = async (name, email, password) => {
 
   const { password: _, ...userPayload } = user.dataValues;
   const token = jwt.sign(userPayload, SECRET);
+  const data = { name: user.dataValues.name,
+    email: user.dataValues.email,
+    role: user.dataValues.role };
 
-  return { status: 201, userPayload, token };
+  return { status: 201, token, data };
 };
 
 const getUser = async (email) => {
@@ -27,8 +32,11 @@ const getUser = async (email) => {
 
   const { password: _, ...userPayload } = user.dataValues;
   const token = jwt.sign(userPayload, SECRET);
+  const data = { name: user.dataValues.name,
+    email: user.dataValues.email,
+    role: user.dataValues.role };
 
-  return { status: 200, token, userPayload };
+  return { status: 200, token, data };
 };
 
 module.exports = {

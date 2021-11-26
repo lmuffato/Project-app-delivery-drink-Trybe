@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import jwtDecode from 'jwt-decode';
 import { Redirect } from 'react-router';
 import postUser from '../services/requests';
 
@@ -21,13 +20,12 @@ const Register = () => {
 
   async function createUser() {
     const STATUS = 201;
-    const { data, status } = await postUser(userData, 'register');
-    if (data.message) setUserErr(data.message);
+    const { message, status, data, token } = await postUser(userData, 'register');
+    if (message) setUserErr(message);
 
     if (status === STATUS) {
-      const { name, email, role } = jwtDecode(data);
-      const objectDataUser = { name, email, role, token: data };
-      localStorage.setItem('user', JSON.stringify(objectDataUser));
+      const user = { token, ...data };
+      localStorage.setItem('user', JSON.stringify(user));
       setIsLoading(true);
     }
   }

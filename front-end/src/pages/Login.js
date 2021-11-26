@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory, Redirect } from 'react-router-dom';
-// import jwtDecode from 'jwt-decode';
 import paths from '../routesPaths/paths';
 import { goRoute } from '../utils/utils';
 import postUser from '../services/requests';
@@ -22,13 +21,13 @@ const Login = () => {
   }
 
   async function validateLogin(userLogin) {
-    const { data, status } = await postUser(userLogin, 'login');
+    const { message, data, status, token } = await postUser(userLogin, 'login');
 
-    if (data.message) setLoginErr(data.message);
+    if (message) setLoginErr(message);
     if (status === STATUS) {
-      // const { name, email, role } = jwtDecode(data);
+      const user = { token, ...data };
 
-      localStorage.setItem('user', JSON.stringify(data));
+      localStorage.setItem('user', JSON.stringify(user));
       setIsLoading(true);
     }
   }

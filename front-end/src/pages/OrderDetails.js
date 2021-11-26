@@ -26,6 +26,7 @@ function OrderDetails() {
     itemNumber: 'customer_order_details__element-order-table-item-number-',
     itemQuantity: 'customer_order_details__element-order-table-quantity-',
     labelOrder: 'customer_order_details__element-order-details-label-order-',
+    subtotal: 'customer_order_details__element-order-table-sub-total-',
   };
 
   const changeStatus = async () => {
@@ -94,12 +95,12 @@ function OrderDetails() {
                   {product.saleProduct.quantity }
                 </p>
                 <p
-                  data-testid={ `${ dataTestIds.labelOrder}${id}` }
+                  data-testid={ `${dataTestIds.labelOrder}${id}` }
                 >
                   {product.price }
                 </p>
                 <p
-                  data-testid={ `customer_order_details__element-order-table-sub-total-${id}` }
+                  data-testid={ `${dataTestIds.subtotal}${id}` }
                 >
                   {product.saleProduct.quantity * product.price}
                 </p>

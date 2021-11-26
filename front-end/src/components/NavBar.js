@@ -19,7 +19,7 @@ function NavBar({ dataUser }) {
         </li>
         <li>
           <a
-            href="/"
+            href="/customer/orders"
             data-testid="customer_products__element-navbar-link-orders"
           >
             Meus Pedidos

@@ -2,10 +2,11 @@ const { UNAUTHORIZED_SEARCH } = require('../messages/errorMessages');
 const { saleService } = require('../services');
 
 const registerSale = async (req, res) => {
-  const { sellerId, totalPrice, deliveryAddress, deliveryNumber, products } = req.body;
+  const { sellerId, totalPrice, deliveryAddress, deliveryNumber, products, status } = req.body;
   const { id } = req.user;
 
-  const saleData = { userId: id, sellerId, totalPrice, deliveryAddress, deliveryNumber, products };
+  const saleData = {
+    userId: id, sellerId, totalPrice, deliveryAddress, deliveryNumber, products, status };
 
   const newSale = await saleService.registerSale(saleData);
 

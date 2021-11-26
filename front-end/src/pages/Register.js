@@ -43,7 +43,10 @@ function Register() {
         name,
         email,
         password,
-      });
+      })
+        .then(({ data: { token, id, role } }) => localStorage
+          .setItem('user', JSON
+            .stringify({ id, name, email, role, token })));
 
       navigate('/customer/products');
     } catch ({ response }) {

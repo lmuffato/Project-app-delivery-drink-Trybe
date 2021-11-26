@@ -2,16 +2,23 @@ import React from 'react';
 import NavBar from '../components/NavBar';
 import ProductsList from '../components/ProductsList';
 import { ProductsProvider } from '../contexts/Products';
-import { CartProvider } from '../contexts/Cart';
+
+const testIds = {
+  pageProductsId: 'customer_products__element-navbar-link-products',
+  pageOrdersId: 'customer_products__element-navbar-link-orders',
+  userId: 'customer_products__element-navbar-user-full-name',
+};
+
+const navegationNames = {
+  pageName: 'Meus pedidos',
+};
 
 function Products() {
   return (
     <>
-      <NavBar />
+      <NavBar ids={ testIds } names={ navegationNames } />
       <ProductsProvider>
-        <CartProvider>
-          <ProductsList />
-        </CartProvider>
+        <ProductsList />
       </ProductsProvider>
     </>
   );

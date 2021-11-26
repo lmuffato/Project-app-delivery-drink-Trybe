@@ -16,16 +16,15 @@ const navegationNames = {
 
 function Checkout() {
   return (
-    <>
+    <div>
       <NavBar ids={ testIds } names={ navegationNames } />
-      <p>Checkout</p>
       <CheckoutTable testIds={ testIds } />
       <ButtonTotal
         buttonId="customer_checkout__element-order-total-price"
         isDisabled={ false }
       />
       <DeliveryDetails />
-    </>
+    </div>
   );
 }
 

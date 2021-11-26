@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const { Sale, SaleProduct, User } = require('../database/models');
+const { Sale, SaleProduct, User, Product } = require('../database/models');
 const errorMap = require('../utils/errorMap');
 
 const config = require('../database/config/config');
@@ -107,9 +107,28 @@ const getSaleDetailById = async (id) => {
   });
   if (!saleDetail) return errorMap.saleNotFound;
 
-  return saleDetail;
+  const seller = await User.findByPk(saleDetail.sellerId);
+
+  return { saleDetail, seller };
   } catch (error) {
     return errorMap.internalError;
+  }
+};
+
+const getProductsSalesBySaleId = async (id) => {
+  try {
+    const salesProducts = await Sale.findByPk(id, {
+    include: [
+      { model: Product, as: 'products', through: { attributes: ['quantity'] } },
+    ],
+  });
+  console.log(salesProducts);
+
+  if (!salesProducts) return errorMap.saleError;
+
+  return salesProducts;
+  } catch (error) {
+    console.log(error);
   }
 };
 
@@ -126,5 +145,10 @@ const getAllSellers = async () => {
 };
 
 module.exports = {
-  postSale, getSalesBySellerId, getSalesByCustomerId, getSaleDetailById, getAllSellers,
+  postSale,
+  getSalesBySellerId,
+  getSalesByCustomerId,
+  getSaleDetailById,
+  getAllSellers,
+  getProductsSalesBySaleId,
 };

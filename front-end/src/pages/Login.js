@@ -27,6 +27,10 @@ const Login = () => {
     if (data.message) setLoginErr(data.message);
     if (status === STATUS) {
       const { name, email, role } = jwtDecode(data);
+      if (!name || !email || !role) return false;
+
+      console.log({ name, email, role });
+
       const objectDataUser = { name, email, role, token: data };
       localStorage.setItem('user', JSON.stringify(objectDataUser));
       setIsLoading(true);

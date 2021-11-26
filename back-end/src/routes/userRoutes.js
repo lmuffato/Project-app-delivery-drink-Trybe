@@ -6,6 +6,7 @@ const routes = express.Router();
 
 routes
   .post('/', rescue(userController.createUser))
+  .post('/login', rescue(userController.findByEmailUser))
   .get('/:id', rescue(userController.findByIdUser))
   .get('/', rescue(userController.findAllUsers))
   .put('/:id', rescue(userController.updateUser))

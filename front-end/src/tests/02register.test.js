@@ -3,8 +3,8 @@ import { cleanup, render, screen, fireEvent } from '@testing-library/react';
 // import renderWithRouter from './renderWithRouter';
 import ContextLogin from '../context/ContextLogin';
 import ProviderLogin from '../context/ProviderLogin';
-import axios from 'axios';
 import SignUp from '../screens/SingUp';
+import axios from 'axios';
 
 const name = 'Carlos Silva e Silva';
 const email = 'carlos@email.com';
@@ -29,7 +29,7 @@ const renderWithContext = (
   }
 }
 
-describe('Teste da pagina de criacao de usuario', () => {
+describe('02 - Teste da pagina de criacao de usuario', () => {
   beforeEach(cleanup);
   
   it('Renderiza os itens corretos', () => {

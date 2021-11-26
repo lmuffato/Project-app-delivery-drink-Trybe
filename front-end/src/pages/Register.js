@@ -20,10 +20,14 @@ const Register = () => {
 
   async function createUser() {
     const STATUS = 201;
-    const { data, status } = await postUser(userData, 'register');
-    if (data.message) setUserErr(data.message);
+    const { message, status, data, token } = await postUser(userData, 'register');
+    if (message) setUserErr(message);
 
-    if (status === STATUS) setIsLoading(true);
+    if (status === STATUS) {
+      const user = { token, ...data };
+      localStorage.setItem('user', JSON.stringify(user));
+      setIsLoading(true);
+    }
   }
 
   useEffect(() => {

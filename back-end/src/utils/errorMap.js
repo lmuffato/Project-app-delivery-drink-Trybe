@@ -95,4 +95,10 @@ module.exports = {
       message: 'Have not Sellers!',
     },
   },
+  saleError: {
+    error: {
+      code: 404,
+      message: 'Have not products selers with this seller ID!',
+    },
+  },
 };

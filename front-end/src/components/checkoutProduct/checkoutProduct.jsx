@@ -3,12 +3,10 @@ import PropTypes from 'prop-types';
 import CheckoutContext from '../../context/checkoutContext';
 import CardProduct from './checkoutProductElements';
 
-
 export default function CheckoutProduct({ index, id, name, qtd, price,
   option,
   dataTestID1,
   dataTestID2, dataTestID3, dataTestID4, dataTestID5 }) {
-
   const newPrice = option ? (price / qtd).toFixed(2).toString().replace(/\./g, ',')
     : (price).replace(/\./g, ',');
   const subtotal = option ? (price).toString().replace(/\./g, ',')

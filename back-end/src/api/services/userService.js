@@ -17,8 +17,23 @@ const create = async ({ email, requestPassword, name, requestRole }) => {
   let role = 'customer';
   if (requestRole) role = requestRole;
   const password = md5(requestPassword);
-
   const response = await users.create({ email, password, name, role });
+  return response;
+};
+
+const createAdmin = async ({ email, requestPassword, name, requestRole }) => {
+  const password = md5(requestPassword);
+  const response = await users.create({ email, password, name, role: requestRole });
+  return response;
+};
+
+const getAllUsers = async () => {
+  const response = await users.findAll();
+  return response;
+};
+
+const deleteUser = async (id) => {
+  const response = await users.destroy({ where: { id } });
   return response;
 };
 
@@ -30,5 +45,8 @@ const getUsers = async ({ role }) => {
 module.exports = {
   login,
   create,
+  createAdmin,
+  getAllUsers,
+  deleteUser,
   getUsers,
 };

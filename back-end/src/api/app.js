@@ -8,6 +8,7 @@ const productController = require('./controllers/productController');
 const salesController = require('./controllers/salesController');
 const loginvalidationMid = require('./middlewares/loginValidationMid');
 const registerValidationMid = require('./middlewares/registerValidationMid');
+const adminValidationMid = require('./middlewares/adminValidationMid');
 const authMid = require('./middlewares/authMid');
 
 const app = express();
@@ -29,4 +30,9 @@ app.post('/sales', authMid, salesController.create);
 app.get('/sales/:id', authMid, salesController.getById);
 app.get('/sales', authMid, salesController.getAll);
 
+app.route('/admin')
+  .get(adminValidationMid, userController.getAllUsers)
+  .post(adminValidationMid, userController.createAdmin);
+
+app.delete('/admin/:id', adminValidationMid, userController.deleteUser);
 module.exports = app;

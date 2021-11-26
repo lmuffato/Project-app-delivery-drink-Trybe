@@ -3,7 +3,7 @@ import { useParams } from 'react-router';
 import NavBar from '../components/NavBar';
 import { formatDate, formatPrice,
   getTestID, formatTestID, leftPad } from '../utils/functions';
-import { fetchSaleByID, changeOrderStatus } from '../utils/API/fetch';
+import { saleActionGetById, changeOrderStatus } from '../utils/API/fetch';
 
 export default function SellerOrders() {
   const [order, setOrder] = useState(null);
@@ -31,7 +31,7 @@ export default function SellerOrders() {
 
   useEffect(() => {
     (async () => {
-      const orderData = await fetchSaleByID(id);
+      const orderData = await saleActionGetById(id);
       switch (orderData.status) {
       case 'Preparando':
         setInProgress(!inProgress);

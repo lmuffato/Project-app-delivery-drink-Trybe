@@ -39,8 +39,6 @@ export default function CheckoutComprador() {
   async function handleEndRequest() {
     const sellerId = seller.find((vendedor) => vendedor.name === chooseSeller);
     if (!sellerId) return;
-    const [month, date, year] = new Date().toLocaleDateString('en-US').split('/');
-    const atualDate = `${year}-${month}-${date}`;
     const response = await sendRequest({
       data: aux,
       sellInfo: {

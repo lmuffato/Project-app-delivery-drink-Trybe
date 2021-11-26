@@ -4,6 +4,7 @@ async function postUser(userData, rota) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(userData),
   });
+
   const { token, data, message } = await response.json();
 
   return { token, data, message, status: response.status };

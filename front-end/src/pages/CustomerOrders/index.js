@@ -1,7 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
 import api from '../../api';
 import ProductOrderCard from '../../components/ProductOrderCard';
 import { useAuth } from '../../contexts/auth';
+
+const OrdersContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px;
+  margin-top: 20px;
+`;
 
 function ProductOrderStatus() {
   const [data, setData] = useState([]);
@@ -15,7 +23,7 @@ function ProductOrderStatus() {
   if (data.length === 0) return <h1>Carregando...</h1>;
 
   return (
-    <div>
+    <OrdersContainer>
       {data.map(({ deliveryAddress, saleDate, id, totalPrice, status }) => (
         <ProductOrderCard
           key={ id }
@@ -27,7 +35,7 @@ function ProductOrderStatus() {
           user="customer"
         />
       ))}
-    </div>
+    </OrdersContainer>
   );
 }
 

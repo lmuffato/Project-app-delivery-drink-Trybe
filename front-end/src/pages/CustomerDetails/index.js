@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import api from '../../api';
 import { deleteItem } from '../../slices/cart';
 import Table from '../../components/Table';
@@ -23,11 +23,17 @@ const ShadowContainer = styled.div`
 function CustomerDetails() {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const { user } = useAuth();
+  const { user, redirectUserByRole } = useAuth();
+  const navigation = useNavigate();
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    api.sales.getById(id, user.token).then(setData).catch(alert);
+    api.sales.getById(id, user.token)
+      .then(setData)
+      .catch((x) => {
+        redirectUserByRole(x);
+        navigation('../');
+      });
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

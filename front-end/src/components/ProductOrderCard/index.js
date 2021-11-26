@@ -68,7 +68,7 @@ function ProductOrderCard({
   );
 
   return (
-    <Link to={ `${orderId}` }>
+    <Link to={ `${orderId}` } style={ { color: 'unset', textDecoration: 'none' } }>
       <OrderCardContainer>
         <div className="order-id">
           <div>

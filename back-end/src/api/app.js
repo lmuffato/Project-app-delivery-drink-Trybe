@@ -6,7 +6,8 @@ const registerRouter = require('./routes/register');
 const usersRouter = require('./routes/users');
 const salesRouter = require('./routes/sales');
 const productsRouter = require('./routes/products');
-// const validateToken = require('./middlewares/validateToken');
+const validateToken = require('./middlewares/validateToken');
+const checkIfUserExists = require('./middlewares/checkIfUserExists');
 
 const app = express();
 app.use(express.json());
@@ -15,6 +16,7 @@ app.use('/images', express.static(path.join(__dirname, '..', 'public', 'assets',
 
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
+app.use('/admin/register', validateToken, checkIfUserExists, registerRouter);
 
 app.use('/users', usersRouter);
 app.use('/sales', salesRouter);

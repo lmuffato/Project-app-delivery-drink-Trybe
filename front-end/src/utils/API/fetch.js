@@ -33,11 +33,24 @@ export const registerAction = async ({ fullName, email, password, role }) => {
   }
 };
 
+export const adminRegisterAction = async ({ fullName, email, password, role, token }) => {
+  try {
+    const rawResponse = await fetch('http://localhost:3001/admin/register',
+      requestMetadata({ method: 'POST',
+        Authorization: token,
+        body: JSON.stringify({ fullName, email, password, role }) }));
+    const result = await rawResponse.json();
+    return result;
+  } catch (error) {
+    console.error(error.message);
+    return null;
+  }
+};
+
 export const fetchProducts = async (token) => {
   try {
     const rawResponse = await fetch('http://localhost:3001/products',
       requestMetadata({ method: 'GET', Authorization: token }));
-    // console.log('🚀 ~ rawResponse', rawResponse);
     const { result } = await rawResponse.json();
     return result;
   } catch (error) {

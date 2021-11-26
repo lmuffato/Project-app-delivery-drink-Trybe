@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Input from './atoms/Input';
 import Button from './atoms/Button';
 import testID from '../datatestids.json';
-import { registerAction } from '../utils/API/fetch';
+import { adminRegisterAction, getUsers } from '../utils/API/fetch';
 import validateRegister from '../utils/validations/joi/adminRegister';
 
 export default function AdminCreateUser() {
@@ -11,18 +11,35 @@ export default function AdminCreateUser() {
     email: '',
     password: '',
     role: '',
+    token: '',
   });
+
   const { fullName, email, password, role } = register;
+  const user = JSON.parse(localStorage.getItem('user'));
+  const { token } = user;
 
   const handleChange = ({ target: { name, value } }) => {
     setRegister({
       ...register,
       [name]: value,
+      token,
     });
   };
 
   const handleClick = async () => {
-    const newUser = await registerAction({ fullName, email, password, role });
+    const users = await getUsers();
+    const userExists = users.some(
+      (userData) => (userData.name === fullName || userData.email === email),
+    );
+    console.log(userExists);
+    if (userExists) return null;
+    const newUser = await adminRegisterAction({ fullName, email, password, role, token });
+    setRegister({
+      fullName: '',
+      email: '',
+      password: '',
+      role: '',
+    });
     console.log(newUser);
   };
 

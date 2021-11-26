@@ -5,7 +5,7 @@ async function postUser(userData, rota) {
     body: JSON.stringify(userData),
   });
   const data = await response.json();
-  console.log(response);
+  console.log(response.userPayload);
 
   return { data, status: response.status };
 }

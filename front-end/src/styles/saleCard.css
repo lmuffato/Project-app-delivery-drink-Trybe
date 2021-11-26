@@ -1,6 +1,6 @@
-#saleCard {
+.saleCard {
   display: flexbox;
-  margin: 30px;
   height: 90px;
+  margin: 30px;
   width: 270px;
-};
+}

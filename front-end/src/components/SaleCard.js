@@ -13,7 +13,7 @@ function SaleCard({ sale }) {
       <button
         type="button"
         value={ id }
-        id="saleCard"
+        className="saleCard"
       >
         <span
           data-testid={ `customer_orders__element-order-id-${id}` }

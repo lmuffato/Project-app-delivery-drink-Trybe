@@ -35,25 +35,28 @@ function OrderDetails() {
       setProducts(products);
     };
     getOrders();
-  }, []);
+  }, []); // eslint-disable-line
+
+  const head = () => (
+    <thead>
+      <tr>
+        <th data-testid={ DATA_TEST_ID }>{order.id}</th>
+        <th data-testid={ DATA_TEST_N }>{order.sellerId}</th>
+        <th data-testid={ DATA_TEST_DA }>
+          {order.saleDate.split('T')[0].split('-').reverse().join('/')}
+        </th>
+        <th data-testid={ DATA_S }>{order.status}</th>
+        <button type="button" data-testid={ DATA_B }>Marcar como entrege</button>
+      </tr>
+    </thead>
+  );
 
   if (!order) return (<div>Loading...</div>);
   return (
     <div>
       <table>
-        <thead>
-          <tr>
-            <th data-testid={ DATA_TEST_ID }>{order.id}</th>
-            <th data-testid={ DATA_TEST_N }>{order.sellerId}</th>
-            <th data-testid={ DATA_TEST_DA }>
-              {order.saleDate.split('T')[0].split('-').reverse().join('/')}
-            </th>
-            <th data-testid={ DATA_S }>{order.status}</th>
-            <button type="button" data-testid={ DATA_B }>Marcar como entrege</button>
-          </tr>
-        </thead>
+        {head()}
       </table>
-
       <table>
         <thead>
           <tr>
@@ -76,7 +79,7 @@ function OrderDetails() {
                 {product.name}
               </td>
               <td data-testid={ `${DATA_ITEM_Q}${product.saleId}` }>
-                {product.quantity}
+                {product.SaleProduct.quantity}
               </td>
               <td data-testid={ `${DATA_ITEM_P}${product.saleId}` }>
                 {console.log(product)}
@@ -91,7 +94,11 @@ function OrderDetails() {
           ))}
         </tbody>
       </table>
-      <h1>{order.totalPrice}</h1>
+      <h1
+        data-testid="customer_order_details__element-order-total-price"
+      >
+        {order.totalPrice}
+      </h1>
 
     </div>
   );

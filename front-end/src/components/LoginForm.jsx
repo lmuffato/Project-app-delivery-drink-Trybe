@@ -12,26 +12,23 @@ export default function Login() {
   const [errorLogin, setErrorLogin] = useState(false);
 
   // o email value do db, este restorno da requisição vai definir o evento de redirecionamento
-  const errorLoginHTTP = 400;
+  // const errorLoginHTTP = 200;
   const navegate = useNavigate();
   const fetchPostData = async (userData) => {
-    try {
-      const data = await api.post('/user/login', userData);
-      const condition = data.status > errorLoginHTTP;
-      console.log(condition);
-      if (condition) {
-        setErrorLogin(true);
-      } else {
-        localStorage('user', JSON.stringify(data.data));
-        const redirectRoutes = {
-          customer: '/customer/products',
-          seller: '/seller/orders',
-          administrator: '/admin/manage',
-        };
-        navegate(redirectRoutes[data.data.role]);
-      }
-    } catch (error) {
+    const data = await api.post('/user/login', userData);
+    const condition = await Object.keys(data.data);
+    console.log(condition);
+    if (condition.length === 1) {
+      console.log('dentro if');
       setErrorLogin(true);
+    } else {
+      localStorage.setItem('user', JSON.stringify(data.data));
+      const redirectRoutes = {
+        customer: '/customer/products',
+        seller: '/seller/orders',
+        administrator: '/admin/manage',
+      };
+      navegate(redirectRoutes[data.data.role]);
     }
   };
 

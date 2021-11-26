@@ -70,7 +70,12 @@ const adminCreate = async (user) => {
     const passwordMD5 = md5(password);
     
     const result = await User.create(
-      { name: user.name, email: user.email, password: passwordMD5, role: user.role || CUSTOMER_ROLE },
+      { 
+        name: user.name,
+        email: user.email,
+        password: passwordMD5,
+        role: user.role || CUSTOMER_ROLE,
+      },
     );
     // console.log(result);
     const { dataValues: { id, name, email, role } } = result;

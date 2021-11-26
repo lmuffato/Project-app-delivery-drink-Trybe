@@ -1,23 +1,22 @@
+const productsSaleSchema = require('../schemas/productsSale');
 /**
  * @param {import('sequelize').Sequelize} sequelize 
  * @param {import('sequelize').DataTypes} DataTypes 
  * @return 
  */
- module.exports = (sequelize, _DataTypes) => {
-  const ProductsSale = sequelize.define('ProductsSale', { }, { timestamps: false });
-  ProductsSale.associate = (models) => {
-    models.Product.belongsToMany(models.Sale, {
-      as: 'products',
-      through: ProductsSale,
+ module.exports = (sequelize, DataTypes) => {
+  const productsSale = sequelize.define('salesProduct', productsSaleSchema(DataTypes), { timestamps: false });
+  productsSale.associate = (models) => {
+    models.product.belongsToMany(models.sale, {
+      through: productsSale,
       foreignKey: 'productId',
-      otherKey: 'saleId',
+      otherKey: 'saleId'
     });
-    models.Sale.belongsToMany(models.Product, {
-      as: 'sales',
-      through: ProductsSale,
+    models.sale.belongsToMany(models.product, {
+      through: productsSale,
       foreignKey: 'saleId',
-      otherKey: 'productId',
+      otherKey: 'productId'
     });
   };
-  return ProductsSale;
+  return productsSale;
 };

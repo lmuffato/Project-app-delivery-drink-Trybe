@@ -1,0 +1,50 @@
+.products {
+  align-items: center;
+  display: flex;
+  font-size: 26px;
+  justify-content: space-around;
+  margin-bottom: 130px;
+  margin-top: 20px;
+  transform: scale(0.3);
+}
+
+.drink-img {
+  border-radius: 30px;
+  height: 250px;
+}
+
+.cartbox {
+  align-items: center;
+  background-color: #157347;
+  border-radius: 5px;
+  bottom: 20px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  max-width: 380px;
+  padding: 15px;
+  position: fixed;
+  right: 10px;
+  text-decoration: none;
+  transform: translateY(200px);
+}
+
+.cartbox button {
+  background: transparent;
+  border: 0;
+  color: white;
+}
+
+.cartbox span {
+  margin-left: 10px;
+}
+
+.cartbox:hover {
+  background-color: #2fc18c;
+  color: white;
+}
+
+.carousel-container {
+  padding-top: 120px;
+}

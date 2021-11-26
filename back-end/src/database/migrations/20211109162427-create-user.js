@@ -1,33 +1,17 @@
 'use strict';
+const userSchema = require('../schemas/user');
 module.exports = {
   /**
-   * 
    * @param {import('sequelize').QueryInterface} queryInterface 
-   * @param {import('sequelize').DataTypes} Sequelize 
+   * @param {import('sequelize').DataTypes} DataTypes 
    */
-  up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Users', {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
-      },
-      name: {
-        type: Sequelize.STRING(255)
-      },
-      password: {
-        type: Sequelize.STRING(255)
-      },
-      email: {
-        type: Sequelize.STRING(255)
-      },
-      role: {
-        type: Sequelize.STRING(255)
-      }
-    });
+  up: async (queryInterface, DataTypes) => {
+    await queryInterface.createTable('users', userSchema(DataTypes));
   },
-  down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Users');
+  /**
+   * @param {import('sequelize').QueryInterface} queryInterface 
+   */
+  down: async (queryInterface) => {
+    await queryInterface.dropTable('users');
   }
 };

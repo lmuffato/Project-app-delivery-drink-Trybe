@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import Card from '../components/productCard';
-import Header from '../components/header';
+import Header from '../components/Header/Header';
 import BottomBox from '../components/bottomBox';
 
 const axios = require('axios').default;
@@ -11,12 +11,7 @@ export default function Produtos() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const local = JSON.parse(user);
-  const headerInfo = {
-    title: 'Produtos',
-    subtitle: 'Meus Pedidos',
-    name: local.name,
-  };
+  const userName = JSON.parse(user);
 
   async function getProducts() {
     try {
@@ -24,7 +19,7 @@ export default function Produtos() {
         method: 'get',
         url: 'http://localhost:3001/products',
         responseType: 'json',
-        headers: { Authorization: local.token },
+        headers: { Authorization: userName.token },
       });
       setProducts(response.data);
       setLoading(false);
@@ -33,14 +28,12 @@ export default function Produtos() {
     }
   }
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { getProducts(); }, []);
 
   return (
     <div>
-      {
-        loading ? ''
-          : <Header props={ headerInfo } />
-      }
+      <Header title="Produtos" subtitle="Meus Pedidos" name={ userName.name } />
       <div
         style={ { width: '100vw',
           height: '100vh',

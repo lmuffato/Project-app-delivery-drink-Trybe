@@ -10,7 +10,7 @@ const config = require(__dirname + '/../config/config.js')[env];
 * @type{{
 * User: import('sequelize').ModelCtor<Model<{ displayName: string, email: string, password: string, image: string}>>,
 * Product: import('sequelize').ModelCtor<Model<{name: string}>>,
-* sale: import('sequelize').ModelCtor<Model<{userId: number, title: string, content: string>>,
+* sale: import('sequelize').ModelCtor<Model<{user_id: number, title: string, content: string>>,
 * PostCategory: import('sequelize').ModelCtor<Model<{postId: number, categoryId: number}>>
 * }}
 */

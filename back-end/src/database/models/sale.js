@@ -13,19 +13,19 @@ module.exports = (sequelize, DataTypes) => {
         autoIncrement: true,
         primaryKey: true,
       },
-      userId: DataTypes.INTEGER,
-      sellerId: DataTypes.INTEGER,
-      totalPrice: DataTypes.STRING,
-      deliveryAddress: DataTypes.STRING,
-      deliveryNumber: DataTypes.STRING,
-      saleDate: DataTypes.DATE,
+      user_id: DataTypes.INTEGER,
+      seller_id: DataTypes.INTEGER,
+      total_price: DataTypes.STRING,
+      delivery_address: DataTypes.STRING,
+      delivery_number: DataTypes.STRING,
+      sale_date: DataTypes.DATE,
       status: DataTypes.STRING,
     },
     { tableName: 'sales', timestamps: false }
   );
   Sale.associate = ( { User } ) => {
-    Sale.belongsTo(User, { as: "user" });
-    Sale.belongsTo(User, { as: "seller" });
+    Sale.belongsTo(User, {foreignKey: 'user_id' ,as: "customer" });
+    Sale.belongsTo(User, { foreignKey: 'seller_id', as: "seller" });
   };
   return Sale;
 };

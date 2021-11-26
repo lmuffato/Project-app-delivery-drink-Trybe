@@ -12,7 +12,6 @@ module.exports = async (req, res, next) => {
 
   try {
     const { user } = jwt.verify(authorization, segredo);
-    console.log(user);
     req.user = user;
     next();
   } catch (err) {

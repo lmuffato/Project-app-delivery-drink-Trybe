@@ -58,7 +58,6 @@ export default function Login() {
             } }
           />
         </label>
-        <h2>{emailInput}</h2>
         <br />
         <label htmlFor="input-password">
           <input
@@ -73,7 +72,6 @@ export default function Login() {
             } }
           />
         </label>
-        <h2>{passwordInput}</h2>
         <br />
         <button
           data-testid="common_login__button-login"
@@ -83,8 +81,13 @@ export default function Login() {
         >
           LOGIN
         </button>
-        <Link to="/register" data-testid="common_login__button-register">
-          Ainda não tenho conta
+        <Link to="/register">
+          <button
+            type="button"
+            data-testid="common_login__button-register"
+          >
+            Ainda não tenho conta
+          </button>
         </Link>
       </form>
       {

@@ -9,7 +9,7 @@ module.exports = async (req, res) => {
     { email, password },
   );
 
-  if (user.length <= 0) return res.status(404).json({ message: 'User not found' });
+  if (!user) return res.status(404).json({ message: 'User not found' });
   const token = passwordToken(user.id);
 
   res.status(200).json({ token, name: user.name, email: user.email, role: user.role });

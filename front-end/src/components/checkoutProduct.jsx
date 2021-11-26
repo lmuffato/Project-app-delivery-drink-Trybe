@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import CheckoutContext from '../context/checkoutContext';
 
-export default function CheckoutProduct({ index, id, name, qtd, price }) {
+export default function CheckoutProduct({ index, id, name, qtd, price, option }) {
   const newPrice = (price / qtd).toFixed(2).toString().replace(/\./g, ',');
   const subtotal = (price).toString().replace(/\./g, ',');
   const { aux, setAux } = useContext(CheckoutContext);
@@ -37,13 +37,15 @@ export default function CheckoutProduct({ index, id, name, qtd, price }) {
       >
         {`R$:${subtotal}`}
       </p>
-      <button
-        type="button"
-        data-testid={ `customer_checkout__element-order-table-remove-${index}` }
-        onClick={ () => deleteItem(id) }
-      >
-        REMOVER
-      </button>
+      { option && (
+        <button
+          type="button"
+          data-testid={ `customer_checkout__element-order-table-remove-${index}` }
+          onClick={ () => deleteItem(id) }
+        >
+          REMOVER
+        </button>
+      )}
     </div>
   );
 }
@@ -54,4 +56,5 @@ CheckoutProduct.propTypes = {
   name: PropTypes.string.isRequired,
   qtd: PropTypes.number.isRequired,
   price: PropTypes.number.isRequired,
+  option: PropTypes.bool.isRequired,
 };

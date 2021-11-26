@@ -4,16 +4,21 @@ import * as request from '../services/requests';
 
 function Products() {
   const [products, setProducts] = useState([]);
+  const [cartStorage, setCartStorage] = useState();
 
   useEffect(() => {
     const getProducts = async () => {
       const { data } = await request.getPruducts();
       setProducts(data);
     };
-    getProducts();
-  }, []);
 
-  console.log(products);
+    getProducts();
+
+    const storage = JSON.parse(localStorage.getItem('carrinho'));
+    if (storage) {
+      setCartStorage(storage);
+    }
+  }, []);
 
   return (
     <section>
@@ -25,7 +30,11 @@ function Products() {
       </nav>
       <div>
         {products.map((product) => (
-          <ProductCard key={ product.id } product={ product } />
+          <ProductCard
+            key={ product.id }
+            product={ product }
+            cartStorage={ cartStorage }
+          />
         ))}
       </div>
     </section>

@@ -1,22 +1,65 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { CartContext } from '../context/cart';
 
 function ProductCard({ product }) {
+  const { setCart, cartStorage } = useContext(CartContext);
+  const [cartItem, setCartItem] = useState();
   const [quantity, setQuantity] = useState(0);
 
   const { id, name, url_image: urlImage, price } = product;
 
-  const addProduct = () => setQuantity(quantity + 1);
+  const formatPrice = (value) => parseFloat(value).toFixed(2);
+
+  const addProduct = () => {
+    setCartItem({
+      id,
+      name,
+      quantity: cartItem ? cartItem.quantity + 1 : 1,
+      totalPrice: cartItem
+        ? formatPrice((cartItem.quantity + 1) * Number(price))
+        : price,
+    });
+
+    if (cartStorage && cartStorage[id]) {
+      setCartItem({
+        ...cartStorage[id],
+        quantity: cartStorage[id].quantity + 1,
+        totalPrice: formatPrice((cartStorage[id].quantity + 1) * Number(price)),
+      });
+    }
+    setQuantity(quantity + 1);
+  };
 
   const removeProduct = () => {
     if (quantity > 0) {
+      setCartItem({
+        ...cartItem,
+        quantity: cartItem.quantity - 1,
+        totalPrice: formatPrice(Number(cartItem.totalPrice) - Number(price)),
+      });
       setQuantity(quantity - 1);
     }
   };
 
+  useEffect(() => {
+    if (cartItem) {
+      setCart({ id, item: cartItem });
+    }
+  }, [cartItem]);
+
   const insertManuallyQuantity = ({ target: { value } }) => {
+    setCartItem({
+      id,
+      name,
+      quantity: Number(value),
+      totalPrice: formatPrice(Number(value) * Number(price)),
+    });
+
     setQuantity(value);
   };
+
+  const handleClickAdd = () => addProduct();
 
   return (
     <div>
@@ -51,7 +94,7 @@ function ProductCard({ product }) {
         <button
           data-testid={ `customer_products__button-card-add-item-${id}` }
           type="button"
-          onClick={ addProduct }
+          onClick={ handleClickAdd }
         >
           +
         </button>
@@ -67,6 +110,7 @@ ProductCard.propTypes = {
     url_image: PropTypes.string,
     price: PropTypes.string,
   }).isRequired,
-};
+  cartStorage: PropTypes.shape({}),
+}.isRequired;
 
 export default ProductCard;

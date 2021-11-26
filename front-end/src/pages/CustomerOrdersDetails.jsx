@@ -1,111 +1,92 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import moment from 'moment';
 import { getUsers, saleActionGetById } from '../utils/API/fetch';
+import { getTestID, formatTestID } from '../utils/functions';
 
 export default function CustomerOrdersDetails() {
-  const [orderDetails, setOrderDetails] = useState([]);
-  console.log('🚀 ~ file: Customs ~ orderDetails', orderDetails);
+  const [orderDetails, setOrderDetails] = useState(null);
   const [sellerName, setSellerName] = useState('');
-
-  const dataTestId = {
-    deliveryNumber: 'customer_order_details__element-order-details-label-order-id',
-    sellerName: 'customer_order_details__element-order-details-label-seller-name',
-    saleDate: 'customer_order_details__element-order-details-label-order-date',
-    status: 'customer_order_details__element-order-details-label-delivery-status',
-    entregue: 'customer_order_details__button-delivery-check',
-  };
-  // `customer_order_details__element-order-table-item-number-${id}`
-  // `customer_order_details__element-order-table-name-${id}`
-  // `customer_order_details__element-order-table-quantity-${id}`
-  // `customer_order_details__element-order-table-sub-total-${id}`
-  // `customer_order_details__element-order-total-price-${id}`
-
-  const idOrder = 1;
+  const { id: idOrder } = useParams();
 
   useEffect(() => {
     (async () => {
       const result = await saleActionGetById(idOrder);
       const users = await getUsers();
-      setOrderDetails([result]);
-      console.log('🚀 ~ file: CustomerOrdersDetails.jsx ~ line 23 ~ users', users);
+      setOrderDetails(result);
       setSellerName(users.find(({ id }) => id === result.sellerId).name);
     })();
-  }, []);
-
+  }, [idOrder]);
+  if (!orderDetails) return <div>Carregando...</div>;
   return (
-    <div style={ { margin: 20 } }>
-      {orderDetails.map((order) => (
-        <div key={ order.id }>
-          <h3>Detalhe do Pedido</h3>
-          <p
-            data-testid={ dataTestId.deliveryNumber }
-          >
-            { order.id }
-          </p>
-          <p
-            data-testid={ dataTestId.sellerName }
-          >
-            { sellerName }
-          </p>
-          <p
-            data-testid={ dataTestId.saleDate }
-          >
-            { moment(order.saleDate).format('DD/MM/YYYY') }
-          </p>
-          <p
-            data-testid={ dataTestId.status }
-          >
-            { order.status }
-          </p>
-          { order.products.map((product, index) => (
-            <ul key={ index }>
-              <li
-                data-testid={
-                  `customer_order_details__element-order-table-item-number-${index}`
-                }
-              >
-                { index }
-              </li>
-              <li
-                data-testid={
-                  `customer_order_details__element-order-table-name-${index}`
-                }
-              >
-                { product.description }
-              </li>
-              <li
-                data-testid={
-                  `customer_order_details__element-order-table-quantity-${index}`
-                }
-              >
-                { product.quantity }
-              </li>
-              <li
-                data-testid={
-                  `customer_order_details__element-order-table-sub-total-${index}`
-                }
-              >
-                { product.unitaryValue }
-              </li>
-              <li
-                data-testid="customer_order_details__element-order-total-price"
-              >
-                { (order.totalPrice)
-                  .toString()
-                  .replace('.', ',')}
-              </li>
+    <div className="customer-orders-details-container">
+      <div key={ orderDetails.id }>
+        <h3>Detalhe do Pedido</h3>
+        <p
+          data-testid={ getTestID('37') }
+        >
+          { orderDetails.id }
+        </p>
+        <p
+          data-testid={ getTestID('38') }
+        >
+          { sellerName }
+        </p>
+        <p
+          data-testid={ getTestID('39') }
+        >
+          { moment(orderDetails.saleDate).format('DD/MM/YYYY') }
+        </p>
+        <p
+          data-testid={ getTestID('40') }
+        >
+          { orderDetails.status }
+        </p>
+        { orderDetails.products.map((product, index) => (
+          <ul key={ index }>
+            <li
+              data-testid={ formatTestID('41', index) }
+            >
+              { index }
+            </li>
+            <li
+              data-testid={ formatTestID('42', index) }
+            >
+              { product.description }
+            </li>
+            <li
+              data-testid={ formatTestID('43', index) }
+            >
+              { product.quantity }
+            </li>
+            <li
+              data-testid={ formatTestID('44', index) }
+            >
+              { product.unitaryValue }
+            </li>
+            <li
+              data-testid={ formatTestID('45', index) }
+            >
+              { (product.quantity * product.unitaryValue)
+                .toFixed(2)
+                .replace('.', ',')}
+            </li>
 
-            </ul>
-          ))}
-          <button
-            type="button"
-            data-testid="customer_order_details__button-delivery-check"
-            disabled
-          >
-            MARCAR COMO ENTREGUE
-          </button>
+          </ul>
+        ))}
+        <button
+          type="button"
+          data-testid={ getTestID('47') }
+          disabled
+        >
+          MARCAR COMO ENTREGUE
+        </button>
+        <div data-testid={ getTestID('46') }>
+          { (orderDetails.totalPrice)
+            .toString()
+            .replace('.', ',')}
         </div>
-      ))}
+      </div>
     </div>
   );
 }

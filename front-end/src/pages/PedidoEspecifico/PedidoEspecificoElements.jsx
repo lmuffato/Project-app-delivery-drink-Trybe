@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const CheckoutContainer = styled.div`
+const DetalhesPedido = styled.div`
     
 h1 {
 margin-left: 20px;
@@ -64,4 +64,4 @@ border-radius: 5px;
 }
 `;
 
-export default CheckoutContainer;
+export default DetalhesPedido;

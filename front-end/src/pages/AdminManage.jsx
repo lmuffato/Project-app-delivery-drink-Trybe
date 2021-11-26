@@ -1,12 +1,15 @@
-/* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import TextInput from '../components/TextInput';
+import Context from '../context/Context';
 import regex from '../utils/regex';
+import errorMap from '../utils/errorMap';
 
 function AdminManage() {
+  const { post } = useContext(Context);
   const [userForm, setuserForm] = useState({
     name: '', email: '', password: '', role: 'seller' });
   const [disableButton, setDisableButton] = useState(true);
+  const [invalidLogin, setInvalidLogin] = useState();
   const L = 12;
 
   const validate = (email, password) => {
@@ -31,12 +34,17 @@ function AdminManage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(userForm);
-    // try {
-    //   const { data } = await post('admin_register', userForm);
-    //   console.log(data);
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    try {
+      setInvalidLogin(null);
+
+      const { data } = await post('admin_register', userForm);
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+      const { response } = error;
+      const { status } = response;
+      setInvalidLogin(errorMap[status || '409']);
+    }
   };
 
   return (
@@ -80,11 +88,12 @@ function AdminManage() {
 
           <span>Tipo</span>
           <select
+            name="role"
             data-testid="admin_manage__select-role"
             onChange={ handleChange }
           >
             <option value="seller">Vendedor</option>
-            <option value="consumer">Cliente</option>
+            <option value="costumer">Cliente</option>
             <option value="administrator">Administrador</option>
 
           </select>
@@ -101,6 +110,12 @@ function AdminManage() {
             Cadastrar
           </button>
         </form>
+        <span
+          hidden={ !invalidLogin }
+          data-testid="admin_manage__element-invalid-register"
+        >
+          { invalidLogin }
+        </span>
       </div>
     </div>
   );

@@ -32,8 +32,8 @@ export async function getById(id, token) {
     /**
        * @type {import('axios').AxiosResponse<User>}
        */
-    const response = await axios.post(
-      `${BASE_URL}/products/${id}`, {}, { headers: { Authorization: token } },
+    const response = await axios.get(
+      `${BASE_URL}/products/${id}`, { headers: { Authorization: token } },
     );
     return response.data;
   } catch ({ response: { status, data: { message } } }) {

@@ -102,6 +102,26 @@ export async function getAll(token) {
   }
 }
 
+export async function createUser(name, email, password, { role = 'customer', token }) {
+  console.log(token);
+  try {
+    /**
+     * @type {import('axios').AxiosResponse<User>}
+     */
+    const response = await axios.post(
+      `${BASE_URL}/users`, { name, email, password, role },
+      { headers: { authorization: token } },
+    );
+    return response.data;
+  } catch ({ response: { status, data: { message } } }) {
+    /**
+     * @type {ErrorResponse}
+     */
+    const errorRes = { status, message };
+    throw errorRes;
+  }
+}
+
 /**
  * Delete an user by its id
  * @param {number} id

@@ -13,14 +13,16 @@ const create = async ({ name, email, password, role = 'customer' }) => {
   return data;
 };
 
-const findAll = async () => {
+const findAll = async ({ role }) => {
+  const where = (role === undefined || role === '') ? {} : { role };
   const data = await User.findAll({
+      where,
     attributes: {
         exclude: ['password'],
     },
   });
 
-  return data;
+  return data.filter((user) => user.role !== 'administrator');
 };
 
 const findOne = async ({ id }) => {

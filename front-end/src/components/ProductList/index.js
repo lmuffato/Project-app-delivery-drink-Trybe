@@ -55,7 +55,7 @@ function ProductList() {
           }
         />
       ))}
-      <div style={ { position: 'fixed', bottom: '0', right: '0' } }>
+      <div style={ { position: 'absolute', bottom: '0', right: '0', zIndex: 100 } }>
         <Button
           variant="primary"
           onClick={ () => navigation('../checkout') }

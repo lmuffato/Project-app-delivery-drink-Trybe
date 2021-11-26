@@ -1,18 +1,17 @@
 import React from 'react';
-import { Routes, Route, Navigate, Outlet } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import AuthProvider from './contexts/auth';
 import CustomerProducts from './pages/CustomerProducts';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import AppContainer from './components/AppContainer';
 import { MainContainer } from './styles/containers';
-
-const placeholderElement = (name) => (
-  <div>
-    <h1>{name}</h1>
-    <Outlet />
-  </div>
-);
+import CustomerCheckout from './pages/CustomerCheckout';
+import CustomerDetails from './pages/CustomerDetails';
+import CustomerOrders from './pages/CustomerOrders';
+import SellerOrders from './pages/SellerOrders';
+import SellerDetails from './pages/SellerDetails';
+import AdminManegement from './pages/AdminManagement';
 
 function App() {
   return (
@@ -26,17 +25,24 @@ function App() {
         <Route path="customer" element={ <AppContainer /> }>
           <Route index element={ <Navigate to="products" /> } />
           <Route path="products" element={ <CustomerProducts /> } />
-          <Route path="orders" element={ <p>orders</p> } />
-          <Route path="checkout" element={ <p>checkout</p> } />
+          <Route path="orders">
+            <Route index element={ <CustomerOrders /> } />
+            <Route path=":id" element={ <CustomerDetails /> } />
+          </Route>
+          <Route path="checkout" element={ <CustomerCheckout /> } />
         </Route>
 
-        <Route path="seller" element={ placeholderElement('Seller') }>
+        <Route path="seller" element={ <AppContainer /> }>
           <Route index element={ <Navigate to="orders" /> } />
+          <Route path="orders">
+            <Route index element={ <SellerOrders /> } />
+            <Route path=":id" element={ <SellerDetails /> } />
+          </Route>
         </Route>
 
-        <Route path="admin" element={ placeholderElement('Administrator') }>
+        <Route path="admin" element={ <AppContainer /> }>
           <Route index element={ <Navigate to="manage" /> } />
-          <Route path="manage" element={ <p>manage</p> } />
+          <Route path="manage" element={ <AdminManegement /> } />
         </Route>
 
         <Route path="*" element={ <h1>Not Found</h1> } />

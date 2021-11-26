@@ -15,16 +15,16 @@ const StatusContainer = styled.div`
   border-radius: 6px;
   font-weight: bold;
   background-color: ${({ theme, type }) => {
-    if (type === 'pending') return theme.pending;
-    if (type === 'preparing') return theme.preparing;
-    if (type === 'delivered') return theme.delivered;
+    if (type === 'pendente') return theme.pending;
+    if (type === 'preparando') return theme.preparing;
+    if (type === 'entregue') return theme.delivered;
   }};
 `;
 
 const statuses = {
-  pending: 'PENDENTE',
-  preparing: 'PREPARANDO',
-  delivered: 'ENTREGUE',
+  pendente: 'Pendente',
+  preparando: 'Preparando',
+  entregue: 'Entregue',
 };
 
 function ProductOrderStatus({ status, testid, full }) {
@@ -36,7 +36,7 @@ function ProductOrderStatus({ status, testid, full }) {
 }
 
 ProductOrderStatus.propTypes = {
-  status: PropTypes.oneOf(['pending', 'preparing', 'delivered']).isRequired,
+  status: PropTypes.oneOf(['pendente', 'preparando', 'entregue']).isRequired,
   testid: PropTypes.string.isRequired,
   full: PropTypes.string,
 };

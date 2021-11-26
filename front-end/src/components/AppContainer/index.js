@@ -10,6 +10,7 @@ const Container = styled.div`
   }
   .main-wrapper {
     max-width: 1100px;
+    position: relative;
     padding: 50px 0;
     margin: 0 auto;
   }

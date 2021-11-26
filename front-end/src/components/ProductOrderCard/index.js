@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import ProductOrderStatus from '../ProductOrderStatus';
 import OrderCardContainer from './styles';
 
@@ -15,7 +16,7 @@ const testids = (id) => ({
     id: `customer_orders__element-order-id-${id}`,
     status: `customer_orders__element-delivery-status-${id}`,
     date: `customer_orders__element-order-date-${id}`,
-    price: '',
+    price: `customer_orders__element-card-price-${id}`,
     address: '',
   },
 });
@@ -51,7 +52,7 @@ function ProductOrderCard({
           className="info-badge"
           data-testid={ testid.price }
         >
-          {`R$ ${price.toFixed(2)}`}
+          {`R$ ${price.toFixed(2).replace('.', ',')}`}
         </div>
       </div>
     </div>
@@ -67,26 +68,28 @@ function ProductOrderCard({
   );
 
   return (
-    <OrderCardContainer>
-      <div className="order-id">
-        <div>
-          <p className="order-label">Pedido</p>
-          <p
-            className="order-product-id"
-            data-testid={ testid.id }
-          >
-            {orderId}
-          </p>
+    <Link to={ `${orderId}` } style={ { color: 'unset', textDecoration: 'none' } }>
+      <OrderCardContainer>
+        <div className="order-id">
+          <div>
+            <p className="order-label">Pedido</p>
+            <p
+              className="order-product-id"
+              data-testid={ testid.id }
+            >
+              {orderId}
+            </p>
+          </div>
         </div>
-      </div>
-      <div className="order-info">
-        <div className="order-info-basic">
-          {orderStatus()}
-          {info2()}
+        <div className="order-info">
+          <div className="order-info-basic">
+            {orderStatus()}
+            {info2()}
+          </div>
+          {address && userAdress()}
         </div>
-        {address && userAdress()}
-      </div>
-    </OrderCardContainer>
+      </OrderCardContainer>
+    </Link>
   );
 }
 

@@ -30,13 +30,13 @@ export default function DeliveryDetails() {
     setSellersList(arr);
   };
 
-  const clearGlobalStates = () => {
-    setDeliveryAddress('');
-    setDeliveryNumber('');
-    setTotalPrice('');
-    setSellerId('');
-    setItensList([]);
-  };
+  // const clearGlobalStates = () => {
+  //   setDeliveryAddress('');
+  //   setDeliveryNumber('');
+  //   setTotalPrice('');
+  //   setSellerId('');
+  //   setItensList([]);
+  // };
 
   useEffect(() => {
     setIsLoading(true);
@@ -51,7 +51,10 @@ export default function DeliveryDetails() {
   };
 
   useEffect(() => {
-    defaultSeller();
+    const seller = async () => {
+      defaultSeller();
+    }
+    seller();
   }, [sellersList]);
 
   const roundValue = (value) => {
@@ -76,13 +79,13 @@ export default function DeliveryDetails() {
     };
     const saleProductsArray = { saleProductsArray: itensList };
     const saleId = await createInSalesAndSalesProducts(token, sale, saleProductsArray);
-    clearGlobalStates();
-    redirectToPage(saleId);
+    // clearGlobalStates();
+    history.push(`/customer/orders/${saleId}`);
   };
 
-  useEffect(() => {
-    console.log(sellerId);
-  }, [sellerId]);
+  // useEffect(() => {
+  //   console.log(sellerId);
+  // }, [sellerId]);
 
   const renderSellersList = () => {
     if (isLoading === true) { return null; }

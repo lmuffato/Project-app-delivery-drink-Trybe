@@ -100,6 +100,7 @@ const createSale = async (req, res, next) => {
     req.salesProducts = { salesProductsArray };
     next();
   } catch (err) {
+    console.log('tttttt', err);
     return res.status(500).json({ message: err.message });
   }
 };
@@ -123,8 +124,10 @@ const createManySaleProducts = async (req, res) => {
     const { saleId } = req.saleId;
     const newArr = formatSalesObjectArray(saleId, arr[0]);
     await salesProducts.bulkCreate(newArr);
+    console.log('sale id', saleId);
     return res.status(201).json(saleId);
   } catch (err) {
+    console.log('uuuuuuu', err);
     return res.status(500).json({ message: err.message });
   }
 };

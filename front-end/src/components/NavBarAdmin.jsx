@@ -20,13 +20,21 @@ function NavBarAdmin() {
           flexDirection: 'row',
           justifyContent: 'space-around',
         } }
+        component="nav"
       >
-        <Link
+        {/* <Link
           href="/customer/products"
           color="#FFF"
           data-testid="customer_products__element-navbar-link-products"
         >
           Produtos
+        </Link> */}
+        <Link
+          href="/seller/orders"
+          color="#FFF"
+          data-testid="customer_products__element-navbar-link-orders"
+        >
+          Pedidos
         </Link>
         <Typography
           variant="h6"

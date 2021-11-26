@@ -8,7 +8,7 @@ import socketInstance from '../utils/socketInstance';
 
 const socket = socketInstance();
 
-function StatusCard({ initialStatus, id }) {
+function StatusCard({ initialStatus, id, testid }) {
   const [status, setStatus] = useState(initialStatus);
 
   socket.on('changeStatus', ({ newStatus, idToChange }) => {
@@ -32,7 +32,7 @@ function StatusCard({ initialStatus, id }) {
         sx={ { fontSize: 14 } }
         color="text.secondary"
         textAlign="center"
-        data-testid={ `customer_orders__element-delivery-status-${id}` }
+        data-testid={ testid }
         variant="h4"
       >
         {status}
@@ -45,6 +45,7 @@ function StatusCard({ initialStatus, id }) {
 StatusCard.propTypes = {
   initialStatus: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
+  testid: PropTypes.string.isRequired,
 };
 
 export default StatusCard;

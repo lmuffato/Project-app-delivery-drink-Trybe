@@ -27,6 +27,8 @@ function OrderDetailsDashboard(props) {
 
   const [status, setStatus] = useState(initialStatus);
 
+  const statusTestid = `customer_orders__element-delivery-status-${id}`;
+
   socket.on('changeStatus', ({ newStatus, idToChange }) => {
     if (idToChange === id) setStatus(newStatus);
   });
@@ -76,7 +78,7 @@ function OrderDetailsDashboard(props) {
           sx={ typographyBasicStyle }
           data-testid={ `${testIdsPrefix}element-order-details-label-delivery-status` }
         >
-          <StatusCard initialStatus={ status } id={ id } />
+          <StatusCard initialStatus={ status } id={ id } testid={ statusTestid } />
         </Typography>
         <Button
           data-testid={ `${testIdsPrefix}button-delivery-check` }

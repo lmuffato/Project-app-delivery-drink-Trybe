@@ -39,6 +39,7 @@ function OrderCard(props) {
   );
   const dateTestid = `customer_orders__element-order-date-${id}`;
   const priceTestid = `customer_orders__element-card-price-${id}`;
+  const statusTestid = `customer_orders__element-delivery-status-${id}`;
   return (
     <Card sx={ { maxWidth: 350 } }>
       <Grid container direction="row" alignItems="center" justifyContent="stretch">
@@ -51,7 +52,7 @@ function OrderCard(props) {
         </Grid>
         <Grid item xs={ 3 }>
           <Grid container direction="row">
-            <StatusCard initialStatus={ status } id={ id } />
+            <StatusCard initialStatus={ status } id={ id } testid={ statusTestid } />
             <Grid
               container
               direction="column"

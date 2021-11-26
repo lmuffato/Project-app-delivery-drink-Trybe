@@ -6,16 +6,15 @@ function UserList() {
   const { users, setUsers } = useContext(UsersContext);
   const { token } = JSON.parse(localStorage.getItem('user'));
 
-  async function getUsers() {
-    const request = await fetch('http://localhost:3001/users');
-    const list = await request.json();
-    const filteredList = list.filter((e) => e.role !== 'administrator');
-    setUsers(filteredList);
-  }
-
   useEffect(() => {
+    async function getUsers() {
+      const request = await fetch('http://localhost:3001/users');
+      const list = await request.json();
+      const filteredList = list.filter((e) => e.role !== 'administrator');
+      setUsers(filteredList);
+    }
     getUsers();
-  }, []);
+  }, [setUsers]);
 
   async function handleClick(email) {
     const data = { email };

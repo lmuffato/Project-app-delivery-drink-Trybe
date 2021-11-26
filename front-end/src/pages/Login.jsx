@@ -34,16 +34,6 @@ function Login() {
     }
   }
 
-  function checkBtn() {
-    const passwordLength = 6;
-    const re = /\S+@\S+\.\S+/;
-    if (password.length >= passwordLength && re.test(email)) {
-      setDisAbleBtn(false);
-      return;
-    }
-    setDisAbleBtn(true);
-  }
-
   async function loginClic() {
     const data = { email };
     const myBody = JSON.stringify(data);
@@ -67,23 +57,31 @@ function Login() {
   }
 
   useEffect(() => {
+    function checkBtn() {
+      const passwordLength = 6;
+      const re = /\S+@\S+\.\S+/;
+      if (password.length >= passwordLength && re.test(email)) {
+        setDisAbleBtn(false);
+        return;
+      }
+      setDisAbleBtn(true);
+    }
     setHideWarning(true);
     checkBtn();
   }, [email, password]);
 
-  const isLoged = () => {
-    const user = JSON.parse(localStorage.getItem('user'));
-    if (!user) return;
-    if (user.role === 'customer') {
-      history.push('/customer/products');
-    } else if (user.role === 'seller') {
-      history.push('/seller/orders');
-    }
-  };
-
   useEffect(() => {
+    const isLoged = () => {
+      const user = JSON.parse(localStorage.getItem('user'));
+      if (!user) return;
+      if (user.role === 'customer') {
+        history.push('/customer/products');
+      } else if (user.role === 'seller') {
+        history.push('/seller/orders');
+      }
+    };
     isLoged();
-  }, []);
+  }, [history]);
 
   return (
     <>

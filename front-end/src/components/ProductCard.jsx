@@ -28,16 +28,15 @@ function ProductCard({ product }) {
     }
   }
 
-  function handleQuantity() {
-    const inicialCart = cart.find((item) => item.name === product.name);
-    if (inicialCart) {
-      setQuantity(inicialCart.quantity);
-    }
-  }
-
   useEffect(() => {
+    function handleQuantity() {
+      const inicialCart = cart.find((item) => item.name === product.name);
+      if (inicialCart) {
+        setQuantity(inicialCart.quantity);
+      }
+    }
     handleQuantity();
-  }, []);
+  }, [cart, product]);
 
   return (
     <Card bcart="info" className="card">

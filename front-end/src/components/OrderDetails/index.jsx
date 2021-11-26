@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 // import { format } from 'date-fns';
+import io from 'socket.io-client';
 import updateStatusSale from '../../services/UpdateSale/updateStatusSale';
 import styles from './styles.module.css';
 import { useOrderDetails } from '../../context/orderDetailsProvider';
 import formatDate from '../../utils/formatDate';
 import replaceDotToComma from '../../services/productPages/replaceDotToComa';
+import { useSocket } from '../../context/socketProvider';
+
+const socket = io.connect('http://localhost:3001');
 
 export default function OrderDetails({ dataTestIds }) {
   const [disabledButton, setDisableButton] = useState(false);
   const { sale, setSale, seller, products } = useOrderDetails();
+  const { socketStatus } = useSocket();
 
   useEffect(() => {
     if (sale.status !== 'Em Trânsito' && sale.status) {
@@ -17,8 +22,15 @@ export default function OrderDetails({ dataTestIds }) {
     }
   }, [sale.status]);
 
+  useEffect(() => {
+    if (socketStatus === 'Em Trânsito') {
+      setDisableButton(false);
+    }
+  }, [socketStatus]);
+
   const handleDelivered = (myStatus) => {
     updateStatusSale(sale.id, setSale, myStatus);
+    socket.emit('changeStatus', myStatus);
   };
 
   return (
@@ -39,7 +51,9 @@ export default function OrderDetails({ dataTestIds }) {
         >
           {sale.saleDate ? formatDate(sale.saleDate) : null}
         </span>
-        <span data-testid={ dataTestIds['40'] }>{sale.status}</span>
+        <span data-testid={ dataTestIds['40'] }>
+          {socketStatus || sale.status}
+        </span>
         <button
           disabled={ disabledButton }
           data-testid={ dataTestIds['47'] }

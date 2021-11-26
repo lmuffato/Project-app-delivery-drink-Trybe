@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from 'react';
 import NewOrderContext from '../../context/NewOrderContext';
 
-const testIdTotal = 'customer_checkout__element-order-total-price';
+const testid46 = 'customer_order_details__element-order-total-price'; // Verificar
 
 export default function StatusBar() {
   const { orderItensList } = useContext(NewOrderContext);
@@ -36,7 +36,7 @@ export default function StatusBar() {
   const renderTotalValue = () => {
     if (orderItensList.lengh !== 0 || orderItensList !== undefined) {
       return (
-        <p data-testid={ `${testIdTotal}` }>
+        <p data-testid={ `${testid46}` }>
           { `Total: ${convertValueToBrlShape(totalPrice)}` }
         </p>);
     }

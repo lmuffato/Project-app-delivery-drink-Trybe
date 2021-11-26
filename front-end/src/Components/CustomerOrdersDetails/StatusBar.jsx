@@ -2,7 +2,11 @@ import React, { useContext, useState, useEffect } from 'react';
 import NewOrderContext from '../../context/NewOrderContext';
 import { updateSaleStatus, getOrderById } from '../../services/endpointsAPI';
 
-const testIdTotal = 'customer_checkout__element-order-total-price';
+const testId37 = 'customer_order_details__element-order-details-label-order-id';
+const testId38 = 'customer_order_details__element-order-details-label-seller-name';
+const testId39 = 'customer_order_details__element-order-details-label-order-date';
+const testId40 = 'customer_order_details__element-order-details-label-delivery-status';
+const testId47 = 'customer_order_details__button-delivery-check';
 
 export default function StatusBar() {
   const { orderSale, setOrderSale } = useContext(NewOrderContext);
@@ -27,13 +31,13 @@ export default function StatusBar() {
   }, [orderStatus]);
 
   // Acrescenta zeros a direita do número, como 50 => 0050.
-  const printZerosOnRightSide = (num, zeros) => {
+  const addZerosOnRightSide = (num, zeros) => {
     const newNum = String(num).padStart(zeros, '0');
     return newNum;
   };
 
   // Converte a data do banco de dados no formato brasileiro dd/mm/yy.
-  const dateConvertBrasilShape = (data) => {
+  const convertDateToBrasilShape = (data) => {
     const now = new Date(data);
     const str = `${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()}`;
     return str;
@@ -52,8 +56,8 @@ export default function StatusBar() {
     const zeros = 4;
     if (Object.keys(orderSale).length !== 0 || orderSale !== undefined) {
       return (
-        <span data-testid={ `${testIdTotal}` }>
-          { `PEDIDO: ${printZerosOnRightSide(orderSale.id, zeros)}` }
+        <span data-testid={ `${testId37}` }>
+          { `PEDIDO: ${addZerosOnRightSide(orderSale.id, zeros)}` }
         </span>);
     }
   };
@@ -62,7 +66,7 @@ export default function StatusBar() {
   const renderSelerName = () => {
     if (Object.keys(orderSale).length !== 0 || orderSale !== undefined) {
       return (
-        <span data-testid={ `${testIdTotal}` }>
+        <span data-testid={ `${testId38}` }>
           { `P. Vend: ${orderSale.sellerName}` }
         </span>);
     }
@@ -72,8 +76,8 @@ export default function StatusBar() {
   const renderOrderDate = () => {
     if (Object.keys(orderSale).length !== 0 || orderSale !== undefined) {
       return (
-        <span data-testid={ `${testIdTotal}` }>
-          { `${dateConvertBrasilShape(orderSale.saleDate)}` }
+        <span data-testid={ `${testId39}` }>
+          { `${convertDateToBrasilShape(orderSale.saleDate)}` }
         </span>);
     }
   };
@@ -83,7 +87,7 @@ export default function StatusBar() {
     if (Object.keys(orderSale).length !== 0 || orderSale !== undefined) {
       console.log(orderSale.status);
       return (
-        <span data-testid={ `${testIdTotal}` }>
+        <span data-testid={ `${testId40}` }>
           { `${changeToUperCase(orderSale.status)}` }
         </span>);
     }
@@ -97,7 +101,7 @@ export default function StatusBar() {
           type="button"
           id="Entregue"
           onClick={ (e) => { updateStatusInDatabase(e.target.id); } }
-          data-testid={ `${testIdTotal}` }
+          data-testid={ `${testId47}` }
         >
           MARCAR COMO ENTREGUE
         </button>

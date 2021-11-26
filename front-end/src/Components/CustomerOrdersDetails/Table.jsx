@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
 import NewOrderContext from '../../context/NewOrderContext';
 
-const testIdNumber = 'customer_checkout__element-order-table-item-number-';
-const testIdName = 'customer_checkout__element-order-table-name-';
-const testIdQuantity = 'customer_checkout__element-order-table-quantity-';
-const testIdUnitPrice = 'customer_checkout__element-order-table-unit-price-';
-const testIdSubTotal = 'customer_checkout__element-order-table-sub-total-';
+const testId41 = 'customer_order_details__element-order-table-item-number-';
+const testId42 = 'customer_order_details__element-order-table-name-';
+const testId43 = 'customer_order_details__element-order-table-quantity-';
+const testId44 = 'customer_order_details__element-order-table-unit-price-'; // Verificar
+const testId45 = 'customer_order_details__element-order-table-sub-total-'; // Verificar
 
 export default function Table() {
   const { orderItensList } = useContext(NewOrderContext);
@@ -36,16 +36,16 @@ export default function Table() {
       return (
         orderItensList.map((ele, index) => (
           <tr key={ index }>
-            <td data-testid={ `${testIdNumber}${index}` }>{index + 1}</td>
-            <td data-testid={ `${testIdName}${index}` }>{ele.name}</td>
-            <td data-testid={ `${testIdQuantity}${index}` }>{ele.quantity}</td>
+            <td data-testid={ `${testId41}${index}` }>{index + 1}</td>
+            <td data-testid={ `${testId42}${index}` }>{ele.name}</td>
+            <td data-testid={ `${testId43}${index}` }>{ele.quantity}</td>
             <td
-              data-testid={ `${testIdUnitPrice}${index}` }
+              data-testid={ `${testId44}${index}` }
             >
               { convertValueToBrlShape(roundValue(ele.price)) }
             </td>
             <td
-              data-testid={ `${testIdSubTotal}${index}` }
+              data-testid={ `${testId45}${index}` }
             >
               { convertValueToBrlShape(roundValue(ele.price * ele.quantity)) }
             </td>

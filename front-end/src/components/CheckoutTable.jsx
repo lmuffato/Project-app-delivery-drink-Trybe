@@ -16,7 +16,8 @@ function CheckoutTable() {
     productName,
     productQuantity,
     productUnitPrice,
-    productSubTotal } = testIds;
+    productSubTotal,
+    productRemove } = testIds;
 
   const fillTable = ((cartt) => cartt.map(
     ({ productId: id, name, quantity, unitPrice, subTotal }, key) => (

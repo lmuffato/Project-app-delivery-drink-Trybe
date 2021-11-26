@@ -1,5 +1,6 @@
 const { Sale, User } = require('../database/models');
 // const saleSchema = require('../schemas/saleSchema');
+const jwt = require('jsonwebtoken');
 
 const create = async (order) => {
   // const validateSale = saleSchema.validateSale.validate(order);
@@ -16,10 +17,7 @@ const create = async (order) => {
   return { status: 201, sale };
 };
 
-const getSale = async (email) => {
-  const { id } = await User.findOne({ where: { email } });
-  if (!id) return { status: 500, message: 'User not found' };
-
+const getSale = async (id) => { 
   const sales = await Sale.findAll({ where: { USER_ID: id } });
   if (!sales) return { status: 404, message: 'Sale not found' };
 

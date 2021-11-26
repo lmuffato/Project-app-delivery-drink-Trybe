@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Header from '../components/Header/Header';
@@ -22,7 +23,6 @@ export default function PedidoEspecífico({ location }) {
     setSale(result);
     setLoading(false);
   }
-  console.log(products);
   useEffect(() => requestAPI(), []);
   useEffect(() => {
     if (products) {
@@ -75,9 +75,7 @@ export default function PedidoEspecífico({ location }) {
         } }
       >
         Total: R$
-        <span
-          data-testid="customer_order_details__element-order-total-price"
-        >
+        <span data-testid="customer_order_details__element-order-total-price">
           {total}
 
         </span>

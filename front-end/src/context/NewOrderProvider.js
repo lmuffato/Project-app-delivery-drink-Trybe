@@ -31,6 +31,7 @@ function NewOrderProvider({ children }) {
   const [totalPrice, setTotalPrice] = useState(''); // valor total do pedido
   const [orderItensList, setOrderItensList] = useState([]); // detalhe da venda concluída
   const [orderSale, setOrderSale] = useState({}); // detalhe da venda concluída
+  const [disableBtnCustomer, setDisableBtnCustomer] = useState(true); // detalhe da venda concluída
 
   // useEffect(() => {
   //   console.log(itensList, 'aaaaaaaaaaaaa');
@@ -78,6 +79,10 @@ function NewOrderProvider({ children }) {
 
         navBarSair,
         setNavBarSair,
+
+        disableBtnCustomer,
+        setDisableBtnCustomer,
+
       } }
     >
       {children}

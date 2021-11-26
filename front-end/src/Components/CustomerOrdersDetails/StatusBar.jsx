@@ -13,6 +13,7 @@ export default function StatusBar() {
   const { orderSale, setOrderSale } = useContext(NewOrderContext);
   const [orderStatus, setOrderStatus] = useState('');
   const { userData } = useContext(UserContext);
+  const { disableBtnCustomer } = useContext(UserContext);
 
   // Atualiza o status do pedido no banco de dados e salva o status no estado local.
   const updateStatusInDatabase = async (status) => {
@@ -46,13 +47,13 @@ export default function StatusBar() {
     return str;
   };
 
-  // Coloca o texto em caixa alta.
+  /* // Coloca o texto em caixa alta.
   const changeToUperCase = (string) => {
     if (string !== undefined) {
       const uperCaseString = string.toUpperCase();
       return uperCaseString;
     }
-  };
+  }; */
 
   // Rendereiza o número da ordem na tela.
   const renderOrderNumber = () => {
@@ -91,7 +92,7 @@ export default function StatusBar() {
       console.log(orderSale.status);
       return (
         <span data-testid={ `${testId40}` }>
-          { `${changeToUperCase(orderSale.status)}` }
+          { `${orderSale.status}` }
         </span>);
     }
   };
@@ -103,6 +104,7 @@ export default function StatusBar() {
         <button
           type="button"
           id="Entregue"
+          disabled={ `${disableBtnCustomer}` }
           onClick={ (e) => { updateStatusInDatabase(e.target.id); } }
           data-testid={ `${testId47}` }
         >

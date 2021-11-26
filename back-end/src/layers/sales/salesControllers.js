@@ -25,6 +25,10 @@ async () => {});
 http GET :3001/users
 */
 
+router.get('/allordersbycustomer',
+salesMiddlewares.getAllOrdersByCustomers,
+async () => {});
+
 router.post('/',
 salesMiddlewares.createNew,
 async () => {});

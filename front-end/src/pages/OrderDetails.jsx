@@ -6,15 +6,19 @@ import Table from '../Components/CustomerOrdersDetails/Table';
 import TotalValue from '../Components/CustomerOrdersDetails/TotalValue';
 import StatusBar from '../Components/CustomerOrdersDetails/StatusBar';
 import NewOrderContext from '../context/NewOrderContext';
+import UserContext from '../context/userContext';
 
 export default function OrderDetails() {
   const { setOrderSale } = useContext(NewOrderContext);
   const { setOrderItensList } = useContext(NewOrderContext);
+  const { userData } = useContext(UserContext);
+
   const params = useParams(); // 2
 
   // Carrega os estados globais com as informações do pedido e dos produtos.
   const getOrderFromDataBase = async () => {
-    const res = await getOrderById(params.id);
+    const { token } = userData;
+    const res = await getOrderById(token, params.id);
     setOrderItensList(res.itensList);
     setOrderSale(res.sale);
   };
@@ -25,9 +29,9 @@ export default function OrderDetails() {
 
   return (
     <div>
+      <Navbar />
       <h3>Detalhe do Pedido</h3>
       <StatusBar />
-      <Navbar />
       <Table />
       <TotalValue />
     </div>

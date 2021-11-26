@@ -40,7 +40,7 @@ export default function CustomerProducts() {
       soma += element;
     });
     if (totalPricePerItem.length)setTotalPriceAllProducts(roundPrice(soma));
-    console.log('tttt soma', soma);
+    // console.log('tttt soma', soma);
   }, [itensList]);
 
   useEffect(() => {

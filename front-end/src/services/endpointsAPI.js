@@ -74,9 +74,13 @@ export const postSales = async (obj) => { // obj = { userId, totalPrice, deliver
   return result.data;
 };
 
-export const createInSalesAndSalesProducts = async (sale, salesProductsArray) => {
+export const createInSalesAndSalesProducts = async (token, sale, salesProductsArray) => {
   const data = { sale, salesProductsArray };
-  const result = await api.post('/sales/createsale', data);
+  const apiForUser = axios.create({
+    baseURL: `http://localhost:${PORT}`,
+    headers: { authorization: token },
+  });
+  const result = await apiForUser.post('/sales/createsale', data);
   return result.data;
 };
 
@@ -90,8 +94,21 @@ export const postSalesProducts = async () => {
   return result.data;
 };
 
-export const getOrderById = async (id) => {
-  const result = await api.get(`/sales/order/${id}`);
+export const getOrderById = async (token, id) => {
+  const apiForUser = axios.create({
+    baseURL: `http://localhost:${PORT}`,
+    headers: { authorization: token },
+  });
+  const result = await apiForUser.get(`/sales/order/${id}`);
+  return result.data;
+};
+
+export const getAllOrdersByCustomer = async (token, userId) => {
+  const apiForUser = axios.create({
+    baseURL: `http://localhost:${PORT}`,
+    headers: { authorization: token, user: userId },
+  });
+  const result = await apiForUser.get('/sales/allordersbycustomer');
   return result.data;
 };
 

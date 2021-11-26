@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import NewOrderContext from '../../context/NewOrderContext';
+import UserContext from '../../context/userContext';
 import { updateSaleStatus, getOrderById } from '../../services/endpointsAPI';
 
 const testId37 = 'customer_order_details__element-order-details-label-order-id';
@@ -11,6 +12,7 @@ const testId47 = 'customer_order_details__button-delivery-check';
 export default function StatusBar() {
   const { orderSale, setOrderSale } = useContext(NewOrderContext);
   const [orderStatus, setOrderStatus] = useState('');
+  const { userData } = useContext(UserContext);
 
   // Atualiza o status do pedido no banco de dados e salva o status no estado local.
   const updateStatusInDatabase = async (status) => {
@@ -21,7 +23,8 @@ export default function StatusBar() {
 
   // Faz uma requisição ao banco de dados trazendo os dados do pedido atualizados.
   const getOrderFromDataBase = async () => {
-    const res = await getOrderById(orderSale.id);
+    const { token } = userData;
+    const res = await getOrderById(token, orderSale.id);
     setOrderSale(res.sale);
   };
 

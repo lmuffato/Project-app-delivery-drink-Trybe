@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import NewOrderContext from '../../context/NewOrderContext';
+import UserContext from '../../context/userContext';
 import { getAllUsersSallers,
   createInSalesAndSalesProducts,
 } from '../../services/endpointsAPI';
@@ -12,6 +13,7 @@ const buttonSubmitOrder = 'customer_checkout__button-submit-order';
 
 export default function DeliveryDetails() {
   const history = useHistory();
+  const { userData } = useContext(UserContext);
   const { userId } = useContext(NewOrderContext);
   const { sellersList, setSellersList } = useContext(NewOrderContext);
   const { sellerId, setSellerId } = useContext(NewOrderContext);
@@ -63,6 +65,7 @@ export default function DeliveryDetails() {
   };
 
   const createNewSale = async () => {
+    const { token } = userData;
     const sale = {
       userId,
       totalPrice: roundValue(totalPrice),
@@ -72,7 +75,7 @@ export default function DeliveryDetails() {
       status: 'pendente',
     };
     const saleProductsArray = { saleProductsArray: itensList };
-    const saleId = await createInSalesAndSalesProducts(sale, saleProductsArray);
+    const saleId = await createInSalesAndSalesProducts(token, sale, saleProductsArray);
     clearGlobalStates();
     redirectToPage(saleId);
   };

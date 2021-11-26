@@ -163,10 +163,15 @@ const mountResponseObj = async (obj) => {
   return newObj;
 };
 
-// const removeKeyInObject = (objn, key) => {
-//   const { [key]: _, ...newObj } = objn;
-//    return newObj;
-// };
+const getAllOrdersByCustomers = async (req, res) => {
+  try {
+    const { user } = req.headers;
+    const data = await sales.findAll({ where: { userId: user } });
+    return res.status(200).json(data);
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+};
 
 const getSaleAndSaleProducts = async (req, res) => {
   try {
@@ -205,6 +210,7 @@ module.exports = {
   getSaleAndSaleProducts,
   getOrderFull,
   updateStatus,
+  getAllOrdersByCustomers,
 };
 
 /* BACKUP

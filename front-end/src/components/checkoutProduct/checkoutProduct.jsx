@@ -4,6 +4,8 @@ import CheckoutContext from '../../context/checkoutContext';
 import CardProduct from './checkoutProductElements';
 
 export default function CheckoutProduct({ index, id, name, qtd, price, option }) {
+  console.log(price);
+  console.log(qtd);
   const newPrice = option ? (price / qtd).toFixed(2).toString().replace(/\./g, ',')
     : (price).replace(/\./g, ',');
   const subtotal = option ? (price).toString().replace(/\./g, ',')
@@ -23,7 +25,11 @@ export default function CheckoutProduct({ index, id, name, qtd, price, option })
     ? `customer_checkout__element-order-table-sub-total-${index}`
     : `customer_order_details__element-order-table-sub-total-${index}`;
   function deleteItem(idx) {
-    const sales = aux.filter((item) => item.product_id !== idx);
+    const sales = aux.filter((item) => {
+      console.log(item.product_id);
+      console.log(idx);
+      return item.product_id !== idx;
+    });
     setAux(sales);
   }
   return (

@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 
 import Card from '../components/salesCard';
@@ -12,7 +11,7 @@ export default function TodosOsPedidos() {
   const [loading, setLoading] = useState(true);
 
   const userName = JSON.parse(user);
-
+  console.log(sales);
   async function getAllSales() {
     try {
       const response = await axios({
@@ -44,6 +43,7 @@ export default function TodosOsPedidos() {
                 status={ e.status }
                 sale_date={ e.sale_date }
                 total_price={ e.total_price }
+                option
               />
             ))
       }

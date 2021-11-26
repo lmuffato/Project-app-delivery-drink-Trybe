@@ -28,7 +28,6 @@ const getAllSales = async (req, res, next) => {
 
     res.status(NOT_FOUND).json({ message: 'User not found' });
   } catch (e) {
-    console.log(e);
     next({ statusCode: INTERNAL_SERVER_ERROR, message: e.message });
   }
 };

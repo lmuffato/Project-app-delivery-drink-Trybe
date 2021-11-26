@@ -6,9 +6,8 @@ function NewUserFormFromAdmin() {
   const [nameInput, setNameInput] = useState('');
   const [emailInput, setEmailInput] = useState('');
   const [passwordInput, setPasswordInput] = useState('');
-  const [roleInput, setRoleInput] = useState('');
+  const [roleInput, setRoleInput] = useState('seller');
   const [isValid, setIsValid] = useState(false);
-  console.log(roleInput);
 
   useEffect(() => {
     const sucessValidate = validateAll(nameInput, emailInput, passwordInput);
@@ -17,12 +16,12 @@ function NewUserFormFromAdmin() {
 
   const newUserRegister = async (e) => {
     e.preventDefault();
-    await axios.post('localhost:3001/register', {
+    await axios.post('http://localhost:3001/register', {
       name: nameInput,
       email: emailInput,
       password: passwordInput,
       role: roleInput,
-    });
+    }, { headers: { Authorization: JSON.parse(localStorage.getItem('user')).token } });
   };
   return (
     <form method="post">
@@ -68,11 +67,12 @@ function NewUserFormFromAdmin() {
           data-testid="admin_manage__select-role"
           placeholder="Vendedor/Cliente"
           onChange={ (e) => setRoleInput(e.target.value) }
+          value={ roleInput }
         >
-          <option value="Vendedor">
+          <option value="seller">
             Vendedor
           </option>
-          <option value="Cliente">
+          <option value="customer">
             Cliente
           </option>
         </select>

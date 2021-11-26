@@ -53,10 +53,15 @@ const getSaleDetails = async (id) => {
   }
 };
 
+const changeStatus = async (id) => {
+  await sale.update({ where: { id } }, { status: 'Entregue' });
+};
+
 module.exports = {
   addNew,
   addRelation,
   getSales,
   getSaleById,
   getSaleDetails,
+  changeStatus,
 };

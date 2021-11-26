@@ -44,6 +44,7 @@ app.post('/validToken', validateToken);
 app.get('/orderDetails/:id', sale.getSaleDetails);
 app.post('/sales', validateJWT, sale.addNew);
 app.get('/sales', getIdByToken, sale.getSale);
+app.post('/sales/:id', sale.changeStatus);
 app.use('/images', express.static(path.join(__dirname, '..', '..', '/public')));
 
 server.listen(port, () => console.log(`Ouvindo na porta ${port}!`));

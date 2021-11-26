@@ -32,9 +32,14 @@ const getSaleDetails = async (id) => {
   return sale;
 };
 
+const changeStatus = async (id) => {
+  await Sale.changeStatus(id);
+};
+
 module.exports = {
   addNew,
   getSale,
   getSaleById,
   getSaleDetails,
+  changeStatus,
 };

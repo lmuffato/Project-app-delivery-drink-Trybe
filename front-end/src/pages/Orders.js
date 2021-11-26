@@ -2,18 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { getSales } from '../utils/Data';
 import Header from '../Components/Header';
+import dateFormatation from '../utils/Format';
 
 function Orders() {
   const [isLoading, setIsLoading] = useState(true);
   const [orders, setOrders] = useState([]);
-
-  const dateFormatation = (data) => {
-    const YMD = data.split('T')[0];
-    const i = YMD.split('-');
-    const [y, m, d] = i;
-    const DMY = `${d}/${m}/${y}`;
-    return DMY;
-  };
 
   const history = useHistory();
 

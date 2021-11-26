@@ -37,4 +37,10 @@ export const validateToken = async (token) => {
   return result;
 };
 
+export const statusChange = async (id) => {
+  await fetch(`http://localhost:3001/setstatus/${id}`, {
+    method: 'POST',
+  });
+};
+
 export default fetchAllProducts;

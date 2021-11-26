@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './Login.css';
 import { Form, Button } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import md5 from 'md5';
@@ -86,7 +87,7 @@ function Login() {
 
   return (
     <>
-      <Form>
+      <Form className="login-form">
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control

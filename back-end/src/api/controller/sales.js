@@ -2,8 +2,8 @@ const {
   StatusCodes: { CREATED, OK, INTERNAL_SERVER_ERROR, NOT_FOUND },
 } = require('http-status-codes');
 
-const { Sale } = require('../../database/models');
-const { User: users, ProductsSale } = require('../../database/models');
+const { Sale, User } = require('../../database/models');
+const { User: users, ProductsSale, Product } = require('../../database/models');
 
 const ids = {
   user: 'user_id',
@@ -36,8 +36,19 @@ const getAllSales = async (req, res, next) => {
 const getSalesById = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const sale = await Sale.findByPk(id);
-    res.status(OK).json(sale);
+    const { dataValues: { ...data } } = await Sale.findByPk(id);
+    const saleProd = await ProductsSale.findAll({ where: { [ids.sale]: id } });
+    const products = await Promise.all(saleProd.map(async (prod) => {
+      const find = await Product.findByPk(prod.dataValues[ids.product], {
+        attributes: { exclude: ['url_image'] },
+      });
+      return { ...find.dataValues, quantity: prod.dataValues.quantity };
+    }));
+    const { name: sellerName } = await User.findByPk(data.seller_id, {
+      attributes: { exclude: ['id', 'role', 'password', 'email'] },
+    });
+    console.log(products);
+    res.status(OK).json({ ...data, products, sellerName });
   } catch (e) {
     next({ statusCode: INTERNAL_SERVER_ERROR, message: e.message });
   }

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import genHashMd5 from 'md5';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import emailValidation from '../validations/loginValidation';
 import api from '../services/api';
 import ErrorBackend from './ErrorBackend/index';
@@ -13,7 +13,7 @@ export default function Login() {
 
   // o email value do db, este restorno da requisição vai definir o evento de redirecionamento
   // const errorLoginHTTP = 200;
-  const navegate = useNavigate();
+  const navigate = useNavigate();
   const fetchPostData = async (userData) => {
     const data = await api.post('/user/login', userData);
     const condition = await Object.keys(data.data);
@@ -28,7 +28,7 @@ export default function Login() {
         seller: '/seller/orders',
         administrator: '/admin/manage',
       };
-      navegate(redirectRoutes[data.data.role]);
+      navigate(redirectRoutes[data.data.role]);
     }
   };
 
@@ -79,9 +79,13 @@ export default function Login() {
         >
           LOGIN
         </button>
-        <Link to="/register" data-testid="common_login__button-register">
+        <button
+          onClick={ () => navigate('/register') }
+          data-testid="common_login__button-register"
+          type="button"
+        >
           Ainda não tenho conta
-        </Link>
+        </button>
       </form>
       {
         errorLogin ? <ErrorBackend

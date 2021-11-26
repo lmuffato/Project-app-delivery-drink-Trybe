@@ -27,7 +27,7 @@ function QuantidadeItens({ data }) {
     <input
       data-testid={ `customer_products__input-card-quantity-${id}` }
       type="number"
-      value={ quantity }
+      value={ quantity || 0 }
       onChange={ (e) => handleChange(e, id) }
     />
   );

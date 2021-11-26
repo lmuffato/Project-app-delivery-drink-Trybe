@@ -28,7 +28,7 @@ const register = async (req, res, next) => {
 const getAll = async (_req, res) => {
   const result = await userService.getAll();
   return res.status(200).json({ result });
-}
+};
 
 module.exports = {
   login,

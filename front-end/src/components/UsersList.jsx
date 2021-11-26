@@ -46,7 +46,7 @@ function UsersList() {
           gap: '10px',
         } }
       >
-        { users?.map((user, index) => (
+        { users && users.map((user, index) => (
           <UserItemInList
             { ...user }
             key={ index }

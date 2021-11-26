@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { Grid } from '@mui/material';
+import BackgroundContainer from '../components/BackgroundContainer';
 import { verifyUserExistance } from '../utils/LocalStorageFunctions';
 import NavBar from '../components/NavBar';
 import OrderCard from '../components/OrderCard';
@@ -28,7 +29,7 @@ function CustomerOrders() {
   // eslint-disable-next-line
   }, []);
   return (
-    <section>
+    <BackgroundContainer>
       <NavBar />
       <Grid
         container
@@ -59,7 +60,7 @@ function CustomerOrders() {
           })
         }
       </Grid>
-    </section>
+    </BackgroundContainer>
   );
 }
 

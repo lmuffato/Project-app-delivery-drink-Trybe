@@ -1,24 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   Box,
   Typography,
 } from '@mui/material';
+import socketInstance from '../utils/socketInstance';
 
-const { io } = require('socket.io-client');
+const socket = socketInstance();
 
-const socketServerUrl = 'http://localhost:3001';
-const socket = io(socketServerUrl);
-
-function StatusCard({ initialStatus, id }) {
+function StatusCard({ initialStatus, id, testid }) {
   const [status, setStatus] = useState(initialStatus);
 
-  useEffect(() => {
-    socket.on('changeState', ({ newState, idToChange }) => {
-      if (idToChange === id) setStatus(newState);
-    });
-    // eslint-disable-next-line
-  }, []);
+  socket.on('changeStatus', ({ newStatus, idToChange }) => {
+    if (idToChange === id) setStatus(newStatus);
+  });
+
   const colorStatus = {
     Pendente: '#ffcc00',
     Preparando: '#99cc00',
@@ -36,7 +32,7 @@ function StatusCard({ initialStatus, id }) {
         sx={ { fontSize: 14 } }
         color="text.secondary"
         textAlign="center"
-        data-testid={ `customer_orders__element-delivery-status-${id}` }
+        data-testid={ testid }
         variant="h4"
       >
         {status}
@@ -49,6 +45,7 @@ function StatusCard({ initialStatus, id }) {
 StatusCard.propTypes = {
   initialStatus: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
+  testid: PropTypes.string.isRequired,
 };
 
 export default StatusCard;

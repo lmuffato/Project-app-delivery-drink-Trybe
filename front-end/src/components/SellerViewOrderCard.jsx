@@ -7,6 +7,7 @@ import {
   Button,
 } from '@mui/material';
 import converDateFormat from '../utils/convertDateFormat';
+import StatusCard from './StatusCard';
 
 function SellerViewOrderCard(props) {
   const {
@@ -21,18 +22,7 @@ function SellerViewOrderCard(props) {
   const testIdPrefix = 'seller_orders__';
   const history = useHistory();
 
-  const statusFieldBackgroundColor = () => {
-    switch (status.toLowerCase()) {
-    case 'pendente':
-      return '#CCB800BF';
-    case 'preparando':
-      return '#00CC9BBF';
-    case 'entregue':
-      return '#66CC00BF';
-    default:
-      return '#FFF';
-    }
-  };
+  const statusTestid = `${testIdPrefix}element-delivery-status-${id}`;
 
   return (
     <Box
@@ -80,23 +70,7 @@ function SellerViewOrderCard(props) {
             gap: '10px',
           } }
         >
-          <Typography
-            sx={ {
-              backgroundColor: statusFieldBackgroundColor(),
-              textTransform: 'uppercase',
-              fontWeight: 'bold',
-              fontSize: '17px',
-              width: '50%',
-              height: '100%',
-              borderRadius: '2px',
-              padding: '0 10px',
-              display: 'flex',
-              alignItems: 'center',
-            } }
-            data-testid={ `${testIdPrefix}element-delivery-status-${id}` }
-          >
-            { status }
-          </Typography>
+          <StatusCard initialStatus={ status } id={ id } testid={ statusTestid } />
           <Box
             sx={ {
               display: 'flex',

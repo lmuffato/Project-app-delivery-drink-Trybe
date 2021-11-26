@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   Box,
@@ -8,6 +8,9 @@ import {
 } from '@mui/material';
 import convertDateFormat from '../utils/convertDateFormat';
 import ProductInSaleCard from './ProductInSaleCard';
+import socketInstance from '../utils/socketInstance';
+
+const socket = socketInstance();
 
 const testIdsPrefix = 'seller_order_details__';
 
@@ -16,10 +19,16 @@ function SellerOrderTable(props) {
     id,
     seller: { name },
     products,
-    status,
+    status: initialStatus,
     totalPrice,
     saleDate,
   } = props;
+
+  const [status, setStatus] = useState(initialStatus);
+
+  socket.on('changeStatus', ({ newStatus, idToChange }) => {
+    if (idToChange === id) setStatus(newStatus);
+  });
 
   const typographyBasicStyle = {
     fontSize: 14,
@@ -70,12 +79,20 @@ function SellerOrderTable(props) {
         </Typography>
         <Button
           data-testid={ `${testIdsPrefix}button-preparing-check` }
+          disabled={ status !== 'Pendente' }
+          onClick={
+            () => socket.emit('changeStatus', { newStatus: 'Preparando', idToChange: id })
+          }
         >
           Preparar Pedido
         </Button>
         <Button
           data-testid={ `${testIdsPrefix}button-dispatch-check` }
-          disabled
+          disabled={ status !== 'Preparando' }
+          onClick={
+            () => socket
+              .emit('changeStatus', { newStatus: 'Em Trânsito', idToChange: id })
+          }
         >
           Saiu para entrega
         </Button>

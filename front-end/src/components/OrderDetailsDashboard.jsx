@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   Box,
@@ -8,6 +8,10 @@ import {
 } from '@mui/material';
 import convertDateFormat from '../utils/convertDateFormat';
 import ProductInSaleCard from './ProductInSaleCard';
+import StatusCard from './StatusCard';
+import socketInstance from '../utils/socketInstance';
+
+const socket = socketInstance();
 
 const testIdsPrefix = 'customer_order_details__';
 
@@ -16,10 +20,18 @@ function OrderDetailsDashboard(props) {
     id,
     seller: { name },
     products,
-    status,
+    status: initialStatus,
     totalPrice,
     saleDate,
   } = props;
+
+  const [status, setStatus] = useState(initialStatus);
+
+  const statusTestid = `customer_orders__element-delivery-status-${id}`;
+
+  socket.on('changeStatus', ({ newStatus, idToChange }) => {
+    if (idToChange === id) setStatus(newStatus);
+  });
 
   const typographyBasicStyle = {
     fontSize: 14,
@@ -66,11 +78,15 @@ function OrderDetailsDashboard(props) {
           sx={ typographyBasicStyle }
           data-testid={ `${testIdsPrefix}element-order-details-label-delivery-status` }
         >
-          { status }
+          <StatusCard initialStatus={ status } id={ id } testid={ statusTestid } />
         </Typography>
         <Button
           data-testid={ `${testIdsPrefix}button-delivery-check` }
-          disabled
+          disabled={ status !== 'Em Trânsito' }
+          onClick={
+            () => socket
+              .emit('changeStatus', { newStatus: 'Entregue', idToChange: id })
+          }
         >
           Marcar com entregue
         </Button>

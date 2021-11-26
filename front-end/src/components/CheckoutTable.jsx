@@ -13,7 +13,6 @@ function CheckoutTable() {
     productSubTotal: 'customer_checkout__element-order-table-sub-total-',
   };
   const {
-    productId,
     productName,
     productQuantity,
     productUnitPrice,
@@ -22,12 +21,25 @@ function CheckoutTable() {
   const fillTable = ((cartt) => cartt.map(
     ({ productId: id, name, quantity, unitPrice, subTotal }, key) => (
       <tr key={ key }>
-        <td data-testid={ productId + id }>{ id }</td>
-        <td data-testid={ productName + id }>{ name }</td>
-        <td data-testid={ productQuantity + id }>{ quantity}</td>
-        <td data-testid={ productUnitPrice + id }>{ unitPrice }</td>
-        <td data-testid={ productSubTotal + id }>{ subTotal }</td>
-        <td><ButtonRemoveItem id={ id } /></td>
+        <td data-testid={ `customer_checkout__element-order-table-item-number--${key}` }>
+          { key + 1 }
+        </td>
+        <td data-testid={ productName + key }>{ name }</td>
+        <td data-testid={ productQuantity + key }>{ quantity }</td>
+        <td data-testid={ productUnitPrice + key }>
+          { Number(unitPrice).toLocaleString('pt-BR', {
+            currency: 'BRL',
+            minimumFractionDigits: 2,
+          }) }
+        </td>
+        <td data-testid={ productSubTotal + key }>
+          {/* Colocar a vírgula na moeda: https://pt.stackoverflow.com/questions/264503/personalizar-o-tofixed-para-utilizar-v%C3%ADrgula-como-separador-decimal */}
+          { Number(subTotal).toLocaleString('pt-BR', {
+            currency: 'BRL',
+            minimumFractionDigits: 2,
+          }) }
+        </td>
+        <td data-testid={ productRemove + key }><ButtonRemoveItem id={ id } /></td>
       </tr>
     ),
   ));
@@ -58,6 +70,7 @@ CheckoutTable.propTypes = {
     productQuantity: PropTypes.string.isRequired,
     productUnitPrice: PropTypes.string.isRequired,
     productSubTotal: PropTypes.string.isRequired,
+    productRemove: PropTypes.string.isRequired,
   }).isRequired,
 };
 

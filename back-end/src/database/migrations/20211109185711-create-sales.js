@@ -1,4 +1,3 @@
-'use strict';
 module.exports = {
   /**
 * 
@@ -6,12 +5,12 @@ module.exports = {
 * @param {import('sequelize').DataTypes} Sequelize 
 */ 
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Sales', {
+    await queryInterface.createTable('sales', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       userId: {
         allowNull: false,
@@ -22,8 +21,8 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: {
           model: 'users',
-          key: 'id'
-        }
+          key: 'id',
+        },
       },
       sellerId: {
         allowNull: false,
@@ -34,14 +33,14 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: {
           model: 'users',
-          key: 'id'
-        }
+          key: 'id',
+        },
       },
       totalPrice: {
         allowNull: false,
         defaultValue: 1,
         field: 'total_price',
-        type: Sequelize.DECIMAL(9,2),
+        type: Sequelize.DECIMAL(9, 2),
       },
       deliveryAddress: {
         allowNull: false,
@@ -64,15 +63,15 @@ module.exports = {
       status: {
         allowNull: false,
         defaultValue: 'Pendente',
-        type: Sequelize.ENUM('Pendente', 'Preparando', 'Em Trânsito', 'Entregue'),
+        type: Sequelize.STRING,
       },
       role: {
         allowNull: false,
-        type: Sequelize.ENUM('administrator', 'seller', 'customer')
+        type: Sequelize.ENUM('administrator', 'seller', 'customer'),
       },
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Sales');
-  }
+    await queryInterface.dropTable('sales');
+  },
 };

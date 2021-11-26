@@ -7,20 +7,58 @@ function ProductCard({ productInfo }) {
   const { cart, setCart, setTotal } = useContext(CartContext);
   const [quantity, setQuantity] = useState(0);
 
-  const onChangeHandler = (event) => {
-    setQuantity(event.target.value);
+  const updatedCart = {
+    productId: id,
+    name,
+    quantity: Number(quantity),
+    unitPrice: price,
+    subTotal: (quantity * price).toFixed(2),
   };
 
   const getTotal = (sum, item) => sum + Number(item.subTotal);
 
   const cartTotal = () => {
     if (cart) {
-      console.log('entrou');
       setTotal(cart.reduce(getTotal, 0).toFixed(2));
     } else {
       setTotal('0.00');
     }
   };
+
+  useEffect(() => {
+    cartTotal();
+    localStorage.setItem('carrinho', JSON.stringify(cart));
+  }, [cart]);
+
+  const removeQuantityEqualZero = (el) => el.filter((product) => product.quantity !== 0);
+
+  useEffect(() => {
+    if (cart) {
+      const notExist = -1;
+      const index = cart.findIndex((product) => product.productId === id);
+
+      if (index !== notExist) {
+        const newCart = cart;
+        newCart[index] = updatedCart;
+        const withNoZero = removeQuantityEqualZero(newCart);
+        setCart([...withNoZero]);
+      } else {
+        setCart([
+          ...cart,
+          updatedCart,
+        ]);
+      }
+    } else if (quantity > 0) {
+      setCart([
+        updatedCart,
+      ]);
+    }
+  }, [quantity]);
+
+  const onChangeHandler = (event) => {
+    setQuantity(event.target.value);
+  };
+
   const onClickHandler = (event) => {
     if (event.target.name === 'add-item') {
       setQuantity(Number(quantity) + 1);
@@ -28,55 +66,6 @@ function ProductCard({ productInfo }) {
       setQuantity(quantity - 1);
     }
   };
-
-  useEffect(() => {
-    cartTotal();
-  }, [cart]);
-
-  useEffect(() => {
-    if (cart !== undefined) {
-      const x = -1;
-      const index = cart.findIndex((product) => product.productId === id);
-
-      if (index !== x) {
-        const newCart = cart;
-        newCart[index] = {
-          productId: id,
-          name,
-          quantity: Number(quantity),
-          unitPrice: price,
-          subTotal: (quantity * price).toFixed(2),
-        };
-
-        setCart([...newCart]);
-      } else {
-        setCart([
-          ...cart,
-          {
-            productId: id,
-            name,
-            quantity: Number(quantity),
-            unitPrice: price,
-            subTotal: (quantity * price).toFixed(2),
-          },
-        ]);
-      }
-    } else {
-      setCart([
-        {
-          productId: id,
-          name,
-          quantity: Number(quantity),
-          unitPrice: price,
-          subTotal: (quantity * price).toFixed(2),
-        },
-      ]);
-    }
-  }, [quantity]);
-
-  useEffect(() => {
-    localStorage.setItem('carrinho', JSON.stringify(cart));
-  }, [cart]);
 
   return (
     <div data-testid={ id }>

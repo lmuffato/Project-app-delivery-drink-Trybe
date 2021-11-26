@@ -8,7 +8,7 @@ const secret = require('fs')
 const { User } = require('../../database/models');
 const {
   INCORRECT_USERNAME_OR_PASSWORD, ALL_FIELDS_FILLED, USER_ALREADY_EXIST,
-  NO_REGISTRED_USERS, NON_EXISTENTE_USER,
+  NO_REGISTRED_USERS, NON_EXISTENTE_USER, NO_REGISTRED_SELLERS,
 } = require('../messages/errorMessages');
 
 const jwtConfig = {
@@ -86,9 +86,18 @@ const deleteUser = async (id) => {
   return ({ status: 204, data: deletedUser });
 };
 
+const findAllSellers = async () => {
+  const allSellers = await User.findAll({ where: { role: 'seller' } });
+
+  if (!allSellers) return ({ status: 404, data: NO_REGISTRED_SELLERS });
+  
+  return ({ status: 200, data: allSellers });
+};
+
 module.exports = {
   login,
   createUser,
   findAllUsers,
+  findAllSellers,
   deleteUser,
 };

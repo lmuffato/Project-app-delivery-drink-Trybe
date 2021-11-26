@@ -45,9 +45,9 @@ const getSalesById = async (req, res, next) => {
       return { ...find.dataValues, quantity: prod.dataValues.quantity };
     }));
     const { name: sellerName } = await User.findByPk(data.seller_id, {
-      attributes:{ exclude: ['id', 'role', 'password', 'email']}
-    })
-
+      attributes: { exclude: ['id', 'role', 'password', 'email'] },
+    });
+    console.log(products);
     res.status(OK).json({ ...data, products, sellerName });
   } catch (e) {
     next({ statusCode: INTERNAL_SERVER_ERROR, message: e.message });

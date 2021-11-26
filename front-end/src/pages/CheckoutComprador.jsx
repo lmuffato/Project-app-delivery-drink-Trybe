@@ -81,6 +81,7 @@ export default function CheckoutComprador() {
             qtd={ quantity }
             index={ i }
             key={ i }
+            option
           />
         ))}
         <h3

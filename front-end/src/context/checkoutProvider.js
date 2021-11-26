@@ -18,6 +18,8 @@ function RecipesProvider({ children }) {
   }, [aux]);
 
   async function addItem(qtd, price, id, name) {
+    const removeItem = aux.filter((item) => item.quantity === 0);
+    setAux(removeItem);
     const newItem = {
       product_id: id,
       quantity: qtd,
@@ -40,7 +42,6 @@ function RecipesProvider({ children }) {
       if (qtd > 0) {
         return setAux([...aux, newItem]);
       }
-      return null;
     }
   }
 

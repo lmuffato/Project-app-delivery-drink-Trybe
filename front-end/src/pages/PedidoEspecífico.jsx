@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Header from '../components/Header/Header';
@@ -22,8 +23,7 @@ export default function PedidoEspecífico({ location }) {
     setSale(result);
     setLoading(false);
   }
-  console.log(products);
-  useEffect(() => requestAPI(), []);
+  useEffect(() => requestAPI(), [requestAPI]);
   useEffect(() => {
     if (products) {
       const result = products.reduce(

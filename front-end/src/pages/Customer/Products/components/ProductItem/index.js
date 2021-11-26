@@ -98,7 +98,12 @@ function ProductItem({ product }) {
 }
 
 ProductItem.propTypes = {
-  product: PropTypes.shape.isRequired,
+  product: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    url_image: PropTypes.string,
+    price: PropTypes.string,
+  }).isRequired,
 };
 
 export default ProductItem;

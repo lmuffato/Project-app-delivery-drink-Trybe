@@ -23,7 +23,7 @@ const Orders = () => {
     };
 
     request();
-  }, [user.token]);
+  }, [user, user.token]);
 
   return (
     <>

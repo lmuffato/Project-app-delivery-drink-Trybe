@@ -12,7 +12,7 @@ const Products = () => {
 
   const [products, setProducts] = useState([]);
 
-  const { user } = useUser();
+  const { user, setUser } = useUser();
   const { total } = useProduct();
 
   function handleNavigateToCheckout() {
@@ -21,16 +21,22 @@ const Products = () => {
 
   const getAllProducts = useCallback(
     async () => {
-      const result = await requestGetAllProducts(user.token);
+      if (user) {
+        const result = await requestGetAllProducts(user.token);
 
-      setProducts(result);
+        if (result.message) {
+          setUser(null);
+        }
+
+        setProducts(result);
+      }
     },
-    [user.token],
+    [setUser, user],
   );
 
   useEffect(() => {
     getAllProducts();
-  }, [getAllProducts]);
+  }, [getAllProducts, user]);
 
   return (
     <div>

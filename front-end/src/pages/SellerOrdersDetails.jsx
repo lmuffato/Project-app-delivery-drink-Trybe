@@ -41,6 +41,12 @@ export default function SellerOrdersDetails() {
   }, []);
 
   const putComma = (value) => value.toString().replace('.', ',');
+  const convertDateFormat = (date) => {
+    const day = date.substr(8, 2);
+    const month = date.substr(5, 2);
+    const year = date.substr(0, 4);
+    return `${day}/${month}/${year}`;
+  };
 
   const renderTable = () => (
     <table>
@@ -50,7 +56,7 @@ export default function SellerOrdersDetails() {
             { `PEDIDO ${sale.id} ` }
           </th>
           <th data-testid={ `${dataTestId56}-${id}` }>
-            { sale.saleDate }
+            { convertDateFormat(sale.saleDate) }
           </th>
           <th data-testid={ `${dataTestId55}-${id}` }>
             { sale.status }
@@ -61,7 +67,7 @@ export default function SellerOrdersDetails() {
             </button>
           </th>
           <th>
-            <button type="button" data-testid={ `${dataTestId58}` }>
+            <button type="button" data-testid={ `${dataTestId58}` } disabled={ `${true}`}>
               SAIU PARA ENTREGA
             </button>
           </th>

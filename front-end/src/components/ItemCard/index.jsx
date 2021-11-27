@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 import replaceDotToComa from '../../services/productPages/replaceDotToComa';
 import styles from './styles.module.css';
 import useShoppingCart from '../../hooks/useShoppingCart';
+import { usePrice } from '../../context/productsProvider';
 
-export default function ItemCard({ id, name, price, image, calculateTotalPrice }) {
+export default function ItemCard({ id, name, price, image }) {
   const newItem = { id, name, price };
+  const { calculateTotalPrice } = usePrice();
   const { addItem, removeItem, quantity, handleChange } = useShoppingCart();
 
   useEffect(() => {

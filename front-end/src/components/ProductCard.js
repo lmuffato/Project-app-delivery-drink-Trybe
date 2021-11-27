@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import '../styles/productCard.css';
 
 function ProductCard({ product }) {
   const { id, name, url_image: urlImage } = product;
   const value = product.price.replace('.', ',');
 
   return (
-    <div>
+    <div className="productCard">
       <span
         data-testid={ `customer_products__element-card-price-${id}` }
       >
@@ -16,6 +17,7 @@ function ProductCard({ product }) {
         data-testid={ `customer_products__img-card-bg-image-${id}` }
         src={ urlImage }
         alt="Product"
+        className="imageCard"
       />
       <p data-testid={ `customer_products__element-card-title-${id}` }>
         { name }

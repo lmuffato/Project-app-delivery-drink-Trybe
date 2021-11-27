@@ -1,30 +1,69 @@
-nav {
-  background-color: rgb(173, 209, 140);
+.nav-container {
   display: flex;
   height: 4rem;
-  justify-content: center;
   top: 0;
   width: 100%;
 }
 
-.icons-container {
+.left-icons-container {
   align-items: center;
+  background-color: #036b52;
   display: flex;
-  justify-content: space-between;
+  justify-content: left;
   list-style: none;
-  width: 90vw;
+  width: 50%;
 }
 
-.destaque {
+.rigth-icons-container {
   align-items: center;
+  background-color: #036b52;
   display: flex;
-  justify-content: center;
-  position: relative;
+  justify-content: right;
+  list-style: none;
+  width: 50%;
 }
 
-/* .destaque li {
-  background-color: blue;
-  border-radius: 50px;
-  padding: 7px;
-  top: -45px;
-} */
+.orders {
+  align-items: center;
+  background-color: #036b52;
+  color: white;
+  height: 4rem;
+  width: 45%;
+}
+
+.products {
+  align-items: center;
+  background-color: #2fc18c;
+  display: flex;
+  font-weight: 600;
+  height: 4rem;
+  justify-content: center;
+  text-decoration: none;
+  width: 35%;
+}
+
+.right-side {
+  display: flex;
+  height: 4rem;
+  width: 80%;
+}
+
+.user-name {
+  align-items: center;
+  background-color: #421981;
+  color: white;
+  display: flex;
+  height: 4rem;
+  justify-content: center;
+  width: 12rem;
+}
+
+.logout {
+  align-items: center;
+  background-color: #056cf9;
+  color: white;
+  display: flex;
+  height: 4rem;
+  justify-content: center;
+  width: 6rem;
+}

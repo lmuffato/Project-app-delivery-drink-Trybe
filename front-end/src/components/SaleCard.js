@@ -6,14 +6,9 @@ function SaleCard({ sale }) {
   const { id, status } = sale;
   const saleDate = sale.sale_date;
 
-  const formatDate = () => {
-    if (saleDate) {
-      const allDate = saleDate.split('T');
-      const thisDate = allDate[0].split('-');
-      const newDate = [thisDate[1], thisDate[2], thisDate[0]].join('/');
-      return newDate;
-    }
-  };
+  const allDate = saleDate.split('T');
+  const thisDate = allDate[0].split('-');
+  const newDate = [thisDate[2], thisDate[1], thisDate[0]].join('/');
 
   return (
     <a
@@ -39,7 +34,7 @@ function SaleCard({ sale }) {
         <span
           data-testid={ `customer_orders__element-order-date-${id}` }
         >
-          { formatDate() }
+          { newDate }
         </span>
       </button>
     </a>

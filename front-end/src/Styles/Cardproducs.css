@@ -1,36 +1,75 @@
-.cardProduct {
-  display: inline-block;
-  margin: 20px;
-  width: 100px;
+.card-product-container {
+  align-items: center;
+  border: 1px solid #d6d6d6;
+  box-shadow: 5px 5px 5px #d6d6d6;
+  display: flex;
+  flex-wrap: wrap;
+  height: 14rem;
+  margin: 0.7rem;
+  width: 8rem;
+}
+
+.card-upside {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  height: 9rem;
+  justify-content: center;
+  width: 8rem;
+}
+
+.card-upside .unit-price {
+  color: blue;
 }
 
 .imageDrinkCard {
-  width: 100px;
+  width: 7rem;
 }
 
-.unitPrice {
-  color: blue;
-  position: absolute;
-}
-
-.footerCardDrink {
-  background-color: rgb(173, 209, 140);
+.footer-card {
+  align-items: center;
+  background-color: #def6f3;
   display: flex;
-  flex-direction: column;
-  margin-top: -6px;
+  flex-wrap: wrap;
+  font-size: small;
+  height: 5rem;
+  justify-content: center;
+  width: 8rem;
 }
 
-.addQuantities {
+h5 {
+  font-size: smaller;
+  margin: 0;
+}
+
+.quantities {
+  align-items: center;
   display: flex;
+  height: 2rem;
+  justify-content: center;
+  width: 5rem;
 }
 
-.elementsQuantities {
-  height: 30px;
-  width: 30px;
+.add-rem-buttons {
+  align-items: center;
+  background-color: #036b52;
+  border-radius: 4px;
+  color: #def6f3;
+  display: flex;
+  font-size: x-large;
+  font-weight: 700;
+  height: 1.5rem;
+  justify-content: center;
+  width: 5rem;
 }
 
-.quantity {
-  height: 24px;
-  text-justify: center;
-  width: 24px;
+.label-quantity {
+  align-items: center;
+  background-color: white;
+  color: #616161;
+  display: flex;
+  font-size: medium;
+  height: 1.1rem;
+  justify-content: center;
+  width: 1.2rem;
 }

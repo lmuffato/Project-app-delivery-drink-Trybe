@@ -70,10 +70,10 @@ export default function CustomerProducts() {
           {totalPriceAllProducts.toFixed(2).toString().replace('.', ',')}
         </span>
       </button>
-      <main className="cards-container">
+      <main className="container">
         { isLoading ? <h3>Carregando...</h3>
           : (
-            <div>
+            <div className="cards-container">
               {
                 listProducts
                   .map((product) => (

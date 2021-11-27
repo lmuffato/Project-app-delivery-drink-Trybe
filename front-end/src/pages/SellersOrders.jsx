@@ -20,6 +20,7 @@ export default function SellersOrders() {
   const [orders, setOrders] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const loadingTag = <h3>Loading ...</h3>;
+  const numberTen = 10;
 
   const convertDateFormat = (date) => {
     const numberEight = 8;
@@ -38,7 +39,7 @@ export default function SellersOrders() {
           <div data-testid={ `${dataTestid48}--${sale.id}` } className="order-number">
             <div className="pedido">Pedido</div>
             <div className="pedido">
-              { sale.id < 10 ? `000${sale.id}` : `00${sale.id}` }
+              { sale.id < numberTen ? `000${sale.id}` : `00${sale.id}` }
             </div>
           </div>
           <div data-testid={ `${dataTestid49}--${sale.id}` } className="order-status">

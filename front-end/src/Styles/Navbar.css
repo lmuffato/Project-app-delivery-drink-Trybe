@@ -42,12 +42,6 @@
   width: 35%;
 }
 
-.right-side {
-  display: flex;
-  height: 4rem;
-  width: 80%;
-}
-
 .user-name {
   align-items: center;
   background-color: #421981;

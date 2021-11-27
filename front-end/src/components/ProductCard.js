@@ -9,7 +9,7 @@ function ProductCard({ product }) {
   const [quantity, setQuantity] = useState(0);
 
   const { id, name, url_image: urlImage, price } = product;
-  // const price = product.price.replace('.', ',');
+  const productPrice = product.price.replace('.', ',');
 
   const formatPrice = (value) => parseFloat(value).toFixed(2);
 
@@ -72,7 +72,7 @@ function ProductCard({ product }) {
         <span
           data-testid={ `customer_products__element-card-price-${id}` }
         >
-          {price}
+          {productPrice}
         </span>
       </p>
       <img

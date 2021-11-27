@@ -11,7 +11,7 @@ import '../Styles/CustomerOrders.css';
 const dataTestid33 = 'customer_orders__element-order-id-';
 const dataTestid34 = 'customer_orders__element-delivery-status-';
 const dataTestid35 = 'customer_orders__element-order-date-';
-const dataTestid36 = 'customer_orders__element-order-total-price-';
+const dataTestid36 = 'customer_orders__element-card-price-';
 
 export default function CustomerOrder() {
   const { userData } = useContext(UserContext);
@@ -46,19 +46,19 @@ export default function CustomerOrder() {
         <Link to={ `/customer/orders/${id} ` }>
           <div className="cardContainer">
 
-            <span data-testid={ `${dataTestid33}${id}` } className="pedido">
+            <span data-testid={ `${dataTestid33}-${id}` } className="pedido">
               { addZerosOnRightSide(id) }
             </span>
 
-            <span data-testid={ `${dataTestid34}${id}` } className="status">
+            <span data-testid={ `${dataTestid34}-${id}` } className="status">
               { status }
             </span>
 
-            <span data-testid={ `${dataTestid35}${id}` } className="status">
+            <span data-testid={ `${dataTestid35}-${id}` } className="status">
               { convertDateToBrasilShape(saleDate) }
             </span>
 
-            <span data-testid={ `${dataTestid36}${id}` } className="moment">
+            <span data-testid={ `${dataTestid36}-${id}` } className="moment">
               { convertValueToBrlShape(totalPrice) }
             </span>
 

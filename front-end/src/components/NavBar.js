@@ -11,7 +11,7 @@ function NavBar({ dataUser }) {
       <ul>
         <li>
           <a
-            href="/"
+            href="/customer/products"
             data-testid="customer_products__element-navbar-link-products"
           >
             Produtos

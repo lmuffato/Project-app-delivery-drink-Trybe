@@ -16,6 +16,14 @@ const create = async (order) => {
   return { status: 201, sale };
 };
 
+const getSale = async (id) => { 
+  const sales = await Sale.findAll({ where: { USER_ID: id } });
+  if (!sales) return { status: 404, message: 'Sale not found' };
+
+  return { status: 200, sales };
+};
+
 module.exports = {
   create,
+  getSale,
 };

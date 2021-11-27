@@ -1,0 +1,10 @@
+.productCard {
+  display: flexbox;
+  height: 350px;
+  margin: 30px;
+  width: 270px;
+}
+
+.imageCard {
+  width: 150px;
+}

@@ -1,0 +1,6 @@
+.saleCard {
+  display: flexbox;
+  height: 90px;
+  margin: 30px;
+  width: 270px;
+}

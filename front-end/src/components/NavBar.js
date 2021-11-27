@@ -11,7 +11,7 @@ function NavBar({ dataUser }) {
       <ul>
         <li>
           <a
-            href="/"
+            href="/customer/products"
             data-testid="customer_products__element-navbar-link-products"
           >
             Produtos
@@ -19,7 +19,7 @@ function NavBar({ dataUser }) {
         </li>
         <li>
           <a
-            href="/"
+            href="/customer/orders"
             data-testid="customer_products__element-navbar-link-orders"
           >
             Meus Pedidos

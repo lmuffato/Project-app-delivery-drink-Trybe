@@ -1,6 +1,6 @@
 import React from 'react';
 import NavBar from '../components/NavBar';
-import OrderDetailsTable from '../components/OrderDetailsTable';
+import SellerOrderDetailsTable from '../components/SellerOrderDetailsTable';
 
 function SellerOrderDetails() {
   const testIds = {
@@ -27,7 +27,7 @@ function SellerOrderDetails() {
   return (
     <>
       <NavBar ids={ testIds } names={ navegationNames } />
-      <OrderDetailsTable testIds={ testIds } />
+      <SellerOrderDetailsTable testIds={ testIds } />
     </>
   );
 }

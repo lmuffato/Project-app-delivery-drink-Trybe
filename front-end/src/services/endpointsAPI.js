@@ -123,6 +123,15 @@ export const getAllOrdersByCustomer = async (token, userId) => {
   return result.data;
 };
 
+export const getAllOrdersBySellerId = async (token, userId) => {
+  const apiForSeller = axios.create({
+    baseURL: `http://localhost:${PORT}`,
+    headers: { authorization: token, user: userId },
+  });
+  const result = await apiForSeller.get('/sales/getAllOrdersBySellerId');
+  return result.data;
+};
+
 export const updateSaleStatus = async (id, status) => {
   const obj = { status };
   const result = await api.patch(`/sales/updatesale/${id}`, obj);

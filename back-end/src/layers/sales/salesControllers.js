@@ -29,6 +29,10 @@ router.get('/allordersbycustomer',
 salesMiddlewares.getAllOrdersByCustomers,
 async () => {});
 
+router.get('/getAllOrdersBySellerId',
+salesMiddlewares.getAllOrdersBySellerId,
+async () => {});
+
 router.post('/',
 salesMiddlewares.createNew,
 async () => {});
@@ -78,3 +82,31 @@ http DELETE :3001/users/4
 */
 
 module.exports = router;
+
+/* BACKUP
+const getSaleAndSaleProducts = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const obj = await sales.findAll({
+      where: { id },
+      include:
+        [
+          { model: products,
+            include: {
+              model: salesProducts,
+            },
+            as: 'products',
+          // attributes: [[Sequelize.literal('salesProducts.quantity'), 'quantidade']],
+        },
+        ],
+        attributes: [
+          [Sequelize.literal('sales.id'), 'code'],
+          // [Sequelize.literal('salesProducts.quantity'), 'quantidade'],
+        ],
+      });
+    return res.status(200).json(obj);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+*/

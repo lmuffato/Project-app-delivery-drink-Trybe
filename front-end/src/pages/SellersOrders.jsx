@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 
-import { getSaleById } from '../services/endpointsAPI';
+import { getAllOrdersBySellerId } from '../services/endpointsAPI';
 
 import userContext from '../context/userContext';
 
@@ -47,10 +47,17 @@ export default function SellersOrders() {
     </div>
   );
 
+  const getOrdersBySeller = async () => {
+    const { token } = userData;
+    const myOrders = await getAllOrdersBySellerId(token, userData.id);
+    console.log(myOrders);
+    setOrders(myOrders);
+  };
+
   useEffect(() => {
     setIsLoading(true);
-    getSaleById(userData.id).then((resp) => setOrders([resp]),
-      setIsLoading(false));
+    getOrdersBySeller();
+    setIsLoading(false);
   }, []);
 
   return (

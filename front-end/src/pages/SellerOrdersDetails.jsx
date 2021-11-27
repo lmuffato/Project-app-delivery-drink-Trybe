@@ -12,14 +12,14 @@ import '../Styles/SellerOrderDetails.css';
 const dataTestId54 = 'seller_order_details__element-order-details-label-order-id-';
 const dataTestId55 = 'seller_order_details__element-order-details-label-delivery-status-';
 const dataTestId56 = 'seller_order_details__element-order-details-label-order-date-';
-const dataTestId57 = 'seller_order_details__button-preparing-check-';
-const dataTestId58 = 'seller_order_details__button-dispatch-check-';
+const dataTestId57 = 'seller_order_details__button-preparing-check';
+const dataTestId58 = 'seller_order_details__button-dispatch-check';
 const dataTestId59 = 'seller_order_details__element-order-table-item-number-';
 const dataTestId60 = 'seller_order_details__element-order-table-name-';
 const dataTestId61 = 'seller_order_details__element-order-table-quantity-';
 const dataTestId62 = 'seller_order_details__element-order-table-unit-price-';
 const dataTestId63 = 'seller_order_details__element-order-table-sub-total-';
-const dataTestId64 = 'seller_order_details__element-order-total-price-';
+const dataTestId64 = 'seller_order_details__element-order-total-price';
 
 export default function SellerOrdersDetails() {
   const { userData } = useContext(UserContext);
@@ -44,8 +44,6 @@ export default function SellerOrdersDetails() {
 
   const renderTable = () => (
     <table>
-      { console.log(itens) }
-      { console.log(sale) }
       <thead>
         <tr>
           <th data-testid={ `${dataTestId54}-${id}` }>
@@ -58,12 +56,12 @@ export default function SellerOrdersDetails() {
             { sale.status }
           </th>
           <th>
-            <button type="button" data-testid={ `${dataTestId57}-${id}` }>
+            <button type="button" data-testid={ `${dataTestId57}` }>
               PREPARAR PEDIDO
             </button>
           </th>
           <th>
-            <button type="button" data-testid={ `${dataTestId58}-${id}` }>
+            <button type="button" data-testid={ `${dataTestId58}` }>
               SAIU PARA ENTREGA
             </button>
           </th>

@@ -86,8 +86,6 @@ export const createInSalesAndSalesProducts = async (token, sale, salesProductsAr
     headers: { authorization: token },
   });
   const result = await apiForUser.post('/sales/createsale', data);
-  console.log('result', result.data);
-  console.log('result sem data', result);
   return result.data;
 };
 
@@ -116,6 +114,15 @@ export const getAllOrdersByCustomer = async (token, userId) => {
     headers: { authorization: token, user: userId },
   });
   const result = await apiForUser.get('/sales/allordersbycustomer');
+  return result.data;
+};
+
+export const getAllOrdersBySellerId = async (token, userId) => {
+  const apiForSeller = axios.create({
+    baseURL: `http://localhost:${PORT}`,
+    headers: { authorization: token, user: userId },
+  });
+  const result = await apiForSeller.get('/sales/getsellerorders');
   return result.data;
 };
 

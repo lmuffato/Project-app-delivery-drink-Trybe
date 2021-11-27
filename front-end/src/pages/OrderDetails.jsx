@@ -20,6 +20,7 @@ export default function OrderDetails() {
   const getOrderFromDataBase = async () => {
     const { token } = userData;
     const res = await getOrderById(token, params.id);
+    // console.log('oderDetails', res);
     setOrderItensList(res.itensList);
     setOrderSale(res.sale);
     if (res) setLoaded(true);
@@ -31,6 +32,7 @@ export default function OrderDetails() {
 
   return (
     <div>
+      {/* { renderComponents() } */}
       <Navbar />
       <h3>Detalhe do Pedido</h3>
       { loaded && <StatusBar /> }

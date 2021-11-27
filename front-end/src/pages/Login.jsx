@@ -46,7 +46,7 @@ export default function Login() {
       setUserName(login.name);
       return redirectByRole(userInfo.role);
     }
-    console.log('usuário não existe');
+    // console.log('usuário não existe');
   };
 
   useEffect(() => {
@@ -55,7 +55,6 @@ export default function Login() {
 
   const checkRole = (login) => {
     const { role } = jwtDecode(login.token);
-    // console.log('aaaaaa', role);
     if (role === 'seller') {
       setToLocalStorage('user', login);
       return '/seller/orders';
@@ -75,7 +74,6 @@ export default function Login() {
       setUserData(login);
       setUserId(login.id);
       setUserName(login.name);
-      console.log(login);
       setErrorMessage(true);
       history.push(endpoint);
     } catch (error) {

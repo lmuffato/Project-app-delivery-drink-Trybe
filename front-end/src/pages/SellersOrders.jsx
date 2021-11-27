@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 
-import { getSaleById } from '../services/endpointsAPI';
+import { getAllOrdersBySellerId } from '../services/endpointsAPI';
 
 import userContext from '../context/userContext';
 
@@ -49,16 +49,13 @@ export default function SellersOrders() {
 
   useEffect(() => {
     setIsLoading(true);
-    getSaleById(userData.id).then((resp) => setOrders([resp]),
-      setIsLoading(false));
+    const { token } = userData;
+    getAllOrdersBySellerId(token, userData.id)
+      .then((resp) => { 
+        setOrders(resp);
+        setIsLoading(false);
+      });
   }, []);
-
-  const checkOrders = () => {
-    console.log(orders);
-    if (orders.length > 0) {
-      return orders.map((e, index) => renderTags(e, index));
-    }
-  };
 
   return (
     <div className="container">
@@ -67,8 +64,7 @@ export default function SellersOrders() {
         {
           isLoading
             ? loadingTag
-            : checkOrders()
-            // orders.map((e, index) => renderTags(e, index))
+            : orders.map((e, index) => renderTags(e, index))
         }
       </section>
     </div>

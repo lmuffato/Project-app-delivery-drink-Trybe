@@ -23,7 +23,7 @@ export default function CustomerProducts() {
       await checkUserToken(token);
     } catch (e) {
       console.log('catch da valid token', e.message);
-      localStorage.clear();
+      // localStorage.clear();
       history.push('/login');
     }
   };

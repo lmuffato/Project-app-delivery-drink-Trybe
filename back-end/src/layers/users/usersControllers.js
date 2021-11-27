@@ -41,6 +41,13 @@ async () => {});
 http POST :3001/login
 */
 
+router.post('/getUserByEmail',
+userMiddlewares.getUserByEmail,
+async () => {});
+/* REQUISIÇÃO:
+http POST :3001/login
+*/
+
 router.post('/createbyadmin',
 admRoleMiddleware.validateAdmRole,
 userMiddlewares.createByAdmin,

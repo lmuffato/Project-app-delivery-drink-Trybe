@@ -10,14 +10,14 @@ export const OrdersProvider = ({ children }) => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const { token, id } = JSON.parse(localStorage.getItem('user'));
-        const data = await axios.get(`http://localhost:3001/orders/${id}`, {
+        const { token } = JSON.parse(localStorage.getItem('user'));
+        const { data } = await axios.get('http://localhost:3001/orders/customerId', {
           headers: {
             Authorization: token,
           },
         });
         console.log(data);
-        setOrderList(response);
+        setOrderList(data);
       } catch (err) {
         console.log(err);
       }

@@ -1,10 +1,10 @@
+const genHashMd5 = require('md5');
 const find = require('../../services/find');
 const { passwordToken } = require('../../services');
-const genHashMd5 = require('md5');
 
 module.exports = async (req, res) => {
   const { email, password } = req.body;
-  const [user] = await find('users',{ email });
+  const [user] = await find('users', { email });
 
   if (!user) return res.status(404).json({ message: 'User not found' });
 
@@ -15,5 +15,5 @@ module.exports = async (req, res) => {
     return res.status(200).json({ token, name: user.name, email: user.email, role: user.role });
   }
 
-  return res.status(400).json({ message: 'Invalid fields'});
+  return res.status(400).json({ message: 'Invalid fields' });
 };

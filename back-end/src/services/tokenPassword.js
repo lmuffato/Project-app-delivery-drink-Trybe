@@ -1,10 +1,10 @@
 const jwt = require('jsonwebtoken');
-const path = require('path')
+const path = require('path');
 
 const SECTRE_KEY = require('fs')
   .readFileSync(
     path.join(__dirname, '..', '..', 'jwt.evaluation.key'),
-    { encoding: 'utf-8'},
+    { encoding: 'utf-8' },
   ).trim();
 
 const passwordToken = (payload) => {

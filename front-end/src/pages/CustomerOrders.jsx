@@ -3,7 +3,7 @@ import OrderCard from '../components/OrderCard';
 import { OrdersContext } from '../contexts/Orders';
 import NavBar from '../components/NavBar';
 
-function Orders() {
+function CustomerOrders() {
   const { orderList } = useContext(OrdersContext);
 
   const testIds = {
@@ -24,10 +24,10 @@ function Orders() {
   return (
     <>
       <NavBar ids={ testIds } names={ navegationNames } />
-      { orderList.map((order, key) => (
-        <OrderCard key={ key } testIds={ testIds } order={ order } />))}
+      { orderList.orders.map((order, key) => (
+        <OrderCard key={ key } testIds={ testIds } index={ key } order={ order } />))}
     </>
   );
 }
 
-export default Orders;
+export default CustomerOrders;

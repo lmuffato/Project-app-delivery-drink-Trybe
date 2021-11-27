@@ -65,7 +65,7 @@ function Login() {
       if (role === 'administrator') {
         navigate('/admin/manage');
       } else if (role === 'seller') {
-        navigate('/seller/products');
+        navigate('/seller/orders');
       } else {
         navigate('/customer/products');
       }

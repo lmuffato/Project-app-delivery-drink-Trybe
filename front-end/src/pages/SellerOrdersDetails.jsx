@@ -41,10 +41,14 @@ export default function SellerOrdersDetails() {
   }, []);
 
   const putComma = (value) => value.toString().replace('.', ',');
+
   const convertDateFormat = (date) => {
-    const day = date.substr(8, 2);
-    const month = date.substr(5, 2);
-    const year = date.substr(0, 4);
+    const numberEight = 8;
+    const numberFive = 5;
+    const numberFour = 4;
+    const day = date.substr(numberEight, 2);
+    const month = date.substr(numberFive, 2);
+    const year = date.substr(0, numberFour);
     return `${day}/${month}/${year}`;
   };
 
@@ -67,7 +71,7 @@ export default function SellerOrdersDetails() {
             </button>
           </th>
           <th>
-            <button type="button" data-testid={ `${dataTestId58}` } disabled={ `${true}`}>
+            <button type="button" data-testid={ `${dataTestId58}` } disabled={ `${true}` }>
               SAIU PARA ENTREGA
             </button>
           </th>

@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
 import { CartContext } from '../contexts/Cart';
 import OrderItem from './OrderItem';
 
@@ -29,31 +28,5 @@ function CheckoutTable() {
     </table>
   );
 }
-
-CheckoutTable.propTypes = {
-  testIds: PropTypes.shape({
-    productId: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number,
-    ]).isRequired,
-    productName: PropTypes.string.isRequired,
-    productQuantity: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number,
-    ]).isRequired,
-    productUnitPrice: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number,
-    ]).isRequired,
-    productSubTotal: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number,
-    ]).isRequired,
-    productRemove: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number,
-    ]).isRequired,
-  }).isRequired,
-};
 
 export default CheckoutTable;

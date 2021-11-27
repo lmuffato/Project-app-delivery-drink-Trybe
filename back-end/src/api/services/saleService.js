@@ -1,9 +1,8 @@
-const { sales, salesProducts } = require('../../database/models');
-const { User } = require('../../database/models');
+const { sales, salesProducts, user, Products } = require('../../database/models');
 const { ORDERS_NOT_FOUND } = require('../messages/errorMessages');
 
 const findUserById = async (id) => {
- const { dataValues: { password: _, ...userData } } = await User.findOne({
+  const { dataValues: { password: _, ...userData } } = await user.findOne({
     where: { id },
   }); 
 
@@ -14,11 +13,9 @@ const registerSale = async (saleData) => {
   const { products, ...data } = saleData;
   const { dataValues } = await sales.create(data);
 
-  const teste = products.map(({ productId, quantity }) => salesProducts.create({
+  products.forEach(({ productId, quantity }) => salesProducts.create({
     productId, saleId: dataValues.id, quantity,
     }));
-
-    await Promise.all(teste);
 
   return dataValues;
 };
@@ -26,7 +23,13 @@ const registerSale = async (saleData) => {
 const getOrdersByUserId = async (userId) => {
   const userOrders = await sales.findAll({
     where: { userId },
-    include: { model: User, as: 'seller', attributes: { exclude: ['password'] } },
+    attributes: { exclude: ['sellerId'] },
+    include: [
+      { model: Products,
+        as: 'products',
+        through: { attributes: ['quantity'] } },
+      { model: user, as: 'seller', attributes: ['name', 'id'] },
+    ],
   });
 
   if (userOrders.length === 0) {
@@ -42,12 +45,10 @@ const getOrdersByUserId = async (userId) => {
 const getAllOrders = async () => {
   const allOrders = await sales.findAll({
     include: [
-      { model: User, as: 'user', attributes: { exclude: ['password'] } },
-      { model: User, as: 'seller', attributes: { exclude: ['password'] } },
+      { model: user, as: 'user', attributes: { exclude: ['password'] } },
+      { model: user, as: 'seller', attributes: { exclude: ['password'] } },
     ],
   });
-
-  console.log(allOrders);
   
   return allOrders;
 };
@@ -55,7 +56,7 @@ const getAllOrders = async () => {
 const getOrdersBySellerId = async (sellerId) => {
   const sellerOrders = await sales.findAll({
     where: { sellerId },
-    include: { model: User, as: 'user', attributes: { exclude: ['password'] } },
+    include: { model: user, as: 'user', attributes: { exclude: ['password'] } },
   });
 
   if (sellerOrders.length === 0) {

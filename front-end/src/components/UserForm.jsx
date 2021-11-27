@@ -32,7 +32,6 @@ function UserForm() {
   }, [userEmail, userName.length, userPassword.length, userRole]);
 
   const insertNewUser = async () => {
-    console.log(token);
     try {
       const bodyRequest = {
         name: userName,

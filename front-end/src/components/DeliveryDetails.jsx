@@ -25,7 +25,7 @@ function DeliveryDetails() {
         },
       },
     );
-    console.log(allSellers);
+
     setSellersList(allSellers.data);
     setSeller(allSellers.data[0]);
   };

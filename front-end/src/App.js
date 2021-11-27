@@ -5,9 +5,12 @@ import { RegisterProvider } from './contexts/Register';
 import Login from './pages/Login';
 import { LoginProvider } from './contexts/Login';
 import Products from './pages/Products';
+import Orders from './pages/Orders';
+import { OrdersProvider } from './contexts/Orders';
 import { ProductsProvider } from './contexts/Products';
 import Checkout from './pages/Checkout';
 import Admin from './pages/Admin';
+import OrderDetails from './pages/OrderDetails';
 
 function App() {
   return (
@@ -44,6 +47,25 @@ function App() {
       />
       <Route exact path="/customer/checkout" element={ <Checkout /> } />
       <Route exact path="/admin/manage" element={ <Admin /> } />
+      <Route exact path="/customer/products" element={ <Products /> } />
+      <Route
+        exact
+        path="/customer/orders"
+        element={
+          <OrdersProvider>
+            <Orders />
+          </OrdersProvider>
+        }
+      />
+      <Route
+        exact
+        path="/customer/orders/:id"
+        element={
+          <OrdersProvider>
+            <OrderDetails />
+          </OrdersProvider>
+        }
+      />
     </Routes>
   );
 }

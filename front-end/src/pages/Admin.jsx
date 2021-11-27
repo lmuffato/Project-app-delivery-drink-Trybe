@@ -11,7 +11,6 @@ const testIds = {
 
 const navegationNames = {
   pageName: 'Gerenciar usuários',
-  userName: 'Admin',
 };
 
 function Admin() {

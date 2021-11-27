@@ -1,4 +1,3 @@
-const { UNAUTHORIZED_SEARCH } = require('../messages/errorMessages');
 const { saleService } = require('../services');
 
 const registerSale = async (req, res) => {
@@ -14,15 +13,10 @@ const registerSale = async (req, res) => {
 };
 
 const getOrdersByUserId = async (req, res) => {
-  const { id } = req.params;
-  const { id: tokenUserId } = req.user;
+  const { id } = req.user;
+  console.log(id);
 
-  if (+id !== tokenUserId) {
-    return res.status(401).send({ error: UNAUTHORIZED_SEARCH });
-  }
-  
   const { status, data, ordersData } = await saleService.getOrdersByUserId(id);
-
   if (status) {
     return res.status(status).json({ error: data });
   }
@@ -32,13 +26,11 @@ const getOrdersByUserId = async (req, res) => {
 
 const getAllOrders = async (_req, res) => {
   const allOrders = await saleService.getAllOrders();
-
   res.status(200).json(allOrders);
 };
 
 const getOrdersBySellerId = async (req, res) => {
   const { id } = req.params;
-  console.log(req.user);
 
   const { status, data, ordersData } = await saleService.getOrdersBySellerId(id);
 

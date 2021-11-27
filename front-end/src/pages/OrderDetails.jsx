@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom'; // 1
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import Navbar from '../Components/NavBar';
 import { getOrderById } from '../services/endpointsAPI';
 import Table from '../Components/CustomerOrdersDetails/Table';
@@ -12,6 +12,7 @@ export default function OrderDetails() {
   const { setOrderSale } = useContext(NewOrderContext);
   const { setOrderItensList } = useContext(NewOrderContext);
   const { userData } = useContext(UserContext);
+  const [loaded, setLoaded] = useState(false);
 
   const params = useParams(); // 2
 
@@ -21,6 +22,7 @@ export default function OrderDetails() {
     const res = await getOrderById(token, params.id);
     setOrderItensList(res.itensList);
     setOrderSale(res.sale);
+    if (res) setLoaded(true);
   };
 
   useEffect(() => {
@@ -31,7 +33,7 @@ export default function OrderDetails() {
     <div>
       <Navbar />
       <h3>Detalhe do Pedido</h3>
-      <StatusBar />
+      { loaded && <StatusBar /> }
       <Table />
       <TotalValue />
     </div>

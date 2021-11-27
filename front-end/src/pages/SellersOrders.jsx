@@ -53,6 +53,13 @@ export default function SellersOrders() {
       setIsLoading(false));
   }, []);
 
+  const checkOrders = () => {
+    console.log(orders);
+    if (orders.length > 0) {
+      return orders.map((e, index) => renderTags(e, index));
+    }
+  };
+
   return (
     <div className="container">
       <Navbar />
@@ -60,7 +67,8 @@ export default function SellersOrders() {
         {
           isLoading
             ? loadingTag
-            : orders.map((e, index) => renderTags(e, index))
+            : checkOrders()
+            // orders.map((e, index) => renderTags(e, index))
         }
       </section>
     </div>

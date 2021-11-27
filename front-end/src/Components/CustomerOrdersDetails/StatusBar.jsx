@@ -47,14 +47,6 @@ export default function StatusBar() {
     return str;
   };
 
-  /* // Coloca o texto em caixa alta.
-  const changeToUperCase = (string) => {
-    if (string !== undefined) {
-      const uperCaseString = string.toUpperCase();
-      return uperCaseString;
-    }
-  }; */
-
   // Rendereiza o número da ordem na tela.
   const renderOrderNumber = () => {
     const zeros = 4;
@@ -89,7 +81,7 @@ export default function StatusBar() {
   // Rendereiza o status do pedido na tela.
   const renderStatusSale = () => {
     if (Object.keys(orderSale).length !== 0 || orderSale.status !== undefined) {
-      console.log(orderSale.status);
+      // console.log(orderSale.status);
       return (
         <span data-testid={ `${testId40}` }>
           { `${orderSale.status}` }

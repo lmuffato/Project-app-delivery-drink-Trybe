@@ -86,8 +86,6 @@ export const createInSalesAndSalesProducts = async (token, sale, salesProductsAr
     headers: { authorization: token },
   });
   const result = await apiForUser.post('/sales/createsale', data);
-  console.log('result', result.data);
-  console.log('result sem data', result);
   return result.data;
 };
 
@@ -102,12 +100,18 @@ export const postSalesProducts = async () => {
 };
 
 export const getOrderById = async (token, id) => {
+  // try {
+  // if (id !== undefined) {
+  // console.log('Id da requisição:', id);
   const apiForUser = axios.create({
     baseURL: `http://localhost:${PORT}`,
     headers: { authorization: token },
   });
   const result = await apiForUser.get(`/sales/order/${id}`);
   return result.data;
+
+  // }
+  // } catch (err) { return (console.log(err)); }
 };
 
 export const getAllOrdersByCustomer = async (token, userId) => {

@@ -23,6 +23,8 @@ export default function DeliveryDetails() {
     // setTotalPrice,
   } = useContext(NewOrderContext);
   const [isLoading, setIsLoading] = useState(false);
+  // const [saleId, setSaleId] = useState(undefined);
+  // const [successfullyrecorded, setSuccessfullyrecorded] = useState(false);
   const { itensList } = useContext(NewOrderContext);
 
   const getSellersList = async () => {
@@ -78,9 +80,12 @@ export default function DeliveryDetails() {
       status: 'Pendente',
     };
     const saleProductsArray = { saleProductsArray: itensList };
-    const saleId = await createInSalesAndSalesProducts(token, sale, saleProductsArray);
+    let orderId = 'falso';
+    orderId = await createInSalesAndSalesProducts(token, sale, saleProductsArray);
+    // console.log(`Apertou pra gravar${orderId}`);
+    history.push(`/customer/orders/${orderId}`);
     // clearGlobalStates();
-    history.push(`/customer/orders/${saleId}`);
+    // history.push(`/customer/orders/${saleId}`);
   };
 
   // useEffect(() => {

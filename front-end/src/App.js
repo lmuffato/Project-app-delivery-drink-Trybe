@@ -13,6 +13,7 @@ import Admin from './pages/Admin';
 import CustomerOrderDetails from './pages/CustomerOrderDetails';
 import SellerOrders from './pages/SellerOrders';
 import SellerOrderDetails from './pages/SellerOrderDetails';
+import { SellerOrdersProvider } from './contexts/SellerOrders';
 
 function App() {
   return (
@@ -72,18 +73,18 @@ function App() {
         exact
         path="/seller/orders"
         element={
-          <OrdersProvider>
+          <SellerOrdersProvider>
             <SellerOrders />
-          </OrdersProvider>
+          </SellerOrdersProvider>
         }
       />
       <Route
         exact
         path="/seller/orders/:id"
         element={
-          <OrdersProvider>
+          <SellerOrdersProvider>
             <SellerOrderDetails />
-          </OrdersProvider>
+          </SellerOrdersProvider>
         }
       />
     </Routes>

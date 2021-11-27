@@ -14,7 +14,6 @@ const registerSale = async (req, res) => {
 
 const getOrdersByUserId = async (req, res) => {
   const { id } = req.user;
-  console.log(id);
 
   const { status, data, ordersData } = await saleService.getOrdersByUserId(id);
   if (status) {

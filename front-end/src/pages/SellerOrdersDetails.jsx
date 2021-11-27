@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router';
+// import io from 'socket.io-client';
 
 import UserContext from '../context/userContext';
 
@@ -8,6 +9,7 @@ import { getOrderById } from '../services/endpointsAPI';
 import Navbar from '../Components/NavBarSellers';
 
 import '../Styles/SellerOrderDetails.css';
+// const socket = io.connect('http://localhost:3002/');
 
 const dataTestId54 = 'seller_order_details__element-order-details-label-order-id-';
 const dataTestId55 = 'seller_order_details__element-order-details-label-delivery-status-';

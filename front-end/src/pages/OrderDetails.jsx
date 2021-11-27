@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom'; // 1
 import React, { useEffect, useContext, useState } from 'react';
+// import io from 'socket.io-client';
 import Navbar from '../Components/NavBar';
 import { getOrderById } from '../services/endpointsAPI';
 import Table from '../Components/CustomerOrdersDetails/Table';
@@ -7,6 +8,8 @@ import TotalValue from '../Components/CustomerOrdersDetails/TotalValue';
 import StatusBar from '../Components/CustomerOrdersDetails/StatusBar';
 import NewOrderContext from '../context/NewOrderContext';
 import UserContext from '../context/userContext';
+
+// const socket = io.connect('http://localhost:3002/');
 
 export default function OrderDetails() {
   const { setOrderSale } = useContext(NewOrderContext);

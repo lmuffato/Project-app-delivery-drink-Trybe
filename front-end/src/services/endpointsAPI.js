@@ -86,6 +86,8 @@ export const createInSalesAndSalesProducts = async (token, sale, salesProductsAr
     headers: { authorization: token },
   });
   const result = await apiForUser.post('/sales/createsale', data);
+  console.log('result', result.data);
+  console.log('result sem data', result);
   return result.data;
 };
 

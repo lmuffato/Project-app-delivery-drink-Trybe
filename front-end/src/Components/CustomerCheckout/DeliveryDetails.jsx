@@ -20,23 +20,23 @@ export default function DeliveryDetails() {
   const { deliveryAddress, setDeliveryAddress } = useContext(NewOrderContext);
   const { deliveryNumber, setDeliveryNumber } = useContext(NewOrderContext);
   const { totalPrice,
-    setTotalPrice,
+    // setTotalPrice,
   } = useContext(NewOrderContext);
   const [isLoading, setIsLoading] = useState(false);
-  const { itensList, setItensList } = useContext(NewOrderContext);
+  const { itensList } = useContext(NewOrderContext);
 
   const getSellersList = async () => {
     const arr = await getAllUsersSallers();
     setSellersList(arr);
   };
 
-  const clearGlobalStates = () => {
-    setDeliveryAddress('');
-    setDeliveryNumber('');
-    setTotalPrice('');
-    setSellerId('');
-    setItensList([]);
-  };
+  // const clearGlobalStates = () => {
+  //   setDeliveryAddress('');
+  //   setDeliveryNumber('');
+  //   setTotalPrice('');
+  //   setSellerId('');
+  //   setItensList([]);
+  // };
 
   useEffect(() => {
     setIsLoading(true);
@@ -51,7 +51,10 @@ export default function DeliveryDetails() {
   };
 
   useEffect(() => {
-    defaultSeller();
+    const seller = async () => {
+      defaultSeller();
+    };
+    seller();
   }, [sellersList]);
 
   const roundValue = (value) => {
@@ -59,10 +62,10 @@ export default function DeliveryDetails() {
     return newValue.toFixed(2);
   };
 
-  const redirectToPage = (id) => {
-    const url = `/customer/orders/${id}`;
-    history.push(url);
-  };
+  // const redirectToPage = (id) => {
+  //   const url = `/customer/orders/${id}`;
+  //   history.push(url);
+  // };
 
   const createNewSale = async () => {
     const { token } = userData;
@@ -76,13 +79,13 @@ export default function DeliveryDetails() {
     };
     const saleProductsArray = { saleProductsArray: itensList };
     const saleId = await createInSalesAndSalesProducts(token, sale, saleProductsArray);
-    clearGlobalStates();
-    redirectToPage(saleId);
+    // clearGlobalStates();
+    history.push(`/customer/orders/${saleId}`);
   };
 
-  useEffect(() => {
-    console.log(sellerId);
-  }, [sellerId]);
+  // useEffect(() => {
+  //   console.log(sellerId);
+  // }, [sellerId]);
 
   const renderSellersList = () => {
     if (isLoading === true) { return null; }

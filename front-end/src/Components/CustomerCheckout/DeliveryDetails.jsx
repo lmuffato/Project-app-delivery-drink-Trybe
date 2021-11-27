@@ -20,23 +20,23 @@ export default function DeliveryDetails() {
   const { deliveryAddress, setDeliveryAddress } = useContext(NewOrderContext);
   const { deliveryNumber, setDeliveryNumber } = useContext(NewOrderContext);
   const { totalPrice,
-    // setTotalPrice,
+    setTotalPrice,
   } = useContext(NewOrderContext);
   const [isLoading, setIsLoading] = useState(false);
-  const { itensList } = useContext(NewOrderContext);
+  const { itensList, setItensList } = useContext(NewOrderContext);
 
   const getSellersList = async () => {
     const arr = await getAllUsersSallers();
     setSellersList(arr);
   };
 
-  // const clearGlobalStates = () => {
-  //   setDeliveryAddress('');
-  //   setDeliveryNumber('');
-  //   setTotalPrice('');
-  //   setSellerId('');
-  //   setItensList([]);
-  // };
+  const clearGlobalStates = () => {
+    setDeliveryAddress('');
+    setDeliveryNumber('');
+    setTotalPrice('');
+    setSellerId('');
+    setItensList([]);
+  };
 
   useEffect(() => {
     setIsLoading(true);
@@ -62,10 +62,10 @@ export default function DeliveryDetails() {
     return newValue.toFixed(2);
   };
 
-  // const redirectToPage = (id) => {
-  //   const url = `/customer/orders/${id}`;
-  //   history.push(url);
-  // };
+  const redirectToPage = (id) => {
+    const url = `/customer/orders/${id}`;
+    history.push(url);
+  };
 
   const createNewSale = async () => {
     const { token } = userData;
@@ -79,13 +79,13 @@ export default function DeliveryDetails() {
     };
     const saleProductsArray = { saleProductsArray: itensList };
     const saleId = await createInSalesAndSalesProducts(token, sale, saleProductsArray);
-    // clearGlobalStates();
-    history.push(`/customer/orders/${saleId}`);
+    clearGlobalStates();
+    redirectToPage(saleId);
   };
 
-  // useEffect(() => {
-  //   console.log(sellerId);
-  // }, [sellerId]);
+  useEffect(() => {
+    console.log(sellerId);
+  }, [sellerId]);
 
   const renderSellersList = () => {
     if (isLoading === true) { return null; }
@@ -125,7 +125,7 @@ export default function DeliveryDetails() {
           id={ `${inputAddress}` }
           placeholder="Avenida Principa, Centro, Vitória"
           onChange={ (e) => {
-            setDeliveryAddress(e.target.value); console.log(deliveryAddress);
+            setDeliveryAddress(e.target.value);
           } }
           required
         />
@@ -145,7 +145,6 @@ export default function DeliveryDetails() {
           placeholder="123"
           onChange={ (e) => {
             setDeliveryNumber(e.target.value);
-            console.log(deliveryNumber);
           } }
           required
         />

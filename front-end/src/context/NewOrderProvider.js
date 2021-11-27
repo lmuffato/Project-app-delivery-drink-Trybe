@@ -41,7 +41,7 @@ function NewOrderProvider({ children }) {
   // localStorage.clear();
 
   useEffect(() => {
-    localStorage.clear();
+    // localStorage.clear();
     setItensList([]);
   }, [navBarSair]);
 

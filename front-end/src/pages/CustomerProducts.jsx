@@ -22,8 +22,8 @@ export default function CustomerProducts() {
       const { token } = await getItemFromLocalStorage('user');
       await checkUserToken(token);
     } catch (e) {
-      console.log('catch da valid token', e.message);
-      localStorage.clear();
+      // console.log('catch da valid token', e.message);
+      // localStorage.clear();
       history.push('/login');
     }
   };
@@ -56,7 +56,7 @@ export default function CustomerProducts() {
   }, [validToken]);
 
   const clickLoginButton = () => {
-    console.log('checkoutaaaaaaaaaaaaa');
+    // console.log('checkoutaaaaaaaaaaaaa');
     history.push('/customer/checkout');
   };
 

@@ -4,7 +4,7 @@ import NewOrderContext from '../context/NewOrderContext';
 import '../Styles/Navbar.css';
 
 function NavbarSellers() {
-  const { userName } = useContext(NewOrderContext);
+  const { userName, navBarSair, setNavBarSair } = useContext(NewOrderContext);
 
   return (
     <div>
@@ -25,9 +25,13 @@ function NavbarSellers() {
         <Link
           to="/"
           data-testid="customer_products__element-navbar-link-logout"
-          className="logout"
+          className="customer_products__element-navbar-link-logout"
+          onClick={ () => {
+            setNavBarSair(!navBarSair);
+            localStorage.clear();
+          } }
         >
-          SAIR
+          Sair
         </Link>
       </nav>
     </div>

@@ -176,6 +176,16 @@ const getAllOrdersByCustomers = async (req, res) => {
   }
 };
 
+const getAllOrdersBySellerId = async (req, res) => {
+  try {
+    const { user } = req.headers;
+    const data = await sales.findAll({ where: { sellerId: user } });
+    return res.status(200).json(data);
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+};
+
 const getSaleAndSaleProducts = async (req, res) => {
   try {
     const { id } = req.params;
@@ -214,32 +224,5 @@ module.exports = {
   getOrderFull,
   updateStatus,
   getAllOrdersByCustomers,
+  getAllOrdersBySellerId,
 };
-
-/* BACKUP
-const getSaleAndSaleProducts = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const obj = await sales.findAll({
-      where: { id },
-      include:
-        [
-          { model: products,
-            include: {
-              model: salesProducts,
-            },
-            as: 'products',
-          // attributes: [[Sequelize.literal('salesProducts.quantity'), 'quantidade']],
-        },
-        ],
-        attributes: [
-          [Sequelize.literal('sales.id'), 'code'],
-          // [Sequelize.literal('salesProducts.quantity'), 'quantidade'],
-        ],
-      });
-    return res.status(200).json(obj);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-};
-*/

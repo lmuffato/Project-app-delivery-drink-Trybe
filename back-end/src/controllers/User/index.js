@@ -5,6 +5,7 @@ const findAllUsers = require('./findAllUsers');
 const findByIdUser = require('./findByIdUser');
 const findByEmailUser = require('./findByEmailUser');
 const getSalesByUser = require('./getSalesByUser');
+const login = require('./login');
 
 module.exports = {
   createUser,
@@ -14,4 +15,5 @@ module.exports = {
   findByIdUser,
   findByEmailUser,
   getSalesByUser,
+  login,
 };

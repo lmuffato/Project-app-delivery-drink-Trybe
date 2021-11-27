@@ -12,6 +12,7 @@ import Admin from './pages/Admin';
 import Orders from './pages/Orders';
 import OrderDetails from './pages/OrderDetails';
 import sellerOrders from './pages/SellerOrders';
+import SellerOrderDetails from './pages/SellerOrderDetails';
 
 export default function Router() {
   return (
@@ -27,6 +28,7 @@ export default function Router() {
             <Route path="/customer/products" component={ Products } />
             <Route path="/admin" component={ Admin } />
             <Route path="/seller/orders" component={ sellerOrders } />
+            <Route path="/seller/orders/:id" component={ SellerOrderDetails } />
             <Route exact path="/" component={ Login } />
           </Switch>
         </UserProvider>

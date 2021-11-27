@@ -25,19 +25,23 @@ export default function PedidoEspecífico({ location }) {
   }
   useEffect(() => requestAPI(), []);
   useEffect(() => {
-    if (products) {
-      const result = products.reduce(
-        (curr, next) => curr + next.price * next.quantity,
-        0,
-      );
-      const toFixed = result.toFixed(2);
-      const toString = toFixed.toString().replace(/\./g, ',');
-      setTotal(toString);
-    }
-  }, [products]);
+    const result = products.reduce(
+      (curr, next) => {
+        console.log(curr);
+        console.log(next);
+        return curr + parseFloat(next.price) * parseInt(next.quantity, 10);
+      },
+      0,
+    );
+    setTotal(result);
+  }, [products, sale]);
 
   useEffect(() => {
-    if (sale) setDate(new Date(sale.sale_date).toLocaleDateString('pt-br'));
+    console.log(sale);
+    if (sale) {
+      const { sale_date: data } = sale;
+      setDate(new Date(data).toLocaleDateString('pt-br'));
+    }
   }, [sale]);
   function handeCheck() {
     setSale({ ...sale, status: 'Entregue' });
@@ -76,7 +80,7 @@ export default function PedidoEspecífico({ location }) {
       >
         Total: R$
         <span data-testid="customer_order_details__element-order-total-price">
-          {total}
+          {total.toFixed(2).toString().replace('.', ',')}
 
         </span>
       </h3>

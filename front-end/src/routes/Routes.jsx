@@ -5,7 +5,7 @@ import Cadastro from '../pages/Cadastro';
 import Produtos from '../pages/Produtos';
 import NotFound from '../pages/notFound';
 import PedidoEspecífico from '../pages/PedidoEspecífico';
-import CheckoutComprador from '../pages/CheckoutComprador';
+import CheckoutComprador from '../pages/CheckoutComprador/CheckoutComprador';
 import TodosOsPedidos from '../pages/TodosOsPedidos';
 import VendaEspecífica from '../pages/VendaEspecífica';
 import TodasAsVendas from '../pages/TodasAsVendas';

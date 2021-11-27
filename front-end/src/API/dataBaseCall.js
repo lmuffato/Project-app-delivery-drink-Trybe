@@ -40,7 +40,7 @@ export async function sendRequest({ data, sellInfo, token }) {
     ));
     return response.data;
   } catch ({ response }) {
-    throw response;
+    throw response.data.message;
   }
 }
 
@@ -53,6 +53,18 @@ export async function getSaleById(token, id) {
     ));
     return response.data;
   } catch ({ response }) {
-    throw response;
+    throw response.data.message;
+  }
+}
+
+export async function postNewUser(token, { name, email, password, role }) {
+  try {
+    const response = axios.post(`${BASE_URL}/users`,
+      { name, email, password, role },
+      { headers: { Authorization: token } },
+      { responseType: 'json' });
+    return response;
+  } catch ({ response }) {
+    throw response.data.message;
   }
 }

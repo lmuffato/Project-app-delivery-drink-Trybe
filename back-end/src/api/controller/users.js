@@ -29,6 +29,7 @@ const findAllSellers = async (req, res, next) => {
 
 const createNewUser = async (req, res, next) => {
   try {
+    console.log('📓 ~ file: users.js ~ line 33 ~ createNewUser ~ req.body', req.body);
     users.create(req.body);
     return res.status(CREATED).json({ message: 'User Created' });
   } catch (e) {

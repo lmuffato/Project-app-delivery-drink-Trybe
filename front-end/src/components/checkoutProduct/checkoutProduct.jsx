@@ -3,7 +3,10 @@ import PropTypes from 'prop-types';
 import CheckoutContext from '../../context/checkoutContext';
 import CardProduct from './checkoutProductElements';
 
-export default function CheckoutProduct({ index, id, name, qtd, price, option }) {
+export default function CheckoutProduct({ index, id, name, qtd, price,
+  option,
+  dataTestID1,
+  dataTestID2, dataTestID3, dataTestID4, dataTestID5 }) {
   const newPrice = option ? (price / qtd).toFixed(2).toString().replace(/\./g, ',')
     : (price).replace(/\./g, ',');
   const subtotal = option ? (price).toString().replace(/\./g, ',')
@@ -23,7 +26,11 @@ export default function CheckoutProduct({ index, id, name, qtd, price, option })
     ? `customer_checkout__element-order-table-sub-total-${index}`
     : `customer_order_details__element-order-table-sub-total-${index}`;
   function deleteItem(idx) {
-    const sales = aux.filter((item) => item.product_id !== idx);
+    const sales = aux.filter((item) => {
+      console.log(item.product_id);
+      console.log(idx);
+      return item.product_id !== idx;
+    });
     setAux(sales);
   }
   return (
@@ -31,31 +38,31 @@ export default function CheckoutProduct({ index, id, name, qtd, price, option })
       <CardProduct>
         <p
           className="numberItem"
-          data-testid={ testIdIndex }
+          data-testid={ dataTestID1 || testIdIndex }
         >
           {index + 1}
         </p>
         <p
           className="nameItem"
-          data-testid={ testIdName }
+          data-testid={ dataTestID2 || testIdName }
         >
           {name}
         </p>
         <p
           className="quantityItem"
-          data-testid={ testIdQtd }
+          data-testid={ dataTestID3 || testIdQtd }
         >
           {qtd}
         </p>
         <p
           className="priceItem"
-          data-testid={ testIdUnitPrice }
+          data-testid={ dataTestID4 || testIdUnitPrice }
         >
           {newPrice}
         </p>
         <p
           className="subTotalItem"
-          data-testid={ testIdSubTotal }
+          data-testid={ dataTestID5 || testIdSubTotal }
         >
           {`R$:${subtotal}`}
         </p>
@@ -82,4 +89,9 @@ CheckoutProduct.propTypes = {
   qtd: PropTypes.number.isRequired,
   price: PropTypes.number.isRequired,
   option: PropTypes.bool.isRequired,
+  dataTestID1: PropTypes.string.isRequired,
+  dataTestID2: PropTypes.string.isRequired,
+  dataTestID3: PropTypes.string.isRequired,
+  dataTestID4: PropTypes.string.isRequired,
+  dataTestID5: PropTypes.string.isRequired,
 };

@@ -15,6 +15,8 @@ export default function VendaEspecífica({ location }) {
   const [sale, setSale] = useState();
   const [date, setDate] = useState('');
   const [loading, setLoading] = useState(true);
+  const [disabledPrep, setDisabledPrep] = useState(false);
+  const [disabledDispatch, setDisabledDispach] = useState(true);
 
   async function requestAPI() {
     const result = await getSaleById(userName.token, saleID);
@@ -22,7 +24,6 @@ export default function VendaEspecífica({ location }) {
     setSale(result);
     setLoading(false);
   }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => requestAPI(), []);
   useEffect(() => {
     if (products) {
@@ -44,6 +45,8 @@ export default function VendaEspecífica({ location }) {
   }
   function preparingOrder() {
     setSale({ ...sale, status: 'Preparando' });
+    setDisabledPrep(true);
+    setDisabledDispach(false);
   }
   if (loading) return <p>Loading...</p>;
   return (
@@ -106,6 +109,7 @@ export default function VendaEspecífica({ location }) {
         type="button"
         data-testid="seller_order_details__button-dispatch-check"
         onClick={ handleOutForDelivery }
+        disabled={ disabledDispatch }
       >
         Saiu para Entrega
       </button>
@@ -113,6 +117,7 @@ export default function VendaEspecífica({ location }) {
         type="button"
         onClick={ preparingOrder }
         data-testid="seller_order_details__button-preparing-check"
+        disabled={ disabledPrep }
       >
         Preparar Pedido
       </button>

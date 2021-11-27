@@ -3,7 +3,8 @@ import styled from 'styled-components';
 const CardProduct = styled.p`
 display: flex;
 justify-content: center;
-margin: -30px 30px;
+margin: -30px 146px;
+margin left: 30px
 text-align: center;
 }
 

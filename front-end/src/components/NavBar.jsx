@@ -13,8 +13,8 @@ function NavBar({ ids:
         productId
         && <li data-testid={ productId }><NavLink to={ route }>Produtos</NavLink></li>
       }
-      <li data-testid={ pageOrdersId }>
-        <NavLink to="/customer/orders">{ pageName }</NavLink>
+      <li>
+        <NavLink to="/customer/orders" data-testid={ pageOrdersId }>{ pageName }</NavLink>
       </li>
       <li data-testid={ userId }>{ name }</li>
       <li>

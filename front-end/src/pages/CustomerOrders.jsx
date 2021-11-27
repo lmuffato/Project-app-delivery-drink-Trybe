@@ -13,7 +13,7 @@ function CustomerOrders() {
     orderId: 'customer_orders__element-order-id-',
     orderStatus: 'customer_orders__element-delivery-status-',
     orderDate: 'customer_orders__element-order-date-',
-    orderPrice: 'customer_order_details__element-order-details-label-order-id',
+    orderPrice: 'customer_orders__element-card-price-',
   };
 
   const navegationNames = {

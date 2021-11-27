@@ -44,9 +44,13 @@ const getOrdersByUserId = async (userId) => {
 
 const getAllOrders = async () => {
   const allOrders = await sales.findAll({
+    attributes: { exclude: ['sellerId'] },
     include: [
       { model: user, as: 'user', attributes: { exclude: ['password'] } },
-      { model: user, as: 'seller', attributes: { exclude: ['password'] } },
+      { model: user, as: 'seller', attributes: ['name', 'id'] },
+      { model: Products,
+        as: 'products',
+        through: { attributes: ['quantity'] } },
     ],
   });
   

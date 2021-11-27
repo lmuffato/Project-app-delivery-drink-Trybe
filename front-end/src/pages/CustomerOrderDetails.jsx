@@ -2,7 +2,7 @@ import React from 'react';
 import NavBar from '../components/NavBar';
 import OrderDetailsTable from '../components/OrderDetailsTable';
 
-function ProductDetails() {
+function CustomerOrderDetails() {
   const testIds = {
     pageProductsId: 'customer_products__element-navbar-link-products',
     pageOrdersId: 'customer_products__element-navbar-link-orders',
@@ -32,4 +32,4 @@ function ProductDetails() {
   );
 }
 
-export default ProductDetails;
+export default CustomerOrderDetails;

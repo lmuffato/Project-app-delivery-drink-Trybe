@@ -10,6 +10,7 @@ function OrderDetailsTable({ testIds }) {
     sellerName,
     orderDate,
     orderStatus,
+    buttonPreparing,
     buttonDelivery,
     tableItemNumber,
     tableItemName,
@@ -23,6 +24,7 @@ function OrderDetailsTable({ testIds }) {
   const { orderList } = useContext(OrdersContext);
   let order;
 
+  console.log(orderList);
   if (orderList) {
     order = orderList.orders.find(
       (el) => el.id.toString() === id,
@@ -62,12 +64,25 @@ function OrderDetailsTable({ testIds }) {
     return 'Loading';
   }
 
+  const renderButtonPreparing = () => (
+    <th>
+      <button
+        type="button"
+        data-testid={ buttonPreparing }
+        disabled
+      >
+        Marcar como entregue
+      </button>
+    </th>
+  );
+
   const renderSaleHeader = () => (
     <tr>
       <th data-testid={ orderId }>{ `Pedido: ${id}` }</th>
-      <th data-testid={ sellerName }>{ order.seller.name }</th>
+      { sellerName && <th data-testid={ sellerName }>{ order.seller.name }</th> }
       <th data-testid={ orderDate }>{ moment(order.saleDate).format('DD/MM/YYYY') }</th>
       <th data-testid={ orderStatus }>{ order.status }</th>
+      { buttonPreparing && renderButtonPreparing() }
       <th>
         <button
           type="button"
@@ -117,6 +132,7 @@ OrderDetailsTable.propTypes = {
     sellerName: PropTypes.string,
     orderDate: PropTypes.string,
     orderStatus: PropTypes.string,
+    buttonPreparing: PropTypes.string,
     buttonDelivery: PropTypes.string,
     tableItemNumber: PropTypes.string,
     tableItemName: PropTypes.string,

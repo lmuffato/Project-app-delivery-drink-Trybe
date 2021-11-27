@@ -1,12 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import ProductCard from '../components/ProductCard';
 import NavBar from '../components/NavBar';
 import * as request from '../services/requests';
 import { CartContext } from '../context/cart';
 
 function Products() {
-  const { cartStorage } = useContext(CartContext);
+  const { cartStorage = {} } = useContext(CartContext);
   const [products, setProducts] = useState([]);
+  const [toCheckout, setToCheckout] = useState(false);
   const [totalCart, setTotalCart] = useState('0.00');
 
   useEffect(() => {
@@ -32,6 +34,14 @@ function Products() {
 
   const dataUser = JSON.parse(localStorage.getItem('user'));
 
+  const handleClick = () => {
+    if (cartStorage) {
+      setToCheckout(true);
+    }
+  };
+
+  if (toCheckout) return <Redirect to="/customer/checkout" />;
+
   return (
     <section>
       <nav>
@@ -45,7 +55,14 @@ function Products() {
             cartStorage={ cartStorage }
           />
         ))}
-        <button type="button">
+        <button
+          type="button"
+          data-testid="customer_products__button-cart"
+          disabled={
+            cartStorage ? !Object.keys(cartStorage).length : !cartStorage
+          }
+          onClick={ handleClick }
+        >
           R$
           <span data-testid="customer_products__checkout-bottom-value">
             {totalCart}

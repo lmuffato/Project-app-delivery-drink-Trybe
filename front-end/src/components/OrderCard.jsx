@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 import moment from 'moment';
 import './orderCard.css';
 
-const OrderCard = ({ order, testIds }) => {
+const OrderCard = ({ order, testIds, index }) => {
   const { id, status, saleDate, totalPrice } = order;
   const { orderId, orderStatus, orderDate, orderPrice } = testIds;
   const navigate = useNavigate();
@@ -19,12 +19,16 @@ const OrderCard = ({ order, testIds }) => {
     >
       <div>
         <p>Pedido</p>
-        <h4 data-testid={ (orderId + id) }>{ id }</h4>
+        <h4 data-testid={ (orderId + index) }>{ id }</h4>
       </div>
-      <h3 data-testid={ orderStatus + id }>{ status }</h3>
+      <h3 data-testid={ orderStatus + index }>{ status }</h3>
       <div>
-        <h4 data-testid={ orderDate + id }>{ moment(saleDate).format('DD/mm/yyyy') }</h4>
-        <h4 data-testid={ orderPrice + id }>{ `R$ ${totalPrice}` }</h4>
+        <h4
+          data-testid={ orderDate + index }
+        >
+          { moment(saleDate).format('DD/mm/yyyy') }
+        </h4>
+        <h4 data-testid={ orderPrice + index }>{ `R$ ${totalPrice}` }</h4>
       </div>
     </button>
   );
@@ -32,12 +36,18 @@ const OrderCard = ({ order, testIds }) => {
 
 OrderCard.propTypes = {
   order: PropTypes.shape({
-    id: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
     status: PropTypes.string.isRequired,
     saleDate: PropTypes.string.isRequired,
     totalPrice: PropTypes.string.isRequired,
   }).isRequired,
   testIds: PropTypes.shape({
+    orderId: PropTypes.string.isRequired,
+    orderStatus: PropTypes.string.isRequired,
+    orderDate: PropTypes.string.isRequired,
+    orderPrice: PropTypes.string.isRequired,
+  }).isRequired,
+  index: PropTypes.shape({
     orderId: PropTypes.string.isRequired,
     orderStatus: PropTypes.string.isRequired,
     orderDate: PropTypes.string.isRequired,

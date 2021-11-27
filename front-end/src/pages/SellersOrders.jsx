@@ -10,9 +10,9 @@ import Navbar from '../Components/NavBarSellers';
 import '../Styles/SellerOrders.css';
 
 const dataTestid48 = 'seller_orders__element-order-id';
-const dataTestid49 = ' seller_orders__element-delivery-status';
-const dataTestid50 = ' seller_orders__element-order-date';
-const dataTestid51 = ' seller_orders__element-card-price';
+const dataTestid49 = 'seller_orders__element-delivery-status';
+const dataTestid50 = 'seller_orders__element-order-date';
+const dataTestid51 = 'seller_orders__element-card-price';
 const dataTestid52 = 'seller_orders__element-card-address';
 
 export default function SellersOrders() {
@@ -25,21 +25,21 @@ export default function SellersOrders() {
     <div key={ index } className="unit-card-container">
       <Link to={ `/seller/orders/${sale.id} ` } className="link">
         <div className="card">
-          <div data-testid={ `${dataTestid48}-${sale.id}` } className="">
+          <div data-testid={ `${dataTestid48}--${sale.id}` } className="">
             Pedido
             { sale.id }
           </div>
-          <div data-testid={ `${dataTestid49}-${sale.id}` } className="">
+          <div data-testid={ `${dataTestid49}--${sale.id}` } className="">
             { sale.status }
           </div>
-          <div data-testid={ `${dataTestid50}-${sale.id}` } className="">
+          <div data-testid={ `${dataTestid50}--${sale.id}` } className="">
             { sale.saleDate }
           </div>
-          <div data-testid={ `${dataTestid51}-${sale.id}` } className="">
+          <div data-testid={ `${dataTestid51}--${sale.id}` } className="">
             R$
             { sale.totalPrice }
           </div>
-          <div data-testid={ `${dataTestid52}-${sale.id}` } className="">
+          <div data-testid={ `${dataTestid52}--${sale.id}` } className="">
             { `${sale.deliveryAddress}, ${sale.deliveryNumber}` }
           </div>
         </div>

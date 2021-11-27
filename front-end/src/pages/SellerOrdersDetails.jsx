@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router';
+
+import UserContext from '../context/userContext';
 
 import { getOrderById } from '../services/endpointsAPI';
 
@@ -7,19 +9,20 @@ import Navbar from '../Components/NavBarSellers';
 
 import '../Styles/SellerOrderDetails.css';
 
-const dataTestId54 = 'seller_order_details__element-order-details-label-order-id';
-const dataTestId55 = 'seller_order_details__element-order-details-label-delivery-status';
-const dataTestId56 = 'seller_order_details__element-order-details-label-order-date';
-const dataTestId57 = 'seller_order_details__button-preparing-check';
-const dataTestId58 = 'seller_order_details__button-dispatch-check';
-const dataTestId59 = 'seller_order_details__element-order-table-item-number';
-const dataTestId60 = 'seller_order_details__element-order-table-name';
-const dataTestId61 = 'seller_order_details__element-order-table-quantity';
-const dataTestId62 = 'seller_order_details__element-order-table-unit-price';
-const dataTestId63 = 'seller_order_details__element-order-table-sub-total';
-const dataTestId64 = 'seller_order_details__element-order-total-price';
+const dataTestId54 = 'seller_order_details__element-order-details-label-order-id-';
+const dataTestId55 = 'seller_order_details__element-order-details-label-delivery-status-';
+const dataTestId56 = 'seller_order_details__element-order-details-label-order-date-';
+const dataTestId57 = 'seller_order_details__button-preparing-check-';
+const dataTestId58 = 'seller_order_details__button-dispatch-check-';
+const dataTestId59 = 'seller_order_details__element-order-table-item-number-';
+const dataTestId60 = 'seller_order_details__element-order-table-name-';
+const dataTestId61 = 'seller_order_details__element-order-table-quantity-';
+const dataTestId62 = 'seller_order_details__element-order-table-unit-price-';
+const dataTestId63 = 'seller_order_details__element-order-table-sub-total-';
+const dataTestId64 = 'seller_order_details__element-order-total-price-';
 
 export default function SellerOrdersDetails() {
+  const { userData } = useContext(UserContext);
   const { id } = useParams();
   const [itens, setItens] = useState([]);
   const [sale, setSale] = useState({});
@@ -28,7 +31,8 @@ export default function SellerOrdersDetails() {
 
   useEffect(() => {
     setIsLoading(true);
-    getOrderById(id)
+    const { token } = userData;
+    getOrderById(token, id)
       .then((result) => {
         setItens(result.itensList);
         setSale(result.sale);

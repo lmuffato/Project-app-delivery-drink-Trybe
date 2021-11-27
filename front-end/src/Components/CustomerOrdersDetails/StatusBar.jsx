@@ -88,7 +88,7 @@ export default function StatusBar() {
 
   // Rendereiza o status do pedido na tela.
   const renderStatusSale = () => {
-    if (Object.keys(orderSale).length !== 0 || orderSale !== undefined) {
+    if (Object.keys(orderSale).length !== 0 || orderSale.status !== undefined) {
       console.log(orderSale.status);
       return (
         <span data-testid={ `${testId40}` }>

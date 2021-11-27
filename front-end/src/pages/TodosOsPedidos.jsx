@@ -11,7 +11,6 @@ export default function TodosOsPedidos() {
   const [loading, setLoading] = useState(true);
 
   const userName = JSON.parse(user);
-  console.log(sales);
   async function getAllSales() {
     try {
       const response = await axios({

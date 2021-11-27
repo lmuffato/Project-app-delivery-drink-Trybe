@@ -38,7 +38,7 @@ app.get('/sellers', validateToken, userController.findAllSellers);
 
 app.put('/orders/:id', validateToken, validateUpdateOrder, saleController.updateOrder);
 
-app.get('/orders/:id', validateToken, saleController.getOrdersByUserId);
+app.get('/orders/customerId', validateToken, saleController.getOrdersByUserId);
 
 app.get('/orders/sellerId/:id', validateToken, validateSeller, saleController.getOrdersBySellerId);
 

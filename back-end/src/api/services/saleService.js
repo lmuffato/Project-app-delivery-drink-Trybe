@@ -1,9 +1,8 @@
-const { sales, salesProducts } = require('../../database/models');
-const { User, Products } = require('../../database/models');
+const { sales, salesProducts, user, Products } = require('../../database/models');
 const { ORDERS_NOT_FOUND } = require('../messages/errorMessages');
 
 const findUserById = async (id) => {
- const { dataValues: { password: _, ...userData } } = await User.findOne({
+  const { dataValues: { password: _, ...userData } } = await user.findOne({
     where: { id },
   }); 
 
@@ -24,8 +23,12 @@ const registerSale = async (saleData) => {
 const getOrdersByUserId = async (userId) => {
   const userOrders = await sales.findAll({
     where: { userId },
+    attributes: { exclude: ['sellerId'] },
     include: [
-      { model: Products, as: 'products', through: { attributes: ['quantity'] } },
+      { model: Products,
+        as: 'products',
+        through: { attributes: ['quantity'] } },
+      { model: user, as: 'seller', attributes: ['name', 'id'] },
     ],
   });
 
@@ -34,6 +37,7 @@ const getOrdersByUserId = async (userId) => {
   }
 
   const ordersData = await findUserById(userId);
+  ordersData.orders = userOrders;
 
   return ({ ordersData });
 };
@@ -41,8 +45,8 @@ const getOrdersByUserId = async (userId) => {
 const getAllOrders = async () => {
   const allOrders = await sales.findAll({
     include: [
-      { model: User, as: 'user', attributes: { exclude: ['password'] } },
-      { model: User, as: 'seller', attributes: { exclude: ['password'] } },
+      { model: user, as: 'user', attributes: { exclude: ['password'] } },
+      { model: user, as: 'seller', attributes: { exclude: ['password'] } },
     ],
   });
   
@@ -52,7 +56,7 @@ const getAllOrders = async () => {
 const getOrdersBySellerId = async (sellerId) => {
   const sellerOrders = await sales.findAll({
     where: { sellerId },
-    include: { model: User, as: 'user', attributes: { exclude: ['password'] } },
+    include: { model: user, as: 'user', attributes: { exclude: ['password'] } },
   });
 
   if (sellerOrders.length === 0) {

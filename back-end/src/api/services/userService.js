@@ -5,7 +5,7 @@ const path = require('path');
 const secret = require('fs')
 .readFileSync(path.join(__dirname, '../../../jwt.evaluation.key'), { encoding: 'utf-8' }).trim(); 
 
-const { User } = require('../../database/models');
+const { user: User } = require('../../database/models');
 const {
   INCORRECT_USERNAME_OR_PASSWORD, ALL_FIELDS_FILLED, USER_ALREADY_EXIST,
   NO_REGISTRED_USERS, NON_EXISTENTE_USER, NO_REGISTRED_SELLERS,

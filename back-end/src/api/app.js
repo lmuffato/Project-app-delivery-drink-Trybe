@@ -29,7 +29,7 @@ app.get('/coffee', (_req, res) => res.status(418).end());
 const PORT = process.env.SOCKET_PORT || 3002;
 
 httpServer.listen(PORT, () => {
-  console.log(`Socket online on port: ${PORT}`);
+  console.log(`Socket rodando na porta: ${PORT}`);
 });
 
 module.exports = app;

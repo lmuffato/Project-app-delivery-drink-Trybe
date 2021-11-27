@@ -11,7 +11,7 @@ export default function emailValidation(email, password) {
       .required(),
   });
   const { error } = schema.validate({ email, password });
-  console.log(error);
+
   if (!error) {
     return true;
   }

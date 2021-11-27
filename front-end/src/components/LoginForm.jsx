@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import genHashMd5 from 'md5';
 import { useNavigate } from 'react-router-dom';
 import emailValidation from '../validations/loginValidation';
-import api from '../services/api';
+import fetchPostUser from '../services/fetchPostUser';
 import ErrorBackend from './ErrorBackend/index';
+import redirectRoutes from '../utils/redirectRoutes';
 
 export default function Login() {
   const [emailInput, setEmailInput] = useState('');
@@ -11,31 +11,15 @@ export default function Login() {
   const [disabledBtn, setDisabledBtn] = useState(true);
   const [errorLogin, setErrorLogin] = useState(false);
 
-  // o email value do db, este restorno da requisição vai definir o evento de redirecionamento
-  // const errorLoginHTTP = 200;
   const navigate = useNavigate();
-  const fetchPostData = async (userData) => {
-    const data = await api.post('/user/login', userData);
-    const condition = await Object.keys(data.data);
-    console.log(condition);
-    if (condition.length === 1) {
-      console.log('dentro if');
-      setErrorLogin(true);
-    } else {
-      localStorage.setItem('user', JSON.stringify(data.data));
-      const redirectRoutes = {
-        customer: '/customer/products',
-        seller: '/seller/orders',
-        administrator: '/admin/manage',
-      };
-      navigate(redirectRoutes[data.data.role]);
-    }
-  };
 
   const handleButtonClick = async () => {
-    const passwordHash = genHashMd5(passwordInput);
-    await fetchPostData({ email: emailInput, password: passwordHash });
-    console.log('handleButtonClick');
+    const user = await fetchPostUser(
+      { email: emailInput, password: passwordInput },
+    );
+    if (!user.role) return setErrorLogin(true);
+    localStorage.setItem('user', JSON.stringify(user));
+    navigate(redirectRoutes[user.role]);
   };
 
   return (

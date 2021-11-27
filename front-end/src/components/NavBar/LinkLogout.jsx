@@ -5,7 +5,7 @@ function LinkLogout() {
   const navigate = useNavigate();
   const handleCLickLogout = () => {
     localStorage.clear();
-    navigate('/customer/checkout');
+    navigate('/login');
   };
   return (
     <button

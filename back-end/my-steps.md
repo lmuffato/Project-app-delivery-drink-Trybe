@@ -1,4 +1,6 @@
 reinicializar o banco de dados:
+npm run db:reset
+
 npx sequelize db:create
 npx sequelize db:migrate
 npx sequelize db:seed:all

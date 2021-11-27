@@ -51,7 +51,7 @@ export default function SellersOrders() {
     setIsLoading(true);
     const { token } = userData;
     getAllOrdersBySellerId(token, userData.id)
-      .then((resp) => { 
+      .then((resp) => {
         setOrders(resp);
         setIsLoading(false);
       });

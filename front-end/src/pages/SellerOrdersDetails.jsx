@@ -71,7 +71,11 @@ export default function SellerOrdersDetails() {
             </button>
           </th>
           <th>
-            <button type="button" data-testid={ `${dataTestId58}` } disabled={ `${true}` }>
+            <button
+              type="button"
+              data-testid={ `${dataTestId58}` }
+              disabled={ `${true}` }
+            >
               SAIU PARA ENTREGA
             </button>
           </th>

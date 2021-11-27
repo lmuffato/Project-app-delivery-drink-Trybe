@@ -1,15 +1,17 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
-
+import { doLogin, getUserByEmail } from '../services/endpointsAPI';
 import ErrorLogin from '../Components/ErrorLogin';
-
 import UserContext from '../context/userContext';
-import { doLogin } from '../services/endpointsAPI';
 import NewOrderContext from '../context/NewOrderContext';
-
-import { setToLocalStorageUser, setToLocalStorage } from '../services/localStorage';
 import validateEmail from '../validations/validateEmail';
+
+import {
+  setToLocalStorageUser,
+  setToLocalStorage,
+  getItemFromLocalStorage,
+} from '../services/localStorage';
 
 const messageError = 'Login e/ou senha inválidos';
 const testId = 'common_login__element-invalid-email';
@@ -29,14 +31,37 @@ export default function Login() {
   const [loginButton, setLoginButton] = useState(false);
   const [errorMessage, setErrorMessage] = useState(true);
 
+  const redirectByRole = (role) => {
+    if (role === 'customer') { return history.push('/customer/products'); }
+    if (role === 'seller') { return history.push('/seller/orders'); }
+    if (role === 'administrator') { return history.push('/admin/manage'); }
+  };
+
+  const getUserDataFromLocalStorage = async () => {
+    const userInfo = await getItemFromLocalStorage('user');
+    if (userInfo !== undefined) {
+      const login = await getUserByEmail(userInfo.email);
+      setUserData(login);
+      setUserId(login.id);
+      setUserName(login.name);
+      return redirectByRole(userInfo.role);
+    }
+    console.log('usuário não existe');
+  };
+
+  useEffect(() => {
+    getUserDataFromLocalStorage();
+  }, []);
+
   const checkRole = (login) => {
     const { role } = jwtDecode(login.token);
     // console.log('aaaaaa', role);
     if (role === 'seller') {
+      setToLocalStorage('user', login);
       return '/seller/orders';
     }
     if (role === 'administrator') {
-      setToLocalStorage('token', login);
+      setToLocalStorage('user', login);
       return '/admin/manage';
     }
     setToLocalStorageUser('user', { login, email });
@@ -50,6 +75,7 @@ export default function Login() {
       setUserData(login);
       setUserId(login.id);
       setUserName(login.name);
+      console.log(login);
       setErrorMessage(true);
       history.push(endpoint);
     } catch (error) {

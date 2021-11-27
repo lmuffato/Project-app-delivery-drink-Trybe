@@ -116,19 +116,18 @@ const getById = async (req, res) => {
   }
 };
 
-// Buscar por id utilizando where
-// const getById = async (req, res) => {
-//   try {
-//     const { id } = req.params;
-//     const data = await users.findOne({
-//       where: { id },
-//       attributes: { exclude: ['password'] },
-//     });
-//     return res.status(200).json(data);
-//   } catch (err) {
-//     res.status(500).json({ message: err.message });
-//   }
-// };
+const getUserByEmail = async (req, res) => {
+  try {
+    const { userEmail } = req.body;
+    const data = await users.findOne({
+      where: { email: userEmail },
+      attributes: { exclude: ['password'] },
+    });
+    return res.status(200).json(data);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
 
 const updateById = async (req, res) => {
   try {
@@ -171,4 +170,5 @@ module.exports = {
   login,
   createByAdmin,
   verifyTokenNotExpired,
+  getUserByEmail,
 };

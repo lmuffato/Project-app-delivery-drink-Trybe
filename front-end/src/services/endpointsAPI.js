@@ -13,6 +13,11 @@ export const doLogin = async (email, password) => {
   return result.data;
 };
 
+export const getUserByEmail = async (userEmail) => {
+  const result = await api.post('/users/getUserByEmail', { userEmail });
+  return result.data;
+};
+
 export const createNewUser = async (name, email, password) => {
   const result = await api.post('/users/create', { name, email, password });
   return result.data;

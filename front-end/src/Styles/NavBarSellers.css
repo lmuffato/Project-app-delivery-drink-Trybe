@@ -1,17 +1,51 @@
-nav {
-  background-color: rgb(173, 209, 140);
+.nav-container {
   display: flex;
   height: 4rem;
-  justify-content: center;
-  position: fixed;
   top: 0;
   width: 100%;
 }
 
 .icons-container {
   align-items: center;
+  background-color: #036b52;
   display: flex;
   justify-content: space-between;
   list-style: none;
-  width: 90vw;
+  width: 100%;
+}
+
+.orders {
+  align-items: center;
+  color: white;
+  display: flex;
+  height: 4rem;
+  justify-content: center;
+  width: 10rem;
+}
+
+.right-side {
+  display: flex;
+  height: 4rem;
+  justify-content: space-between;
+  width: 18rem;
+}
+
+.seller-name {
+  align-items: center;
+  background-color: #421981;
+  color: white;
+  display: flex;
+  height: 4rem;
+  justify-content: center;
+  width: 12rem;
+}
+
+.logout {
+  align-items: center;
+  background-color: #056cf9;
+  color: white;
+  display: flex;
+  height: 4rem;
+  justify-content: center;
+  width: 6rem;
 }

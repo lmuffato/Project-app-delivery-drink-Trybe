@@ -1,9 +1,10 @@
 import React, { useEffect, useCallback } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import styles from './styles.module.css';
 
 export default function Header() {
   const navigate = useNavigate();
+  const currentRoute = useLocation();
 
   const conditionalNavigate = useCallback(() => {
     if (!localStorage.getItem('user')) {
@@ -42,7 +43,8 @@ export default function Header() {
     <nav className={ styles.topnav }>
       <div>
         <Link
-          className={ styles.active }
+          className={ currentRoute.pathname === titleNavLink
+            ? styles.active : styles.link }
           to={ titleNavLink }
           data-testid={
             user.role !== 'customer'
@@ -54,6 +56,8 @@ export default function Header() {
         </Link>
         {user.role !== 'customer' ? null : (
           <Link
+            className={ currentRoute.pathname.split('/')
+              .includes('orders') ? styles.active : styles.link }
             to="/customer/orders"
             data-testid="customer_products__element-navbar-link-orders"
           >

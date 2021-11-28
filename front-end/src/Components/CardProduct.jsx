@@ -81,7 +81,14 @@ export default function CardProduct({ id,
         />
       </div>
       <div className="footer-card">
-        <h5 data-testid={ `customer_products__element-card-title-${id}` }>{drink}</h5>
+        <div className="name-container">
+          <div
+            data-testid={ `customer_products__element-card-title-${id}` }
+            className="name"
+          >
+            {drink}
+          </div>
+        </div>
         <div className="quantities">
           <button
             data-testid={

@@ -20,6 +20,7 @@ export default function CustomerProducts() {
       const { token } = await getItemFromLocalStorage('user');
       await checkUserToken(token);
     } catch (e) {
+      localStorage.clear();
       history.push('/login');
     }
   };
@@ -60,7 +61,7 @@ export default function CustomerProducts() {
       <button
         type="button"
         data-testid="customer_products__button-cart"
-        className=""
+        className="card-button"
         disabled={ totalPriceAllProducts === 0 }
         onClick={ clickLoginButton }
       >

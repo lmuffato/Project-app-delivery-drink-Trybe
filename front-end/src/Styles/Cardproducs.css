@@ -31,23 +31,33 @@
   background-color: #def6f3;
   display: flex;
   flex-wrap: wrap;
-  font-size: small;
   height: 5rem;
   justify-content: center;
   width: 8rem;
 }
 
-h5 {
-  font-size: smaller;
-  margin: 0;
+.name-container {
+  display: flex;
+  height: 2.5rem;
+  width: 8rem;
+}
+
+.name {
+  align-items: center;
+  display: flex;
+  font-size: small;
+  font-weight: 500;
+  justify-content: center;
+  margin: auto;
+  width: 7.5rem;
 }
 
 .quantities {
   align-items: center;
   display: flex;
-  height: 2rem;
+  height: 2.5rem;
   justify-content: center;
-  width: 3rem;
+  width: 4rem;
 }
 
 .add-rem-buttons {
@@ -56,11 +66,11 @@ h5 {
   border-radius: 4px;
   color: #def6f3;
   display: flex;
-  font-size: x-large;
+  font-size: larger;
   font-weight: 700;
-  height: 1.5rem;
+  height: 1.6rem;
   justify-content: center;
-  width: 5rem;
+  width: 4rem;
 }
 
 .label-quantity {

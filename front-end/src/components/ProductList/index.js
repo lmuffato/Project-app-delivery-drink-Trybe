@@ -12,9 +12,15 @@ const ProdListContainer = styled.div`
   flex-flow: row wrap;
   align-content: center;
   justify-content: space-between;
+  position: relative;
 
-  & >* {
-    margin: 10px;
+  & > * { margin: 10px; }
+
+  .see-cart { 
+    font-size: 20px;
+    position: fixed;
+    bottom: 10px;
+    right: 0px;
   }
 `;
 
@@ -55,23 +61,22 @@ function ProductList() {
           }
         />
       ))}
-      <div style={ { position: 'absolute', bottom: '0', right: '0', zIndex: 100 } }>
-        <Button
-          variant="primary"
-          onClick={ () => navigation('../checkout') }
-          datatestid="customer_products__button-cart"
-          disabled={ cart.length <= 0 }
-        >
-          <>
-            R$
-            <span
-              data-testid="customer_products__checkout-bottom-value"
-            >
-              {total.toFixed(2).replace('.', ',')}
-            </span>
-          </>
-        </Button>
-      </div>
+      <Button
+        className="see-cart"
+        variant="primary"
+        onClick={ () => navigation('../checkout') }
+        datatestid="customer_products__button-cart"
+        disabled={ cart.length <= 0 }
+      >
+        <>
+          VER CARRINHO: R$
+          <span
+            data-testid="customer_products__checkout-bottom-value"
+          >
+            {total.toFixed(2).replace('.', ',')}
+          </span>
+        </>
+      </Button>
     </ProdListContainer>
   );
 }

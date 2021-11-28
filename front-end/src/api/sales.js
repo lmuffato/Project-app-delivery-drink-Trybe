@@ -40,3 +40,15 @@ export async function getById(id, token) {
     throw errorRes;
   }
 }
+
+export async function changeStatus(id, status, token) {
+  try {
+    const response = await axios.post(
+      `${BASE_URL}/sales/status/${id}`, { status }, { headers: { Authorization: token } },
+    );
+    return response.data;
+  } catch ({ response: { status: sts, data: { message } } }) {
+    const errorRes = { sts, message };
+    throw errorRes;
+  }
+}

@@ -2,20 +2,27 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider as ReduxProvider } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
+import { Toaster } from 'react-hot-toast';
 import { BrowserRouter } from 'react-router-dom';
-import GlobalStyles from './styles/GlobalStyles';
 import reportWebVitals from './reportWebVitals';
 import App from './App';
 import theme from './styles/themes';
 import store from './store';
+import './index.css';
 
 ReactDOM.render(
   <React.StrictMode>
     <ReduxProvider store={store}>
       <BrowserRouter>
         <ThemeProvider theme={theme.light}>
-          <GlobalStyles />
-          <App />
+            <Toaster 
+              position="bottom-center"
+              toastOptions={{
+                style: { background: 'tomato', color: 'white' },
+                duration: 2000
+              }}
+            />
+            <App />
         </ThemeProvider>
       </BrowserRouter>
     </ReduxProvider>

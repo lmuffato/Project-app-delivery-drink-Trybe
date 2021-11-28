@@ -24,6 +24,7 @@ function AppContainer() {
   return (
     <Container>
       <Navbar userType={ user.role } username={ user.name } />
+
       <main className="main-wrapper">
         <Outlet />
       </main>

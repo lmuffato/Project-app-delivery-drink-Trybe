@@ -6,6 +6,7 @@ import Table from '../../components/Table';
 import api from '../../api';
 import { useAuth } from '../../contexts/auth';
 import Button from '../../components/Button';
+import Select from '../../components/Select';
 
 const MIN_NAME_LENGTH = 12;
 const MIN_PASSWORD_LENGTH = 6;
@@ -18,8 +19,19 @@ const AdminContainer = styled.div`
   form {
     display: flex;
     justify-content: space-between;
+    align-items: flex-end;
+
+    button[type="submit"] {
+      height: 46px;
+    }
   }
 `;
+
+const adminTypes = [
+  { text: 'Consumidor', value: 'customer' },
+  { text: 'Administrador', value: 'administrator' },
+  { text: 'Vendedor', value: 'seller' },
+];
 
 function AdminManegement() {
   const { user } = useAuth();
@@ -27,7 +39,7 @@ function AdminManegement() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
-  const [role, setRole] = useState('customer');
+  const [role, setRole] = useState(adminTypes[0]);
   const [invalidInfo, setInvalidInfo] = useState('');
 
   const getAllUsers = () => {
@@ -82,15 +94,14 @@ function AdminManegement() {
           value={ password }
           onChange={ ({ target: { value } }) => setPassword(value) }
         />
-        <select
-          data-testid="admin_manage__select-role"
+        <Select
+          label="Tipo"
+          testid="admin_manage__select-role"
+          elemId="admin-type"
           value={ role }
-          onChange={ ({ target: { value } }) => setRole(value) }
-        >
-          <option value="customer">Consumidor</option>
-          <option value="seller">Vendedor</option>
-          <option value="administrator">Administrador</option>
-        </select>
+          onValueChange={ setRole }
+          data={ adminTypes }
+        />
         <Button
           datatestid="admin_manage__button-register"
           disabled={ validateInputs }

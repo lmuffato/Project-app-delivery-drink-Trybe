@@ -6,6 +6,7 @@ import Button from '../../components/Button';
 import Input from '../../components/Input';
 import api from '../../api';
 import { useAuth } from '../../contexts/auth';
+import Select from '../../components/Select';
 
 const Form = styled.form`
   padding: 10px 10px;
@@ -15,6 +16,15 @@ const Form = styled.form`
   }
   .inputs {
     display: flex;
+    justify-content: space-between;
+    & > * { flex: 2; }
+    & > *:first-child {
+      flex: 1;
+      width: min-content;
+    }
+    & > *:nth-child(odd) {
+      margin-inline: 20px;
+    }
   }
   .submit {
     button {
@@ -43,12 +53,11 @@ function SelectSeller({ cartItems, totalPrice }) {
       totalPrice,
       deliveryAddress: address,
       deliveryNumber: number,
-      status: 'Pendente',
       cart,
     };
     api.sales.create(out, user.token)
       .then((data) => { navigation(`/customer/orders/${data.id}`); })
-      .catch((x) => alert(x.message));
+      .catch((x) => console.log(x.message));
   };
 
   useEffect(() => {
@@ -62,18 +71,20 @@ function SelectSeller({ cartItems, totalPrice }) {
 
   if (select === null) return <p>Carregando...</p>;
 
+  const selectData = sellers.map(({ id: value, name: text }) => ({ text, value }));
+
   return (
     <Form onSubmit={ createSale }>
       <div className="inputs">
-        <select
+        <Select
+          label="Pessoa vendedora"
+          elemId="seller-id"
+          testid="customer_checkout__select-seller"
+          data={ selectData }
+          onValueChange={ setSelect }
           value={ select }
-          onChange={ ({ target: { value } }) => setSelect(Number(value)) }
-          data-testid="customer_checkout__select-seller"
-        >
-          {sellers.map(({ id, name, role }) => (
-            <option key={ `${id}-${role}` } value={ id }>{name}</option>
-          ))}
-        </select>
+        />
+
         <Input
           type="text"
           label="Endereço"

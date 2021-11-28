@@ -24,13 +24,25 @@ function CustomerDetails() {
   const navigation = useNavigate();
   const [data, setData] = useState(null);
 
-  useEffect(() => {
+  const getProduct = () => {
     api.sales.getById(id, user.token)
       .then(setData)
       .catch((x) => {
         logoutNotAuthorized(x);
         navigation('../');
       });
+  };
+
+  const changeStatus = (status) => {
+    api.sales.changeStatus(id, status, user.token)
+      .then(getProduct).catch((x) => {
+        logoutNotAuthorized(x);
+        navigation('../');
+      });
+  };
+
+  useEffect(() => {
+    getProduct();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -44,6 +56,10 @@ function CustomerDetails() {
     price: product.price,
     quantity: product.SalesProduct.quantity,
   }));
+
+  const preparingIsDisabled = status === 'Preparando'
+   || status === 'Entregue' || status === 'Em Trânsito';
+  const deliverDisabled = status !== 'Preparando';
 
   return (
     <>
@@ -69,12 +85,15 @@ function CustomerDetails() {
           <Button
             variant="primary"
             datatestid="seller_order_details__button-preparing-check"
+            onClick={ () => changeStatus('Preparando') }
+            disabled={ preparingIsDisabled }
           >
             PREPARAR PEDIDO
           </Button>
           <Button
             variant="primary"
-            disabled
+            disabled={ deliverDisabled }
+            onClick={ () => changeStatus('Em Trânsito') }
             datatestid="seller_order_details__button-dispatch-check"
           >
             SAIU PARA ENTREGA
@@ -83,16 +102,19 @@ function CustomerDetails() {
         <Table
           items={ items }
           type="seller-details"
+          onDelete={ () => {} }
         />
         <Button
           variant="primary"
           disabled
           datatestid="customer_order_details__button-delivery-check"
         >
-          R$
-          <span data-testid="seller_order_details__element-order-total-price">
-            {totalPrice.toFixed(2).replace(/\./, ',')}
-          </span>
+          <>
+            R$
+            <span data-testid="seller_order_details__element-order-total-price">
+              {totalPrice.toFixed(2).replace(/\./, ',')}
+            </span>
+          </>
         </Button>
       </ShadowContainer>
     </>

@@ -12,6 +12,12 @@ const ShadowContainer = styled.div`
   box-shadow: 0 0 4px 0 ${({ theme }) => theme.shadow};
   padding: 10px 20px;
   margin-bottom: 40px;
+  display: flex;
+  flex-flow: column;
+  .checkout-total {
+    font-size: 22px;
+    align-self: end;
+  }
 `;
 
 function CustomerCheckout() {
@@ -48,11 +54,13 @@ function CustomerCheckout() {
           onDelete={ cb }
           type="customer-checkout"
         />
-        <Button variant="primary">
-          R$
-          <span data-testid="customer_checkout__element-order-total-price">
-            {totalPrice.toFixed(2).replace(/\./, ',')}
-          </span>
+        <Button className="checkout-total" variant="primary">
+          <>
+            R$
+            <span data-testid="customer_checkout__element-order-total-price">
+              {totalPrice.toFixed(2).replace(/\./, ',')}
+            </span>
+          </>
         </Button>
       </ShadowContainer>
 

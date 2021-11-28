@@ -27,7 +27,7 @@ export default function SaleCard(props) {
         <div className="h-20 bg-white">
           <p>Pedido</p>
           <p
-            data-testid={ `seller_orders__element-order-${id}` }
+            data-testid={ `seller_orders__element-order-id-${id}` }
           >
             { newOrderId }
           </p>

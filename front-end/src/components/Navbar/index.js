@@ -68,7 +68,7 @@ function Navbar({ userType, username }) {
 }
 
 Navbar.propTypes = {
-  userType: PropTypes.oneOf(['seller', 'customer', 'admin']).isRequired,
+  userType: PropTypes.oneOf(['seller', 'customer', 'administrator']).isRequired,
   username: PropTypes.string.isRequired,
 };
 

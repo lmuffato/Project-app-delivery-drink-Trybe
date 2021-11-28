@@ -9,6 +9,8 @@ import { setToLocalStorageUser } from '../services/localStorage';
 
 import { createNewUser, doLogin } from '../services/endpointsAPI';
 
+import '../Styles/Register.css';
+
 const testId = 'common_register__element-invalid_register';
 const messageError = 'Nome e/ou email já cadastrado';
 
@@ -55,38 +57,41 @@ export default function Register() {
   }, [name, email, password]);
 
   return (
-    <main>
+    <main className="main-container">
       <h1>Cadastro</h1>
-      <form>
-        <label htmlFor="user-name">
+      <form className="form-container">
+        <label className="labels" htmlFor="user-name">
           Nome
           <input
             type="text"
             id="user-name"
-            placeholder="Seu nome"
+            placeholder="Seu nome completo"
+            className="inputs"
             value={ name }
             onChange={ (e) => handleChange(e.target) }
             data-testid="common_register__input-name"
           />
         </label>
-        <label htmlFor="user-email">
+        <label className="labels" htmlFor="user-email">
           Email
           <input
             type="email"
             id="user-email"
             placeholder="seu-email@site.com.br"
+            className="inputs"
             value={ email }
             onChange={ (e) => handleChange(e.target) }
             data-testid="common_register__input-email"
 
           />
         </label>
-        <label htmlFor="user-password">
+        <label className="labels" htmlFor="user-password">
           Senha
           <input
             type="password"
             id="user-password"
             placeholder="**********"
+            className="inputs"
             value={ password }
             onChange={ (e) => handleChange(e.target) }
             data-testid="common_register__input-password"
@@ -95,6 +100,7 @@ export default function Register() {
         <button
           type="button"
           id="register-button"
+          className={ disableRegisterButton ? 'true-button' : 'false-button' }
           disabled={ !disableRegisterButton }
           data-testid="common_register__button-register"
           onClick={ clickCadastrarButton }

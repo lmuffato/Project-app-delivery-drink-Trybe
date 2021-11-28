@@ -33,8 +33,8 @@ export default function StatusBar() {
   };
 
   useEffect(() => {
-    socket.emit('updateCustomerReciveOrder',  {
-      messagem: "ENTREGUE"
+    socket.emit('updateCustomerReciveOrder', {
+      messagem: 'ENTREGUE',
     });
   }, []);
 

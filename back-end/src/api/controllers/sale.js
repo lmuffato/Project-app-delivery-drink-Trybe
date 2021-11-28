@@ -13,7 +13,10 @@ const findOne = rescue((req, res) => Sale.findOne(req.params)
 const update = rescue((req, res) => Sale.update(req.body, req.params)
   .then((data) => res.status(200).json(data)));
 
+const updateStatus = rescue((req, res) => Sale.updateStatus(req.body, req.params)
+  .then((data) => res.status(200).json(data)));
+
 const destroy = rescue((req, res) => Sale.destroy(req.params)
   .then((data) => res.status(204).json(data)));
 
-module.exports = { create, findAll, findOne, update, destroy };
+module.exports = { create, findAll, findOne, update, updateStatus, destroy };

@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import api from '../../api';
 import { useAuth } from '../../contexts/auth';
+import Alert from '../../components/Alert';
 
 const validateEmail = (email) => /[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z0-9]+/.test(email);
 const MIN_PWD_LENGTH = 6;
@@ -19,7 +21,6 @@ const Form = styled.form`
 `;
 
 function Login() {
-  const [errorMessage, setErrorMessage] = useState(null);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { login, redirectUserByRole } = useAuth();
@@ -32,57 +33,56 @@ function Login() {
         login(data);
         redirectUserByRole(data);
       })
-      .catch(setErrorMessage);
+      .catch(({ message }) => toast.error(
+        ({ style }) => (
+          <Alert
+            message={ message }
+            style={ style }
+            testid="common_login__element-invalid-email"
+          />
+        ),
+      ));
   };
 
   const canSubmit = validateEmail(email) && password.length >= MIN_PWD_LENGTH;
 
   return (
-    <>
-      <Form onSubmit={ authUser }>
-        <Input
-          type="email "
-          label="Login"
-          name="email"
-          onChange={ ({ target: { value } }) => setEmail(value) }
-          placeholder="email@trybeer.com.br"
-          datatestid="common_login__input-email"
-        />
-        <Input
-          type="password"
-          onChange={ ({ target: { value } }) => setPassword(value) }
-          label="Senha"
-          name="password"
-          datatestid="common_login__input-password"
-          placeholder={ `${'****'}${'****'}${'***'}` }
-        />
+    <Form onSubmit={ authUser }>
+      <Input
+        type="email "
+        label="Login"
+        name="email"
+        onChange={ ({ target: { value } }) => setEmail(value) }
+        placeholder="email@trybeer.com.br"
+        datatestid="common_login__input-email"
+      />
+      <Input
+        type="password"
+        onChange={ ({ target: { value } }) => setPassword(value) }
+        label="Senha"
+        name="password"
+        datatestid="common_login__input-password"
+        placeholder={ `${'****'}${'****'}${'***'}` }
+      />
 
-        <Button
-          full
-          type="submit"
-          variant="primary"
-          datatestid="common_login__button-login"
-          disabled={ !canSubmit }
-        >
-          LOGIN
-        </Button>
-        <Button
-          full
-          variant="tertiary"
-          datatestid="common_login__button-register"
-          onClick={ () => navigator('/register') }
-        >
-          Ainda não tenho conta
-        </Button>
-      </Form>
-
-      {errorMessage
-      && (
-        <p data-testid="common_login__element-invalid-email">
-          {errorMessage.message}
-        </p>
-      )}
-    </>
+      <Button
+        full
+        type="submit"
+        variant="primary"
+        datatestid="common_login__button-login"
+        disabled={ !canSubmit }
+      >
+        LOGIN
+      </Button>
+      <Button
+        full
+        variant="tertiary"
+        datatestid="common_login__button-register"
+        onClick={ () => navigator('/register') }
+      >
+        Ainda não tenho conta
+      </Button>
+    </Form>
   );
 }
 

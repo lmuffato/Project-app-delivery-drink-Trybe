@@ -25,7 +25,7 @@ export const BaseButton = styled.button`
   padding: 10px;
   font-size: 15px;
   border-radius: 6px;
-  font-weight: 6100;
+  font-weight: 600;
   cursor: pointer;
   transition: filter 0.15s ease;
 

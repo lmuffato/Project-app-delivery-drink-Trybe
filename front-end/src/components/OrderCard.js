@@ -14,7 +14,7 @@ function SaleCard({ sale }) {
 
   return (
     <a
-      href={ `/customer/orders/${id}` }
+      href={ `/seller/orders/${id}` }
       data-testid={ `seller_orders__element-order-date-${id}` }
     >
       <button

@@ -26,14 +26,17 @@ function StatusCard({ initialStatus, id, testid }) {
         backgroundColor: colorStatus[status],
         width: '100%',
         height: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: '5px',
       } }
     >
       <Typography
-        sx={ { fontSize: 14 } }
         color="text.secondary"
         textAlign="center"
         data-testid={ testid }
-        variant="h4"
+        variant="h3"
       >
         {status}
       </Typography>

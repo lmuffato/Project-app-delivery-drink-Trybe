@@ -37,6 +37,7 @@ function CustomerOrders() {
         alignItems="center"
         justifyContent="flex-start"
         flexWrap
+        sx={ { padding: '30px', width: '100%' } }
         spacing={ 2 }
       >
         {

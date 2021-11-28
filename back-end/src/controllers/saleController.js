@@ -9,9 +9,9 @@ const createSale = async (req, res) => {
 };
 
 const getSaleById = async (req, res) => {
-  const { id } = req.user;
+  const { id, role } = req.user;
   
-  const { status, message, sales } = await saleService.getSale(id);
+  const { status, message, sales } = await saleService.getSale(id, role);
   if (!sales) return res.status(status).json({ message });
   return res.status(status).json(sales);
 };

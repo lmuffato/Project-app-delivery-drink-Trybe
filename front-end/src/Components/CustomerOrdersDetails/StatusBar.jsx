@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import io from 'socket.io-client';
+// import io from 'socket.io-client';
 import NewOrderContext from '../../context/NewOrderContext';
 import UserContext from '../../context/userContext';
 import { updateSaleStatus, getOrderById } from '../../services/endpointsAPI';
@@ -10,7 +10,7 @@ const testId39 = 'customer_order_details__element-order-details-label-order-date
 const testId40 = 'customer_order_details__element-order-details-label-delivery-status';
 const testId47 = 'customer_order_details__button-delivery-check';
 
-const socket = io('http://localhost:3002/');
+// const socket = io('http://localhost:3002/');
 
 export default function StatusBar() {
   const { orderSale, setOrderSale } = useContext(NewOrderContext);
@@ -32,16 +32,6 @@ export default function StatusBar() {
     setOrderSale(res.sale);
   };
 
-<<<<<<< HEAD
-  useEffect(() => {
-    socket.emit('updateCustomerReciveOrder', {
-      messagem: 'ENTREGUE',
-    });
-  }, []);
-
-  // A atualização dos dados exibidos na tela depende da alteração do estado local.
-=======
->>>>>>> 20d0184e22b3bc433d570148a772cfd14ab94047
   useEffect(() => {
     getOrderFromDataBase();
   }, [orderStatus]);

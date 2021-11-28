@@ -20,7 +20,7 @@ function ProductOrderStatus() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (data.length === 0) return <h1>Carregando...</h1>;
+  if (data.length === 0) return <h1>Sem pedidos ainda 👺</h1>;
 
   return (
     <OrdersContainer>

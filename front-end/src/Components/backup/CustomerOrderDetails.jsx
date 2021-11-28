@@ -1,7 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+// import io from 'socket.io-client';
+
+
+
+
 import moment from 'moment';
 
 export default function OrderDetailsHeader() {
+
   const dataTestid37 = 'customer_order_details__element-order-details-label-order-id';
   const dataTestid38 = 'customer_order_details__element-order-details-label-seller-name';
   const dataTestid39 = 'customer_order_details__element-order-details-label-order-date';
@@ -12,10 +18,24 @@ export default function OrderDetailsHeader() {
 
   const handleChangeStatus = () => {
     setChangeRole('ENTREGUE');
+
+    socket.emit('updateCustomerReciveOrder',  {
+      messagem: "ENTREGUE"
+    });
+  };
+
+  
+
+  const testa = () => {
+    console.log('entrou na testa')
+    socket.emit('updateCustomerReciveOrder',  {
+      messagem: "ENTREGUE"
+    });
   };
 
   return (
     <div className="container-details">
+      {console.log('sollll', socket)}
       <div data-testid={ dataTestid37 } className="pedido">
         <h2>PEDIDO</h2>
       </div>
@@ -44,3 +64,5 @@ export default function OrderDetailsHeader() {
 // const dataTestid43 = 'customer_order_details__element-order-table-quantity-';
 // const dataTestid44 = 'customer_order_details__element-order-table-sub-total-';
 // const dataTestid45 = 'customer_order_details__element-order-total-price-';
+
+

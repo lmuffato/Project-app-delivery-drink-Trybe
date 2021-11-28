@@ -24,11 +24,14 @@ const dataTestId63 = 'seller_order_details__element-order-table-sub-total-';
 const dataTestId64 = 'seller_order_details__element-order-total-price';
 
 export default function SellerOrdersDetails() {
+
   const { userData } = useContext(UserContext);
   const { id } = useParams();
   const [itens, setItens] = useState([]);
   const [sale, setSale] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [ prepare, setPrepare ] = useState(false);
+  const [enviar, setEnviar ] = useState(false);
   const loadingTag = <h3>Loading ...</h3>;
 
   useEffect(() => {
@@ -41,6 +44,26 @@ export default function SellerOrdersDetails() {
         setIsLoading(false);
       });
   }, []);
+
+  useEffect(() => {
+    setEnviar(true);
+    setPrepare(true);
+  }, [prepare]);
+
+  // useEffect(() => {
+  //   console.log(btnSaiu);
+  // }, [enviar]);
+
+  const clickPrepararPedido = () => {
+    console.log('clicar preparar')
+    setPrepare(true);
+  }
+
+  const clickSairEntrega = () =>{
+    console.log('clicar sair entrega')
+    setPrepare(true);
+  }
+
 
   const putComma = (value) => value.toString().replace('.', ',');
 
@@ -68,15 +91,22 @@ export default function SellerOrdersDetails() {
             { sale.status }
           </th>
           <th>
-            <button type="button" data-testid={ `${dataTestId57}` }>
+            <button 
+              type="button"
+              disabled={ !enviar }
+              data-testid={ `${dataTestId57}` }
+              onClick = { clickPrepararPedido }
+              >
               PREPARAR PEDIDO
             </button>
           </th>
           <th>
             <button
+              id="btnSaiu"
               type="button"
               data-testid={ `${dataTestId58}` }
-              disabled={ `${true}` }
+              disabled={ enviar }
+              onClick = { clickSairEntrega }
             >
               SAIU PARA ENTREGA
             </button>

@@ -14,11 +14,11 @@ const io = require('socket.io')(httpServer, {
   },
 });
 
+app.use(cors());
+
 const socketsClientSeller = require('../sockets/socketsClientSeller');
 
-socketsClientSeller.socketsClientSeller(io);
-
-app.use(cors());
+socketsClientSeller(io);
 
 app.use(bodyParser.json());
 

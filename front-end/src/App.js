@@ -5,12 +5,15 @@ import { RegisterProvider } from './contexts/Register';
 import Login from './pages/Login';
 import { LoginProvider } from './contexts/Login';
 import Products from './pages/Products';
-import Orders from './pages/Orders';
+import CustomerOrders from './pages/CustomerOrders';
 import { OrdersProvider } from './contexts/Orders';
 import { ProductsProvider } from './contexts/Products';
 import Checkout from './pages/Checkout';
 import Admin from './pages/Admin';
-import OrderDetails from './pages/OrderDetails';
+import CustomerOrderDetails from './pages/CustomerOrderDetails';
+import SellerOrders from './pages/SellerOrders';
+import SellerOrderDetails from './pages/SellerOrderDetails';
+import { SellerOrdersProvider } from './contexts/SellerOrders';
 
 function App() {
   return (
@@ -53,7 +56,7 @@ function App() {
         path="/customer/orders"
         element={
           <OrdersProvider>
-            <Orders />
+            <CustomerOrders />
           </OrdersProvider>
         }
       />
@@ -62,8 +65,26 @@ function App() {
         path="/customer/orders/:id"
         element={
           <OrdersProvider>
-            <OrderDetails />
+            <CustomerOrderDetails />
           </OrdersProvider>
+        }
+      />
+      <Route
+        exact
+        path="/seller/orders"
+        element={
+          <SellerOrdersProvider>
+            <SellerOrders />
+          </SellerOrdersProvider>
+        }
+      />
+      <Route
+        exact
+        path="/seller/orders/:id"
+        element={
+          <SellerOrdersProvider>
+            <SellerOrderDetails />
+          </SellerOrdersProvider>
         }
       />
     </Routes>

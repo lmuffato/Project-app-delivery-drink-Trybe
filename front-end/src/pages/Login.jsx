@@ -14,6 +14,23 @@ function Login() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user) {
+      let endpoint;
+      if (user.role === 'customer') {
+        endpoint = '/customer/products';
+      } else if (user.role === 'seller') {
+        endpoint = '/seller/orders';
+      } else if (user.role === 'administrator') {
+        endpoint = '/admin/manage';
+      }
+      navigate(endpoint);
+    } else {
+      navigate('/login');
+    }
+  }, []);
+
+  useEffect(() => {
     setValues({
       ...values,
       buttonStatus:
@@ -46,11 +63,11 @@ function Login() {
         id,
       });
       if (role === 'administrator') {
-        navigate('/admin/manage', { replace: true });
+        navigate('/admin/manage');
       } else if (role === 'seller') {
-        navigate('/seller/products', { replace: true });
+        navigate('/seller/orders');
       } else {
-        navigate('/customer/products', { replace: true });
+        navigate('/customer/products');
       }
     } catch ({ response }) {
       // Source: https://stackoverflow.com/questions/45017822/catching-error-body-using-axios-post

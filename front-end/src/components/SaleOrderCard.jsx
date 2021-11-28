@@ -4,9 +4,9 @@ import { useNavigate } from 'react-router';
 import moment from 'moment';
 import './orderCard.css';
 
-const OrderCard = ({ order, testIds }) => {
+const SaleOrderCard = ({ order /* , testIds  */ }) => {
   const { id, status, saleDate, totalPrice } = order;
-  const { orderId, orderStatus, orderDate, orderPrice } = testIds;
+  // const { orderId, orderStatus, orderDate, orderPrice } = testIds;
   const { role } = JSON.parse(localStorage.getItem('user'));
   const navigate = useNavigate();
 
@@ -18,29 +18,28 @@ const OrderCard = ({ order, testIds }) => {
       className="order-card"
       onClick={ navigateHandler }
     >
-      <div>
-        <p>Pedido</p>
-        <h4 data-testid={ orderId + id }>{ id }</h4>
+      <div data-testid={ `seller_orders__element-order-id-${id}` }>
+        Pedido:
+        {' '}
+        { id }
       </div>
-      <div data-testid={ orderStatus + id }>{ status }</div>
-      <div>
-        <span
-          data-testid={ orderDate + id }
-        >
-          { moment(saleDate).format('DD/MM/YYYY') }
-        </span>
-        <span data-testid={ orderPrice + id }>
-          { Number(totalPrice).toLocaleString('pt-BR', {
-            currency: 'BRL',
-            minimumFractionDigits: 2,
-          })}
-        </span>
+      <div data-testid={ `seller_orders__element-delivery-status-${id}` }>
+        { status }
       </div>
+      <span data-testid={ `seller_orders__element-order-date-${id}` }>
+        { moment(saleDate).format('DD/MM/YYYY') }
+      </span>
+      <span data-testid={ `seller_orders__element-card-price-${id}` }>
+        { Number(totalPrice).toLocaleString('pt-BR', {
+          currency: 'BRL',
+          minimumFractionDigits: 2,
+        }) }
+      </span>
     </button>
   );
 };
 
-OrderCard.propTypes = {
+SaleOrderCard.propTypes = {
   order: PropTypes.shape({
     id: PropTypes.number.isRequired,
     status: PropTypes.string.isRequired,
@@ -63,4 +62,4 @@ OrderCard.propTypes = {
   }).isRequired,
 };
 
-export default OrderCard;
+export default SaleOrderCard;

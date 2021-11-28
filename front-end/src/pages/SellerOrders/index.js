@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import api from '../../api';
 import ProductOrderCard from '../../components/ProductOrderCard';
 import { useAuth } from '../../contexts/auth';
+import useSocket from '../../hooks/useSocket';
 
 const OrdersContainer = styled.div`
   display: grid;
@@ -15,8 +16,14 @@ function SellerOrders() {
   const [data, setData] = useState([]);
   const { user, logoutNotAuthorized } = useAuth();
 
-  useEffect(() => {
+  function getAll() {
     api.sales.getAll(user.token).then(setData).catch(logoutNotAuthorized);
+  }
+
+  useSocket(getAll);
+
+  useEffect(() => {
+    getAll();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

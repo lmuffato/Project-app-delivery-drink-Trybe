@@ -6,6 +6,7 @@ import Table from '../../components/Table';
 import { useAuth } from '../../contexts/auth';
 import Button from '../../components/Button';
 import ProductOrderStatus from '../../components/ProductOrderStatus';
+import useSocket from '../../hooks/useSocket';
 
 const ShadowContainer = styled.div`
   box-shadow: 0 0 4px 0 ${({ theme }) => theme.shadow};
@@ -33,13 +34,9 @@ function CustomerDetails() {
       });
   };
 
-  const changeStatus = (status) => {
-    api.sales.changeStatus(id, status, user.token)
-      .then(getProduct).catch((x) => {
-        logoutNotAuthorized(x);
-        navigation('../');
-      });
-  };
+  const { setStatus } = useSocket(getProduct);
+
+  const changeStatus = (status) => setStatus(id, status);
 
   useEffect(() => {
     getProduct();

@@ -8,6 +8,7 @@ import Table from '../../components/Table';
 import { useAuth } from '../../contexts/auth';
 import Button from '../../components/Button';
 import ProductOrderStatus from '../../components/ProductOrderStatus';
+import useSocket from '../../hooks/useSocket';
 
 const ShadowContainer = styled.div`
   box-shadow: 0 0 4px 0 ${({ theme }) => theme.shadow};
@@ -27,13 +28,19 @@ function CustomerDetails() {
   const navigation = useNavigate();
   const [data, setData] = useState(null);
 
-  useEffect(() => {
+  const updateDetails = () => {
     api.sales.getById(id, user.token)
       .then(setData)
       .catch((x) => {
         logoutNotAuthorized(x);
         navigation('../');
       });
+  };
+
+  const { setStatus } = useSocket(updateDetails);
+
+  useEffect(() => {
+    updateDetails();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -80,6 +87,8 @@ function CustomerDetails() {
           <Button
             variant="primary"
             datatestid="customer_order_details__button-delivery-check"
+            disabled={ status !== 'Em Trânsito' }
+            onClick={ () => setStatus(data.id, 'Entregue') }
           >
             Marcar como entregue
           </Button>
@@ -94,10 +103,12 @@ function CustomerDetails() {
           disabled
           datatestid="customer_order_details__button-delivery-check"
         >
-          R$
-          <span data-testid="customer_order_details__element-order-total-price">
-            {totalPrice.toFixed(2).replace(/\./, ',')}
-          </span>
+          <>
+            R$
+            <span data-testid="customer_order_details__element-order-total-price">
+              {totalPrice.toFixed(2).replace(/\./, ',')}
+            </span>
+          </>
         </Button>
       </ShadowContainer>
     </>

@@ -6,8 +6,8 @@ export default createGlobalStyle`
   }
 
   body {
-    transform-origin: 50% 0%;
-    transform: scale(calc(1 / 1));
+    /* transform-origin: 50% 0%; */
+    /* transform: scale(calc(1 / 4)); */
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
       'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',

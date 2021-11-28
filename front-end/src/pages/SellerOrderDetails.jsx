@@ -8,7 +8,7 @@ function SellerOrderDetails() {
     userId: 'customer_products__element-navbar-user-full-name',
     orderId: 'seller_order_details__element-order-details-label-order-id',
     // sellerName: 'customer_order_details__element-order-details-label-seller-name',
-    orderDate: 'seller-order-details-label-order-date',
+    orderDate: 'seller_order_details__element-order-details-label-order-date',
     orderStatus: 'seller_order_details__element-order-details-label-delivery-status',
     buttonPreparing: 'seller_order_details__button-preparing-check',
     buttonDelivery: 'seller_order_details__button-dispatch-check',

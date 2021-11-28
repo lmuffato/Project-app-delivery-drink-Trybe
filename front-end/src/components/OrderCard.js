@@ -5,7 +5,7 @@ import '../styles/saleCard.css';
 function SaleCard({ sale }) {
   const { id, status } = sale;
   const saleDate = sale.sale_date;
-  const totalPrice = sale.total_price;
+  const totalPrice = sale.total_price.replace('.', ',');
   const deliveryAddress = sale.delivery_address;
 
   const allDate = saleDate.split('T');

@@ -5,6 +5,7 @@ import Products from './pages/Products';
 import Register from './pages/Register';
 import Orders from './pages/Orders';
 import CartProvider from './provider/Cart';
+import Checkout from './pages/Checkout';
 
 // rotas
 import paths from './routesPaths/paths';
@@ -22,6 +23,7 @@ function App() {
         <CartProvider>
           <Route path={ paths.routeProducts } exact component={ Products } />
         </CartProvider>
+        <Route path={ paths.routeMain } exact component={ Checkout } />
       </Switch>
     </BrowserRouter>
   );

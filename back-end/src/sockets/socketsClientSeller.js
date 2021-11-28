@@ -1,5 +1,5 @@
-module.exports = (io) => io.on('connection',  (socket) => {
-  console.log("entrou server socket");
+module.exports = (io) => io.on('connection', (socket) => {
+  console.log('entrou server socket');
   // socket.on('updateFromCustomer', () => {
   //   io.emit('updateSeller');
   // });
@@ -9,7 +9,6 @@ module.exports = (io) => io.on('connection',  (socket) => {
   // });
 
   socket.on('updateCustomerReciveOrder', (obj) => {
-    console.log( obj );
+    console.log(obj);
   });
-
 });

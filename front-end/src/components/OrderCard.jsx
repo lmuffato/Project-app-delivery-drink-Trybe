@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 import moment from 'moment';
 import './orderCard.css';
 
-const OrderCard = ({ order, testIds, index }) => {
+const OrderCard = ({ order, testIds }) => {
   const { id, status, saleDate, totalPrice } = order;
   const { orderId, orderStatus, orderDate, orderPrice } = testIds;
   const { role } = JSON.parse(localStorage.getItem('user'));
@@ -22,14 +22,14 @@ const OrderCard = ({ order, testIds, index }) => {
         <p>Pedido</p>
         <h4 data-testid={ orderId + id }>{ id }</h4>
       </div>
-      <h3 data-testid={ orderStatus + index }>{ status }</h3>
+      <h3 data-testid={ orderStatus + id }>{ status }</h3>
       <div>
         <h4
-          data-testid={ orderDate + index }
+          data-testid={ orderDate + id }
         >
           { moment(saleDate).format('DD/MM/YYYY') }
         </h4>
-        <h4 data-testid={ orderPrice + index }>
+        <h4 data-testid={ orderPrice + id }>
           { Number(totalPrice).toLocaleString('pt-BR', {
             currency: 'BRL',
             minimumFractionDigits: 2,

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
-import OrderCard from '../components/OrderCard';
 import NavBar from '../components/NavBar';
 import { SellerOrdersContext } from '../contexts/SellerOrders';
+import SaleOrderCard from '../components/SaleOrderCard';
 
 function SellerOrders() {
   const { orderList } = useContext(SellerOrdersContext);
@@ -26,7 +26,7 @@ function SellerOrders() {
     <>
       <NavBar ids={ testIds } names={ navegationNames } />
       { orderList.map((order, key) => (
-        <OrderCard key={ key } testIds={ testIds } order={ order } index={ key } />))}
+        <SaleOrderCard key={ key } testIds={ testIds } order={ order } index={ key } />))}
     </>
   );
 }

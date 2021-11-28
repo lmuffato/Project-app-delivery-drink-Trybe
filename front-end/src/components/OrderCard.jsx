@@ -22,19 +22,19 @@ const OrderCard = ({ order, testIds }) => {
         <p>Pedido</p>
         <h4 data-testid={ orderId + id }>{ id }</h4>
       </div>
-      <h3 data-testid={ orderStatus + id }>{ status }</h3>
+      <div data-testid={ orderStatus + id }>{ status }</div>
       <div>
-        <h4
+        <span
           data-testid={ orderDate + id }
         >
           { moment(saleDate).format('DD/MM/YYYY') }
-        </h4>
-        <h4 data-testid={ orderPrice + id }>
+        </span>
+        <span data-testid={ orderPrice + id }>
           { Number(totalPrice).toLocaleString('pt-BR', {
             currency: 'BRL',
             minimumFractionDigits: 2,
           })}
-        </h4>
+        </span>
       </div>
     </button>
   );

@@ -1,21 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { format } from 'date-fns';
-
+import formatDate from '../../utils/formatDate';
 import RequestCard from '../../components/RequestCard';
 import styles from './styles.module.css';
-
 import { dataTestisSeller } from '../../utils/dataTestIds';
 import Header from '../../components/Header';
+import useFetch from '../../hooks/useFetch';
+import { saleEndPointData } from '../../utils/endPointsData';
 
 export default function SellerPage() {
-  const [data, setData] = React.useState([]);
-
-  React.useEffect(() => {
-    fetch('http://localhost:3001/sale')
-      .then((response) => response.json())
-      .then((item) => setData(item));
-  }, []);
+  const { endpoint } = saleEndPointData;
+  const { data: sales, error, loading } = useFetch(endpoint);
 
   const userStorage = localStorage.getItem('user');
   let user = null;
@@ -24,11 +19,13 @@ export default function SellerPage() {
   }
 
   const filterSaleSeller = () => {
-    const salesSeller = data.filter((sale) => sale.sellerId === user.id);
+    const salesSeller = sales.filter((sale) => sale.sellerId === user.id);
     return salesSeller;
   };
 
-  const handleFormDate = (dateSales) => format(new Date(dateSales), 'dd/MM/yy');
+  if (loading) return <span>Carregando...</span>;
+
+  if (error) console.log(error);
 
   return (
     <main className={ styles.container }>
@@ -40,7 +37,7 @@ export default function SellerPage() {
               dataTestId={ dataTestisSeller }
               requestId={ sale.id }
               status={ sale.status }
-              date={ handleFormDate(sale.saleDate) }
+              date={ formatDate(sale.saleDate) }
               price={ sale.totalPrice }
               address={ sale.deliveryAddress }
               number={ sale.deliveryNumber }

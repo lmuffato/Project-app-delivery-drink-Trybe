@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-import { orderStatusChange } from '../utils/Data';
+import { orderStatusChange, getSaleByID } from '../utils/Data';
 import dateFormatation, { priceFormat } from '../utils/Format';
 // import Header from '../Components/Header';
 
@@ -44,7 +44,7 @@ export default function SellerOrderDetails() {
 
   useEffect(() => {
     (async () => {
-      const orderData = await fetch(`http://localhost:3001/orderDetails/${id}`);
+      const orderData = await getSaleByID(id);
       switch (orderData.status) {
       case 'Preparando':
         setInProgress(!inProgress);

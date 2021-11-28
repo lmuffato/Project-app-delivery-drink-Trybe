@@ -2,9 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { BaseButton } from '../styles/baseComponents';
 
-function Button({ children, type, onClick, datatestid, variant, full, disabled }) {
+function Button({ children, type, onClick,
+  datatestid, variant, full, disabled, className }) {
   return (
     <BaseButton
+      className={ `${className}` }
       type={ type }
       onClick={ onClick }
       data-testid={ datatestid }
@@ -25,9 +27,11 @@ Button.propTypes = {
   onClick: PropTypes.func,
   type: PropTypes.string,
   disabled: PropTypes.bool,
+  className: PropTypes.string,
 };
 
 Button.defaultProps = {
+  className: '',
   variant: 'primary',
   type: 'button',
   disabled: false,

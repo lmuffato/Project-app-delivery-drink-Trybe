@@ -31,8 +31,18 @@ const sale = Joi.object({
   deliveryAddress: Joi.string().required(),
   deliveryNumber: Joi.string().required(),
   saleDate: Joi.date(),
-  status: Joi.string(),
   cart: Joi.array().required(),
 });
 
-module.exports = { login, register, user, product, sale };
+const saleStatus = (role) => {
+  const states = {
+    administrator: ['Em Trânsito', 'Preparando', 'Entregue', 'Pendente'],
+    seller: ['Em Trânsito', 'Preparando'],
+    customer: ['Entregue'],
+  };
+  return Joi.object({
+    status: Joi.string().valid(...states[role]).required(),
+  });
+};
+
+module.exports = { login, register, user, product, sale, saleStatus };

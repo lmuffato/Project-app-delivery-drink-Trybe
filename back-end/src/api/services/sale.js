@@ -10,7 +10,7 @@ const err = (code, message) => ({ code, message });
 const saleNotFound = '"sale" not found';
 
 const create = async ({ cart, ...sale }) => {
-  const data = await Sale.create(sale);
+  const data = await Sale.create({ ...sale, status: 'Pendente' });
   
   cart.forEach(async ({ productId, quantity }) =>
     SalesProduct.create({ saleId: data.id, productId, quantity }));
@@ -40,6 +40,13 @@ const update = async (sale, { id }) => {
   return data;
 };
 
+const updateStatus = async ({ status }, { id }) => {
+  const data = await Sale.update({ status }, { where: { id } });
+  if (!data) throw err('notFound', saleNotFound);
+
+  return data;
+};
+
 const destroy = async ({ id }) => {
   const data = await Sale.destroy({ where: { id } });
 
@@ -48,4 +55,4 @@ const destroy = async ({ id }) => {
   return data;
 };
 
-module.exports = { create, findAll, findOne, update, destroy };
+module.exports = { create, findAll, findOne, update, updateStatus, destroy };

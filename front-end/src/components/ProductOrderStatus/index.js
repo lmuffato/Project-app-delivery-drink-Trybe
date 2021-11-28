@@ -17,6 +17,7 @@ const StatusContainer = styled.div`
   background-color: ${({ theme, type }) => {
     if (type === 'pendente') return theme.pending;
     if (type === 'preparando') return theme.preparing;
+    if (type === 'em trânsito') return theme.transit;
     if (type === 'entregue') return theme.delivered;
   }};
 `;
@@ -24,6 +25,7 @@ const StatusContainer = styled.div`
 const statuses = {
   pendente: 'Pendente',
   preparando: 'Preparando',
+  'em trânsito': 'Em Trânsito',
   entregue: 'Entregue',
 };
 

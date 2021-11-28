@@ -10,6 +10,7 @@ const theme = {
     'light-dark': 'hsl(163, 20%, 93%)',
     delivered: 'hsl(165, 67%, 55%)',
     preparing: 'hsl(90, 67%, 55%)',
+    transit: 'hsl(40, 67%, 55%)',
     pending: 'hsl(54, 67%, 55%)',
     danger: 'red',
     warn: 'yellow',

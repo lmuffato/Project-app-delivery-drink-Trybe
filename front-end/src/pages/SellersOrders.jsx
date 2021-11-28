@@ -20,27 +20,46 @@ export default function SellersOrders() {
   const [orders, setOrders] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const loadingTag = <h3>Loading ...</h3>;
+  const numberTen = 10;
+
+  const convertDateFormat = (date) => {
+    const numberEight = 8;
+    const numberFive = 5;
+    const numberFour = 4;
+    const day = date.substr(numberEight, 2);
+    const month = date.substr(numberFive, 2);
+    const year = date.substr(0, numberFour);
+    return `${day}/${month}/${year}`;
+  };
 
   const renderTags = (sale, index) => (
-    <div key={ index } className="unit-card-container">
+    <div key={ index }>
       <Link to={ `/seller/orders/${sale.id} ` } className="link">
-        <div className="card">
-          <div data-testid={ `${dataTestid48}--${sale.id}` } className="">
-            Pedido
-            { sale.id }
+        <div className="unit-card-container">
+          <div data-testid={ `${dataTestid48}--${sale.id}` } className="order-number">
+            <div className="pedido">Pedido</div>
+            <div className="pedido">
+              { sale.id < numberTen ? `000${sale.id}` : `00${sale.id}` }
+            </div>
           </div>
-          <div data-testid={ `${dataTestid49}--${sale.id}` } className="">
-            { sale.status }
+          <div data-testid={ `${dataTestid49}--${sale.id}` } className="order-status">
+            <div className="status-order">
+              { sale.status }
+            </div>
           </div>
-          <div data-testid={ `${dataTestid50}--${sale.id}` } className="">
-            { sale.saleDate }
+          <div>
+            <div data-testid={ `${dataTestid50}--${sale.id}` } className="order-date">
+              { convertDateFormat(sale.saleDate) }
+            </div>
+            <div data-testid={ `${dataTestid51}--${sale.id}` } className="order-total">
+              R$
+              { sale.totalPrice }
+            </div>
           </div>
-          <div data-testid={ `${dataTestid51}--${sale.id}` } className="">
-            R$
-            { sale.totalPrice }
-          </div>
-          <div data-testid={ `${dataTestid52}--${sale.id}` } className="">
-            { `${sale.deliveryAddress}, ${sale.deliveryNumber}` }
+          <div>
+            <div data-testid={ `${dataTestid52}--${sale.id}` } className="order-address">
+              { `${sale.deliveryAddress}, ${sale.deliveryNumber}` }
+            </div>
           </div>
         </div>
       </Link>
@@ -60,7 +79,7 @@ export default function SellersOrders() {
   return (
     <div className="container">
       <Navbar />
-      <section className="card-container">
+      <section className="cards-container">
         {
           isLoading
             ? loadingTag

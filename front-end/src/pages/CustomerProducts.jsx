@@ -1,14 +1,12 @@
-/* eslint-disable react/jsx-one-expression-per-line */
 import React, { useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import CardProduct from '../Components/CardProduct';
 import Navbar from '../Components/NavBar';
 import NewOrderContext from '../context/NewOrderContext';
-import '../Styles/CustomerProducts.css';
 import { getProducts, checkUserToken } from '../services/endpointsAPI';
 import { getItemFromLocalStorage } from '../services/localStorage';
+import '../Styles/CustomerProducts.css';
 
-// checkUserToken
 export default function CustomerProducts() {
   const history = useHistory();
   const { itensList } = useContext(NewOrderContext);
@@ -22,8 +20,6 @@ export default function CustomerProducts() {
       const { token } = await getItemFromLocalStorage('user');
       await checkUserToken(token);
     } catch (e) {
-      // console.log('catch da valid token', e.message);
-      // localStorage.clear();
       history.push('/login');
     }
   };
@@ -40,7 +36,6 @@ export default function CustomerProducts() {
       soma += element;
     });
     if (totalPricePerItem.length)setTotalPriceAllProducts(roundPrice(soma));
-    // console.log('tttt soma', soma);
   }, [itensList]);
 
   useEffect(() => {
@@ -56,17 +51,16 @@ export default function CustomerProducts() {
   }, [validToken]);
 
   const clickLoginButton = () => {
-    // console.log('checkoutaaaaaaaaaaaaa');
     history.push('/customer/checkout');
   };
 
   return (
-    <div className="mainCustomerProducts">
+    <div className="container">
       <Navbar />
       <button
         type="button"
         data-testid="customer_products__button-cart"
-        className="buttonVercarrinho"
+        className=""
         disabled={ totalPriceAllProducts === 0 }
         onClick={ clickLoginButton }
       >
@@ -76,24 +70,23 @@ export default function CustomerProducts() {
           {totalPriceAllProducts.toFixed(2).toString().replace('.', ',')}
         </span>
       </button>
-      <main>
+      <main className="container">
         { isLoading ? <h3>Carregando...</h3>
           : (
-            <div className="bodyCustomerProducts">
+            <div className="cards-container">
               {
                 listProducts
-                  .map((product) => {
-                    const { id, name, price, urlImage } = product;
-                    return (<CardProduct
-                      key={ id }
-                      id={ id }
-                      drink={ name }
-                      cost={ price }
-                      thumb={ urlImage }
+                  .map((product) => (
+                    <CardProduct
+                      key={ product.id }
+                      id={ product.id }
+                      drink={ product.name }
+                      cost={ product.price }
+                      thumb={ product.urlImage }
                       changeSomeStatus={ changeSomeStatus }
                       setChangeSomeStatus={ setChangeSomeStatus }
-                    />);
-                  })
+                    />
+                  ))
               }
             </div>
           ) }
@@ -101,4 +94,3 @@ export default function CustomerProducts() {
     </div>
   );
 }
-// <CardProduct dataTestIdError={ testId } message={ messageError }/>

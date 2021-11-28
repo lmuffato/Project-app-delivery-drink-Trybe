@@ -65,14 +65,14 @@ export default function CardProduct({ id,
   }
 
   return (
-    <div key={ id } className="cardProduct">
-      <div>
-        <span
+    <div key={ id } className="card-product-container">
+      <div className="card-upside">
+        <div
           data-testid={ `customer_products__element-card-price-${id}` }
-          className="unitPrice"
+          className="unit-price"
         >
-          {cost.toString().replace('.', ',')}
-        </span>
+          { `R$ ${cost.toString().replace('.', ',')}` }
+        </div>
         <img
           className="imageDrinkCard"
           alt="drink"
@@ -80,25 +80,24 @@ export default function CardProduct({ id,
           src={ thumb }
         />
       </div>
-      <div className="footerCardDrink">
+      <div className="footer-card">
         <h5 data-testid={ `customer_products__element-card-title-${id}` }>{drink}</h5>
-        <div className="addQuantities">
+        <div className="quantities">
           <button
             data-testid={
               `customer_products__button-card-rm-item-${id}`
             }
             onClick={ decrement }
             type="button"
-            className="elementsQuantities"
+            className="add-rem-buttons"
           >
             -
-
           </button>
           <input
             data-testid={ `customer_products__input-card-quantity-${id}` }
             value={ Number(counter) }
             onChange={ handleChange }
-            className="elementsQuantities quantity"
+            className="add-rem-buttons label-quantity"
           />
           <button
             data-testid={
@@ -106,19 +105,10 @@ export default function CardProduct({ id,
             }
             onClick={ increment }
             type="button"
-            className="elementsQuantities"
+            className="add-rem-buttons"
           >
-            {' '}
             +
-            {' '}
-
           </button>
-          <span
-            className="elementsQuantities"
-          >
-            { price.toString().replace('.', ',') }
-
-          </span>
         </div>
       </div>
     </div>

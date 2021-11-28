@@ -32,6 +32,7 @@ export default function StatusBar() {
     setOrderSale(res.sale);
   };
 
+<<<<<<< HEAD
   useEffect(() => {
     socket.emit('updateCustomerReciveOrder', {
       messagem: 'ENTREGUE',
@@ -39,24 +40,23 @@ export default function StatusBar() {
   }, []);
 
   // A atualização dos dados exibidos na tela depende da alteração do estado local.
+=======
+>>>>>>> 20d0184e22b3bc433d570148a772cfd14ab94047
   useEffect(() => {
     getOrderFromDataBase();
   }, [orderStatus]);
 
-  // Acrescenta zeros a direita do número, como 50 => 0050.
   const addZerosOnRightSide = (num, zeros) => {
     const newNum = String(num).padStart(zeros, '0');
     return newNum;
   };
 
-  // Converte a data do banco de dados no formato brasileiro dd/mm/yy.
   const convertDateToBrasilShape = (data) => {
     const now = new Date(data);
     const str = `${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()}`;
     return str;
   };
 
-  // Rendereiza o número da ordem na tela.
   const renderOrderNumber = () => {
     const zeros = 4;
     if (Object.keys(orderSale).length !== 0 || orderSale !== undefined) {
@@ -67,7 +67,6 @@ export default function StatusBar() {
     }
   };
 
-  // Rendereiza o número o nome do vendedor na tela.
   const renderSelerName = () => {
     if (Object.keys(orderSale).length !== 0 || orderSale !== undefined) {
       return (
@@ -77,7 +76,6 @@ export default function StatusBar() {
     }
   };
 
-  // Rendereiza a data do pedido na tela.
   const renderOrderDate = () => {
     if (Object.keys(orderSale).length !== 0 || orderSale !== undefined) {
       return (
@@ -87,10 +85,8 @@ export default function StatusBar() {
     }
   };
 
-  // Rendereiza o status do pedido na tela.
   const renderStatusSale = () => {
     if (Object.keys(orderSale).length !== 0 || orderSale.status !== undefined) {
-      // console.log(orderSale.status);
       return (
         <span data-testid={ `${testId40}` }>
           { `${orderSale.status}` }
@@ -98,7 +94,6 @@ export default function StatusBar() {
     }
   };
 
-  // Rendereiza o botão para atualizar o estado do pedido.
   const renderButtonToUpdateStatus = () => {
     if (Object.keys(orderSale).length !== 0 || orderSale !== undefined) {
       return (

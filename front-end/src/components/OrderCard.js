@@ -5,6 +5,8 @@ import '../styles/saleCard.css';
 function SaleCard({ sale }) {
   const { id, status } = sale;
   const saleDate = sale.sale_date;
+  const totalPrice = sale.total_price;
+  const deliveryAddress = sale.delivery_address;
 
   const allDate = saleDate.split('T');
   const thisDate = allDate[0].split('-');
@@ -13,7 +15,7 @@ function SaleCard({ sale }) {
   return (
     <a
       href={ `/customer/orders/${id}` }
-      data-testid={ `customer_products__element-order-date-${id}` }
+      data-testid={ `seller_orders__element-order-date-${id}` }
     >
       <button
         type="button"
@@ -21,22 +23,37 @@ function SaleCard({ sale }) {
         className="saleCard"
       >
         <span
-          data-testid={ `customer_orders__element-order-id-${id}` }
+          data-testid={ `seller_orders__element-order-id-${id}` }
         >
           { `Pedido ${id}` }
         </span>
 
         <p
-          data-testid={ `customer_orders__element-delivery-status-${id}` }
+          data-testid={ `seller_orders__element-delivery-status-${id}` }
         >
           { status }
         </p>
 
         <span
-          data-testid={ `customer_orders__element-order-date-${id}` }
+          data-testid={ `seller_orders__element-order-date-${id}` }
         >
           { newDate }
         </span>
+
+        <p>
+          R$
+          <span
+            data-testid={ `seller_orders__element-card-price-${id}` }
+          >
+            {totalPrice}
+          </span>
+        </p>
+
+        <p
+          data-testid={ `seller_orders__element-card-address-${id}` }
+        >
+          { deliveryAddress }
+        </p>
       </button>
     </a>
   );
@@ -47,6 +64,8 @@ SaleCard.propTypes = {
     id: PropTypes.number,
     status: PropTypes.string,
     sale_date: PropTypes.string,
+    total_price: PropTypes.string,
+    delivery_address: PropTypes.string,
   }).isRequired,
 };
 

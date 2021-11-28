@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import NavBar from '../components/NavBar';
-// import SaleCard from '../components/SaleCard';
+import OrderCard from '../components/OrderCard';
 import * as request from '../services/requests';
 
 function Orders() {
   const [sales, setSales] = useState([]);
   const dataUser = JSON.parse(localStorage.getItem('user'));
-
-  console.log('seller orders:', sales);
-  console.log(dataUser);
 
   useEffect(() => {
     const getSale = async () => {
@@ -24,13 +21,11 @@ function Orders() {
         <NavBar dataUser={ dataUser } />
       </nav>
 
-      <h1>SELLER ORDERS</h1>
-
-      {/* <div>
+      <div>
         {Object.values(sales).map((sale) => (
-          <SaleCard key={ sale.id } sale={ sale } />
+          <OrderCard key={ sale.id } sale={ sale } />
         ))}
-      </div> */}
+      </div>
 
     </section>
   );

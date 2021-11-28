@@ -73,10 +73,10 @@ function UserItemInList(props) {
           width: '10%',
           textAlign: 'center',
         } }
-        data-testid={ `${testIdsPrefix}element-user-table-remove-${id}` }
+        data-testid={ `${testIdsPrefix}element-user-table-remove--${id}` }
         onClick={ () => removeUser(id) }
       >
-        Excluir
+        Remover
       </Button>
     </Box>
   );

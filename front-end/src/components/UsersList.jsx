@@ -21,6 +21,7 @@ function UsersList() {
       setUsers(res.data);
     }
     getUsers();
+    // eslint-disable-next-line
   }, []);
 
   const handleRemoveUser = async (id) => {

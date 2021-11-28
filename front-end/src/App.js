@@ -20,10 +20,10 @@ function App() {
         <Route path={ paths.routeLogin } exact component={ Login } />
         <Route path={ paths.routeRegister } exact component={ Register } />
         <Route path={ paths.routeOrders } exact component={ Orders } />
+        <Route path={ paths.routeCheckout } exact component={ Checkout } />
         <CartProvider>
           <Route path={ paths.routeProducts } exact component={ Products } />
         </CartProvider>
-        <Route path={ paths.routeMain } exact component={ Checkout } />
       </Switch>
     </BrowserRouter>
   );

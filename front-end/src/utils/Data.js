@@ -52,4 +52,24 @@ export const statusChange = async (id) => {
   });
 };
 
+export const orderStatusChange = async ({ token, id, newStatus }) => {
+  try {
+    const rawResponse = await fetch(`http://localhost:3001/sales/${id}`,
+      {
+        method: 'PUT',
+        headers: {
+          Accept: APPLICATION_JSON,
+          Authorization: token,
+          'Content-Type': APPLICATION_JSON,
+        },
+        body: JSON.stringify({ newStatus }),
+      });
+    const { result: status } = await rawResponse.json();
+    return status;
+  } catch (error) {
+    console.error(error.message);
+    return null;
+  }
+};
+
 export default fetchAllProducts;

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-import { statusChange } from '../utils/Data';
+import { orderStatusChange } from '../utils/Data';
 import dateFormatation, { priceFormat } from '../utils/Format';
 // import Header from '../Components/Header';
 
@@ -34,11 +34,11 @@ export default function SellerOrderDetails() {
       newStatus = 'Preparando';
       setInProgress(!inProgress);
       setOrderReady(!orderReady);
-      statusChange({ token, id, newStatus });
+      orderStatusChange({ token, id, newStatus });
     } else {
       newStatus = 'Em Trânsito';
       setOrderReady(!orderReady);
-      statusChange({ token, id, newStatus });
+      orderStatusChange({ token, id, newStatus });
     }
   };
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router';
 
 export default function SaleCard(props) {
   const { sale } = props;
@@ -7,7 +8,8 @@ export default function SaleCard(props) {
   const { id, status } = sale;
   const newOrderId = `000${id}`.slice(toSlice);
   const newPrice = sale.total_price.split('.').join(',');
-  console.log(sale);
+  // console.log(sale);
+  const history = useHistory();
   const showdate = (date) => {
     console.log(date);
     const dateArr = date.split('-');
@@ -18,14 +20,19 @@ export default function SaleCard(props) {
   };
   return (
     <div className="p-2 m-5 bg-gray-300">
-      <div className="h-20 bg-white">
-        <p>Pedido</p>
-        <p
-          data-testid={ `seller_orders__element-order-${id}` }
-        >
-          { newOrderId }
-        </p>
-      </div>
+      <button
+        type="button"
+        onClick={ () => history.push(`/seller/orders/${id}`) }
+      >
+        <div className="h-20 bg-white">
+          <p>Pedido</p>
+          <p
+            data-testid={ `seller_orders__element-order-${id}` }
+          >
+            { newOrderId }
+          </p>
+        </div>
+      </button>
       <div className="h-16">
         <p
           data-testid={ `seller_orders__element-delivery-status-${id}` }

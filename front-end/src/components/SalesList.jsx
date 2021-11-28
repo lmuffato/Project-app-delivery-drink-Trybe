@@ -1,14 +1,14 @@
 import axios from 'axios';
 import React, { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { useHistory } from 'react-router';
+// import { useHistory } from 'react-router';
 import SaleCard from './SaleCard';
 
 export default function SalesList(props) {
   const { token } = props;
   const url = 'http://localhost:3001';
   const [sales, setSales] = useState([]);
-  const history = useHistory();
+  // const history = useHistory();
 
   const getSales = useCallback(
     async () => {
@@ -34,13 +34,7 @@ export default function SalesList(props) {
     <div className="w-full flex flex-wrap p-20">
       {
         sales.map((sale, index) => (
-          <button
-            key={ index }
-            type="button"
-            onClick={ () => history.push(`/seller/orders/${sale.id}`) }
-          >
-            <SaleCard sale={ sale } key={ index } />
-          </button>
+          <SaleCard sale={ sale } key={ index } />
         ))
       }
     </div>

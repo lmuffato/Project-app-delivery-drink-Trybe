@@ -1,10 +1,14 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
+import axios from 'axios';
 import { SellerOrdersContext } from '../contexts/SellerOrders';
 
 function SellerOrderDetailsTable({ testIds }) {
+  const [preparing, setPreparing] = useState(false);
+  const [statusOrder, setStatusOrder] = useState('Pendente');
+  const [enableDelivery, setEnableDelivery] = useState(true);
   const {
     orderId,
     sellerName,
@@ -23,14 +27,30 @@ function SellerOrderDetailsTable({ testIds }) {
   const { id } = params;
   const { orderList } = useContext(SellerOrdersContext);
   let order;
+  // let statusOrder = 'Pendente';
 
   console.log(orderList);
   if (orderList) {
     order = orderList.find(
       (el) => el.id.toString() === id,
     );
+    // statusOrder = order.status;
     console.log(order);
   }
+
+  useEffect(() => {
+    if (order) {
+      setStatusOrder(order.status);
+    }
+  }, [order]);
+
+  useEffect(() => {
+    if (statusOrder === 'Pendente') {
+      setPreparing(false);
+    } else {
+      setPreparing(true);
+    }
+  }, [statusOrder]);
 
   const fillTable = (() => order.products && order.products.map(
     ({ id: productId, name, salesProducts: { quantity }, price }, key) => (
@@ -61,18 +81,47 @@ function SellerOrderDetailsTable({ testIds }) {
   )
   );
 
+  const updateStatus = async () => {
+    const { token } = JSON.parse(localStorage.getItem('user'));
+    console.log('🚀 ~ file: SellerOrderDetailsTable.jsx ~ line 79 ~ updateStatus ~ token',
+      token);
+    // statusOrder = 'Preparando';
+    setStatusOrder('Preparando');
+    setEnableDelivery(false);
+    try {
+      await axios.put(`http://localhost:3001/orders/${id}`, {
+        headers: {
+          Authorization: token,
+        },
+      }, {
+        status: 'Preparando',
+      });
+      // const { data } = await axios.get('http://localhost:3001/orders/customerId', {
+      //   headers: {
+      //     Authorization: token,
+      //   },
+      // });
+      // console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   if (!orderList) {
     return 'Loading';
   }
+
+  console.log(statusOrder);
 
   const renderButtonPreparing = () => (
     <th>
       <button
         type="button"
         data-testid={ buttonPreparing }
-        disabled
+        onClick={ updateStatus }
+        disabled={ preparing }
       >
-        Marcar como entregue
+        Preparar pedido
       </button>
     </th>
   );
@@ -82,13 +131,13 @@ function SellerOrderDetailsTable({ testIds }) {
       <th data-testid={ orderId }>{ `Pedido: ${id}` }</th>
       { sellerName && <th data-testid={ sellerName }>{ order.seller.name }</th> }
       <th data-testid={ orderDate }>{ moment(order.saleDate).format('DD/MM/YYYY') }</th>
-      <th data-testid={ orderStatus }>{ order.status }</th>
+      <th data-testid={ orderStatus }>{ statusOrder }</th>
       { buttonPreparing && renderButtonPreparing() }
       <th>
         <button
           type="button"
           data-testid={ buttonDelivery }
-          disabled
+          disabled={ enableDelivery }
         >
           Marcar como entregue
         </button>

@@ -6,6 +6,7 @@ import ErrorLogin from '../Components/ErrorLogin';
 import UserContext from '../context/userContext';
 import NewOrderContext from '../context/NewOrderContext';
 import validateEmail from '../validations/validateEmail';
+import logoGif from '../images/logo/soReis.gif';
 import '../Styles/Register.css';
 
 import {
@@ -140,6 +141,9 @@ export default function Login() {
 
   return (
     <main className="main-container">
+      <div className="logo-container">
+        <img className="logo-img" src={ logoGif } alt="logo" />
+      </div>
       { renderForm() }
       <div hidden={ errorMessage }>
         <ErrorLogin dataTestIdError={ testId } message={ messageError } />

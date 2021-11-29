@@ -24,7 +24,7 @@ h1 {
 }
 
 .labels {
-  margin-top: 0.6rem;
+  margin-bottom: 0.6rem;
 }
 
 .inputs {
@@ -65,4 +65,19 @@ h1 {
   height: 2rem;
   margin-top: 1.3rem;
   width: 11rem;
+}
+
+.logo-container {
+  align-items: center;
+  display: flex;
+  height: 20rem;
+  justify-content: center;
+  margin: 0.5rem;
+  margin-right: 2rem;
+  width: 20rem;
+}
+
+.logo-img {
+  border-radius: 5rem;
+  height: 18rem;
 }

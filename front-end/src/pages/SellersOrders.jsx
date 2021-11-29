@@ -52,7 +52,10 @@ export default function SellersOrders() {
           </div>
           <div className="rigth-side">
             <div className="upper-side">
-              <div data-testid={ `${dataTestid49}--${sale.id}` } className="status-container">
+              <div
+                data-testid={ `${dataTestid49}--${sale.id}` }
+                className="status-container"
+              >
                 <div className={ selectStatusCss(sale.status) }>
                   { sale.status.toUpperCase() }
                 </div>
@@ -66,7 +69,7 @@ export default function SellersOrders() {
                   { ' ' }
                   { putComma(sale.totalPrice) }
                 </div>
-              </div>     
+              </div>
             </div>
             <div className="lower-side">
               <div className="address-container">
@@ -89,7 +92,7 @@ export default function SellersOrders() {
         setOrders(resp);
         setIsLoading(false);
       });
-  }, []);
+  }, [userData]);
 
   return (
     <div className="container">

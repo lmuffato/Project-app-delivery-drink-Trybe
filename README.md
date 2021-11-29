@@ -65,6 +65,7 @@ Qualquer registro vindo pela rota comum daria como resultado um cliente normal, 
 
 As bebidas são consumidas por uma API fictícia.
 Gerenciamento de estado utilizando Context API, Hooks e Storage.
+Na parte de Banco de Dados foi utilizado MySQL em conjunto com o ORM Sequelize.
 
 Alguns testes foram feitos tanto no back-end quanto no front-end.
 <br />
@@ -77,6 +78,7 @@ Esse projeto foi feito utilizando as seguintes tecnologias: <br>
 - :heavy_check_mark: **ContextAPI**
 - :heavy_check_mark: **Hooks**
 - :heavy_check_mark: **Node**
+- :heavy_check_mark: **Express**
 - :heavy_check_mark: **MySQL**
 - :heavy_check_mark: **Sequelize**
 - :heavy_check_mark: **ESLint**
@@ -142,7 +144,7 @@ npm run dev
 7. Em outro terminal, mude para o diretório `front-end`
 
 ```bash
-cd frontend
+cd front-end
 ```
 
 8. Instale as dependências

@@ -32,6 +32,12 @@ export default function SellersOrders() {
     return `${day}/${month}/${year}`;
   };
 
+  const selectStatusCss = (status) => {
+    if (status === 'Pendente') return 'ordem-pendente';
+    if (status === 'Preparando') return 'ordem-preparando';
+    return 'ordem-entregue';
+  };
+
   const renderTags = (sale, index) => (
     <div key={ index }>
       <Link to={ `/seller/orders/${sale.id} ` } className="link">
@@ -42,9 +48,9 @@ export default function SellersOrders() {
               { sale.id < numberTen ? `000${sale.id}` : `00${sale.id}` }
             </div>
           </div>
-          <div data-testid={ `${dataTestid49}--${sale.id}` } className="order-status">
-            <div className="status-order">
-              { sale.status }
+          <div data-testid={ `${dataTestid49}--${sale.id}` } className="status-container">
+            <div className={ selectStatusCss(sale.status) }>
+              { sale.status.toUpperCase() }
             </div>
           </div>
           <div>

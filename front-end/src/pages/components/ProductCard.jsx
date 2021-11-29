@@ -2,6 +2,8 @@ import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import ContextDeliveryApp from '../../store/ContextDeliveryApp';
 
+import '../styles/customerProductsStyle.css';
+
 export default function ProductCard({ product, index, callback }) {
   const { url_image: urlImage, name, price, id } = product;
   const { products, setProducts } = useContext(ContextDeliveryApp);
@@ -48,12 +50,14 @@ export default function ProductCard({ product, index, callback }) {
       <p
         id="product-name"
         data-testid={ `customer_products__element-card-title-${id}` }
+        className="products-name"
       >
         { name }
       </p>
       <p
         id="product-price"
         data-testid={ `customer_products__element-card-price-${id}` }
+        className="products-price"
       >
         { price.toString().replace(/\./, ',') }
       </p>
@@ -62,6 +66,7 @@ export default function ProductCard({ product, index, callback }) {
         type="button"
         onClick={ handleRemoveClick }
         data-testid={ `customer_products__button-card-rm-item-${id}` }
+        className="add-remove-btn"
       >
         -
       </button>
@@ -73,6 +78,7 @@ export default function ProductCard({ product, index, callback }) {
           value={ qty.toString() }
           onChange={ handleInputChange }
           data-testid={ `customer_products__input-card-quantity-${id}` }
+          className="products-qnt-input"
         />
       </label>
       <button
@@ -81,6 +87,7 @@ export default function ProductCard({ product, index, callback }) {
         type="button"
         value="+"
         onClick={ handleAddClick }
+        className="add-remove-btn"
       >
         +
       </button>

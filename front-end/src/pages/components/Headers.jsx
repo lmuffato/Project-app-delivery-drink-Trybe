@@ -5,6 +5,8 @@ import OrdersButton from './OrdersButton';
 import LogoutButton from './LogoutButton';
 import ManageUsersButton from './ManageUsersButton';
 
+import '../styles/customerProductsStyle.css';
+
 export default function Headers() {
   const { user } = useContext(ContextDeliveryApp);
 
@@ -15,6 +17,7 @@ export default function Headers() {
         <OrdersButton />
         <p
           data-testid="customer_products__element-navbar-user-full-name"
+          className="products-username"
         >
           { user.name }
         </p>
@@ -26,7 +29,7 @@ export default function Headers() {
     return (
       <navbar>
         <OrdersButton />
-        <p>{ user.name }</p>
+        <p className="products-username">{ user.name }</p>
         <LogoutButton />
       </navbar>
     );
@@ -35,7 +38,7 @@ export default function Headers() {
     return (
       <navbar>
         <ManageUsersButton />
-        <p>{ user.name }</p>
+        <p className="products-username">{ user.name }</p>
         <LogoutButton />
       </navbar>
     );

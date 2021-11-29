@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import '../styles/customerProductsStyle.css';
+
 export default function ShopCartCard({ value, history }) {
   const handleClick = () => {
     history.push('/customer/checkout');
@@ -14,6 +16,7 @@ export default function ShopCartCard({ value, history }) {
         disabled={ value <= 0 }
         data-testid="customer_products__checkout-bottom-value"
         onClick={ handleClick }
+        className="products-total-price"
       >
         { value.toFixed(2).toString().replace(/\./, ',') }
       </button>

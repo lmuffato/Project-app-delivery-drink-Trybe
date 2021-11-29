@@ -7,6 +7,8 @@ import checkPassword from '../services/checkPassword';
 import checkName from '../services/checkName';
 import fetchRegister from '../services/fetchRegister';
 
+import './styles/registerStyle.css';
+
 function Register({ history }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -34,10 +36,10 @@ function Register({ history }) {
   };
 
   return (
-    <div>
-      <h1>Cadastro</h1>
-      <form>
-        <label htmlFor="name-input">
+    <div className="register-container">
+      <h1 className="register-title">Cadastro</h1>
+      <form className="register-form">
+        <label htmlFor="name-input" className="register-name-label">
           <input
             id="name-input"
             type="text"
@@ -45,10 +47,11 @@ function Register({ history }) {
             placeholder="Seu nome"
             value={ name }
             onChange={ (e) => setName(e.target.value) }
+            className="register-name"
           />
         </label>
 
-        <label htmlFor="email-input">
+        <label htmlFor="email-input" className="register-email-label">
           <input
             id="email-input"
             type="text"
@@ -56,10 +59,11 @@ function Register({ history }) {
             placeholder="seu-email@site.com.br"
             value={ email }
             onChange={ (e) => setEmail(e.target.value) }
+            className="register-email"
           />
         </label>
 
-        <label htmlFor="password-input">
+        <label htmlFor="password-input" className="register-password-label">
           <input
             id="password-input"
             type="password"
@@ -67,6 +71,7 @@ function Register({ history }) {
             placeholder="********"
             value={ password }
             onChange={ (e) => setPassword(e.target.value) }
+            className="register-password"
           />
         </label>
         <button
@@ -75,6 +80,7 @@ function Register({ history }) {
           disabled={ enableBtn }
           data-testid="common_register__button-register"
           onClick={ handleRegisterButtonClick }
+          className="register-btn"
         >
           Cadastrar
         </button>

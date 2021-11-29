@@ -11,6 +11,7 @@ export default function RemoveButton({ callback, index }) {
       <button
         type="button"
         onClick={ handleClick }
+        className="checkout-remove-btn"
       >
         Remover
       </button>

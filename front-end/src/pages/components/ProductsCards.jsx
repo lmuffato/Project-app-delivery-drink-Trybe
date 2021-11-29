@@ -5,6 +5,8 @@ import fetchProducts from '../../services/fetchProducts';
 import ProductCard from './ProductCard';
 // import ComponenteTest from './ComponenteTest';
 
+import '../styles/customerProductsStyle.css';
+
 export default function ProductsCards({ callback }) {
   const { user, products, setProducts } = useContext(ContextDeliveryApp);
   const [isLoading, setIsLoading] = useState(true);
@@ -38,7 +40,7 @@ export default function ProductsCards({ callback }) {
   }
 
   return (
-    <div>
+    <div className="products-container">
       { products.length && products
         .map((product, index) => (<ProductCard
           key={ product.id }

@@ -6,6 +6,7 @@ import ErrorLogin from '../Components/ErrorLogin';
 import UserContext from '../context/userContext';
 import NewOrderContext from '../context/NewOrderContext';
 import validateEmail from '../validations/validateEmail';
+import '../Styles/Register.css';
 
 import {
   setToLocalStorageUser,
@@ -46,7 +47,6 @@ export default function Login() {
       setUserName(login.name);
       return redirectByRole(userInfo.role);
     }
-    // console.log('usuário não existe');
   };
 
   useEffect(() => {
@@ -92,12 +92,13 @@ export default function Login() {
   }, [email, password]);
 
   return (
-    <div>
-      <form>
-        <label htmlFor="login">
+    <main className="main-container">
+      <form className="form-container">
+        <label className="labels" htmlFor="login">
           Login
           <input
             data-testid={ testIdEmail }
+            className="inputs"
             type="email"
             id="email"
             placeholder="email@trybeer.com.br"
@@ -105,10 +106,11 @@ export default function Login() {
             required
           />
         </label>
-        <label htmlFor="senha">
+        <label className="labels" htmlFor="senha">
           Senha
           <input
             data-testid={ IvalidPassword }
+            className="inputs"
             type="password"
             id="senha"
             placeholder="*********"
@@ -117,7 +119,7 @@ export default function Login() {
           />
         </label>
         <button
-          variant="primary"
+          className={ loginButton ? 'true-button' : 'false-button' }
           disabled={ !loginButton }
           onClick={ clickLoginButton }
           data-testid={ testIdBtnLogin }
@@ -128,6 +130,7 @@ export default function Login() {
         <Link to="/register">
           <button
             data-testid={ testIdBtnRegister }
+            className="register-button"
             type="button"
           >
             Ainda não tenho conta
@@ -137,6 +140,6 @@ export default function Login() {
       <div hidden={ errorMessage }>
         <ErrorLogin dataTestIdError={ testId } message={ messageError } />
       </div>
-    </div>
+    </main>
   );
 }

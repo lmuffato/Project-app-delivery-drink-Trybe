@@ -55,3 +55,14 @@ h1 {
   margin-top: 1.3rem;
   width: 11rem;
 }
+
+.register-button {
+  background-color: #421981;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px #cecbcb;
+  color: white;
+  font-weight: 600;
+  height: 2rem;
+  margin-top: 1.3rem;
+  width: 11rem;
+}

@@ -1,13 +1,10 @@
-const md5 = require("md5");
-const jwt = require("jsonwebtoken");
-// const fs = require('fs');
-// const path = require('path');
-const { User } = require("../database/models");
+const md5 = require('md5');
+const jwt = require('jsonwebtoken');
+const { User } = require('../database/models');
 
-const CUSTOMER = "customer";
-// const SECRET = fs.readFileSync(path.join(__dirname, '../../jwt.evaluation.key'), 'utf8');
+const CUSTOMER = 'customer';
 
-const SECRET = "secret_key";
+const SECRET = 'secret_key';
 
 const create = async (name, email, password) => {
   const MD5password = md5(password);
@@ -18,7 +15,7 @@ const create = async (name, email, password) => {
     password: MD5password,
     role: CUSTOMER,
   });
-  if (!user) return { status: 500, message: "Internal Server Error" };
+  if (!user) return { status: 500, message: 'Internal Server Error' };
 
   const { password: _, ...userPayload } = user.dataValues;
   const token = jwt.sign(userPayload, SECRET);
@@ -34,11 +31,11 @@ const create = async (name, email, password) => {
 const getUser = async (email) => {
   const user = await User.findOne({
     where: { email },
-    attributes: { exclude: ["password"] },
+    attributes: { exclude: ['password'] },
     raw: true,
   });
 
-  if (!user) return { status: 500, message: "Internal Server Error" };
+  if (!user) return { status: 500, message: 'Internal Server Error' };
 
   const token = jwt.sign(user, SECRET);
 
@@ -47,8 +44,8 @@ const getUser = async (email) => {
 
 const getSellers = async () => {
   const sellers = await User.findAll({
-    where: { role: "seller" },
-    attributes: { exclude: ["password"] },
+    where: { role: 'seller' },
+    attributes: { exclude: ['password'] },
   });
 
   return sellers;

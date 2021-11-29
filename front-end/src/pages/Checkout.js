@@ -32,7 +32,8 @@ function Checkout() {
       products: Object.values(cartStorage),
     };
     const data = await requests.createSale(dataUser.token, sale);
-    if (data.status === 201) {
+    const CREATED_STATUS = 201;
+    if (data.status === CREATED_STATUS) {
       setSaleId(data.saleId);
       setSaleCreated(true);
       localStorage.removeItem('carrinho');

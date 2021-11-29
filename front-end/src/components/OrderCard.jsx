@@ -1,9 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
+import socketIOClient from 'socket.io-client';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router';
 
 function OrderCard({ id, status, totalPrice, saleDate }) {
+  const [orderStatus, setOrderStatus] = useState(status);
   const history = useHistory();
+  const socket = socketIOClient('http://localhost:3001');
+
+  socket.on('serverNewStatus', ({ newStatus, idOrder }) => {
+    if (parseInt(idOrder, 10) === id) {
+      setOrderStatus(newStatus);
+    }
+  });
 
   return (
     <button
@@ -18,7 +27,7 @@ function OrderCard({ id, status, totalPrice, saleDate }) {
       <div
         data-testid={ `customer_orders__element-delivery-status-${id}` }
       >
-        { status }
+        { orderStatus }
       </div>
       <div
         data-testid={ `customer_orders__element-card-price-${id}` }

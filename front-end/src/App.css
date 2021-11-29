@@ -1,13 +1,60 @@
 .App {
   align-items: center;
-  background: #0fa36b;
-  color: #464646;
+  background-image: url('./images/shutterstock_703651876.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  /* background: #ffa630; */
+  color: #59656f;
   display: flex;
   flex-direction: column;
   font-family: sans-serif;
   height: 100vh;
   justify-content: center;
   width: 100%;
+}
+
+.Login {
+  background: #ffa630;
+  height: 20vh;
+  padding: 30px 20px 70px;
+  position: fixed;
+  right: 10%;
+  border-radius: 20px;
+  box-shadow: 10px 10px 20px #1d1e2c;
+}
+
+.Logo {
+  border: none;
+  height: 100px;
+  left: 20px;
+  position: fixed;
+  top: 0;
+}
+
+.Header {
+  background: #ffa630;
+  display: flex;
+  height: 4vh;
+  width: 100%;
+  padding: 30px 50px;
+  position: fixed;
+  top: 0;
+  border-bottom: 3px solid #1d1e2c;
+}
+
+.HeaderButton {
+  display: flex;
+  text-align: center;
+  position: fixed;
+  right: 5%;
+  color: #1d1e2c;
+}
+
+.HeaderButton span {
+  margin: 10px;
+  font-weight: bold;
 }
 
 .App > .logo {
@@ -21,6 +68,37 @@
 .rocksGlass {
   animation: shake 1s infinite ease;
   max-height: 80vh;
+}
+
+.App input {
+  border-radius: 5px;
+  padding: 7px 26px;
+  margin-top: 5px;
+  border: 1px solid #d7dedc;
+}
+
+.App button {
+  border-radius: 5px;
+  padding: 7px 25px;
+  width: 100%;
+  font-weight: bold;
+  color: #1d1e2c;
+  background-color: #d7dedc;
+  margin-top: 5px;
+  border: none;
+  box-shadow: 1px 3px 1px #59656f;
+
+}
+
+.App button:hover {
+  color: #1d1e2c;
+  background-color: #ffa630;
+}
+
+.App a {
+  color: #d7dedc;
+  margin-top: 5px;
+  text-decoration: none;
 }
 
 @keyframes shake {

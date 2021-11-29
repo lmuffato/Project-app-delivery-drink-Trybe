@@ -62,7 +62,7 @@ function LoginForm() {
   };
 
   return (
-    <div className="border">
+    <div>
       <form action="submit">
         <TextInput
           name="email"
@@ -97,21 +97,19 @@ function LoginForm() {
           Login
         </button>
 
-        <Link
-          to="/"
-          className="input"
-        >
-          Esqueceu a senha?
-        </Link>
-
         <button
           type="button"
           onClick={ () => navigate('/register') }
-          className="input"
           data-testid="common_login__button-register"
         >
           Cadastre-se
         </button>
+        <Link
+          className="input"
+          to="/"
+        >
+          Esqueceu a senha?
+        </Link>
       </form>
     </div>
   );

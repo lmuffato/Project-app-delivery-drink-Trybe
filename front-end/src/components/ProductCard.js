@@ -49,7 +49,7 @@ function ProductCard({ product }) {
     if (cartItem) {
       setCart({ id, item: cartItem });
     }
-  }, [cartItem]);
+  }, [cartItem, id, setCart]);
 
   const insertManuallyQuantity = ({ target: { value } }) => {
     setCartItem({

@@ -13,7 +13,7 @@ function Orders() {
       setSales(saleData);
     };
     getSale();
-  }, []);
+  }, [dataUser]);
 
   return (
     <section>

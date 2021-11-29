@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styles from './styles.module.css';
 import replaceDotToComma from '../../services/productPages/replaceDotToComa';
+import { useSocket } from '../../context/socketProvider';
 
 export default function RequestCard(
   { requestId, status, date, price, address, number, dataTestId },
@@ -13,6 +14,14 @@ export default function RequestCard(
     dataTestIdPrice,
     dataTestIdAddress } = dataTestId;
 
+  const { socketStatus } = useSocket();
+  const [myStatus, setMyStatus] = useState({ id: '', myStatus: '' });
+
+  useEffect(() => {
+    console.log('Ola mundo', socketStatus);
+    if (socketStatus) setMyStatus(socketStatus);
+  }, [socketStatus]);
+
   return (
     <div className={ styles.cardContainer }>
       <div className={ styles.requestId }>
@@ -23,9 +32,12 @@ export default function RequestCard(
       </div>
       <div className={ styles.cardSubContainer }>
         <div className={ styles.statusDatePriceContainer }>
-          <div className={ styles[status.toLowerCase()] }>
+          <div
+            className={ styles[status
+              .toLowerCase().replace('â', 'a').replace(' ', '')] }
+          >
             <span data-testid={ `${dataTestIdStatus}${requestId}` }>
-              {status}
+              {myStatus.id === requestId ? myStatus.myStatus : status}
             </span>
           </div>
           <div className={ styles.dateAndPrice }>

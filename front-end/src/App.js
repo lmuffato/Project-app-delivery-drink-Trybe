@@ -10,9 +10,10 @@ import MyRequestsPage from './pages/MyRequestsPage';
 import ClientOrderDetailsPage from './pages/ClientOrderDetailsPage';
 import SellerPage from './pages/SellerPage';
 import './App.css';
-import { OrderDetailsProvider } from './context/orderDetailsProvider';
+/* import { OrderDetailsProvider } from './context/orderDetailsProvider'; */
 import SellerOrderDetailsPage from './pages/SellerOrderDetailsPage';
 import { SellerOrderDetailsProvider } from './context/sellerOrderDetailsProvider';
+import { SocketProvider } from './context/socketProvider';
 
 function App() {
   return (
@@ -32,22 +33,40 @@ function App() {
         path="/customer/checkout"
         element={ <PricesProvider><CheckoutPage /></PricesProvider> }
       />
-      <Route path="/customer/orders" element={ <MyRequestsPage /> } />
-      <Route path="/seller/orders" element={ <SellerPage /> } />
+      <Route
+        path="/customer/orders"
+        element={
+          <SocketProvider>
+            <MyRequestsPage />
+          </SocketProvider>
+        }
+      />
+      <Route
+        path="/seller/orders"
+        element={
+          <SocketProvider>
+            <SellerPage />
+          </SocketProvider>
+        }
+      />
       <Route
         path="/customer/orders/:id"
         element={
-          <OrderDetailsProvider>
-            <ClientOrderDetailsPage />
-          </OrderDetailsProvider>
+          <SocketProvider>
+            <SellerOrderDetailsProvider>
+              <ClientOrderDetailsPage />
+            </SellerOrderDetailsProvider>
+          </SocketProvider>
         }
       />
       <Route
         path="/seller/orders/:id"
         element={
-          <SellerOrderDetailsProvider>
-            <SellerOrderDetailsPage />
-          </SellerOrderDetailsProvider>
+          <SocketProvider>
+            <SellerOrderDetailsProvider>
+              <SellerOrderDetailsPage />
+            </SellerOrderDetailsProvider>
+          </SocketProvider>
         }
       />
       <Route path="/admin/manage" element={ <AdminPage /> } />

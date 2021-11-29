@@ -6,10 +6,10 @@ import * as request from '../services/requests';
 import { CartContext } from '../context/cart';
 
 function Products() {
-  const { cartStorage = {} } = useContext(CartContext);
+  const { cartStorage = {}, totalCart } = useContext(CartContext);
   const [products, setProducts] = useState([]);
   const [toCheckout, setToCheckout] = useState(false);
-  const [totalCart, setTotalCart] = useState('0.00');
+  // const [totalCart, setTotalCart] = useState('0.00');
 
   useEffect(() => {
     const getProducts = async () => {
@@ -19,18 +19,6 @@ function Products() {
 
     getProducts();
   }, []);
-
-  useEffect(() => {
-    if (cartStorage) {
-      let value = Object.values(cartStorage)
-        .map((item) => item.subTotal)
-        .reduce((acc, item) => acc + Number(item), 0);
-
-      value = parseFloat(value).toFixed(2).replace('.', ',');
-
-      setTotalCart(value);
-    }
-  }, [cartStorage]);
 
   const dataUser = JSON.parse(localStorage.getItem('user'));
 

@@ -1,82 +1,79 @@
-import React, { useState, useEffect } from 'react';
-import ProductSellCard from '../components/ProductSellCard';
+import React, { useContext, useEffect, useState } from 'react';
+import { Redirect } from 'react-router-dom';
+import CheckoutProductsTable from '../components/CheckoutProductsTable';
+import DeliveryDetailsTable from '../components/DeliveryDetailsTable';
 import NavBar from '../components/NavBar';
+import { CartContext } from '../context/cart';
+import * as requests from '../services/requests';
 // import postSell from '../services/requests';
 
 function Checkout() {
-  const [products, setProducts] = useState([]);
-  const [totalValue, setTotalValue] = useState([]);
-  const dataUser = JSON.parse(localStorage.getItem('user'));
-  const sellProduts = Object.values(JSON.parse(localStorage.getItem('carrinho')));
-
-  function createSell() {
-    console.log(dataUser.token, sellProdut);
-    // postUser(data, toke, '/sales');
-  }
+  const { cartStorage = {}, totalCart } = useContext(CartContext);
+  const [sellers, setSellers] = useState([]);
+  const [deliveryDetails, setDeliveryDetails] = useState({});
+  const [saleCreated, setSaleCreated] = useState(false);
+  const [saleId, setSaleId] = useState();
 
   useEffect(() => {
-    setProducts(sellProduts);
-    const values = [];
-    sellProduts.map((product) => (
-      values.push(Number(product.subTotal))
-    ));
-    setTotalValue(parseFloat(values
-      .reduce((acc, item) => acc + item, 0)).toFixed(2).replace('.', ','));
+    const getSellers = async () => {
+      const { data } = await requests.getSellers();
+      setSellers(data);
+    };
+    getSellers();
   }, []);
+
+  const dataUser = JSON.parse(localStorage.getItem('user'));
+
+  const createSale = async () => {
+    const sale = {
+      ...deliveryDetails,
+      user_id: dataUser.id,
+      total_price: totalCart.replace(',', '.'),
+      products: Object.values(cartStorage),
+    };
+    const data = await requests.createSale(dataUser.token, sale);
+    if (data.status === 201) {
+      setSaleId(data.saleId);
+      setSaleCreated(true);
+      localStorage.removeItem('carrinho');
+    }
+  };
+
+  const handleChange = ({ target: { name, value } }) => {
+    setDeliveryDetails({ ...deliveryDetails, [name]: value });
+  };
+
+  if (saleCreated) {
+    return <Redirect to={ `/customer/orders/${saleId}` } />;
+  }
 
   return (
     <main>
       <NavBar dataUser={ dataUser } />
       <section>
         <h1>Finalizar Pedido</h1>
-        <tr>
-          <td>Iten</td>
-          <td>Descrição</td>
-          <td>Quantidade</td>
-          <td>Preço Unitário</td>
-          <td>Sub-total</td>
-          <td>Remover Iten</td>
-        </tr>
-        {products.map((product, index) => (
-          <ProductSellCard
-            key={ index }
-            product={ product }
-            index={ index }
-          />
-        ))}
+        <CheckoutProductsTable products={ cartStorage } />
         <span
           data-testid="customer_checkout__element-order-total-price"
         >
           Total: R$
-          {totalValue}
+          {totalCart}
         </span>
       </section>
       <section>
         <h1>Detalhes da Entrega</h1>
-        <tr>
-          <td>Vendedora</td>
-          <td>Endereço</td>
-          <td>Numero</td>
-        </tr>
-        <select
-          name="select"
-          data-testid="customer_checkout__select-seller"
-        >
-          <option value="valor1">Valor 1</option>
-          <option value="valor2">Valor 2</option>
-          <option value="valor3">Valor 3</option>
-        </select>
-        <input
-          data-testid="customer_checkout__input-address"
-        />
-        <input
-          data-testid="customer_checkout__input-addressNumber"
+        <DeliveryDetailsTable
+          sellers={ sellers }
+          handleChange={ handleChange }
         />
       </section>
       <button
         data-testid="customer_checkout__button-submit-order"
         type="button"
-        onClick={ () => createSell() }
+        onClick={ createSale }
+        disabled={
+          cartStorage ? !Object.keys(cartStorage).length : !cartStorage
+        }
       >
         Finalizar Pedido
       </button>

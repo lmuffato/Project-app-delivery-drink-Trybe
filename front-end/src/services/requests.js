@@ -29,6 +29,23 @@ export async function getPruducts() {
   return { response, data };
 }
 
+export async function getSellers() {
+  const response = await fetch('http://localhost:3001/customer/checkout');
+  const data = await response.json();
+  return { response, data };
+}
+
+export async function createSale(token, data) {
+  const response = await fetch('http://localhost:3001/sales', {
+    method: methods[0],
+    headers: { 'Content-Type': contentType[0], Authorization: token },
+    body: JSON.stringify(data),
+  });
+
+  const { saleId, message } = await response.json();
+  return { saleId, message, status: response.status };
+}
+
 export async function getSales(dataUser) {
   const { token } = dataUser;
   const response = await fetch('http://localhost:3001/sales', {

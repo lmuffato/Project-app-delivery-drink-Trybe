@@ -21,9 +21,9 @@ function App() {
         <Route path={ paths.routeLogin } exact component={ Login } />
         <Route path={ paths.routeRegister } exact component={ Register } />
         <Route path={ paths.routeOrders } exact component={ Orders } />
-        <Route path={ paths.routeCheckout } exact component={ Checkout } />
         <Route path={ paths.routeDetailsSell } exact component={ DetailsSell } />
         <CartProvider>
+          <Route path={ paths.routeCheckout } exact component={ Checkout } />
           <Route path={ paths.routeProducts } exact component={ Products } />
         </CartProvider>
       </Switch>

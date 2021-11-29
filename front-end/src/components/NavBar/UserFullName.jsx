@@ -1,12 +1,14 @@
-import React, { useContext } from 'react';
-import contexts from '../../context';
+import React from 'react';
 
 function UserFullName() {
-  const { login: name } = useContext(contexts.LoginContext);
+  const user = JSON.parse(localStorage.getItem('user'));
+
   return (
-    <div>
-      <h1>{ name }</h1>
-    </div>
+    <h2
+      data-testid="customer_products__element-navbar-user-full-name"
+    >
+      { user.name }
+    </h2>
   );
 }
 

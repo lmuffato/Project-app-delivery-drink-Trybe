@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import genHashMd5 from 'md5';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import emailValidation from '../validations/loginValidation';
-import api from '../services/api';
+import fetchPostUser from '../services/fetchPostUser';
 import ErrorBackend from './ErrorBackend/index';
+import redirectRoutes from '../utils/redirectRoutes';
 
 export default function Login() {
   const [emailInput, setEmailInput] = useState('');
@@ -11,35 +11,15 @@ export default function Login() {
   const [disabledBtn, setDisabledBtn] = useState(true);
   const [errorLogin, setErrorLogin] = useState(false);
 
-  // o email value do db, este restorno da requisição vai definir o evento de redirecionamento
-  const errorLoginHTTP = 400;
-  const navegate = useNavigate();
-  const fetchPostData = async (userData) => {
-    try {
-      const data = await api.post('/user/login', userData);
-      if (data.status > errorLoginHTTP) {
-        setErrorLogin(true);
-        return;
-      }
-      localStorage.setItem('token', data.data.token);
-      localStorage.setItem('email', data.data.email);
-      localStorage.setItem('role', data.data.role);
-      localStorage.setItem('name', data.data.name);
-      const redirectRoutes = {
-        customer: '/customer/products',
-        seller: '/seller/orders',
-        administrator: '/admin/manage',
-      };
-      navegate(redirectRoutes[data.data.role]);
-    } catch (error) {
-      setErrorLogin(true);
-    }
-  };
+  const navigate = useNavigate();
 
   const handleButtonClick = async () => {
-    const passwordHash = genHashMd5(passwordInput);
-    await fetchPostData({ email: emailInput, password: passwordHash });
-    console.log('handleButtonClick');
+    const user = await fetchPostUser(
+      { email: emailInput, password: passwordInput },
+    );
+    if (!user.role) return setErrorLogin(true);
+    localStorage.setItem('user', JSON.stringify(user));
+    navigate(redirectRoutes[user.role]);
   };
 
   return (
@@ -58,6 +38,7 @@ export default function Login() {
             } }
           />
         </label>
+        <h2>{emailInput}</h2>
         <br />
         <label htmlFor="input-password">
           <input
@@ -72,6 +53,7 @@ export default function Login() {
             } }
           />
         </label>
+        <h2>{passwordInput}</h2>
         <br />
         <button
           data-testid="common_login__button-login"
@@ -81,14 +63,13 @@ export default function Login() {
         >
           LOGIN
         </button>
-        <Link to="/register">
-          <button
-            type="button"
-            data-testid="common_login__button-register"
-          >
-            Ainda não tenho conta
-          </button>
-        </Link>
+        <button
+          onClick={ () => navigate('/register') }
+          data-testid="common_login__button-register"
+          type="button"
+        >
+          Ainda não tenho conta
+        </button>
       </form>
       {
         errorLogin ? <ErrorBackend

@@ -1,10 +1,14 @@
 const jwt = require('jsonwebtoken');
-require('dotenv').config();
+const path = require('path');
 
-const SECRET = process.env.SECRET || 'segredo';
+const SECTRE_KEY = require('fs')
+  .readFileSync(
+    path.join(__dirname, '..', '..', 'jwt.evaluation.key'),
+    { encoding: 'utf-8' },
+  ).trim();
 
-const passwordToken = (paylod) => {
-    const token = jwt.sign({ paylod }, SECRET);
+const passwordToken = (payload) => {
+    const token = jwt.sign({ payload }, SECTRE_KEY);
     return token;
 };
 

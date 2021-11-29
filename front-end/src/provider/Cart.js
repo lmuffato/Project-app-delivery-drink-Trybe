@@ -5,6 +5,7 @@ import { CartContext } from '../context/cart';
 const CartProvider = ({ children }) => {
   const [cart, setCart] = useState();
   const [cartStorage, setCartStorage] = useState();
+  const [totalCart, setTotalCart] = useState('0.00');
 
   const updateStorage = (id, item) => {
     let storage = JSON.parse(localStorage.getItem('carrinho'));
@@ -35,7 +36,19 @@ const CartProvider = ({ children }) => {
     }
   }, [cart]);
 
-  const context = { cart, setCart, cartStorage, setCartStorage };
+  useEffect(() => {
+    if (cartStorage) {
+      let value = Object.values(cartStorage)
+        .map((item) => item.subTotal)
+        .reduce((acc, item) => acc + Number(item), 0);
+
+      value = parseFloat(value).toFixed(2).replace('.', ',');
+
+      setTotalCart(value);
+    }
+  }, [cartStorage]);
+
+  const context = { cart, setCart, cartStorage, setCartStorage, totalCart };
   return (
     <CartContext.Provider value={ context }>{children}</CartContext.Provider>
   );

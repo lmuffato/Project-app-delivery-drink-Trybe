@@ -9,16 +9,26 @@
 }
 
 .table tr {
-  border: 1px solid red;
   font-weight: lighter;
   padding: 10px 30px;
 }
+
+.table tr:hover {
+  font-weight: normal;
+}
+
 
 .table button {
   font-weight: bold;
   padding: 10px 20px;
   border: 1px solid #59656f;
   background-color: #59656f;
+  color: #ffa630;
+}
+
+.table button:hover {
+  border: 1px solid #1d1e2c;
+  background-color: #1d1e2c;
   color: #ffa630;
 }
 

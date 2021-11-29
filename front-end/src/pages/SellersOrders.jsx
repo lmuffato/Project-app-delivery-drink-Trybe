@@ -32,6 +32,8 @@ export default function SellersOrders() {
     return `${day}/${month}/${year}`;
   };
 
+  const putComma = (value) => value.toString().replace('.', ',');
+
   const selectStatusCss = (status) => {
     if (status === 'Pendente') return 'ordem-pendente';
     if (status === 'Preparando') return 'ordem-preparando';
@@ -48,23 +50,30 @@ export default function SellersOrders() {
               { sale.id < numberTen ? `000${sale.id}` : `00${sale.id}` }
             </div>
           </div>
-          <div data-testid={ `${dataTestid49}--${sale.id}` } className="status-container">
-            <div className={ selectStatusCss(sale.status) }>
-              { sale.status.toUpperCase() }
+          <div className="rigth-side">
+            <div className="upper-side">
+              <div data-testid={ `${dataTestid49}--${sale.id}` } className="status-container">
+                <div className={ selectStatusCss(sale.status) }>
+                  { sale.status.toUpperCase() }
+                </div>
+              </div>
+              <div className="date-price-container">
+                <div data-testid={ `${dataTestid50}--${sale.id}` } className="order-date">
+                  { convertDateFormat(sale.saleDate) }
+                </div>
+                <div data-testid={ `${dataTestid51}--${sale.id}` } className="order-total">
+                  R$
+                  { ' ' }
+                  { putComma(sale.totalPrice) }
+                </div>
+              </div>     
             </div>
-          </div>
-          <div>
-            <div data-testid={ `${dataTestid50}--${sale.id}` } className="order-date">
-              { convertDateFormat(sale.saleDate) }
-            </div>
-            <div data-testid={ `${dataTestid51}--${sale.id}` } className="order-total">
-              R$
-              { sale.totalPrice }
-            </div>
-          </div>
-          <div>
-            <div data-testid={ `${dataTestid52}--${sale.id}` } className="order-address">
-              { `${sale.deliveryAddress}, ${sale.deliveryNumber}` }
+            <div className="lower-side">
+              <div className="address-container">
+                <div data-testid={ `${dataTestid52}--${sale.id}` } className="order-address">
+                  { `End.: ${sale.deliveryAddress}, ${sale.deliveryNumber}` }
+                </div>
+              </div>
             </div>
           </div>
         </div>

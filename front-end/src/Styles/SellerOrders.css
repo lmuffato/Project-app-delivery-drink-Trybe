@@ -5,7 +5,6 @@
 
 .cards-container {
   display: flex;
-  flex-wrap: wrap;
   height: 90%;
   justify-content: center;
   padding: 10px;
@@ -43,12 +42,34 @@
   width: 5rem;
 }
 
+.rigth-side {
+  display: flex;
+  flex-flow: wrap;
+  height: 7rem;
+  width: 17rem;
+}
+
+.upper-side {
+  align-items: center;
+  display: flex;
+  height: 5rem;
+  justify-content: center;
+  width: 16rem;
+}
+
+.lower-side {
+  align-items: center;
+  display: flex;
+  height: 2rem;
+  justify-content: right;
+  width: 16rem;
+}
+
 .status-container {
   align-items: center;
   display: flex;
-  flex-direction: column;
-  height: 7rem;
-  width: 6rem;
+  height: 4rem;
+  width: 8rem;
 }
 
 .ordem-pendente {
@@ -63,12 +84,12 @@
   justify-content: center;
   margin: auto;
   text-shadow: 1px 1px 2px black;
-  width: 5.8rem;
+  width: 7rem;
 }
 
 .ordem-preparando {
   align-items: center;
-  background-color: #98a09c;
+  background-color: #c8c510;
   border-radius: 5px;
   color: white;
   display: flex;
@@ -78,7 +99,7 @@
   justify-content: center;
   margin: auto;
   text-shadow: 1px 1px 2px black;
-  width: 5.8rem;
+  width: 7rem;
 }
 
 .ordem-entregue {
@@ -93,17 +114,48 @@
   justify-content: center;
   margin: auto;
   text-shadow: 1px 1px 2px black;
-  width: 5.8rem;
+  width: 7rem;
+}
+
+.date-price-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 4rem;
+  justify-content: center;
+  padding: 0.2rem;
 }
 
 .order-date {
+  align-items: center;
   background-color: azure;
+  border: 1px solid #bebeb5;
+  border-radius: 5px;
+  display: flex;
+  height: 1.6rem;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+  width: 7rem;
 }
 
 .order-total {
-  background-color: beige;
+  align-items: center;
+  background-color: azure;
+  border: 1px solid #bebeb5;
+  border-radius: 5px;
+  display: flex;
+  height: 1.6rem;
+  justify-content: center;
+  width: 7rem;
 }
 
 .order-address {
-  background-color: blueviolet;
+  align-items: center;
+  background-color: white;
+  border: 1px solid #bebeb5;
+  border-radius: 5px;
+  display: flex;
+  height: 1.6rem;
+  justify-content: center;
+  width: 15rem;
 }

@@ -7,7 +7,7 @@ function Checkout() {
   const [products, setProducts] = useState([]);
   const [totalValue, setTotalValue] = useState([]);
   const dataUser = JSON.parse(localStorage.getItem('user'));
-  const sellProdut = JSON.parse(localStorage.getItem('carrinho'));
+  const sellProduts = Object.values(JSON.parse(localStorage.getItem('carrinho')));
 
   function createSell() {
     console.log(dataUser.token, sellProdut);
@@ -15,9 +15,7 @@ function Checkout() {
   }
 
   useEffect(() => {
-    const sellProduts = Object.values(JSON.parse(localStorage.getItem('carrinho')));
     setProducts(sellProduts);
-
     const values = [];
     sellProduts.map((product) => (
       values.push(Number(product.subTotal))
@@ -60,23 +58,20 @@ function Checkout() {
           <td>Endereço</td>
           <td>Numero</td>
         </tr>
-        <tr>
-          <td>
-            <input
-              data-testid="customer_checkout__select-seller"
-            />
-          </td>
-          <td>
-            <input
-              data-testid="customer_checkout__input-address"
-            />
-          </td>
-          <td>
-            <input
-              data-testid="customer_checkout__input-addressNumber"
-            />
-          </td>
-        </tr>
+        <select
+          name="select"
+          data-testid="customer_checkout__select-seller"
+        >
+          <option value="valor1">Valor 1</option>
+          <option value="valor2">Valor 2</option>
+          <option value="valor3">Valor 3</option>
+        </select>
+        <input
+          data-testid="customer_checkout__input-address"
+        />
+        <input
+          data-testid="customer_checkout__input-addressNumber"
+        />
       </section>
       <button
         data-testid="customer_checkout__button-submit-order"

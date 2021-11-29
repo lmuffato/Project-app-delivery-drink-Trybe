@@ -12,10 +12,9 @@ function OrderCard(props) {
 
   if (user.role === 'seller') {
     return (
-      <Link to={ `/seller/orders/${id}` }>
+      <Link to={ `/seller/orders/${id}` } className="card">
         <div
           data-testid={ `seller_orders__element-order-id-${id}` }
-          className="card"
         >
           <span className="status">
             Pedido

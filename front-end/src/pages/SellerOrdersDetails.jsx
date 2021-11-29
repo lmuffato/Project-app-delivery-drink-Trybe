@@ -31,8 +31,7 @@ function SellerOrdersDetails({ match }) {
     }
     getOrder();
     setOrderId(id);
-    console.log(id);
-  }, [id]);
+  }, [id, setOrderId, setOrderStatus]);
 
   useEffect(() => {
     async function prepareStatus() {

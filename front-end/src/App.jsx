@@ -26,6 +26,10 @@ function App() {
         path="/customer/products"
         element={ <PrivateRoute element={ ProductClient } /> }
       />
+      <Route
+        path="/seller/products"
+        element={ <PrivateRoute element={ () => <div>Produtos vendedor</div> } /> }
+      />
       <Route path="/customer/checkout" element={ <CheckoutClient /> } />
       <Route
         path="/customer/orders/"

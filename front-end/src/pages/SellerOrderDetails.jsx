@@ -14,28 +14,34 @@ const DATA_ITEM_P = 'seller_order_details__element-order-table-sub-total-';
 const DATA_ITEM_TP = 'seller_order_details__element-order-total-price';
 
 function OrderDetails() {
-  const { get } = useContext(Context);
-  const id = useLocation().pathname.split('/');
-  const { length } = id;
+  const { get, socket } = useContext(Context);
+  const id = useLocation().pathname.split('/').pop();
   const [order, setOrder] = useState();
   const [currProducts, setProducts] = useState([]);
 
+  const getOrders = async () => {
+    const { data: { saleDetail, seller } } = await
+    get('customer_checkout', id);
+
+    setOrder({ ...saleDetail, sellerId: seller.name });
+
+    const { data: { products } } = await
+    get('customer_orders', id);
+
+    setProducts(products);
+  };
+
   useEffect(() => {
-    const getOrders = async () => {
-      const { data: { saleDetail, seller } } = await
-      get('customer_checkout', id[length - 1]);
-
-      saleDetail.sellerId = seller.name;
-
-      setOrder(saleDetail);
-
-      const { data: { products } } = await
-      get('customer_orders', id[length - 1]);
-
-      setProducts(products);
-    };
     getOrders();
   }, []); // eslint-disable-line
+
+  const updateStatus = (status) => {
+    socket.emit('changeStatus', { id, status });
+  };
+
+  socket.on('updateStatus', () => {
+    getOrders();
+  });
 
   const head = () => (
     <thead>
@@ -50,6 +56,7 @@ function OrderDetails() {
             type="button"
             data-testid={ DATA_PREARING }
             disabled={ order.status !== 'Pendente' }
+            onClick={ () => updateStatus('Preparando') }
           >
             Preparar pedido
           </button>
@@ -57,6 +64,7 @@ function OrderDetails() {
             type="button"
             data-testid={ DATA_DISPATCH }
             disabled={ order.status !== 'Preparando' }
+            onClick={ () => updateStatus('Em Trânsito') }
           >
             Saiu para entrega
           </button>

@@ -69,7 +69,7 @@ img {
 
 .textArea button {
   padding: 10px 15px;
-  border: 1px solid black;
+  border: 1px solid #1d1e2c;
   background-color: #ffa630;
 }
 
@@ -88,7 +88,7 @@ img {
 
 .textArea button:nth-child( 3 ) {
   padding: 10px 15px;
-  border: 1px solid black;
+  border: 1px solid #1d1e2c;
   background-color: #ffa630;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;

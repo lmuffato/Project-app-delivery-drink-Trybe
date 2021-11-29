@@ -16,6 +16,10 @@
   box-shadow: 3px 5px 7px #d7dedc;
 }
 
+.card:hover {
+  border: 1px solid #1d1e2c;
+}
+
 .status {
   margin: 5px;
   padding: 25px 10px 25px 10px;
@@ -30,6 +34,13 @@
   background-color: #ffa630;
   font-weight: bold;
 }
+
+.status:nth-child( 2 ):hover {
+  background-color: #1d1e2c;
+  color: #ffa630;
+  font-weight: bold;
+}
+
 
 .status:nth-child( 3 ) {
   font-weight: lighter;

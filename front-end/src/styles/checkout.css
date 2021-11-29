@@ -37,6 +37,11 @@
   margin-left: 20px;
 }
 
+.title:nth-child( 4 ) {
+  color: #1d1e2c;
+  margin-left: 900px;
+}
+
 
 .form {
   display: flex;

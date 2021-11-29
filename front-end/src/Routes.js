@@ -27,7 +27,7 @@ export default function Router() {
             <Route path="/register" component={ SignUp } />
             <Route path="/customer/products" component={ Products } />
             <Route path="/admin" component={ Admin } />
-            <Route path="/seller/orders" component={ sellerOrders } />
+            <Route exact path="/seller/orders" component={ sellerOrders } />
             <Route path="/seller/orders/:id" component={ SellerOrderDetails } />
             <Route exact path="/" component={ Login } />
           </Switch>

@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
-import { orderStatusChange, getSaleByID } from '../utils/Data';
-import dateFormatation, { priceFormat } from '../utils/Format';
+import React, { useState, useEffect } from 'react';
+// import { useParams } from 'react-router';
+import { getSaleBySellerId } from '../utils/Data';
+// import { priceFormat } from '../utils/Format';
 // import Header from '../Components/Header';
 
 export default function SellerOrderDetails() {
-  const [order, setOrder] = useState(null);
-  const [inProgress, setInProgress] = useState(false);
-  const [orderReady, setOrderReady] = useState(false);
-  const user = JSON.parse(localStorage.getItem('user'));
-  const { token } = user;
-  const { id } = useParams;
+  const [order, setOrders] = useState([]);
+  const [inProgress] = useState(false);
+  const [orderReady] = useState(false);
+  // const user = JSON.parse(localStorage.getItem('user'));
+  // const { token } = user;
+  // const { id } = useParams;
 
   const dataTestIds = {
     labelOrderId: 'seller_order_details__element-order-details-label-order-id',
@@ -26,41 +26,17 @@ export default function SellerOrderDetails() {
     totalPrice: 'seller_order_details__element-order-total-price',
   };
 
-  const handleClick = ({ target }) => {
-    const { name } = target;
-    let newStatus;
-
-    if (name === 'prepare-order') {
-      newStatus = 'Preparando';
-      setInProgress(!inProgress);
-      setOrderReady(!orderReady);
-      orderStatusChange({ token, id, newStatus });
-    } else {
-      newStatus = 'Em Trânsito';
-      setOrderReady(!orderReady);
-      orderStatusChange({ token, id, newStatus });
-    }
+  const handleClick = () => {
+    console.log(order);
   };
 
   useEffect(() => {
-    (async () => {
-      const orderData = await getSaleByID(id);
-      switch (orderData.status) {
-      case 'Preparando':
-        setInProgress(!inProgress);
-        setReadyToDelivery(!readyToDelivery);
-        break;
-      case 'Em Trânsito':
-        setInProgress(!inProgress);
-        break;
-      case 'Entregue':
-        setInProgress(!inProgress);
-        break;
-      default:
-        break;
-      }
-      setOrder(orderData);
-    })();
+    const renderSales = async () => {
+      const token = localStorage.getItem('token');
+      const result = await getSaleBySellerId(token);
+      setOrders(result);
+    };
+    renderSales();
   }, []);
 
   if (!order) return <p>Loading...</p>;
@@ -69,8 +45,8 @@ export default function SellerOrderDetails() {
     <div>
       <h1>Detalhes do pedido - vendedor</h1>
       <div className="card-top-bar">
-        <div data-testid={ dataTestIds.labelOrderId }>{`Pedido ${priceFormat(id)}`}</div>
-        <div data-testid={ dataTestIds.orderDate }>{dateFormatation(order.saleDate)}</div>
+        <div data-testid={ dataTestIds.labelOrderId }>{order.id}</div>
+        <div data-testid={ dataTestIds.orderDate }>{ order.saleDate }</div>
         <div data-testid={ dataTestIds.deliveryStatus }>{order.status}</div>
         <button
           data-testid={ dataTestIds.buttonPreparingCheck }
@@ -84,7 +60,7 @@ export default function SellerOrderDetails() {
         <button
           data-testid={ dataTestIds.buttonDispatchCheck }
           name="deliver-order"
-          disabled={ !readyToDelivery }
+          disabled={ !orderReady }
           onClick={ handleClick }
           type="button"
         >
@@ -94,7 +70,6 @@ export default function SellerOrderDetails() {
       <div className="card-list">
         <ul>
           {order
-            .products
             .map(({ description, quantity, unitaryValue, subTotal }, index) => (
               <li key={ index }>
                 <div data-testid={ `${dataTestIds.itemNumber}${index}` }>{index}</div>
@@ -105,15 +80,15 @@ export default function SellerOrderDetails() {
                   {quantity}
                 </div>
                 <div data-testid={ `${dataTestIds.tableUnitPrice}${index}` }>
-                  {priceFormat(unitaryValue)}
+                  {(unitaryValue)}
                 </div>
                 <div data-testid={ `${dataTestIds.tableSuTotal}${index}` }>
-                  {priceFormat(subTotal)}
+                  {(subTotal)}
                 </div>
               </li>
             ))}
         </ul>
-        <div data-testid={ dataTestIds.totalPrice }>{priceFormat(order.totalPrice)}</div>
+        <div data-testid={ dataTestIds.totalPrice }>{(order.totalPrice)}</div>
       </div>
     </div>
   );

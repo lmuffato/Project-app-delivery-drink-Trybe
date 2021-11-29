@@ -1,22 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../../components/Header';
 import RequestCard from '../../components/RequestCard';
-import fetchSales from '../../services/MyRequestsPage/fetchSales';
+import useFetch from '../../hooks/useFetch';
 import { dataTestIdsClientMyRequest } from '../../utils/dataTestIds';
+import { saleEndPointData } from '../../utils/endPointsData';
 import formatDate from '../../utils/formatDate';
 import styles from './styles.module.css';
 
 export default function MyRequestsPage() {
-  const [sales, setSales] = useState([]);
+  const { endpoint } = saleEndPointData;
+  const { data: sales, loading, error } = useFetch(endpoint);
 
-  useEffect(() => {
-    const getSales = async () => {
-      const data = await fetchSales();
-      setSales(data);
-    };
-    getSales();
-  }, []);
+  if (loading) return <span>Carregando...</span>;
+
+  if (error) console.log(error);
 
   return (
     <main className={ styles.container }>

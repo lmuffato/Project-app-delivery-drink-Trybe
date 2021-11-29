@@ -17,3 +17,7 @@ export const saleEndPointData = {
 export const getUserEndpoint = {
   endpoint: 'http://localhost:3001/user',
 };
+
+export const productsEndPointData = {
+  endpoint: 'http://localhost:3001/customer/products',
+};

@@ -1,33 +1,70 @@
 .topnav {
-  background-color: #333;
+  background-color: #036b52;
   display: flex;
   justify-content: space-between;
   overflow: hidden;
 }
 
 .rightHeader {
-  align-items: right;
+  align-items: center;
+  background: #421981;
   color: white;
   display: flex;
-  justify-content: space-between;
-  width: 10%;
+  justify-content: flex-end;
+  text-align: center;
+  width: 205px;
 }
 
-.topnav a {
-  color: #f2f2f2;
+.rightHeader button {
+  background: #056cf9;
+  border: none;
+  color: white;
+  cursor: pointer;
+  height: 100%;
+  margin-left: 15px;
+  width: 60px;
+}
+
+.rightHeader button:hover {
+  filter: brightness(0.9);
+}
+
+.link, .active {
+  color: black;
   float: left;
   font-size: 17px;
+  font-weight: 600;
+  height: 100%;
   padding: 14px 16px;
   text-align: center;
   text-decoration: none;
 }
 
 .topnav a:hover {
-  background-color: #ddd;
-  color: black;
+  filter: brightness(0.9);
 }
 
 .active {
   background-color: #04aa6d;
   color: white;
+}
+
+@media screen and ( max-width : 767px ) {
+
+  .rightHeader {
+    width: 80px;
+  }
+
+  .rightHeader p {
+    display: none;
+  }
+
+  .rightHeader button {
+    margin-left: 0;
+    width: 80px;
+  }
+
+  .link, .active {
+    font-size: 14px;
+  }
 }

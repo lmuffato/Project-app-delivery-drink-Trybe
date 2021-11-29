@@ -1,41 +1,34 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../components/Header';
 import ItemCard from '../../components/ItemCard';
 import { usePrice } from '../../context/productsProvider';
 import replaceDotToComma from '../../services/productPages/replaceDotToComa';
+import useFetch from '../../hooks/useFetch';
 import styles from './styles.module.css';
+import { productsEndPointData } from '../../utils/endPointsData';
 
 export default function ProductPage() {
-  const [data, setData] = useState([]);
-  const { totalPrice, setTotalPrice, putItem } = usePrice();
-
+  const { endpoint } = productsEndPointData;
+  const { data: products, error, loading } = useFetch(endpoint);
+  const { totalPrice } = usePrice();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    fetch('http://localhost:3001/customer/products')
-      .then((response) => response.json())
-      .then((item) => setData(item));
-  }, []);
+  if (loading) return <span>Carregando...</span>;
 
-  const calculateTotalPrice = () => {
-    const prices = putItem
-      .reduce((acc, item) => Number(item.price) * item.quantity + acc, 0);
-    setTotalPrice(prices.toFixed(2));
-  };
+  if (error) console.log(error);
 
   return (
     <div>
       <Header />
       <div className={ styles.products }>
-        { data && data.map(({ id, name, price, urlImage }) => (
+        { products.map(({ id, name, price, urlImage }) => (
           <ItemCard
             id={ id }
             key={ id }
             name={ name }
             price={ price }
             image={ urlImage }
-            calculateTotalPrice={ calculateTotalPrice }
           />
         )) }
       </div>

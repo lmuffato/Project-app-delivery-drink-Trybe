@@ -59,7 +59,6 @@ const OrderCard = ({ id, status, saleDate, totalPrice, userRole, deliveryAddress
           </span>
         </div>
       )}
-
     </StyledOrderCard>
   );
 };
@@ -68,7 +67,7 @@ OrderCard.propTypes = {
   id: PropTypes.number.isRequired,
   status: PropTypes.string.isRequired,
   saleDate: PropTypes.string.isRequired,
-  totalPrice: PropTypes.number.isRequired,
+  totalPrice: PropTypes.string.isRequired,
   userRole: PropTypes.string.isRequired,
   deliveryAddress: PropTypes.string.isRequired,
 };

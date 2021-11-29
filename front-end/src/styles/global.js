@@ -34,11 +34,12 @@ const GlobalStyle = createGlobalStyle`
   }
 
   input {
-    border-radius: 15px;
+    border-radius: 4px;
   }
 
   button {
-    border-radius: 15px;
+    border-radius: 4px;
+    cursor: pointer;
   }
 `;
 

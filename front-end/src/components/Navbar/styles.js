@@ -1,17 +1,23 @@
 import styled from 'styled-components';
 
 const StyledNavbar = styled.nav`
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 50px;
   width: 100vw;
-  height: 10vh;
   background-color: var(--dark-gray);
+
+  .nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 8vh;
+
+    flex-direction: row;
+
+    max-width: 900px;
+    margin: 0 auto;
+  }
 
   .container-links {
     display: flex;
-    flex-direction: column;
     a {
       color: white;
     }
@@ -21,9 +27,16 @@ const StyledNavbar = styled.nav`
     }
   }
 
+  .container-links a {
+    margin-right: 1rem;
+  }
+
+  .container-links a:hover {
+    color: var(--orange);
+  }
+
   div:nth-child(2) {
     display: flex;
-    flex-direction: column;
   }
 
   span {
@@ -32,6 +45,8 @@ const StyledNavbar = styled.nav`
 
   button {
     background-color: var(--orange);
+    width: 100px;
+    margin: 0 1.6rem 0 2rem;
     color: black;
   }
 `;

@@ -1,5 +1,5 @@
 import React, {
-  createContext, useContext, useEffect, useState } from 'react';
+  createContext, useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 
 const UserContext = createContext();
@@ -7,10 +7,15 @@ const UserContext = createContext();
 export const UserContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    // console.log so para ver o user
-    console.log('user', user);
-  }, [user]);
+  // useEffect(() => {
+  //   if (!user) {
+  //     const storageUser = JSON.parse(localStorage.getItem('user'));
+
+  //     if (storageUser) {
+  //       setUser(storageUser);
+  //     }
+  //   }
+  // }, [user]);
 
   return (
     <UserContext.Provider value={ { user, setUser } }>{children}</UserContext.Provider>

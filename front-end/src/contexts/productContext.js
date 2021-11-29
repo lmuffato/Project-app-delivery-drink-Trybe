@@ -1,5 +1,10 @@
 import React, {
-  createContext, useCallback, useContext, useEffect, useState } from 'react';
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import PropTypes from 'prop-types';
 
 const ProductContext = createContext();
@@ -12,12 +17,17 @@ export const ProductContextProvider = ({ children }) => {
     if (products) {
       const productsValues = Object.values(products);
 
-      const currentTotal = productsValues.reduce((totalPrice, currentProduct) => {
-        const currentProductPrice = Number(currentProduct.price);
-        const currentProductQuant = Number(currentProduct.quantity);
+      const currentTotal = productsValues.reduce(
+        (totalPrice, currentProduct) => {
+          const currentProductPrice = Number(currentProduct.price);
+          const currentProductQuant = Number(currentProduct.quantity);
 
-        return totalPrice + (currentProductPrice * currentProductQuant);
-      }, 0);
+          console.log('daniel Ribeiro');
+
+          return totalPrice + currentProductPrice * currentProductQuant;
+        },
+        0,
+      );
 
       setTotal(currentTotal.toFixed(2).replace(/\./, ','));
     }
@@ -32,11 +42,8 @@ export const ProductContextProvider = ({ children }) => {
   }, [products]);
 
   return (
-    <ProductContext.Provider
-      value={ { products, setProducts, total, setTotal } }
-    >
+    <ProductContext.Provider value={ { products, setProducts, total, setTotal } }>
       {children}
-
     </ProductContext.Provider>
   );
 };

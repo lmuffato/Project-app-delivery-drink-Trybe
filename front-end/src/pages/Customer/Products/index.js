@@ -39,37 +39,37 @@ const Products = () => {
   }, [getAllProducts, user]);
 
   return (
-    <div>
-      {user && (
-        <>
-          <Navbar
-            username={ user.name }
-            productPath="/customer/products"
-            orderPath="/customer/orders"
-          />
-
-          <h1>Produtos</h1>
-          <ProductList products={ products } />
-
-          <StyledTotalButton
-            type="button"
-            disabled={ total === 0 }
-            onClick={ handleNavigateToCheckout }
-            data-testid="customer_products__button-cart"
-            className="total"
-          >
-            <span
-              type="button"
-              data-testid="customer_products__checkout-bottom-value"
-            >
-              {total}
-            </span>
-          </StyledTotalButton>
-
-        </>
+    <>
+      {user.name && (
+        <Navbar
+          username={ user.name }
+          productPath="/customer/products"
+          orderPath="/customer/orders"
+        />
       )}
 
-    </div>
+      {products.length > 0 && (
+        <div className="product-list-container">
+          <ProductList products={ products } />
+        </div>
+      )}
+
+      <StyledTotalButton
+        type="button"
+        disabled={ total === 0 }
+        onClick={ handleNavigateToCheckout }
+        data-testid="customer_products__button-cart"
+        className="total"
+      >
+        <span
+          type="button"
+          className="total-button"
+          data-testid="customer_products__checkout-bottom-value"
+        >
+          {total}
+        </span>
+      </StyledTotalButton>
+    </>
   );
 };
 

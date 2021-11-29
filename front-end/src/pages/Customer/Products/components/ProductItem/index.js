@@ -53,44 +53,48 @@ function ProductItem({ product }) {
         height="100px"
         data-testid={ `customer_products__img-card-bg-image-${product.id}` }
       />
-      <span
-        data-testid={ `customer_products__element-card-title-${product.id}` }
-        className="product-name"
-      >
-        {product.name}
-
-      </span>
-      <span
-        data-testid={ `customer_products__element-card-price-${product.id}` }
-        className="product-price"
-      >
-        {formatPrice(product.price)}
-      </span>
-
-      <div className="quantity-buttons">
-        <button
-          type="button"
-          data-testid={ `customer_products__button-card-add-item-${product.id}` }
-          onClick={ increaseQuantity }
+      <div className="info-product-container">
+        <span
+          data-testid={ `customer_products__element-card-title-${product.id}` }
+          className="product-name"
         >
-          +
-        </button>
+          {product.name}
 
-        <input
-          data-testid={ `customer_products__input-card-quantity-${product.id}` }
-          value={ quantity }
-          onChange={ (event) => {
-            setQuantity(event.target.value);
-          } }
-        />
-
-        <button
-          type="button"
-          data-testid={ `customer_products__button-card-rm-item-${product.id}` }
-          onClick={ decreaseQuantity }
+        </span>
+        <span
+          data-testid={ `customer_products__element-card-price-${product.id}` }
+          className="product-price"
         >
-          -
-        </button>
+          {formatPrice(product.price)}
+        </span>
+
+        <div className="quantity-buttons">
+          <button
+            type="button"
+            data-testid={ `customer_products__button-card-rm-item-${product.id}` }
+            onClick={ decreaseQuantity }
+          >
+            -
+          </button>
+
+          <input
+            data-testid={ `customer_products__input-card-quantity-${product.id}` }
+            value={ quantity }
+            onChange={ (event) => {
+              setQuantity(event.target.value);
+            } }
+          />
+
+          <button
+            type="button"
+            data-testid={ `customer_products__button-card-add-item-${product.id}` }
+            onClick={ increaseQuantity }
+          >
+            +
+          </button>
+
+        </div>
+
       </div>
 
     </StyledProductItem>

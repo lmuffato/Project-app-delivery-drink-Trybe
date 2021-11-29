@@ -18,16 +18,20 @@ const Orders = () => {
 
   useEffect(() => {
     const request = async () => {
-      const result = await requestSales(user.token);
-      setOrders(result.sales);
+      if (user) {
+        const result = await requestSales(user.token);
+        setOrders(result.sales);
+      }
     };
 
     request();
-  }, [user, user.token]);
+  }, [user]);
+
+  if (!user) return <div>loading...</div>;
 
   return (
     <>
-      {pathname !== sellerOrdersUrl ? (
+      { pathname !== sellerOrdersUrl ? (
         <Navbar
           productPath={ customerProductsUrl }
           orderPath={ customerOrdersUrl }

@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import axios from 'axios';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import NavBar from '../components/CustomerNavBar';
+import SocketContext from '../contexts/SocketContext';
 
 function OrdersDetails({ match }) {
   const [order, setOrder] = useState(null);
-  const [orderStatus, setOrderStatus] = useState('');
+  const {
+    orderStatus, setOrderStatus, clientEmitStatus, setOrderId,
+  } = useContext(SocketContext);
   const [disableButton, setdisableButton] = useState(true);
   const { id } = match.params;
   const statsDTid = 'customer_order_details__element-order-details-label-delivery-status';
@@ -27,6 +30,7 @@ function OrdersDetails({ match }) {
   async function setSaleStatus(status) {
     await axios.patch(`http://localhost:3001/sale/${id}`, { status });
     setOrderStatus(status);
+    clientEmitStatus(status, id);
   }
 
   useEffect(() => {
@@ -37,6 +41,7 @@ function OrdersDetails({ match }) {
       setOrderStatus(mySale.status);
     }
     getOrder();
+    setOrderId(id);
   }, [id]);
 
   function tableRow() {

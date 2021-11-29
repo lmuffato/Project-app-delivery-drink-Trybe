@@ -27,7 +27,7 @@ export default function SellerOrderDetails() {
   };
 
   const handleClick = () => {
-    console.log(order);
+    console.log(order[0].id);
   };
 
   useEffect(() => {
@@ -41,11 +41,12 @@ export default function SellerOrderDetails() {
 
   if (!order) return <p>Loading...</p>;
 
+  // const { id } = order;
   return (
     <div>
       <h1>Detalhes do pedido - vendedor</h1>
       <div className="card-top-bar">
-        <div data-testid={ dataTestIds.labelOrderId }>{order.id}</div>
+        <div data-testid={ dataTestIds.labelOrderId }>{}</div>
         <div data-testid={ dataTestIds.orderDate }>{ order.saleDate }</div>
         <div data-testid={ dataTestIds.deliveryStatus }>{order.status}</div>
         <button

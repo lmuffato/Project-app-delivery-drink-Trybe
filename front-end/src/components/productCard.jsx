@@ -26,25 +26,24 @@ function ProductCard({ product }) {
     <section className="productContainer">
       <div className="element">
         <span
+          className="absolute"
           data-testid={ `customer_products__element-card-price-${id}` }
         >
           {price.replace('.', ',')}
         </span>
         <img
           src={ urlImage }
-          style={ { width: 20 } }
           alt="algo"
           data-testid={ `customer_products__img-card-bg-image-${id}` }
         />
       </div>
-      <div>
+      <div className="textArea">
         <h1
-          className="element"
           data-testid={ `customer_products__element-card-title-${id}` }
         >
           {name}
         </h1>
-        <div className="element">
+        <div>
           <button
             type="button"
             data-testid={ `customer_products__button-card-rm-item-${id}` }

@@ -1,28 +1,91 @@
+.master {
+  display: flex;
+  padding-left: 30px;
+  flex-wrap: wrap;
+}
+
+.Carrinho {
+  padding: 20px;
+  margin: 20px 50px;
+  border-radius: 5px;
+  border: 1px solid #59656f;
+  background-color: #ffa630;
+  box-shadow: 0px 1px 5px #59656f;
+  font-weight: bold;
+}
+
+.Carrinho:hover {
+  color: #ffa630;
+  background-color: #1d1e2c;
+}
+
 .productContainer {
   align-content: stretch;
-  background-color: lightcyan;
-  border: 1px solid black;
+  background-color: #fff;
+  /* border: 1px solid black; */
   display: flex;
+  border-radius: 10px;
   flex-direction: column;
   height: 300px;
   justify-content: space-evenly;
   margin: 20px;
+  padding: 10px;
+  width: 250px;
   max-width: 250px;
   position: relative;
-}
-
-.element {
-  display: flex;
+  box-shadow: 1px 3px 5px #59656f;
 }
 
 img {
-  border: 1px solid black;
   margin: auto;
+  width: 150px;
+  position: absolute;
+  top: 10px;
+  margin: auto 50px;
 }
 
 .absolute {
   color: grey;
   inset: 0;
-  padding-left: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  padding-top: 20px;
+  padding-left: 20px;
   position: absolute;
+}
+
+.textArea {
+  position: absolute;
+  bottom: 10px;
+  text-align: center;
+  width: 90%;
+  margin: 0;
+  padding-bottom: 10px;
+}
+
+.textArea button {
+  padding: 10px 15px;
+  border: 1px solid black;
+  background-color: #ffa630;
+}
+
+.textArea input {
+  padding: 10px;
+  width: 40px
+}
+
+.textArea button:nth-child( 1 ) {
+  padding: 10px 15px;
+  border: 1px solid black;
+  background-color: #ffa630;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.textArea button:nth-child( 3 ) {
+  padding: 10px 15px;
+  border: 1px solid black;
+  background-color: #ffa630;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
 }

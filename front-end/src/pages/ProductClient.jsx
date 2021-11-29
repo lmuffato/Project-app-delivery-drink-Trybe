@@ -2,16 +2,16 @@ import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Context from '../context/Context';
 import ProductCard from '../components/productCard';
+import '../styles/product.css';
 
 function ProductClient() {
   const { products, total } = useContext(Context);
   const navigate = useNavigate();
 
-  // setar CSS MASTER
-
   return (
     <>
       <button
+        className="Carrinho"
         onClick={ () => navigate('/customer/checkout') }
         data-testid="customer_products__button-cart"
         type="button"

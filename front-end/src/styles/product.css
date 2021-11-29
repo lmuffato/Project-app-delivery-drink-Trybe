@@ -36,6 +36,10 @@
   box-shadow: 1px 3px 5px #59656f;
 }
 
+.productContainer:hover {
+  box-shadow: 1px 3px 5px #ffa630;
+}
+
 img {
   margin: auto;
   width: 150px;

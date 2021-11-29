@@ -22,7 +22,9 @@ function ProductCard(props) {
   }, [quantity]);
 
   return (
-    <Card sx={ { maxWidth: 275 } }>
+    <Card
+      sx={ { width: '150px', background: 'white', borderRadius: '20px' } }
+    >
       <CardContent>
         <Box
           sx={ {
@@ -61,7 +63,15 @@ function ProductCard(props) {
           { name }
         </Typography>
       </CardContent>
-      <ButtonGroup>
+      <ButtonGroup
+        sx={ {
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '5px',
+        } }
+      >
         <Button
           size="medium"
           data-testid={ `customer_products__button-card-rm-item-${id}` }
@@ -74,6 +84,9 @@ function ProductCard(props) {
         <TextField
           sx={ {
             maxWidth: 50,
+            alignSelf: 'center',
+            alignContent: 'center',
+            justifySelf: 'center',
           } }
           inputProps={ {
             'data-testid': `customer_products__input-card-quantity-${id}`,

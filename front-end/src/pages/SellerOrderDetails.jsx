@@ -19,13 +19,14 @@ export default function SellerOrderDetails() {
   const orderId = location[location.length - 1];
   const toSlice = -4;
   const newOrderId = `000${orderId}`.slice(toSlice);
-  const newPrice = order.total_price.split('.').join(',');
+  let newPrice;
   const status = 'seller_order_details__element-order-details-label-delivery-status';
   const sttTotal = 'seller_order_details__element-order-total-price';
   const { username, token } = JSON.parse(localStorage.getItem('user'));
   let day;
   let month;
   let year;
+
   const getOrder = useCallback(
     async () => {
       await axios({
@@ -54,6 +55,7 @@ export default function SellerOrderDetails() {
     day = arr3;
     year = year2;
     month = month2;
+    newPrice = order.total_price.split('.').join(',');
   }
 
   useEffect(() => {
@@ -73,7 +75,7 @@ export default function SellerOrderDetails() {
             <p data-testid="seller_order_details__element-order-details-label-order-date">
               { `${day}/${month}/${year}`}
             </p>
-            <p className={ status }>
+            <p data-testid={ status }>
               { order.status }
             </p>
             <button
@@ -85,6 +87,7 @@ export default function SellerOrderDetails() {
             <button
               type="button"
               data-testid="seller_order_details__button-dispatch-check"
+              disabled
             >
               SAIU PARA ENTREGA
             </button>

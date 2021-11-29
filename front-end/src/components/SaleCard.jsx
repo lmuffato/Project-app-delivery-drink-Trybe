@@ -32,29 +32,29 @@ export default function SaleCard(props) {
             { newOrderId }
           </p>
         </div>
+        <div className="h-16">
+          <p
+            data-testid={ `seller_orders__element-delivery-status-${id}` }
+          >
+            { status }
+          </p>
+        </div>
+        <div className="h-8">
+          <p data-testid={ `seller_orders__element-order-date-${id}` }>
+            { showdate(sale.sale_date) }
+          </p>
+        </div>
+        <div className="h-8">
+          <p data-testid={ `seller_orders__element-card-price-${id}` }>
+            { `R$ ${newPrice}`}
+          </p>
+        </div>
+        <div className="h-8">
+          <p>
+            { `Rua ${sale.delivery_address}, ${sale.delivery_number}`}
+          </p>
+        </div>
       </button>
-      <div className="h-16">
-        <p
-          data-testid={ `seller_orders__element-delivery-status-${id}` }
-        >
-          { status }
-        </p>
-      </div>
-      <div className="h-8">
-        <p data-testid={ `seller_orders__element-order-date-${id}` }>
-          { showdate(sale.sale_date) }
-        </p>
-      </div>
-      <div className="h-8">
-        <p data-testid={ `seller_orders__element-card-price-${id}` }>
-          { `R$ ${newPrice}`}
-        </p>
-      </div>
-      <div className="h-8">
-        <p>
-          { `Rua ${sale.delivery_address}, ${sale.delivery_number}`}
-        </p>
-      </div>
     </div>
   );
 }

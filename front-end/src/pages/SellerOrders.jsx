@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Context from '../context/Context';
 import OrderCard from '../components/OrderCard';
+import '../styles/order.css';
 
 function SellerOrders() {
   const { get } = useContext(Context);
@@ -15,8 +16,7 @@ function SellerOrders() {
   }, [get]);
 
   return (
-    <div>
-      Tela do Vendedor
+    <div className="master">
       { orders.length > 0
         && orders.map((order) => <OrderCard key={ order.id } order={ order } />)}
     </div>

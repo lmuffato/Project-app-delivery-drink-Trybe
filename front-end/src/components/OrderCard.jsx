@@ -13,18 +13,29 @@ function OrderCard(props) {
   if (user.role === 'seller') {
     return (
       <Link to={ `/seller/orders/${id}` }>
-        <div data-testid={ `seller_orders__element-order-id-${id}` }>
-          Pedido
-          {' '}
-          { id }
+        <div
+          data-testid={ `seller_orders__element-order-id-${id}` }
+          className="card"
+        >
+          <span className="status">
+            Pedido
+            {' '}
+            { id }
+          </span>
         </div>
-        <div data-testid={ `seller_orders__element-delivery-status-${id}` }>
+        <div
+          className="status"
+          data-testid={ `seller_orders__element-delivery-status-${id}` }
+        >
           { status }
         </div>
-        <div data-testid={ `seller_orders__element-order-date-${id}` }>
+        <div
+          className="status"
+          data-testid={ `seller_orders__element-order-date-${id}` }
+        >
           { formatDate }
         </div>
-        <div>
+        <div className="status">
           R$
           <span data-testid={ `seller_orders__element-card-price-${id}` }>
             {totalPrice.replace('.', ',') }

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router';
 import Header from '../components/header';
 import Context from '../context/Context';
 import Table from '../components/table';
+import '../styles/checkout.css';
 
 function CheckoutClient() {
   const { post, shoppingCart, total, get, setSellers } = useContext(Context);
@@ -61,8 +62,8 @@ function CheckoutClient() {
   return (
     <>
       <Header client={ `${'nome'}` } />
-      <h1>Finalizar Pedido</h1>
-      <table border="1">
+      <h1 className="title">Finalizar Pedido</h1>
+      <table className="table">
         <thead>
           <tr>
             <td>Item</td>
@@ -81,12 +82,12 @@ function CheckoutClient() {
           />))}
       </table>
 
-      <h1 data-testid="customer_checkout__element-order-total-price">
+      <h1 className="title" data-testid="customer_checkout__element-order-total-price">
         Total: R$
         { total }
       </h1>
-      <div>
-        <h1>Detalhes e Endereço para Entrega</h1>
+      <div className="form">
+        <h1 className="title">Detalhes e Endereço para Entrega</h1>
         <label htmlFor="vendedor">
           P.Vendedora responsável
           <select
@@ -122,8 +123,6 @@ function CheckoutClient() {
             {error}
           </div>
         )}
-        <br />
-        <br />
         <button
           data-testid="customer_checkout__button-submit-order"
           type="submit"

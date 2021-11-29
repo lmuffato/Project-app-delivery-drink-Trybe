@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import OrderCard from '../components/OrderCard';
+import '../styles/order.css';
 
 function ClientOrders() {
   const [orders, setOrders] = useState([]);
@@ -19,8 +20,7 @@ function ClientOrders() {
   }, []);
 
   return (
-    <div>
-      Tela do que to trab alhandop
+    <div className="master">
       {
         orders.map((order) => <OrderCard key={ order.id } order={ order } />)
       }

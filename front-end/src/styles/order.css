@@ -1,0 +1,40 @@
+.master {
+  display: flex;
+  padding-left: 30px;
+  flex-wrap: wrap;
+}
+
+.card {
+  border: 1px solid #ffa630;
+  padding: 4px;
+  border-radius: 10px;
+  display: flex;
+  margin: 20px;
+  text-decoration: none;
+  text-align: center;
+  color: #1d1e2c;
+  box-shadow: 3px 5px 7px #d7dedc;
+}
+
+.status {
+  margin: 5px;
+  padding: 25px 10px 25px 10px;
+  border-radius: 10px;
+}
+
+.status:nth-child( 1 ) {
+  font-weight: bold;
+}
+
+.status:nth-child( 2 ) {
+  background-color: #ffa630;
+  font-weight: bold;
+}
+
+.status:nth-child( 3 ) {
+  font-weight: lighter;
+}
+
+.status:nth-child( 4 ) {
+  font-weight: bold;
+}

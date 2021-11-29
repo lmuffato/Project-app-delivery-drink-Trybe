@@ -41,19 +41,26 @@ function OrderCard(props) {
     <Link
       to={ `/${user.role}/orders/${id}` }
       data-testid={ `customer_orders__element-order-id-${id}` }
+      className="card"
     >
-      <span>
+      <span className="status">
         Pedido
         {' '}
         { id }
       </span>
-      <div data-testid={ `customer_orders__element-delivery-status-${id}` }>
+      <div
+        className="status"
+        data-testid={ `customer_orders__element-delivery-status-${id}` }
+      >
         { status }
       </div>
-      <div data-testid={ `customer_orders__element-order-date-${id}` }>
+      <div
+        className="status"
+        data-testid={ `customer_orders__element-order-date-${id}` }
+      >
         { formatDate }
       </div>
-      <div>
+      <div className="status">
         R$
         <span data-testid={ `customer_orders__element-card-price-${id}` }>
           { totalPrice.replace('.', ',') }

@@ -1,28 +1,17 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { string } from 'prop-types';
-import ProductsContext from '../../context/ProductsContext';
+import useProductManager from '../../hooks/useProductManager';
 
 function RmItem({ data }) {
-  const { id } = data;
-  const { values: { productsCart },
-    actions: { setProductsCart } } = useContext(ProductsContext);
-  const rmProduct = (identifier) => {
-    const productIndex = productsCart.findIndex((item) => item.id === identifier);
-    if (productIndex < 0) {
-      setProductsCart((products) => [...products, { id: identifier, quantity: 1 }]);
-    } else {
-      const updatedProducts = productsCart.map((element, index) => {
-        if (index === productIndex && element.quantity >= 1) element.quantity -= 1;
-        return element;
-      });
-      setProductsCart(updatedProducts);
-    }
-  };
+  const [setProduct] = useProductManager();
+  const { id, price } = data;
+  const dataProductRm = { id, price, quantity: 1, operation: 'rm' };
+
   return (
     <button
       data-testid={ `customer_products__button-card-rm-item-${id}` }
       type="button"
-      onClick={ () => rmProduct(id) }
+      onClick={ () => setProduct(dataProductRm) }
     >
       -
     </button>

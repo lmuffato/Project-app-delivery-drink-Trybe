@@ -12,44 +12,84 @@ function Header() {
     navigate('/login');
   };
 
+  if (user.role === 'administrator') {
+    return (
+      <div className="container">
+        <div
+          className="border"
+        >
+          <Link
+            to="/admin/manage"
+            data-testid="customer_products__element-navbar-link-orders"
+          >
+            Gerenciar Usuários
+          </Link>
+        </div>
+        <div
+          className="border"
+          data-testid={ `${user.role}_products__element-navbar-user-full-name` }
+        >
+          <h1
+            data-testid={ `${user.role}_products__element-navbar-user-full-name` }
+          >
+            { user.name }
+
+          </h1>
+        </div>
+        <div className="border">
+          <button
+            type="button"
+            data-testid={ `${user.role}_products__element-navbar-link-logout` }
+            onClick={ logout }
+          >
+            Sair
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="container">
-      <div
-        className="border"
-      >
-        <Link
-          to={ `/${user.role}/products` }
-          data-testid={ `${user.role}_products__element-navbar-link-products` }
-        >
-          Produtos
-        </Link>
-      </div>
+      {
+        user.role === 'customer'
+        && (
+          <div
+            className="border"
+          >
+            <Link
+              to="/customer/products"
+              data-testid="customer_products__element-navbar-link-products"
+            >
+              Produtos
+            </Link>
+          </div>
+        )
+      }
       <div
         className="border"
       >
         <Link
           to={ `/${user.role}/orders` }
-          data-testid={ `${user.role}_products__element-navbar-link-orders` }
+          data-testid="customer_products__element-navbar-link-orders"
         >
           Meus Pedidos
         </Link>
       </div>
       <div
         className="border"
-        data-testid={ `${user.role}_products__element-navbar-user-full-name` }
       >
         <h1
-          data-testid={ `${user.role}_products__element-navbar-user-full-name` }
+          data-testid="customer_products__element-navbar-user-full-name"
         >
           { user.name }
-
         </h1>
       </div>
 
       <div className="border">
         <button
           type="button"
-          data-testid={ `${user.role}_products__element-navbar-link-logout` }
+          data-testid="customer_products__element-navbar-link-logout"
           onClick={ logout }
         >
           Sair

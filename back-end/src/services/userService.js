@@ -60,4 +60,30 @@ const login = async (user) => {
   }
 };
 
-module.exports = { login, create }; 
+const adminCreate = async (user) => {
+  try {
+    const { password } = user;
+    const userAlreadyExists = await User.findOne({ where: { email: user.email } });
+    
+    if (userAlreadyExists) return errorMap.userAlreadyExists;
+    
+    const passwordMD5 = md5(password);
+    const ROLE = 'customer';
+
+    const result = await User.create(
+      { name: user.name, email: user.email, password: passwordMD5, role: user.role || ROLE },
+    );
+    // console.log(result);
+    const { dataValues: { id, name, email, role } } = result;
+    const payload = { id, name, email, role };
+    const options = { expiresIn: '1d' };
+
+    const token = jwt.sign(payload, SECRET, options);
+    
+    return { token };
+  } catch (_error) {
+    return errorMap.internalError;
+  }
+};
+
+module.exports = { login, create, adminCreate }; 

@@ -25,4 +25,16 @@ const create = async (req, res) => {
   return res.status(CREATED).json(result);
 };
 
-module.exports = { login, create }; 
+const adminCreate = async (req, res) => {
+  const { name, email, password, role } = req.body;
+
+  const result = await userService.adminCreate({ name, email, password, role });
+
+  const { error } = result;
+
+  if (error) return res.status(error.code).json({ message: error.message });
+
+  return res.status(CREATED).json(result);
+};
+
+module.exports = { login, create, adminCreate }; 

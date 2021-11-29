@@ -91,52 +91,56 @@ export default function Login() {
     validateFields();
   }, [email, password]);
 
-  return (
-    <main className="main-container">
-      <form className="form-container">
-        <label className="labels" htmlFor="login">
-          Login
-          <input
-            data-testid={ testIdEmail }
-            className="inputs"
-            type="email"
-            id="email"
-            placeholder="email@trybeer.com.br"
-            onChange={ (e) => setEmail(e.target.value) }
-            required
-          />
-        </label>
-        <label className="labels" htmlFor="senha">
-          Senha
-          <input
-            data-testid={ IvalidPassword }
-            className="inputs"
-            type="password"
-            id="senha"
-            placeholder="*********"
-            onChange={ (e) => setPassword(e.target.value) }
-            required
-          />
-        </label>
+  const renderForm = () => (
+    <form className="form-container">
+      <label className="labels" htmlFor="login">
+        Login
+        <input
+          data-testid={ testIdEmail }
+          className="inputs"
+          type="email"
+          id="email"
+          placeholder="email@trybeer.com.br"
+          onChange={ (e) => setEmail(e.target.value) }
+          required
+        />
+      </label>
+      <label className="labels" htmlFor="senha">
+        Senha
+        <input
+          data-testid={ IvalidPassword }
+          className="inputs"
+          type="password"
+          id="senha"
+          placeholder="*********"
+          onChange={ (e) => setPassword(e.target.value) }
+          required
+        />
+      </label>
+      <button
+        className={ loginButton ? 'true-button' : 'false-button' }
+        disabled={ !loginButton }
+        onClick={ clickLoginButton }
+        data-testid={ testIdBtnLogin }
+        type="button"
+      >
+        LOGIN
+      </button>
+      <Link to="/register">
         <button
-          className={ loginButton ? 'true-button' : 'false-button' }
-          disabled={ !loginButton }
-          onClick={ clickLoginButton }
-          data-testid={ testIdBtnLogin }
+          data-testid={ testIdBtnRegister }
+          className="register-button"
           type="button"
         >
-          LOGIN
+          Ainda não tenho conta
         </button>
-        <Link to="/register">
-          <button
-            data-testid={ testIdBtnRegister }
-            className="register-button"
-            type="button"
-          >
-            Ainda não tenho conta
-          </button>
-        </Link>
-      </form>
+      </Link>
+    </form>
+  );
+
+  return (
+    <main className="main-container">
+      { renderForm() }
       <div hidden={ errorMessage }>
         <ErrorLogin dataTestIdError={ testId } message={ messageError } />
       </div>

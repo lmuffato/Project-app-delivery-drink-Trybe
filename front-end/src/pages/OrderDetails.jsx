@@ -42,7 +42,7 @@ function OrdersDetails({ match }) {
     }
     getOrder();
     setOrderId(id);
-  }, [id]);
+  }, [id, setOrderId, setOrderStatus]);
 
   function tableRow() {
     return (

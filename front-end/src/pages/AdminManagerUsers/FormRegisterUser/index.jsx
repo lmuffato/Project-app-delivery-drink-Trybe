@@ -15,11 +15,10 @@ const fetchPostData = (userData) => api.post('/user', userData)
   .catch((error) => error.response.data);
 
 const FormRegisterUser = () => {
+  const STATE_FORM_DEFAULT = { name: '', email: '', password: '', role: 'customer' };
   const [messageErrorBackend, setMessageErrorBackend] = useState(false);
   const [formValidState, setFormValidState] = useState(false);
-  const [formState, setFormState] = useState(
-    { name: '', email: '', password: '', role: 'client' },
-  );
+  const [formState, setFormState] = useState(STATE_FORM_DEFAULT);
   const { setUser } = useManagerUsersContext();
 
   const submitApiData = useCallback(() => {
@@ -118,8 +117,8 @@ const FormRegisterUser = () => {
           value={ formState.role }
           data-testid="admin_manage__select-role"
           options={ [
-            { name: 'Vendedor', value: 'salesman' },
-            { name: 'Cliente', value: 'client' },
+            { name: 'Vendedor', value: 'seller' },
+            { name: 'Cliente', value: 'customer' },
             { name: 'Administrator', value: 'administrator' },
           ] }
         />
@@ -127,7 +126,7 @@ const FormRegisterUser = () => {
         <ButtonPrimary
           type
           name="CADASTRAR"
-          data-testid="admin_manage__button-register"
+          dataTestId="admin_manage__button-register"
           disabled={ !formValidState || status === 'pending' }
         />
       </form>

@@ -6,6 +6,7 @@ import Register from './pages/Register';
 import Orders from './pages/Orders';
 import CartProvider from './provider/Cart';
 import Checkout from './pages/Checkout';
+import DetailsSell from './pages/DetailsSell';
 
 // rotas
 import paths from './routesPaths/paths';

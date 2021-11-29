@@ -1,10 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import ProductSellCard from '../components/ProductSellCard';
 import NavBar from '../components/NavBar';
+// import postSell from '../services/requests';
 
 function Checkout() {
   const [products, setProducts] = useState([]);
   const [totalValue, setTotalValue] = useState([]);
+  const dataUser = JSON.parse(localStorage.getItem('user'));
+  const sellProdut = JSON.parse(localStorage.getItem('carrinho'));
+
+  function createSell() {
+    console.log(dataUser.token, sellProdut);
+    // postUser(data, toke, '/sales');
+  }
 
   useEffect(() => {
     const sellProduts = Object.values(JSON.parse(localStorage.getItem('carrinho')));
@@ -17,8 +25,6 @@ function Checkout() {
     setTotalValue(parseFloat(values
       .reduce((acc, item) => acc + item, 0)).toFixed(2).replace('.', ','));
   }, []);
-
-  const dataUser = JSON.parse(localStorage.getItem('user'));
 
   return (
     <main>
@@ -51,7 +57,7 @@ function Checkout() {
         <h1>Detalhes da Entrega</h1>
         <tr>
           <td>Vendedora</td>
-          <td>Endeeço</td>
+          <td>Endereço</td>
           <td>Numero</td>
         </tr>
         <tr>
@@ -75,6 +81,7 @@ function Checkout() {
       <button
         data-testid="customer_checkout__button-submit-order"
         type="button"
+        onClick={ () => createSell() }
       >
         Finalizar Pedido
       </button>

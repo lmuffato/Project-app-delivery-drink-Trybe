@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ProductSellCard from '../components/ProductSellCard';
+import NavBar from '../components/NavBar';
 
 function Checkout() {
   const [products, setProducts] = useState([]);
@@ -17,8 +18,11 @@ function Checkout() {
       .reduce((acc, item) => acc + item, 0)).toFixed(2).replace('.', ','));
   }, []);
 
+  const dataUser = JSON.parse(localStorage.getItem('user'));
+
   return (
     <main>
+      <NavBar dataUser={ dataUser } />
       <section>
         <h1>Finalizar Pedido</h1>
         <tr>

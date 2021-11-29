@@ -1,6 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+const removeIten = (index) => {
+  const sellProduts = Object.values(JSON.parse(localStorage.getItem('carrinho')));
+  sellProduts.splice(index, 1)
+}
+
 function ProductSellCard({ product, index }) {
   const { name, quantity, unitPrice, subTotal } = product;
   return (
@@ -35,6 +40,7 @@ function ProductSellCard({ product, index }) {
       <button
         data-testid={ `customer_checkout__element-order-table-remove-${index}` }
         type="button"
+        onClick={ () => removeIten(index)}
       >
         Remover Item
       </button>

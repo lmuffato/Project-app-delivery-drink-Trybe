@@ -14,9 +14,9 @@ const login = async (req, res, next) => {
 
 const register = async (req, res, next) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password, role = 'customer' } = req.body;
 
-    const user = await userService.register({ name, email, password });
+    const user = await userService.register({ name, email, password, role });
 
     res.status(201).json({ user });
   } catch (err) {
@@ -25,7 +25,13 @@ const register = async (req, res, next) => {
   }
 };
 
+const getAll = async (_req, res) => {
+  const result = await userService.getAll();
+  return res.status(200).json({ result });
+};
+
 module.exports = {
   login,
   register,
+  getAll,
 };

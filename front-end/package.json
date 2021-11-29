@@ -18,7 +18,7 @@
     "eject": "npm run with-env react-scripts eject",
     "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json .",
     "lint:styles": "stylelint **/*.css --config .stylelintrc.json --ignore-disables --allow-empty-input",
-    "eslint:fix": "eslint src/pages --fix"
+    "eslint:fix": "eslint src --fix"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.2",

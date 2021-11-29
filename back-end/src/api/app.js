@@ -9,8 +9,8 @@ const saleController = require('./controllers/saleController');
 
 const app = express();
 
-app.use('/', express.static(path.join(__dirname, '..', '..', 'public')));
 app.use(cors());
+app.use('/', express.static(path.join(__dirname, '..', '..', 'public')));
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
@@ -20,6 +20,7 @@ app.get('/', (req, res) => {
 app.get('/products/:id', productController.getOne);
 app.get('/products', productController.getAll);
 
+app.get('/users', userController.getAll);
 app.post('/sales', saleController.create);
 app.get('/users/:id/sales', saleController.findByUserId);
 app.get('/sales', saleController.getAll);

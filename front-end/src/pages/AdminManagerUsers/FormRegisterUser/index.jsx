@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import genHashMd5 from 'md5';
 import useAsync from '../../../hooks/useAsync';
 import validateFormRegister from '../../../utils/validateFormRegister';
 import useManagerUsersContext from '../../../hooks/useManagerUsersContext';
@@ -10,7 +9,13 @@ import Select from '../../../components/Select';
 import ButtonPrimary from '../../../components/ButtonPrimary';
 import './styles.css';
 
-const fetchPostData = (userData) => api.post('/user', userData)
+const { token } = JSON.parse(localStorage.getItem('user'));
+const headers = {
+  'Content-Type': 'application/json',
+  Authorization: token,
+};
+
+const fetchPostData = (userData) => api.post('/user/admin', userData, { headers })
   .then((response) => response.data)
   .catch((error) => error.response.data);
 
@@ -23,8 +28,7 @@ const FormRegisterUser = () => {
 
   const submitApiData = useCallback(() => {
     const { name, email, password, role } = formState;
-    const passwordHash = genHashMd5(password);
-    return fetchPostData({ name, email, password: passwordHash, role });
+    return fetchPostData({ name, email, password, role });
   }, [formState]);
 
   const { execute, status, value, error } = useAsync(submitApiData, false);
@@ -131,7 +135,13 @@ const FormRegisterUser = () => {
         />
       </form>
 
-      { messageErrorBackend && <ErrorBackend messageError={ messageErrorBackend } />}
+      {
+        messageErrorBackend
+      && <ErrorBackend
+        messageError={ messageErrorBackend }
+        dataTestId="admin_manage__element-invalid-register"
+      />
+      }
     </div>
   );
 };
